@@ -5,5 +5,5 @@ TO_DO_LIST.md
 /components/WaveTank.tsx
 /islands/Counter.tsx
 /islands/WaterDrop.tsx
-/routes/api/joke.tsx
+/routes/api/joke.ts
 /utils/colors.ts
