@@ -1,0 +1,210 @@
+/* 🎨 Palette Everblush
+      https://github.com/Everblush/everblush
+*/
+:root {
+    --color-blue: #67b0e8;
+    --color-cyan: #6cbfbf;
+    --color-green: #8ccf7e;
+    --color-magenta: #c47fd5;
+    --color-white: #dadada;
+}
+
+/* Surligner un texte sélectionné en couleur */
+::selection {
+    background-color: var(--color-blue);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-magenta);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-blue);
+}
+
+/* Cadres */
+.artist-frame {
+    position: relative;
+    padding-bottom: 120%;
+    background: black;
+    box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.3);
+}
+
+.artist-name {
+    position: absolute;
+    top: 6.0303%;
+    bottom: 3.0303%;
+    left: 10.5%;
+    right: 2.5%;
+    font-size: calc(0.6em + 0.5vw)
+}
+
+.artist-sign {
+    position: absolute;
+    top: 86.0303%;
+    bottom: 3.0303%;
+    left: 74.5%;
+    right: 2.5%;
+    font-size: calc(0.6em + 0.5vw)
+}
+
+.artist-mat {
+    position: absolute;
+    background: white;
+    top: 3.0303%;
+    bottom: 3.0303%;
+    left: 2.5%;
+    right: 2.5%;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset;
+}
+
+.artist-art {
+    position: absolute;
+    top: 16.129%;
+    bottom: 16.129%;
+    left: 13.158%;
+    right: 13.158%;
+}
+
+.artist-art:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset;
+}
+
+.art-frame {
+    background-color: #ddc;
+    border: solid 5vmin #eee;
+    border-bottom-color: #fff;
+    border-left-color: #eee;
+    border-radius: 2px;
+    border-right-color: #eee;
+    border-top-color: #ddd;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .25) inset, 0 5px 10px 5px rgba(0, 0, 0, .25);
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 8vh 8vw;
+    height: 60vh;
+    padding: 6vmin;
+    position: relative;
+    text-align: center;
+}
+
+.art-frame:before {
+    border-radius: 2px;
+    bottom: -2vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25) inset;
+    content: "";
+    left: -2vmin;
+    position: absolute;
+    right: -2vmin;
+    top: -2vmin;
+}
+
+.art-frame:after {
+    border-radius: 2px;
+    bottom: -2.5vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25);
+    content: "";
+    left: -2.5vmin;
+    position: absolute;
+    right: -2.5vmin;
+    top: -2.5vmin;
+}
+
+.art-name {
+    position: absolute;
+    top: 2.0303%;
+    bottom: 4.0303%;
+    left: 8.5%;
+    right: 8.5%;
+    font-size: calc(0.7em + 0.5vw)
+}
+
+.art-frame img {
+    border: solid 2px;
+    border-bottom-color: #ffe;
+    border-left-color: #eed;
+    border-right-color: #eed;
+    border-top-color: #ccb;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+/* Vague de couleurs
+   Gradient : http://colorzilla.com/gradient-editor/#67b0e8+0,6cbfbf+52,8ccf7e+100
+*/
+.wave-colors {
+    background: var(--color-blue);
+    /* Old browsers */
+    background: -moz-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#67b0e8', endColorstr='#8ccf7e', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+    background-size: 350% 350%;
+    animation: waveColors 8s ease infinite;
+}
+
+@-webkit-keyframes waveColors {
+    0% {
+        background-position: 0% 7%;
+    }
+
+    50% {
+        background-position: 100% 94%;
+    }
+
+    100% {
+        background-position: 0% 7%;
+    }
+}
+
+@keyframes waveColors {
+    0% {
+        background-position: 0% 7%;
+    }
+
+    50% {
+        background-position: 100% 94%;
+    }
+
+    100% {
+        background-position: 0% 7%;
+    }
+}
+
+/* Effet coup de pinceau */
+.brush-wrap {
+    position: relative;
+    display: inline-block;
+    padding: 3rem;
+}
+
+.brush-wrap:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: black;
+    z-index: -1;
+    clip-path: url(#clip);
+}
+
+.brush-wrap p {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--color-white);
+    font-style: italic;
+}
