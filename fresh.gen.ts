@@ -7,12 +7,13 @@ import * as $0 from "./routes/_app.tsx";
 import * as $1 from "./routes/api/arts.ts";
 import * as $2 from "./routes/api/joke.ts";
 import * as $3 from "./routes/art/[slug].tsx";
-import * as $4 from "./routes/art/search.tsx";
-import * as $5 from "./routes/index.tsx";
+import * as $4 from "./routes/index.tsx";
+import * as $5 from "./routes/search.tsx";
 import * as $$0 from "./islands/Counter.tsx";
 import * as $$1 from "./islands/Footer.tsx";
 import * as $$2 from "./islands/Header.tsx";
-import * as $$3 from "./islands/WaterDrop.tsx";
+import * as $$3 from "./islands/LiveSearch.tsx";
+import * as $$4 from "./islands/WaterDrop.tsx";
 
 const manifest = {
   routes: {
@@ -20,14 +21,15 @@ const manifest = {
     "./routes/api/arts.ts": $1,
     "./routes/api/joke.ts": $2,
     "./routes/art/[slug].tsx": $3,
-    "./routes/art/search.tsx": $4,
-    "./routes/index.tsx": $5,
+    "./routes/index.tsx": $4,
+    "./routes/search.tsx": $5,
   },
   islands: {
     "./islands/Counter.tsx": $$0,
     "./islands/Footer.tsx": $$1,
     "./islands/Header.tsx": $$2,
-    "./islands/WaterDrop.tsx": $$3,
+    "./islands/LiveSearch.tsx": $$3,
+    "./islands/WaterDrop.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,

@@ -6,20 +6,21 @@ export const handler = async (
   _ctx: HandlerContext,
 ): Promise<Response> => {
   const url = new URL(req.url);
-  const query = url.searchParams.get("q") || "";
+  const query = url.searchParams.get("name") || "";
   const filter = query.length ? encodeURIComponent(query) : "";
 
   const db = Db.getInstance();
   const results = await db.selectFrom("art")
-    .innerJoin("person", "art.owner_id", "person.id").select([
+    .innerJoin("artist", "art.owner_id", "artist.id").select([
+      "art.id",
       "name",
       "first_name",
       "last_name",
       "gender",
       "avatar_url",
+      "slug",
       "movement",
       "url",
-      "art.modified_at",
     ]).where("name", "like", "%" + filter + "%").execute();
 
   return Promise.resolve(

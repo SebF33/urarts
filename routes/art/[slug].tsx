@@ -1,21 +1,13 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { Db } from "@utils/db.ts";
+import { ArtCollection } from "@utils/types.tsx";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import Footer from "@islands/Footer.tsx";
 import Header from "@islands/Header.tsx";
 
-type ArtRow = {
-  firstName: string;
-  lastName: string;
-  id: number;
-  name: string;
-  movement: string;
-  url: string;
-};
-
-type Art = Array<ArtRow>;
+type Art = Array<ArtCollection>;
 
 export const handler: Handlers<Art | null> = {
   async GET(_, ctx) {
@@ -24,7 +16,7 @@ export const handler: Handlers<Art | null> = {
     const db = Db.getInstance();
 
     const results = await db.selectFrom("art")
-      .innerJoin("person", "art.owner_id", "person.id").select([
+      .innerJoin("artist", "art.owner_id", "artist.id").select([
         "first_name",
         "last_name",
         "art.id",
@@ -38,7 +30,7 @@ export const handler: Handlers<Art | null> = {
       art = results.map((p) => ({
         firstName: p.first_name,
         lastName: p.last_name,
-        id: p.id,
+        id: String(p.id),
         name: p.name,
         movement: p.movement,
         url: p.url,
@@ -69,7 +61,10 @@ export default function Arts({ data }: PageProps<Art | null>) {
                 <div
                   class={tw`row mx-auto`}
                 >
-                  <div class="art-frame w-full p-2 lg:w-1/3 md:w-1/2">
+                  <div
+                    id={p.id}
+                    class="art-frame w-full p-2 lg:w-1/3 md:w-1/2"
+                  >
                     <p class={tw`art-name font-brush z-10`}>
                       {p.name}
                     </p>

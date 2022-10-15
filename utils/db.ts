@@ -10,7 +10,7 @@ import {
   SqliteQueryCompiler,
 } from "kysely";
 
-interface PersonTable {
+interface ArtistTable {
   id: Generated<number>;
   first_name: string;
   last_name: string;
@@ -30,11 +30,11 @@ interface ArtTable {
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
-export type Person = Selectable<PersonTable>;
+export type Artist = Selectable<ArtistTable>;
 export type Art = Selectable<ArtTable>;
 
 export interface DbSchema {
-  person: PersonTable;
+  artist: ArtistTable;
   art: ArtTable;
 }
 

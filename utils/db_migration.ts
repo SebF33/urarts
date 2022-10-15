@@ -4,7 +4,7 @@ import { Db, DbSchema } from "@utils/db.ts";
 async function up(db: Kysely<DbSchema>): Promise<void> {
   // Table "Artistes"
   await db.schema
-    .createTable("person")
+    .createTable("artist")
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("first_name", "text", (col) => col.notNull())
@@ -37,7 +37,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addForeignKeyConstraint(
       "art_owner_id_fk",
       ["owner_id"],
-      "person",
+      "artist",
       ["id"],
       (cb) => cb.onDelete("cascade"),
     )
@@ -51,14 +51,14 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .execute();
 
   // Données "Artiste"
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Tamara",
     last_name: "de Lempicka",
     gender: "Femme",
     avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
     slug: "lempicka",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Eugène",
     last_name: "Delacroix",
     gender: "Homme",
@@ -66,7 +66,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/delacroix.png",
     slug: "delacroix",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Paul",
     last_name: "Gauguin",
     gender: "Homme",
@@ -74,7 +74,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/gauguin.png",
     slug: "gauguin",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Pablo",
     last_name: "Picasso",
     gender: "Homme",
@@ -82,7 +82,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/picasso.png",
     slug: "picasso",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Rembrandt",
     last_name: "Harmenszoon van Rijn",
     gender: "Homme",
@@ -90,7 +90,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
       "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
     slug: "rembrandt",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Vincent",
     last_name: "van Gogh",
     gender: "Homme",
@@ -98,14 +98,14 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/van gogh.png",
     slug: "vangogh",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Édouard",
     last_name: "Manet",
     gender: "Homme",
     avatar_url: "/arts/manet/Autoportrait à la palette.jpg",
     slug: "manet",
   }).execute();
-  await db.insertInto("person").values({
+  await db.insertInto("artist").values({
     first_name: "Frida",
     last_name: "Kahlo",
     gender: "Femme",
@@ -149,7 +149,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
   await db.schema.dropTable("art").ifExists().execute();
-  await db.schema.dropTable("person").ifExists().execute();
+  await db.schema.dropTable("artist").ifExists().execute();
 }
 
 async function run() {

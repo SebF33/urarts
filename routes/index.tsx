@@ -1,30 +1,22 @@
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
+import { ArtistRow } from "@utils/types.tsx";
 
 import Footer from "@islands/Footer.tsx";
 import Header from "@islands/Header.tsx";
 
-type PersonRow = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  signature: string | null;
-  slug: string;
-};
+type Artists = Array<ArtistRow>;
 
-type People = Array<PersonRow>;
-
-export const handler: Handlers<People | null> = {
+export const handler: Handlers<Artists | null> = {
   async GET(_, ctx) {
     const db = Db.getInstance();
-    const results = await db.selectFrom("person").selectAll().limit(8)
+    const results = await db.selectFrom("artist").selectAll().limit(8)
       .execute();
 
-    let people: People | null = null;
+    let artists: Artists | null = null;
     if (results) {
-      people = results.map((p) => ({
+      artists = results.map((p) => ({
         id: p.id,
         firstName: p.first_name,
         lastName: p.last_name,
@@ -34,11 +26,11 @@ export const handler: Handlers<People | null> = {
       }));
     }
 
-    return ctx.render(people);
+    return ctx.render(artists);
   },
 };
 
-export default function Home({ data }: PageProps<People | null>) {
+export default function Home({ data }: PageProps<Artists | null>) {
   return (
     <div class={tw`flex flex-col min-h-screen`}>
       <Header />

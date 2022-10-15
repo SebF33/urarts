@@ -8,6 +8,7 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.0.1",
     "@twind": "./utils/twind.ts",
     "@utils/": "./utils/",
+    "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
     "ky": "https://esm.sh/ky@v0.31.3",
     "kysely": "https://esm.sh/kysely@0.21.3",
     "preact": "https://esm.sh/preact@10.11.0",

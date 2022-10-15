@@ -18,7 +18,7 @@ export default function Header() {
                   Accueil
                 </a>
                 <a
-                  href="/art/search"
+                  href="/search"
                   class={tw`text-white hover:bg-green-500 hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-medium`}
                 >
                   Recherche

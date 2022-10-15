@@ -2,10 +2,14 @@
       https://github.com/Everblush/everblush
 */
 :root {
-    --color-blue: #67b0e8;
-    --color-cyan: #6cbfbf;
+    --color-dark: #232a2d;
+    --color-red: #e57474;
     --color-green: #8ccf7e;
+    --color-yellow: #e5c76b;
+    --color-blue: #67b0e8;
     --color-magenta: #c47fd5;
+    --color-cyan: #6cbfbf;
+    --color-gray: #b3b9b8;
     --color-white: #dadada;
 }
 
@@ -15,12 +19,22 @@
 }
 
 /* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color-magenta);
+    background-color: var(--color-gray);
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--color-blue);
+    background-color: var(--color-white);
+    border-radius: 2px;
+}
+
+html {
+    scrollbar-color: var(--color-gray) var(--color-white);
 }
 
 /* Cadres */
