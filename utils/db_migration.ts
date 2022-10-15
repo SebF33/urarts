@@ -145,6 +145,85 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     url: "/arts/de lempicka/New York.jpg",
     owner_id: 1,
   }).execute();
+  await db.insertInto("art").values({
+    name: "Roses in a Vase",
+    movement: "Art déco",
+    url: "/arts/de lempicka/Roses in a Vase.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Roses",
+    movement: "Art déco",
+    url: "/arts/de lempicka/Roses.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "The Pink Shirt I",
+    movement: "Art déco",
+    url: "/arts/de lempicka/The Pink Shirt I.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "The Slave",
+    movement: "Art déco",
+    url: "/arts/de lempicka/The Slave.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "The Sleeping Girl",
+    movement: "Art déco",
+    url: "/arts/de lempicka/The Sleeping Girl.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "The Two Girlfriends",
+    movement: "Art déco",
+    url: "/arts/de lempicka/The Two Girlfriends.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chambre de Van Gogh à Arles",
+    movement: "Postimpressionnisme",
+    url: "/arts/van gogh/La Chambre de Van Gogh à Arles.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Maison blanche, la nuit",
+    movement: "Postimpressionnisme",
+    url: "/arts/van gogh/La Maison blanche, la nuit.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Nuit étoilée",
+    movement: "Postimpressionnisme",
+    url: "/arts/van gogh/La Nuit étoilée.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Mangeurs de pommes de terre",
+    movement: "Réalisme",
+    url: "/arts/van gogh/Les Mangeurs de pommes de terre.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Tournesols",
+    movement: "Postimpressionnisme",
+    url: "/arts/van gogh/Les Tournesols.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Portrait du docteur Gachet avec branche de digitale",
+    movement: "Postimpressionnisme",
+    url:
+      "/arts/van gogh/Portrait du docteur Gachet avec branche de digitale.jpg",
+    owner_id: 6,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Terrasse du café le soir",
+    movement: "Postimpressionnisme",
+    url: "/arts/van gogh/Terrasse du café le soir.jpg",
+    owner_id: 6,
+  }).execute();
 }
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
