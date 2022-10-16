@@ -11,8 +11,8 @@ type Artists = Array<ArtistRow>;
 export const handler: Handlers<Artists | null> = {
   async GET(_, ctx) {
     const db = Db.getInstance();
-    const results = await db.selectFrom("artist").selectAll().limit(8)
-      .execute();
+    const results = await db.selectFrom("artist").selectAll()
+      .limit(8).orderBy("last_name").execute();
 
     let artists: Artists | null = null;
     if (results) {

@@ -21,7 +21,7 @@ export const handler = async (
       "slug",
       "movement",
       "url",
-    ]).where("name", "like", "%" + filter + "%").execute();
+    ]).where("name", "like", "%" + filter + "%").orderBy("name").execute();
 
   return Promise.resolve(
     new Response(JSON.stringify(results), {

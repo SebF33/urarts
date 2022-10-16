@@ -7,7 +7,7 @@ export function BrushStroke() {
             <animate
               id="anim"
               attributeName="width"
-              dur="2s"
+              dur="1s"
               fill="freeze"
               calcMode="spline"
               keyTimes="0; 1"
@@ -21,7 +21,7 @@ export function BrushStroke() {
             <animate
               id="anim-indefinite"
               attributeName="width"
-              dur="2s"
+              dur="1s"
               calcMode="spline"
               keyTimes="0; 1"
               keySplines="0.5,0,0.5,1"
