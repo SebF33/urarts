@@ -25,7 +25,12 @@ interface ArtTable {
   id: Generated<number>;
   owner_id: number;
   name: string;
-  movement: "Art déco" | "Impressionnisme" | "Postimpressionnisme" | "Réalisme";
+  movement:
+    | "Art déco"
+    | "Impressionnisme"
+    | "Postimpressionnisme"
+    | "Réalisme"
+    | "Romantisme";
   url: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }

@@ -224,6 +224,30 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     url: "/arts/van gogh/Terrasse du café le soir.jpg",
     owner_id: 6,
   }).execute();
+  await db.insertInto("art").values({
+    name: "Femmes d'Alger dans leur appartement",
+    movement: "Romantisme",
+    url: "/arts/delacroix/Femmes d'Alger dans leur appartement.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Liberté guidant le peuple",
+    movement: "Romantisme",
+    url: "/arts/delacroix/La Liberté guidant le peuple.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Mort de Sardanapale",
+    movement: "Romantisme",
+    url: "/arts/delacroix/La Mort de Sardanapale.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Scènes des massacres de Scio",
+    movement: "Romantisme",
+    url: "/arts/delacroix/Scènes des massacres de Scio.jpg",
+    owner_id: 2,
+  }).execute();
 }
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
