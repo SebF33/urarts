@@ -4,7 +4,6 @@ import { Db } from "@utils/db.ts";
 import { ArtCollection } from "@utils/types.tsx";
 
 import { BrushStroke } from "@components/Assets.tsx";
-import Footer from "@islands/Footer.tsx";
 import Header from "@islands/Header.tsx";
 
 type Art = Array<ArtCollection>;
@@ -78,8 +77,6 @@ export default function Arts({ data }: PageProps<Art | null>) {
             </div>
           )}
       </main>
-
-      <Footer />
     </div>
   );
 }

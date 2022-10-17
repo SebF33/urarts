@@ -36,11 +36,11 @@ export default function Home({ data }: PageProps<Artists | null>) {
       <Header />
 
       <main class={tw`flex-grow`}>
-        <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+        <div class={tw`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
           {data &&
             (
               <div
-                class={tw`grid grid-cols-2 gap-5 md:grid-cols-2 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-20`}
+                class={tw`grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-20`}
               >
                 {data.map((p) => (
                   <div class="artist-frame">

@@ -2,13 +2,13 @@ import { tw } from "@twind";
 
 export default function Footer() {
   return (
-    <footer class={tw`wave-colors`}>
+    <footer class={tw`wave-colors fixed bottom-0 w-full z-20`}>
       <div
-        class={tw`max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
+        class={tw`max-w-7xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >
         <div class={tw`flex justify-center space-x-8 md:order-2`}>
           <a
-            href="https://www.linkedin.com/in/s%C3%A9bastien-flouriot-99aa75205"
+            href="https://www.linkedin.com/in/sébastien-flouriot-99aa75205"
             class={tw`text-gray-400 hover:text-gray-500`}
           >
             <span class={tw`sr-only`}>LinkedIn</span>

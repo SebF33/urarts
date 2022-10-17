@@ -51,15 +51,15 @@ html {
     bottom: 3.0303%;
     left: 10.5%;
     right: 2.5%;
-    font-size: calc(0.6em + 0.5vw)
+    font-size: calc(0.6em + 0.4vw);
 }
 
 .artist-sign {
     position: absolute;
     top: 86.0303%;
     bottom: 3.0303%;
-    left: 74.5%;
-    right: 2.5%;
+    left: 76.5%;
+    right: 1%;
     font-size: calc(0.6em + 0.5vw)
 }
 
