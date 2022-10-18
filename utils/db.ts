@@ -27,6 +27,7 @@ interface ArtTable {
   name: string;
   movement:
     | "Art déco"
+    | "Art nouveau"
     | "Impressionnisme"
     | "Postimpressionnisme"
     | "Réalisme"

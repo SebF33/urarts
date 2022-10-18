@@ -113,8 +113,17 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/kahlo.png",
     slug: "kahlo",
   }).execute();
+  await db.insertInto("artist").values({
+    first_name: "Gustav",
+    last_name: "Klimt",
+    gender: "Homme",
+    avatar_url: "/arts/klimt/Autoportrait.jpg",
+    signature: "/signs/klimt.png",
+    slug: "klimt",
+  }).execute();
 
   // Données "Art"
+  // Tamara de Lempicka
   await db.insertInto("art").values({
     name: "Adam and Eve",
     movement: "Art déco",
@@ -181,6 +190,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     url: "/arts/de lempicka/The Two Girlfriends.jpg",
     owner_id: 1,
   }).execute();
+
+  // Vincent van Gogh
   await db.insertInto("art").values({
     name: "La Chambre de Van Gogh à Arles",
     movement: "Postimpressionnisme",
@@ -224,6 +235,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     url: "/arts/van gogh/Terrasse du café le soir.jpg",
     owner_id: 6,
   }).execute();
+
+  // Eugène Delacroix
   await db.insertInto("art").values({
     name: "Femmes d'Alger dans leur appartement",
     movement: "Romantisme",
@@ -247,6 +260,20 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Romantisme",
     url: "/arts/delacroix/Scènes des massacres de Scio.jpg",
     owner_id: 2,
+  }).execute();
+
+  // Gustav Klimt
+  await db.insertInto("art").values({
+    name: "La Vie et la Mort",
+    movement: "Art nouveau",
+    url: "/arts/klimt/La Vie et la Mort.jpg",
+    owner_id: 9,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Portrait d'Adele Bloch-Bauer I",
+    movement: "Art nouveau",
+    url: "/arts/klimt/Portrait d'Adele Bloch-Bauer I.jpg",
+    owner_id: 9,
   }).execute();
 }
 
