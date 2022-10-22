@@ -1,6 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { Db } from "@utils/db.ts";
+
 import { ArtCollection } from "@utils/types.tsx";
 
 import { BrushStroke } from "@components/Assets.tsx";
@@ -62,7 +63,6 @@ export default function Arts(
   return (
     <div class={tw`flex flex-col min-h-screen`}>
       <Header />
-
       <main class={tw`flex-grow`}>
         <div
           class={tw`w-screen flex flex-col mx-auto my-2`}
@@ -70,7 +70,8 @@ export default function Arts(
           <div class="brush-wrap mx-auto mt-2">
             <p>{artist}</p>
           </div>
-          <BrushStroke /> {art &&
+          <BrushStroke />
+          {art &&
             (
               <div
                 class={tw`flex flex-wrap mx-auto`}

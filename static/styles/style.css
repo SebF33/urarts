@@ -37,6 +37,10 @@ html {
     scrollbar-color: var(--color-gray) var(--color-white);
 }
 
+.footer {
+    background-color: var(--color-dark);
+}
+
 /* Cadres */
 .artist-frame {
     position: relative;

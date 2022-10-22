@@ -2,7 +2,7 @@ import { tw } from "@twind";
 
 export default function Footer() {
   return (
-    <footer class={tw`wave-colors fixed bottom-0 w-full z-20`}>
+    <footer class={tw`footer bottom-0 w-full z-20`}>
       <div
         class={tw`max-w-7xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >

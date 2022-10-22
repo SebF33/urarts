@@ -7,7 +7,6 @@ import { ArtistRow } from "@utils/types.tsx";
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
 import Footer from "@islands/Footer.tsx";
 import Header from "@islands/Header.tsx";
-import WaterDrop from "@islands/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
 
@@ -17,8 +16,9 @@ export const handler: Handlers<{
   async GET(_, ctx) {
     const db = Db.getInstance();
 
-    const results = await db.selectFrom("artist").selectAll()
-      .limit(4).orderBy("last_name").execute();
+    const results = await db.selectFrom("artist").selectAll().orderBy(
+      "last_name",
+    ).execute();
 
     const artists = results.map((p) => ({
       id: p.id,
@@ -44,7 +44,6 @@ export default function Home(
     <div class={tw`flex flex-col min-h-screen`}>
       <Header />
       <ArtistsLayout artists={artists} />
-      <WaterDrop />
       <Footer />
     </div>
   );
