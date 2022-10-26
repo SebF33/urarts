@@ -335,6 +335,16 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
       "/arts/de vinci/Sainte Anne, la Vierge et l'Enfant Jésus jouant avec un agneau.jpg",
     owner_id: 11,
   }).execute();
+
+  // Salvador Dalí
+  await db.insertInto("artist").values({
+    first_name: "Salvador",
+    last_name: "Dalí",
+    gender: "Homme",
+    avatar_url: "/arts/dali/Autoportrait.jpg",
+    signature: "/signs/dali.png",
+    slug: "dali",
+  }).execute();
 }
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
