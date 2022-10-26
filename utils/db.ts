@@ -13,7 +13,7 @@ import {
 interface ArtistTable {
   id: Generated<number>;
   first_name: string;
-  last_name: string;
+  last_name: string | null;
   gender: "Femme" | "Homme" | "Autre";
   avatar_url: string;
   signature: string | null;
@@ -28,9 +28,11 @@ interface ArtTable {
   movement:
     | "Art déco"
     | "Art nouveau"
+    | "Haute Renaissance"
     | "Impressionnisme"
     | "Postimpressionnisme"
     | "Réalisme"
+    | "Renaissance italienne"
     | "Romantisme";
   url: string;
   modified_at: ColumnType<Date, string | undefined, never>;

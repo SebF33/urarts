@@ -1,5 +1,5 @@
-import { Kysely, sql } from "kysely";
 import { Db, DbSchema } from "@utils/db.ts";
+import { Kysely, sql } from "kysely";
 
 async function up(db: Kysely<DbSchema>): Promise<void> {
   // Table "Artistes"
@@ -8,7 +8,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("first_name", "text", (col) => col.notNull())
-    .addColumn("last_name", "text", (col) => col.notNull())
+    .addColumn("last_name", "text")
     .addColumn("gender", "text", (col) => col.notNull())
     .addColumn("avatar_url", "text", (col) => col.notNull())
     .addColumn("signature", "text")
@@ -50,7 +50,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .column("owner_id")
     .execute();
 
-  // Données "Artiste"
+  // Tamara de Lempicka
   await db.insertInto("artist").values({
     first_name: "Tamara",
     last_name: "de Lempicka",
@@ -58,72 +58,6 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
     slug: "lempicka",
   }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Eugène",
-    last_name: "Delacroix",
-    gender: "Homme",
-    avatar_url: "/arts/delacroix/Autoportrait au gilet vert.jpg",
-    signature: "/signs/delacroix.png",
-    slug: "delacroix",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Paul",
-    last_name: "Gauguin",
-    gender: "Homme",
-    avatar_url: "/arts/gauguin/Autoportrait au chapeau.jpg",
-    signature: "/signs/gauguin.png",
-    slug: "gauguin",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Pablo",
-    last_name: "Picasso",
-    gender: "Homme",
-    avatar_url: "/arts/picasso/Autoportrait.jpg",
-    signature: "/signs/picasso.png",
-    slug: "picasso",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Rembrandt",
-    last_name: "Harmenszoon van Rijn",
-    gender: "Homme",
-    avatar_url:
-      "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
-    slug: "rembrandt",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Vincent",
-    last_name: "van Gogh",
-    gender: "Homme",
-    avatar_url: "/arts/van gogh/Autoportrait.jpg",
-    signature: "/signs/van gogh.png",
-    slug: "vangogh",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Édouard",
-    last_name: "Manet",
-    gender: "Homme",
-    avatar_url: "/arts/manet/Autoportrait à la palette.jpg",
-    slug: "manet",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Frida",
-    last_name: "Kahlo",
-    gender: "Femme",
-    avatar_url: "/arts/kahlo/Autoportrait.jpg",
-    signature: "/signs/kahlo.png",
-    slug: "kahlo",
-  }).execute();
-  await db.insertInto("artist").values({
-    first_name: "Gustav",
-    last_name: "Klimt",
-    gender: "Homme",
-    avatar_url: "/arts/klimt/Autoportrait.jpg",
-    signature: "/signs/klimt.png",
-    slug: "klimt",
-  }).execute();
-
-  // Données "Art"
-  // Tamara de Lempicka
   await db.insertInto("art").values({
     name: "Adam and Eve",
     movement: "Art déco",
@@ -191,7 +125,78 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 1,
   }).execute();
 
+  // Eugène Delacroix
+  await db.insertInto("artist").values({
+    first_name: "Eugène",
+    last_name: "Delacroix",
+    gender: "Homme",
+    avatar_url: "/arts/delacroix/Autoportrait au gilet vert.jpg",
+    signature: "/signs/delacroix.png",
+    slug: "delacroix",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Femmes d'Alger dans leur appartement",
+    movement: "Romantisme",
+    url: "/arts/delacroix/Femmes d'Alger dans leur appartement.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Liberté guidant le peuple",
+    movement: "Romantisme",
+    url: "/arts/delacroix/La Liberté guidant le peuple.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Mort de Sardanapale",
+    movement: "Romantisme",
+    url: "/arts/delacroix/La Mort de Sardanapale.jpg",
+    owner_id: 2,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Scènes des massacres de Scio",
+    movement: "Romantisme",
+    url: "/arts/delacroix/Scènes des massacres de Scio.jpg",
+    owner_id: 2,
+  }).execute();
+
+  // Paul Gauguin
+  await db.insertInto("artist").values({
+    first_name: "Paul",
+    last_name: "Gauguin",
+    gender: "Homme",
+    avatar_url: "/arts/gauguin/Autoportrait au chapeau.jpg",
+    signature: "/signs/gauguin.png",
+    slug: "gauguin",
+  }).execute();
+
+  // Pablo Picasso
+  await db.insertInto("artist").values({
+    first_name: "Pablo",
+    last_name: "Picasso",
+    gender: "Homme",
+    avatar_url: "/arts/picasso/Autoportrait.jpg",
+    signature: "/signs/picasso.png",
+    slug: "picasso",
+  }).execute();
+
+  // Rembrandt
+  await db.insertInto("artist").values({
+    first_name: "Rembrandt",
+    gender: "Homme",
+    avatar_url:
+      "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
+    slug: "rembrandt",
+  }).execute();
+
   // Vincent van Gogh
+  await db.insertInto("artist").values({
+    first_name: "Vincent",
+    last_name: "van Gogh",
+    gender: "Homme",
+    avatar_url: "/arts/van gogh/Autoportrait.jpg",
+    signature: "/signs/van gogh.png",
+    slug: "vangogh",
+  }).execute();
   await db.insertInto("art").values({
     name: "La Chambre de Van Gogh à Arles",
     movement: "Postimpressionnisme",
@@ -236,33 +241,34 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 6,
   }).execute();
 
-  // Eugène Delacroix
-  await db.insertInto("art").values({
-    name: "Femmes d'Alger dans leur appartement",
-    movement: "Romantisme",
-    url: "/arts/delacroix/Femmes d'Alger dans leur appartement.jpg",
-    owner_id: 2,
+  // Édouard Manet
+  await db.insertInto("artist").values({
+    first_name: "Édouard",
+    last_name: "Manet",
+    gender: "Homme",
+    avatar_url: "/arts/manet/Autoportrait à la palette.jpg",
+    slug: "manet",
   }).execute();
-  await db.insertInto("art").values({
-    name: "La Liberté guidant le peuple",
-    movement: "Romantisme",
-    url: "/arts/delacroix/La Liberté guidant le peuple.jpg",
-    owner_id: 2,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "La Mort de Sardanapale",
-    movement: "Romantisme",
-    url: "/arts/delacroix/La Mort de Sardanapale.jpg",
-    owner_id: 2,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "Scènes des massacres de Scio",
-    movement: "Romantisme",
-    url: "/arts/delacroix/Scènes des massacres de Scio.jpg",
-    owner_id: 2,
+
+  // Frida Kahlo
+  await db.insertInto("artist").values({
+    first_name: "Frida",
+    last_name: "Kahlo",
+    gender: "Femme",
+    avatar_url: "/arts/kahlo/Autoportrait.jpg",
+    signature: "/signs/kahlo.png",
+    slug: "kahlo",
   }).execute();
 
   // Gustav Klimt
+  await db.insertInto("artist").values({
+    first_name: "Gustav",
+    last_name: "Klimt",
+    gender: "Homme",
+    avatar_url: "/arts/klimt/Autoportrait.jpg",
+    signature: "/signs/klimt.png",
+    slug: "klimt",
+  }).execute();
   await db.insertInto("art").values({
     name: "La Vie et la Mort",
     movement: "Art nouveau",
@@ -274,6 +280,60 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Art nouveau",
     url: "/arts/klimt/Portrait d'Adele Bloch-Bauer I.jpg",
     owner_id: 9,
+  }).execute();
+
+  // Michel-Ange
+  await db.insertInto("artist").values({
+    first_name: "Michel-Ange",
+    gender: "Homme",
+    avatar_url: "/arts/michel-ange/Autoportrait.jpg",
+    slug: "michel-ange",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Conversion de saint Paul",
+    movement: "Renaissance italienne",
+    url: "/arts/michel-ange/La Conversion de saint Paul.jpg",
+    owner_id: 10,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Création d'Adam",
+    movement: "Haute Renaissance",
+    url: "/arts/michel-ange/La Création d'Adam.jpg",
+    owner_id: 10,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Jugement dernier",
+    movement: "Renaissance italienne",
+    url: "/arts/michel-ange/Le Jugement dernier.jpg",
+    owner_id: 10,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Tourment de saint Antoine",
+    movement: "Renaissance italienne",
+    url: "/arts/michel-ange/Le Tourment de saint Antoine.jpg",
+    owner_id: 10,
+  }).execute();
+
+  // Léonard de Vinci
+  await db.insertInto("artist").values({
+    first_name: "Léonard",
+    last_name: "de Vinci",
+    gender: "Homme",
+    avatar_url: "/arts/de vinci/Portrait d'un vieil homme.jpg",
+    slug: "vinci",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Joconde",
+    movement: "Haute Renaissance",
+    url: "/arts/de vinci/La Joconde.jpg",
+    owner_id: 11,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Sainte Anne, la Vierge et l'Enfant Jésus jouant avec un agneau",
+    movement: "Haute Renaissance",
+    url:
+      "/arts/de vinci/Sainte Anne, la Vierge et l'Enfant Jésus jouant avec un agneau.jpg",
+    owner_id: 11,
   }).execute();
 }
 
