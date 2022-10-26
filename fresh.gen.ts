@@ -4,34 +4,36 @@
 
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/_app.tsx";
-import * as $1 from "./routes/api/arts.ts";
-import * as $2 from "./routes/api/joke.ts";
+import * as $1 from "./routes/api/artists.ts";
+import * as $2 from "./routes/api/arts.ts";
 import * as $3 from "./routes/art/[slug].tsx";
 import * as $4 from "./routes/artists.tsx";
-import * as $5 from "./routes/index.tsx";
-import * as $6 from "./routes/search.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/Footer.tsx";
-import * as $$2 from "./islands/Header.tsx";
-import * as $$3 from "./islands/LiveSearch.tsx";
-import * as $$4 from "./islands/WaterDrop.tsx";
+import * as $5 from "./routes/arts.tsx";
+import * as $6 from "./routes/index.tsx";
+import * as $$0 from "./islands/ArtistsSearch.tsx";
+import * as $$1 from "./islands/ArtsSearch.tsx";
+import * as $$2 from "./islands/Counter.tsx";
+import * as $$3 from "./islands/Footer.tsx";
+import * as $$4 from "./islands/Header.tsx";
+import * as $$5 from "./islands/WaterDrop.tsx";
 
 const manifest = {
   routes: {
     "./routes/_app.tsx": $0,
-    "./routes/api/arts.ts": $1,
-    "./routes/api/joke.ts": $2,
+    "./routes/api/artists.ts": $1,
+    "./routes/api/arts.ts": $2,
     "./routes/art/[slug].tsx": $3,
     "./routes/artists.tsx": $4,
-    "./routes/index.tsx": $5,
-    "./routes/search.tsx": $6,
+    "./routes/arts.tsx": $5,
+    "./routes/index.tsx": $6,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/Footer.tsx": $$1,
-    "./islands/Header.tsx": $$2,
-    "./islands/LiveSearch.tsx": $$3,
-    "./islands/WaterDrop.tsx": $$4,
+    "./islands/ArtistsSearch.tsx": $$0,
+    "./islands/ArtsSearch.tsx": $$1,
+    "./islands/Counter.tsx": $$2,
+    "./islands/Footer.tsx": $$3,
+    "./islands/Header.tsx": $$4,
+    "./islands/WaterDrop.tsx": $$5,
   },
   baseUrl: import.meta.url,
   config,

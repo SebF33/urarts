@@ -1,5 +1,5 @@
-import { DB as SqliteDatabase, QueryParameterSet } from "sqlite";
 import { CompiledQuery, DatabaseConnection, Driver, QueryResult } from "kysely";
+import { DB as SqliteDatabase, QueryParameterSet } from "sqlite";
 
 export class SqliteDriver implements Driver {
   readonly #connectionMutex = new ConnectionMutex();

@@ -1,5 +1,5 @@
-import { HandlerContext } from "$fresh/server.ts";
 import { Db } from "@utils/db.ts";
+import { HandlerContext } from "$fresh/server.ts";
 
 export const handler = async (
   req: Request,
@@ -21,7 +21,9 @@ export const handler = async (
       "slug",
       "movement",
       "url",
-    ]).where("name", "like", "%" + filter + "%").orderBy("name").execute();
+    ]).where("name", "like", "%" + filter + "%")
+    .orderBy("name")
+    .execute();
 
   return Promise.resolve(
     new Response(JSON.stringify(results), {

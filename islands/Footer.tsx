@@ -1,20 +1,32 @@
-import { tw } from "@twind";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css, tw } from "@twind";
 
-export default function Footer() {
+export default function Footer({ color }: { color: string }) {
+  const fontColor: string = colorScheme[currentColorScheme].white;
+
   return (
-    <footer class={tw`footer bottom-0 w-full z-20`}>
+    <footer
+      class={tw`bottom-0 w-full z-20 ${
+        css(
+          {
+            "background-color": `${color}`,
+            "color": fontColor,
+          },
+        )
+      }`}
+    >
       <div
         class={tw`max-w-7xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >
         <div class={tw`flex justify-center space-x-8 md:order-2`}>
           <a
             href="https://www.linkedin.com/in/sébastien-flouriot-99aa75205"
-            class={tw`text-gray-400 hover:text-gray-500`}
+            class={tw`hover:text-gray-500`}
           >
             <span class={tw`sr-only`}>LinkedIn</span>
             <svg
               class={tw`h-5 w-5`}
-              fill="white"
+              fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 448 512"
               aria-hidden="true"
             >
@@ -24,12 +36,12 @@ export default function Footer() {
 
           <a
             href="https://www.youtube.com/channel/UCjwYESom5l53m9kS_OOnVqw"
-            class={tw`text-gray-400 hover:text-gray-500`}
+            class={tw`hover:text-gray-500`}
           >
             <span class={tw`sr-only`}>Youtube</span>
             <svg
               class={tw`h-5 w-5`}
-              fill="white"
+              fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -39,12 +51,12 @@ export default function Footer() {
 
           <a
             href="https://github.com/SebF33"
-            class={tw`text-gray-400 hover:text-gray-500`}
+            class={tw`hover:text-gray-500`}
           >
             <span class={tw`sr-only`}>GitHub</span>
             <svg
               class={tw`h-5 w-5`}
-              fill="white"
+              fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -57,7 +69,7 @@ export default function Footer() {
           </a>
         </div>
         <div class={tw`mt-8 md:mt-0 md:order-1`}>
-          <p class={tw`text-center text-base text-white`}>Urarts</p>
+          <p class={tw`text-center text-base`}>© Urarts</p>
         </div>
       </div>
     </footer>

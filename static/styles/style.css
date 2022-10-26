@@ -2,7 +2,8 @@
       https://github.com/Everblush/everblush
 */
 :root {
-    --color-dark: #232a2d;
+    --color-dark: #141b1e;
+    --color-lighterdark: #232a2d;
     --color-red: #e57474;
     --color-green: #8ccf7e;
     --color-yellow: #e5c76b;
@@ -37,64 +38,7 @@ html {
     scrollbar-color: var(--color-gray) var(--color-white);
 }
 
-.footer {
-    background-color: var(--color-dark);
-}
-
 /* Cadres */
-.artist-frame {
-    position: relative;
-    padding-bottom: 120%;
-    background: black;
-    box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.3);
-}
-
-.artist-name {
-    position: absolute;
-    top: 6.0303%;
-    bottom: 3.0303%;
-    left: 10.5%;
-    right: 2.5%;
-    font-size: calc(0.6em + 0.4vw);
-}
-
-.artist-sign {
-    position: absolute;
-    top: 86.0303%;
-    bottom: 3.0303%;
-    left: 76.5%;
-    right: 1%;
-    font-size: calc(0.6em + 0.5vw)
-}
-
-.artist-mat {
-    position: absolute;
-    background: white;
-    top: 3.0303%;
-    bottom: 3.0303%;
-    left: 2.5%;
-    right: 2.5%;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset;
-}
-
-.artist-art {
-    position: absolute;
-    top: 16.129%;
-    bottom: 16.129%;
-    left: 13.158%;
-    right: 13.158%;
-}
-
-.artist-art:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset;
-}
-
 .art-frame {
     background-color: #ddc;
     border: solid 5vmin #eee;
@@ -152,7 +96,6 @@ html {
     max-height: 100%;
     max-width: 100%;
 }
-
 
 /* Vague de couleurs
    Gradient : http://colorzilla.com/gradient-editor/#67b0e8+0,6cbfbf+52,8ccf7e+100
@@ -214,7 +157,7 @@ html {
     width: 100%;
     top: 0;
     left: 0;
-    background: black;
+    background: var(--color-dark);
     z-index: -1;
     clip-path: url(#clip);
 }

@@ -1,5 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Configuration, setup } from "twind";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";
 export { css } from "twind/css";
@@ -9,6 +10,9 @@ export const config: Configuration = {
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
+      },
+      colors: {
+        ...colorScheme[currentColorScheme],
       },
     },
   },

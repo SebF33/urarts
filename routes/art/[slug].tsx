@@ -1,8 +1,7 @@
+import { ArtCollection } from "@utils/types.tsx";
+import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
-import { Db } from "@utils/db.ts";
-
-import { ArtCollection } from "@utils/types.tsx";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import Header from "@islands/Header.tsx";
@@ -33,14 +32,17 @@ export const handler: Handlers<{
 
     let artist: string | null = null;
     if (result) {
+      if (result.last_name === null) {
+        result.last_name = "";
+      }
       artist = result.first_name + " " + result.last_name;
     }
 
     let art: Array<ArtCollection> | null = null;
     if (results) {
       art = results.map((p) => ({
-        firstName: p.first_name,
-        lastName: p.last_name,
+        first_name: p.first_name,
+        last_name: p.last_name,
         id: String(p.id),
         name: p.name,
         movement: p.movement,
