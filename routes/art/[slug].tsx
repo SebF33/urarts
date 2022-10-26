@@ -67,7 +67,7 @@ export default function Arts(
       <Header />
       <main class={tw`flex-grow`}>
         <div
-          class={tw`w-screen flex flex-col mx-auto my-2`}
+          class={tw`w-auto flex flex-col mx-auto my-6`}
         >
           <div class="brush-wrap mx-auto mt-2">
             <p>{artist}</p>
