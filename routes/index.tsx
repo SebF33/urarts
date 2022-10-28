@@ -3,7 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { tw } from "@twind";
+import { css, tw } from "@twind";
 
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
 import Footer from "@islands/Footer.tsx";
@@ -63,9 +63,21 @@ export default function Home(
   const { artists, color, grid } = props.data;
 
   return (
-    <div class={tw`flex flex-col min-h-screen`}>
+    <div
+      class={tw`flex flex-col min-h-screen ${
+        css({
+          background: `url(/bg)`,
+          "background-color": `${colorScheme[currentColorScheme].white}`,
+          "background-position": "center",
+          "background-size": "316px",
+          "-webkit-tap-highlight-color": "transparent",
+        })
+      }`}
+    >
       <Header />
-      <main class={tw`flex-grow`}>
+      <main
+        class={tw`flex-grow`}
+      >
         <ArtistsLayout artists={artists} grid={grid} />
       </main>
       <WaterDrop color={color} />

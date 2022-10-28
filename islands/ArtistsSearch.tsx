@@ -34,7 +34,7 @@ export default function ArtistsSearch() {
               e.key === "Enter" && e.preventDefault();
             }}
             onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={tw`w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out`}
+            class={tw`w-full rounded border border-gray-600 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out`}
           />
         </div>
       </div>

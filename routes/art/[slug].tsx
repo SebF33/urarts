@@ -1,7 +1,8 @@
 import { ArtCollection } from "@utils/types.tsx";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { tw } from "@twind";
+import { css, tw } from "@twind";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import Header from "@islands/Header.tsx";
@@ -63,20 +64,31 @@ export default function Arts(
   const { art, artist } = props.data;
 
   return (
-    <div class={tw`flex flex-col min-h-screen`}>
+    <div
+      class={tw`flex flex-col min-h-screen`}
+    >
       <Header />
-      <main class={tw`flex-grow`}>
+      <main
+        class={tw`flex-grow`}
+      >
         <div
           class={tw`w-auto flex flex-col mx-auto my-6`}
         >
-          <div class="brush-wrap mx-auto mt-2">
-            <p>{artist}</p>
-          </div>
-          <BrushStroke />
+          <BrushStroke artist={artist} />
           {art &&
             (
               <div
-                class={tw`flex flex-wrap mx-auto`}
+                class={tw`flex flex-wrap mx-auto ${
+                  css({
+                    background: `url(/bg)`,
+                    "background-color": `${
+                      colorScheme[currentColorScheme].white
+                    }`,
+                    "background-position": "center",
+                    "background-size": "540px",
+                    "-webkit-tap-highlight-color": "transparent",
+                  })
+                }`}
               >
                 {art.map((art) => (
                   <div

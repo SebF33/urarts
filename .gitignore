@@ -3,8 +3,4 @@ TO_DO_LIST.md
 /static/arts
 /static/signs
 /components/Button.tsx
-/components/WaveTank.tsx
 /islands/Counter.tsx
-/islands/WaterDrop.tsx
-/routes/api/joke.ts
-/utils/colors.ts
