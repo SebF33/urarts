@@ -16,7 +16,7 @@ export default function Footer({ color }: { color: string }) {
       }`}
     >
       <div
-        class={tw`max-w-7xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
+        class={tw`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >
         <div class={tw`flex justify-center space-x-8 md:order-2`}>
           <a
