@@ -1,11 +1,12 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { css, tw } from "@twind";
 
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
+import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
 import Header from "@islands/Header.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
@@ -63,25 +64,30 @@ export default function Home(
   const { artists, color, grid } = props.data;
 
   return (
-    <div
-      class={tw`flex flex-col min-h-screen ${
-        css({
-          background: `url(/bg)`,
-          "background-color": `${colorScheme[currentColorScheme].white}`,
-          "background-position": "center",
-          "background-size": "316px",
-          "-webkit-tap-highlight-color": "transparent",
-        })
-      }`}
+    <DefaultLayout
+      title="Accueil Urarts"
+      desc="Quelles sont les plus belles œuvres d'art au monde ?"
     >
-      <Header />
-      <main
-        class={tw`flex-grow`}
+      <div
+        class={tw`flex flex-col min-h-screen ${
+          css({
+            background: `url(/bg)`,
+            "background-color": `${colorScheme[currentColorScheme].white}`,
+            "background-position": "center",
+            "background-size": "316px",
+            "-webkit-tap-highlight-color": "transparent",
+          })
+        }`}
       >
-        <ArtistsLayout artists={artists} grid={grid} />
-      </main>
-      <WaterDrop color={color} />
-      <Footer color={color} />
-    </div>
+        <Header />
+        <main
+          class={tw`flex-grow`}
+        >
+          <ArtistsLayout artists={artists} grid={grid} />
+        </main>
+        <WaterDrop color={color} />
+        <Footer color={color} />
+      </div>
+    </DefaultLayout>
   );
 }

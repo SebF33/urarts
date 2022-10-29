@@ -44,6 +44,7 @@ export default function Header() {
                 <a
                   href="/api/arts"
                   class={tw`hover:bg-green-500 hover:bg-opacity-75 px-3 py-2 rounded-md text-lg font-medium`}
+                  target="_blank"
                 >
                   API
                 </a>

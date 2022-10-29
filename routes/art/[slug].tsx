@@ -1,15 +1,18 @@
 import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { css, tw } from "@twind";
 
 import { BrushStroke } from "@components/Assets.tsx";
+import DefaultLayout from "@components/DefaultLayout.tsx";
 import Header from "@islands/Header.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
   artist: string | null;
+  desc: string | null;
+  title: string | null;
 }> = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
@@ -32,11 +35,15 @@ export const handler: Handlers<{
       ]).where("slug", "=", slug).execute();
 
     let artist: string | null = null;
+    let desc: string | null = null;
+    let title: string | null = null;
     if (result) {
       if (result.last_name === null) {
         result.last_name = "";
       }
       artist = result.first_name + " " + result.last_name;
+      desc = "Les plus belles œuvres de " + artist + ".";
+      title = "Collection " + artist;
     }
 
     let art: Array<ArtCollection> | null = null;
@@ -51,7 +58,7 @@ export const handler: Handlers<{
       }));
     }
 
-    return ctx.render({ art, artist });
+    return ctx.render({ art, artist, desc, title });
   },
 };
 
@@ -59,59 +66,66 @@ export default function Arts(
   props: PageProps<{
     art: Array<ArtCollection> | null;
     artist: string | null;
+    desc: string;
+    title: string;
   }>,
 ) {
-  const { art, artist } = props.data;
+  const { art, artist, desc, title } = props.data;
 
   return (
-    <div
-      class={tw`flex flex-col min-h-screen`}
+    <DefaultLayout
+      title={title}
+      desc={desc}
     >
-      <Header />
-      <main
-        class={tw`flex-grow`}
+      <div
+        class={tw`flex flex-col min-h-screen`}
       >
-        <div
-          class={tw`w-auto flex flex-col mx-auto my-6`}
+        <Header />
+        <main
+          class={tw`flex-grow`}
         >
-          <BrushStroke artist={artist} />
-          {art &&
-            (
-              <div
-                class={tw`flex flex-wrap mx-auto ${
-                  css({
-                    background: `url(/bg)`,
-                    "background-color": `${
-                      colorScheme[currentColorScheme].white
-                    }`,
-                    "background-position": "center",
-                    "background-size": "540px",
-                    "-webkit-tap-highlight-color": "transparent",
-                  })
-                }`}
-              >
-                {art.map((art) => (
-                  <div
-                    class={tw`row mx-auto`}
-                  >
+          <div
+            class={tw`w-auto flex flex-col mx-auto my-6`}
+          >
+            <BrushStroke artist={artist} />
+            {art &&
+              (
+                <div
+                  class={tw`flex flex-wrap mx-auto ${
+                    css({
+                      background: `url(/bg)`,
+                      "background-color": `${
+                        colorScheme[currentColorScheme].white
+                      }`,
+                      "background-position": "center",
+                      "background-size": "540px",
+                      "-webkit-tap-highlight-color": "transparent",
+                    })
+                  }`}
+                >
+                  {art.map((art) => (
                     <div
-                      id={art.id}
-                      class="art-frame w-full p-2 lg:w-1/3 md:w-1/2"
+                      class={tw`row mx-auto`}
                     >
-                      <p class={tw`art-name font-brush z-10`}>
-                        {art.name}
-                      </p>
-                      <img
-                        src={art.url}
-                        alt={art.name}
-                      />
+                      <div
+                        id={art.id}
+                        class="art-frame w-full p-2 lg:w-1/3 md:w-1/2"
+                      >
+                        <p class={tw`art-name font-brush z-10`}>
+                          {art.name}
+                        </p>
+                        <img
+                          src={art.url}
+                          alt={art.name}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-        </div>
-      </main>
-    </div>
+                  ))}
+                </div>
+              )}
+          </div>
+        </main>
+      </div>
+    </DefaultLayout>
   );
 }
