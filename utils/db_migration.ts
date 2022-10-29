@@ -178,6 +178,30 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/picasso.png",
     slug: "picasso",
   }).execute();
+  await db.insertInto("art").values({
+    name: "La famille de saltimbanques",
+    movement: "Période rose",
+    url: "/arts/picasso/La famille de saltimbanques.jpg",
+    owner_id: 4,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Vie",
+    movement: "Période bleue",
+    url: "/arts/picasso/La Vie.jpg",
+    owner_id: 4,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Vie",
+    movement: "Période bleue",
+    url: "/arts/picasso/La Vie.jpg",
+    owner_id: 4,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Demoiselles d'Avignon",
+    movement: "Cubisme",
+    url: "/arts/picasso/Les Demoiselles d'Avignon.jpg",
+    owner_id: 4,
+  }).execute();
 
   // Rembrandt
   await db.insertInto("artist").values({
@@ -186,6 +210,24 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url:
       "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
     slug: "rembrandt",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bethsabée au bain tenant la lettre de David",
+    movement: "Baroque",
+    url: "/arts/rembrandt/Bethsabée au bain tenant la lettre de David.jpg",
+    owner_id: 5,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Leçon d'anatomie du docteur Tulp",
+    movement: "Baroque",
+    url: "/arts/rembrandt/La Leçon d'anatomie du docteur Tulp.jpg",
+    owner_id: 5,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Ronde de nuit",
+    movement: "Baroque",
+    url: "/arts/rembrandt/La Ronde de nuit.jpg",
+    owner_id: 5,
   }).execute();
 
   // Vincent van Gogh
@@ -249,15 +291,45 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url: "/arts/manet/Autoportrait à la palette.jpg",
     slug: "manet",
   }).execute();
+  await db.insertInto("art").values({
+    name: "Le Déjeuner sur l'herbe",
+    movement: "Impressionnisme",
+    url: "/arts/manet/Le Déjeuner sur l'herbe.jpg",
+    owner_id: 7,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Olympia",
+    movement: "Réalisme",
+    url: "/arts/manet/Olympia.jpg",
+    owner_id: 7,
+  }).execute();
 
   // Frida Kahlo
   await db.insertInto("artist").values({
     first_name: "Frida",
     last_name: "Kahlo",
     gender: "Femme",
-    avatar_url: "/arts/kahlo/Autoportrait.jpg",
+    avatar_url: "/arts/kahlo/Autoportrait au collier d'épines et colibri.jpg",
     signature: "/signs/kahlo.png",
     slug: "kahlo",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Fruits de la Terre",
+    movement: "Art naïf",
+    url: "/arts/kahlo/Les Fruits de la Terre.jpg",
+    owner_id: 8,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Ma naissance",
+    movement: "Art naïf",
+    url: "/arts/kahlo/Ma naissance.jpg",
+    owner_id: 8,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Pitahayas",
+    movement: "Art naïf",
+    url: "/arts/kahlo/Pitahayas.jpg",
+    owner_id: 8,
   }).execute();
 
   // Gustav Klimt
@@ -344,6 +416,138 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url: "/arts/dali/Autoportrait.jpg",
     signature: "/signs/dali.png",
     slug: "dali",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Galacidalacidesoxyribonucleicacid",
+    movement: "Surréalisme",
+    url: "/arts/dali/Galacidalacidesoxyribonucleicacid.jpg",
+    owner_id: 12,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Grand Masturbateur",
+    movement: "Surréalisme",
+    url: "/arts/dali/Le Grand Masturbateur.jpg",
+    owner_id: 12,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Miel est plus doux que le sang",
+    movement: "Surréalisme",
+    url: "/arts/dali/Le Miel est plus doux que le sang.jpg",
+    owner_id: 12,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Leda atomica",
+    movement: "Surréalisme",
+    url: "/arts/dali/Leda atomica.jpg",
+    owner_id: 12,
+  }).execute();
+  await db.insertInto("art").values({
+    name:
+      "Ma femme, nue, regardant son propre corps devenir, trois vertèbres d'une colonne, ciel et architecture",
+    movement: "Surréalisme",
+    url:
+      "/arts/dali/Ma femme, nue, regardant son propre corps devenir, trois vertèbres d'une colonne, ciel et architecture.jpg",
+    owner_id: 12,
+  }).execute();
+
+  // Claude Monet
+  await db.insertInto("artist").values({
+    first_name: "Claude",
+    last_name: "Monet",
+    gender: "Homme",
+    avatar_url: "/arts/monet/Autoportrait au béret.jpg",
+    signature: "/signs/monet.png",
+    slug: "monet",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Impression, soleil levant",
+    movement: "Impressionnisme",
+    url: "/arts/monet/Impression, soleil levant.jpg",
+    owner_id: 13,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Nymphéas",
+    movement: "Impressionnisme",
+    url: "/arts/monet/Les Nymphéas.jpg",
+    owner_id: 13,
+  }).execute();
+
+  // Auguste Renoir
+  await db.insertInto("artist").values({
+    first_name: "Auguste",
+    last_name: "Renoir",
+    gender: "Homme",
+    avatar_url: "/arts/renoir/Autoportrait.jpg",
+    signature: "/signs/renoir.png",
+    slug: "renoir",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bal du moulin de la Galette",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/Bal du moulin de la Galette.jpg",
+    owner_id: 14,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Jeunes filles en noir",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/Jeunes filles en noir.jpg",
+    owner_id: 14,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Grenouillère",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/La Grenouillère.jpg",
+    owner_id: 14,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Loge",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/La Loge.jpg",
+    owner_id: 14,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Déjeuner des canotiers",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/Le Déjeuner des canotiers.jpg",
+    owner_id: 14,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Deux Sœurs",
+    movement: "Impressionnisme",
+    url: "/arts/renoir/Les Deux Sœurs.jpg",
+    owner_id: 14,
+  }).execute();
+
+  // Artemisia Gentileschi
+  await db.insertInto("artist").values({
+    first_name: "Artemisia",
+    last_name: "Gentileschi",
+    gender: "Femme",
+    avatar_url:
+      "/arts/gentileschi/Autoportrait en allégorie de la peinture.jpg",
+    slug: "gentileschi",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Suzanne et les vieillards",
+    movement: "Baroque",
+    url: "/arts/gentileschi/Suzanne et les vieillards.jpg",
+    owner_id: 15,
+  }).execute();
+
+  // Paul Cézanne
+  await db.insertInto("artist").values({
+    first_name: "Paul",
+    last_name: "Cézanne",
+    gender: "Homme",
+    avatar_url: "/arts/cezanne/Autoportrait au fond rose.jpg",
+    signature: "/signs/cezanne.png",
+    slug: "cezanne",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nature morte aux pommes et aux oranges",
+    movement: "Postimpressionnisme",
+    url: "/arts/cezanne/Nature morte aux pommes et aux oranges.jpg",
+    owner_id: 16,
   }).execute();
 }
 

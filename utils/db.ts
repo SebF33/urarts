@@ -27,13 +27,19 @@ interface ArtTable {
   name: string;
   movement:
     | "Art déco"
+    | "Art naïf"
     | "Art nouveau"
+    | "Baroque"
+    | "Cubisme"
     | "Haute Renaissance"
     | "Impressionnisme"
+    | "Période bleue"
+    | "Période rose"
     | "Postimpressionnisme"
     | "Réalisme"
     | "Renaissance italienne"
-    | "Romantisme";
+    | "Romantisme"
+    | "Surréalisme";
   url: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
