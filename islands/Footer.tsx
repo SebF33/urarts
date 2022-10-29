@@ -6,7 +6,7 @@ export default function Footer({ color }: { color: string }) {
 
   return (
     <footer
-      class={tw`bottom-0 w-full z-20 ${
+      class={tw`font-brush bottom-0 w-full ${
         css(
           {
             "background-color": `${color}`,
@@ -69,7 +69,7 @@ export default function Footer({ color }: { color: string }) {
           </a>
         </div>
         <div class={tw`mt-8 md:mt-0 md:order-1`}>
-          <p class={tw`text-center text-base`}>© Urarts</p>
+          <p class={tw`text-center text-xl font-bold`}>© Urarts</p>
         </div>
       </div>
     </footer>
