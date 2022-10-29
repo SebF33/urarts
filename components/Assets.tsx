@@ -2,7 +2,7 @@ import { tw } from "@twind";
 
 export function BrushStroke(props: { artist: string | null }) {
   return (
-    <div class={tw`mx-auto`}>
+    <div class={tw`mx-auto z-10`}>
       <div
         class={tw`brush-wrap mx-auto mt-2`}
       >
@@ -19,10 +19,10 @@ export function BrushStroke(props: { artist: string | null }) {
               <animate
                 id="anim"
                 attributeName="width"
-                dur="1s"
+                dur="1.000s"
                 fill="freeze"
                 calcMode="spline"
-                keyTimes="0; 1"
+                keyTimes="0;1"
                 keySplines="0.5,0,0.5,1"
                 values="0;1"
               />
@@ -33,12 +33,12 @@ export function BrushStroke(props: { artist: string | null }) {
               <animate
                 id="anim-indefinite"
                 attributeName="width"
-                dur="1s"
+                dur="1.000s"
                 calcMode="spline"
-                keyTimes="0; 1"
+                keyTimes="0;1"
                 keySplines="0.5,0,0.5,1"
                 values="0;1"
-                begin="0s;anim-indefinite.end+1s"
+                begin="0.000s"
               />
             </rect>
           </clipPath>

@@ -78,7 +78,15 @@ export default function Arts(
       desc={desc}
     >
       <div
-        class={tw`flex flex-col min-h-screen`}
+        class={tw`flex flex-col min-h-screen ${
+          css({
+            background: `url(/bg)`,
+            "background-color": `${colorScheme[currentColorScheme].white}`,
+            "background-position": "center",
+            "background-size": "540px",
+            "-webkit-tap-highlight-color": "transparent",
+          })
+        }`}
       >
         <Header />
         <main
@@ -91,17 +99,7 @@ export default function Arts(
             {art &&
               (
                 <div
-                  class={tw`flex flex-wrap mx-auto ${
-                    css({
-                      background: `url(/bg)`,
-                      "background-color": `${
-                        colorScheme[currentColorScheme].white
-                      }`,
-                      "background-position": "center",
-                      "background-size": "540px",
-                      "-webkit-tap-highlight-color": "transparent",
-                    })
-                  }`}
+                  class={tw`flex flex-wrap mx-auto`}
                 >
                   {art.map((art) => (
                     <div
