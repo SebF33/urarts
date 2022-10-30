@@ -168,6 +168,24 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     signature: "/signs/gauguin.png",
     slug: "gauguin",
   }).execute();
+  await db.insertInto("art").values({
+    name: "Le Christ jaune",
+    movement: "Cloisonnisme",
+    url: "/arts/gauguin/Le Christ jaune.jpg",
+    owner_id: 3,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Manao Tupapau",
+    movement: "Postimpressionnisme",
+    url: "/arts/gauguin/Manao Tupapau.jpg",
+    owner_id: 3,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Quand te maries-tu ?",
+    movement: "Cloisonnisme",
+    url: "/arts/gauguin/Quand te maries-tu.jpg",
+    owner_id: 3,
+  }).execute();
 
   // Pablo Picasso
   await db.insertInto("artist").values({
@@ -191,12 +209,6 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 4,
   }).execute();
   await db.insertInto("art").values({
-    name: "La Vie",
-    movement: "Période bleue",
-    url: "/arts/picasso/La Vie.jpg",
-    owner_id: 4,
-  }).execute();
-  await db.insertInto("art").values({
     name: "Les Demoiselles d'Avignon",
     movement: "Cubisme",
     url: "/arts/picasso/Les Demoiselles d'Avignon.jpg",
@@ -209,6 +221,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url:
       "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
+    signature: "/signs/rembrandt.png",
     slug: "rembrandt",
   }).execute();
   await db.insertInto("art").values({
@@ -548,6 +561,68 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Postimpressionnisme",
     url: "/arts/cezanne/Nature morte aux pommes et aux oranges.jpg",
     owner_id: 16,
+  }).execute();
+
+  // Johannes Vermeer
+  await db.insertInto("artist").values({
+    first_name: "Johannes",
+    last_name: "Vermeer",
+    gender: "Homme",
+    avatar_url: "/arts/vermeer/Autoportrait.jpg",
+    signature: "/signs/vermeer.png",
+    slug: "vermeer",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Dame jouant du virginal",
+    movement: "Baroque",
+    url: "/arts/vermeer/Dame jouant du virginal.jpg",
+    owner_id: 17,
+  }).execute();
+
+  // Berthe Morisot
+  await db.insertInto("artist").values({
+    first_name: "Berthe",
+    last_name: "Morisot",
+    gender: "Femme",
+    avatar_url: "/arts/morisot/Autoportrait.jpg",
+    slug: "morisot",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bateaux sur la Seine",
+    movement: "Impressionnisme",
+    url: "/arts/morisot/Bateaux sur la Seine.jpg",
+    owner_id: 18,
+  }).execute();
+
+  // Marc Chagall
+  await db.insertInto("artist").values({
+    first_name: "Marc",
+    last_name: "Chagall",
+    gender: "Homme",
+    avatar_url: "/arts/chagall/Autoportrait.jpg",
+    signature: "/signs/chagall.png",
+    slug: "chagall",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Golgotha",
+    movement: "Cubisme",
+    url: "/arts/chagall/Golgotha.jpg",
+    owner_id: 19,
+  }).execute();
+
+  // Titien
+  await db.insertInto("artist").values({
+    first_name: "Titien",
+    gender: "Homme",
+    avatar_url: "/arts/titien/Autoportrait.jpg",
+    signature: "/signs/titien.png",
+    slug: "titien",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bacchus et Ariane",
+    movement: "Haute Renaissance",
+    url: "/arts/titien/Bacchus et Ariane.jpg",
+    owner_id: 20,
   }).execute();
 }
 

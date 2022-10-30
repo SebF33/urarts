@@ -30,6 +30,7 @@ interface ArtTable {
     | "Art naïf"
     | "Art nouveau"
     | "Baroque"
+    | "Cloisonnisme"
     | "Cubisme"
     | "Haute Renaissance"
     | "Impressionnisme"
