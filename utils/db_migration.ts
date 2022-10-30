@@ -56,6 +56,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "de Lempicka",
     gender: "Femme",
     avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
+    signature: "/signs/lempicka.png",
     slug: "lempicka",
   }).execute();
   await db.insertInto("art").values({
@@ -302,6 +303,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Manet",
     gender: "Homme",
     avatar_url: "/arts/manet/Autoportrait à la palette.jpg",
+    signature: "/signs/manet.png",
     slug: "manet",
   }).execute();
   await db.insertInto("art").values({
@@ -372,6 +374,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     first_name: "Michel-Ange",
     gender: "Homme",
     avatar_url: "/arts/michel-ange/Autoportrait.jpg",
+    signature: "/signs/michel-ange.png",
     slug: "michel-ange",
   }).execute();
   await db.insertInto("art").values({
@@ -405,6 +408,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "de Vinci",
     gender: "Homme",
     avatar_url: "/arts/de vinci/Portrait d'un vieil homme.jpg",
+    signature: "/signs/vinci.png",
     slug: "vinci",
   }).execute();
   await db.insertInto("art").values({
@@ -538,6 +542,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Femme",
     avatar_url:
       "/arts/gentileschi/Autoportrait en allégorie de la peinture.jpg",
+    signature: "/signs/gentileschi.png",
     slug: "gentileschi",
   }).execute();
   await db.insertInto("art").values({
@@ -585,6 +590,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Morisot",
     gender: "Femme",
     avatar_url: "/arts/morisot/Autoportrait.jpg",
+    signature: "/signs/morisot.png",
     slug: "morisot",
   }).execute();
   await db.insertInto("art").values({
@@ -623,6 +629,34 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Haute Renaissance",
     url: "/arts/titien/Bacchus et Ariane.jpg",
     owner_id: 20,
+  }).execute();
+
+  // Rosa Bonheur
+  await db.insertInto("artist").values({
+    first_name: "Rosa",
+    last_name: "Bonheur",
+    gender: "Femme",
+    avatar_url: "/arts/bonheur/Autoportrait.jpg",
+    signature: "/signs/bonheur.png",
+    slug: "bonheur",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Biches et cerf au repos",
+    movement: "Romantisme",
+    url: "/arts/bonheur/Biches et cerf au repos.jpg",
+    owner_id: 21,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La foire du cheval",
+    movement: "Réalisme",
+    url: "/arts/bonheur/La foire du cheval.jpg",
+    owner_id: 21,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Roi de la forêt",
+    movement: "Réalisme",
+    url: "/arts/bonheur/Le Roi de la forêt.jpg",
+    owner_id: 21,
   }).execute();
 }
 
