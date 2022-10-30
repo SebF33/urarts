@@ -3,6 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { quotes } from "@utils/quotes.ts";
 import { sql } from "kysely";
 
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
@@ -17,6 +18,7 @@ export const handler: Handlers<{
   artists: Artists;
   color: string;
   grid: string;
+  quote: string;
 }> = {
   async GET(_, ctx) {
     const db = Db.getInstance();
@@ -34,7 +36,7 @@ export const handler: Handlers<{
       slug: p.slug,
     }));
 
-    const randomIndex = Math.floor(Math.random() * 8);
+    const randomColorsIndex = Math.floor(Math.random() * 8);
     const colors = [
       colorScheme[currentColorScheme].lighterdark,
       colorScheme[currentColorScheme].red,
@@ -45,12 +47,15 @@ export const handler: Handlers<{
       colorScheme[currentColorScheme].cyan,
       colorScheme[currentColorScheme].gray,
     ];
-    const color = colors[randomIndex];
+    const color = colors[randomColorsIndex];
 
     const grid =
-      "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-20";
+      "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    return ctx.render({ artists, color, grid });
+    const randomQuotesIndex = Math.floor(Math.random() * 10);
+    const quote = quotes[randomQuotesIndex];
+
+    return ctx.render({ artists, color, grid, quote });
   },
 };
 
@@ -59,9 +64,10 @@ export default function Home(
     artists: Artists;
     color: string;
     grid: string;
+    quote: string;
   }>,
 ) {
-  const { artists, color, grid } = props.data;
+  const { artists, color, grid, quote } = props.data;
 
   return (
     <DefaultLayout
@@ -84,6 +90,17 @@ export default function Home(
           class={tw`flex-grow`}
         >
           <ArtistsLayout artists={artists} grid={grid} />
+          <div
+            class={tw`font-brush mx-auto ${
+              css(
+                {
+                  "color": `${colorScheme[currentColorScheme].lighterdark}`,
+                },
+              )
+            }`}
+          >
+            <p class={tw`text-center text-xl font-bold`}>{quote}</p>
+          </div>
         </main>
         <WaterDrop color={color} />
         <Footer color={color} />
