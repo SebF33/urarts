@@ -59,7 +59,7 @@ Créer une application :
 Créer un volume persistant pour SQLite :
 `flyctl volumes create urarts_data --size 20 --app urarts`
 
-Augmenter la mémoire virtuelle :
+Augmenter la mémoire de la machine virtuelle :
 `flyctl scale memory 512 -a urarts`
 
 Déployer :
