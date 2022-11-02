@@ -74,7 +74,7 @@ export class Db {
           return new SqliteAdapter();
         },
         createDriver() {
-          return new SqliteDriver("./data/urarts.db");
+          return new SqliteDriver("./data/urarts_data.db");
         },
         createIntrospector(db: Kysely<unknown>) {
           return new SqliteIntrospector(db);
