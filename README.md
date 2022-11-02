@@ -12,7 +12,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 
 
 ## :link: Liens
-:earth_africa: **Site web :** https://
+:earth_africa: **Site web :** https://urarts.fly.dev
 
 :clapper: **Démo :** https://
 
@@ -57,7 +57,10 @@ Créer une application :
 `flyctl launch`
 
 Créer un volume persistant pour SQLite :
-`flyctl volumes create data --size 1 --app urarts`
+`flyctl volumes create urarts_data --size 20 --app urarts`
+
+Augmenter la mémoire virtuelle :
+`flyctl scale memory 512 -a urarts`
 
 Déployer :
 `flyctl deploy`
