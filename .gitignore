@@ -1,3 +1,4 @@
+.dockerignore
 desktop.ini
 TO_DO_LIST.md
 /static/arts
