@@ -10,7 +10,7 @@ export default function ArtistsSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    ky.get(`http://localhost:8000/api/artists?name=${searchTerm}`)
+    ky.get(`https://urarts.fly.dev/api/artists?name=${searchTerm}`)
       .json<ArtistRow[]>()
       .then((response) => {
         setSearchResults(response);

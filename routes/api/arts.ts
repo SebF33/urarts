@@ -27,7 +27,12 @@ export const handler = async (
 
   return Promise.resolve(
     new Response(JSON.stringify(results), {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+      },
     }),
   );
 };

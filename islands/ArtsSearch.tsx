@@ -8,7 +8,7 @@ export default function LiveSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    ky.get(`http://localhost:8000/api/arts?name=${searchTerm}`)
+    ky.get(`https://urarts.fly.dev/api/arts?name=${searchTerm}`)
       .json<ArtRow[]>()
       .then((response) => {
         setSearchResults(response);
