@@ -35,7 +35,7 @@ export default function ArtistsLayout(
                         "bottom": "3.0303%",
                         "left": "10.5%",
                         "right": "2.5%",
-                        "font-size": "calc(0.6em + 0.4vw)",
+                        "font-size": "calc(0.8em + 0.2vw)",
                       },
                     )
                   }`}

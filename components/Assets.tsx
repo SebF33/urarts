@@ -4,9 +4,13 @@ export function BrushStroke(props: { artist: string | null }) {
   return (
     <div class={tw`mx-auto z-10`}>
       <div
-        class={tw`brush-wrap mx-auto mt-2`}
+        class={tw`brush-wrap font-brush mx-auto mt-2 text-center`}
       >
-        <p>{props.artist}</p>
+        <p
+          class={tw`inline-block`}
+        >
+          {props.artist}
+        </p>
       </div>
       <svg
         height="0"

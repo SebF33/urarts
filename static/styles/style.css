@@ -84,7 +84,8 @@ html {
     bottom: 4.0303%;
     left: 8.5%;
     right: 8.5%;
-    font-size: calc(0.7em + 0.5vw)
+    font-size: calc(0.4em + 0.7vw);
+    line-height: 0.7;
 }
 
 .art-frame img {
