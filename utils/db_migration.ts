@@ -357,9 +357,33 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "klimt",
   }).execute();
   await db.insertInto("art").values({
+    name: "Danaé",
+    movement: "Art nouveau",
+    url: "/arts/klimt/Danaé.jpg",
+    owner_id: 9,
+  }).execute();
+  await db.insertInto("art").values({
     name: "La Vie et la Mort",
     movement: "Art nouveau",
     url: "/arts/klimt/La Vie et la Mort.jpg",
+    owner_id: 9,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Baiser",
+    movement: "Art nouveau",
+    url: "/arts/klimt/Le Baiser.jpg",
+    owner_id: 9,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Vierges",
+    movement: "Art nouveau",
+    url: "/arts/klimt/Les Vierges.jpg",
+    owner_id: 9,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Espoir II",
+    movement: "Art nouveau",
+    url: "/arts/klimt/L'Espoir II.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
@@ -412,9 +436,22 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "vinci",
   }).execute();
   await db.insertInto("art").values({
+    name: "La Cène",
+    movement: "Haute Renaissance",
+    url: "/arts/de vinci/La Cène.jpg",
+    owner_id: 11,
+  }).execute();
+  await db.insertInto("art").values({
     name: "La Joconde",
     movement: "Haute Renaissance",
     url: "/arts/de vinci/La Joconde.jpg",
+    owner_id: 11,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Saint Jean-Baptiste",
+    movement: "Haute Renaissance",
+    url:
+      "/arts/de vinci/Saint Jean-Baptiste.jpg",
     owner_id: 11,
   }).execute();
   await db.insertInto("art").values({
@@ -583,6 +620,24 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     url: "/arts/vermeer/Dame jouant du virginal.jpg",
     owner_id: 17,
   }).execute();
+  await db.insertInto("art").values({
+    name: "La Laitière",
+    movement: "Baroque",
+    url: "/arts/vermeer/La Laitière.jpg",
+    owner_id: 17,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Art de la peinture",
+    movement: "Baroque",
+    url: "/arts/vermeer/L'Art de la peinture.jpg",
+    owner_id: 17,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Entremetteuse",
+    movement: "Baroque",
+    url: "/arts/vermeer/L'Entremetteuse.jpg",
+    owner_id: 17,
+  }).execute();
 
   // Berthe Morisot
   await db.insertInto("artist").values({
@@ -610,9 +665,39 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "chagall",
   }).execute();
   await db.insertInto("art").values({
+    name: "Dédié à ma fiancée",
+    movement: "Expressionnisme",
+    url: "/arts/chagall/Dédié à ma fiancée.jpg",
+    owner_id: 19,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Golgotha",
     movement: "Cubisme",
     url: "/arts/chagall/Golgotha.jpg",
+    owner_id: 19,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Violoniste",
+    movement: "Cubisme",
+    url: "/arts/chagall/Le Violoniste.jpg",
+    owner_id: 19,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nature morte",
+    movement: "Cubisme",
+    url: "/arts/chagall/Nature morte.jpg",
+    owner_id: 19,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Paris par la fenêtre",
+    movement: "Cubisme",
+    url: "/arts/chagall/Paris par la fenêtre.jpg",
+    owner_id: 19,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Trois heures et demie (Le poète)",
+    movement: "Cubisme",
+    url: "/arts/chagall/Trois heures et demie (Le poète).jpg",
     owner_id: 19,
   }).execute();
 
@@ -628,6 +713,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "Bacchus et Ariane",
     movement: "Haute Renaissance",
     url: "/arts/titien/Bacchus et Ariane.jpg",
+    owner_id: 20,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Caïn et Abel",
+    movement: "Maniérisme",
+    url: "/arts/titien/Caïn et Abel.jpg",
     owner_id: 20,
   }).execute();
 
@@ -657,6 +748,50 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Réalisme",
     url: "/arts/bonheur/Le Roi de la forêt.jpg",
     owner_id: 21,
+  }).execute();
+
+  // Camille Pissarro
+  await db.insertInto("artist").values({
+    first_name: "Camille",
+    last_name: "Pissarro",
+    gender: "Homme",
+    avatar_url: "/arts/pissarro/Autoportrait.jpg",
+    signature: "/signs/pissarro.png",
+    slug: "pissarro",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Boulevard Montmartre, printemps",
+    movement: "Impressionnisme",
+    url: "/arts/pissarro/Boulevard Montmartre, printemps.jpg",
+    owner_id: 22,
+  }).execute();
+
+  // Henri Matisse
+  await db.insertInto("artist").values({
+    first_name: "Henri",
+    last_name: "Matisse",
+    gender: "Homme",
+    avatar_url: "/arts/matisse/Autoportrait.jpg",
+    signature: "/signs/matisse.png",
+    slug: "matisse",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Femme au chapeau",
+    movement: "Fauvisme",
+    url: "/arts/matisse/Femme au chapeau.jpg",
+    owner_id: 23,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Joie de vivre",
+    movement: "Fauvisme",
+    url: "/arts/matisse/La Joie de vivre.jpg",
+    owner_id: 23,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Luxe, Calme et Volupté",
+    movement: "Pointillisme",
+    url: "/arts/matisse/Luxe, Calme et Volupté.jpg",
+    owner_id: 23,
   }).execute();
 }
 
