@@ -60,27 +60,45 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "lempicka",
   }).execute();
   await db.insertInto("art").values({
-    name: "Adam and Eve",
+    name: "Adam et Ève",
     movement: "Art déco",
-    url: "/arts/de lempicka/Adam and Eve.jpg",
+    url: "/arts/de lempicka/Adam et Ève.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
-    name: "Arums",
+    name: "Bouquet de violettes",
     movement: "Art déco",
-    url: "/arts/de lempicka/Arums.jpg",
+    url: "/arts/de lempicka/Bouquet de violettes.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
-    name: "Bouquet of Violets",
+    name: "Citron",
     movement: "Art déco",
-    url: "/arts/de lempicka/Bouquet of Violets.jpg",
+    url: "/arts/de lempicka/Citron.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
-    name: "Lemon",
+    name: "La chemise rose",
     movement: "Art déco",
-    url: "/arts/de lempicka/Lemon.jpg",
+    url: "/arts/de lempicka/La chemise rose.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La femme endormie",
+    movement: "Art déco",
+    url: "/arts/de lempicka/La femme endormie.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Arums",
+    movement: "Art déco",
+    url: "/arts/de lempicka/Les Arums.jpg",
+    owner_id: 1,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'esclave",
+    movement: "Art déco",
+    url: "/arts/de lempicka/L'esclave.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
@@ -90,39 +108,15 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
-    name: "Roses in a Vase",
+    name: "Roses dans un vase",
     movement: "Art déco",
-    url: "/arts/de lempicka/Roses in a Vase.jpg",
+    url: "/arts/de lempicka/Roses dans un vase.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Roses",
     movement: "Art déco",
     url: "/arts/de lempicka/Roses.jpg",
-    owner_id: 1,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "The Pink Shirt I",
-    movement: "Art déco",
-    url: "/arts/de lempicka/The Pink Shirt I.jpg",
-    owner_id: 1,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "The Slave",
-    movement: "Art déco",
-    url: "/arts/de lempicka/The Slave.jpg",
-    owner_id: 1,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "The Sleeping Girl",
-    movement: "Art déco",
-    url: "/arts/de lempicka/The Sleeping Girl.jpg",
-    owner_id: 1,
-  }).execute();
-  await db.insertInto("art").values({
-    name: "The Two Girlfriends",
-    movement: "Art déco",
-    url: "/arts/de lempicka/The Two Girlfriends.jpg",
     owner_id: 1,
   }).execute();
 
@@ -450,8 +444,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   await db.insertInto("art").values({
     name: "Saint Jean-Baptiste",
     movement: "Haute Renaissance",
-    url:
-      "/arts/de vinci/Saint Jean-Baptiste.jpg",
+    url: "/arts/de vinci/Saint Jean-Baptiste.jpg",
     owner_id: 11,
   }).execute();
   await db.insertInto("art").values({
@@ -792,6 +785,160 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Pointillisme",
     url: "/arts/matisse/Luxe, Calme et Volupté.jpg",
     owner_id: 23,
+  }).execute();
+
+  // Élisabeth Vigée Le Brun
+  await db.insertInto("artist").values({
+    first_name: "Élisabeth",
+    last_name: "Vigée Le Brun",
+    gender: "Femme",
+    avatar_url: "/arts/le brun/Autoportrait.jpg",
+    signature: "/signs/le brun.png",
+    slug: "lebrun",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Paix ramenant l'Abondance",
+    movement: "Rococo",
+    url: "/arts/le brun/La Paix ramenant l'Abondance.jpg",
+    owner_id: 24,
+  }).execute();
+
+  // Paul Véronèse
+  await db.insertInto("artist").values({
+    first_name: "Paul",
+    last_name: "Véronèse",
+    gender: "Homme",
+    avatar_url: "/arts/veronese/Autoportrait.jpg",
+    signature: "/signs/veronese.png",
+    slug: "veronese",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Bataille de Lépante",
+    movement: "Maniérisme",
+    url: "/arts/veronese/La Bataille de Lépante.jpg",
+    owner_id: 25,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Mars et Vénus réunis par Cupidon",
+    movement: "Maniérisme",
+    url: "/arts/veronese/Mars et Vénus réunis par Cupidon.jpg",
+    owner_id: 25,
+  }).execute();
+
+  // Norman Rockwell
+  await db.insertInto("artist").values({
+    first_name: "Norman",
+    last_name: "Rockwell",
+    gender: "Homme",
+    avatar_url: "/arts/rockwell/Autoportrait.jpg",
+    signature: "/signs/rockwell.png",
+    slug: "rockwell",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Triple autoportrait",
+    movement: "Régionalisme",
+    url: "/arts/rockwell/Triple autoportrait.jpg",
+    owner_id: 26,
+  }).execute();
+
+  // Henri Rousseau
+  await db.insertInto("artist").values({
+    first_name: "Henri",
+    last_name: "Rousseau",
+    gender: "Homme",
+    avatar_url: "/arts/rousseau/Autoportrait avec une lampe.jpg",
+    signature: "/signs/rousseau.png",
+    slug: "rousseau",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Combat de tigre et buffle",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Combat de tigre et buffle.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L’Octroi",
+    movement: "Art naïf",
+    url: "/arts/rousseau/L’Octroi.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Bohémienne endormie",
+    movement: "Art naïf",
+    url: "/arts/rousseau/La Bohémienne endormie.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Charmeuse de serpents",
+    movement: "Art naïf",
+    url: "/arts/rousseau/La Charmeuse de serpents.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Seine à Suresnes",
+    movement: "Art naïf",
+    url: "/arts/rousseau/La Seine à Suresnes.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le lion, ayant faim, se jette sur l’antilope",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Le lion, ayant faim, se jette sur l’antilope.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Moulin d’Alfort",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Le Moulin d’Alfort.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Repas du lion",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Le Repas du lion.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Rêve",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Le Rêve.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Moi-même",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Moi-même.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Paysage d’Alger",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Paysage d’Alger.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Portrait de Monsieur X",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Portrait de Monsieur X.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Une soirée au carnaval",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Une soirée au carnaval.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Vue de Billancourt et Bas-Meudon",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Vue de Billancourt et Bas-Meudon.jpg",
+    owner_id: 27,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Vue du Pont de Sèvres",
+    movement: "Art naïf",
+    url: "/arts/rousseau/Vue du Pont de Sèvres.jpg",
+    owner_id: 27,
   }).execute();
 }
 

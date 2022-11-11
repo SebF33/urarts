@@ -42,7 +42,9 @@ interface ArtTable {
     | "Pointillisme"
     | "Postimpressionnisme"
     | "Réalisme"
+    | "Régionalisme"
     | "Renaissance italienne"
+    | "Rococo"
     | "Romantisme"
     | "Surréalisme";
   url: string;
