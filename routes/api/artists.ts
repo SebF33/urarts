@@ -24,6 +24,7 @@ export const handler = async (
       .orWhere("last_name", "like", "%" + filter + "%")
   )
     .orderBy("first_name")
+    .orderBy("last_name")
     .execute();
 
   return Promise.resolve(
