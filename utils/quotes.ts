@@ -11,6 +11,7 @@ export const quotes = [
   // 10
   "“Pour créer son propre paradis, il faut puiser dans son enfer personnel.” —Frida Kahlo",
   "“Quand j’ai terminé un tableau, je ne veux pas perdre ensuite des mois entiers à le justifier devant la foule. Ce qui compte pour moi, ce n’est pas à combien de gens il plaît, mais à qui.” —Gustav Klimt",
+  "“Je n'ai eu de bonheur qu'en peinture.” —Élisabeth Vigée Le Brun",
   "“La vérité est que l'art doit être l'écriture de la vie.” —Édouard Manet",
   "“La couleur surtout et peut-être plus encore que le dessin est une libération.” —Henri Matisse",
   "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
@@ -18,8 +19,11 @@ export const quotes = [
   "“Mon ambition est de saisir une touche d'éphémère.” —Berthe Morisot",
   "“Qui voit la figure humaine correctement ? Le photographe, le miroir ou le peintre ?” —Pablo Picasso",
   "“Peignez généreusement et sans hésitations pour garder la fraîcheur de la première impression. Ne vous laissez pas intimider par la nature, au risque d’être déçu du résultat.” —Camille Pissarro",
-  "“Si je veux enrichir mon esprit, je ne cherche pas les honneurs, mais la liberté.” —Rembrandt",
   // 20
+  "“Si je veux enrichir mon esprit, je ne cherche pas les honneurs, mais la liberté.” —Rembrandt",
   "“Un matin, l'un de nous manquant de noir, se servit de bleu : l'impressionnisme était né.” —Auguste Renoir",
+  "“Moins le tableau est réussi, plus le cadre doit être beau, telle est ma devise.” —Norman Rockwell",
+  "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
   "“Il faut commencer par éprouver ce qu'on veut exprimer.” —Vincent van Gogh",
+  "“Nous autres peintres, nous jouissons de la même licence que celle dont jouissent les poètes et les fous.” —Paul Véronèse",
 ];
