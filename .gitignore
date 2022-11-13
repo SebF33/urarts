@@ -1,7 +1,8 @@
 .dockerignore
 desktop.ini
 TO_DO_LIST.md
-/static/arts
-/static/signs
 /components/Button.tsx
 /islands/Counter.tsx
+/static/arts
+/static/errors
+/static/signs

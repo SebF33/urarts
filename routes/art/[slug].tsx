@@ -58,6 +58,7 @@ export const handler: Handlers<{
       }));
     }
 
+    if (!result) return ctx.renderNotFound();
     return ctx.render({ art, artist, desc, title });
   },
 };
