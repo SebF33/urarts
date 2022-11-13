@@ -56,8 +56,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "de Lempicka",
     gender: "Femme",
     avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
-    signature: "/signs/lempicka.png",
-    slug: "lempicka",
+    signature: "/signs/de lempicka.png",
+    slug: "delempicka",
   }).execute();
   await db.insertInto("art").values({
     name: "Adam et Ève",
@@ -426,8 +426,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "de Vinci",
     gender: "Homme",
     avatar_url: "/arts/de vinci/Portrait d'un vieil homme.jpg",
-    signature: "/signs/vinci.png",
-    slug: "vinci",
+    signature: "/signs/de vinci.png",
+    slug: "devinci",
   }).execute();
   await db.insertInto("art").values({
     name: "La Cène",
@@ -611,6 +611,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "Dame jouant du virginal",
     movement: "Baroque",
     url: "/arts/vermeer/Dame jouant du virginal.jpg",
+    owner_id: 17,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Jeune Fille à la perle",
+    movement: "Baroque",
+    url: "/arts/vermeer/La Jeune Fille à la perle.jpg",
     owner_id: 17,
   }).execute();
   await db.insertInto("art").values({
@@ -939,6 +945,435 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement: "Art naïf",
     url: "/arts/rousseau/Vue du Pont de Sèvres.jpg",
     owner_id: 27,
+  }).execute();
+
+  // Jacques-Louis David
+  await db.insertInto("artist").values({
+    first_name: "Jacques-Louis",
+    last_name: "David",
+    gender: "Homme",
+    avatar_url: "/arts/david/Autoportrait.jpg",
+    signature: "/signs/david.png",
+    slug: "david",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bonaparte franchissant le Grand-Saint-Bernard",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Bonaparte franchissant le Grand-Saint-Bernard.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Combat de Mars contre Minerve",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Combat de Mars contre Minerve.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Diane et Apollon perçant de leurs flèches les enfants de Niobé",
+    movement: "Néo-classicisme",
+    url:
+      "/arts/david/Diane et Apollon perçant de leurs flèches les enfants de Niobé.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Érasistrate découvrant la cause de la maladie d'Antiochius",
+    movement: "Néo-classicisme",
+    url:
+      "/arts/david/Érasistrate découvrant la cause de la maladie d'Antiochius.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Distribution des aigles",
+    movement: "Néo-classicisme",
+    url: "/arts/david/La Distribution des aigles.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Douleur d'Andromaque",
+    movement: "Néo-classicisme",
+    url: "/arts/david/La Douleur d'Andromaque.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Mort de Marat",
+    movement: "Néo-classicisme",
+    url: "/arts/david/La Mort de Marat.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Mort de Socrate",
+    movement: "Néo-classicisme",
+    url: "/arts/david/La Mort de Socrate.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Sacre de Napoléon",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Le Sacre de Napoléon.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Serment des Horaces",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Le Serment des Horaces.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Léonidas aux Thermopyles",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Léonidas aux Thermopyles.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Funérailles de Patrocle",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Les Funérailles de Patrocle.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les licteurs rapportent à Brutus les corps de ses fils",
+    movement: "Néo-classicisme",
+    url:
+      "/arts/david/Les licteurs rapportent à Brutus les corps de ses fils.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Sabines",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Les Sabines.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Mars désarmé par Vénus",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Mars désarmé par Vénus.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Napoléon dans son cabinet de travail",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Napoléon dans son cabinet de travail.jpg",
+    owner_id: 28,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Saint Roch intercédant la Vierge",
+    movement: "Néo-classicisme",
+    url: "/arts/david/Saint Roch intercédant la Vierge.jpg",
+    owner_id: 28,
+  }).execute();
+
+  // Le Caravage
+  await db.insertInto("artist").values({
+    first_name: "Le Caravage",
+    gender: "Homme",
+    avatar_url: "/arts/le caravage/Autoportrait.jpg",
+    signature: "/signs/le caravage.png",
+    slug: "lecaravage",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "David avec la tête de Goliath",
+    movement: "Baroque",
+    url: "/arts/le caravage/David avec la tête de Goliath.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Garçon avec un panier de fruits",
+    movement: "Baroque",
+    url: "/arts/le caravage/Garçon avec un panier de fruits.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Conversion de saint Paul",
+    movement: "Baroque",
+    url: "/arts/le caravage/La Conversion de saint Paul.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Madone des pèlerins",
+    movement: "Baroque",
+    url: "/arts/le caravage/La Madone des pèlerins.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Mort de la Vierge",
+    movement: "Baroque",
+    url: "/arts/le caravage/La Mort de la Vierge.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Vocation de saint Matthieu",
+    movement: "Baroque",
+    url: "/arts/le caravage/La Vocation de saint Matthieu.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Christ à la colonne",
+    movement: "Baroque",
+    url: "/arts/le caravage/Le Christ à la colonne.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Martyre de saint Matthieu",
+    movement: "Baroque",
+    url: "/arts/le caravage/Le Martyre de saint Matthieu.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Sept Œuvres de miséricorde",
+    movement: "Baroque",
+    url: "/arts/le caravage/Les Sept Œuvres de miséricorde.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Tricheurs",
+    movement: "Baroque",
+    url: "/arts/le caravage/Les Tricheurs.jpg",
+    owner_id: 29,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Incrédulité de saint Thomas",
+    movement: "Baroque",
+    url: "/arts/le caravage/L'Incrédulité de saint Thomas.jpg",
+    owner_id: 29,
+  }).execute();
+
+  // Le Tintoret
+  await db.insertInto("artist").values({
+    first_name: "Le Tintoret",
+    gender: "Homme",
+    avatar_url: "/arts/le tintoret/Autoportrait.jpg",
+    signature: "/signs/le tintoret.png",
+    slug: "letintoret",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Cène",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/La Cène.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Lamentations sur le Christ mort",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/Lamentations sur le Christ mort.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Enlèvement du corps de saint Marc",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/L'Enlèvement du corps de saint Marc.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Origine de la Voie Lactée",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/L'Origine de la Voie Lactée.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Miracle de l'esclave",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/Miracle de l'esclave.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Présentation de la Vierge au temple",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/Présentation de la Vierge au temple.jpg",
+    owner_id: 30,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Saint Georges et le dragon",
+    movement: "Maniérisme",
+    url: "/arts/le tintoret/Saint Georges et le dragon.jpg",
+    owner_id: 30,
+  }).execute();
+
+  // Raphaël
+  await db.insertInto("artist").values({
+    first_name: "Raphaël",
+    gender: "Homme",
+    avatar_url: "/arts/raphael/Autoportrait.jpg",
+    signature: "/signs/raphael.png",
+    slug: "raphael",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Fornarina",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/La Fornarina.jpg",
+    owner_id: 31,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Résurrection du Christ",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/La Résurrection du Christ.jpg",
+    owner_id: 31,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Transfiguration",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/La Transfiguration.jpg",
+    owner_id: 31,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Madone à la prairie",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/Madone à la prairie.jpg",
+    owner_id: 31,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Saint George et le dragon",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/Saint George et le dragon.jpg",
+    owner_id: 31,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Sainte Catherine d'Alexandrie",
+    movement: "Haute Renaissance",
+    url: "/arts/raphael/Sainte Catherine d'Alexandrie.jpg",
+    owner_id: 31,
+  }).execute();
+
+  // Amedeo Modigliani
+  await db.insertInto("artist").values({
+    first_name: "Amedeo",
+    last_name: "Modigliani",
+    gender: "Homme",
+    avatar_url: "/arts/modigliani/Autoportrait.jpg",
+    signature: "/signs/modigliani.png",
+    slug: "modigliani",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Femme à la cravate noire",
+    movement: "Expressionnisme",
+    url: "/arts/modigliani/Femme à la cravate noire.jpg",
+    owner_id: 32,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Femme à l'éventail",
+    movement: "Expressionnisme",
+    url: "/arts/modigliani/La Femme à l'éventail.jpg",
+    owner_id: 32,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Violoncelliste",
+    movement: "Expressionnisme",
+    url: "/arts/modigliani/Le Violoncelliste.jpg",
+    owner_id: 32,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu allongé sur un oreiller blanc",
+    movement: "Expressionnisme",
+    url: "/arts/modigliani/Nu allongé sur un oreiller blanc.jpg",
+    owner_id: 32,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu couché",
+    movement: "Expressionnisme",
+    url: "/arts/modigliani/Nu couché.jpg",
+    owner_id: 32,
+  }).execute();
+
+  // Giuseppe Arcimboldo
+  await db.insertInto("artist").values({
+    first_name: "Giuseppe",
+    last_name: "Arcimboldo",
+    gender: "Homme",
+    avatar_url: "/arts/arcimboldo/Autoportrait.jpg",
+    slug: "arcimboldo",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Terre",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/La Terre.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Air",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/L'Air.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Automne",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/L'Automne.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Printemps",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/Le Printemps.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Eau",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/L'Eau.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les quatre saisons en une seule tête",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/Les quatre saisons en une seule tête.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Été",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/L'Été.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Hiver",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/L'Hiver.jpg",
+    owner_id: 33,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Vertumne",
+    movement: "Maniérisme",
+    url: "/arts/arcimboldo/Vertumne.jpg",
+    owner_id: 33,
+  }).execute();
+
+  // Stanislaw Wyspianski
+  await db.insertInto("artist").values({
+    first_name: "Stanislaw",
+    last_name: "Wyspianski",
+    gender: "Homme",
+    avatar_url: "/arts/wyspianski/Autoportrait.jpg",
+    signature: "/signs/wyspianski.png",
+    slug: "wyspianski",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Courbes de la Vistule et le château du Wawel",
+    movement: "Expressionnisme",
+    url: "/arts/wyspianski/Courbes de la Vistule et le château du Wawel.jpg",
+    owner_id: 34,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Enfant avec un vase avec des fleurs",
+    movement: "Art nouveau",
+    url: "/arts/wyspianski/Enfant avec un vase avec des fleurs.jpg",
+    owner_id: 34,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Iris",
+    movement: "Expressionnisme",
+    url: "/arts/wyspianski/Iris.jpg",
+    owner_id: 34,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Maternité",
+    movement: "Art nouveau",
+    url: "/arts/wyspianski/Maternité.jpg",
+    owner_id: 34,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Parc Planty de Cracovie, la nuit",
+    movement: "Symbolisme",
+    url: "/arts/wyspianski/Parc Planty de Cracovie, la nuit.jpg",
+    owner_id: 34,
   }).execute();
 }
 

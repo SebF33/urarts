@@ -37,6 +37,7 @@ interface ArtTable {
     | "Haute Renaissance"
     | "Impressionnisme"
     | "Maniérisme"
+    | "Néo-classicisme"
     | "Période bleue"
     | "Période rose"
     | "Pointillisme"
@@ -46,7 +47,8 @@ interface ArtTable {
     | "Renaissance italienne"
     | "Rococo"
     | "Romantisme"
-    | "Surréalisme";
+    | "Surréalisme"
+    | "Symbolisme";
   url: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
