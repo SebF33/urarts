@@ -2,13 +2,14 @@ export const quotes = [
   "“J'avais pour les étables un goût plus irrésistible que jamais courtisan pour les antichambres royales ou impériales.” —Rosa Bonheur",
   "“Une œuvre d'art qui n'a pas commencé dans l'émotion n'est pas de l'art.” —Paul Cézanne",
   "“Si toute vie va inévitablement vers sa fin, nous devons, durant la nôtre, la colorier avec nos couleurs d'amour et d'espoir.” —Marc Chagall",
+  "“L’État est incompétent en matière d’art.” —Gustave Courbet",
   "“La peinture est la face visible de l’iceberg de ma pensée.” —Salvador Dalí",
   "“Il ne faut pas seulement regarder le modèle, il faut y lire comme dans un livre.” —Jacques-Louis David",
   "“Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.” —Tamara de Lempicka",
   "“Le peintre doit s’efforcer d’être universel.” —Léonard de Vinci",
   "“Le premier mérite d’un tableau est d’être une fête pour l’œil.” —Eugène Delacroix",
-  "“L’art est une abstraction, c’est le moyen de monter vers Dieu en faisant comme notre divin Maître, créer.” —Paul Gauguin",
   // 10
+  "“L’art est une abstraction, c’est le moyen de monter vers Dieu en faisant comme notre divin Maître, créer.” —Paul Gauguin",
   "“Jamais personne n'a trouvé dans mes tableaux une répétition d'invention, pas même d'une main.” —Artemisia Gentileschi",
   "“Pour créer son propre paradis, il faut puiser dans son enfer personnel.” —Frida Kahlo",
   "“Quand j’ai terminé un tableau, je ne veux pas perdre ensuite des mois entiers à le justifier devant la foule. Ce qui compte pour moi, ce n’est pas à combien de gens il plaît, mais à qui.” —Gustav Klimt",
@@ -18,8 +19,8 @@ export const quotes = [
   "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu'un tableau de figures.” —Le Caravage",
   "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
   "“Le dessein de l'art est de lutter contre les obligations.” —Amedeo Modigliani",
-  "“Ce que je ferai, ce sera l'impression de ce que j'aurai ressenti.” —Claude Monet",
   // 20
+  "“Ce que je ferai, ce sera l'impression de ce que j'aurai ressenti.” —Claude Monet",
   "“Mon ambition est de saisir une touche d'éphémère.” —Berthe Morisot",
   "“Qui voit la figure humaine correctement ? Le photographe, le miroir ou le peintre ?” —Pablo Picasso",
   "“Peignez généreusement et sans hésitations pour garder la fraîcheur de la première impression. Ne vous laissez pas intimider par la nature, au risque d’être déçu du résultat.” —Camille Pissarro",
@@ -29,4 +30,5 @@ export const quotes = [
   "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
   "“Il faut commencer par éprouver ce qu'on veut exprimer.” —Vincent van Gogh",
   "“Nous autres peintres, nous jouissons de la même licence que celle dont jouissent les poètes et les fous.” —Paul Véronèse",
+  // 30
 ];

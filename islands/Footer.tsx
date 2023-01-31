@@ -38,7 +38,7 @@ export default function Footer({ color }: { color: string }) {
             href="https://www.youtube.com/channel/UCjwYESom5l53m9kS_OOnVqw"
             class={tw`hover:text-gray-500`}
           >
-            <span class={tw`sr-only`}>Youtube</span>
+            <span class={tw`sr-only`}>YouTube</span>
             <svg
               class={tw`h-5 w-5`}
               fill={colorScheme[currentColorScheme].white}

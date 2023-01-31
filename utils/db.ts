@@ -10,6 +10,15 @@ import {
   SqliteQueryCompiler,
 } from "kysely";
 
+interface ArtTable {
+  id: Generated<number>;
+  owner_id: number;
+  name: string;
+  movement_id: number;
+  url: string;
+  modified_at: ColumnType<Date, string | undefined, never>;
+}
+
 interface ArtistTable {
   id: Generated<number>;
   first_name: string;
@@ -21,44 +30,21 @@ interface ArtistTable {
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
-interface ArtTable {
+interface MovementTable {
   id: Generated<number>;
-  owner_id: number;
   name: string;
-  movement:
-    | "Art déco"
-    | "Art naïf"
-    | "Art nouveau"
-    | "Baroque"
-    | "Cloisonnisme"
-    | "Cubisme"
-    | "Expressionnisme"
-    | "Fauvisme"
-    | "Haute Renaissance"
-    | "Impressionnisme"
-    | "Maniérisme"
-    | "Néo-classicisme"
-    | "Période bleue"
-    | "Période rose"
-    | "Pointillisme"
-    | "Postimpressionnisme"
-    | "Réalisme"
-    | "Régionalisme"
-    | "Renaissance italienne"
-    | "Rococo"
-    | "Romantisme"
-    | "Surréalisme"
-    | "Symbolisme";
-  url: string;
+  slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
-export type Artist = Selectable<ArtistTable>;
 export type Art = Selectable<ArtTable>;
+export type Artist = Selectable<ArtistTable>;
+export type Movement = Selectable<MovementTable>;
 
 export interface DbSchema {
-  artist: ArtistTable;
   art: ArtTable;
+  artist: ArtistTable;
+  movement: MovementTable;
 }
 
 export class Db {

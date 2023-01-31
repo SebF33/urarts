@@ -1,6 +1,6 @@
 import { tw } from "@twind";
 
-export function BrushStroke(props: { artist: string | null }) {
+export function BrushStroke(props: { title: string | null }) {
   return (
     <div class={tw`mx-auto z-10`}>
       <div
@@ -9,7 +9,7 @@ export function BrushStroke(props: { artist: string | null }) {
         <p
           class={tw`inline-block`}
         >
-          {props.artist}
+          {props.title}
         </p>
       </div>
       <svg

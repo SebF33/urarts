@@ -1,6 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
-import { h } from "preact";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { h } from "preact";
 
 export default function DefaultLayout(props: {
   date?: string;

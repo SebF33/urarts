@@ -10,19 +10,21 @@ export const handler = async (
   const filter = query.length ? encodeURIComponent(query) : "";
 
   const db = Db.getInstance();
-  const results = await db.selectFrom("artist").select([
-    "id",
-    "first_name",
-    "last_name",
-    "gender",
-    "avatar_url",
-    "signature",
-    "slug",
-  ]).where((qb) =>
-    qb
-      .orWhere("first_name", "like", "%" + filter + "%")
-      .orWhere("last_name", "like", "%" + filter + "%")
-  )
+  const results = await db.selectFrom("artist")
+    .select([
+      "id",
+      "first_name",
+      "last_name",
+      "gender",
+      "avatar_url",
+      "signature",
+      "slug",
+    ])
+    .where((qb) =>
+      qb
+        .orWhere("first_name", "like", "%" + filter + "%")
+        .orWhere("last_name", "like", "%" + filter + "%")
+    )
     .orderBy("first_name")
     .orderBy("last_name")
     .execute();
