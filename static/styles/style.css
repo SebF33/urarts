@@ -169,3 +169,8 @@ html {
     color: var(--color-white);
     font-style: italic;
 }
+
+.brush-input-box {
+    border-width: 18px 18px 18px 18px;
+    border-image: url(../brush-input-box.png) 27 round;
+}

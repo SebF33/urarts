@@ -18,10 +18,13 @@ export default function LiveSearch() {
   return (
     <main class={tw`flex-grow font-brush`}>
       <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+        <h1 class={tw`text-5xl font-medium mx-auto mb-2`}>
+          Œuvres
+        </h1>
         <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
-          Œuvre(s) d'art :
+          Nom(s) :
         </h2>
-        <div class={tw`relative mx-auto mb-4 w-48`}>
+        <div class={tw`brush-input-box relative w-48 mx-auto mb-4`}>
           <input
             type="text"
             value={searchTerm}
@@ -29,7 +32,7 @@ export default function LiveSearch() {
               e.key === "Enter" && e.preventDefault();
             }}
             onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={tw`w-full rounded border border-gray-600 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out`}
+            class={tw`w-full rounded border text-base outline-none py-1 px-3`}
           />
         </div>
         <div class={tw`flex flex-wrap`}>
