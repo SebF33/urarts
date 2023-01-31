@@ -27,7 +27,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("owner_id", "integer", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
-    .addColumn("movement", "text", (col) => col.notNull())
+    .addColumn("movement_id", "integer", (col) => col.notNull())
     .addColumn("url", "text", (col) => col.notNull())
     .addColumn(
       "modified_at",
@@ -41,14 +41,168 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
       ["id"],
       (cb) => cb.onDelete("cascade"),
     )
+    .addForeignKeyConstraint(
+      "art_movement_id_fk",
+      ["movement_id"],
+      "movement",
+      ["id"],
+      (cb) => cb.onDelete("cascade"),
+    )
     .execute();
 
-  // Index
+  // Index "art_owner_id_index"
   await db.schema
     .createIndex("art_owner_id_index")
     .on("art")
     .column("owner_id")
     .execute();
+
+  // Index "art_movement_id_index"
+  await db.schema
+    .createIndex("art_movement_id_index")
+    .on("art")
+    .column("movement_id")
+    .execute();
+
+  // Table "Mouvements"
+  await db.schema
+    .createTable("movement")
+    .ifNotExists()
+    .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
+    .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("slug", "text", (col) => col.notNull())
+    .addColumn(
+      "modified_at",
+      "timestamp",
+      (col) => col.defaultTo(sql`CURRENT_TIMESTAMP`),
+    )
+    .execute();
+
+  //1
+  await db.insertInto("movement").values({
+    name: "Art déco",
+    slug: "artdeco",
+  }).execute();
+  //2
+  await db.insertInto("movement").values({
+    name: "Art naïf",
+    slug: "artnaif",
+  }).execute();
+  //3
+  await db.insertInto("movement").values({
+    name: "Art nouveau",
+    slug: "artnouveau",
+  }).execute();
+  //4
+  await db.insertInto("movement").values({
+    name: "Baroque",
+    slug: "baroque",
+  }).execute();
+  //5
+  await db.insertInto("movement").values({
+    name: "Cloisonnisme",
+    slug: "cloisonnisme",
+  }).execute();
+  //6
+  await db.insertInto("movement").values({
+    name: "Cubisme",
+    slug: "cubisme",
+  }).execute();
+  //7
+  await db.insertInto("movement").values({
+    name: "Expressionnisme",
+    slug: "expressionnisme",
+  }).execute();
+  //8
+  await db.insertInto("movement").values({
+    name: "Fauvisme",
+    slug: "fauvisme",
+  }).execute();
+  //9
+  await db.insertInto("movement").values({
+    name: "Haute Renaissance",
+    slug: "hauterenaissance",
+  }).execute();
+  //10
+  await db.insertInto("movement").values({
+    name: "Impressionnisme",
+    slug: "impressionnisme",
+  }).execute();
+  //11
+  await db.insertInto("movement").values({
+    name: "Maniérisme",
+    slug: "manierisme",
+  }).execute();
+  //12
+  await db.insertInto("movement").values({
+    name: "Néo-classicisme",
+    slug: "neoclassicisme",
+  }).execute();
+  //13
+  await db.insertInto("movement").values({
+    name: "Période bleue",
+    slug: "periodebleue",
+  }).execute();
+  //14
+  await db.insertInto("movement").values({
+    name: "Période rose",
+    slug: "perioderose",
+  }).execute();
+  //15
+  await db.insertInto("movement").values({
+    name: "Pointillisme",
+    slug: "pointillisme",
+  }).execute();
+  //16
+  await db.insertInto("movement").values({
+    name: "Postimpressionnisme",
+    slug: "postimpressionnisme",
+  }).execute();
+  //17
+  await db.insertInto("movement").values({
+    name: "Première Renaissance",
+    slug: "premiererenaissance",
+  }).execute();
+  //18
+  await db.insertInto("movement").values({
+    name: "Réalisme",
+    slug: "realisme",
+  }).execute();
+  //19
+  await db.insertInto("movement").values({
+    name: "Régionalisme",
+    slug: "regionalisme",
+  }).execute();
+  //20
+  await db.insertInto("movement").values({
+    name: "Renaissance italienne",
+    slug: "renaissanceitalienne",
+  }).execute();
+  //21
+  await db.insertInto("movement").values({
+    name: "Rococo",
+    slug: "rococo",
+  }).execute();
+  //22
+  await db.insertInto("movement").values({
+    name: "Romantisme",
+    slug: "romantisme",
+  }).execute();
+  //23
+  await db.insertInto("movement").values({
+    name: "Surréalisme",
+    slug: "surrealisme",
+  }).execute();
+  //24
+  await db.insertInto("movement").values({
+    name: "Symbolisme",
+    slug: "symbolisme",
+  }).execute();
+  //25
+  await db.insertInto("movement").values({
+    name: "Synthétisme",
+    slug: "synthetisme",
+  }).execute();
 
   // Tamara de Lempicka
   await db.insertInto("artist").values({
@@ -61,61 +215,61 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Adam et Ève",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Adam et Ève.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Bouquet de violettes",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Bouquet de violettes.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Citron",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Citron.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "La chemise rose",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/La chemise rose.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "La femme endormie",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/La femme endormie.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Arums",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Les Arums.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "L'esclave",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/L'esclave.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "New York",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/New York.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Roses dans un vase",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Roses dans un vase.jpg",
     owner_id: 1,
   }).execute();
   await db.insertInto("art").values({
     name: "Roses",
-    movement: "Art déco",
+    movement_id: 1,
     url: "/arts/de lempicka/Roses.jpg",
     owner_id: 1,
   }).execute();
@@ -131,25 +285,25 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Femmes d'Alger dans leur appartement",
-    movement: "Romantisme",
+    movement_id: 22,
     url: "/arts/delacroix/Femmes d'Alger dans leur appartement.jpg",
     owner_id: 2,
   }).execute();
   await db.insertInto("art").values({
     name: "La Liberté guidant le peuple",
-    movement: "Romantisme",
+    movement_id: 22,
     url: "/arts/delacroix/La Liberté guidant le peuple.jpg",
     owner_id: 2,
   }).execute();
   await db.insertInto("art").values({
     name: "La Mort de Sardanapale",
-    movement: "Romantisme",
+    movement_id: 22,
     url: "/arts/delacroix/La Mort de Sardanapale.jpg",
     owner_id: 2,
   }).execute();
   await db.insertInto("art").values({
     name: "Scènes des massacres de Scio",
-    movement: "Romantisme",
+    movement_id: 22,
     url: "/arts/delacroix/Scènes des massacres de Scio.jpg",
     owner_id: 2,
   }).execute();
@@ -165,19 +319,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Le Christ jaune",
-    movement: "Cloisonnisme",
+    movement_id: 5,
     url: "/arts/gauguin/Le Christ jaune.jpg",
     owner_id: 3,
   }).execute();
   await db.insertInto("art").values({
     name: "Manao Tupapau",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/gauguin/Manao Tupapau.jpg",
     owner_id: 3,
   }).execute();
   await db.insertInto("art").values({
     name: "Quand te maries-tu ?",
-    movement: "Cloisonnisme",
+    movement_id: 5,
     url: "/arts/gauguin/Quand te maries-tu.jpg",
     owner_id: 3,
   }).execute();
@@ -193,19 +347,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La famille de saltimbanques",
-    movement: "Période rose",
+    movement_id: 14,
     url: "/arts/picasso/La famille de saltimbanques.jpg",
     owner_id: 4,
   }).execute();
   await db.insertInto("art").values({
     name: "La Vie",
-    movement: "Période bleue",
+    movement_id: 13,
     url: "/arts/picasso/La Vie.jpg",
     owner_id: 4,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Demoiselles d'Avignon",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/picasso/Les Demoiselles d'Avignon.jpg",
     owner_id: 4,
   }).execute();
@@ -221,19 +375,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Bethsabée au bain tenant la lettre de David",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/rembrandt/Bethsabée au bain tenant la lettre de David.jpg",
     owner_id: 5,
   }).execute();
   await db.insertInto("art").values({
     name: "La Leçon d'anatomie du docteur Tulp",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/rembrandt/La Leçon d'anatomie du docteur Tulp.jpg",
     owner_id: 5,
   }).execute();
   await db.insertInto("art").values({
     name: "La Ronde de nuit",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/rembrandt/La Ronde de nuit.jpg",
     owner_id: 5,
   }).execute();
@@ -249,44 +403,44 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Chambre de Van Gogh à Arles",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/van gogh/La Chambre de Van Gogh à Arles.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "La Maison blanche, la nuit",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/van gogh/La Maison blanche, la nuit.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "La Nuit étoilée",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/van gogh/La Nuit étoilée.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Mangeurs de pommes de terre",
-    movement: "Réalisme",
+    movement_id: 18,
     url: "/arts/van gogh/Les Mangeurs de pommes de terre.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Tournesols",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/van gogh/Les Tournesols.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "Portrait du docteur Gachet avec branche de digitale",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url:
       "/arts/van gogh/Portrait du docteur Gachet avec branche de digitale.jpg",
     owner_id: 6,
   }).execute();
   await db.insertInto("art").values({
     name: "Terrasse du café le soir",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/van gogh/Terrasse du café le soir.jpg",
     owner_id: 6,
   }).execute();
@@ -302,13 +456,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Le Déjeuner sur l'herbe",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/manet/Le Déjeuner sur l'herbe.jpg",
     owner_id: 7,
   }).execute();
   await db.insertInto("art").values({
     name: "Olympia",
-    movement: "Réalisme",
+    movement_id: 18,
     url: "/arts/manet/Olympia.jpg",
     owner_id: 7,
   }).execute();
@@ -324,19 +478,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Les Fruits de la Terre",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/kahlo/Les Fruits de la Terre.jpg",
     owner_id: 8,
   }).execute();
   await db.insertInto("art").values({
     name: "Ma naissance",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/kahlo/Ma naissance.jpg",
     owner_id: 8,
   }).execute();
   await db.insertInto("art").values({
     name: "Pitahayas",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/kahlo/Pitahayas.jpg",
     owner_id: 8,
   }).execute();
@@ -352,37 +506,37 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Danaé",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/Danaé.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
     name: "La Vie et la Mort",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/La Vie et la Mort.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Baiser",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/Le Baiser.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Vierges",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/Les Vierges.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Espoir II",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/L'Espoir II.jpg",
     owner_id: 9,
   }).execute();
   await db.insertInto("art").values({
     name: "Portrait d'Adele Bloch-Bauer I",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/klimt/Portrait d'Adele Bloch-Bauer I.jpg",
     owner_id: 9,
   }).execute();
@@ -397,25 +551,25 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Conversion de saint Paul",
-    movement: "Renaissance italienne",
+    movement_id: 20,
     url: "/arts/michel-ange/La Conversion de saint Paul.jpg",
     owner_id: 10,
   }).execute();
   await db.insertInto("art").values({
     name: "La Création d'Adam",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/michel-ange/La Création d'Adam.jpg",
     owner_id: 10,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Jugement dernier",
-    movement: "Renaissance italienne",
+    movement_id: 20,
     url: "/arts/michel-ange/Le Jugement dernier.jpg",
     owner_id: 10,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Tourment de saint Antoine",
-    movement: "Renaissance italienne",
+    movement_id: 20,
     url: "/arts/michel-ange/Le Tourment de saint Antoine.jpg",
     owner_id: 10,
   }).execute();
@@ -431,25 +585,25 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Cène",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/de vinci/La Cène.jpg",
     owner_id: 11,
   }).execute();
   await db.insertInto("art").values({
     name: "La Joconde",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/de vinci/La Joconde.jpg",
     owner_id: 11,
   }).execute();
   await db.insertInto("art").values({
     name: "Saint Jean-Baptiste",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/de vinci/Saint Jean-Baptiste.jpg",
     owner_id: 11,
   }).execute();
   await db.insertInto("art").values({
     name: "Sainte Anne, la Vierge et l'Enfant Jésus jouant avec un agneau",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url:
       "/arts/de vinci/Sainte Anne, la Vierge et l'Enfant Jésus jouant avec un agneau.jpg",
     owner_id: 11,
@@ -466,32 +620,32 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Galacidalacidesoxyribonucleicacid",
-    movement: "Surréalisme",
+    movement_id: 23,
     url: "/arts/dali/Galacidalacidesoxyribonucleicacid.jpg",
     owner_id: 12,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Grand Masturbateur",
-    movement: "Surréalisme",
+    movement_id: 23,
     url: "/arts/dali/Le Grand Masturbateur.jpg",
     owner_id: 12,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Miel est plus doux que le sang",
-    movement: "Surréalisme",
+    movement_id: 23,
     url: "/arts/dali/Le Miel est plus doux que le sang.jpg",
     owner_id: 12,
   }).execute();
   await db.insertInto("art").values({
     name: "Leda atomica",
-    movement: "Surréalisme",
+    movement_id: 23,
     url: "/arts/dali/Leda atomica.jpg",
     owner_id: 12,
   }).execute();
   await db.insertInto("art").values({
     name:
       "Ma femme, nue, regardant son propre corps devenir, trois vertèbres d'une colonne, ciel et architecture",
-    movement: "Surréalisme",
+    movement_id: 23,
     url:
       "/arts/dali/Ma femme, nue, regardant son propre corps devenir, trois vertèbres d'une colonne, ciel et architecture.jpg",
     owner_id: 12,
@@ -508,13 +662,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Impression, soleil levant",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/monet/Impression, soleil levant.jpg",
     owner_id: 13,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Nymphéas",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/monet/Les Nymphéas.jpg",
     owner_id: 13,
   }).execute();
@@ -530,37 +684,37 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Bal du moulin de la Galette",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/Bal du moulin de la Galette.jpg",
     owner_id: 14,
   }).execute();
   await db.insertInto("art").values({
     name: "Jeunes filles en noir",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/Jeunes filles en noir.jpg",
     owner_id: 14,
   }).execute();
   await db.insertInto("art").values({
     name: "La Grenouillère",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/La Grenouillère.jpg",
     owner_id: 14,
   }).execute();
   await db.insertInto("art").values({
     name: "La Loge",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/La Loge.jpg",
     owner_id: 14,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Déjeuner des canotiers",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/Le Déjeuner des canotiers.jpg",
     owner_id: 14,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Deux Sœurs",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/renoir/Les Deux Sœurs.jpg",
     owner_id: 14,
   }).execute();
@@ -577,7 +731,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Suzanne et les vieillards",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/gentileschi/Suzanne et les vieillards.jpg",
     owner_id: 15,
   }).execute();
@@ -593,7 +747,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Nature morte aux pommes et aux oranges",
-    movement: "Postimpressionnisme",
+    movement_id: 16,
     url: "/arts/cezanne/Nature morte aux pommes et aux oranges.jpg",
     owner_id: 16,
   }).execute();
@@ -609,31 +763,31 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Dame jouant du virginal",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/vermeer/Dame jouant du virginal.jpg",
     owner_id: 17,
   }).execute();
   await db.insertInto("art").values({
     name: "La Jeune Fille à la perle",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/vermeer/La Jeune Fille à la perle.jpg",
     owner_id: 17,
   }).execute();
   await db.insertInto("art").values({
     name: "La Laitière",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/vermeer/La Laitière.jpg",
     owner_id: 17,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Art de la peinture",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/vermeer/L'Art de la peinture.jpg",
     owner_id: 17,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Entremetteuse",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/vermeer/L'Entremetteuse.jpg",
     owner_id: 17,
   }).execute();
@@ -649,7 +803,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Bateaux sur la Seine",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/morisot/Bateaux sur la Seine.jpg",
     owner_id: 18,
   }).execute();
@@ -665,37 +819,37 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Dédié à ma fiancée",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/chagall/Dédié à ma fiancée.jpg",
     owner_id: 19,
   }).execute();
   await db.insertInto("art").values({
     name: "Golgotha",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/chagall/Golgotha.jpg",
     owner_id: 19,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Violoniste",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/chagall/Le Violoniste.jpg",
     owner_id: 19,
   }).execute();
   await db.insertInto("art").values({
     name: "Nature morte",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/chagall/Nature morte.jpg",
     owner_id: 19,
   }).execute();
   await db.insertInto("art").values({
     name: "Paris par la fenêtre",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/chagall/Paris par la fenêtre.jpg",
     owner_id: 19,
   }).execute();
   await db.insertInto("art").values({
     name: "Trois heures et demie (Le poète)",
-    movement: "Cubisme",
+    movement_id: 6,
     url: "/arts/chagall/Trois heures et demie (Le poète).jpg",
     owner_id: 19,
   }).execute();
@@ -710,13 +864,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Bacchus et Ariane",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/titien/Bacchus et Ariane.jpg",
     owner_id: 20,
   }).execute();
   await db.insertInto("art").values({
     name: "Caïn et Abel",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/titien/Caïn et Abel.jpg",
     owner_id: 20,
   }).execute();
@@ -732,19 +886,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Biches et cerf au repos",
-    movement: "Romantisme",
+    movement_id: 22,
     url: "/arts/bonheur/Biches et cerf au repos.jpg",
     owner_id: 21,
   }).execute();
   await db.insertInto("art").values({
     name: "La foire du cheval",
-    movement: "Réalisme",
+    movement_id: 18,
     url: "/arts/bonheur/La foire du cheval.jpg",
     owner_id: 21,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Roi de la forêt",
-    movement: "Réalisme",
+    movement_id: 18,
     url: "/arts/bonheur/Le Roi de la forêt.jpg",
     owner_id: 21,
   }).execute();
@@ -760,7 +914,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Boulevard Montmartre, printemps",
-    movement: "Impressionnisme",
+    movement_id: 10,
     url: "/arts/pissarro/Boulevard Montmartre, printemps.jpg",
     owner_id: 22,
   }).execute();
@@ -776,19 +930,19 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Femme au chapeau",
-    movement: "Fauvisme",
+    movement_id: 8,
     url: "/arts/matisse/Femme au chapeau.jpg",
     owner_id: 23,
   }).execute();
   await db.insertInto("art").values({
     name: "La Joie de vivre",
-    movement: "Fauvisme",
+    movement_id: 8,
     url: "/arts/matisse/La Joie de vivre.jpg",
     owner_id: 23,
   }).execute();
   await db.insertInto("art").values({
     name: "Luxe, Calme et Volupté",
-    movement: "Pointillisme",
+    movement_id: 15,
     url: "/arts/matisse/Luxe, Calme et Volupté.jpg",
     owner_id: 23,
   }).execute();
@@ -804,7 +958,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Paix ramenant l'Abondance",
-    movement: "Rococo",
+    movement_id: 21,
     url: "/arts/le brun/La Paix ramenant l'Abondance.jpg",
     owner_id: 24,
   }).execute();
@@ -820,13 +974,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Bataille de Lépante",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/veronese/La Bataille de Lépante.jpg",
     owner_id: 25,
   }).execute();
   await db.insertInto("art").values({
     name: "Mars et Vénus réunis par Cupidon",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/veronese/Mars et Vénus réunis par Cupidon.jpg",
     owner_id: 25,
   }).execute();
@@ -842,7 +996,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Triple autoportrait",
-    movement: "Régionalisme",
+    movement_id: 19,
     url: "/arts/rockwell/Triple autoportrait.jpg",
     owner_id: 26,
   }).execute();
@@ -858,91 +1012,91 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Combat de tigre et buffle",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Combat de tigre et buffle.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "L’Octroi",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/L’Octroi.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "La Bohémienne endormie",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/La Bohémienne endormie.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "La Charmeuse de serpents",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/La Charmeuse de serpents.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "La Seine à Suresnes",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/La Seine à Suresnes.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Le lion, ayant faim, se jette sur l’antilope",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Le lion, ayant faim, se jette sur l’antilope.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Moulin d’Alfort",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Le Moulin d’Alfort.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Repas du lion",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Le Repas du lion.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Rêve",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Le Rêve.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Moi-même",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Moi-même.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Paysage d’Alger",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Paysage d’Alger.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Portrait de Monsieur X",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Portrait de Monsieur X.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Une soirée au carnaval",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Une soirée au carnaval.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Vue de Billancourt et Bas-Meudon",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Vue de Billancourt et Bas-Meudon.jpg",
     owner_id: 27,
   }).execute();
   await db.insertInto("art").values({
     name: "Vue du Pont de Sèvres",
-    movement: "Art naïf",
+    movement_id: 2,
     url: "/arts/rousseau/Vue du Pont de Sèvres.jpg",
     owner_id: 27,
   }).execute();
@@ -958,106 +1112,106 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Bonaparte franchissant le Grand-Saint-Bernard",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Bonaparte franchissant le Grand-Saint-Bernard.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Combat de Mars contre Minerve",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Combat de Mars contre Minerve.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Diane et Apollon perçant de leurs flèches les enfants de Niobé",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url:
       "/arts/david/Diane et Apollon perçant de leurs flèches les enfants de Niobé.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Érasistrate découvrant la cause de la maladie d'Antiochius",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url:
       "/arts/david/Érasistrate découvrant la cause de la maladie d'Antiochius.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "La Distribution des aigles",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/La Distribution des aigles.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "La Douleur d'Andromaque",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/La Douleur d'Andromaque.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "La Mort de Marat",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/La Mort de Marat.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "La Mort de Socrate",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/La Mort de Socrate.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Sacre de Napoléon",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Le Sacre de Napoléon.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Serment des Horaces",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Le Serment des Horaces.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Léonidas aux Thermopyles",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Léonidas aux Thermopyles.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Funérailles de Patrocle",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Les Funérailles de Patrocle.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Les licteurs rapportent à Brutus les corps de ses fils",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url:
       "/arts/david/Les licteurs rapportent à Brutus les corps de ses fils.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Sabines",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Les Sabines.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Mars désarmé par Vénus",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Mars désarmé par Vénus.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Napoléon dans son cabinet de travail",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Napoléon dans son cabinet de travail.jpg",
     owner_id: 28,
   }).execute();
   await db.insertInto("art").values({
     name: "Saint Roch intercédant la Vierge",
-    movement: "Néo-classicisme",
+    movement_id: 12,
     url: "/arts/david/Saint Roch intercédant la Vierge.jpg",
     owner_id: 28,
   }).execute();
@@ -1072,67 +1226,67 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "David avec la tête de Goliath",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/David avec la tête de Goliath.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "Garçon avec un panier de fruits",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/Garçon avec un panier de fruits.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "La Conversion de saint Paul",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/La Conversion de saint Paul.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "La Madone des pèlerins",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/La Madone des pèlerins.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "La Mort de la Vierge",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/La Mort de la Vierge.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "La Vocation de saint Matthieu",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/La Vocation de saint Matthieu.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Christ à la colonne",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/Le Christ à la colonne.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Martyre de saint Matthieu",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/Le Martyre de saint Matthieu.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Sept Œuvres de miséricorde",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/Les Sept Œuvres de miséricorde.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "Les Tricheurs",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/Les Tricheurs.jpg",
     owner_id: 29,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Incrédulité de saint Thomas",
-    movement: "Baroque",
+    movement_id: 4,
     url: "/arts/le caravage/L'Incrédulité de saint Thomas.jpg",
     owner_id: 29,
   }).execute();
@@ -1147,43 +1301,43 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Cène",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/La Cène.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "Lamentations sur le Christ mort",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/Lamentations sur le Christ mort.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Enlèvement du corps de saint Marc",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/L'Enlèvement du corps de saint Marc.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Origine de la Voie Lactée",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/L'Origine de la Voie Lactée.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "Miracle de l'esclave",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/Miracle de l'esclave.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "Présentation de la Vierge au temple",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/Présentation de la Vierge au temple.jpg",
     owner_id: 30,
   }).execute();
   await db.insertInto("art").values({
     name: "Saint Georges et le dragon",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/le tintoret/Saint Georges et le dragon.jpg",
     owner_id: 30,
   }).execute();
@@ -1198,37 +1352,37 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Fornarina",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/La Fornarina.jpg",
     owner_id: 31,
   }).execute();
   await db.insertInto("art").values({
     name: "La Résurrection du Christ",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/La Résurrection du Christ.jpg",
     owner_id: 31,
   }).execute();
   await db.insertInto("art").values({
     name: "La Transfiguration",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/La Transfiguration.jpg",
     owner_id: 31,
   }).execute();
   await db.insertInto("art").values({
     name: "Madone à la prairie",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/Madone à la prairie.jpg",
     owner_id: 31,
   }).execute();
   await db.insertInto("art").values({
     name: "Saint George et le dragon",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/Saint George et le dragon.jpg",
     owner_id: 31,
   }).execute();
   await db.insertInto("art").values({
     name: "Sainte Catherine d'Alexandrie",
-    movement: "Haute Renaissance",
+    movement_id: 9,
     url: "/arts/raphael/Sainte Catherine d'Alexandrie.jpg",
     owner_id: 31,
   }).execute();
@@ -1244,31 +1398,31 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Femme à la cravate noire",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/modigliani/Femme à la cravate noire.jpg",
     owner_id: 32,
   }).execute();
   await db.insertInto("art").values({
     name: "La Femme à l'éventail",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/modigliani/La Femme à l'éventail.jpg",
     owner_id: 32,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Violoncelliste",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/modigliani/Le Violoncelliste.jpg",
     owner_id: 32,
   }).execute();
   await db.insertInto("art").values({
     name: "Nu allongé sur un oreiller blanc",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/modigliani/Nu allongé sur un oreiller blanc.jpg",
     owner_id: 32,
   }).execute();
   await db.insertInto("art").values({
     name: "Nu couché",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/modigliani/Nu couché.jpg",
     owner_id: 32,
   }).execute();
@@ -1283,55 +1437,55 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "La Terre",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/La Terre.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Air",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/L'Air.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Automne",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/L'Automne.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "Le Printemps",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/Le Printemps.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Eau",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/L'Eau.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "Les quatre saisons en une seule tête",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/Les quatre saisons en une seule tête.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Été",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/L'Été.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "L'Hiver",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/L'Hiver.jpg",
     owner_id: 33,
   }).execute();
   await db.insertInto("art").values({
     name: "Vertumne",
-    movement: "Maniérisme",
+    movement_id: 11,
     url: "/arts/arcimboldo/Vertumne.jpg",
     owner_id: 33,
   }).execute();
@@ -1347,39 +1501,211 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   await db.insertInto("art").values({
     name: "Courbes de la Vistule et le château du Wawel",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/wyspianski/Courbes de la Vistule et le château du Wawel.jpg",
     owner_id: 34,
   }).execute();
   await db.insertInto("art").values({
     name: "Enfant avec un vase avec des fleurs",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/wyspianski/Enfant avec un vase avec des fleurs.jpg",
     owner_id: 34,
   }).execute();
   await db.insertInto("art").values({
     name: "Iris",
-    movement: "Expressionnisme",
+    movement_id: 7,
     url: "/arts/wyspianski/Iris.jpg",
     owner_id: 34,
   }).execute();
   await db.insertInto("art").values({
     name: "Maternité",
-    movement: "Art nouveau",
+    movement_id: 3,
     url: "/arts/wyspianski/Maternité.jpg",
     owner_id: 34,
   }).execute();
   await db.insertInto("art").values({
     name: "Parc Planty de Cracovie, la nuit",
-    movement: "Symbolisme",
+    movement_id: 24,
     url: "/arts/wyspianski/Parc Planty de Cracovie, la nuit.jpg",
     owner_id: 34,
+  }).execute();
+
+  // Sandro Botticelli
+  await db.insertInto("artist").values({
+    first_name: "Sandro",
+    last_name: "Botticelli",
+    gender: "Homme",
+    avatar_url: "/arts/botticelli/Autoportrait.jpg",
+    signature: "/signs/botticelli.png",
+    slug: "botticelli",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Calomnie d'Apelle",
+    movement_id: 17,
+    url: "/arts/botticelli/La Calomnie d'Apelle.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Naissance de Vénus",
+    movement_id: 17,
+    url: "/arts/botticelli/La Naissance de Vénus.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Punition des rebelles",
+    movement_id: 17,
+    url: "/arts/botticelli/La Punition des rebelles.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Vierge à l'Enfant avec un ange",
+    movement_id: 17,
+    url: "/arts/botticelli/La Vierge à l'Enfant avec un ange.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Adoration des mages",
+    movement_id: 17,
+    url: "/arts/botticelli/L'Adoration des mages.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Annonciation du Cestello",
+    movement_id: 17,
+    url: "/arts/botticelli/L'Annonciation du Cestello.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Printemps",
+    movement_id: 17,
+    url: "/arts/botticelli/Le Printemps.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Pallas et le Centaure",
+    movement_id: 17,
+    url: "/arts/botticelli/Pallas et le Centaure.jpg",
+    owner_id: 35,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Vénus et Mars",
+    movement_id: 17,
+    url: "/arts/botticelli/Vénus et Mars.jpg",
+    owner_id: 35,
+  }).execute();
+
+  // Pierre Paul Rubens
+  await db.insertInto("artist").values({
+    first_name: "Pierre Paul",
+    last_name: "Rubens",
+    gender: "Homme",
+    avatar_url: "/arts/rubens/Autoportrait.jpg",
+    signature: "/signs/rubens.png",
+    slug: "rubens",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chasse à l'hippopotame et au crocodile",
+    movement_id: 4,
+    url: "/arts/rubens/La Chasse à l'hippopotame et au crocodile.jpg",
+    owner_id: 36,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chasse au lion et au léopard",
+    movement_id: 4,
+    url: "/arts/rubens/La Chasse au lion et au léopard.jpg",
+    owner_id: 36,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chasse au loup et au renard",
+    movement_id: 4,
+    url: "/arts/rubens/La Chasse au loup et au renard.jpg",
+    owner_id: 36,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chasse au sanglier",
+    movement_id: 4,
+    url: "/arts/rubens/La Chasse au sanglier.jpg",
+    owner_id: 36,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chasse au tigre",
+    movement_id: 4,
+    url: "/arts/rubens/La Chasse au tigre.jpg",
+    owner_id: 36,
+  }).execute();
+
+  // Paul Sérusier
+  await db.insertInto("artist").values({
+    first_name: "Paul",
+    last_name: "Sérusier",
+    gender: "Homme",
+    avatar_url: "/arts/serusier/Autoportrait.jpg",
+    slug: "serusier",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Talisman",
+    movement_id: 25,
+    url: "/arts/serusier/Le Talisman.jpg",
+    owner_id: 37,
+  }).execute();
+
+  // Gustave Courbet
+  await db.insertInto("artist").values({
+    first_name: "Gustave",
+    last_name: "Courbet",
+    gender: "Homme",
+    avatar_url: "/arts/courbet/L'homme à la pipe.jpg",
+    signature: "/signs/courbet.png",
+    slug: "courbet",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bonjour Monsieur Courbet",
+    movement_id: 18,
+    url: "/arts/courbet/Bonjour Monsieur Courbet.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Fleurs dans un vase",
+    movement_id: 18,
+    url: "/arts/courbet/Fleurs dans un vase.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'Atelier du peintre",
+    movement_id: 18,
+    url: "/arts/courbet/L'Atelier du peintre.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Chêne de Flagey",
+    movement_id: 18,
+    url: "/arts/courbet/Le Chêne de Flagey.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Coup de vent",
+    movement_id: 18,
+    url: "/arts/courbet/Le Coup de vent.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Déjeuner de chasse",
+    movement_id: 18,
+    url: "/arts/courbet/Le Déjeuner de chasse.jpg",
+    owner_id: 38,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Désespéré",
+    movement_id: 22,
+    url: "/arts/courbet/Le Désespéré.jpg",
+    owner_id: 38,
   }).execute();
 }
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
   await db.schema.dropTable("art").ifExists().execute();
   await db.schema.dropTable("artist").ifExists().execute();
+  await db.schema.dropTable("movement").ifExists().execute();
 }
 
 async function run() {

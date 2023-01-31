@@ -10,7 +10,7 @@ import Header from "@islands/Header.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
-  artist: string | null;
+  movement: string | null;
   desc: string | null;
   title: string | null;
 }> = {
@@ -19,9 +19,8 @@ export const handler: Handlers<{
 
     const db = Db.getInstance();
 
-    const result = await db.selectFrom("artist").select([
-      "first_name",
-      "last_name",
+    const result = await db.selectFrom("movement").select([
+      "name",
     ]).where("slug", "=", slug).executeTakeFirst();
 
     const results = await db.selectFrom("art")
@@ -35,19 +34,17 @@ export const handler: Handlers<{
         "movement.name as movement",
         "url",
       ])
-      .where("artist.slug", "=", slug)
+      .where("movement.slug", "=", slug)
+      .orderBy("art.name")
       .execute();
 
-    let artist: string | null = null;
+    let movement: string | null = null;
     let desc: string | null = null;
     let title: string | null = null;
     if (result) {
-      if (result.last_name === null) {
-        result.last_name = "";
-      }
-      artist = result.first_name + " " + result.last_name;
-      desc = "Les plus belles œuvres de " + artist + ".";
-      title = "Collection " + artist;
+      movement = result.name;
+      desc = movement + ".";
+      title = "Collection " + movement;
     }
 
     let art: Array<ArtCollection> | null = null;
@@ -63,19 +60,19 @@ export const handler: Handlers<{
     }
 
     if (!result) return ctx.renderNotFound();
-    return ctx.render({ art, artist, desc, title });
+    return ctx.render({ art, movement, desc, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
     art: Array<ArtCollection> | null;
-    artist: string | null;
+    movement: string | null;
     desc: string;
     title: string;
   }>,
 ) {
-  const { art, artist, desc, title } = props.data;
+  const { art, movement, desc, title } = props.data;
 
   return (
     <DefaultLayout
@@ -100,7 +97,7 @@ export default function Arts(
           <div
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
-            <BrushStroke title={artist} />
+            <BrushStroke title={movement} />
             {art &&
               (
                 <div

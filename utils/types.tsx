@@ -28,6 +28,12 @@ export type ArtistRow = {
   slug: string;
 };
 
+export type MovementRow = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
 export interface Spring {
   p: number;
   v: number;

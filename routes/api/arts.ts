@@ -11,18 +11,21 @@ export const handler = async (
 
   const db = Db.getInstance();
   const results = await db.selectFrom("art")
-    .innerJoin("artist", "art.owner_id", "artist.id").select([
+    .innerJoin("artist", "art.owner_id", "artist.id")
+    .innerJoin("movement", "art.movement_id", "movement.id")
+    .select([
       "art.id",
-      "name",
+      "art.name as name",
       "first_name",
       "last_name",
       "gender",
       "avatar_url",
-      "slug",
-      "movement",
+      "artist.slug as slug",
+      "movement.name as movement",
       "url",
-    ]).where("name", "like", "%" + filter + "%")
-    .orderBy("name")
+    ])
+    .where("art.name", "like", "%" + filter + "%")
+    .orderBy("art.name")
     .execute();
 
   return Promise.resolve(
