@@ -1,10 +1,14 @@
-import { tw } from "@twind";
+import { css, tw } from "@twind";
 
-export function BrushStroke(props: { title: string | null }) {
+export function BrushStroke(props: { color: string; title: string }) {
   return (
     <div class={tw`mx-auto z-10`}>
       <div
-        class={tw`brush-wrap font-brush mx-auto mt-2 text-center`}
+        class={tw`brush-wrap font-brush mx-auto mt-2 text-center ${
+          css({
+            "&::before": { background: `${props.color}` },
+          })
+        }`}
       >
         <p
           class={tw`inline-block`}
