@@ -10,8 +10,9 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("first_name", "text", (col) => col.notNull())
     .addColumn("last_name", "text")
     .addColumn("gender", "text", (col) => col.notNull())
-    .addColumn("avatar_url", "text", (col) => col.notNull())
+    .addColumn("avatar_url", "text")
     .addColumn("signature", "text")
+    .addColumn("color", "text", (col) => col.defaultTo(sql`"#141b1e"`))
     .addColumn("slug", "text", (col) => col.notNull())
     .addColumn(
       "modified_at",
@@ -28,7 +29,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("owner_id", "integer", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("movement_id", "integer", (col) => col.notNull())
+    .addColumn("polyptych", "integer", (col) => col.defaultTo(sql`1`))
+    .addColumn("frame", "integer", (col) => col.defaultTo(sql`1`))
     .addColumn("url", "text", (col) => col.notNull())
+    .addColumn("url_2", "text")
+    .addColumn("url_3", "text")
+    .addColumn("url_4", "text")
+    .addColumn("url_5", "text")
     .addColumn(
       "modified_at",
       "timestamp",
@@ -203,6 +210,16 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "Synthétisme",
     slug: "synthetisme",
   }).execute();
+  //26
+  await db.insertInto("movement").values({
+    name: "Renaissance nordique",
+    slug: "renaissancenordique",
+  }).execute();
+  //27
+  await db.insertInto("movement").values({
+    name: "Non classé",
+    slug: "nonclasse",
+  }).execute();
 
   // Tamara de Lempicka
   await db.insertInto("artist").values({
@@ -211,6 +228,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Femme",
     avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
     signature: "/signs/de lempicka.png",
+    color: "#318b8c",
     slug: "delempicka",
   }).execute();
   await db.insertInto("art").values({
@@ -281,6 +299,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/delacroix/Autoportrait au gilet vert.jpg",
     signature: "/signs/delacroix.png",
+    color: "#784d2a",
     slug: "delacroix",
   }).execute();
   await db.insertInto("art").values({
@@ -315,6 +334,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/gauguin/Autoportrait au chapeau.jpg",
     signature: "/signs/gauguin.png",
+    color: "#dfb41a",
     slug: "gauguin",
   }).execute();
   await db.insertInto("art").values({
@@ -343,6 +363,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/picasso/Autoportrait.jpg",
     signature: "/signs/picasso.png",
+    color: "#3f6993",
     slug: "picasso",
   }).execute();
   await db.insertInto("art").values({
@@ -371,6 +392,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url:
       "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
     signature: "/signs/rembrandt.png",
+    color: "#654a2d",
     slug: "rembrandt",
   }).execute();
   await db.insertInto("art").values({
@@ -399,6 +421,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/van gogh/Autoportrait.jpg",
     signature: "/signs/van gogh.png",
+    color: "#61a1e9",
     slug: "vangogh",
   }).execute();
   await db.insertInto("art").values({
@@ -1699,6 +1722,104 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 22,
     url: "/arts/courbet/Le Désespéré.jpg",
     owner_id: 38,
+  }).execute();
+
+  // Hans Memling
+  await db.insertInto("artist").values({
+    first_name: "Hans",
+    last_name: "Memling",
+    gender: "Homme",
+    avatar_url: "/arts/memling/Autoportrait.jpg",
+    slug: "memling",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Scènes de la Passion du Christ",
+    movement_id: 26,
+    url: "/arts/memling/Scènes de la Passion du Christ.jpg",
+    owner_id: 39,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Triptyque Donne",
+    movement_id: 26,
+    polyptych: 3,
+    frame: 2,
+    url: "/arts/memling/Triptyque Donne_1.jpg",
+    url_2: "/arts/memling/Triptyque Donne_2.jpg",
+    url_3: "/arts/memling/Triptyque Donne_3.jpg",
+    owner_id: 39,
+  }).execute();
+
+  // Mimi
+  await db.insertInto("artist").values({
+    first_name: "Mimi",
+    gender: "Femme",
+    color: "#ab8089",
+    slug: "mimi",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bouddha rieur",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Bouddha rieur.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Cléopâtre",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Cléopâtre.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Inconnue",
+    movement_id: 27,
+    url: "/arts/mimi/Inconnue.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Mélancolie",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Mélancolie.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Mère et bébé éléphant",
+    movement_id: 27,
+    polyptych: 3,
+    frame: 0,
+    url: "/arts/mimi/Mère et bébé éléphant_1.jpg",
+    url_2: "/arts/mimi/Mère et bébé éléphant_2.jpg",
+    url_3: "/arts/mimi/Mère et bébé éléphant_3.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nue persienne",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Nue persienne.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Réflexion dorée",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Réflexion dorée.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Tamara de Lempicka",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Tamara de Lempicka.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Toutânkhamon",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Toutânkhamon.jpg",
+    owner_id: 40,
   }).execute();
 }
 

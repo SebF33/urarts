@@ -16,7 +16,10 @@ export const handler: Handlers<{
 }> = {
   async GET(_, ctx) {
     const db = Db.getInstance();
-    const results = await db.selectFrom("movement").selectAll()
+    const results = await db.selectFrom("movement")
+      .selectAll()
+      .where("slug", "!=", "nonclasse")
+      .orderBy("name")
       .execute();
 
     const movements = results.map((p) => ({

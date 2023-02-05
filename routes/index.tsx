@@ -22,7 +22,9 @@ export const handler: Handlers<{
 }> = {
   async GET(_, ctx) {
     const db = Db.getInstance();
-    const results = await db.selectFrom("artist").selectAll()
+    const results = await db.selectFrom("artist")
+      .selectAll()
+      .where("slug", "!=", "mimi")
       .orderBy(sql`random()`)
       .limit(4)
       .execute();

@@ -25,6 +25,7 @@ export const handler = async (
         .orWhere("first_name", "like", "%" + filter + "%")
         .orWhere("last_name", "like", "%" + filter + "%")
     )
+    .where("slug", "!=", "mimi")
     .orderBy("first_name")
     .orderBy("last_name")
     .execute();

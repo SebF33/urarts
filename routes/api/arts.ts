@@ -22,9 +22,11 @@ export const handler = async (
       "avatar_url",
       "artist.slug as slug",
       "movement.name as movement",
+      "polyptych",
       "url",
     ])
     .where("art.name", "like", "%" + filter + "%")
+    .where("artist.slug", "!=", "mimi")
     .orderBy("art.name")
     .execute();
 

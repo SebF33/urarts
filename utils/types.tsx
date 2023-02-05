@@ -4,7 +4,13 @@ export type ArtCollection = {
   id: string;
   name: string;
   movement: string;
+  polyptych: number;
+  frame: number;
   url: string;
+  url_2?: string;
+  url_3?: string;
+  url_4?: string;
+  url_5?: string;
 };
 
 export type ArtRow = {
