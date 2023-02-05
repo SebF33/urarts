@@ -1733,6 +1733,16 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "memling",
   }).execute();
   await db.insertInto("art").values({
+    name: "Le Jugement dernier",
+    movement_id: 26,
+    polyptych: 3,
+    frame: 2,
+    url: "/arts/memling/Le Jugement dernier_1.jpg",
+    url_2: "/arts/memling/Le Jugement dernier_2.jpg",
+    url_3: "/arts/memling/Le Jugement dernier_3.jpg",
+    owner_id: 39,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Scènes de la Passion du Christ",
     movement_id: 26,
     url: "/arts/memling/Scènes de la Passion du Christ.jpg",
@@ -1757,10 +1767,40 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "mimi",
   }).execute();
   await db.insertInto("art").values({
+    name: "Âmes indiennes",
+    movement_id: 27,
+    polyptych: 5,
+    frame: 0,
+    url: "/arts/mimi/Âmes indiennes_1.jpg",
+    url_2: "/arts/mimi/Âmes indiennes_2.jpg",
+    url_3: "/arts/mimi/Âmes indiennes_3.jpg",
+    url_4: "/arts/mimi/Âmes indiennes_4.jpg",
+    url_5: "/arts/mimi/Âmes indiennes_5.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bouddha penseur",
+    movement_id: 27,
+    polyptych: 5,
+    frame: 0,
+    url: "/arts/mimi/Bouddha penseur_1.jpg",
+    url_2: "/arts/mimi/Bouddha penseur_2.jpg",
+    url_3: "/arts/mimi/Bouddha penseur_3.jpg",
+    url_4: "/arts/mimi/Bouddha penseur_4.jpg",
+    url_5: "/arts/mimi/Bouddha penseur_5.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Bouddha rieur",
     movement_id: 27,
     frame: 3,
     url: "/arts/mimi/Bouddha rieur.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Brigitte Bardot",
+    movement_id: 27,
+    url: "/arts/mimi/Brigitte Bardot.jpg",
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
@@ -1771,9 +1811,30 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Corps et âmes",
+    movement_id: 27,
+    polyptych: 2,
+    frame: 0,
+    url: "/arts/mimi/Corps et âmes_1.jpg",
+    url_2: "/arts/mimi/Corps et âmes_2.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Inconnue",
     movement_id: 27,
     url: "/arts/mimi/Inconnue.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Leonardo DiCaprio",
+    movement_id: 27,
+    url: "/arts/mimi/Leonardo DiCaprio.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Marcelle Derrien",
+    movement_id: 27,
+    url: "/arts/mimi/Marcelle Derrien.jpg",
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
@@ -1794,6 +1855,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Montand et Marilyn",
+    movement_id: 27,
+    url: "/arts/mimi/Montand et Marilyn.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Nue persienne",
     movement_id: 27,
     frame: 0,
@@ -1801,10 +1868,41 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Nue serpent",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Nue serpent.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Poisson Murano",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Poisson Murano.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Possession",
+    movement_id: 27,
+    polyptych: 3,
+    frame: 0,
+    url: "/arts/mimi/Possession_1.jpg",
+    url_2: "/arts/mimi/Possession_2.jpg",
+    url_3: "/arts/mimi/Possession_3.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Réflexion dorée",
     movement_id: 27,
     frame: 0,
     url: "/arts/mimi/Réflexion dorée.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Solitude",
+    movement_id: 27,
+    frame: 0,
+    url: "/arts/mimi/Solitude.jpg",
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
