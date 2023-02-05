@@ -148,6 +148,17 @@ export default function Arts(
                     <div
                       class={`art-wrap-${art.polyptych}`}
                     >
+                      {art.polyptych > 3 &&
+                        (
+                          <div
+                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
+                          >
+                            <img
+                              src={art.url_4}
+                              alt={art.name + "_4"}
+                            />
+                          </div>
+                        )}
                       {art.polyptych > 1 &&
                         (
                           <div
@@ -179,6 +190,17 @@ export default function Arts(
                             <img
                               src={art.url_3}
                               alt={art.name + "_3"}
+                            />
+                          </div>
+                        )}
+                      {art.polyptych === 5 &&
+                        (
+                          <div
+                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
+                          >
+                            <img
+                              src={art.url_5}
+                              alt={art.name + "_5"}
                             />
                           </div>
                         )}

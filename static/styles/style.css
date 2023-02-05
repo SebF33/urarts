@@ -46,7 +46,7 @@ html {
     text-align: center;
 }
 
-.art-frame-type-0 {
+.art-frame-type-0 img {
     box-shadow: 5px 5px 10px;
 }
 
@@ -172,7 +172,7 @@ html {
 }
 
 .art-polyptych-5 {
-    margin: 8vh 0.4vw;
+    margin: 8vh 0.3vw;
 }
 
 .art-wrap-1 {
@@ -189,6 +189,14 @@ html {
     width: 100%;
     margin-left: 1.75rem;
     margin-right: 1.75rem;
+}
+
+.art-wrap-5 .art-frame {
+    display: flex;
+}
+
+.art-wrap-5 .art-frame img {
+    align-self: center;
 }
 
 /* Vague de couleurs
