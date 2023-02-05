@@ -9,11 +9,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 ## [2023-02-05]
 
 ### Nouveautés
-•	Ajout de la prise en compte des polyptyques jusqu'à 5 panneaux.
-•	Ajout des types d'encadrement.
-•	Ajout d'une page spéciale accessible via l'icône "cœur" du header.
+- Ajout de la prise en compte des polyptyques jusqu'à 5 panneaux.
+- Ajout des types d'encadrement.
+- Ajout d'une page spéciale accessible via l'icône "cœur" du header.
 
 ## [2023-01-31]
 
 ### Nouveautés
-•	Ajout des mouvements artistiques.
+- Ajout des mouvements artistiques.
