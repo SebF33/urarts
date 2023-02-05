@@ -57,6 +57,25 @@ export default function Header() {
               </div>
             </div>
           </div>
+          <div class={tw`flex`}>
+            <a
+              href="/art/mimi"
+              class={tw`hover:text-gray-500`}
+            >
+              <span class={tw`sr-only`}>Mimi</span>
+              <svg
+                class={tw`icon-svg h-5 w-5`}
+                fill={colorScheme[currentColorScheme].white}
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </nav>
