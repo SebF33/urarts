@@ -10,6 +10,7 @@ import Header from "@islands/Header.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
+  color: string | null;
   movement: string | null;
   desc: string | null;
   title: string | null;
@@ -32,22 +33,32 @@ export const handler: Handlers<{
         "art.id",
         "art.name as name",
         "movement.name as movement",
+        "polyptych",
+        "frame",
         "url",
+        "url_2",
+        "url_3",
+        "url_4",
+        "url_5",
       ])
       .where("movement.slug", "=", slug)
       .orderBy("art.name")
       .execute();
 
+    const color = colorScheme[currentColorScheme].dark;
+
     let movement: string | null = null;
     let desc: string | null = null;
     let title: string | null = null;
+
     if (result) {
       movement = result.name;
       desc = movement + ".";
       title = "Collection " + movement;
-    }
+    } else return ctx.renderNotFound();
 
     let art: Array<ArtCollection> | null = null;
+
     if (results) {
       art = results.map((p) => ({
         first_name: p.first_name,
@@ -55,24 +66,30 @@ export const handler: Handlers<{
         id: String(p.id),
         name: p.name,
         movement: p.movement,
+        polyptych: p.polyptych,
+        frame: p.frame,
         url: p.url,
+        url_2: p.url_2,
+        url_3: p.url_3,
+        url_4: p.url_4,
+        url_5: p.url_5,
       }));
     }
 
-    if (!result) return ctx.renderNotFound();
-    return ctx.render({ art, movement, desc, title });
+    return ctx.render({ art, color, movement, desc, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
     art: Array<ArtCollection> | null;
+    color: string;
     movement: string | null;
     desc: string;
     title: string;
   }>,
 ) {
-  const { art, movement, desc, title } = props.data;
+  const { art, color, movement, desc, title } = props.data;
 
   return (
     <DefaultLayout
@@ -97,21 +114,32 @@ export default function Arts(
           <div
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
-            <BrushStroke title={movement} />
+            <BrushStroke color={color} title={movement} />
             {art &&
               (
                 <div
-                  class={tw`flex flex-wrap mx-auto`}
+                  class={tw`row flex flex-wrap mx-auto`}
                 >
                   {art.map((art) => (
                     <div
-                      class={tw`row mx-auto`}
+                      class={`art-wrap-${art.polyptych}`}
                     >
+                      {art.polyptych > 1 &&
+                        (
+                          <div
+                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
+                          >
+                            <img
+                              src={art.url_2}
+                              alt={art.name + "_2"}
+                            />
+                          </div>
+                        )}
                       <div
                         id={art.id}
-                        class="art-frame w-full p-2 lg:w-1/3 md:w-1/2"
+                        class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
                       >
-                        <p class={tw`art-name font-brush z-10`}>
+                        <p class={`art-name-${art.frame} font-brush`}>
                           {art.name}
                         </p>
                         <img
@@ -119,6 +147,17 @@ export default function Arts(
                           alt={art.name}
                         />
                       </div>
+                      {art.polyptych > 2 &&
+                        (
+                          <div
+                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
+                          >
+                            <img
+                              src={art.url_3}
+                              alt={art.name + "_3"}
+                            />
+                          </div>
+                        )}
                     </div>
                   ))}
                 </div>
