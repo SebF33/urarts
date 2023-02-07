@@ -54,7 +54,7 @@ export const handler: Handlers<{
     const grid =
       "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    const randomQuotesIndex = Math.floor(Math.random() * 29);
+    const randomQuotesIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[randomQuotesIndex];
 
     return ctx.render({ artists, color, grid, quote });

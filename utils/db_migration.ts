@@ -299,7 +299,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/delacroix/Autoportrait au gilet vert.jpg",
     signature: "/signs/delacroix.png",
-    color: "#784d2a",
+    color: "#3b3328",
     slug: "delacroix",
   }).execute();
   await db.insertInto("art").values({
@@ -497,6 +497,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Femme",
     avatar_url: "/arts/kahlo/Autoportrait au collier d'épines et colibri.jpg",
     signature: "/signs/kahlo.png",
+    color: "#111113",
     slug: "kahlo",
   }).execute();
   await db.insertInto("art").values({
@@ -681,6 +682,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/monet/Autoportrait au béret.jpg",
     signature: "/signs/monet.png",
+    color: "#444061",
     slug: "monet",
   }).execute();
   await db.insertInto("art").values({
@@ -703,6 +705,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/renoir/Autoportrait.jpg",
     signature: "/signs/renoir.png",
+    color: "#3c2736",
     slug: "renoir",
   }).execute();
   await db.insertInto("art").values({
@@ -750,6 +753,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     avatar_url:
       "/arts/gentileschi/Autoportrait en allégorie de la peinture.jpg",
     signature: "/signs/gentileschi.png",
+    color: "#606841",
     slug: "gentileschi",
   }).execute();
   await db.insertInto("art").values({
@@ -822,6 +826,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Femme",
     avatar_url: "/arts/morisot/Autoportrait.jpg",
     signature: "/signs/morisot.png",
+    color: "#907935",
     slug: "morisot",
   }).execute();
   await db.insertInto("art").values({
@@ -933,6 +938,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/pissarro/Autoportrait.jpg",
     signature: "/signs/pissarro.png",
+    color: "#674e38",
     slug: "pissarro",
   }).execute();
   await db.insertInto("art").values({
@@ -1417,6 +1423,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/modigliani/Autoportrait.jpg",
     signature: "/signs/modigliani.png",
+    color: "#9e4e43",
     slug: "modigliani",
   }).execute();
   await db.insertInto("art").values({
@@ -1456,6 +1463,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Arcimboldo",
     gender: "Homme",
     avatar_url: "/arts/arcimboldo/Autoportrait.jpg",
+    color: "#304b5c",
     slug: "arcimboldo",
   }).execute();
   await db.insertInto("art").values({
@@ -1733,6 +1741,15 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "memling",
   }).execute();
   await db.insertInto("art").values({
+    name: "Diptyque de Maarten van Nieuwenhove",
+    movement_id: 26,
+    polyptych: 2,
+    frame: 2,
+    url: "/arts/memling/Diptyque de Maarten van Nieuwenhove_1.jpg",
+    url_2: "/arts/memling/Diptyque de Maarten van Nieuwenhove_2.jpg",
+    owner_id: 39,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Le Jugement dernier",
     movement_id: 26,
     polyptych: 3,
@@ -1918,6 +1935,28 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     frame: 0,
     url: "/arts/mimi/Toutânkhamon.jpg",
     owner_id: 40,
+  }).execute();
+
+  // Max Beckmann
+  await db.insertInto("artist").values({
+    first_name: "Max",
+    last_name: "Beckmann",
+    gender: "Homme",
+    avatar_url: "/arts/beckmann/Autoportrait au foulard rouge.jpg",
+    signature: "/signs/beckmann.png",
+    slug: "beckmann",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Naufrage du Titanic",
+    movement_id: 7,
+    url: "/arts/beckmann/Naufrage du Titanic.jpg",
+    owner_id: 41,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Société Paris",
+    movement_id: 7,
+    url: "/arts/beckmann/Société Paris.jpg",
+    owner_id: 41,
   }).execute();
 }
 

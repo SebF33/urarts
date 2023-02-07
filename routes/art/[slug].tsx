@@ -133,7 +133,7 @@ export default function Arts(
                 >
                   <p class={tw`text-center text-xl font-bold`}>
                     “Je dédie cette page aux plus belles œuvres de mon artiste
-                    préférée, celle qui au-delà de son exceptionnel talent
+                    préférée, celle qui au-delà de son talent exceptionnel
                     m’inspire encore aujourd’hui : ma merveilleuse Maman.”
                     —Sébastien
                   </p>
