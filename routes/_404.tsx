@@ -5,7 +5,7 @@ import { UnknownPageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import ErrorLayout from "@components/ErrorLayout.tsx";
 import Footer from "@islands/Footer.tsx";
-import Header from "@islands/Header.tsx";
+import Nav from "@islands/Nav.tsx";
 
 export default function NotFoundPage({ url }: UnknownPageProps) {
   return (
@@ -24,7 +24,7 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
           })
         }`}
       >
-        <Header />
+        <Nav />
         <main
           class={tw`flex-grow`}
         >

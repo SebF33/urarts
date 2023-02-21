@@ -32,7 +32,7 @@ export default function LiveSearch() {
               e.key === "Enter" && e.preventDefault();
             }}
             onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={tw`w-full rounded border text-base outline-none py-1 px-3`}
+            class={tw`w-full rounded text-base outline-none py-1 px-3`}
           />
         </div>
         <div class={tw`flex flex-wrap`}>

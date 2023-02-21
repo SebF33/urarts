@@ -9,7 +9,7 @@ import { sql } from "kysely";
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
-import Header from "@islands/Header.tsx";
+import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
@@ -19,8 +19,12 @@ export const handler: Handlers<{
   color: string;
   grid: string;
   quote: string;
+  pathname: string;
 }> = {
-  async GET(_, ctx) {
+  async GET(req, ctx) {
+    const url = new URL(req.url);
+    const pathname = url.pathname;
+
     const db = Db.getInstance();
     const results = await db.selectFrom("artist")
       .selectAll()
@@ -57,7 +61,7 @@ export const handler: Handlers<{
     const randomQuotesIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[randomQuotesIndex];
 
-    return ctx.render({ artists, color, grid, quote });
+    return ctx.render({ artists, color, grid, quote, pathname });
   },
 };
 
@@ -67,9 +71,10 @@ export default function Home(
     color: string;
     grid: string;
     quote: string;
+    pathname: string;
   }>,
 ) {
-  const { artists, color, grid, quote } = props.data;
+  const { artists, color, grid, quote, pathname } = props.data;
 
   return (
     <DefaultLayout
@@ -87,7 +92,7 @@ export default function Home(
           })
         }`}
       >
-        <Header />
+        <Nav pathname={pathname} />
         <main
           class={tw`flex-grow`}
         >
@@ -101,7 +106,7 @@ export default function Home(
               )
             }`}
           >
-            <p class={tw`text-center text-xl font-bold`}>{quote}</p>
+            <p class={tw`text-center text-xl font-bold mx-2`}>{quote}</p>
           </div>
         </main>
         <WaterDrop color={color} />

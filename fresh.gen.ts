@@ -18,7 +18,7 @@ import * as $$0 from "./islands/ArtistsSearch.tsx";
 import * as $$1 from "./islands/ArtsSearch.tsx";
 import * as $$2 from "./islands/Counter.tsx";
 import * as $$3 from "./islands/Footer.tsx";
-import * as $$4 from "./islands/Header.tsx";
+import * as $$4 from "./islands/Nav.tsx";
 import * as $$5 from "./islands/WaterDrop.tsx";
 
 const manifest = {
@@ -40,7 +40,7 @@ const manifest = {
     "./islands/ArtsSearch.tsx": $$1,
     "./islands/Counter.tsx": $$2,
     "./islands/Footer.tsx": $$3,
-    "./islands/Header.tsx": $$4,
+    "./islands/Nav.tsx": $$4,
     "./islands/WaterDrop.tsx": $$5,
   },
   baseUrl: import.meta.url,

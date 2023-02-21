@@ -6,7 +6,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import Header from "@islands/Header.tsx";
+import Nav from "@islands/Nav.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
@@ -107,7 +107,7 @@ export default function Arts(
           })
         }`}
       >
-        <Header />
+        <Nav />
         <main
           class={tw`flex-grow`}
         >

@@ -6,15 +6,19 @@ import { MovementRow } from "@utils/types.tsx";
 
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
-import Header from "@islands/Header.tsx";
+import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 type Movements = Array<MovementRow>;
 
 export const handler: Handlers<{
   movements: Movements;
+  pathname: string;
 }> = {
-  async GET(_, ctx) {
+  async GET(req, ctx) {
+    const url = new URL(req.url);
+    const pathname = url.pathname;
+
     const db = Db.getInstance();
     const results = await db.selectFrom("movement")
       .selectAll()
@@ -28,16 +32,17 @@ export const handler: Handlers<{
       slug: p.slug,
     }));
 
-    return ctx.render({ movements });
+    return ctx.render({ movements, pathname });
   },
 };
 
 export default function Home(
   props: PageProps<{
     movements: Movements;
+    pathname: string;
   }>,
 ) {
-  const { movements } = props.data;
+  const { movements, pathname } = props.data;
 
   return (
     <DefaultLayout
@@ -55,7 +60,7 @@ export default function Home(
           })
         }`}
       >
-        <Header />
+        <Nav pathname={pathname} />
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
             <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
