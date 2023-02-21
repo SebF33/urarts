@@ -2,15 +2,12 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 
 export default function Footer({ color }: { color: string }) {
-  const fontColor: string = colorScheme[currentColorScheme].white;
-
   return (
     <footer
-      class={tw`font-brush bottom-0 w-full ${
+      class={tw`font-brush bottom-0 w-full text-white ${
         css(
           {
             "background-color": `${color}`,
-            "color": fontColor,
           },
         )
       }`}

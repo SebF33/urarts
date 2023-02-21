@@ -7,12 +7,12 @@ export { css } from "twind/css";
 
 export const config: Configuration = {
   theme: {
+    colors: {
+      ...colorScheme[currentColorScheme],
+    },
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
-      },
-      colors: {
-        ...colorScheme[currentColorScheme],
       },
     },
   },
