@@ -107,7 +107,11 @@ export default function ArtistsLayout(
                       alt={p.first_name}
                     />
                     <div
-                      class={tw`absolute bg-black w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60`}
+                      class={tw`absolute w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60 ${
+                        css({
+                          "background": "black",
+                        })
+                      }`}
                     />
                   </a>
                 </div>
