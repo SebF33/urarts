@@ -6,7 +6,9 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
+import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
+import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
@@ -121,7 +123,7 @@ export default function Arts(
             {artist === "Mimi" &&
               (
                 <div
-                  class={tw`font-brush w-1/3 mx-auto mt-5 ${
+                  class={tw`font-brush mx-2 mt-5 ${
                     css(
                       {
                         "color": `${
@@ -210,6 +212,8 @@ export default function Arts(
               )}
           </div>
         </main>
+        <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
+        <Footer color={colorScheme[currentColorScheme].lighterdark} />
       </div>
     </DefaultLayout>
   );

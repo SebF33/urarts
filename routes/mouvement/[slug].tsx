@@ -6,7 +6,9 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 
 import { BrushStroke } from "@components/Assets.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
+import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
+import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
   art: Array<ArtCollection> | null;
@@ -186,6 +188,8 @@ export default function Arts(
               )}
           </div>
         </main>
+        <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
+        <Footer color={colorScheme[currentColorScheme].lighterdark} />
       </div>
     </DefaultLayout>
   );
