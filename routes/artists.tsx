@@ -28,7 +28,7 @@ export default function Search(
 
   return (
     <DefaultLayout
-      title="Artistes"
+      title="Urarts - Artistes"
       desc="Les meilleurs artistes au monde."
     >
       <div

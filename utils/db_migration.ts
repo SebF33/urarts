@@ -220,6 +220,11 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "Non classé",
     slug: "nonclasse",
   }).execute();
+  //28
+  await db.insertInto("movement").values({
+    name: "Intimisme",
+    slug: "intimisme",
+  }).execute();
 
   // Tamara de Lempicka
   await db.insertInto("artist").values({
@@ -1957,6 +1962,72 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 7,
     url: "/arts/beckmann/Société Paris.jpg",
     owner_id: 41,
+  }).execute();
+
+  // Pierre Bonnard
+  await db.insertInto("artist").values({
+    first_name: "Pierre",
+    last_name: "Bonnard",
+    gender: "Homme",
+    avatar_url: "/arts/bonnard/Autoportrait.jpg",
+    signature: "/signs/bonnard.png",
+    slug: "bonnard",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Femme au perroquet",
+    movement_id: 16,
+    url: "/arts/bonnard/Femme au perroquet.jpg",
+    owner_id: 42,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Fenêtre ouverte",
+    movement_id: 28,
+    url: "/arts/bonnard/La Fenêtre ouverte.jpg",
+    owner_id: 42,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Symphonie pastorale",
+    movement_id: 16,
+    url: "/arts/bonnard/La Symphonie pastorale.jpg",
+    owner_id: 42,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu à contre-jour",
+    movement_id: 28,
+    url: "/arts/bonnard/Nu à contre-jour.jpg",
+    owner_id: 42,
+  }).execute();
+
+  // Lê Phổ
+  await db.insertInto("artist").values({
+    first_name: "Lê Phổ",
+    gender: "Homme",
+    avatar_url: "/arts/le pho/Autoportrait.jpg",
+    slug: "lepho",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Autoportrait dans la forêt",
+    movement_id: 16,
+    url: "/arts/le pho/Autoportrait dans la forêt.jpg",
+    owner_id: 43,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Hibiscus et oiseaux",
+    movement_id: 16,
+    url: "/arts/le pho/Hibiscus et oiseaux.jpg",
+    owner_id: 43,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nature morte aux artichauts",
+    movement_id: 16,
+    url: "/arts/le pho/Nature morte aux artichauts.jpg",
+    owner_id: 43,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Portrait de femme près de pivoines",
+    movement_id: 16,
+    url: "/arts/le pho/Portrait de femme près de pivoines.jpg",
+    owner_id: 43,
   }).execute();
 }
 

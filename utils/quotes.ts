@@ -1,14 +1,15 @@
 export const quotes = [
   "“L’art est créatif pour la réalisation, pas pour le plaisir... pour la transfiguration, pas pour le jeu.” —Max Beckmann",
   "“J’avais pour les étables un goût plus irrésistible que jamais courtisan pour les antichambres royales ou impériales.” —Rosa Bonheur",
+  "“Il ne s’agit pas de peindre la vie, mais de rendre vivante la peinture.” —Pierre Bonnard",
   "“Une œuvre d’art qui n’a pas commencé dans l’émotion n’est pas de l’art.” —Paul Cézanne",
   "“Si toute vie va inévitablement vers sa fin, nous devons, durant la nôtre, la colorier avec nos couleurs d’amour et d’espoir.” —Marc Chagall",
   "“L’État est incompétent en matière d’art.” —Gustave Courbet",
   "“La peinture est la face visible de l’iceberg de ma pensée.” —Salvador Dalí",
   "“Il ne faut pas seulement regarder le modèle, il faut y lire comme dans un livre.” —Jacques-Louis David",
   "“Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.” —Tamara de Lempicka",
-  "“Le peintre doit s’efforcer d’être universel.” —Léonard de Vinci",
   // 10
+  "“Le peintre doit s’efforcer d’être universel.” —Léonard de Vinci",
   "“Le premier mérite d’un tableau est d’être une fête pour l’œil.” —Eugène Delacroix",
   "“L’art est une abstraction, c’est le moyen de monter vers Dieu en faisant comme notre divin Maître, créer.” —Paul Gauguin",
   "“Jamais personne n’a trouvé dans mes tableaux une répétition d’invention, pas même d’une main.” —Artemisia Gentileschi",
@@ -18,8 +19,8 @@ export const quotes = [
   "“La vérité est que l’art doit être l’écriture de la vie.” —Édouard Manet",
   "“La couleur surtout et peut-être plus encore que le dessin est une libération.” —Henri Matisse",
   "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu’un tableau de figures.” —Le Caravage",
-  "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
   // 20
+  "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
   "“Le dessein de l’art est de lutter contre les obligations.” —Amedeo Modigliani",
   "“Ce que je ferai, ce sera l’impression de ce que j’aurai ressenti.” —Claude Monet",
   "“Mon ambition est de saisir une touche d’éphémère.” —Berthe Morisot",
@@ -29,7 +30,7 @@ export const quotes = [
   "“Un matin, l’un de nous manquant de noir, se servit de bleu : l’impressionnisme était né.” —Auguste Renoir",
   "“Moins le tableau est réussi, plus le cadre doit être beau, telle est ma devise.” —Norman Rockwell",
   "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
-  "“Il faut commencer par éprouver ce qu’on veut exprimer.” —Vincent van Gogh",
   // 30
+  "“Il faut commencer par éprouver ce qu’on veut exprimer.” —Vincent van Gogh",
   "“Nous autres peintres, nous jouissons de la même licence que celle dont jouissent les poètes et les fous.” —Paul Véronèse",
 ];

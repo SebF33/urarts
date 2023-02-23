@@ -46,7 +46,7 @@ export default function Home(
 
   return (
     <DefaultLayout
-      title="Mouvements"
+      title="Urarts - Mouvements"
       desc="Les principaux mouvements artistiques."
     >
       <div

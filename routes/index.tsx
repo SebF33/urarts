@@ -78,7 +78,7 @@ export default function Home(
 
   return (
     <DefaultLayout
-      title="Accueil Urarts"
+      title="Urarts - Accueil"
       desc="Quelles sont les plus belles œuvres d'art au monde ?"
     >
       <div

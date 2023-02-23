@@ -28,7 +28,7 @@ export default function Search(
 
   return (
     <DefaultLayout
-      title="Œuvres d'art"
+      title="Urarts - Œuvres"
       desc="Toutes les plus belles œuvres d'art au monde."
     >
       <div

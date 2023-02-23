@@ -10,7 +10,7 @@ import Nav from "@islands/Nav.tsx";
 export default function NotFoundPage({ url }: UnknownPageProps) {
   return (
     <DefaultLayout
-      title={`404 Page introuvable : ${url.pathname}`}
+      title="Urarts - Page introuvable"
       desc={`404 Page introuvable : ${url.pathname}`}
     >
       <div
