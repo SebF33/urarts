@@ -71,22 +71,28 @@ export default function Home(
                 (
                   <ul class={tw`lg:w-1/3 sm:w-1/2 p-2`}>
                     {movements.map((item, index) => (
-                      <a
-                        href={"/mouvement/" + item.slug}
-                        class={tw`cursor-pointer`}
-                      >
-                        <li class={tw`text-lg`} key={index}>
-                          {item.name}
-                        </li>
-                      </a>
+                      <li class={tw`m-2`} key={index}>
+                        <a
+                          href={"/mouvement/" + item.slug}
+                          class={tw`cursor-pointer`}
+                        >
+                          <p class={tw`relative group text-xl`}>
+                            <span>{item.name}</span>
+                            <span
+                              class={tw`absolute -bottom-1 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}
+                            >
+                            </span>
+                          </p>
+                        </a>
+                      </li>
                     ))}
                   </ul>
                 )}
             </div>
           </div>
         </main>
-        <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
-        <Footer color={colorScheme[currentColorScheme].lighterdark} />
+        <WaterDrop color={colorScheme[currentColorScheme].cyan} />
+        <Footer color={colorScheme[currentColorScheme].cyan} />
       </div>
     </DefaultLayout>
   );

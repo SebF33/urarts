@@ -40,14 +40,23 @@ export default function LiveSearch() {
             (
               <ul class={tw`lg:w-1/3 sm:w-1/2 p-2`}>
                 {searchResults.map((item, index) => (
-                  <a
-                    href={"/art/" + item.slug + "#" + item.id}
-                    class={tw`cursor-pointer`}
-                  >
-                    <li class={tw`text-lg`} key={index}>
-                      {item.name}
-                    </li>
-                  </a>
+                  <li class={tw`m-2`} key={index}>
+                    <a
+                      href={"/art/" + item.slug + "#" + item.id}
+                      class={tw`cursor-pointer`}
+                    >
+                      <p class={tw`relative group text-xl`}>
+                        <span>{item.name}</span>
+                        <span class={tw`text-lg italic`}>
+                          {" "}({item.last_name})
+                        </span>
+                        <span
+                          class={tw`absolute -bottom-1 left-0 w-0 h-1 bg-blue transition-all group-hover:w-full`}
+                        >
+                        </span>
+                      </p>
+                    </a>
+                  </li>
                 ))}
               </ul>
             )}
