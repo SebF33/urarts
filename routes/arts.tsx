@@ -44,8 +44,8 @@ export default function Search(
       >
         <Nav pathname={pathname} />
         <ArtsSearch />
-        <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
-        <Footer color={colorScheme[currentColorScheme].lighterdark} />
+        <WaterDrop color={colorScheme[currentColorScheme].blue} />
+        <Footer color={colorScheme[currentColorScheme].blue} />
       </div>
     </DefaultLayout>
   );

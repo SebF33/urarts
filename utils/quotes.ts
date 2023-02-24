@@ -16,10 +16,11 @@ export const quotes = [
   "“Pour créer son propre paradis, il faut puiser dans son enfer personnel.” —Frida Kahlo",
   "“Quand j’ai terminé un tableau, je ne veux pas perdre ensuite des mois entiers à le justifier devant la foule. Ce qui compte pour moi, ce n’est pas à combien de gens il plaît, mais à qui.” —Gustav Klimt",
   "“Je n’ai eu de bonheur qu’en peinture.” —Élisabeth Vigée Le Brun",
+  "“Les titres des tableaux ne sont pas des explications et les tableaux ne sont pas des illustrations des titres.” —René Magritte",
   "“La vérité est que l’art doit être l’écriture de la vie.” —Édouard Manet",
   "“La couleur surtout et peut-être plus encore que le dessin est une libération.” —Henri Matisse",
-  "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu’un tableau de figures.” —Le Caravage",
   // 20
+  "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu’un tableau de figures.” —Le Caravage",
   "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
   "“Le dessein de l’art est de lutter contre les obligations.” —Amedeo Modigliani",
   "“Ce que je ferai, ce sera l’impression de ce que j’aurai ressenti.” —Claude Monet",
@@ -29,8 +30,8 @@ export const quotes = [
   "“Si je veux enrichir mon esprit, je ne cherche pas les honneurs, mais la liberté.” —Rembrandt",
   "“Un matin, l’un de nous manquant de noir, se servit de bleu : l’impressionnisme était né.” —Auguste Renoir",
   "“Moins le tableau est réussi, plus le cadre doit être beau, telle est ma devise.” —Norman Rockwell",
-  "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
   // 30
+  "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
   "“Il faut commencer par éprouver ce qu’on veut exprimer.” —Vincent van Gogh",
   "“Nous autres peintres, nous jouissons de la même licence que celle dont jouissent les poètes et les fous.” —Paul Véronèse",
 ];

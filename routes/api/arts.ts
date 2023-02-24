@@ -28,6 +28,7 @@ export const handler = async (
     .where("art.name", "like", "%" + filter + "%")
     .where("artist.slug", "!=", "mimi")
     .orderBy("art.name")
+    .orderBy("last_name")
     .execute();
 
   return Promise.resolve(
