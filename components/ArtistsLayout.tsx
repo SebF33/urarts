@@ -104,7 +104,7 @@ export default function ArtistsLayout(
                     <img
                       class={tw`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
                       src={p.avatar_url}
-                      alt={p.first_name}
+                      alt={p.last_name}
                     />
                     <div
                       class={tw`absolute w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60 ${

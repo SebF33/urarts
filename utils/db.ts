@@ -27,8 +27,8 @@ interface ArtTable {
 
 interface ArtistTable {
   id: Generated<number>;
-  first_name: string;
-  last_name: string | null;
+  first_name: string | null;
+  last_name: string;
   gender: "Femme" | "Homme" | "Autre";
   avatar_url?: string;
   signature: string | null;

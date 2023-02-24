@@ -1,6 +1,6 @@
 export type ArtCollection = {
-  first_name: string;
-  last_name: string | null;
+  first_name: string | null;
+  last_name: string;
   id: string;
   name: string;
   movement: string;
@@ -16,8 +16,8 @@ export type ArtCollection = {
 export type ArtRow = {
   id: number;
   name: string;
-  first_name: string;
-  last_name: string | null;
+  first_name: string | null;
+  last_name: string;
   gender: string;
   avatar_url: string;
   slug: string;
@@ -27,8 +27,8 @@ export type ArtRow = {
 
 export type ArtistRow = {
   id: number;
-  first_name: string;
-  last_name: string | null;
+  first_name: string | null;
+  last_name: string;
   avatar_url: string;
   signature: string | null;
   slug: string;

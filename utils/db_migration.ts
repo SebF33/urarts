@@ -7,8 +7,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .createTable("artist")
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
-    .addColumn("first_name", "text", (col) => col.notNull())
-    .addColumn("last_name", "text")
+    .addColumn("first_name", "text")
+    .addColumn("last_name", "text", (col) => col.notNull())
     .addColumn("gender", "text", (col) => col.notNull())
     .addColumn("avatar_url", "text")
     .addColumn("signature", "text")
@@ -392,7 +392,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Rembrandt
   await db.insertInto("artist").values({
-    first_name: "Rembrandt",
+    last_name: "Rembrandt",
     gender: "Homme",
     avatar_url:
       "/arts/rembrandt/Autoportrait avec fourrure, chaîne en or et boucles d'oreille.jpg",
@@ -531,6 +531,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/klimt/Autoportrait.jpg",
     signature: "/signs/klimt.png",
+    color: "#15334f",
     slug: "klimt",
   }).execute();
   await db.insertInto("art").values({
@@ -572,7 +573,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Michel-Ange
   await db.insertInto("artist").values({
-    first_name: "Michel-Ange",
+    last_name: "Michel-Ange",
     gender: "Homme",
     avatar_url: "/arts/michel-ange/Autoportrait.jpg",
     signature: "/signs/michel-ange.png",
@@ -889,7 +890,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Titien
   await db.insertInto("artist").values({
-    first_name: "Titien",
+    last_name: "Titien",
     gender: "Homme",
     avatar_url: "/arts/titien/Autoportrait.jpg",
     signature: "/signs/titien.png",
@@ -960,6 +961,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/matisse/Autoportrait.jpg",
     signature: "/signs/matisse.png",
+    color: "#272f24",
     slug: "matisse",
   }).execute();
   await db.insertInto("art").values({
@@ -1042,6 +1044,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/rousseau/Autoportrait avec une lampe.jpg",
     signature: "/signs/rousseau.png",
+    color: "#050100",
     slug: "rousseau",
   }).execute();
   await db.insertInto("art").values({
@@ -1142,6 +1145,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/david/Autoportrait.jpg",
     signature: "/signs/david.png",
+    color: "#6c4b3a",
     slug: "david",
   }).execute();
   await db.insertInto("art").values({
@@ -1252,7 +1256,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Le Caravage
   await db.insertInto("artist").values({
-    first_name: "Le Caravage",
+    last_name: "Le Caravage",
     gender: "Homme",
     avatar_url: "/arts/le caravage/Autoportrait.jpg",
     signature: "/signs/le caravage.png",
@@ -1327,7 +1331,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Le Tintoret
   await db.insertInto("artist").values({
-    first_name: "Le Tintoret",
+    last_name: "Le Tintoret",
     gender: "Homme",
     avatar_url: "/arts/le tintoret/Autoportrait.jpg",
     signature: "/signs/le tintoret.png",
@@ -1378,7 +1382,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Raphaël
   await db.insertInto("artist").values({
-    first_name: "Raphaël",
+    last_name: "Raphaël",
     gender: "Homme",
     avatar_url: "/arts/raphael/Autoportrait.jpg",
     signature: "/signs/raphael.png",
@@ -1676,6 +1680,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Sérusier",
     gender: "Homme",
     avatar_url: "/arts/serusier/Autoportrait.jpg",
+    signature: "/signs/serusier.png",
     slug: "serusier",
   }).execute();
   await db.insertInto("art").values({
@@ -1692,6 +1697,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     gender: "Homme",
     avatar_url: "/arts/courbet/L'homme à la pipe.jpg",
     signature: "/signs/courbet.png",
+    color: "#2f6468",
     slug: "courbet",
   }).execute();
   await db.insertInto("art").values({
@@ -1743,6 +1749,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Memling",
     gender: "Homme",
     avatar_url: "/arts/memling/Autoportrait.jpg",
+    color: "#495154",
     slug: "memling",
   }).execute();
   await db.insertInto("art").values({
@@ -1783,7 +1790,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Mimi
   await db.insertInto("artist").values({
-    first_name: "Mimi",
+    last_name: "Mimi",
     gender: "Femme",
     color: "#ab8089",
     slug: "mimi",
@@ -2000,9 +2007,10 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
 
   // Lê Phổ
   await db.insertInto("artist").values({
-    first_name: "Lê Phổ",
+    last_name: "Lê Phổ",
     gender: "Homme",
     avatar_url: "/arts/le pho/Autoportrait.jpg",
+    signature: "/signs/le pho.png",
     slug: "lepho",
   }).execute();
   await db.insertInto("art").values({
@@ -2028,6 +2036,88 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 16,
     url: "/arts/le pho/Portrait de femme près de pivoines.jpg",
     owner_id: 43,
+  }).execute();
+
+  // René Magritte
+  await db.insertInto("artist").values({
+    first_name: "René",
+    last_name: "Magritte",
+    gender: "Homme",
+    avatar_url: "/arts/magritte/Autoportrait.jpg",
+    signature: "/signs/magritte.png",
+    slug: "magritte",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Alice au pays des merveilles",
+    movement_id: 23,
+    url: "/arts/magritte/Alice au pays des merveilles.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Jeunesse",
+    movement_id: 6,
+    url: "/arts/magritte/Jeunesse.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La chambre d'écoute",
+    movement_id: 23,
+    url: "/arts/magritte/La chambre d'écoute.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La fenêtre",
+    movement_id: 23,
+    url: "/arts/magritte/La fenêtre.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La traversée difficile",
+    movement_id: 23,
+    url: "/arts/magritte/La traversée difficile.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le blanc-seing",
+    movement_id: 23,
+    url: "/arts/magritte/Le blanc-seing.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Fils de l'homme",
+    movement_id: 23,
+    url: "/arts/magritte/Le Fils de l'homme.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le jockey perdu",
+    movement_id: 23,
+    url: "/arts/magritte/Le jockey perdu.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu",
+    movement_id: 6,
+    url: "/arts/magritte/Nu.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu couché",
+    movement_id: 6,
+    url: "/arts/magritte/Nu couché.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Panorama populaire",
+    movement_id: 23,
+    url: "/arts/magritte/Panorama populaire.jpg",
+    owner_id: 44,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Paysage",
+    movement_id: 23,
+    url: "/arts/magritte/Paysage.jpg",
+    owner_id: 44,
   }).execute();
 }
 

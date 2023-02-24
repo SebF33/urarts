@@ -54,9 +54,9 @@ export const handler: Handlers<{
     let title: string | null = null;
 
     if (result) {
-      artist = result.last_name !== null
+      artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
-        : result.first_name;
+        : result.last_name;
       color = result.color;
       desc = "Les plus belles œuvres de " + artist + ".";
       title = "Collection " + artist;
