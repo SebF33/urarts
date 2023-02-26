@@ -47,45 +47,18 @@ html {
 }
 
 .art-frame-type-0 img {
+    -webkit-mask-image: url(../mural-mask.png);
+    mask-image: url(../mural-mask.png);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
+.art-frame-type-1 img {
     box-shadow: 5px 5px 10px;
 }
 
-.art-frame-type-1 {
-    background-color: #ddc;
-    border: solid 5vmin #eee;
-    border-bottom-color: #fff;
-    border-left-color: #eee;
-    border-radius: 2px;
-    border-right-color: #eee;
-    border-top-color: #ddd;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .25) inset, 0 5px 10px 5px rgba(0, 0, 0, .25);
-    padding: 6vmin;
-}
-
-.art-frame-type-1:before {
-    border-radius: 2px;
-    bottom: -2vmin;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25) inset;
-    content: "";
-    left: -2vmin;
-    position: absolute;
-    right: -2vmin;
-    top: -2vmin;
-}
-
-.art-frame-type-1:after {
-    border-radius: 2px;
-    bottom: -2.5vmin;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25);
-    content: "";
-    left: -2.5vmin;
-    position: absolute;
-    right: -2.5vmin;
-    top: -2.5vmin;
-}
-
 .art-frame-type-2,
-.art-frame-type-3 {
+.art-frame-type-4 {
     background-color: #ddc;
     border: solid 1.8vmin #eee;
     border-bottom-color: #fff;
@@ -97,7 +70,7 @@ html {
 }
 
 .art-frame-type-2:before,
-.art-frame-type-3:before {
+.art-frame-type-4:before {
     border-radius: 2px;
     bottom: -1vmin;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25) inset;
@@ -109,7 +82,7 @@ html {
 }
 
 .art-frame-type-2:after,
-.art-frame-type-3:after {
+.art-frame-type-4:after {
     border-radius: 2px;
     bottom: -1.5vmin;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25);
@@ -120,13 +93,47 @@ html {
     top: -1.5vmin;
 }
 
+.art-frame-type-3 {
+    background-color: #ddc;
+    border: solid 5vmin #eee;
+    border-bottom-color: #fff;
+    border-left-color: #eee;
+    border-radius: 2px;
+    border-right-color: #eee;
+    border-top-color: #ddd;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .25) inset, 0 5px 10px 5px rgba(0, 0, 0, .25);
+    padding: 6vmin;
+}
+
+.art-frame-type-3:before {
+    border-radius: 2px;
+    bottom: -2vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25) inset;
+    content: "";
+    left: -2vmin;
+    position: absolute;
+    right: -2vmin;
+    top: -2vmin;
+}
+
+.art-frame-type-3:after {
+    border-radius: 2px;
+    bottom: -2.5vmin;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .25);
+    content: "";
+    left: -2.5vmin;
+    position: absolute;
+    right: -2.5vmin;
+    top: -2.5vmin;
+}
+
 .art-frame img {
     max-width: 100%;
 }
 
-.art-frame-type-1 img,
 .art-frame-type-2 img,
-.art-frame-type-3 img {
+.art-frame-type-3 img,
+.art-frame-type-4 img {
     border: solid 2px;
     border-bottom-color: #ffe;
     border-left-color: #eed;
@@ -138,24 +145,32 @@ html {
     position: absolute;
     left: 8.5%;
     right: 8.5%;
-    font-size: calc(0.4em + 0.7vw);
     line-height: 0.7;
 }
 
-.art-name-0 {
-    bottom: -7.2%;
+.art-frame-type-0 p {
+    top: 1%;
+    font-size: calc(0.875em + 1.7vw);
 }
 
-.art-name-1 {
+.art-frame-type-1 p {
+    bottom: -5.2%;
+    font-size: calc(0.675em + 0.7vw);
+}
+
+.art-frame-type-2 p {
+    top: -9.4%;
+    font-size: calc(0.675em + 0.7vw);
+}
+
+.art-frame-type-3 p {
     top: 2.1%;
+    font-size: calc(0.4em + 0.7vw);
 }
 
-.art-name-2 {
-    top: -10.1%;
-}
-
-.art-name-3 {
+.art-frame-type-4 p {
     bottom: 4.1%;
+    font-size: calc(0.4em + 0.7vw);
 }
 
 .art-polyptych-1 {
