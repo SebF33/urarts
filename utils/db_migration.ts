@@ -2150,6 +2150,8 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     last_name: "Banksy",
     gender: "Homme",
     avatar_url: "/arts/banksy/Autoportrait.jpg",
+    signature: "/signs/banksy.png",
+    color: "#d6e274",
     slug: "banksy",
   }).execute();
   await db.insertInto("art").values({
@@ -2216,6 +2218,52 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     frame: 0,
     url: "/arts/banksy/Rat parachute.jpg",
     owner_id: 45,
+  }).execute();
+
+  // Marie Laurencin
+  await db.insertInto("artist").values({
+    first_name: "Marie",
+    last_name: "Laurencin",
+    gender: "Femme",
+    avatar_url: "/arts/laurencin/Autoportrait.jpg",
+    signature: "/signs/laurencin.png",
+    slug: "laurencin",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Apollinaire et ses amis",
+    movement_id: 7,
+    url: "/arts/laurencin/Apollinaire et ses amis.jpg",
+    owner_id: 46,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Danseuses espagnoles",
+    movement_id: 7,
+    url: "/arts/laurencin/Danseuses espagnoles.jpg",
+    owner_id: 46,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Île-de-France",
+    movement_id: 7,
+    url: "/arts/laurencin/Île-de-France.jpg",
+    owner_id: 46,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Répétition",
+    movement_id: 7,
+    url: "/arts/laurencin/La Répétition.jpg",
+    owner_id: 46,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les Biches",
+    movement_id: 7,
+    url: "/arts/laurencin/Les Biches.jpg",
+    owner_id: 46,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Les deux espagnoles",
+    movement_id: 7,
+    url: "/arts/laurencin/Les deux espagnoles.jpg",
+    owner_id: 46,
   }).execute();
 }
 

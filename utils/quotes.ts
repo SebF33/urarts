@@ -1,4 +1,5 @@
 export const quotes = [
+  "“Le graffiti est l’un des rares moyens à votre disposition quand vous n’avez presque rien. Et même si vous ne pouvez soigner la pauvreté dans ce monde avec une image, au moins vous pouvez faire sourire quelqu’un pendant qu’il pisse.” —Banksy",
   "“L’art est créatif pour la réalisation, pas pour le plaisir... pour la transfiguration, pas pour le jeu.” —Max Beckmann",
   "“J’avais pour les étables un goût plus irrésistible que jamais courtisan pour les antichambres royales ou impériales.” —Rosa Bonheur",
   "“Il ne s’agit pas de peindre la vie, mais de rendre vivante la peinture.” —Pierre Bonnard",
@@ -7,20 +8,21 @@ export const quotes = [
   "“L’État est incompétent en matière d’art.” —Gustave Courbet",
   "“La peinture est la face visible de l’iceberg de ma pensée.” —Salvador Dalí",
   "“Il ne faut pas seulement regarder le modèle, il faut y lire comme dans un livre.” —Jacques-Louis David",
-  "“Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.” —Tamara de Lempicka",
   // 10
+  "“Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.” —Tamara de Lempicka",
   "“Le peintre doit s’efforcer d’être universel.” —Léonard de Vinci",
   "“Le premier mérite d’un tableau est d’être une fête pour l’œil.” —Eugène Delacroix",
   "“L’art est une abstraction, c’est le moyen de monter vers Dieu en faisant comme notre divin Maître, créer.” —Paul Gauguin",
   "“Jamais personne n’a trouvé dans mes tableaux une répétition d’invention, pas même d’une main.” —Artemisia Gentileschi",
   "“Pour créer son propre paradis, il faut puiser dans son enfer personnel.” —Frida Kahlo",
   "“Quand j’ai terminé un tableau, je ne veux pas perdre ensuite des mois entiers à le justifier devant la foule. Ce qui compte pour moi, ce n’est pas à combien de gens il plaît, mais à qui.” —Gustav Klimt",
+  "“Tenues à l’écart de la vie, nous [jeunes filles de la bourgeoisie] la cherchions passionnément dans la peinture et dans la poésie.” —Marie Laurencin",
   "“Je n’ai eu de bonheur qu’en peinture.” —Élisabeth Vigée Le Brun",
+  "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu’un tableau de figures.” —Le Caravage",
+  // 20
   "“Les titres des tableaux ne sont pas des explications et les tableaux ne sont pas des illustrations des titres.” —René Magritte",
   "“La vérité est que l’art doit être l’écriture de la vie.” —Édouard Manet",
   "“La couleur surtout et peut-être plus encore que le dessin est une libération.” —Henri Matisse",
-  // 20
-  "“Il me coûte autant de soin pour faire un bon tableau de fleurs qu’un tableau de figures.” —Le Caravage",
   "“L’art naît de la contrainte et meurt dans la liberté.” —Michel-Ange",
   "“Le dessein de l’art est de lutter contre les obligations.” —Amedeo Modigliani",
   "“Ce que je ferai, ce sera l’impression de ce que j’aurai ressenti.” —Claude Monet",
@@ -28,9 +30,9 @@ export const quotes = [
   "“Qui voit la figure humaine correctement ? Le photographe, le miroir ou le peintre ?” —Pablo Picasso",
   "“Peignez généreusement et sans hésitations pour garder la fraîcheur de la première impression. Ne vous laissez pas intimider par la nature, au risque d’être déçu du résultat.” —Camille Pissarro",
   "“Si je veux enrichir mon esprit, je ne cherche pas les honneurs, mais la liberté.” —Rembrandt",
+  // 30
   "“Un matin, l’un de nous manquant de noir, se servit de bleu : l’impressionnisme était né.” —Auguste Renoir",
   "“Moins le tableau est réussi, plus le cadre doit être beau, telle est ma devise.” —Norman Rockwell",
-  // 30
   "“Rien ne me rend plus heureux que de sortir dans la campagne et de peindre ce que je vois.” —Henri Rousseau",
   "“Il faut commencer par éprouver ce qu’on veut exprimer.” —Vincent van Gogh",
   "“Nous autres peintres, nous jouissons de la même licence que celle dont jouissent les poètes et les fous.” —Paul Véronèse",
