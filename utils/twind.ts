@@ -33,6 +33,8 @@ export const config: Configuration = {
       {
         fontFamily: "Tokyo Street",
         src: 'url(/fonts/TokyoStreet.ttf) format("​truetype​") or ttf',
+        fontStyle: "normal",
+        fontWeight: "normal",
       },
     ],
   },
