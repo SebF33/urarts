@@ -152,7 +152,13 @@ export default function Arts(
                         id={art.id}
                         class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
                       >
-                        <p class={`art-name-${art.frame} font-brush`}>
+                        <p
+                          class={tw`${
+                            art.movement === "Street art"
+                              ? "font-street z-10"
+                              : "font-brush"
+                          }`}
+                        >
                           {art.name}
                         </p>
                         <img

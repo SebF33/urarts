@@ -13,6 +13,7 @@ export const config: Configuration = {
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
+        street: "Tokyo Street",
       },
     },
     screens: {
@@ -26,8 +27,13 @@ export const config: Configuration = {
   darkMode: "class",
   mode: "silent",
   preflight: {
-    "@import": [
+    "@import":
       `url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap')`,
+    "@font-face": [
+      {
+        fontFamily: "Tokyo Street",
+        src: 'url(/fonts/TokyoStreet.ttf) format("​truetype​") or ttf',
+      },
     ],
   },
 };

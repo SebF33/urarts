@@ -16,7 +16,7 @@ interface ArtTable {
   name: string;
   movement_id: number;
   polyptych: number; // Nombre de panneaux
-  frame: number; // Type d'encadrement (0: canvas | 1: cadre avec passe-partout | 2: cadre sans passe-partout | 3: cadre avec passe-partout sur photo)
+  frame: number; // Type d'encadrement (0: street |1: canvas |2: cadre sans passe-partout |3: cadre avec passe-partout |4: cadre avec passe-partout sur photo)
   url: string; // Panneau central
   url_2?: string; // Panneau à gauche du central
   url_3?: string; // Panneau à droite du central
