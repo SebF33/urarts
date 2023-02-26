@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-02-26]
+
+### Nouveautés
+- Ajout de la prise en compte des œuvres de street art.
+
 ## [2023-02-21]
 
 ### Nouveautés
