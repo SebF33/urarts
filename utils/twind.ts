@@ -13,7 +13,7 @@ export const config: Configuration = {
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
-        street: "Tokyo Street",
+        street: "Five Boroughs Handwriting",
       },
     },
     screens: {
@@ -31,10 +31,8 @@ export const config: Configuration = {
       `url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap')`,
     "@font-face": [
       {
-        fontFamily: "Tokyo Street",
-        src: 'url(/fonts/TokyoStreet.ttf) format("​truetype​") or ttf',
-        fontStyle: "normal",
-        fontWeight: "normal",
+        fontFamily: "Five Boroughs Handwriting",
+        src: 'url(/fonts/FiveBoroughsHandwriting.otf) format("opentype")',
       },
     ],
   },
