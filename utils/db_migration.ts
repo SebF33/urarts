@@ -1821,6 +1821,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Athipik",
+    movement_id: 27,
+    url: "/arts/mimi/Athipik.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Bouddha penseur",
     movement_id: 27,
     polyptych: 5,
@@ -1847,6 +1853,20 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Christophe Lambert",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Christophe Lambert.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Clark Gable",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Clark Gable.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Cléopâtre",
     movement_id: 27,
     frame: 1,
@@ -1870,10 +1890,24 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
+    name: "Épices",
+    movement_id: 27,
+    frame: 1,
+    url: "/arts/mimi/Épices.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Inconnue",
     movement_id: 27,
     frame: 3,
     url: "/arts/mimi/Inconnue.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Jean Marais",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Jean Marais.jpg",
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
@@ -1888,6 +1922,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 27,
     frame: 3,
     url: "/arts/mimi/Marcelle Derrien.jpg",
+    owner_id: 40,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Maxime",
+    movement_id: 27,
+    frame: 3,
+    url: "/arts/mimi/Maxime.jpg",
     owner_id: 40,
   }).execute();
   await db.insertInto("art").values({
