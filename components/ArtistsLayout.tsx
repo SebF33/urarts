@@ -45,14 +45,12 @@ export default function ArtistsLayout(
                 {p.signature &&
                   (
                     <img
-                      class={tw`w-8 z-10 ${
+                      class={tw`w-12 z-10 ${
                         css(
                           {
                             "position": "absolute",
                             "top": "86.0303%",
-                            "bottom": "3.0303%",
-                            "left": "76.5%",
-                            "right": "1%",
+                            "left": "70.5%",
                             "font-size": "calc(0.6em + 0.5vw)",
                           },
                         )
