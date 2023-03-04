@@ -147,13 +147,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   }).execute();
   //13
   await db.insertInto("movement").values({
-    name: "Période bleue",
-    slug: "periodebleue",
+    name: "Pop art",
+    slug: "popart",
   }).execute();
   //14
   await db.insertInto("movement").values({
-    name: "Période rose",
-    slug: "perioderose",
+    name: "Hyperréalisme",
+    slug: "hyperrealisme",
   }).execute();
   //15
   await db.insertInto("movement").values({
@@ -234,6 +234,11 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   await db.insertInto("movement").values({
     name: "Art conceptuel",
     slug: "artconceptuel",
+  }).execute();
+  //31
+  await db.insertInto("movement").values({
+    name: "Ukiyo-e",
+    slug: "ukiyoe",
   }).execute();
 
   // Tamara de Lempicka
@@ -382,14 +387,20 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     slug: "picasso",
   }).execute();
   await db.insertInto("art").values({
+    name: "Fillette à la corbeille fleurie",
+    movement_id: 7,
+    url: "/arts/picasso/Fillette à la corbeille fleurie.jpg",
+    owner_id: 4,
+  }).execute();
+  await db.insertInto("art").values({
     name: "La famille de saltimbanques",
-    movement_id: 14,
+    movement_id: 7,
     url: "/arts/picasso/La famille de saltimbanques.jpg",
     owner_id: 4,
   }).execute();
   await db.insertInto("art").values({
     name: "La Vie",
-    movement_id: 13,
+    movement_id: 7,
     url: "/arts/picasso/La Vie.jpg",
     owner_id: 4,
   }).execute();
@@ -665,6 +676,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 12,
   }).execute();
   await db.insertInto("art").values({
+    name: "La Persistance de la mémoire",
+    movement_id: 23,
+    url: "/arts/dali/La Persistance de la mémoire.jpg",
+    owner_id: 12,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Le Grand Masturbateur",
     movement_id: 23,
     url: "/arts/dali/Le Grand Masturbateur.jpg",
@@ -705,6 +722,12 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "Impression, soleil levant",
     movement_id: 10,
     url: "/arts/monet/Impression, soleil levant.jpg",
+    owner_id: 13,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Meules",
+    movement_id: 10,
+    url: "/arts/monet/Meules.jpg",
     owner_id: 13,
   }).execute();
   await db.insertInto("art").values({
@@ -1805,7 +1828,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   await db.insertInto("artist").values({
     last_name: "Mimi",
     gender: "Femme",
-    color: "#ab8089",
+    color: "#a997f0",
     slug: "mimi",
   }).execute();
   await db.insertInto("art").values({
@@ -2247,6 +2270,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 45,
   }).execute();
   await db.insertInto("art").values({
+    name: "Le doux doux ouest",
+    movement_id: 29,
+    frame: 0,
+    url: "/arts/banksy/Le doux doux ouest.jpg",
+    owner_id: 45,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Le Fils d'un migrant syrien",
     movement_id: 29,
     frame: 0,
@@ -2305,6 +2335,120 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 7,
     url: "/arts/laurencin/Les deux espagnoles.jpg",
     owner_id: 46,
+  }).execute();
+
+  // Francis Bacon
+  await db.insertInto("artist").values({
+    first_name: "Francis",
+    last_name: "Bacon",
+    gender: "Homme",
+    avatar_url: "/arts/bacon/Autoportrait.jpg",
+    signature: "/signs/bacon.png",
+    slug: "bacon",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Trois études de Lucian Freud",
+    movement_id: 7,
+    polyptych: 3,
+    url: "/arts/bacon/Trois études de Lucian Freud_1.jpg",
+    url_2: "/arts/bacon/Trois études de Lucian Freud_2.jpg",
+    url_3: "/arts/bacon/Trois études de Lucian Freud_3.jpg",
+    owner_id: 47,
+  }).execute();
+
+  // Katsushika Hokusai
+  await db.insertInto("artist").values({
+    first_name: "Katsushika",
+    last_name: "Hokusai",
+    gender: "Homme",
+    avatar_url: "/arts/hokusai/Autoportrait.jpg",
+    signature: "/signs/hokusai.png",
+    slug: "hokusai",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Autoportrait sous l'aspect d'un vieillard",
+    movement_id: 31,
+    frame: 1,
+    url: "/arts/hokusai/Autoportrait sous l'aspect d'un vieillard.jpg",
+    owner_id: 48,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Grande Vague de Kanagawa",
+    movement_id: 31,
+    frame: 1,
+    url: "/arts/hokusai/La Grande Vague de Kanagawa.jpg",
+    owner_id: 48,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Fuji par temps clair",
+    movement_id: 31,
+    frame: 1,
+    url: "/arts/hokusai/Le Fuji par temps clair.jpg",
+    owner_id: 48,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "L'orage sous le sommet",
+    movement_id: 31,
+    frame: 1,
+    url: "/arts/hokusai/L'orage sous le sommet.jpg",
+    owner_id: 48,
+  }).execute();
+
+  // Roy Lichtenstein
+  await db.insertInto("artist").values({
+    first_name: "Roy",
+    last_name: "Lichtenstein",
+    gender: "Homme",
+    avatar_url: "/arts/lichtenstein/Autoportrait.jpg",
+    signature: "/signs/lichtenstein.png",
+    slug: "lichtenstein",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Bedroom at Arles",
+    movement_id: 13,
+    frame: 1,
+    url: "/arts/lichtenstein/Bedroom at Arles.jpg",
+    owner_id: 49,
+  }).execute();
+
+  // Suzanne Valadon
+  await db.insertInto("artist").values({
+    first_name: "Suzanne",
+    last_name: "Valadon",
+    gender: "Femme",
+    avatar_url: "/arts/valadon/Autoportrait.jpg",
+    signature: "/signs/valadon.png",
+    slug: "valadon",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Après le bain",
+    movement_id: 16,
+    url: "/arts/valadon/Après le bain.jpg",
+    owner_id: 50,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Chambre bleue",
+    movement_id: 16,
+    url: "/arts/valadon/La Chambre bleue.jpg",
+    owner_id: 50,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Le Lancement du filet",
+    movement_id: 16,
+    url: "/arts/valadon/Le Lancement du filet.jpg",
+    owner_id: 50,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nature morte au lapin et à la perdrix",
+    movement_id: 16,
+    url: "/arts/valadon/Nature morte au lapin et à la perdrix.jpg",
+    owner_id: 50,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Nu couché",
+    movement_id: 16,
+    url: "/arts/valadon/Nu couché.jpg",
+    owner_id: 50,
   }).execute();
 }
 

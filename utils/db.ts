@@ -57,9 +57,6 @@ export interface DbSchema {
 export class Db {
   static #instance: Kysely<DbSchema>;
 
-  private constructor() {
-  }
-
   public static getInstance(): Kysely<DbSchema> {
     if (!Db.#instance) {
       Db.#instance = Db.#initDb();

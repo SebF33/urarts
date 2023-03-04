@@ -13,7 +13,7 @@ export const config: Configuration = {
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
-        street: "Five Boroughs Handwriting",
+        streetart: "Five Boroughs Handwriting",
       },
     },
     screens: {

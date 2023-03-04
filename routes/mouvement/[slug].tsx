@@ -155,7 +155,7 @@ export default function Arts(
                         <p
                           class={tw`${
                             art.movement === "Street art"
-                              ? "font-street z-10"
+                              ? "font-streetart z-10"
                               : "font-brush"
                           }`}
                         >
