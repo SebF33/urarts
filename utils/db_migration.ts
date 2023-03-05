@@ -77,6 +77,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("font", "text", (col) => col.defaultTo(sql`"brush"`))
     .addColumn("slug", "text", (col) => col.notNull())
     .addColumn(
       "modified_at",
@@ -228,6 +229,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   //29
   await db.insertInto("movement").values({
     name: "Street art",
+    font: "street z-10",
     slug: "streetart",
   }).execute();
   //30
@@ -238,6 +240,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   //31
   await db.insertInto("movement").values({
     name: "Ukiyo-e",
+    font: "japanese",
     slug: "ukiyoe",
   }).execute();
 
