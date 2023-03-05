@@ -2236,6 +2236,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     owner_id: 45,
   }).execute();
   await db.insertInto("art").values({
+    name: "Bethléem",
+    movement_id: 29,
+    frame: 0,
+    url: "/arts/banksy/Bethléem.jpg",
+    owner_id: 45,
+  }).execute();
+  await db.insertInto("art").values({
     name: "Chien",
     movement_id: 29,
     frame: 0,
@@ -2247,6 +2254,13 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 29,
     frame: 0,
     url: "/arts/banksy/Femme de ménage.jpg",
+    owner_id: 45,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Groupe de réflexion",
+    movement_id: 29,
+    frame: 0,
+    url: "/arts/banksy/Groupe de réflexion.jpg",
     owner_id: 45,
   }).execute();
   await db.insertInto("art").values({
@@ -2452,6 +2466,52 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     movement_id: 16,
     url: "/arts/valadon/Nu couché.jpg",
     owner_id: 50,
+  }).execute();
+
+  // Edvard Munch
+  await db.insertInto("artist").values({
+    first_name: "Edvard",
+    last_name: "Munch",
+    gender: "Homme",
+    avatar_url: "/arts/munch/Autoportrait.jpg",
+    signature: "/signs/munch.png",
+    slug: "munch",
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Anxiété",
+    movement_id: 7,
+    url: "/arts/munch/Anxiété.jpg",
+    owner_id: 51,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Cri",
+    movement_id: 7,
+    url: "/arts/munch/Cri.jpg",
+    owner_id: 51,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Jalousie",
+    movement_id: 7,
+    url: "/arts/munch/Jalousie.jpg",
+    owner_id: 51,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "La Madone",
+    movement_id: 7,
+    url: "/arts/munch/La Madone.jpg",
+    owner_id: 51,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Mélancolie",
+    movement_id: 7,
+    url: "/arts/munch/Mélancolie.jpg",
+    owner_id: 51,
+  }).execute();
+  await db.insertInto("art").values({
+    name: "Travailleurs de retour à la maison",
+    movement_id: 7,
+    url: "/arts/munch/Travailleurs de retour à la maison.jpg",
+    owner_id: 51,
   }).execute();
 }
 

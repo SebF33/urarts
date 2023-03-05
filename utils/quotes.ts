@@ -28,6 +28,7 @@ export const quotes = [
   "“Le dessein de l’art est de lutter contre les obligations.” —Amedeo Modigliani",
   "“Ce que je ferai, ce sera l’impression de ce que j’aurai ressenti.” —Claude Monet",
   "“Mon ambition est de saisir une touche d’éphémère.” —Berthe Morisot",
+  "“Je ne crois pas à l’art dont l’expression n’est pas contrainte par le besoin qu’a l’homme d’ouvrir son cœur.” —Edvard Munch",
   "“Qui voit la figure humaine correctement ? Le photographe, le miroir ou le peintre ?” —Pablo Picasso",
   "“Peignez généreusement et sans hésitations pour garder la fraîcheur de la première impression. Ne vous laissez pas intimider par la nature, au risque d’être déçu du résultat.” —Camille Pissarro",
   "“Si je veux enrichir mon esprit, je ne cherche pas les honneurs, mais la liberté.” —Rembrandt",
