@@ -4,6 +4,7 @@ import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
+import ArtsLayout from "@components/ArtsLayout.tsx";
 import { BrushStroke } from "@components/Assets.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
@@ -11,10 +12,11 @@ import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
-  art: Array<ArtCollection> | null;
+  arts: Array<ArtCollection> | null;
   color: string | null;
-  movement: string | null;
   desc: string | null;
+  font: string | null;
+  movement: string | null;
   title: string | null;
 }> = {
   async GET(_, ctx) {
@@ -22,9 +24,11 @@ export const handler: Handlers<{
 
     const db = Db.getInstance();
 
-    const result = await db.selectFrom("movement").select([
-      "name",
-    ]).where("slug", "=", slug).executeTakeFirst();
+    const result = await db.selectFrom("movement")
+      .select([
+        "name",
+        "font",
+      ]).where("slug", "=", slug).executeTakeFirst();
 
     const results = await db.selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
@@ -34,7 +38,6 @@ export const handler: Handlers<{
         "last_name",
         "art.id",
         "art.name as name",
-        "movement.name as movement",
         "polyptych",
         "frame",
         "url",
@@ -52,22 +55,23 @@ export const handler: Handlers<{
     let movement: string | null = null;
     let desc: string | null = null;
     let title: string | null = null;
+    let font: string | null = null;
 
     if (result) {
       movement = result.name;
       desc = movement + ".";
       title = "Collection " + movement;
+      font = result.font;
     } else return ctx.renderNotFound();
 
-    let art: Array<ArtCollection> | null = null;
+    let arts: Array<ArtCollection> | null = null;
 
     if (results) {
-      art = results.map((p) => ({
+      arts = results.map((p) => ({
         first_name: p.first_name,
         last_name: p.last_name,
         id: String(p.id),
         name: p.name,
-        movement: p.movement,
         polyptych: p.polyptych,
         frame: p.frame,
         url: p.url,
@@ -78,20 +82,21 @@ export const handler: Handlers<{
       }));
     }
 
-    return ctx.render({ art, color, movement, desc, title });
+    return ctx.render({ arts, color, desc, font, movement, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
-    art: Array<ArtCollection> | null;
+    arts: Array<ArtCollection>;
     color: string;
-    movement: string | null;
     desc: string;
+    font: string;
+    movement: string;
     title: string;
   }>,
 ) {
-  const { art, color, movement, desc, title } = props.data;
+  const { arts, color, desc, font, movement, title } = props.data;
 
   return (
     <DefaultLayout
@@ -109,89 +114,15 @@ export default function Arts(
           })
         }`}
       >
-        <Nav />
+        <Nav pathname="/mouvements" />
         <main
           class={tw`flex-grow`}
         >
           <div
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
-            <BrushStroke color={color} title={movement} />
-            {art &&
-              (
-                <div
-                  class={tw`row flex flex-wrap mx-auto`}
-                >
-                  {art.map((art) => (
-                    <div
-                      class={`art-wrap-${art.polyptych}`}
-                    >
-                      {art.polyptych > 3 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_4}
-                              alt={art.name + "_4"}
-                            />
-                          </div>
-                        )}
-                      {art.polyptych > 1 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_2}
-                              alt={art.name + "_2"}
-                            />
-                          </div>
-                        )}
-                      <div
-                        id={art.id}
-                        class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                      >
-                        <p
-                          class={tw`${
-                            art.movement === "Street art"
-                              ? "font-streetart z-10"
-                              : "font-brush"
-                          }`}
-                        >
-                          {art.name}
-                        </p>
-                        <img
-                          src={art.url}
-                          alt={art.name}
-                        />
-                      </div>
-                      {art.polyptych > 2 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_3}
-                              alt={art.name + "_3"}
-                            />
-                          </div>
-                        )}
-                      {art.polyptych === 5 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_5}
-                              alt={art.name + "_5"}
-                            />
-                          </div>
-                        )}
-                    </div>
-                  ))}
-                </div>
-              )}
+            <BrushStroke color={color} font={font} title={movement} />
+            <ArtsLayout arts={arts} font={font} />
           </div>
         </main>
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />

@@ -4,6 +4,7 @@ import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
+import ArtsLayout from "@components/ArtsLayout.tsx";
 import { BrushStroke } from "@components/Assets.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
@@ -11,7 +12,7 @@ import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
-  art: Array<ArtCollection> | null;
+  arts: Array<ArtCollection> | null;
   artist: string | null;
   color: string | null;
   desc: string | null;
@@ -36,7 +37,7 @@ export const handler: Handlers<{
         "last_name",
         "art.id",
         "art.name as name",
-        "movement.name as movement",
+        "movement.font as font",
         "polyptych",
         "frame",
         "url",
@@ -62,15 +63,15 @@ export const handler: Handlers<{
       title = "Collection " + artist;
     } else return ctx.renderNotFound();
 
-    let art: Array<ArtCollection> | null = null;
+    let arts: Array<ArtCollection> | null = null;
 
     if (results) {
-      art = results.map((p) => ({
+      arts = results.map((p) => ({
         first_name: p.first_name,
         last_name: p.last_name,
         id: String(p.id),
         name: p.name,
-        movement: p.movement,
+        font: p.font,
         polyptych: p.polyptych,
         frame: p.frame,
         url: p.url,
@@ -81,20 +82,20 @@ export const handler: Handlers<{
       }));
     }
 
-    return ctx.render({ art, artist, color, desc, title });
+    return ctx.render({ arts, artist, color, desc, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
-    art: Array<ArtCollection> | null;
-    artist: string | null;
+    arts: Array<ArtCollection>;
+    artist: string;
     color: string;
     desc: string;
     title: string;
   }>,
 ) {
-  const { art, artist, color, desc, title } = props.data;
+  const { arts, artist, color, desc, title } = props.data;
 
   return (
     <DefaultLayout
@@ -112,14 +113,14 @@ export default function Arts(
           })
         }`}
       >
-        <Nav />
+        <Nav pathname="/arts" />
         <main
           class={tw`flex-grow`}
         >
           <div
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
-            <BrushStroke color={color} title={artist} />
+            <BrushStroke color={color} font="brush" title={artist} />
             {artist === "Mimi" &&
               (
                 <div
@@ -141,81 +142,7 @@ export default function Arts(
                   </p>
                 </div>
               )}
-            {art &&
-              (
-                <div
-                  class={tw`row flex flex-wrap mx-auto`}
-                >
-                  {art.map((art) => (
-                    <div
-                      class={`art-wrap-${art.polyptych}`}
-                    >
-                      {art.polyptych > 3 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_4}
-                              alt={art.name + "_4"}
-                            />
-                          </div>
-                        )}
-                      {art.polyptych > 1 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_2}
-                              alt={art.name + "_2"}
-                            />
-                          </div>
-                        )}
-                      <div
-                        id={art.id}
-                        class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                      >
-                        <p
-                          class={tw`${
-                            art.movement === "Street art"
-                              ? "font-streetart z-10"
-                              : "font-brush"
-                          }`}
-                        >
-                          {art.name}
-                        </p>
-                        <img
-                          src={art.url}
-                          alt={art.name}
-                        />
-                      </div>
-                      {art.polyptych > 2 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_3}
-                              alt={art.name + "_3"}
-                            />
-                          </div>
-                        )}
-                      {art.polyptych === 5 &&
-                        (
-                          <div
-                            class={`art-frame art-frame-type-${art.frame} art-polyptych-${art.polyptych}`}
-                          >
-                            <img
-                              src={art.url_5}
-                              alt={art.name + "_5"}
-                            />
-                          </div>
-                        )}
-                    </div>
-                  ))}
-                </div>
-              )}
+            <ArtsLayout arts={arts} />
           </div>
         </main>
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
