@@ -2,8 +2,11 @@
 desktop.ini
 TO_DO_LIST.md
 /components/Button.tsx
+/data/urarts_data.db
 /islands/Counter.tsx
 /static/arts
 /static/errors
 /static/fonts
 /static/signs
+/utils/db_migration.ts
+/utils/quotes.ts
