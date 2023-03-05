@@ -13,7 +13,8 @@ export const config: Configuration = {
     extend: {
       fontFamily: {
         brush: ["Caveat Brush", "cursive"],
-        streetart: "Five Boroughs Handwriting",
+        japanese: "Kashima Brush",
+        street: "Five Boroughs Handwriting",
       },
     },
     screens: {
@@ -33,6 +34,10 @@ export const config: Configuration = {
       {
         fontFamily: "Five Boroughs Handwriting",
         src: 'url(/fonts/FiveBoroughsHandwriting.otf) format("opentype")',
+      },
+      {
+        fontFamily: "Kashima Brush",
+        src: 'url(/fonts/Kashima.otf) format("opentype")',
       },
     ],
   },

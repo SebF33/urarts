@@ -3,7 +3,7 @@ export type ArtCollection = {
   last_name: string;
   id: string;
   name: string;
-  movement: string;
+  font?: string;
   polyptych: number;
   frame: number;
   url: string;

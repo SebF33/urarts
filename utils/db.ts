@@ -40,6 +40,7 @@ interface ArtistTable {
 interface MovementTable {
   id: Generated<number>;
   name: string;
+  font: string;
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
