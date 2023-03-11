@@ -2,7 +2,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 
 export default function Nav(
-  props: { pathname: string },
+  props: { pathname?: string },
 ) {
   if (typeof document !== "undefined") {
     const btn = document.querySelector("button.mobile-menu-button");
