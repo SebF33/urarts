@@ -1,25 +1,26 @@
-import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import ArtsLayout from "@components/ArtsLayout.tsx";
 import { BrushStroke } from "@components/Assets.tsx";
+import CollectionSearch from "@islands/CollectionSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
-  arts: Array<ArtCollection> | null;
   artist: string | null;
   color: string | null;
   desc: string | null;
+  mySlug: string | null;
+  query: string | null;
   title: string | null;
 }> = {
-  async GET(_, ctx) {
+  async GET(req, ctx) {
     const { slug } = ctx.params;
+    const url = new URL(req.url);
 
     const db = Db.getInstance();
 
@@ -27,31 +28,14 @@ export const handler: Handlers<{
       "first_name",
       "last_name",
       "color",
+      "slug",
     ]).where("slug", "=", slug).executeTakeFirst();
-
-    const results = await db.selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .innerJoin("movement", "art.movement_id", "movement.id")
-      .select([
-        "first_name",
-        "last_name",
-        "art.id",
-        "art.name as name",
-        "movement.font as font",
-        "polyptych",
-        "frame",
-        "url",
-        "url_2",
-        "url_3",
-        "url_4",
-        "url_5",
-      ])
-      .where("artist.slug", "=", slug)
-      .execute();
 
     let artist: string | null = null;
     let color: string | null = null;
     let desc: string | null = null;
+    let mySlug: string | null = null;
+    let query: string | null = null;
     let title: string | null = null;
 
     if (result) {
@@ -60,42 +44,26 @@ export const handler: Handlers<{
         : result.last_name;
       color = result.color;
       desc = "Les plus belles œuvres de " + artist + ".";
-      title = "Collection " + artist;
+      mySlug = result.slug;
+      query = url.searchParams.get("id") || "";
+      title = artist + " - Collection";
     } else return ctx.renderNotFound();
 
-    let arts: Array<ArtCollection> | null = null;
-
-    if (results) {
-      arts = results.map((p) => ({
-        first_name: p.first_name,
-        last_name: p.last_name,
-        id: String(p.id),
-        name: p.name,
-        font: p.font,
-        polyptych: p.polyptych,
-        frame: p.frame,
-        url: p.url,
-        url_2: p.url_2,
-        url_3: p.url_3,
-        url_4: p.url_4,
-        url_5: p.url_5,
-      }));
-    }
-
-    return ctx.render({ arts, artist, color, desc, title });
+    return ctx.render({ artist, color, desc, mySlug, query, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
-    arts: Array<ArtCollection>;
     artist: string;
     color: string;
     desc: string;
+    mySlug: string;
+    query: string;
     title: string;
   }>,
 ) {
-  const { arts, artist, color, desc, title } = props.data;
+  const { artist, color, desc, mySlug, query, title } = props.data;
 
   return (
     <DefaultLayout
@@ -121,7 +89,7 @@ export default function Arts(
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
             <BrushStroke color={color} font="brush" title={artist} />
-            {artist === "Mimi" &&
+            {mySlug === "mimi" &&
               (
                 <div
                   class={tw`font-brush mx-2 mt-5 ${
@@ -142,7 +110,7 @@ export default function Arts(
                   </p>
                 </div>
               )}
-            <ArtsLayout arts={arts} />
+            <CollectionSearch id={query} myslug={mySlug} type="artist" />
           </div>
         </main>
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />

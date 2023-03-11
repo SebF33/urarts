@@ -42,7 +42,7 @@ export default function LiveSearch() {
                 {searchResults.map((item, index) => (
                   <li class={tw`m-2`} key={index}>
                     <a
-                      href={"/art/" + item.slug + "#" + item.id}
+                      href={"/art/" + item.slug + "?id=" + item.id}
                       class={tw`cursor-pointer`}
                     >
                       <p class={tw`relative group text-xl`}>

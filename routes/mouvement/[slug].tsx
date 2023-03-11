@@ -4,19 +4,19 @@ import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import ArtsLayout from "@components/ArtsLayout.tsx";
 import { BrushStroke } from "@components/Assets.tsx";
+import CollectionSearch from "@islands/CollectionSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
 export const handler: Handlers<{
-  arts: Array<ArtCollection> | null;
   color: string | null;
   desc: string | null;
   font: string | null;
   movement: string | null;
+  mySlug: string | null;
   title: string | null;
 }> = {
   async GET(_, ctx) {
@@ -28,75 +28,40 @@ export const handler: Handlers<{
       .select([
         "name",
         "font",
+        "slug",
       ]).where("slug", "=", slug).executeTakeFirst();
-
-    const results = await db.selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .innerJoin("movement", "art.movement_id", "movement.id")
-      .select([
-        "first_name",
-        "last_name",
-        "art.id",
-        "art.name as name",
-        "polyptych",
-        "frame",
-        "url",
-        "url_2",
-        "url_3",
-        "url_4",
-        "url_5",
-      ])
-      .where("movement.slug", "=", slug)
-      .orderBy("art.name")
-      .execute();
 
     const color = colorScheme[currentColorScheme].dark;
 
-    let movement: string | null = null;
     let desc: string | null = null;
-    let title: string | null = null;
     let font: string | null = null;
+    let movement: string | null = null;
+    let mySlug: string | null = null;
+    let title: string | null = null;
 
     if (result) {
       movement = result.name;
       desc = movement + ".";
-      title = "Collection " + movement;
       font = result.font;
+      mySlug = result.slug;
+      title = movement + " - Collection";
     } else return ctx.renderNotFound();
 
-    let arts: Array<ArtCollection> | null = null;
-
-    if (results) {
-      arts = results.map((p) => ({
-        first_name: p.first_name,
-        last_name: p.last_name,
-        id: String(p.id),
-        name: p.name,
-        polyptych: p.polyptych,
-        frame: p.frame,
-        url: p.url,
-        url_2: p.url_2,
-        url_3: p.url_3,
-        url_4: p.url_4,
-        url_5: p.url_5,
-      }));
-    }
-
-    return ctx.render({ arts, color, desc, font, movement, title });
+    return ctx.render({ color, desc, font, movement, mySlug, title });
   },
 };
 
 export default function Arts(
   props: PageProps<{
-    arts: Array<ArtCollection>;
     color: string;
     desc: string;
     font: string;
     movement: string;
+    mySlug: string;
     title: string;
   }>,
 ) {
-  const { arts, color, desc, font, movement, title } = props.data;
+  const { color, desc, mySlug, font, movement, title } = props.data;
 
   return (
     <DefaultLayout
@@ -122,7 +87,7 @@ export default function Arts(
             class={tw`w-auto flex flex-col mx-auto my-6`}
           >
             <BrushStroke color={color} font={font} title={movement} />
-            <ArtsLayout arts={arts} font={font} />
+            <CollectionSearch font={font} myslug={mySlug} type="movement" />
           </div>
         </main>
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
