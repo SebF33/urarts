@@ -277,7 +277,7 @@ html {
     clip-path: url(#clip);
 }
 
-.brush-wrap p {
+.brush-wrap h1 {
     font-size: 2rem;
     margin: 0;
     color: var(--color-white);
