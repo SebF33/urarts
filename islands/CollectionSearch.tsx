@@ -15,7 +15,7 @@ export default function CollectionSearch(
 
   useEffect(() => {
     ky.get(
-      `http://localhost:8000/api/collection?type=${props.type}&slug=${props.myslug}&name=${searchTerm}`,
+      `https://urarts.fly.dev/api/collection?type=${props.type}&slug=${props.myslug}&name=${searchTerm}`,
     )
       .json<Arts[]>()
       .then((response) => {
