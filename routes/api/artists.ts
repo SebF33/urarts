@@ -7,8 +7,12 @@ export const handler = async (
   _ctx: HandlerContext,
 ): Promise<Response> => {
   const url = new URL(req.url);
-  const query = url.searchParams.get("name") || "";
-  const filter = query.length ? encodeURIComponent(query) : "";
+
+  let query = url.searchParams.get("name") || "";
+  const nameFilter = query.length ? encodeURIComponent(query) : "";
+
+  query = url.searchParams.get("nationality") || "";
+  const nationalityFilter = query.length ? encodeURIComponent(query) : "";
 
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")
@@ -17,15 +21,17 @@ export const handler = async (
       "first_name",
       "last_name",
       "gender",
+      "nationality",
       "avatar_url",
       "signature",
       "slug",
     ])
     .where((qb) =>
       qb
-        .orWhere("first_name", "like", "%" + filter + "%")
-        .orWhere("last_name", "like", "%" + filter + "%")
+        .orWhere("first_name", "like", "%" + nameFilter + "%")
+        .orWhere("last_name", "like", "%" + nameFilter + "%")
     )
+    .where("nationality", "like", "%" + nationalityFilter + "%")
     .where("slug", "!=", "mimi")
     .orderBy(sql`coalesce(first_name, last_name)`)
     .execute();

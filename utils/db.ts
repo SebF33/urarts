@@ -30,6 +30,7 @@ interface ArtistTable {
   first_name: string | null;
   last_name: string;
   gender: "Femme" | "Homme" | "Autre";
+  nationality: string;
   avatar_url?: string;
   signature: string | null;
   color: string;

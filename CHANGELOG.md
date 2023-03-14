@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-03-14]
+
+### Nouveautés
+- Ajout de la recherche d'artistes par nationalité.
+
 ## [2023-02-26]
 
 ### Nouveautés

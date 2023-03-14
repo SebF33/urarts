@@ -19,23 +19,9 @@
     background-color: var(--color-blue);
 }
 
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray);
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: var(--color-white);
-    border-radius: 2px;
-}
-
+/* Cacher la scrollbar */
 html {
-    scrollbar-color: var(--color-gray) var(--color-white);
+    scrollbar-width: none;
 }
 
 /* Cadres */
@@ -290,7 +276,8 @@ html {
     border-image: url(../brush-input-box.png) 27 round;
 }
 
-/* Icône SVG */
-.icon-svg {
+/* SVG */
+.icon-svg,
+#PaintPalette {
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }

@@ -6,6 +6,7 @@ TO_DO_LIST.md
 /islands/Counter.tsx
 /static/arts
 /static/errors
+/static/flags
 /static/fonts
 /static/signs
 /utils/db_migration.ts

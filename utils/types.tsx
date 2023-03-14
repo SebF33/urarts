@@ -29,7 +29,8 @@ export type ArtistRow = {
   id: number;
   first_name: string | null;
   last_name: string;
-  avatar_url: string;
+  nationality: string;
+  avatar_url?: string;
   signature: string | null;
   slug: string;
 };
