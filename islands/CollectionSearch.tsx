@@ -33,7 +33,7 @@ export default function CollectionSearch(
           inline: "nearest",
         });
       }
-    }, 400);
+    }, 600);
   }, []);
 
   return (
