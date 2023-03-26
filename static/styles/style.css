@@ -270,6 +270,19 @@ html {
     font-style: italic;
 }
 
+/* Charts */
+.charts {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+@media (min-width: 1170px) {
+    .charts {
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+}
+
 /* Input */
 .brush-input-box {
     border-width: 18px 18px 18px 18px;

@@ -102,6 +102,22 @@ export default function Nav(
                 />
               </svg>
             </a>
+            <a
+              href="/charts"
+              class={tw`hover:text-lighterdark`}
+            >
+              <svg
+                class={tw`icon-svg h-5 w-5`}
+                fill={colorScheme[currentColorScheme].white}
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"
+                />
+              </svg>
+            </a>
           </div>
           <div class={tw`md:hidden flex items-center`}>
             <button class={tw`mobile-menu-button focus:outline-none`}>
@@ -201,6 +217,24 @@ export default function Nav(
                 <path
                   fill-rule="evenodd"
                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/charts"
+              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+            >
+              <svg
+                class={tw`icon-svg h-5 w-5`}
+                fill={colorScheme[currentColorScheme].white}
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"
                 />
               </svg>
             </a>

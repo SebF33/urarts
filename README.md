@@ -24,7 +24,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 
 **Langage :** TypeScript.
 
-[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![Trex](/.github/Trex.png)](https://deno.land/x/trex) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Fly.io](/.github/Fly.io.png)](https://fly.io) 
+[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![Trex](/.github/Trex.png)](https://deno.land/x/trex) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![Fly.io](/.github/Fly.io.png)](https://fly.io) 
 
 :toolbox: **Technologies :**
 - [Deno](https://deno.land/manual)
@@ -35,6 +35,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 - [Ky](https://github.com/sindresorhus/ky)
 - [Twind](https://twind.style/installation)
 - [Everblush](https://github.com/Everblush/everblush)
+- [Chart.js](https://www.chartjs.org/docs/latest)
 - [Fly.io](https://fly.io/docs/getting-started/deno)
 
 
