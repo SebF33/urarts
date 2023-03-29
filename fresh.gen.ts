@@ -13,8 +13,8 @@ import * as $6 from "./routes/art/[slug].tsx";
 import * as $7 from "./routes/artists.tsx";
 import * as $8 from "./routes/arts.tsx";
 import * as $9 from "./routes/bg.tsx";
-import * as $10 from "./routes/charts.tsx";
-import * as $11 from "./routes/index.tsx";
+import * as $10 from "./routes/index.tsx";
+import * as $11 from "./routes/indicators.tsx";
 import * as $12 from "./routes/mouvement/[slug].tsx";
 import * as $13 from "./routes/mouvements.tsx";
 import * as $$0 from "./islands/ArtistsSearch.tsx";
@@ -39,8 +39,8 @@ const manifest = {
     "./routes/artists.tsx": $7,
     "./routes/arts.tsx": $8,
     "./routes/bg.tsx": $9,
-    "./routes/charts.tsx": $10,
-    "./routes/index.tsx": $11,
+    "./routes/index.tsx": $10,
+    "./routes/indicators.tsx": $11,
     "./routes/mouvement/[slug].tsx": $12,
     "./routes/mouvements.tsx": $13,
   },

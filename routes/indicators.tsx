@@ -98,8 +98,8 @@ export default function Home(
 
   return (
     <DefaultLayout
-      title="Urarts - Statistiques"
-      desc="Statistiques"
+      title="Urarts - Indicateurs"
+      desc="Indicateurs pour Urarts"
     >
       <div
         class={tw`flex flex-col min-h-screen ${
@@ -116,7 +116,7 @@ export default function Home(
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
             <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
-              Statistiques
+              Indicateurs
             </h1>
             <div
               class={tw`charts flex items-center justify-evenly mx-auto max-w-xl`}

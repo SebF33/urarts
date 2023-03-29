@@ -9,7 +9,7 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 ## [2023-03-26]
 
 ### Nouveautés
-- Ajout d'une page de statistiques.
+- Ajout d'une page d'indicateurs.
 
 ## [2023-03-14]
 

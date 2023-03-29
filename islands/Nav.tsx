@@ -103,7 +103,7 @@ export default function Nav(
               </svg>
             </a>
             <a
-              href="/charts"
+              href="/indicators"
               class={tw`hover:text-lighterdark`}
             >
               <svg
@@ -223,7 +223,7 @@ export default function Nav(
           </li>
           <li>
             <a
-              href="/charts"
+              href="/indicators"
               class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               <svg
