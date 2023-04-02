@@ -1,7 +1,7 @@
 import { ArtCollection } from "@utils/types.tsx";
 import ky from "ky";
 import { tw } from "@twind";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@components/ArtsLayout.tsx";
 
@@ -23,7 +23,7 @@ export default function CollectionSearch(
       });
   }, [searchTerm]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTimeout(() => {
       const target: HTMLElement | null = document.getElementById(`${props.id}`);
       if (target) {
@@ -34,7 +34,7 @@ export default function CollectionSearch(
         });
       }
     }, 600);
-  }, []);
+  }, [props.id]);
 
   return (
     <main class={tw`flex-grow font-brush`}>
