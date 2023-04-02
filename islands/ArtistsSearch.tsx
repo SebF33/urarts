@@ -1,6 +1,6 @@
 import { ArtistRow } from "@utils/types.tsx";
 import ky from "ky";
-import { tw } from "@twind";
+import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
@@ -93,8 +93,19 @@ export default function ArtistsSearch() {
             />
           </button>
           <button
+            onClick={() => setSearchNationality("Belgique")}
+            class={tw`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
+          >
+            <img
+              class={tw`w-8 sm:w-10`}
+              src="/flags/belgium.png"
+              alt="Belgique"
+              draggable={draggable}
+            />
+          </button>
+          <button
             onClick={() => setSearchNationality("Allemagne")}
-            class={tw`absolute flex items-center -bottom-16 left-48 sm:top-32 sm:left-56 focus:outline-none`}
+            class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
           >
             <img
               class={tw`w-8 sm:w-10`}
@@ -105,7 +116,13 @@ export default function ArtistsSearch() {
           </button>
           <button
             onClick={() => setSearchNationality("Pologne")}
-            class={tw`absolute flex items-center -bottom-24 right-14 sm:top-36 sm:left-44 focus:outline-none`}
+            class={tw`absolute flex items-center right-24 sm:top-36 sm:left-44 focus:outline-none ${
+              css(
+                {
+                  "bottom": "calc(-6.6rem)",
+                },
+              )
+            }`}
           >
             <img
               class={tw`w-8 sm:w-10`}
