@@ -2,9 +2,13 @@ import { ArtCollection } from "@utils/types.tsx";
 import { tw } from "@twind";
 
 type Arts = Array<ArtCollection>;
+interface ArtsLayoutProps {
+  arts: Arts;
+  font?: string;
+}
 
 export default function ArtsLayout(
-  props: { arts: Arts; font?: string },
+  props: ArtsLayoutProps,
 ) {
   return (
     <div
