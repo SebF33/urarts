@@ -1,6 +1,5 @@
 import { Db } from "@utils/db.ts";
 import { HandlerContext } from "$fresh/server.ts";
-import { sql } from "kysely";
 
 export const handler = async (
   req: Request,
@@ -33,7 +32,7 @@ export const handler = async (
     )
     .where("nationality", "like", "%" + nationalityFilter + "%")
     .where("slug", "!=", "mimi")
-    .orderBy(sql`coalesce(first_name, last_name)`)
+    .orderBy("last_name")
     .execute();
 
   return Promise.resolve(
