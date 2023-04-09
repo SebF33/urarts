@@ -9,5 +9,6 @@ TO_DO_LIST.md
 /static/flags
 /static/fonts
 /static/signs
+/static/symbols
 /utils/db_migration.ts
 /utils/quotes.ts
