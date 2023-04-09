@@ -289,8 +289,22 @@ html {
     border-image: url(../brush-input-box.png) 27 round;
 }
 
-/* SVG */
+/* Ombre pour SVG */
 .icon-svg,
 #PaintPalette {
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+/* Transition d'opacité */
+.fade {
+    opacity: 1;
+    transition: opacity 400ms;
+}
+
+.fade-enter-active {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
 }
