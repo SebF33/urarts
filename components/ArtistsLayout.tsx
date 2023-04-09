@@ -1,11 +1,20 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { css, tw } from "@twind";
+import { h } from "preact";
 
 type Artists = Array<ArtistRow>;
 
 export default function ArtistsLayout(
   props: { artists: Artists; grid: string },
 ) {
+  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const href = (event.currentTarget as HTMLAnchorElement).href;
+    setTimeout(() => {
+      window.location.href = href;
+    }, 200);
+  }
+
   return (
     <div class={tw`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
       {props.artists &&
@@ -77,6 +86,7 @@ export default function ArtistsLayout(
                 >
                   <a
                     href={"/art/" + p.slug}
+                    onClick={handleClick}
                     class={tw`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
                       css(
                         {
