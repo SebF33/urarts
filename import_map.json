@@ -11,11 +11,11 @@
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
     "chartjs": "https://esm.sh/chart.js@4.2.1",
     "ky": "https://esm.sh/ky@v0.31.3",
-    "kysely": "https://esm.sh/kysely@0.21.3",
+    "kysely": "https://esm.sh/kysely@0.24.2",
     "preact": "https://esm.sh/preact@10.11.0",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
     "preact/": "https://esm.sh/preact@10.11.0/",
-    "sqlite": "https://deno.land/x/sqlite@v3.4.0/mod.ts",
+    "sqlite": "https://deno.land/x/sqlite@v3.7.0/mod.ts",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/"
   }
