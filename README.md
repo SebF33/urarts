@@ -31,7 +31,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 - [Fresh](https://fresh.deno.dev/docs/introduction)
 - [Trex](https://github.com/crewdevio/Trex)
 - [SQLite](https://github.com/dyedgreen/deno-sqlite)
-- [Kysely](https://koskimas.github.io/kysely)
+- [Kysely](https://kysely-org.github.io/kysely)
 - [Ky](https://github.com/sindresorhus/ky)
 - [Twind](https://twind.style/installation)
 - [Everblush](https://github.com/Everblush/everblush)
