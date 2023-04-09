@@ -8,10 +8,10 @@ export const handler = async (
   const url = new URL(req.url);
 
   let query = url.searchParams.get("name") || "";
-  const nameFilter = query.length ? encodeURIComponent(query) : "";
+  const nameFilter = query.length ? query : "";
 
   query = url.searchParams.get("nationality") || "";
-  const nationalityFilter = query.length ? encodeURIComponent(query) : "";
+  const nationalityFilter = query.length ? query : "";
 
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")

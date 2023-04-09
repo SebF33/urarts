@@ -9,7 +9,7 @@ export const handler = async (
   const url = new URL(req.url);
 
   let query = url.searchParams.get("name") || "";
-  const nameFilter = query.length ? encodeURIComponent(query) : "";
+  const nameFilter = query.length ? query : "";
 
   query = url.searchParams.get("slug") || "";
   const slugFilter = query.length ? encodeURIComponent(query) : "";

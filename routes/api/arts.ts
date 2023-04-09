@@ -7,7 +7,7 @@ export const handler = async (
 ): Promise<Response> => {
   const url = new URL(req.url);
   const query = url.searchParams.get("name") || "";
-  const filter = query.length ? encodeURIComponent(query) : "";
+  const filter = query.length ? query : "";
 
   const db = Db.getInstance();
   const results = await db.selectFrom("art")
