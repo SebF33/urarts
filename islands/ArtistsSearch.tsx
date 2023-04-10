@@ -43,13 +43,13 @@ export default function ArtistsSearch() {
       if (showFlags2 === false) setShowFlags2(!showFlags2);
       setTimeout(() => {
         setFlags(flags + 1);
-      }, 400);
+      }, 280);
     } else {
       setShowFlags2(!showFlags2);
       setShowFlags1(!showFlags1);
       setTimeout(() => {
         setFlags(flags + 1);
-      }, 400);
+      }, 280);
     }
     link.style.pointerEvents = "";
   };

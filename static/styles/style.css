@@ -20,6 +20,10 @@
 }
 
 /* Cacher la scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
 html {
     scrollbar-width: none;
 }
@@ -298,7 +302,7 @@ html {
 /* Transition d'opacité */
 .fade {
     opacity: 1;
-    transition: opacity 400ms;
+    transition: opacity 280ms;
 }
 
 .fade-enter-active {
