@@ -33,6 +33,7 @@ export const handler = async (
     .where("nationality", "like", "%" + nationalityFilter + "%")
     .where("slug", "!=", "mimi")
     .orderBy("last_name")
+    .orderBy("first_name")
     .execute();
 
   return Promise.resolve(
