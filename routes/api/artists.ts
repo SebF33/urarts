@@ -12,6 +12,9 @@ export const handler = async (
 
   query = url.searchParams.get("nationality") || "";
   const nationalityFilter = query.length ? query : "";
+  let isCountry = false;
+  let isWorld = false;
+  nationalityFilter === "" ? isWorld = true : isCountry = true;
 
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")
@@ -30,7 +33,8 @@ export const handler = async (
         .orWhere("first_name", "like", "%" + nameFilter + "%")
         .orWhere("last_name", "like", "%" + nameFilter + "%")
     )
-    .where("nationality", "like", "%" + nationalityFilter + "%")
+    .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
+    .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
     .where("slug", "!=", "mimi")
     .orderBy("last_name")
     .orderBy("first_name")

@@ -319,6 +319,20 @@ export default function ArtistsSearch() {
                 </button>
                 <button
                   onClick={() => {
+                    setSearchNationality("Russie");
+                  }}
+                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses2}
+                    src="/flags/russia.png"
+                    alt="Russie"
+                    title="Russie"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
                     setSearchNationality("Royaume-Uni");
                   }}
                   class={tw`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
