@@ -33,6 +33,7 @@ interface ArtistTable {
   nationality: string;
   avatar_url?: string;
   signature: string | null;
+  quote: string | null;
   color: string;
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;

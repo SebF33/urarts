@@ -3,7 +3,6 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { quotes } from "@utils/quotes.ts";
 import { sql } from "kysely";
 
 import ArtistsLayout from "@components/ArtistsLayout.tsx";
@@ -12,28 +11,29 @@ import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
+type ArtistQuote = {
+  first_name: string | null;
+  last_name: string;
+  signature: string | null;
+  quote: string | null;
+};
 type Artists = Array<ArtistRow>;
 
-export const handler: Handlers<{
-  artists: Artists;
-  color: string;
-  grid: string;
-  quote: string;
-  pathname: string;
-}> = {
+export const handler: Handlers<{}> = {
   async GET(req, ctx) {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
     const db = Db.getInstance();
-    const results = await db.selectFrom("artist")
+
+    const artistQuery = await db.selectFrom("artist")
       .selectAll()
       .where("slug", "!=", "mimi")
       .orderBy(sql`random()`)
       .limit(4)
       .execute();
 
-    const artists = results.map((p) => ({
+    const artists = artistQuery.map((p) => ({
       id: p.id,
       first_name: p.first_name,
       last_name: p.last_name,
@@ -41,6 +41,13 @@ export const handler: Handlers<{
       signature: p.signature,
       slug: p.slug,
     }));
+
+    const artistQuote = await db.selectFrom("artist")
+      .select(["first_name", "last_name", "signature", "quote"])
+      .where("quote", "is not", null)
+      .where("slug", "!=", "mimi")
+      .orderBy(sql`random()`)
+      .executeTakeFirst();
 
     const randomColorsIndex = Math.floor(Math.random() * 8);
     const colors = [
@@ -58,23 +65,20 @@ export const handler: Handlers<{
     const grid =
       "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    const randomQuotesIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomQuotesIndex];
-
-    return ctx.render({ artists, color, grid, quote, pathname });
+    return ctx.render({ artistQuote, artists, color, grid, pathname });
   },
 };
 
 export default function Home(
   props: PageProps<{
+    artistQuote: ArtistQuote;
     artists: Artists;
     color: string;
     grid: string;
-    quote: string;
     pathname: string;
   }>,
 ) {
-  const { artists, color, grid, quote, pathname } = props.data;
+  const { artistQuote, artists, color, grid, pathname } = props.data;
 
   return (
     <DefaultLayout
@@ -106,7 +110,22 @@ export default function Home(
               )
             }`}
           >
-            <p class={tw`text-center text-xl font-bold mx-2`}>{quote}</p>
+            <p class={tw`text-center text-xl font-bold w-5/6 md:w-1/2 mx-auto`}>
+              “{artistQuote.quote}”<br></br>—{artistQuote.first_name}{" "}
+              {artistQuote.last_name}
+            </p>
+            {artistQuote.signature &&
+              (
+                <div
+                  class={tw`flex justify-end w-5/6 md:w-1/3 max-h-9 mx-auto`}
+                >
+                  <img
+                    class={tw`max-w-[100px]`}
+                    src={artistQuote.signature}
+                    alt={artistQuote.signature}
+                  />
+                </div>
+              )}
           </div>
         </main>
         <WaterDrop color={color} />
