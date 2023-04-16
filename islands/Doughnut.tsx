@@ -55,7 +55,7 @@ export default function Doughnut(
               `${colorScheme[currentColorScheme].green}`,
             ],
             borderColor: `${colorScheme[currentColorScheme].white}`,
-            hoverOffset: 12,
+            hoverOffset: 1,
           } as ChartDataset,
         ],
       },

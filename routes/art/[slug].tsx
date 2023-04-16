@@ -10,26 +10,22 @@ import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 
-export const handler: Handlers<{
-  artist: string | null;
-  color: string | null;
-  desc: string | null;
-  mySlug: string | null;
-  query: string | null;
-  title: string | null;
-}> = {
+export const handler: Handlers<{}> = {
   async GET(req, ctx) {
     const { slug } = ctx.params;
     const url = new URL(req.url);
 
     const db = Db.getInstance();
 
-    const result = await db.selectFrom("artist").select([
-      "first_name",
-      "last_name",
-      "color",
-      "slug",
-    ]).where("slug", "=", slug).executeTakeFirst();
+    const result = await db.selectFrom("artist")
+      .select([
+        "first_name",
+        "last_name",
+        "color",
+        "slug",
+      ])
+      .where("slug", "=", slug)
+      .executeTakeFirst();
 
     let artist: string | null = null;
     let color: string | null = null;
@@ -102,11 +98,13 @@ export default function Arts(
                     )
                   }`}
                 >
-                  <p class={tw`text-center text-xl font-bold`}>
+                  <p
+                    class={tw`w-5/6 md:w-2/5 text-center text-xl font-bold mx-auto`}
+                  >
                     “Je dédie cette page aux plus belles œuvres de mon artiste
                     préférée, celle qui au-delà de son talent exceptionnel
-                    m’inspire encore aujourd’hui : ma merveilleuse Maman.”
-                    —Sébastien
+                    m’inspire encore aujourd’hui : ma merveilleuse Maman.”<br>
+                    </br>— Sébastien
                   </p>
                 </div>
               )}
