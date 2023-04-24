@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-04-24]
+
+### Nouveautés
+- Ajout des infobulles.
+
 ## [2023-03-26]
 
 ### Nouveautés
@@ -23,8 +28,8 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 ## [2023-02-21]
 
-### Nouveautés
-- Modification de la barre de navigation (responsive).
+### Modifications
+- Amélioration de la barre de navigation (responsive).
 
 ## [2023-02-05]
 
