@@ -28,7 +28,56 @@ html {
     scrollbar-width: none;
 }
 
-/* Cadres */
+/* Cadre des artistes */
+.artist-frame {
+    overflow: hidden;
+}
+
+.artist-side {
+    position: absolute;
+    top: 12px;
+    left: 84.7%;
+    height: 100%;
+    list-style-type: none;
+}
+
+.artist-side a {
+    display: flex;
+    align-items: center;
+    margin: 12px;
+    transform: translateX(300%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.artist-side a:nth-child(1) {
+    margin-left: -6px;
+}
+
+.artist-frame:hover .artist-side a {
+    transform: translateX(0);
+}
+
+.artist-frame:hover .artist-side a:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.artist-frame a,
+.artist-frame a img {
+    will-change: transform
+}
+
+@media (pointer: coarse) {
+    .artist-side a {
+        transform: translateX(0);
+    }
+}
+
+.tippy-box[data-theme~='urarts'] {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+}
+
+/* Cadres des œuvres */
 .art-frame {
     box-sizing: border-box;
     display: inline-block;

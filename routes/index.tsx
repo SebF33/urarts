@@ -5,7 +5,7 @@ import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { sql } from "kysely";
 
-import ArtistsLayout from "@components/ArtistsLayout.tsx";
+import ArtistsLayout from "@islands/ArtistsLayout.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/Footer.tsx";
 import Nav from "@islands/Nav.tsx";
@@ -37,8 +37,11 @@ export const handler: Handlers<{}> = {
       id: p.id,
       first_name: p.first_name,
       last_name: p.last_name,
+      nationality: p.nationality,
       avatar_url: p.avatar_url,
       signature: p.signature,
+      site_web: p.site_web,
+      info: p.info,
       slug: p.slug,
     }));
 
@@ -86,7 +89,7 @@ export default function Home(
       desc="Quelles sont les plus belles œuvres d'art au monde ?"
     >
       <div
-        class={tw`flex flex-col min-h-screen ${
+        class={tw`flex flex-col min-h-screen font-brush ${
           css({
             background: `url(/bg)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
@@ -102,7 +105,7 @@ export default function Home(
         >
           <ArtistsLayout artists={artists} grid={grid} />
           <div
-            class={tw`font-brush mx-auto ${
+            class={tw`mx-auto ${
               css(
                 {
                   "color": `${colorScheme[currentColorScheme].lighterdark}`,

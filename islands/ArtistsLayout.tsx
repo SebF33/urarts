@@ -1,6 +1,7 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { css, tw } from "@twind";
 import { h } from "preact";
+import tippy from "tippyjs";
 
 type Artists = Array<ArtistRow>;
 
@@ -24,7 +25,14 @@ export default function ArtistsLayout(
           >
             {props.artists.map((p) => (
               <div
-                class={tw`${
+                ref={(el) =>
+                  tippy(el, {
+                    content: p.info,
+                    interactive: true,
+                    placement: "bottom",
+                    theme: "urarts",
+                  })}
+                class={tw`artist-frame ${
                   css(
                     {
                       "position": "relative",
@@ -123,6 +131,14 @@ export default function ArtistsLayout(
                     />
                   </a>
                 </div>
+                <ul class="artist-side">
+                  <a class={tw`w-7`}>
+                    <img
+                      src={"/flags/" + p.nationality + ".png"}
+                      alt="flag-symbol"
+                    />
+                  </a>
+                </ul>
               </div>
             ))}
           </div>

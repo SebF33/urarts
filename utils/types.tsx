@@ -32,6 +32,8 @@ export type ArtistRow = {
   nationality: string;
   avatar_url?: string;
   signature: string | null;
+  site_web: string | null;
+  info: string | null;
   slug: string;
 };
 

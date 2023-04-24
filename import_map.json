@@ -16,6 +16,7 @@
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
     "preact/": "https://esm.sh/preact@10.11.0/",
     "sqlite": "https://deno.land/x/sqlite@v3.7.0/mod.ts",
+    "tippyjs": "https://cdn.skypack.dev/tippy.js@6.3.7/dist/tippy.esm.js",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/"
   }

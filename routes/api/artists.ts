@@ -26,6 +26,8 @@ export const handler = async (
       "nationality",
       "avatar_url",
       "signature",
+      "site_web",
+      "info",
       "slug",
     ])
     .where((qb) =>

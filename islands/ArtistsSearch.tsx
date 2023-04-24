@@ -4,7 +4,7 @@ import { css, tw } from "@twind";
 import { Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
-import ArtistsLayout from "@components/ArtistsLayout.tsx";
+import ArtistsLayout from "@islands/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 
 export default function ArtistsSearch() {
@@ -93,7 +93,7 @@ export default function ArtistsSearch() {
               title="Monde"
               draggable={draggable}
             />
-          </button>{" "}
+          </button>
           {flags === 1 &&
             (
               <Fragment>
@@ -105,7 +105,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/france.png"
+                    src="/flags/France.png"
                     alt="France"
                     title="France"
                     draggable={draggable}
@@ -119,7 +119,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/spain.png"
+                    src="/flags/Espagne.png"
                     alt="Espagne"
                     title="Espagne"
                     draggable={draggable}
@@ -133,7 +133,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/italy.png"
+                    src="/flags/Italie.png"
                     alt="Italie"
                     title="Italie"
                     draggable={draggable}
@@ -147,7 +147,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/netherlands.png"
+                    src="/flags/Pays-Bas.png"
                     alt="Pays-Bas"
                     title="Pays-Bas"
                     draggable={draggable}
@@ -161,7 +161,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/belgium.png"
+                    src="/flags/Belgique.png"
                     alt="Belgique"
                     title="Belgique"
                     draggable={draggable}
@@ -175,7 +175,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/poland.png"
+                    src="/flags/Pologne.png"
                     alt="Pologne"
                     title="Pologne"
                     draggable={draggable}
@@ -199,7 +199,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/austria.png"
+                    src="/flags/Autriche.png"
                     alt="Autriche"
                     title="Autriche"
                     draggable={draggable}
@@ -222,7 +222,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/germany.png"
+                    src="/flags/Allemagne.png"
                     alt="Allemagne"
                     title="Allemagne"
                     draggable={draggable}
@@ -236,7 +236,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/denmark.png"
+                    src="/flags/Danemark.png"
                     alt="Danemark"
                     title="Danemark"
                     draggable={draggable}
@@ -250,7 +250,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/norway.png"
+                    src="/flags/Norvège.png"
                     alt="Norvège"
                     title="Norvège"
                     draggable={draggable}
@@ -269,7 +269,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/vietnam.png"
+                    src="/flags/Vietnam.png"
                     alt="Vietnam"
                     title="Vietnam"
                     draggable={draggable}
@@ -283,7 +283,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/japan.png"
+                    src="/flags/Japon.png"
                     alt="Japon"
                     title="Japon"
                     draggable={draggable}
@@ -297,7 +297,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/china.png"
+                    src="/flags/Chine.png"
                     alt="Chine"
                     title="Chine"
                     draggable={draggable}
@@ -311,7 +311,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/belarus.png"
+                    src="/flags/Biélorussie.png"
                     alt="Biélorussie"
                     title="Biélorussie"
                     draggable={draggable}
@@ -325,7 +325,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/russia.png"
+                    src="/flags/Russie.png"
                     alt="Russie"
                     title="Russie"
                     draggable={draggable}
@@ -348,7 +348,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/united-kingdom.png"
+                    src="/flags/Royaume-Uni.png"
                     alt="Royaume-Uni"
                     title="Royaume-Uni"
                     draggable={draggable}
@@ -362,7 +362,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/mexico.png"
+                    src="/flags/Mexique.png"
                     alt="Mexique"
                     title="Mexique"
                     draggable={draggable}
@@ -376,7 +376,7 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/usa.png"
+                    src="/flags/États-Unis.png"
                     alt="États-Unis"
                     title="États-Unis"
                     draggable={draggable}
@@ -390,8 +390,8 @@ export default function ArtistsSearch() {
           >
             <img
               class={moreClasses}
-              src="/symbols/more.png"
-              alt="More"
+              src="/symbols/add.png"
+              alt="add-symbol"
               draggable={draggable}
             />
           </button>

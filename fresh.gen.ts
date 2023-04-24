@@ -17,15 +17,16 @@ import * as $10 from "./routes/index.tsx";
 import * as $11 from "./routes/indicators.tsx";
 import * as $12 from "./routes/mouvement/[slug].tsx";
 import * as $13 from "./routes/mouvements.tsx";
-import * as $$0 from "./islands/ArtistsSearch.tsx";
-import * as $$1 from "./islands/ArtsSearch.tsx";
-import * as $$2 from "./islands/CollectionSearch.tsx";
-import * as $$3 from "./islands/Counter.tsx";
-import * as $$4 from "./islands/Doughnut.tsx";
-import * as $$5 from "./islands/Footer.tsx";
-import * as $$6 from "./islands/Nav.tsx";
-import * as $$7 from "./islands/PolarArea.tsx";
-import * as $$8 from "./islands/WaterDrop.tsx";
+import * as $$0 from "./islands/ArtistsLayout.tsx";
+import * as $$1 from "./islands/ArtistsSearch.tsx";
+import * as $$2 from "./islands/ArtsSearch.tsx";
+import * as $$3 from "./islands/CollectionSearch.tsx";
+import * as $$4 from "./islands/Counter.tsx";
+import * as $$5 from "./islands/Doughnut.tsx";
+import * as $$6 from "./islands/Footer.tsx";
+import * as $$7 from "./islands/Nav.tsx";
+import * as $$8 from "./islands/PolarArea.tsx";
+import * as $$9 from "./islands/WaterDrop.tsx";
 
 const manifest = {
   routes: {
@@ -45,15 +46,16 @@ const manifest = {
     "./routes/mouvements.tsx": $13,
   },
   islands: {
-    "./islands/ArtistsSearch.tsx": $$0,
-    "./islands/ArtsSearch.tsx": $$1,
-    "./islands/CollectionSearch.tsx": $$2,
-    "./islands/Counter.tsx": $$3,
-    "./islands/Doughnut.tsx": $$4,
-    "./islands/Footer.tsx": $$5,
-    "./islands/Nav.tsx": $$6,
-    "./islands/PolarArea.tsx": $$7,
-    "./islands/WaterDrop.tsx": $$8,
+    "./islands/ArtistsLayout.tsx": $$0,
+    "./islands/ArtistsSearch.tsx": $$1,
+    "./islands/ArtsSearch.tsx": $$2,
+    "./islands/CollectionSearch.tsx": $$3,
+    "./islands/Counter.tsx": $$4,
+    "./islands/Doughnut.tsx": $$5,
+    "./islands/Footer.tsx": $$6,
+    "./islands/Nav.tsx": $$7,
+    "./islands/PolarArea.tsx": $$8,
+    "./islands/WaterDrop.tsx": $$9,
   },
   baseUrl: import.meta.url,
   config,

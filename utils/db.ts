@@ -35,6 +35,8 @@ interface ArtistTable {
   signature: string | null;
   quote: string | null;
   color: string;
+  site_web: string | null;
+  info: string | null;
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
