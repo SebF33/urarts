@@ -1,4 +1,5 @@
 import { ArtCollection } from "@utils/types.tsx";
+import tippy from "tippyjs";
 import { tw } from "@twind";
 
 type Arts = Array<ArtCollection>;
@@ -16,7 +17,10 @@ export default function ArtsLayout(
     >
       {props.arts &&
         props.arts.map((p) => (
-          <div id={p.id} class={`art-wrap-${p.polyptych}`}>
+          <div
+            id={p.id}
+            class={`art-wrap-${p.polyptych}`}
+          >
             {p.polyptych > 3 &&
               (
                 <div
@@ -40,6 +44,13 @@ export default function ArtsLayout(
                 </div>
               )}
             <div
+              ref={(el) =>
+                tippy(el, {
+                  content: p.info,
+                  interactive: true,
+                  placement: "bottom",
+                  theme: "urarts",
+                })}
               class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
             >
               <p

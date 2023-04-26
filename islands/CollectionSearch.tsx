@@ -3,7 +3,7 @@ import ky from "ky";
 import { tw } from "@twind";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
-import ArtsLayout from "@components/ArtsLayout.tsx";
+import ArtsLayout from "@islands/ArtsLayout.tsx";
 
 type Arts = Array<ArtCollection>;
 

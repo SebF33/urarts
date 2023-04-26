@@ -37,6 +37,7 @@ export const handler = async (
         "url_3",
         "url_4",
         "url_5",
+        "art.info as info",
       ])
       .where("artist.slug", "=", slugFilter)
       .where("art.name", "like", "%" + nameFilter + "%")
@@ -57,6 +58,7 @@ export const handler = async (
         "url_3",
         "url_4",
         "url_5",
+        "art.info as info",
       ])
       .where("movement.slug", "=", slugFilter)
       .where("art.name", "like", "%" + nameFilter + "%")

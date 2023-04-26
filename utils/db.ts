@@ -22,6 +22,7 @@ interface ArtTable {
   url_3?: string; // Panneau à droite du central
   url_4?: string; // Panneau à l'extrême gauche du central
   url_5?: string; // Panneau à l'extrême droite du central
+  info: string | null;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

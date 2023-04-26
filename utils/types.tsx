@@ -11,6 +11,7 @@ export type ArtCollection = {
   url_3?: string;
   url_4?: string;
   url_5?: string;
+  info: string | null;
 };
 
 export type ArtRow = {

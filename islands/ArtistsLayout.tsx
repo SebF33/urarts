@@ -1,13 +1,47 @@
+import { Any } from "any";
 import { ArtistRow } from "@utils/types.tsx";
 import { css, tw } from "@twind";
 import { h } from "preact";
 import tippy from "tippyjs";
+import { useEffect, useState } from "preact/hooks";
 
 type Artists = Array<ArtistRow>;
 
 export default function ArtistsLayout(
   props: { artists: Artists; grid: string },
 ) {
+  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+
+  useEffect(() => {
+    tippyInstances.forEach((instance) => {
+      instance.destroy();
+    });
+    setTippyInstances([]);
+
+    props.artists.forEach((p) => {
+      const el = document.querySelector(`[data-artist-id="${p.id}"]`);
+
+      if (el) {
+        tippy(el, {
+          allowHTML: true,
+          content:
+            `<strong>${p.last_name}</strong><br>Nationalité : ${p.nationality}<br>${p.info}`,
+          interactive: true,
+          placement: "bottom",
+          theme: "urarts",
+          onCreate(instance: Any) {
+            setTippyInstances((prevInstances) => [...prevInstances, instance]);
+          },
+          onDestroy(instance: Any) {
+            setTippyInstances((prevInstances) =>
+              prevInstances.filter((i) => i !== instance)
+            );
+          },
+        });
+      }
+    });
+  }, [props.artists]);
+
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
@@ -25,13 +59,7 @@ export default function ArtistsLayout(
           >
             {props.artists.map((p) => (
               <div
-                ref={(el) =>
-                  tippy(el, {
-                    content: p.info,
-                    interactive: true,
-                    placement: "bottom",
-                    theme: "urarts",
-                  })}
+                data-artist-id={p.id}
                 class={tw`artist-frame ${
                   css(
                     {
