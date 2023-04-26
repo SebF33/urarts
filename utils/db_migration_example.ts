@@ -10,9 +10,17 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("first_name", "text")
     .addColumn("last_name", "text", (col) => col.notNull())
     .addColumn("gender", "text", (col) => col.notNull())
+    .addColumn("nationality", "text", (col) => col.notNull())
     .addColumn("avatar_url", "text")
     .addColumn("signature", "text")
+    .addColumn("quote", "text")
     .addColumn("color", "text", (col) => col.defaultTo(sql`"#141b1e"`))
+    .addColumn("site_web", "text")
+    .addColumn(
+      "info",
+      "text",
+      (col) => col.defaultTo(sql`"Description à faire."`),
+    )
     .addColumn("slug", "text", (col) => col.notNull())
     .addColumn(
       "modified_at",
@@ -36,6 +44,11 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("url_3", "text")
     .addColumn("url_4", "text")
     .addColumn("url_5", "text")
+    .addColumn(
+      "info",
+      "text",
+      (col) => col.defaultTo(sql`"Description à faire."`),
+    )
     .addColumn(
       "modified_at",
       "timestamp",
@@ -86,18 +99,26 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     )
     .execute();
 
+  //1
   await db.insertInto("movement").values({
     name: "Art déco",
     slug: "artdeco",
   }).execute();
 
+  // Tamara de Lempicka
   await db.insertInto("artist").values({
     first_name: "Tamara",
     last_name: "de Lempicka",
     gender: "Femme",
-    avatar_url: "/arts/de lempicka/Tamara dans la Bugatti verte.jpg",
+    nationality: "Pologne",
+    avatar_url: "/arts/de lempicka/Tamara dans une Bugatti verte.jpg",
     signature: "/signs/de lempicka.png",
+    quote:
+      "Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.",
     color: "#318b8c",
+    site_web: "https://www.delempicka.org",
+    info:
+      "Elle occupe une place à part dans l'art du XXe siècle malgré une production modeste, ses œuvres évoquent et reflètent le style et la mode des années folles de l'entre-deux-guerres. Avec une stylisation néo-cubiste, ses œuvres, principalement des portraits, se caractérisent par un modelé accentué, des couleurs vives mais dans une gamme restreinte, mises en valeur par des fonds gris ou noirs.",
     slug: "delempicka",
   }).execute();
   await db.insertInto("art").values({
