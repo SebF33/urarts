@@ -1,6 +1,8 @@
+import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
 import tippy from "tippyjs";
 import { tw } from "@twind";
+import { useEffect, useState } from "preact/hooks";
 
 type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
@@ -11,6 +13,37 @@ interface ArtsLayoutProps {
 export default function ArtsLayout(
   props: ArtsLayoutProps,
 ) {
+  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+
+  useEffect(() => {
+    tippyInstances.forEach((instance) => {
+      instance.destroy();
+    });
+    setTippyInstances([]);
+
+    props.arts.forEach((p) => {
+      const el = document.querySelector(`[data-artist-id="${p.id}"]`);
+
+      if (el) {
+        tippy(el, {
+          allowHTML: true,
+          content: `<strong>${p.name}</strong><br>${p.info}`,
+          interactive: true,
+          placement: "bottom",
+          theme: "urarts",
+          onCreate(instance: Any) {
+            setTippyInstances((prevInstances) => [...prevInstances, instance]);
+          },
+          onDestroy(instance: Any) {
+            setTippyInstances((prevInstances) =>
+              prevInstances.filter((i) => i !== instance)
+            );
+          },
+        });
+      }
+    });
+  }, [props.arts]);
+
   return (
     <div
       class={tw`row flex flex-wrap mx-auto`}
@@ -44,13 +77,7 @@ export default function ArtsLayout(
                 </div>
               )}
             <div
-              ref={(el) =>
-                tippy(el, {
-                  content: p.info,
-                  interactive: true,
-                  placement: "bottom",
-                  theme: "urarts",
-                })}
+              data-artist-id={p.id}
               class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
             >
               <p
