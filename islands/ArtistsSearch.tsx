@@ -88,7 +88,7 @@ export default function ArtistsSearch() {
           >
             <img
               class={worldFlagClasses}
-              src="/flags/world.png"
+              src="/flags/Monde.png"
               alt="Monde"
               title="Monde"
               draggable={draggable}

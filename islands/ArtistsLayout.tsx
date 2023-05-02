@@ -80,7 +80,7 @@ export default function ArtistsLayout(
                         "bottom": "3.0303%",
                         "left": "10.5%",
                         "right": "2.5%",
-                        "font-size": "calc(0.8em + 0.2vw)",
+                        "font-size": "calc(0.8em + 0.16vw)",
                       },
                     )
                   }`}
@@ -159,7 +159,7 @@ export default function ArtistsLayout(
                     />
                   </a>
                 </div>
-                <ul class="artist-side">
+                <ul class={tw`artist-side z-20`}>
                   <a class={tw`w-7`}>
                     <img
                       src={"/flags/" + p.nationality + ".png"}
