@@ -1,6 +1,8 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 
+import { WomanIcon } from "@components/Assets.tsx";
+
 export default function Nav(
   props: { pathname?: string },
 ) {
@@ -86,6 +88,12 @@ export default function Nav(
             </div>
           </div>
           <div class={tw`hidden md:flex items-center space-x-3 `}>
+            <a
+              href="/women"
+              class={tw`hover:text-lighterdark`}
+            >
+              <WomanIcon />
+            </a>
             <a
               href="/art/mimi"
               class={tw`hover:text-lighterdark`}
@@ -201,6 +209,14 @@ export default function Nav(
               target="_blank"
             >
               API
+            </a>
+          </li>
+          <li>
+            <a
+              href="/women"
+              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+            >
+              <WomanIcon />
             </a>
           </li>
           <li>

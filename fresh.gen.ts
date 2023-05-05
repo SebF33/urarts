@@ -17,6 +17,7 @@ import * as $10 from "./routes/index.tsx";
 import * as $11 from "./routes/indicators.tsx";
 import * as $12 from "./routes/mouvement/[slug].tsx";
 import * as $13 from "./routes/mouvements.tsx";
+import * as $14 from "./routes/women.tsx";
 import * as $$0 from "./islands/ArtistsLayout.tsx";
 import * as $$1 from "./islands/ArtistsSearch.tsx";
 import * as $$2 from "./islands/ArtsLayout.tsx";
@@ -28,6 +29,7 @@ import * as $$7 from "./islands/Footer.tsx";
 import * as $$8 from "./islands/Nav.tsx";
 import * as $$9 from "./islands/PolarArea.tsx";
 import * as $$10 from "./islands/WaterDrop.tsx";
+import * as $$11 from "./islands/WomenSearch.tsx";
 
 const manifest = {
   routes: {
@@ -45,6 +47,7 @@ const manifest = {
     "./routes/indicators.tsx": $11,
     "./routes/mouvement/[slug].tsx": $12,
     "./routes/mouvements.tsx": $13,
+    "./routes/women.tsx": $14,
   },
   islands: {
     "./islands/ArtistsLayout.tsx": $$0,
@@ -58,6 +61,7 @@ const manifest = {
     "./islands/Nav.tsx": $$8,
     "./islands/PolarArea.tsx": $$9,
     "./islands/WaterDrop.tsx": $$10,
+    "./islands/WomenSearch.tsx": $$11,
   },
   baseUrl: import.meta.url,
   config,

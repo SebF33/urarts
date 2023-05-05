@@ -7,7 +7,12 @@ export const handler = async (
 ): Promise<Response> => {
   const url = new URL(req.url);
 
-  let query = url.searchParams.get("name") || "";
+  let query = url.searchParams.get("gender") || "";
+  const genderFilter = query.length ? query : "";
+  let hasGender;
+  genderFilter === "" ? hasGender = false : hasGender = true;
+
+  query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
 
   query = url.searchParams.get("nationality") || "";
@@ -35,6 +40,7 @@ export const handler = async (
         .orWhere("first_name", "like", "%" + nameFilter + "%")
         .orWhere("last_name", "like", "%" + nameFilter + "%")
     )
+    .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
     .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
     .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
     .where("slug", "!=", "mimi")
