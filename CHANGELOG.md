@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-05-06]
+
+### Nouveautés
+- Ajout d'une page regroupant les femmes artistes.
+
 ## [2023-04-24]
 
 ### Nouveautés
