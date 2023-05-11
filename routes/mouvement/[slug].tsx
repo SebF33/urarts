@@ -1,4 +1,3 @@
-import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
