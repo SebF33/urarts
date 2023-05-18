@@ -20,16 +20,27 @@ export const handler: Handlers<{
     const pathname = url.pathname;
 
     const db = Db.getInstance();
-    const results = await db.selectFrom("movement")
-      .selectAll()
+    const { count } = db.fn;
+
+    const results = await db
+      .selectFrom("movement")
+      .innerJoin("art", "art.movement_id", "movement.id")
+      .select([
+        "movement.id",
+        "movement.name",
+        "movement.slug",
+        count("art.id").as("art_count"),
+      ])
       .where("slug", "!=", "nonclasse")
-      .orderBy("name")
+      .groupBy("movement.id")
+      .orderBy("movement.name")
       .execute();
 
     const movements = results.map((p) => ({
       id: p.id,
       name: p.name,
       slug: p.slug,
+      art_count: String(p.art_count),
     }));
 
     return ctx.render({ movements, pathname });
@@ -78,6 +89,9 @@ export default function Home(
                         >
                           <p class={tw`relative group text-xl`}>
                             <span>{item.name}</span>
+                            <span class={tw`text-lg italic`}>
+                              {" "}({item.art_count} œuvre.s)
+                            </span>
                             <span
                               class={tw`absolute -bottom-1 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}
                             >
