@@ -3,7 +3,7 @@ import ky from "ky";
 import { tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 
-import ArtistsLayout from "@islands/ArtistsLayout.tsx";
+import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { WomanLogo } from "@components/Assets.tsx";
 
 export default function ArtistsSearch() {

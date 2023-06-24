@@ -4,11 +4,11 @@ import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
 import { BrushStroke } from "@components/Assets.tsx";
-import CollectionSearch from "@islands/CollectionSearch.tsx";
+import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import Footer from "@islands/Footer.tsx";
-import Nav from "@islands/Nav.tsx";
-import WaterDrop from "@islands/WaterDrop.tsx";
+import Footer from "@islands/footer/Footer.tsx";
+import Nav from "@islands/header/Nav.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 export const handler: Handlers<{}> = {
   async GET(req, ctx) {

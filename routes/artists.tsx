@@ -2,11 +2,11 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import ArtistsSearch from "@islands/ArtistsSearch.tsx";
+import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import Footer from "@islands/Footer.tsx";
-import Nav from "@islands/Nav.tsx";
-import WaterDrop from "@islands/WaterDrop.tsx";
+import Footer from "@islands/footer/Footer.tsx";
+import Nav from "@islands/header/Nav.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 export const handler: Handlers<{
   pathname: string;

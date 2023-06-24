@@ -5,11 +5,11 @@ import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { sql } from "kysely";
 
-import ArtistsLayout from "@islands/ArtistsLayout.tsx";
+import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import Footer from "@islands/Footer.tsx";
-import Nav from "@islands/Nav.tsx";
-import WaterDrop from "@islands/WaterDrop.tsx";
+import Footer from "@islands/footer/Footer.tsx";
+import Nav from "@islands/header/Nav.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type ArtistQuote = {
   first_name: string | null;

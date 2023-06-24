@@ -5,11 +5,11 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { sql } from "kysely";
 
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import Footer from "@islands/Footer.tsx";
-import Nav from "@islands/Nav.tsx";
-import Doughnut from "@islands/Doughnut.tsx";
-import PolarArea from "@islands/PolarArea.tsx";
-import WaterDrop from "@islands/WaterDrop.tsx";
+import Footer from "@islands/footer/Footer.tsx";
+import Nav from "@islands/header/Nav.tsx";
+import Doughnut from "@islands/chart/Doughnut.tsx";
+import PolarArea from "@islands/chart/PolarArea.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 export const handler: Handlers<{}> = {
   async GET(req, ctx) {
