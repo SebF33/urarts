@@ -2,7 +2,6 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_500.tsx";
 import * as $2 from "./routes/_app.tsx";
@@ -18,18 +17,17 @@ import * as $11 from "./routes/indicators.tsx";
 import * as $12 from "./routes/mouvement/[slug].tsx";
 import * as $13 from "./routes/mouvements.tsx";
 import * as $14 from "./routes/women.tsx";
-import * as $$0 from "./islands/ArtistsLayout.tsx";
-import * as $$1 from "./islands/ArtistsSearch.tsx";
-import * as $$2 from "./islands/ArtsLayout.tsx";
-import * as $$3 from "./islands/ArtsSearch.tsx";
-import * as $$4 from "./islands/CollectionSearch.tsx";
-import * as $$5 from "./islands/Counter.tsx";
-import * as $$6 from "./islands/Doughnut.tsx";
-import * as $$7 from "./islands/Footer.tsx";
-import * as $$8 from "./islands/Nav.tsx";
-import * as $$9 from "./islands/PolarArea.tsx";
-import * as $$10 from "./islands/WaterDrop.tsx";
-import * as $$11 from "./islands/WomenSearch.tsx";
+import * as $$0 from "./islands/chart/Doughnut.tsx";
+import * as $$1 from "./islands/chart/PolarArea.tsx";
+import * as $$2 from "./islands/footer/Footer.tsx";
+import * as $$3 from "./islands/footer/WaterDrop.tsx";
+import * as $$4 from "./islands/header/Nav.tsx";
+import * as $$5 from "./islands/layout/ArtistsLayout.tsx";
+import * as $$6 from "./islands/layout/ArtsLayout.tsx";
+import * as $$7 from "./islands/livesearch/ArtistsSearch.tsx";
+import * as $$8 from "./islands/livesearch/ArtsSearch.tsx";
+import * as $$9 from "./islands/livesearch/CollectionSearch.tsx";
+import * as $$10 from "./islands/livesearch/WomenSearch.tsx";
 
 const manifest = {
   routes: {
@@ -50,21 +48,19 @@ const manifest = {
     "./routes/women.tsx": $14,
   },
   islands: {
-    "./islands/ArtistsLayout.tsx": $$0,
-    "./islands/ArtistsSearch.tsx": $$1,
-    "./islands/ArtsLayout.tsx": $$2,
-    "./islands/ArtsSearch.tsx": $$3,
-    "./islands/CollectionSearch.tsx": $$4,
-    "./islands/Counter.tsx": $$5,
-    "./islands/Doughnut.tsx": $$6,
-    "./islands/Footer.tsx": $$7,
-    "./islands/Nav.tsx": $$8,
-    "./islands/PolarArea.tsx": $$9,
-    "./islands/WaterDrop.tsx": $$10,
-    "./islands/WomenSearch.tsx": $$11,
+    "./islands/chart/Doughnut.tsx": $$0,
+    "./islands/chart/PolarArea.tsx": $$1,
+    "./islands/footer/Footer.tsx": $$2,
+    "./islands/footer/WaterDrop.tsx": $$3,
+    "./islands/header/Nav.tsx": $$4,
+    "./islands/layout/ArtistsLayout.tsx": $$5,
+    "./islands/layout/ArtsLayout.tsx": $$6,
+    "./islands/livesearch/ArtistsSearch.tsx": $$7,
+    "./islands/livesearch/ArtsSearch.tsx": $$8,
+    "./islands/livesearch/CollectionSearch.tsx": $$9,
+    "./islands/livesearch/WomenSearch.tsx": $$10,
   },
   baseUrl: import.meta.url,
-  config,
 };
 
 export default manifest;
