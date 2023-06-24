@@ -1,6 +1,6 @@
 {
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.1.1/",
+    "$fresh/": "https://deno.land/x/fresh@1.2.0/",
     "@/": "./",
     "@components/": "./components/",
     "@islands/": "./islands/",
@@ -10,14 +10,17 @@
     "@utils/": "./utils/",
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
     "chartjs": "https://esm.sh/chart.js@4.2.1",
-    "ky": "https://esm.sh/ky@v0.31.3",
-    "kysely": "https://esm.sh/kysely@0.24.2",
-    "preact": "https://esm.sh/preact@10.11.0",
-    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
-    "preact/": "https://esm.sh/preact@10.11.0/",
+    "ky": "https://esm.sh/ky@v0.33.3",
+    "kysely": "https://esm.sh/kysely@0.25.0",
+    "preact": "https://esm.sh/preact@10.15.1",
+    "preact/debug": "https://esm.sh/preact@10.15.1/debug",
+    "preact/hooks": "https://esm.sh/preact@10.15.1/hooks",
+    "preact/jsx-runtime": "https://esm.sh/preact@10.15.1/jsx-runtime",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.1.0",
     "sqlite": "https://deno.land/x/sqlite@v3.7.0/mod.ts",
     "tippyjs": "https://cdn.skypack.dev/tippy.js@6.3.7/dist/tippy.esm.js",
     "twind": "https://esm.sh/twind@0.16.17",
-    "twind/": "https://esm.sh/twind@0.16.17/"
+    "twind/css": "https://esm.sh/twind@0.16.17/css",
+    "twind/sheets": "https://esm.sh/twind@0.16.17/sheets"
   }
 }
