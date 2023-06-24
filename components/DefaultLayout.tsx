@@ -15,7 +15,7 @@ export default function DefaultLayout(props: {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content={props.desc} />
         <meta key="words" name="keywords" content="arts" />
-        <meta property="og:url" content="http://localhost:8000/" />
+        <meta property="og:url" content="https://urarts.fly.dev/" />
         <meta property="og:site_name" content={props.title} />
         <meta property="og:title" content={props.title} />
         <meta property="og:type" content="website" />
