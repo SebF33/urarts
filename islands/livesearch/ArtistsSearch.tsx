@@ -14,6 +14,7 @@ export default function ArtistsSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showFlags1, setShowFlags1] = useState(true);
   const [showFlags2, setShowFlags2] = useState(true);
+  const [showFlags3, setShowFlags3] = useState(true);
 
   const draggable = false;
   const grid =
@@ -30,6 +31,9 @@ export default function ArtistsSearch() {
   const flagClasses2 = tw`${width8} ${transition} fade ${
     showFlags2 ? "fade-enter-active" : "fade-exit-active"
   }`;
+  const flagClasses3 = tw`${width8} ${transition} fade ${
+    showFlags3 ? "fade-enter-active" : "fade-exit-active"
+  }`;
   const moreClasses = tw`${width6} ${transition}`;
   const worldFlagClasses = tw`${width12} ${transition}`;
 
@@ -41,12 +45,15 @@ export default function ArtistsSearch() {
     const link = event.currentTarget;
     link.style.pointerEvents = "none";
 
-    if (flags === 1 || flags === 3) {
+    if (flags === 1) {
       setShowFlags1((prevShowFlags1) => !prevShowFlags1);
       if (!showFlags2) setShowFlags2(true);
-    } else {
+    } else if (flags === 2) {
       setShowFlags2((prevShowFlags2) => !prevShowFlags2);
       setShowFlags1((prevShowFlags1) => !prevShowFlags1);
+      if (!showFlags3) setShowFlags3(true);
+    } else if (flags === 3) {
+      setShowFlags3((prevShowFlags3) => !prevShowFlags3);
     }
 
     setTimeout(() => {
@@ -56,7 +63,7 @@ export default function ArtistsSearch() {
   };
 
   useEffect(() => {
-    if (flags === 3) {
+    if (flags === 4) {
       setFlags(1);
     }
   }, [flags]);
@@ -128,9 +135,23 @@ export default function ArtistsSearch() {
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Italie");
+                    setSearchNationality("Portugal");
                   }}
                   class={tw`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses1}
+                    src="/flags/Portugal.png"
+                    alt="Portugal"
+                    title="Portugal"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Italie");
+                  }}
+                  class={tw`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
                 >
                   <img
                     class={flagClasses1}
@@ -144,7 +165,7 @@ export default function ArtistsSearch() {
                   onClick={() => {
                     setSearchNationality("Pays-Bas");
                   }}
-                  class={tw`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
+                  class={tw`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
                     class={flagClasses1}
@@ -158,7 +179,7 @@ export default function ArtistsSearch() {
                   onClick={() => {
                     setSearchNationality("Belgique");
                   }}
-                  class={tw`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
+                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
                 >
                   <img
                     class={flagClasses1}
@@ -171,20 +192,6 @@ export default function ArtistsSearch() {
                 <button
                   onClick={() => {
                     setSearchNationality("Pologne");
-                  }}
-                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/flags/Pologne.png"
-                    alt="Pologne"
-                    title="Pologne"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {
-                    setSearchNationality("Autriche");
                   }}
                   class={tw`absolute flex items-center sm:left-44 focus:outline-none ${
                     css(
@@ -200,9 +207,9 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Autriche.png"
-                    alt="Autriche"
-                    title="Autriche"
+                    src="/flags/Pologne.png"
+                    alt="Pologne"
+                    title="Pologne"
                     draggable={draggable}
                   />
                 </button>
@@ -231,29 +238,29 @@ export default function ArtistsSearch() {
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Danemark");
+                    setSearchNationality("Autriche");
                   }}
                   class={tw`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Danemark.png"
-                    alt="Danemark"
-                    title="Danemark"
+                    src="/flags/Autriche.png"
+                    alt="Autriche"
+                    title="Autriche"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Norvège");
+                    setSearchNationality("Hongrie");
                   }}
                   class={tw`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Norvège.png"
-                    alt="Norvège"
-                    title="Norvège"
+                    src="/flags/Hongrie.png"
+                    alt="Hongrie"
+                    title="Hongrie"
                     draggable={draggable}
                   />
                 </button>
@@ -264,77 +271,101 @@ export default function ArtistsSearch() {
               <Fragment>
                 <button
                   onClick={() => {
-                    setSearchNationality("Vietnam");
+                    setSearchNationality("Suisse");
                   }}
                   class={tw`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Vietnam.png"
-                    alt="Vietnam"
-                    title="Vietnam"
+                    src="/flags/Suisse.png"
+                    alt="Suisse"
+                    title="Suisse"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Japon");
+                    setSearchNationality("Finlande");
                   }}
                   class={tw`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Japon.png"
-                    alt="Japon"
-                    title="Japon"
+                    src="/flags/Finlande.png"
+                    alt="Finlande"
+                    title="Finlande"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Chine");
+                    setSearchNationality("Norvège");
                   }}
                   class={tw`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Chine.png"
-                    alt="Chine"
-                    title="Chine"
+                    src="/flags/Norvège.png"
+                    alt="Norvège"
+                    title="Norvège"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Biélorussie");
+                    setSearchNationality("Suède");
+                  }}
+                  class={tw`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses2}
+                    src="/flags/Suède.png"
+                    alt="Suède"
+                    title="Suède"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Danemark");
                   }}
                   class={tw`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Biélorussie.png"
-                    alt="Biélorussie"
-                    title="Biélorussie"
+                    src="/flags/Danemark.png"
+                    alt="Danemark"
+                    title="Danemark"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Russie");
+                    setSearchNationality("Ukraine");
                   }}
-                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                  class={tw`absolute flex items-center sm:left-44 focus:outline-none ${
+                    css(
+                      {
+                        "bottom": "calc(-6.6rem)",
+                        "right": "5.8rem",
+                        "@screen sm": {
+                          "top": "9.2rem",
+                        },
+                      },
+                    )
+                  }`}
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Russie.png"
-                    alt="Russie"
-                    title="Russie"
+                    src="/flags/Ukraine.png"
+                    alt="Ukraine"
+                    title="Ukraine"
                     draggable={draggable}
                   />
                 </button>
                 <button
                   onClick={() => {
-                    setSearchNationality("Royaume-Uni");
+                    setSearchNationality("Arménie");
                   }}
                   class={tw`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
                     css(
@@ -349,6 +380,119 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses2}
+                    src="/flags/Arménie.png"
+                    alt="Arménie"
+                    title="Arménie"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Biélorussie");
+                  }}
+                  class={tw`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses2}
+                    src="/flags/Biélorussie.png"
+                    alt="Biélorussie"
+                    title="Biélorussie"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Russie");
+                  }}
+                  class={tw`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses2}
+                    src="/flags/Russie.png"
+                    alt="Russie"
+                    title="Russie"
+                    draggable={draggable}
+                  />
+                </button>
+              </Fragment>
+            )}
+          {flags === 3 &&
+            (
+              <Fragment>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Vietnam");
+                  }}
+                  class={tw`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Vietnam.png"
+                    alt="Vietnam"
+                    title="Vietnam"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Japon");
+                  }}
+                  class={tw`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Japon.png"
+                    alt="Japon"
+                    title="Japon"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Chine");
+                  }}
+                  class={tw`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Chine.png"
+                    alt="Chine"
+                    title="Chine"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Grèce");
+                  }}
+                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Grèce.png"
+                    alt="Grèce"
+                    title="Grèce"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Royaume-Uni");
+                  }}
+                  class={tw`absolute flex items-center sm:left-44 focus:outline-none ${
+                    css(
+                      {
+                        "bottom": "calc(-6.6rem)",
+                        "right": "5.8rem",
+                        "@screen sm": {
+                          "top": "9.2rem",
+                        },
+                      },
+                    )
+                  }`}
+                >
+                  <img
+                    class={flagClasses3}
                     src="/flags/Royaume-Uni.png"
                     alt="Royaume-Uni"
                     title="Royaume-Uni"
@@ -359,10 +503,19 @@ export default function ArtistsSearch() {
                   onClick={() => {
                     setSearchNationality("Mexique");
                   }}
-                  class={tw`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
+                  class={tw`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
+                    css(
+                      {
+                        "bottom": "calc(-6.6rem)",
+                        "@screen sm": {
+                          "top": "9.6rem",
+                        },
+                      },
+                    )
+                  }`}
                 >
                   <img
-                    class={flagClasses2}
+                    class={flagClasses3}
                     src="/flags/Mexique.png"
                     alt="Mexique"
                     title="Mexique"
@@ -373,13 +526,27 @@ export default function ArtistsSearch() {
                   onClick={() => {
                     setSearchNationality("États-Unis");
                   }}
-                  class={tw`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
+                  class={tw`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
-                    class={flagClasses2}
+                    class={flagClasses3}
                     src="/flags/États-Unis.png"
                     alt="États-Unis"
                     title="États-Unis"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Canada");
+                  }}
+                  class={tw`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Canada.png"
+                    alt="Canada"
+                    title="Canada"
                     draggable={draggable}
                   />
                 </button>
