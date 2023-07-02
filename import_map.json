@@ -9,7 +9,7 @@
     "@twind": "./utils/twind.ts",
     "@utils/": "./utils/",
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
-    "chartjs": "https://esm.sh/chart.js@4.2.1",
+    "chartjs": "https://cdn.skypack.dev/chart.js@4.3.0",
     "ky": "https://esm.sh/ky@v0.33.3",
     "kysely": "https://esm.sh/kysely@0.25.0",
     "preact": "https://esm.sh/preact@10.15.1",
