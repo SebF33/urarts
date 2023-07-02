@@ -1,4 +1,5 @@
 .dockerignore
+deno.lock
 desktop.ini
 TO_DO_LIST.md
 /components/Button.tsx
