@@ -35,10 +35,11 @@ export const handler = async (
       "info",
       "slug",
     ])
-    .where((qb) =>
-      qb
-        .orWhere("first_name", "like", "%" + nameFilter + "%")
-        .orWhere("last_name", "like", "%" + nameFilter + "%")
+    .where(({ eb, or }) =>
+      or([
+        eb("first_name", "like", "%" + nameFilter + "%"),
+        eb("last_name", "like", "%" + nameFilter + "%"),
+      ])
     )
     .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
     .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
