@@ -79,16 +79,47 @@ export default function Arts(
         }`}
       >
         <Nav pathname="/mouvements" />
+
         <main
           class={tw`flex-grow`}
         >
           <div
-            class={tw`w-auto flex flex-col mx-auto my-6`}
+            class={tw`w-auto flex flex-col mx-auto`}
           >
-            <BrushStroke color={color} font={font} title={movement} />
+            <div class={tw`mx-auto mt-8 z-10`}>
+              <BrushStroke
+                color={color}
+                font={font}
+                fontcolor="white"
+                title={movement}
+              />
+            </div>
+            <div class={tw`-mt-44`}>
+              <div
+                class={tw`h-72 bg-white ${
+                  css({
+                    "mask-image": `linear-gradient(to bottom, ${
+                      colorScheme[currentColorScheme].white
+                    } 50%, transparent)`,
+                    "-webkit-mask-image": `linear-gradient(to bottom, ${
+                      colorScheme[currentColorScheme].white
+                    } 50%, transparent)`,
+                    "-o-mask-image": `linear-gradient(to bottom, ${
+                      colorScheme[currentColorScheme].white
+                    } 50%, transparent)`,
+                    "-moz-mask-image": `linear-gradient(to bottom, ${
+                      colorScheme[currentColorScheme].white
+                    } 50%, transparent)`,
+                  })
+                }`}
+              >
+              </div>
+            </div>
+
             <CollectionSearch font={font} myslug={mySlug} type="movement" />
           </div>
         </main>
+
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
         <Footer color={colorScheme[currentColorScheme].lighterdark} />
       </div>
