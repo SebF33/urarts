@@ -2,19 +2,31 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 
 export function BrushStroke(
-  props: { color: string; font: string; title: string },
+  props: { color: string; font: string; fontcolor: string; title: string },
 ) {
   return (
-    <div class={tw`mx-auto z-10`}>
+    <div
+      class={tw`h-[144px]`}
+    >
       <div
-        class={tw`brush-wrap font-${props.font} mx-auto mt-2 text-center ${
+        class={tw`brush-wrap font-${props.font} mx-auto text-center relative inline-block p-12 ${
           css({
-            "&::before": { background: `${props.color}` },
+            "&::before": {
+              background: `${props.color}`,
+              content: '""',
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+              top: "0",
+              left: "0",
+              "z-index": "-1",
+              "clip-path": "url(#clip)",
+            },
           })
         }`}
       >
         <h1
-          class={tw`inline-block`}
+          class={tw`inline-block text-[2rem] text-${props.fontcolor} italic`}
         >
           {props.title}
         </h1>

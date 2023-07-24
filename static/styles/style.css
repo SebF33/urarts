@@ -296,31 +296,6 @@ html {
     }
 }
 
-/* Effet coup de pinceau */
-.brush-wrap {
-    position: relative;
-    display: inline-block;
-    padding: 3rem;
-}
-
-.brush-wrap:before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    clip-path: url(#clip);
-}
-
-.brush-wrap h1 {
-    font-size: 2rem;
-    margin: 0;
-    color: var(--color-white);
-    font-style: italic;
-}
-
 /* Charts */
 .charts {
     -webkit-flex-direction: column;
