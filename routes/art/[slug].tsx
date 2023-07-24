@@ -21,16 +21,22 @@ export const handler: Handlers<{}> = {
       .select([
         "first_name",
         "last_name",
+        "avatar_url",
         "color",
+        "info",
+        "nationality",
         "slug",
       ])
       .where("slug", "=", slug)
       .executeTakeFirst();
 
     let artist: string | null = null;
+    let avatar: string | null = null;
     let color: string | null = null;
     let desc: string | null = null;
+    let info: string | null = null;
     let mySlug: string | null = null;
+    let nationality: string | null = null;
     let query: string | null = null;
     let title: string | null = null;
 
@@ -38,28 +44,54 @@ export const handler: Handlers<{}> = {
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
         : result.last_name;
+      avatar = result.avatar_url;
       color = result.color;
       desc = "Les plus belles œuvres de " + artist + ".";
+      info = result.info;
       mySlug = result.slug;
+      nationality = "Nationalité : " + result.nationality;
       query = url.searchParams.get("id") || "";
       title = artist + " - Collection";
     } else return ctx.renderNotFound();
 
-    return ctx.render({ artist, color, desc, mySlug, query, title });
+    return ctx.render({
+      artist,
+      avatar,
+      color,
+      desc,
+      info,
+      mySlug,
+      nationality,
+      query,
+      title,
+    });
   },
 };
 
 export default function Arts(
   props: PageProps<{
     artist: string;
+    avatar: string;
     color: string;
     desc: string;
+    info: string;
     mySlug: string;
+    nationality: string;
     query: string;
     title: string;
   }>,
 ) {
-  const { artist, color, desc, mySlug, query, title } = props.data;
+  const {
+    artist,
+    avatar,
+    color,
+    desc,
+    info,
+    mySlug,
+    nationality,
+    query,
+    title,
+  } = props.data;
 
   return (
     <DefaultLayout
@@ -78,39 +110,61 @@ export default function Arts(
         }`}
       >
         <Nav pathname="/arts" />
+
         <main
           class={tw`flex-grow`}
         >
           <div
-            class={tw`w-auto flex flex-col mx-auto my-6`}
+            class={tw`w-auto flex flex-col mx-auto`}
           >
-            <BrushStroke color={color} font="brush" title={artist} />
-            {mySlug === "mimi" &&
-              (
+            <div class={tw`mx-auto mt-8 z-10`}>
+              <BrushStroke
+                color={color}
+                font="brush"
+                fontcolor="lighterdark"
+                title={artist}
+              />
+            </div>
+            <div id="bannerInfo" class={tw`-mt-44`}>
+              <div
+                class={tw`h-[38rem] md:h-96 bg-lighterdark shadow-2xl`}
+              >
+              </div>
+
+              <div class={tw`-mt-96 md:-mt-44`}>
                 <div
-                  class={tw`font-brush mx-2 mt-5 ${
-                    css(
-                      {
-                        "color": `${
-                          colorScheme[currentColorScheme].lighterdark
-                        }`,
-                      },
-                    )
-                  }`}
+                  class={tw`w-11/12 xl:w-3/6 mx-auto text-center text-white font-brush`}
                 >
-                  <p
-                    class={tw`w-5/6 md:w-2/5 text-center text-xl font-bold mx-auto`}
-                  >
-                    “Je dédie cette page aux plus belles œuvres de mon artiste
-                    préférée, celle qui au-delà de son talent exceptionnel
-                    m’inspire encore aujourd’hui : ma merveilleuse Maman.”<br>
-                    </br>— Sébastien
+                  <p class="font-bold text-xl mb-4">
+                    {nationality}
                   </p>
+                  <p class={tw`text-left text-base select-none`}>{info}</p>
                 </div>
-              )}
+
+                {avatar &&
+                  (
+                    <div
+                      class={tw`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
+                    >
+                      <div class={tw`pt-20 sm:pt-12 sm:pl-12 sm:pr-12`}>
+                        <div
+                          class={tw`p-6 w-60 mx-auto text-center bg-lighterdark rounded-xl overflow-hidden shadow-2xl`}
+                        >
+                          <img
+                            src={avatar}
+                            alt={avatar}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+              </div>
+            </div>
+
             <CollectionSearch id={query} myslug={mySlug} type="artist" />
           </div>
         </main>
+
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
         <Footer color={colorScheme[currentColorScheme].lighterdark} />
       </div>
