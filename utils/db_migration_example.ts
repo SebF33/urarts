@@ -7,21 +7,24 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .createTable("artist")
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
-    .addColumn("first_name", "text")
-    .addColumn("last_name", "text", (col) => col.notNull())
-    .addColumn("gender", "text", (col) => col.notNull())
-    .addColumn("nationality", "text", (col) => col.notNull())
-    .addColumn("avatar_url", "text")
-    .addColumn("signature", "text")
-    .addColumn("quote", "text")
-    .addColumn("color", "text", (col) => col.defaultTo(sql`"#141b1e"`))
-    .addColumn("site_web", "text")
+    .addColumn("first_name", "varchar")
+    .addColumn("last_name", "varchar", (col) => col.notNull())
+    .addColumn("gender", "varchar", (col) => col.notNull())
+    .addColumn("nationality", "varchar", (col) => col.notNull())
+    .addColumn("avatar_url", "varchar")
+    .addColumn("signature", "varchar")
+    .addColumn("quote", "varchar")
+    .addColumn("color", "varchar", (col) => col.defaultTo(sql`"#141b1e"`))
+    .addColumn("site_web", "varchar")
     .addColumn(
       "info",
-      "text",
-      (col) => col.defaultTo(sql`"Description à faire."`),
+      "varchar(500)",
+      (col) =>
+        col.defaultTo(
+          sql`"La description est à faire pour cet(te) artiste. Il faut y indiquer son origine, son style et ses particularités qui font ce pourquoi il ou elle est célèbre."`,
+        ),
     )
-    .addColumn("slug", "text", (col) => col.notNull())
+    .addColumn("slug", "varchar", (col) => col.notNull())
     .addColumn(
       "modified_at",
       "timestamp",
@@ -35,18 +38,18 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("owner_id", "integer", (col) => col.notNull())
-    .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("name", "varchar", (col) => col.notNull())
     .addColumn("movement_id", "integer", (col) => col.notNull())
     .addColumn("polyptych", "integer", (col) => col.defaultTo(sql`1`))
     .addColumn("frame", "integer", (col) => col.defaultTo(sql`2`))
-    .addColumn("url", "text", (col) => col.notNull())
-    .addColumn("url_2", "text")
-    .addColumn("url_3", "text")
-    .addColumn("url_4", "text")
-    .addColumn("url_5", "text")
+    .addColumn("url", "varchar", (col) => col.notNull())
+    .addColumn("url_2", "varchar")
+    .addColumn("url_3", "varchar")
+    .addColumn("url_4", "varchar")
+    .addColumn("url_5", "varchar")
     .addColumn(
       "info",
-      "text",
+      "varchar",
       (col) => col.defaultTo(sql`"Description à faire."`),
     )
     .addColumn(
@@ -89,9 +92,9 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .createTable("movement")
     .ifNotExists()
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
-    .addColumn("name", "text", (col) => col.notNull())
-    .addColumn("font", "text", (col) => col.defaultTo(sql`"brush"`))
-    .addColumn("slug", "text", (col) => col.notNull())
+    .addColumn("name", "varchar", (col) => col.notNull())
+    .addColumn("font", "varchar", (col) => col.defaultTo(sql`"brush"`))
+    .addColumn("slug", "varchar", (col) => col.notNull())
     .addColumn(
       "modified_at",
       "timestamp",
