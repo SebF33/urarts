@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-07-25]
+
+### Nouveautés
+- Ajout d'une bannière d'info sur la page d'artiste.
+
 ## [2023-05-06]
 
 ### Nouveautés
