@@ -37,8 +37,10 @@ export default function CollectionSearch(
   }, [props.id]);
 
   return (
-    <main class={tw`flex-grow font-brush`}>
-      <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}>
+    <div class={tw`flex-grow font-brush`}>
+      <div
+        class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}
+      >
         <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>
@@ -58,6 +60,6 @@ export default function CollectionSearch(
         arts={searchResults}
         font={props.font}
       />
-    </main>
+    </div>
   );
 }
