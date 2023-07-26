@@ -341,6 +341,20 @@ export default function ArtistsSearch() {
                 </button>
                 <button
                   onClick={() => {
+                    setSearchNationality("Tchécoslovaquie");
+                  }}
+                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses2}
+                    src="/flags/Tchécoslovaquie.png"
+                    alt="Tchécoslovaquie"
+                    title="Tchécoslovaquie"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
                     setSearchNationality("Ukraine");
                   }}
                   class={tw`absolute flex items-center sm:left-44 focus:outline-none ${
