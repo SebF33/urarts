@@ -49,7 +49,7 @@ export const handler: Handlers<{}> = {
       desc = "Les plus belles œuvres de " + artist + ".";
       info = result.info;
       mySlug = result.slug;
-      nationality = "Nationalité : " + result.nationality;
+      nationality = result.nationality;
       query = url.searchParams.get("id") || "";
       title = artist + " - Collection";
     } else return ctx.renderNotFound();
@@ -131,12 +131,17 @@ export default function Arts(
               >
               </div>
 
-              <div class={tw`-mt-96 md:-mt-44`}>
+              <div class={tw`-mt-96 md:-mt-48`}>
                 <div
                   class={tw`w-11/12 xl:w-3/6 mx-auto text-center text-white font-brush`}
                 >
+                  <img
+                    class={tw`inline-block`}
+                    src={"/flags/" + nationality + ".png"}
+                    alt={nationality}
+                  />
                   <p class="font-bold text-xl mb-4">
-                    {nationality}
+                    {"Nationalité : " + nationality}
                   </p>
                   <p class={tw`text-left text-base select-none`}>{info}</p>
                 </div>
