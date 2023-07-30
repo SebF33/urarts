@@ -435,29 +435,29 @@ export default function ArtistsSearch() {
               <Fragment>
                 <button
                   onClick={() => {
-                    setSearchNationality("Vietnam");
-                  }}
-                  class={tw`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/flags/Vietnam.png"
-                    alt="Vietnam"
-                    title="Vietnam"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {
                     setSearchNationality("Japon");
                   }}
-                  class={tw`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
+                  class={tw`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
                 >
                   <img
                     class={flagClasses3}
                     src="/flags/Japon.png"
                     alt="Japon"
                     title="Japon"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Vietnam");
+                  }}
+                  class={tw`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Vietnam.png"
+                    alt="Vietnam"
+                    title="Vietnam"
                     draggable={draggable}
                   />
                 </button>
