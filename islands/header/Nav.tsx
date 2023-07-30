@@ -171,7 +171,7 @@ export default function Nav(
           >
             <a
               href="/"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Accueil
             </a>
@@ -185,7 +185,7 @@ export default function Nav(
           >
             <a
               href="/artists"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Artistes
             </a>
@@ -199,7 +199,7 @@ export default function Nav(
           >
             <a
               href="/arts"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Œuvres
             </a>
@@ -213,7 +213,7 @@ export default function Nav(
           >
             <a
               href="/mouvements"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Mouvements
             </a>
@@ -221,7 +221,7 @@ export default function Nav(
           <li>
             <a
               href="/women"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               <WomanIcon />
             </a>
@@ -229,7 +229,7 @@ export default function Nav(
           <li>
             <a
               href="/art/mimi"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               <svg
                 class={tw`icon-svg h-5 w-5`}
@@ -247,7 +247,7 @@ export default function Nav(
           <li>
             <a
               href="/indicators"
-              class={tw`block text-sm px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               <svg
                 class={tw`icon-svg h-5 w-5`}
