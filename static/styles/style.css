@@ -191,23 +191,23 @@ html {
 }
 
 .art-frame-type-1 p {
-    bottom: -5.2%;
+    bottom: -1.7em;
     font-size: calc(0.675em + 0.7vw);
 }
 
 .art-frame-type-2 p {
-    top: -9.4%;
+    top: -2em;
     font-size: calc(0.675em + 0.7vw);
 }
 
 .art-frame-type-3 p {
     top: 2.1%;
-    font-size: calc(0.4em + 0.7vw);
+    font-size: calc(0.7em + 0.4vw);
 }
 
 .art-frame-type-4 p {
     bottom: 4.1%;
-    font-size: calc(0.4em + 0.7vw);
+    font-size: calc(0.7em + 0.4vw);
 }
 
 .art-polyptych-1 {
