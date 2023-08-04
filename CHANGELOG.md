@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-08-04]
+
+### Nouveautés
+- Ajout d'une page regroupant les personnages historiques.
+
 ## [2023-07-25]
 
 ### Nouveautés
