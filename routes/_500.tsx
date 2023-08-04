@@ -16,7 +16,7 @@ export default function Error500Page({ error }: ErrorPageProps) {
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
             "background-size": "4000px",

@@ -7,7 +7,7 @@ import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import WomenSearch from "@islands/livesearch/WomenSearch.tsx";
 
-export default function Search() {
+export default function WomenPage() {
   return (
     <DefaultLayout
       title="Urarts - Femmes artistes"
@@ -16,8 +16,8 @@ export default function Search() {
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
-            "background-color": `${colorScheme[currentColorScheme].white}`,
+            background: `url(/background/white)`,
+            "background-color": `${colorScheme[currentColorScheme].gray}`,
             "background-position": "center",
             "background-size": "3400px",
             "-webkit-tap-highlight-color": "transparent",

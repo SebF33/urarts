@@ -19,7 +19,7 @@ export const handler: Handlers<{
   },
 };
 
-export default function Search(
+export default function ArtsPage(
   props: PageProps<{
     pathname: string;
   }>,
@@ -34,7 +34,7 @@ export default function Search(
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
             "background-size": "3200px",

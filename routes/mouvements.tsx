@@ -47,7 +47,7 @@ export const handler: Handlers<{
   },
 };
 
-export default function Home(
+export default function MovementsPage(
   props: PageProps<{
     movements: Movements;
     pathname: string;
@@ -63,7 +63,7 @@ export default function Home(
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
             "background-size": "3200px",

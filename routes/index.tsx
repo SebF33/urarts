@@ -52,7 +52,7 @@ export const handler: Handlers<{}> = {
       .orderBy(sql`random()`)
       .executeTakeFirst();
 
-    const randomColorsIndex = Math.floor(Math.random() * 8);
+    const randomColorsIndex = Math.floor(Math.random() * 7);
     const colors = [
       colorScheme[currentColorScheme].lighterdark,
       colorScheme[currentColorScheme].red,
@@ -61,7 +61,6 @@ export const handler: Handlers<{}> = {
       colorScheme[currentColorScheme].blue,
       colorScheme[currentColorScheme].magenta,
       colorScheme[currentColorScheme].cyan,
-      colorScheme[currentColorScheme].gray,
     ];
     const color = colors[randomColorsIndex];
 
@@ -72,7 +71,7 @@ export const handler: Handlers<{}> = {
   },
 };
 
-export default function Home(
+export default function HomePage(
   props: PageProps<{
     artistQuote: ArtistQuote;
     artists: Artists;
@@ -91,10 +90,10 @@ export default function Home(
       <div
         class={tw`flex flex-col min-h-screen font-brush ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
-            "background-size": "316px",
+            "background-size": "420px",
             "-webkit-tap-highlight-color": "transparent",
           })
         }`}

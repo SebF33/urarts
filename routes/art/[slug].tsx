@@ -68,7 +68,7 @@ export const handler: Handlers<{}> = {
   },
 };
 
-export default function Arts(
+export default function ArtistArtsPage(
   props: PageProps<{
     artist: string;
     avatar: string;
@@ -101,7 +101,7 @@ export default function Arts(
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
             "background-size": "540px",

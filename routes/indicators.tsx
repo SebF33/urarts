@@ -77,7 +77,7 @@ export const handler: Handlers<{}> = {
   },
 };
 
-export default function Home(
+export default function IndicatorsPage(
   props: PageProps<{
     artistCountResult: number[];
     artistNationalityResult: string[];
@@ -104,7 +104,7 @@ export default function Home(
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
-            background: `url(/bg)`,
+            background: `url(/background/gray)`,
             "background-color": `${colorScheme[currentColorScheme].white}`,
             "background-position": "center",
             "background-size": "2800px",
