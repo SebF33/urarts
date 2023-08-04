@@ -3,7 +3,7 @@ import ky from "ky";
 import { tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 
-export default function LiveSearch() {
+export default function ArtsSearch() {
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 

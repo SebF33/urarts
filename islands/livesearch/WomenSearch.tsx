@@ -6,7 +6,7 @@ import { useEffect, useState } from "preact/hooks";
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { WomanLogo } from "@components/Assets.tsx";
 
-export default function ArtistsSearch() {
+export default function WomenSearch() {
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
 
   const gender = "Femme";
