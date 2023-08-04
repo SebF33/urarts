@@ -20,53 +20,49 @@ export const handler = async (
   const db = Db.getInstance();
   let results: Array<ArtCollection> | null = null;
 
-  if (type === "artist") {
-    results = await db.selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .innerJoin("movement", "art.movement_id", "movement.id")
-      .select([
-        "first_name",
-        "last_name",
-        "art.id",
-        "art.name as name",
-        "movement.name as movement",
-        "movement.font as font",
-        "polyptych",
-        "frame",
-        "url",
-        "url_2",
-        "url_3",
-        "url_4",
-        "url_5",
-        "art.info as info",
-      ])
-      .where("artist.slug", "=", slugFilter)
-      .where("art.name", "like", "%" + nameFilter + "%")
-      .execute();
-  } else if (type === "movement") {
-    results = await db.selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .innerJoin("movement", "art.movement_id", "movement.id")
-      .select([
-        "first_name",
-        "last_name",
-        "art.id",
-        "art.name as name",
-        "movement.name as movement",
-        "polyptych",
-        "frame",
-        "url",
-        "url_2",
-        "url_3",
-        "url_4",
-        "url_5",
-        "art.info as info",
-      ])
-      .where("movement.slug", "=", slugFilter)
-      .where("art.name", "like", "%" + nameFilter + "%")
-      .orderBy("art.name")
-      .execute();
-  } else return ctx.renderNotFound();
+  let artQuery = db.selectFrom("art")
+    .innerJoin("artist", "art.owner_id", "artist.id")
+    .innerJoin("movement", "art.movement_id", "movement.id")
+    .select([
+      "first_name",
+      "last_name",
+      "art.id",
+      "art.name as name",
+      "movement.name as movement",
+      "polyptych",
+      "frame",
+      "url",
+      "url_2",
+      "url_3",
+      "url_4",
+      "url_5",
+      "art.info as info",
+    ])
+    .where("art.name", "like", "%" + nameFilter + "%");
+
+  switch (type) {
+    case "artist":
+      artQuery = artQuery
+        .where("artist.slug", "=", slugFilter);
+      break;
+
+    case "histocharacters":
+      artQuery = artQuery
+        .where("histocharacter", "=", 1)
+        .orderBy("art.name");
+      break;
+
+    case "movement":
+      artQuery = artQuery
+        .where("movement.slug", "=", slugFilter)
+        .orderBy("art.name");
+      break;
+
+    default:
+      return ctx.renderNotFound();
+  }
+
+  results = await artQuery.execute();
 
   return Promise.resolve(
     new Response(JSON.stringify(results), {
