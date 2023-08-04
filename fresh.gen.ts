@@ -11,12 +11,14 @@ import * as $5 from "./routes/api/collection.ts";
 import * as $6 from "./routes/art/[slug].tsx";
 import * as $7 from "./routes/artists.tsx";
 import * as $8 from "./routes/arts.tsx";
-import * as $9 from "./routes/bg.tsx";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/indicators.tsx";
-import * as $12 from "./routes/mouvement/[slug].tsx";
-import * as $13 from "./routes/mouvements.tsx";
-import * as $14 from "./routes/women.tsx";
+import * as $9 from "./routes/background/gray.tsx";
+import * as $10 from "./routes/background/white.tsx";
+import * as $11 from "./routes/histocharacters.tsx";
+import * as $12 from "./routes/index.tsx";
+import * as $13 from "./routes/indicators.tsx";
+import * as $14 from "./routes/mouvement/[slug].tsx";
+import * as $15 from "./routes/mouvements.tsx";
+import * as $16 from "./routes/women.tsx";
 import * as $$0 from "./islands/chart/Doughnut.tsx";
 import * as $$1 from "./islands/chart/PolarArea.tsx";
 import * as $$2 from "./islands/footer/Footer.tsx";
@@ -27,7 +29,8 @@ import * as $$6 from "./islands/layout/ArtsLayout.tsx";
 import * as $$7 from "./islands/livesearch/ArtistsSearch.tsx";
 import * as $$8 from "./islands/livesearch/ArtsSearch.tsx";
 import * as $$9 from "./islands/livesearch/CollectionSearch.tsx";
-import * as $$10 from "./islands/livesearch/WomenSearch.tsx";
+import * as $$10 from "./islands/livesearch/HistoSearch.tsx";
+import * as $$11 from "./islands/livesearch/WomenSearch.tsx";
 
 const manifest = {
   routes: {
@@ -40,12 +43,14 @@ const manifest = {
     "./routes/art/[slug].tsx": $6,
     "./routes/artists.tsx": $7,
     "./routes/arts.tsx": $8,
-    "./routes/bg.tsx": $9,
-    "./routes/index.tsx": $10,
-    "./routes/indicators.tsx": $11,
-    "./routes/mouvement/[slug].tsx": $12,
-    "./routes/mouvements.tsx": $13,
-    "./routes/women.tsx": $14,
+    "./routes/background/gray.tsx": $9,
+    "./routes/background/white.tsx": $10,
+    "./routes/histocharacters.tsx": $11,
+    "./routes/index.tsx": $12,
+    "./routes/indicators.tsx": $13,
+    "./routes/mouvement/[slug].tsx": $14,
+    "./routes/mouvements.tsx": $15,
+    "./routes/women.tsx": $16,
   },
   islands: {
     "./islands/chart/Doughnut.tsx": $$0,
@@ -58,7 +63,8 @@ const manifest = {
     "./islands/livesearch/ArtistsSearch.tsx": $$7,
     "./islands/livesearch/ArtsSearch.tsx": $$8,
     "./islands/livesearch/CollectionSearch.tsx": $$9,
-    "./islands/livesearch/WomenSearch.tsx": $$10,
+    "./islands/livesearch/HistoSearch.tsx": $$10,
+    "./islands/livesearch/WomenSearch.tsx": $$11,
   },
   baseUrl: import.meta.url,
 };
