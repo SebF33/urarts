@@ -23,6 +23,7 @@ interface ArtTable {
   url_4?: string; // Panneau à l'extrême gauche du central
   url_5?: string; // Panneau à l'extrême droite du central
   info: string | null;
+  histocharacter: number; // Personnage historique (0: non |1: oui)
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

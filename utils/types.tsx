@@ -13,6 +13,7 @@ export type ArtCollection = {
   url_4?: string;
   url_5?: string;
   info: string | null;
+  histocharacter: number;
 };
 
 export type ArtRow = {

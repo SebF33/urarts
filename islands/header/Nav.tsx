@@ -1,7 +1,7 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 
-import { WomanIcon } from "@components/Assets.tsx";
+import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
 
 export default function Nav(
   props: { pathname?: string },
@@ -80,7 +80,13 @@ export default function Nav(
               </a>
             </div>
           </div>
-          <div class={tw`hidden md:flex items-center space-x-3 `}>
+          <div class={tw`hidden md:flex items-center space-x-3`}>
+            <a
+              href="/histocharacters"
+              class={tw`hover:text-lighterdark -mr-1`}
+            >
+              <HistoIcon />
+            </a>
             <a
               href="/women"
               class={tw`hover:text-lighterdark`}
@@ -216,6 +222,14 @@ export default function Nav(
               class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Mouvements
+            </a>
+          </li>
+          <li>
+            <a
+              href="/histocharacters"
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+            >
+              <HistoIcon />
             </a>
           </li>
           <li>
