@@ -14,8 +14,6 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 ## :link: Liens
 :earth_africa: **Site web :** https://urarts.fly.dev
 
-:clapper: **Démo :** https://
-
 :octocat: **GitHub :** https://github.com/SebF33/urarts
 
 
