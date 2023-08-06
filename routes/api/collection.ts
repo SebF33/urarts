@@ -29,6 +29,7 @@ export const handler = async (
       "art.id",
       "art.name as name",
       "movement.name as movement",
+      "movement.font as font",
       "polyptych",
       "frame",
       "url",
@@ -38,6 +39,7 @@ export const handler = async (
       "url_5",
       "art.info as info",
     ])
+    .where("copyright", "!=", 2)
     .where("art.name", "like", "%" + nameFilter + "%");
 
   switch (type) {

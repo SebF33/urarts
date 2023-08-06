@@ -3,6 +3,7 @@
 // Modifié par Sébastien Flouriot le 28/10/2022
 
 import { Spring } from "@utils/types.tsx";
+import tippy from "tippyjs";
 import { tw } from "@utils/twind.ts";
 import { useEffect, useRef, useState } from "preact/hooks";
 
@@ -100,10 +101,30 @@ export default function WaterDrop({ color }: { color: string }) {
     };
   }, []);
 
+  useEffect(() => {
+    const logo = document.querySelector("#Urarts");
+    if (logo) {
+      tippy(logo, {
+        allowHTML: true,
+        content:
+          `<strong style="font-size:1.3em;text-decoration:underline">Politique de droit d'auteur :</strong><br><br>
+          Urarts montre des œuvres d'art du domaine public et tente d'obtenir l'autorisation pour celles protégées par le droit d'auteur.<br>
+          Le but de ce site est d'utiliser ces œuvres historiques à des fins d'information et d'éducation.<br>
+          Les visuels sont des images à faible résolution non adaptées à un usage commercial.<br><br>
+          Veuillez vous adresser au créateur du site via son adresse email
+          <a href="mailto:sebastien.flouriot@gmail.com" style="text-decoration:underline">sebastien.flouriot@gmail.com</a>
+          en cas de demande ou de litige liés à l'exploitation de ces visuels.`,
+        interactive: true,
+        placement: "top",
+        theme: "urarts",
+      });
+    }
+  }, []);
+
   return (
     <section
       id="dropy-section"
-      class={tw`w-full flex justify-center items-center flex-col`}
+      class={tw`w-full flex justify-center items-center flex-col font-brush`}
     >
       <svg
         id="Urarts"

@@ -33,6 +33,8 @@ interface ArtistTable {
   last_name: string;
   gender: "Femme" | "Homme" | "Autre";
   nationality: string;
+  birthyear: string;
+  deathyear: string;
   avatar_url?: string;
   signature: string | null;
   quote: string | null;
@@ -40,6 +42,7 @@ interface ArtistTable {
   site_web: string | null;
   info: string | null;
   slug: string;
+  copyright: number; // Droit d'auteur (0: domaine public |1: autorisation |2: protégé)
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

@@ -25,6 +25,7 @@ export const handler: Handlers<{}> = {
         "color",
         "info",
         "nationality",
+        "copyright",
         "slug",
       ])
       .where("slug", "=", slug)
@@ -33,6 +34,7 @@ export const handler: Handlers<{}> = {
     let artist: string | null = null;
     let avatar: string | null = null;
     let color: string | null = null;
+    let copyright: number | null = null;
     let desc: string | null = null;
     let info: string | null = null;
     let mySlug: string | null = null;
@@ -46,6 +48,7 @@ export const handler: Handlers<{}> = {
         : result.last_name;
       avatar = result.avatar_url;
       color = result.color;
+      copyright = result.copyright;
       desc = "Les plus belles œuvres de " + artist + ".";
       info = result.info;
       mySlug = result.slug;
@@ -58,6 +61,7 @@ export const handler: Handlers<{}> = {
       artist,
       avatar,
       color,
+      copyright,
       desc,
       info,
       mySlug,
@@ -73,6 +77,7 @@ export default function ArtistArtsPage(
     artist: string;
     avatar: string;
     color: string;
+    copyright: number;
     desc: string;
     info: string;
     mySlug: string;
@@ -85,6 +90,7 @@ export default function ArtistArtsPage(
     artist,
     avatar,
     color,
+    copyright,
     desc,
     info,
     mySlug,
@@ -166,7 +172,23 @@ export default function ArtistArtsPage(
               </div>
             </div>
 
-            <CollectionSearch id={query} myslug={mySlug} type="artist" />
+            {copyright != 2 &&
+              <CollectionSearch id={query} myslug={mySlug} type="artist" />}
+
+            {copyright === 2 &&
+              (
+                <div class={tw`flex-grow font-brush`}>
+                  <div
+                    class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 mt-5`}
+                  >
+                    <p class={tw`text-4xl font-extrabold mx-auto text-justify`}>
+                      <span class={tw`text-5xl`}>©</span>
+                      Les œuvres de l’artiste ne sont pas encore disponibles
+                      pour des raisons de droit d’auteur.
+                    </p>
+                  </div>
+                </div>
+              )}
           </div>
         </main>
 

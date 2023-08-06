@@ -25,6 +25,7 @@ export const handler = async (
       "polyptych",
       "url",
     ])
+    .where("copyright", "!=", 2)
     .where("art.name", "like", "%" + filter + "%")
     .where("artist.slug", "!=", "mimi")
     .orderBy("art.name")
