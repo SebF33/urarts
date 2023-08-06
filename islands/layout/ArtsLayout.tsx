@@ -28,7 +28,7 @@ export default function ArtsLayout(
         tippy(el, {
           allowHTML: true,
           content:
-            `<strong>${p.name}</strong><br>${p.movement}<br>Artiste : ${p.last_name}<br>${p.info}`,
+            `<strong style="font-size:1.2em">${p.name}</strong><br>${p.movement}<br>Artiste : ${p.last_name}<br><br>${p.info}`,
           interactive: true,
           placement: "bottom",
           theme: "urarts",

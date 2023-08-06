@@ -25,7 +25,7 @@ export default function ArtistsLayout(
         tippy(el, {
           allowHTML: true,
           content:
-            `<strong>${p.last_name}</strong><br>Nationalité : ${p.nationality}<br>${p.info}`,
+            `<strong style="font-size:1.2em">${p.last_name}</strong><br>Nationalité : ${p.nationality}<br><br>${p.info}`,
           interactive: true,
           placement: "bottom",
           theme: "urarts",
