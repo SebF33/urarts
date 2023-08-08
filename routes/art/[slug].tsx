@@ -179,10 +179,12 @@ export default function ArtistArtsPage(
               (
                 <div class={tw`flex-grow font-brush`}>
                   <div
-                    class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 mt-5`}
+                    class={tw`p-4 max-w-2xl mx-auto px-4 sm:px-6 mt-5`}
                   >
-                    <p class={tw`text-4xl font-extrabold mx-auto text-justify`}>
-                      <span class={tw`text-5xl`}>©</span>
+                    <p
+                      class={tw`text-2xl md:text-3xl font-extrabold mx-auto text-center`}
+                    >
+                      <span class={tw`text-3xl md:text-4xl`}>©</span>
                       Les œuvres de l’artiste ne sont pas encore disponibles
                       pour des raisons de droit d’auteur.
                     </p>
