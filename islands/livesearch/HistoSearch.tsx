@@ -28,7 +28,7 @@ export default function HistoSearch() {
       <div
         class={tw`p-4 max-w-7xl mx-auto mb-4 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
-        <h1 class={tw`text-5xl font-medium mx-auto mb-2`}>
+        <h1 class={tw`text-5xl leading-none font-medium mx-auto mb-2`}>
           Personnages historiques
         </h1>
         <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
