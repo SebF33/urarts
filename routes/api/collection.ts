@@ -27,9 +27,11 @@ export const handler = async (
       "first_name",
       "last_name",
       "art.id",
+      "art.info as info",
       "art.name as name",
-      "movement.name as movement",
       "movement.font as font",
+      "movement.name as movement",
+      "movement.slug as movement_slug",
       "polyptych",
       "frame",
       "url",
@@ -37,7 +39,7 @@ export const handler = async (
       "url_3",
       "url_4",
       "url_5",
-      "art.info as info",
+      "artist.slug as artist_slug",
     ])
     .where("copyright", "!=", 2)
     .where("art.name", "like", "%" + nameFilter + "%");

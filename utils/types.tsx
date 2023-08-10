@@ -4,6 +4,7 @@ export type ArtCollection = {
   id: string;
   name: string;
   movement: string;
+  movement_slug: string;
   font?: string;
   polyptych: number;
   frame: number;
@@ -13,6 +14,7 @@ export type ArtCollection = {
   url_4?: string;
   url_5?: string;
   info: string | null;
+  artist_slug: string;
   histocharacter: number;
 };
 
