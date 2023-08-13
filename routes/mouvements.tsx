@@ -25,13 +25,15 @@ export const handler: Handlers<{
     const results = await db
       .selectFrom("movement")
       .innerJoin("art", "art.movement_id", "movement.id")
+      .innerJoin("artist", "art.owner_id", "artist.id")
       .select([
         "movement.id",
         "movement.name",
         "movement.slug",
         count("art.id").as("art_count"),
       ])
-      .where("slug", "!=", "nonclasse")
+      .where("movement.slug", "!=", "nonclasse")
+      .where("copyright", "!=", 2)
       .groupBy("movement.id")
       .orderBy("movement.name")
       .execute();
