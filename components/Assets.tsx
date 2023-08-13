@@ -92,7 +92,7 @@ export function HistoIcon() {
   return (
     <svg
       id="HistoIcon"
-      class={tw`icon-svg h-8 w-8`}
+      class={tw`icon-svg h-9 w-9`}
       fill={colorScheme[currentColorScheme].white}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 80.8 48"
@@ -206,7 +206,7 @@ export function WomanIcon() {
   return (
     <svg
       id="WomanIcon"
-      class={tw`icon-svg h-7 w-7`}
+      class={tw`icon-svg h-8 w-8`}
       fill={colorScheme[currentColorScheme].white}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 491.1 342.7"
