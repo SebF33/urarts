@@ -31,12 +31,14 @@ export const handler: Handlers<{}> = {
 
     const movementQuery = await db
       .selectFrom("art")
+      .innerJoin("artist", "art.owner_id", "artist.id")
       .innerJoin("movement", "art.movement_id", "movement.id")
       .select([
         "movement.name",
         sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
         count("art.id").as("art_count"),
       ])
+      .where("copyright", "!=", 2)
       .groupBy("movement_group")
       .execute();
 
