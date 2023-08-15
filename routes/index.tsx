@@ -1,4 +1,4 @@
-import { ArtistRow } from "@utils/types.tsx";
+import { ArtistQuote, ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
@@ -9,14 +9,10 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
+import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-type ArtistQuote = {
-  first_name: string | null;
-  last_name: string;
-  signature: string | null;
-  quote: string | null;
-};
+type Quote = Array<ArtistQuote>;
 type Artists = Array<ArtistRow>;
 
 export const handler: Handlers<{}> = {
@@ -46,7 +42,14 @@ export const handler: Handlers<{}> = {
     }));
 
     const artistQuote = await db.selectFrom("artist")
-      .select(["first_name", "last_name", "signature", "quote"])
+      .select([
+        "first_name",
+        "last_name",
+        "avatar_url",
+        "signature",
+        "quote",
+        "slug",
+      ])
       .where("quote", "is not", null)
       .where("slug", "!=", "mimi")
       .orderBy(sql`random()`)
@@ -73,7 +76,7 @@ export const handler: Handlers<{}> = {
 
 export default function HomePage(
   props: PageProps<{
-    artistQuote: ArtistQuote;
+    artistQuote: Quote;
     artists: Artists;
     color: string;
     grid: string;
@@ -103,32 +106,7 @@ export default function HomePage(
           class={tw`flex-grow`}
         >
           <ArtistsLayout artists={artists} grid={grid} />
-          <div
-            class={tw`mx-auto ${
-              css(
-                {
-                  "color": `${colorScheme[currentColorScheme].lighterdark}`,
-                },
-              )
-            }`}
-          >
-            <p class={tw`text-center text-xl font-bold w-5/6 md:w-1/2 mx-auto`}>
-              “{artistQuote.quote}”<br></br>—{artistQuote.first_name}{" "}
-              {artistQuote.last_name}
-            </p>
-            {artistQuote.signature &&
-              (
-                <div
-                  class={tw`flex justify-end w-5/6 md:w-1/3 max-h-9 mx-auto`}
-                >
-                  <img
-                    class={tw`max-w-[100px]`}
-                    src={artistQuote.signature}
-                    alt={artistQuote.signature}
-                  />
-                </div>
-              )}
-          </div>
+          <Quote data={artistQuote} />
         </main>
         <WaterDrop color={color} />
         <Footer color={color} />

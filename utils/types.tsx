@@ -30,6 +30,15 @@ export type ArtRow = {
   url: string;
 };
 
+export type ArtistQuote = {
+  first_name: string | null;
+  last_name: string;
+  avatar_url: string;
+  signature: string | null;
+  quote: string | null;
+  slug: string;
+};
+
 export type ArtistRow = {
   id: number;
   first_name: string | null;
