@@ -69,9 +69,9 @@ export default function Nav(
                 Œuvres
               </a>
               <a
-                href="/mouvements"
+                href="/movements"
                 class={tw`${
-                  props.pathname === "/mouvements"
+                  props.pathname === "/movements"
                     ? "text-lighterdark border-b-4 border-lighterdark"
                     : ""
                 } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
@@ -212,13 +212,13 @@ export default function Nav(
           </li>
           <li
             class={tw`${
-              props.pathname === "/mouvements"
+              props.pathname === "/movements"
                 ? "active text-white bg-lighterdark font-semibold"
                 : ""
             }`}
           >
             <a
-              href="/mouvements"
+              href="/movements"
               class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Mouvements

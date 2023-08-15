@@ -78,7 +78,7 @@ export default function MovementArtsPage(
           })
         }`}
       >
-        <Nav pathname="/mouvements" />
+        <Nav pathname="/movements" />
 
         <main
           class={tw`flex-grow`}

@@ -86,7 +86,7 @@ export default function MovementsPage(
                     {movements.map((item, index) => (
                       <li class={tw`m-2`} key={index}>
                         <a
-                          href={"/mouvement/" + item.slug}
+                          href={"/movement/" + item.slug}
                           class={tw`cursor-pointer`}
                         >
                           <p class={tw`relative group text-xl`}>
