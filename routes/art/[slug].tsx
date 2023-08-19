@@ -3,7 +3,7 @@ import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import { BrushStroke } from "@components/Assets.tsx";
+import { AnimBrushStroke, BrushStroke } from "@components/Assets.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
@@ -15,8 +15,14 @@ export const handler: Handlers<{}> = {
     const { slug } = ctx.params;
     const url = new URL(req.url);
 
-    const db = Db.getInstance();
+    // Firefox :
+    // Le clip-path du SVG n'est pas correctement géré par ce navigateur.
+    // Pour sélection de l'asset non animé à la place.
+    const userAgent = req.headers.get("user-agent");
+    const isFirefox = userAgent.toLowerCase().includes("firefox");
+    const isNotFirefox = !isFirefox;
 
+    const db = Db.getInstance();
     const result = await db.selectFrom("artist")
       .select([
         "first_name",
@@ -25,6 +31,8 @@ export const handler: Handlers<{}> = {
         "color",
         "info",
         "nationality",
+        "birthyear",
+        "deathyear",
         "copyright",
         "slug",
       ])
@@ -39,6 +47,8 @@ export const handler: Handlers<{}> = {
     let info: string | null = null;
     let mySlug: string | null = null;
     let nationality: string | null = null;
+    let birthyear: string | null = null;
+    let deathyear: string | null = null;
     let query: string | null = null;
     let title: string | null = null;
 
@@ -53,6 +63,8 @@ export const handler: Handlers<{}> = {
       info = result.info;
       mySlug = result.slug;
       nationality = result.nationality;
+      birthyear = result.birthyear;
+      deathyear = result.deathyear !== "" ? " — " + result.deathyear : "";
       query = url.searchParams.get("id") || "";
       title = artist + " - Collection";
     } else return ctx.renderNotFound();
@@ -64,8 +76,12 @@ export const handler: Handlers<{}> = {
       copyright,
       desc,
       info,
+      isFirefox,
+      isNotFirefox,
       mySlug,
       nationality,
+      birthyear,
+      deathyear,
       query,
       title,
     });
@@ -80,8 +96,12 @@ export default function ArtistArtsPage(
     copyright: number;
     desc: string;
     info: string;
+    isFirefox: boolean;
+    isNotFirefox: boolean;
     mySlug: string;
     nationality: string;
+    birthyear: string;
+    deathyear: string;
     query: string;
     title: string;
   }>,
@@ -93,8 +113,12 @@ export default function ArtistArtsPage(
     copyright,
     desc,
     info,
+    isFirefox,
+    isNotFirefox,
     mySlug,
     nationality,
+    birthyear,
+    deathyear,
     query,
     title,
   } = props.data;
@@ -124,12 +148,24 @@ export default function ArtistArtsPage(
             class={tw`w-auto flex flex-col mx-auto`}
           >
             <div class={tw`mx-auto mt-8 z-10`}>
-              <BrushStroke
-                color={color}
-                font="brush"
-                fontcolor="lighterdark"
-                title={artist}
-              />
+              {isFirefox &&
+                (
+                  <BrushStroke
+                    color={color}
+                    font="brush"
+                    fontcolor="lighterdark"
+                    title={artist}
+                  />
+                )}
+              {isNotFirefox &&
+                (
+                  <AnimBrushStroke
+                    color={color}
+                    font="brush"
+                    fontcolor="lighterdark"
+                    title={artist}
+                  />
+                )}
             </div>
             <div id="bannerInfo" class={tw`-mt-44`}>
               <div
@@ -137,16 +173,19 @@ export default function ArtistArtsPage(
               >
               </div>
 
-              <div class={tw`-mt-96 md:-mt-48`}>
+              <div class={tw`-mt-[27rem] md:-mt-[13.5rem]`}>
                 <div
                   class={tw`w-11/12 xl:w-3/6 mx-auto text-center text-white font-brush`}
                 >
+                  <p class="font-bold italic text-xl">
+                    {birthyear + deathyear}
+                  </p>
                   <img
-                    class={tw`inline-block`}
+                    class={tw`inline-block mt-2`}
                     src={"/flags/" + nationality + ".png"}
                     alt={nationality}
                   />
-                  <p class="font-bold text-xl mb-4">
+                  <p class="font-bold text-lg mb-4">
                     {"Nationalité : " + nationality}
                   </p>
                   <p class={tw`text-left text-base select-none`}>{info}</p>
