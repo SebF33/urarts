@@ -12,8 +12,8 @@ import Nav from "@islands/header/Nav.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-type Quote = Array<ArtistQuote>;
 type Artists = Array<ArtistRow>;
+type Quote = Array<ArtistQuote>;
 
 export const handler: Handlers<{}> = {
   async GET(req, ctx) {
@@ -34,6 +34,8 @@ export const handler: Handlers<{}> = {
       first_name: p.first_name,
       last_name: p.last_name,
       nationality: p.nationality,
+      birthyear: p.birthyear,
+      deathyear: p.deathyear,
       avatar_url: p.avatar_url,
       signature: p.signature,
       site_web: p.site_web,
