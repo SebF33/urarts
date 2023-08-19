@@ -1,6 +1,7 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { h } from "preact";
+import { UrlBasePath } from "../env.ts";
 
 export default function DefaultLayout(props: {
   date?: string;
@@ -15,7 +16,7 @@ export default function DefaultLayout(props: {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content={props.desc} />
         <meta key="words" name="keywords" content="arts" />
-        <meta property="og:url" content="https://urarts.fly.dev/" />
+        <meta property="og:url" content={UrlBasePath} />
         <meta property="og:site_name" content={props.title} />
         <meta property="og:title" content={props.title} />
         <meta property="og:type" content="website" />

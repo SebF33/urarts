@@ -2,6 +2,7 @@ import { ArtistQuote } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css, tw } from "@utils/twind.ts";
 import tippy from "tippyjs";
+import { UrlBasePath } from "../env.ts";
 import { useEffect } from "preact/hooks";
 
 type Quote = Array<ArtistQuote>;
@@ -14,7 +15,7 @@ export default function Quote(
     if (artistQuote) {
       tippy(artistQuote, {
         allowHTML: true,
-        content: `<a href="https://urarts.fly.dev/art/${props.data.slug}">
+        content: `<a href="${UrlBasePath}/art/${props.data.slug}">
           <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px"/>
           </a>`,
         interactive: true,

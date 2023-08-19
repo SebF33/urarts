@@ -2,6 +2,7 @@ import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
 import tippy from "tippyjs";
 import { tw } from "@twind";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 type Arts = Array<ArtCollection>;
@@ -28,8 +29,8 @@ export default function ArtsLayout(
         tippy(el, {
           allowHTML: true,
           content: `<strong style="font-size:1.3em">${p.name}</strong>
-            <br><strong><a href="https://urarts.fly.dev/movement/${p.movement_slug}">${p.movement}</a></strong>
-            <br>Artiste : <strong><a href="https://urarts.fly.dev/art/${p.artist_slug}">${p.last_name}</a></strong>
+            <br><strong><a href="${UrlBasePath}/movement/${p.movement_slug}">${p.movement}</a></strong>
+            <br>Artiste : <strong><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
             <br><br>${p.info}`,
           interactive: true,
           placement: "bottom",

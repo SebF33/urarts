@@ -3,6 +3,7 @@ import { ArtistRow } from "@utils/types.tsx";
 import { css, tw } from "@twind";
 import { h } from "preact";
 import tippy from "tippyjs";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 type Artists = Array<ArtistRow>;
@@ -25,7 +26,7 @@ export default function ArtistsLayout(
         tippy(el, {
           allowHTML: true,
           content:
-            `<strong style="font-size:1.2em"><a href="https://urarts.fly.dev/art/${p.slug}">${p.last_name}</a></strong>
+            `<strong style="font-size:1.2em"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
             <br>Nationalité : ${p.nationality}
             <br><br>${p.info}`,
           interactive: true,
