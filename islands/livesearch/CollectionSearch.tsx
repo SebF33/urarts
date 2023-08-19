@@ -1,6 +1,7 @@
 import { ArtCollection } from "@utils/types.tsx";
 import ky from "ky";
 import { tw } from "@twind";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
@@ -14,13 +15,15 @@ export default function CollectionSearch(
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    ky.get(
-      `https://urarts.fly.dev/api/collection?type=${props.type}&slug=${props.myslug}&name=${searchTerm}`,
-    )
-      .json<Arts[]>()
-      .then((response) => {
-        setSearchResults(response);
-      });
+    setTimeout(() => {
+      ky.get(
+        `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${searchTerm}`,
+      )
+        .json<Arts[]>()
+        .then((response) => {
+          setSearchResults(response);
+        });
+    }, 150);
   }, [searchTerm]);
 
   useLayoutEffect(() => {

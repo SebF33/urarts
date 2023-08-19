@@ -1,6 +1,7 @@
 import { ArtCollection } from "@utils/types.tsx";
 import ky from "ky";
 import { tw } from "@twind";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
@@ -14,13 +15,15 @@ export default function HistoSearch() {
   const type = "histocharacters";
 
   useEffect(() => {
-    ky.get(
-      `https://urarts.fly.dev/api/collection?type=${type}&name=${searchTerm}`,
-    )
-      .json<Arts[]>()
-      .then((response) => {
-        setSearchResults(response);
-      });
+    setTimeout(() => {
+      ky.get(
+        `${UrlBasePath}/api/collection?type=${type}&name=${searchTerm}`,
+      )
+        .json<Arts[]>()
+        .then((response) => {
+          setSearchResults(response);
+        });
+    }, 150);
   }, [searchTerm]);
 
   return (

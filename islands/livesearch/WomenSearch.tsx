@@ -1,6 +1,7 @@
 import { ArtistRow } from "@utils/types.tsx";
 import ky from "ky";
 import { tw } from "@twind";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -14,13 +15,15 @@ export default function WomenSearch() {
     "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
 
   useEffect(() => {
-    ky.get(
-      `https://urarts.fly.dev/api/artists?gender=${gender}`,
-    )
-      .json<ArtistRow[]>()
-      .then((response) => {
-        setSearchResults(response);
-      });
+    setTimeout(() => {
+      ky.get(
+        `${UrlBasePath}/api/artists?gender=${gender}`,
+      )
+        .json<ArtistRow[]>()
+        .then((response) => {
+          setSearchResults(response);
+        });
+    }, 150);
   }, []);
 
   return (

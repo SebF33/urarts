@@ -1,6 +1,7 @@
 import { ArtRow } from "@utils/types.tsx";
 import ky from "ky";
 import { tw } from "@twind";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 export default function ArtsSearch() {
@@ -8,11 +9,13 @@ export default function ArtsSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    ky.get(`https://urarts.fly.dev/api/arts?name=${searchTerm}`)
-      .json<ArtRow[]>()
-      .then((response) => {
-        setSearchResults(response);
-      });
+    setTimeout(() => {
+      ky.get(`${UrlBasePath}/api/arts?name=${searchTerm}`)
+        .json<ArtRow[]>()
+        .then((response) => {
+          setSearchResults(response);
+        });
+    }, 150);
   }, [searchTerm]);
 
   return (

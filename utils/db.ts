@@ -1,3 +1,4 @@
+import { DatabaseName } from "../env.ts";
 import { SqliteDriver } from "@utils/sqlite_driver.ts";
 
 import {
@@ -82,7 +83,7 @@ export class Db {
           return new SqliteAdapter();
         },
         createDriver() {
-          return new SqliteDriver("./data/urarts_data.db");
+          return new SqliteDriver("./data/" + DatabaseName);
         },
         createIntrospector(db: Kysely<unknown>) {
           return new SqliteIntrospector(db);

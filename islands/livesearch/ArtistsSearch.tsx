@@ -2,6 +2,7 @@ import { ArtistRow } from "@utils/types.tsx";
 import ky from "ky";
 import { css, tw } from "@twind";
 import { Fragment, h } from "preact";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -102,16 +103,21 @@ export default function ArtistsSearch() {
     });
 
     slider.noUiSlider.set(["1700", "2000"]);
+    slider.noUiSlider.on("update", function () {
+      setSearchYears(slider.noUiSlider.get());
+    });
   }, []);
 
   useEffect(() => {
-    ky.get(
-      `https://urarts.fly.dev/api/artists?nationality=${searchNationality}&name=${searchTerm}&years=${searchYears}`,
-    )
-      .json<ArtistRow[]>()
-      .then((response) => {
-        setSearchResults(response);
-      });
+    setTimeout(() => {
+      ky.get(
+        `${UrlBasePath}/api/artists?nationality=${searchNationality}&name=${searchTerm}&years=${searchYears}`,
+      )
+        .json<ArtistRow[]>()
+        .then((response) => {
+          setSearchResults(response);
+        });
+    }, 150);
   }, [searchNationality, searchTerm, searchYears]);
 
   return (
@@ -637,7 +643,6 @@ export default function ArtistsSearch() {
       <div
         id="slider"
         class={tw`max-w-3xl mt-[240px] mb-[40px] sm:mt-[200px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
-        onClick={() => setSearchYears(slider.noUiSlider.get())}
       >
       </div>
 
