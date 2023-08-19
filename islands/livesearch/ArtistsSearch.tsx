@@ -12,13 +12,14 @@ export default function ArtistsSearch() {
   const [searchNationality, setSearchNationality] = useState("France");
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchYears, setSearchYears] = useState(["1700", "2000"]);
   const [showFlags1, setShowFlags1] = useState(true);
   const [showFlags2, setShowFlags2] = useState(true);
   const [showFlags3, setShowFlags3] = useState(true);
 
   const draggable = false;
   const grid =
-    "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pt-10 pb-10 lg:pt-20 lg:pb-20";
+    "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
   const transition =
     "transition-all duration-300 ease-in-out hover:(transform scale-110)";
   const width6 = "w-6 sm:w-8";
@@ -69,14 +70,49 @@ export default function ArtistsSearch() {
   }, [flags]);
 
   useEffect(() => {
+    const slider: HTMLElement | null = document.getElementById("slider");
+    const valuesForSlider = [
+      1400,
+      1500,
+      1600,
+      1700,
+      1800,
+      1900,
+      2000,
+      2100,
+    ];
+    const format = {
+      to: function (value) {
+        return valuesForSlider[Math.round(value)];
+      },
+      from: function (value) {
+        return valuesForSlider.indexOf(Number(value));
+      },
+    };
+
+    noUiSlider.create(slider, {
+      connect: true,
+      format: format,
+      margin: 1,
+      pips: { mode: "steps", density: 1.5, format: format },
+      range: { min: 0, max: valuesForSlider.length - 1 },
+      start: [1700, 2000],
+      step: 1,
+      tooltips: true,
+    });
+
+    slider.noUiSlider.set(["1700", "2000"]);
+  }, []);
+
+  useEffect(() => {
     ky.get(
-      `https://urarts.fly.dev/api/artists?nationality=${searchNationality}&name=${searchTerm}`,
+      `https://urarts.fly.dev/api/artists?nationality=${searchNationality}&name=${searchTerm}&years=${searchYears}`,
     )
       .json<ArtistRow[]>()
       .then((response) => {
         setSearchResults(response);
       });
-  }, [searchNationality, searchTerm]);
+  }, [searchNationality, searchTerm, searchYears]);
 
   return (
     <main class={tw`flex-grow font-brush`}>
@@ -597,6 +633,14 @@ export default function ArtistsSearch() {
           </div>
         </div>
       </div>
+
+      <div
+        id="slider"
+        class={tw`max-w-3xl mt-[240px] mb-[40px] sm:mt-[200px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
+        onClick={() => setSearchYears(slider.noUiSlider.get())}
+      >
+      </div>
+
       <ArtistsLayout artists={searchResults} grid={grid} />
     </main>
   );

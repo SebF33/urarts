@@ -250,8 +250,9 @@ html {
     align-self: center;
 }
 
-/* Vague de couleurs
-   Gradient : http://colorzilla.com/gradient-editor/#67b0e8+0,6cbfbf+52,8ccf7e+100
+/* Vagues de couleurs
+   - Gradient pour la barre de navigation : https://colorzilla.com/gradient-editor/#67b0e8+0,6cbfbf+52,8ccf7e+100
+   - Gradient pour le slider : https://colorzilla.com/gradient-editor/#232a2d+0,b3b9b8+52,dadada+100
 */
 .wave-colors {
     background: var(--color-blue);
@@ -259,13 +260,31 @@ html {
     background: -moz-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
     /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
-    /* Chrome10-25,Safari5.1-6 */
+    /* Chrome10-25, Safari5.1-6 */
     background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#67b0e8', endColorstr='#8ccf7e', GradientType=1);
-    /* IE6-9 fallback on horizontal gradient */
-    background-size: 350% 350%;
+    /* IE6-9 */
     animation: waveColors 8s ease infinite;
+}
+
+.noUi-connect {
+    background: var(--color-lighterdark);
+    /* Old browsers */
+    background: -moz-linear-gradient(left, var(--color-lighterdark) 0%, var(--color-gray) 52%, var(--color-white) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, var(--color-lighterdark) 0%, var(--color-gray) 52%, var(--color-white) 100%);
+    /* Chrome10-25, Safari5.1-6 */
+    background: linear-gradient(to right, var(--color-lighterdark) 0%, var(--color-gray) 52%, var(--color-white) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#232a2d', endColorstr='#dadada', GradientType=1);
+    /* IE6-9 */
+    animation: waveColors 5s ease infinite;
+}
+
+.wave-colors,
+.noUi-connect {
+    background-size: 350% 350%;
 }
 
 @-webkit-keyframes waveColors {
@@ -333,4 +352,28 @@ html {
 
 .fade-exit-active {
     opacity: 0;
+}
+
+/* noUiSlider */
+.noUi-handle {
+    cursor: grab;
+}
+
+.noUi-marker-large,
+.noUi-marker-sub,
+.noUi-touch-area {
+    background: var(--color-lighterdark)
+}
+
+.noUi-tooltip {
+    font-size: 1.3rem;
+}
+
+.noUi-value-large:before {
+    content: "An ";
+}
+
+.noUi-value-large,
+.noUi-value-sub {
+    color: var(--color-lighterdark)
 }

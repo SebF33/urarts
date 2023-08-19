@@ -1,5 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { HandlerContext } from "$fresh/server.ts";
+import { sql } from "kysely";
 
 export const handler = async (
   req: Request,
@@ -21,6 +22,12 @@ export const handler = async (
   let isWorld = false;
   nationalityFilter === "" ? isWorld = true : isCountry = true;
 
+  query = url.searchParams.get("years") || "";
+  const yearsFilter = query.length ? query : "";
+  const years = yearsFilter.split(",", 2);
+  const beginFilter = years[0];
+  const endFilter = years[1];
+
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")
     .select([
@@ -29,22 +36,27 @@ export const handler = async (
       "last_name",
       "gender",
       "nationality",
+      "birthyear",
+      "deathyear",
       "avatar_url",
       "signature",
       "site_web",
       "info",
       "slug",
     ])
+    .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
+    .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
+    .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
+    .where("slug", "!=", "mimi")
     .where(({ eb, or }) =>
       or([
         eb("first_name", "like", "%" + nameFilter + "%"),
         eb("last_name", "like", "%" + nameFilter + "%"),
       ])
     )
-    .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
-    .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
-    .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
-    .where("slug", "!=", "mimi")
+    .where(
+      sql`((birthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (deathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
+    )
     .orderBy("last_name")
     .orderBy("first_name")
     .execute();
