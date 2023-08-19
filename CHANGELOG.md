@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-08-19]
+
+### Nouveautés
+- Ajout d'un slider pour la recherche d'artistes selon les années de naissance et de décès.
+
 ## [2023-08-04]
 
 ### Nouveautés

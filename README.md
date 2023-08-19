@@ -34,6 +34,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 - [Everblush](https://github.com/Everblush/everblush)
 - [Tippy.js](https://atomiks.github.io/tippyjs/v6/getting-started)
 - [Chart.js](https://www.chartjs.org/docs/latest)
+- [noUiSlider](https://refreshless.com/nouislider)
 - [Fly.io](https://fly.io/docs/getting-started/deno)
 
 
