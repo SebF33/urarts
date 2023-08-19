@@ -8,22 +8,28 @@ export const handler = async (
 ): Promise<Response> => {
   const url = new URL(req.url);
 
+  // Genre
   let query = url.searchParams.get("gender") || "";
   const genderFilter = query.length ? query : "";
   let hasGender;
   genderFilter === "" ? hasGender = false : hasGender = true;
 
+  // Nom
   query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
 
+  // Nationalité
   query = url.searchParams.get("nationality") || "";
   const nationalityFilter = query.length ? query : "";
   let isCountry = false;
   let isWorld = false;
   nationalityFilter === "" ? isWorld = true : isCountry = true;
 
+  // Période
   query = url.searchParams.get("years") || "";
   const yearsFilter = query.length ? query : "";
+  let hasYears;
+  yearsFilter === "" ? hasYears = false : hasYears = true;
   const years = yearsFilter.split(",", 2);
   const beginFilter = years[0];
   const endFilter = years[1];
@@ -45,6 +51,10 @@ export const handler = async (
       "slug",
     ])
     .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
+    .$if(hasYears, (qb) =>
+      qb.where(
+        sql`((birthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (deathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
+      ))
     .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
     .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
     .where("slug", "!=", "mimi")
@@ -53,9 +63,6 @@ export const handler = async (
         eb("first_name", "like", "%" + nameFilter + "%"),
         eb("last_name", "like", "%" + nameFilter + "%"),
       ])
-    )
-    .where(
-      sql`((birthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (deathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
     )
     .orderBy("last_name")
     .orderBy("first_name")
