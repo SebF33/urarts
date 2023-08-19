@@ -28,10 +28,11 @@ export default function ArtsLayout(
       if (el) {
         tippy(el, {
           allowHTML: true,
-          content: `<strong style="font-size:1.3em">${p.name}</strong>
+          content:
+            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
             <br><strong><a href="${UrlBasePath}/movement/${p.movement_slug}">${p.movement}</a></strong>
             <br>Artiste : <strong><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
-            <br><br>${p.info}`,
+            <p style="margin-top:10px">${p.info}</p>`,
           interactive: true,
           placement: "bottom",
           theme: "urarts",
