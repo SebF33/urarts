@@ -27,8 +27,9 @@ export default function ArtistsLayout(
           allowHTML: true,
           content:
             `<strong style="font-size:1.2em"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
+            <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
             <br>Nationalité : ${p.nationality}
-            <br><br>${p.info}`,
+            <p style="margin-top:10px">${p.info}</p>`,
           interactive: true,
           placement: "bottom",
           theme: "urarts",
