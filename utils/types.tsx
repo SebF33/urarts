@@ -44,6 +44,8 @@ export type ArtistRow = {
   first_name: string | null;
   last_name: string;
   nationality: string;
+  birthyear: string;
+  deathyear: string;
   avatar_url?: string;
   signature: string | null;
   site_web: string | null;
