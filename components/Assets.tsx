@@ -26,7 +26,7 @@ export function AnimBrushStroke(
         }`}
       >
         <h1
-          class={tw`inline-block text-[2rem] text-${props.fontcolor} italic`}
+          class={tw`inline-block text-[2rem] leading-[1.6rem] text-${props.fontcolor} italic`}
         >
           {props.title}
         </h1>
@@ -90,7 +90,7 @@ export function BrushStroke(
         }`}
       >
         <h1
-          class={tw`inline-block text-[2rem] text-${props.fontcolor} italic`}
+          class={tw`inline-block text-[2rem] leading-[1.6rem] text-${props.fontcolor} italic`}
         >
           {props.title}
         </h1>
