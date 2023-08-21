@@ -3,26 +3,25 @@ import { css, tw } from "@twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import { BrushStroke } from "@components/Assets.tsx";
+import { AnimBrushStroke, BrushStroke } from "@components/Assets.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export const handler: Handlers<{
-  color: string | null;
-  desc: string | null;
-  font: string | null;
-  movement: string | null;
-  mySlug: string | null;
-  title: string | null;
-}> = {
-  async GET(_, ctx) {
+export const handler: Handlers<{}> = {
+  async GET(req, ctx) {
     const { slug } = ctx.params;
 
-    const db = Db.getInstance();
+    // Firefox :
+    // Le clip-path du SVG n'est pas correctement géré par ce navigateur.
+    // Pour sélection de l'asset non animé à la place.
+    const userAgent = req.headers.get("user-agent");
+    const isFirefox = userAgent.toLowerCase().includes("firefox");
+    const isNotFirefox = !isFirefox;
 
+    const db = Db.getInstance();
     const result = await db.selectFrom("movement")
       .select([
         "name",
@@ -46,7 +45,16 @@ export const handler: Handlers<{
       title = movement + " - Collection";
     } else return ctx.renderNotFound();
 
-    return ctx.render({ color, desc, font, movement, mySlug, title });
+    return ctx.render({
+      color,
+      desc,
+      font,
+      isFirefox,
+      isNotFirefox,
+      movement,
+      mySlug,
+      title,
+    });
   },
 };
 
@@ -55,12 +63,23 @@ export default function MovementArtsPage(
     color: string;
     desc: string;
     font: string;
+    isFirefox: boolean;
+    isNotFirefox: boolean;
     movement: string;
     mySlug: string;
     title: string;
   }>,
 ) {
-  const { color, desc, mySlug, font, movement, title } = props.data;
+  const {
+    color,
+    desc,
+    mySlug,
+    font,
+    isFirefox,
+    isNotFirefox,
+    movement,
+    title,
+  } = props.data;
 
   return (
     <DefaultLayout
@@ -87,12 +106,24 @@ export default function MovementArtsPage(
             class={tw`w-auto flex flex-col mx-auto`}
           >
             <div class={tw`mx-auto mt-8 z-10`}>
-              <BrushStroke
-                color={color}
-                font={font}
-                fontcolor="white"
-                title={movement}
-              />
+              {isFirefox &&
+                (
+                  <BrushStroke
+                    color={color}
+                    font={font}
+                    fontcolor="white"
+                    title={movement}
+                  />
+                )}
+              {isNotFirefox &&
+                (
+                  <AnimBrushStroke
+                    color={color}
+                    font={font}
+                    fontcolor="white"
+                    title={movement}
+                  />
+                )}
             </div>
             <div class={tw`-mt-44`}>
               <div
