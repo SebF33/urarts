@@ -40,7 +40,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 
 ### ![Deno_tiny](/.github/Deno_tiny.png) Deno
 Démarrer le projet :
-`deno task start`
+`deno task preview`
 
 Lancer la base de données :
 `deno task migrate`
