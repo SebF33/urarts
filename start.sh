@@ -3,4 +3,4 @@
 set -ex
 
 deno task migrate
-deno task start
+deno task preview

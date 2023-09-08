@@ -2,7 +2,6 @@
 deno.lock
 desktop.ini
 TO_DO_LIST.md
-/components/Button.tsx
 /data/urarts_data.db
 /islands/Counter.tsx
 /static/arts
@@ -12,3 +11,5 @@ TO_DO_LIST.md
 /static/signs
 /static/symbols
 /utils/db_migration.ts
+# Fresh build directory
+_fresh/
