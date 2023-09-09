@@ -13,6 +13,8 @@ export default function DefaultLayout(props: {
   return (
     <>
       <Head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content={props.desc} />
         <meta key="words" name="keywords" content="arts" />
