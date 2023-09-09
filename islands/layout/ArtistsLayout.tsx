@@ -1,6 +1,7 @@
 import { Any } from "any";
 import { ArtistRow } from "@utils/types.tsx";
-import { css, tw } from "@twind";
+import { css } from "twind/css";
+import { tw } from "twind";
 import { h } from "preact";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";

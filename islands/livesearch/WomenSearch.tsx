@@ -1,6 +1,6 @@
 import { ArtistRow } from "@utils/types.tsx";
 import ky from "ky";
-import { tw } from "@twind";
+import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 

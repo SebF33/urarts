@@ -1,7 +1,7 @@
 import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { tw } from "@twind";
+import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 

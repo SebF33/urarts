@@ -4,7 +4,7 @@
 
 import { Spring } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { tw } from "@utils/twind.ts";
+import { tw } from "twind";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import WaveTank from "@components/WaveTank.tsx";

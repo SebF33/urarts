@@ -1,6 +1,7 @@
 import { ArtistQuote } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css, tw } from "@utils/twind.ts";
+import { css } from "twind/css";
+import { tw } from "twind";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../env.ts";
 import { useEffect } from "preact/hooks";

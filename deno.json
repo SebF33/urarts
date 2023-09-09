@@ -17,7 +17,6 @@
     "@islands/": "./islands/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.1.3",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
-    "@twind": "./utils/twind.ts",
     "@utils/": "./utils/",
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
     "chartjs": "https://cdn.skypack.dev/chart.js@4.3.0",

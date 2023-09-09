@@ -1,5 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css, tw } from "@twind";
+import { css } from "twind/css";
+import { tw } from "twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 

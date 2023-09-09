@@ -1,5 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css, tw } from "@twind";
+import { css } from "twind/css";
+import { tw } from "twind";
 
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";

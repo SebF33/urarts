@@ -1,4 +1,5 @@
-import { css, tw } from "@twind";
+import { css } from "twind/css";
+import { tw } from "twind";
 
 export default function ErrorLayout(
   props: { firstDigit: string; secondDigit: string; thirdDigit: string },
