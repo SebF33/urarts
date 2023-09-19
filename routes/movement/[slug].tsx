@@ -128,20 +128,20 @@ export default function MovementArtsPage(
             </div>
             <div class={tw`-mt-44`}>
               <div
-                class={tw`h-72 bg-white ${
+                class={tw`h-48 bg-white ${
                   css({
                     "mask-image": `linear-gradient(to bottom, ${
                       colorScheme[currentColorScheme].white
-                    } 50%, transparent)`,
+                    } 70%, transparent)`,
                     "-webkit-mask-image": `linear-gradient(to bottom, ${
                       colorScheme[currentColorScheme].white
-                    } 50%, transparent)`,
+                    } 70%, transparent)`,
                     "-o-mask-image": `linear-gradient(to bottom, ${
                       colorScheme[currentColorScheme].white
-                    } 50%, transparent)`,
+                    } 70%, transparent)`,
                     "-moz-mask-image": `linear-gradient(to bottom, ${
                       colorScheme[currentColorScheme].white
-                    } 50%, transparent)`,
+                    } 70%, transparent)`,
                   })
                 }`}
               >
