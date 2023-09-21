@@ -522,7 +522,7 @@ export default function ArtistsSearch() {
                   onClick={() => {
                     setSearchNationality("Grèce");
                   }}
-                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                  class={tw`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
                     class={flagClasses3}
@@ -535,6 +535,20 @@ export default function ArtistsSearch() {
                 <button
                   onClick={() => {
                     setSearchNationality("Royaume-Uni");
+                  }}
+                  class={tw`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
+                >
+                  <img
+                    class={flagClasses3}
+                    src="/flags/Royaume-Uni.png"
+                    alt="Royaume-Uni"
+                    title="Royaume-Uni"
+                    draggable={draggable}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchNationality("Colombie");
                   }}
                   class={tw`absolute flex items-center sm:left-44 focus:outline-none ${
                     css(
@@ -550,9 +564,9 @@ export default function ArtistsSearch() {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Royaume-Uni.png"
-                    alt="Royaume-Uni"
-                    title="Royaume-Uni"
+                    src="/flags/Colombie.png"
+                    alt="Colombie"
+                    title="Colombie"
                     draggable={draggable}
                   />
                 </button>
