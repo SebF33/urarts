@@ -4,7 +4,8 @@
     "migrate": "deno run -A utils/db_migration.ts",
     "migrate_up": "deno run -A utils/db_migration.ts --up",
     "migrate_down": "deno run -A utils/db_migration.ts --down",
-    "preview": "deno run -A main.ts"
+    "preview": "deno run -A main.ts",
+    "start": "deno run --allow-net --allow-read --allow-env --allow-run --watch=static/,routes/ main.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
