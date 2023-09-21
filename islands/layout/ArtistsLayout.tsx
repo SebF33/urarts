@@ -31,11 +31,31 @@ export default function ArtistsLayout(
     });
     setTippyInstances([]);
 
-    props.artists.forEach((p) => {
-      const el = document.querySelector(`[data-artist-id="${p.id}"]`);
+    const noresults = document.querySelector("#Noresults");
 
-      if (el) {
-        tippy(el, {
+    if (noresults) {
+      tippy(noresults, {
+        allowHTML: true,
+        content: "<p>Pas de résultats.</p>",
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+        onCreate(instance: Any) {
+          setTippyInstances((prevInstances) => [...prevInstances, instance]);
+        },
+        onDestroy(instance: Any) {
+          setTippyInstances((prevInstances) =>
+            prevInstances.filter((i) => i !== instance)
+          );
+        },
+      });
+    }
+
+    props.artists.forEach((p) => {
+      const artist = document.querySelector(`[data-artist-id="${p.id}"]`);
+
+      if (artist) {
+        tippy(artist, {
           allowHTML: true,
           content:
             `<strong style="font-size:1.2em"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
@@ -189,6 +209,7 @@ export default function ArtistsLayout(
             {showPlaceholder
               ? (
                 <div
+                  id="Noresults"
                   class={tw`${
                     css(
                       {
