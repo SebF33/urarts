@@ -4,10 +4,10 @@ import { css } from "twind/css";
 import { tw } from "twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
-import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import Quote from "@islands/Quote.tsx";
@@ -87,12 +87,20 @@ export default function HomePage(
   }>,
 ) {
   const { artistQuote, artists, color, grid, pathname } = props.data;
+  const desc = "Quelles sont les plus belles œuvres d'art au monde ?";
+  const title = "Urarts - Accueil";
 
   return (
-    <DefaultLayout
-      title="Urarts - Accueil"
-      desc="Quelles sont les plus belles œuvres d'art au monde ?"
-    >
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={desc} />
+      </Head>
+
       <div
         class={tw`flex flex-col min-h-screen font-brush ${
           css({
@@ -105,15 +113,17 @@ export default function HomePage(
         }`}
       >
         <Nav pathname={pathname} />
+
         <main
           class={tw`flex-grow`}
         >
           <ArtistsLayout artists={artists} grid={grid} />
           <Quote data={artistQuote} />
         </main>
+
         <WaterDrop color={color} />
         <Footer color={color} />
       </div>
-    </DefaultLayout>
+    </>
   );
 }

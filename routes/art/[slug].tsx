@@ -1,12 +1,12 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import { tw } from "twind";
 
 import { AnimBrushStroke, BrushStroke } from "@components/Assets.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
-import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
@@ -125,10 +125,16 @@ export default function ArtistArtsPage(
   } = props.data;
 
   return (
-    <DefaultLayout
-      title={title}
-      desc={desc}
-    >
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={desc} />
+      </Head>
+
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
@@ -237,6 +243,6 @@ export default function ArtistArtsPage(
         <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
         <Footer color={colorScheme[currentColorScheme].lighterdark} />
       </div>
-    </DefaultLayout>
+    </>
   );
 }

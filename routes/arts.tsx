@@ -1,17 +1,15 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import { tw } from "twind";
 
 import ArtsSearch from "@islands/livesearch/ArtsSearch.tsx";
-import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export const handler: Handlers<{
-  pathname: string;
-}> = {
+export const handler: Handlers<{}> = {
   GET(req, ctx) {
     const url = new URL(req.url);
     const pathname = url.pathname;
@@ -26,12 +24,20 @@ export default function ArtsPage(
   }>,
 ) {
   const { pathname } = props.data;
+  const desc = "Toutes les plus belles œuvres d'art au monde.";
+  const title = "Urarts - Œuvres";
 
   return (
-    <DefaultLayout
-      title="Urarts - Œuvres"
-      desc="Toutes les plus belles œuvres d'art au monde."
-    >
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={desc} />
+      </Head>
+
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
@@ -44,10 +50,12 @@ export default function ArtsPage(
         }`}
       >
         <Nav pathname={pathname} />
+
         <ArtsSearch />
+
         <WaterDrop color={colorScheme[currentColorScheme].blue} />
         <Footer color={colorScheme[currentColorScheme].blue} />
       </div>
-    </DefaultLayout>
+    </>
   );
 }

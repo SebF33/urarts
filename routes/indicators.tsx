@@ -1,11 +1,11 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
+import { tw } from "twind";
 
-import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import Doughnut from "@islands/chart/Doughnut.tsx";
@@ -98,12 +98,20 @@ export default function IndicatorsPage(
     movementNameResult,
     pathname,
   } = props.data;
+  const desc = "Indicateurs pour Urarts.";
+  const title = "Urarts - Indicateurs";
 
   return (
-    <DefaultLayout
-      title="Urarts - Indicateurs"
-      desc="Indicateurs pour Urarts"
-    >
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={desc} />
+      </Head>
+
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
@@ -116,6 +124,7 @@ export default function IndicatorsPage(
         }`}
       >
         <Nav pathname={pathname} />
+
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
             <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
@@ -136,9 +145,10 @@ export default function IndicatorsPage(
             </div>
           </div>
         </main>
+
         <WaterDrop color={color} />
         <Footer color={color} />
       </div>
-    </DefaultLayout>
+    </>
   );
 }

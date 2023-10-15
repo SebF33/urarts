@@ -1,21 +1,18 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
 import { MovementRow } from "@utils/types.tsx";
+import { tw } from "twind";
 
-import DefaultLayout from "@components/DefaultLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Movements = Array<MovementRow>;
 
-export const handler: Handlers<{
-  movements: Movements;
-  pathname: string;
-}> = {
+export const handler: Handlers<{}> = {
   async GET(req, ctx) {
     const url = new URL(req.url);
     const pathname = url.pathname;
@@ -57,12 +54,20 @@ export default function MovementsPage(
   }>,
 ) {
   const { movements, pathname } = props.data;
+  const desc = "Les principaux mouvements artistiques.";
+  const title = "Urarts - Mouvements";
 
   return (
-    <DefaultLayout
-      title="Urarts - Mouvements"
-      desc="Les principaux mouvements artistiques."
-    >
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={desc} />
+      </Head>
+
       <div
         class={tw`flex flex-col min-h-screen ${
           css({
@@ -75,6 +80,7 @@ export default function MovementsPage(
         }`}
       >
         <Nav pathname={pathname} />
+
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
             <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
@@ -108,9 +114,10 @@ export default function MovementsPage(
             </div>
           </div>
         </main>
+
         <WaterDrop color={colorScheme[currentColorScheme].cyan} />
         <Footer color={colorScheme[currentColorScheme].cyan} />
       </div>
-    </DefaultLayout>
+    </>
   );
 }
