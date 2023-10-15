@@ -72,4 +72,6 @@ Ouvrir dans le navigateur :
 [![Made with Fresh](https://fresh.deno.dev/fresh-badge-dark.svg)](https://fresh.deno.dev)
 
 
-![avatar](/.github/avatar.png)
+<p align="center">
+  <img align="center" width="100" src="https://raw.githubusercontent.com/sebf33/sebf33/master/assets/avatar.png" />
+</p>
