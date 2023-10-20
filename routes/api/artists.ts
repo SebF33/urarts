@@ -46,6 +46,7 @@ export const handler = async (
       "deathyear",
       "avatar_url",
       "signature",
+      "color",
       "site_web",
       "info",
       "slug",

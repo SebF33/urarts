@@ -39,6 +39,7 @@ export const handler: Handlers<{}> = {
       deathyear: p.deathyear,
       avatar_url: p.avatar_url,
       signature: p.signature,
+      color: p.color,
       site_web: p.site_web,
       info: p.info,
       slug: p.slug,

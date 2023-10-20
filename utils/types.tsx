@@ -48,6 +48,7 @@ export type ArtistRow = {
   deathyear: string;
   avatar_url?: string;
   signature: string | null;
+  color: string;
   site_web: string | null;
   info: string | null;
   slug: string;

@@ -1,9 +1,9 @@
 import { Any } from "any";
 import { ArtistRow } from "@utils/types.tsx";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { h } from "preact";
 import tippy from "tippyjs";
+import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -58,7 +58,7 @@ export default function ArtistsLayout(
         tippy(artist, {
           allowHTML: true,
           content:
-            `<strong style="font-size:1.2em"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
+            `<strong style="font-size:1.2em;color:${p.color}"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
             <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
             <br>Nationalité : ${p.nationality}
             <p style="margin-top:10px">${p.info}</p>`,
