@@ -20,6 +20,7 @@ export const handler = async (
       "last_name",
       "gender",
       "avatar_url",
+      "color",
       "artist.slug as slug",
       "movement.name as movement",
       "polyptych",

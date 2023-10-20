@@ -1,4 +1,5 @@
 import { ArtRow } from "@utils/types.tsx";
+import { css } from "twind/css";
 import ky from "ky";
 import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
@@ -50,11 +51,25 @@ export default function ArtsSearch() {
                     >
                       <p class={tw`relative group text-xl`}>
                         <span>{item.name}</span>
-                        <span class={tw`text-lg italic`}>
+                        <span
+                          class={tw`italic ${
+                            css(
+                              {
+                                "font-size": "1.05rem",
+                              },
+                            )
+                          }`}
+                        >
                           {" "}({item.last_name})
                         </span>
                         <span
-                          class={tw`absolute -bottom-1 left-0 w-0 h-1 bg-blue transition-all group-hover:w-full`}
+                          class={tw`absolute -bottom-1 left-0 w-0 h-1 transition-all group-hover:w-full ${
+                            css(
+                              {
+                                "background": item.color,
+                              },
+                            )
+                          }`}
                         >
                         </span>
                       </p>
