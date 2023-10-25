@@ -9,6 +9,7 @@ type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
   arts: Arts;
   font?: string;
+  type?: string;
 }
 
 export default function ArtsLayout(
@@ -23,16 +24,27 @@ export default function ArtsLayout(
     setTippyInstances([]);
 
     props.arts.forEach((p) => {
+      let content;
       const el = document.querySelector(`[data-artist-id="${p.id}"]`);
 
       if (el) {
+        if (props.type === "histocharacters") {
+          content =
+            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
+        <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
+        <br>Artiste : <strong style="color:${p.color}"><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
+        <p style="margin-top:10px">${p.info}</p>`;
+        } else {
+          content =
+            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
+        <br><strong><a href="${UrlBasePath}/movement/${p.movement_slug}">${p.movement}</a></strong>
+        <br>Artiste : <strong style="color:${p.color}"><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
+        <p style="margin-top:10px">${p.info}</p>`;
+        }
+
         tippy(el, {
           allowHTML: true,
-          content:
-            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
-            <br><strong><a href="${UrlBasePath}/movement/${p.movement_slug}">${p.movement}</a></strong>
-            <br>Artiste : <strong><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
-            <p style="margin-top:10px">${p.info}</p>`,
+          content: content,
           interactive: true,
           placement: "bottom",
           theme: "urarts",

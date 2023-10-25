@@ -25,6 +25,10 @@ interface ArtTable {
   url_5?: string; // Panneau à l'extrême droite du central
   info: string | null;
   histocharacter: number; // Personnage historique (0: non |1: oui)
+  histocharactername: string | null;
+  histocharacterbirthyear: number | null;
+  histocharacterdeathyear: number | null;
+  histocharacterinfo: string | null;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

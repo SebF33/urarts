@@ -1,3 +1,4 @@
+import { asset } from "$fresh/runtime.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
 import { Head } from "$fresh/runtime.ts";
@@ -21,6 +22,17 @@ export default function HistoCharactersPage() {
         <meta property="og:description" content={desc} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={desc} />
+
+        {/* CSS & JS */}
+        <link
+          href={asset("/styles/lib/nouislider.min.css")}
+          rel="stylesheet"
+        />
+        <link
+          href={asset("/styles/nouislider.css")}
+          rel="stylesheet"
+        />
+        <script src="/styles/lib/nouislider.min.js"></script>
       </Head>
 
       <div
