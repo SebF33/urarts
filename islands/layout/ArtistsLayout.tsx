@@ -197,6 +197,14 @@ export default function ArtistsLayout(
                     <img
                       src={"/flags/" + p.nationality + ".png"}
                       alt="flag-symbol"
+                      class={tw`${
+                        css(
+                          {
+                            "filter":
+                              "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))",
+                          },
+                        )
+                      }`}
                     />
                   </a>
                 </ul>
