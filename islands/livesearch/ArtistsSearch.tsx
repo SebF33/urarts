@@ -1,8 +1,8 @@
 import { ArtistRow } from "@utils/types.tsx";
-import ky from "ky";
 import { css } from "twind/css";
-import { tw } from "twind";
 import { Fragment, h } from "preact";
+import ky from "ky";
+import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -20,25 +20,25 @@ export default function ArtistsSearch() {
   const [showFlags3, setShowFlags3] = useState(true);
 
   const draggable = false;
-  const grid =
-    "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
-  const transition =
-    "transition-all duration-300 ease-in-out hover:(transform scale-110)";
+  const grid = "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
+  const scale105 = "transition-all duration-150 ease-in-out hover:(transform scale-105)";
+  const scale110 = "transition-all duration-300 ease-in-out hover:(transform scale-110)";
+  const shadow = "drop-shadow(0.01rem 0.01rem 0.04rem rgba(0, 0, 0, 0.5))";
   const width6 = "w-6 sm:w-8";
   const width8 = "w-8 sm:w-10";
   const width12 = "w-12 sm:w-16";
 
-  const flagClasses1 = tw`${width8} ${transition} fade ${
+  const flagClasses1 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
     showFlags1 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const flagClasses2 = tw`${width8} ${transition} fade ${
+  const flagClasses2 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
     showFlags2 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const flagClasses3 = tw`${width8} ${transition} fade ${
+  const flagClasses3 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
     showFlags3 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const moreClasses = tw`${width6} ${transition}`;
-  const worldFlagClasses = tw`${width12} ${transition}`;
+  const moreClasses = tw`${width6} ${css({"filter":shadow})} ${scale105}`;
+  const worldFlagClasses = tw`${width12} ${css({"filter":shadow})} ${scale105}`;
 
   const handleMoreClick = (
     event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
