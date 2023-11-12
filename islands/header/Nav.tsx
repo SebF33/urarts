@@ -7,6 +7,8 @@ import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
 export default function Nav(
   props: { pathname?: string },
 ) {
+  const draggable = false;
+
   if (typeof document !== "undefined") {
     const btn = document.querySelector("button.mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
@@ -30,11 +32,16 @@ export default function Nav(
         <div class={tw`flex justify-between`}>
           <div class={tw`flex space-x-7`}>
             <div>
-              <a href="/" class={tw`flex items-center py-3 px-2`}>
+              <a
+                href="/"
+                class={tw`flex items-center py-3 px-2`}
+                draggable={draggable}
+              >
                 <img
                   class={tw`h-10 w-10`}
                   src="/icon_urarts.svg"
                   alt="Urarts"
+                  draggable={draggable}
                 />
               </a>
             </div>
@@ -46,6 +53,7 @@ export default function Nav(
                     ? "text-lighterdark border-b-4 border-lighterdark"
                     : ""
                 } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                draggable={draggable}
               >
                 Accueil
               </a>
@@ -56,6 +64,7 @@ export default function Nav(
                     ? "text-lighterdark border-b-4 border-lighterdark"
                     : ""
                 } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                draggable={draggable}
               >
                 Artistes
               </a>
@@ -66,6 +75,7 @@ export default function Nav(
                     ? "text-lighterdark border-b-4 border-lighterdark"
                     : ""
                 } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                draggable={draggable}
               >
                 Œuvres
               </a>
@@ -76,6 +86,7 @@ export default function Nav(
                     ? "text-lighterdark border-b-4 border-lighterdark"
                     : ""
                 } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                draggable={draggable}
               >
                 Mouvements
               </a>
@@ -85,18 +96,21 @@ export default function Nav(
             <a
               href="/histocharacters"
               class={tw`hover:text-lighterdark -mr-1`}
+              draggable={draggable}
             >
               <HistoIcon />
             </a>
             <a
               href="/women"
               class={tw`hover:text-lighterdark`}
+              draggable={draggable}
             >
               <WomanIcon />
             </a>
             <a
               href="/art/mimi"
               class={tw`hover:text-lighterdark`}
+              draggable={draggable}
             >
               <svg
                 class={tw`icon-svg h-6 w-6`}
@@ -113,6 +127,7 @@ export default function Nav(
             <a
               href="/indicators"
               class={tw`hover:text-lighterdark`}
+              draggable={draggable}
             >
               <svg
                 class={tw`icon-svg h-6 w-6`}
@@ -129,6 +144,7 @@ export default function Nav(
             <a
               href="/api/arts"
               class={tw`hover:text-lighterdark`}
+              draggable={draggable}
               target="_blank"
             >
               <svg

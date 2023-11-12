@@ -15,6 +15,8 @@ export default function ArtistsLayout(
   const [showPlaceholder, setShowPlaceholder] = useState(false);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
+  const draggable = false;
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowPlaceholder(true);
@@ -135,6 +137,7 @@ export default function ArtistsLayout(
                     }`}
                     src={p.signature}
                     alt={p.signature}
+                    draggable={draggable}
                   />
                 )}
                 <div
@@ -156,6 +159,7 @@ export default function ArtistsLayout(
                   <a
                     href={"/art/" + p.slug}
                     onClick={handleClick}
+                    draggable={draggable}
                     class={tw`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
                       css(
                         {
@@ -197,6 +201,7 @@ export default function ArtistsLayout(
                     <img
                       src={"/flags/" + p.nationality + ".png"}
                       alt="flag-symbol"
+                      draggable={draggable}
                       class={tw`${
                         css(
                           {

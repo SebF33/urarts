@@ -11,13 +11,16 @@ type Quote = Array<ArtistQuote>;
 export default function Quote(
   props: { data: Quote },
 ) {
+  const draggable = false;
+
   useEffect(() => {
     const artistQuote = document.querySelector("#Quote");
     if (artistQuote) {
       tippy(artistQuote, {
         allowHTML: true,
-        content: `<a href="${UrlBasePath}/art/${props.data.slug}">
-          <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px"/>
+        content:
+          `<a href="${UrlBasePath}/art/${props.data.slug}" draggable="${draggable}">
+          <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px" draggable="${draggable}"/>
           </a>`,
         interactive: true,
         placement: "top",
@@ -52,6 +55,7 @@ export default function Quote(
               class={tw`max-w-[100px]`}
               src={props.data.signature}
               alt={props.data.signature}
+              draggable={draggable}
             />
           </div>
         )}

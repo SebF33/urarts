@@ -123,6 +123,7 @@ export default function ArtistArtsPage(
     query,
     title,
   } = props.data;
+  const draggable = false;
 
   return (
     <>
@@ -191,6 +192,7 @@ export default function ArtistArtsPage(
                     class={tw`inline-block mt-2`}
                     src={"/flags/" + nationality + ".png"}
                     alt={nationality}
+                    draggable={draggable}
                   />
                   <p class="font-bold text-lg mb-4">
                     {"Nationalité : " + nationality}
@@ -210,6 +212,7 @@ export default function ArtistArtsPage(
                           <img
                             src={avatar}
                             alt={avatar}
+                            draggable={draggable}
                           />
                         </div>
                       </div>
