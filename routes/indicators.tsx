@@ -6,9 +6,9 @@ import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
 import { tw } from "twind";
 
+import Doughnut from "@islands/chart/Doughnut.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
-import Doughnut from "@islands/chart/Doughnut.tsx";
 import PolarArea from "@islands/chart/PolarArea.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
@@ -30,6 +30,14 @@ export const handler: Handlers<{}> = {
       .groupBy("nationality_group")
       .execute();
 
+    const totalArtistQuery = await db
+      .selectFrom("artist")
+      .select([
+        count("id").as("artist_count"),
+      ])
+      .where("slug", "!=", "mimi")
+      .execute();
+
     const movementQuery = await db
       .selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
@@ -43,17 +51,32 @@ export const handler: Handlers<{}> = {
       .groupBy("movement_group")
       .execute();
 
+    const totalArtQuery = await db
+      .selectFrom("art")
+      .innerJoin("artist", "art.owner_id", "artist.id")
+      .select([count("art.id").as("art_count")])
+      .where("slug", "!=", "mimi")
+      .where("copyright", "!=", 2)
+      .execute();
+
     const artistCountResult: number[] = artistQuery.map((item) =>
       parseFloat(item.artist_count)
     );
     const artistNationalityResult: string[] = artistQuery.map((item) =>
       item.nationality_group
     );
+    const totalArtistCountResult: number[] = totalArtistQuery.map((item) =>
+      parseFloat(item.artist_count)
+    );
+
     const movementCountResult: number[] = movementQuery.map((item) =>
       parseFloat(item.art_count)
     );
     const movementNameResult: string[] = movementQuery.map((item) =>
       item.movement_group
+    );
+    const totalArtCountResult: number[] = totalArtQuery.map((item) =>
+      parseFloat(item.art_count)
     );
 
     const randomColorsIndex = Math.floor(Math.random() * 8);
@@ -76,6 +99,8 @@ export const handler: Handlers<{}> = {
       movementCountResult,
       movementNameResult,
       pathname,
+      totalArtCountResult,
+      totalArtistCountResult,
     });
   },
 };
@@ -88,6 +113,8 @@ export default function IndicatorsPage(
     movementCountResult: number[];
     movementNameResult: string[];
     pathname: string;
+    totalArtCountResult: number[];
+    totalArtistCountResult: number[];
   }>,
 ) {
   const {
@@ -97,6 +124,8 @@ export default function IndicatorsPage(
     movementCountResult,
     movementNameResult,
     pathname,
+    totalArtCountResult,
+    totalArtistCountResult,
   } = props.data;
   const desc = "Indicateurs pour Urarts.";
   const title = "Urarts - Indicateurs";
@@ -136,11 +165,13 @@ export default function IndicatorsPage(
               <Doughnut
                 countResult={artistCountResult}
                 nationalityResult={artistNationalityResult}
+                totalArtistCountResult={totalArtistCountResult}
               />
               <div style="height:60px; width:60px"></div>
               <PolarArea
                 countResult={movementCountResult}
                 nameResult={movementNameResult}
+                totalArtCountResult={totalArtCountResult}
               />
             </div>
           </div>

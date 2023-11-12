@@ -9,7 +9,11 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function PolarArea(
-  props: { countResult: number[]; nameResult: string[] },
+  props: {
+    countResult: number[];
+    nameResult: string[];
+    totalArtCountResult: number[];
+  },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -29,7 +33,8 @@ export default function PolarArea(
           size: 19,
         },
         fullSize: false,
-        text: "Nombre d’œuvres d’art disponibles par mouvement",
+        text: props.totalArtCountResult +
+          " œuvres d’art disponibles par mouvement",
       },
     },
   };

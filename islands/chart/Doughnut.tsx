@@ -9,7 +9,11 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
-  props: { countResult: number[]; nationalityResult: string[] },
+  props: {
+    countResult: number[];
+    nationalityResult: string[];
+    totalArtistCountResult: number[];
+  },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -29,7 +33,8 @@ export default function Doughnut(
           size: 19,
         },
         fullSize: false,
-        text: "Nombre d’artistes disponibles par nationalité",
+        text: props.totalArtistCountResult +
+          " artistes disponibles par nationalité",
       },
     },
   };
