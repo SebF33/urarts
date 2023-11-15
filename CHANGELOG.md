@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-11-15]
+
+### Nouveautés
+- Ajout d'une page regroupant les talents.
+
 ## [2023-08-19]
 
 ### Nouveautés

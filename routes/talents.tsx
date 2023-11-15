@@ -1,4 +1,4 @@
-import { ArtistQuote, ArtistRow } from "@utils/types.tsx";
+import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "twind/css";
 import { Db } from "@utils/db.ts";
@@ -11,11 +11,9 @@ import { tw } from "twind";
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Nav from "@islands/header/Nav.tsx";
-import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
-type Quote = Array<ArtistQuote>;
 
 export const handler: Handlers<{}> = {
   async GET(req, ctx) {
@@ -26,9 +24,8 @@ export const handler: Handlers<{}> = {
 
     const artistQuery = await db.selectFrom("artist")
       .selectAll()
-      .where("slug", "not in", talents)
+      .where("slug", "in", talents)
       .orderBy(sql`random()`)
-      .limit(4)
       .execute();
 
     const artists = artistQuery.map((p) => ({
@@ -46,19 +43,6 @@ export const handler: Handlers<{}> = {
       slug: p.slug,
     }));
 
-    const artistQuote = await db.selectFrom("artist")
-      .select([
-        "first_name",
-        "last_name",
-        "avatar_url",
-        "signature",
-        "quote",
-        "slug",
-      ])
-      .where("quote", "is not", null)
-      .orderBy(sql`random()`)
-      .executeTakeFirst();
-
     const randomColorsIndex = Math.floor(Math.random() * 7);
     const colors = [
       colorScheme[currentColorScheme].lighterdark,
@@ -72,24 +56,23 @@ export const handler: Handlers<{}> = {
     const color = colors[randomColorsIndex];
 
     const grid =
-      "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
+      "grid gap-10 sm:gap-6 md:gap-20 lg:gap-64 xl:gap-96 grid-cols-1 sm:grid-cols-2 pt-10 pb-10 lg:pt-20 md:pb-4 lg:pb-0";
 
-    return ctx.render({ artistQuote, artists, color, grid, pathname });
+    return ctx.render({ artists, color, grid, pathname });
   },
 };
 
-export default function HomePage(
+export default function TalentsPage(
   props: PageProps<{
-    artistQuote: Quote;
     artists: Artists;
     color: string;
     grid: string;
     pathname: string;
   }>,
 ) {
-  const { artistQuote, artists, color, grid, pathname } = props.data;
-  const desc = "Quelles sont les plus belles œuvres d'art au monde ?";
-  const title = "Urarts - Accueil";
+  const { artists, color, grid, pathname } = props.data;
+  const desc = "Les talents.";
+  const title = "Urarts - Talents";
 
   return (
     <>
@@ -105,8 +88,8 @@ export default function HomePage(
       <div
         class={tw`flex flex-col min-h-screen font-brush ${
           css({
-            background: `url(/background/gray)`,
-            "background-color": `${colorScheme[currentColorScheme].white}`,
+            background: `url(/background/white)`,
+            "background-color": `${colorScheme[currentColorScheme].gray}`,
             "background-position": "center",
             "background-size": "420px",
             "-webkit-tap-highlight-color": "transparent",
@@ -118,8 +101,17 @@ export default function HomePage(
         <main
           class={tw`flex-grow`}
         >
+          <div
+            class={tw`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}
+          >
+            <h1
+              class={tw`text-5xl leading-none font-medium mx-auto z-20`}
+            >
+              Talents
+            </h1>
+          </div>
+
           <ArtistsLayout artists={artists} grid={grid} />
-          <Quote data={artistQuote} />
         </main>
 
         <WaterDrop color={color} />

@@ -90,6 +90,17 @@ export default function Nav(
               >
                 Mouvements
               </a>
+              <a
+                href="/talents"
+                class={tw`${
+                  props.pathname === "/talents"
+                    ? "text-lighterdark border-b-4 border-lighterdark"
+                    : ""
+                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                draggable={draggable}
+              >
+                Talents
+              </a>
             </div>
           </div>
           <div class={tw`hidden md:flex items-center space-x-3`}>
@@ -239,6 +250,20 @@ export default function Nav(
               class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
             >
               Mouvements
+            </a>
+          </li>
+          <li
+            class={tw`${
+              props.pathname === "/talents"
+                ? "active text-white bg-lighterdark font-semibold"
+                : ""
+            }`}
+          >
+            <a
+              href="/talents"
+              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+            >
+              Talents
             </a>
           </li>
           <li

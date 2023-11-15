@@ -4,6 +4,7 @@ import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
+import { talents } from "@utils/variables.ts";
 import { tw } from "twind";
 
 import Doughnut from "@islands/chart/Doughnut.tsx";
@@ -35,7 +36,7 @@ export const handler: Handlers<{}> = {
       .select([
         count("id").as("artist_count"),
       ])
-      .where("slug", "!=", "mimi")
+      .where("slug", "not in", talents)
       .execute();
 
     const movementQuery = await db
@@ -55,7 +56,7 @@ export const handler: Handlers<{}> = {
       .selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
       .select([count("art.id").as("art_count")])
-      .where("slug", "!=", "mimi")
+      .where("slug", "not in", talents)
       .where("copyright", "!=", 2)
       .execute();
 
