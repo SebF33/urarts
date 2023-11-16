@@ -126,10 +126,16 @@ export default function ArtistsSearch() {
       <div
         class={tw`p-4 max-w-7xl mx-auto mb-44 sm:mb-28 px-4 sm:px-6 lg:px-8`}
       >
-        <h1 class={tw`text-5xl font-medium mx-auto mb-16 z-20`}>
-          Artistes
-        </h1>
-        <div class={tw`relative w-60 sm:w-80 mx-auto mt-6 mb-24`}>
+        <div
+          class={tw`paper max-w-[230px] mb-16`}
+        >
+          <div class="top-tape"></div>
+          <h1 class={tw`text-5xl font-medium mx-auto`}>
+            Artistes
+          </h1>
+        </div>
+
+        <div class={tw`relative w-60 sm:w-80 mx-auto mt-24 md:mt-6 mb-24`}>
           <div class={tw`absolute w-full -top-16`}>
             <PaintPalette />
           </div>
@@ -657,7 +663,7 @@ export default function ArtistsSearch() {
 
       <div
         id="slider"
-        class={tw`max-w-3xl mt-[240px] mb-[40px] sm:mt-[200px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
+        class={tw`max-w-3xl mt-[290px] mb-[40px] sm:mt-[230px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
       >
       </div>
 

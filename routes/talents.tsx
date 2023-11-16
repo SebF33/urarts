@@ -104,11 +104,16 @@ export default function TalentsPage(
           <div
             class={tw`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}
           >
-            <h1
-              class={tw`text-5xl leading-none font-medium mx-auto z-20`}
+            <div
+              class={tw`paper max-w-[240px]`}
             >
-              Talents
-            </h1>
+              <div class="top-tape"></div>
+              <h1
+                class={tw`text-5xl leading-none font-medium mx-auto`}
+              >
+                Talents
+              </h1>
+            </div>
           </div>
 
           <ArtistsLayout artists={artists} grid={grid} />

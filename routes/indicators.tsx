@@ -157,9 +157,15 @@ export default function IndicatorsPage(
 
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-            <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
-              Indicateurs
-            </h1>
+            <div
+              class={tw`paper max-w-[230px] mb-6`}
+            >
+              <div class="top-tape"></div>
+              <h1 class={tw`text-5xl font-medium mx-auto`}>
+                Indicateurs
+              </h1>
+            </div>
+
             <div
               class={tw`charts flex items-center justify-evenly mx-auto max-w-xl`}
             >

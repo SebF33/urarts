@@ -83,9 +83,15 @@ export default function MovementsPage(
 
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-            <h1 class={tw`text-5xl font-medium mx-auto mb-6`}>
-              Mouvements
-            </h1>
+            <div
+              class={tw`paper max-w-[230px] mb-6`}
+            >
+              <div class="top-tape"></div>
+              <h1 class={tw`text-5xl font-medium mx-auto`}>
+                Mouvements
+              </h1>
+            </div>
+
             <div class={tw`flex flex-wrap`}>
               {movements &&
                 (
@@ -99,7 +105,8 @@ export default function MovementsPage(
                           <p class={tw`relative group text-xl`}>
                             <span>{item.name}</span>
                             <span class={tw`text-lg italic`}>
-                              {" "}({item.art_count} œuvre.s)
+                              {" "}({item.art_count}{" "}
+                              œuvre{item.art_count === "1" ? "" : "s"})
                             </span>
                             <span
                               class={tw`absolute -bottom-1 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}

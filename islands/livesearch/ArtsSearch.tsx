@@ -22,9 +22,15 @@ export default function ArtsSearch() {
   return (
     <main class={tw`flex-grow font-brush`}>
       <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-        <h1 class={tw`text-5xl font-medium mx-auto mb-2`}>
-          Œuvres
-        </h1>
+        <div
+          class={tw`paper max-w-[230px] mb-2`}
+        >
+          <div class="top-tape"></div>
+          <h1 class={tw`text-5xl font-medium mx-auto`}>
+            Œuvres
+          </h1>
+        </div>
+
         <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>

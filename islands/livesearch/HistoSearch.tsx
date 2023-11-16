@@ -70,11 +70,18 @@ export default function HistoSearch() {
   return (
     <main class={tw`flex-grow font-brush`}>
       <div
-        class={tw`p-4 max-w-7xl mx-auto mb-4 sm:mb-16 px-4 sm:px-6 lg:px-8`}
+        class={tw`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
-        <h1 class={tw`text-5xl leading-none font-medium mx-auto mb-2`}>
-          Personnages historiques
-        </h1>
+        <div
+          class={tw`paper max-w-[280px] mb-4`}
+        >
+          <div class="tape-section"></div>
+          <h1 class={tw`text-5xl leading-none font-medium mx-auto mb-2`}>
+            Personnages historiques
+          </h1>
+          <div class="tape-section"></div>
+        </div>
+
         <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>
