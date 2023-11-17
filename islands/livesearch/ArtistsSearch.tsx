@@ -19,6 +19,8 @@ export default function ArtistsSearch() {
   const [showFlags2, setShowFlags2] = useState(true);
   const [showFlags3, setShowFlags3] = useState(true);
 
+  // CSS
+  const blur = "blur(0)";
   const draggable = false;
   const grid = "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
   const scale105 = "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
@@ -28,17 +30,17 @@ export default function ArtistsSearch() {
   const width8 = "w-8 sm:w-10";
   const width12 = "w-12 sm:w-16";
 
-  const flagClasses1 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
+  const flagClasses1 = tw`${width8} ${css({"filter":shadow,"backdrop-filter":blur})} ${scale110} fade ${
     showFlags1 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const flagClasses2 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
+  const flagClasses2 = tw`${width8} ${css({"filter":shadow,"backdrop-filter":blur})} ${scale110} fade ${
     showFlags2 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const flagClasses3 = tw`${width8} ${css({"filter":shadow})} ${scale110} fade ${
+  const flagClasses3 = tw`${width8} ${css({"filter":shadow,"backdrop-filter":blur})} ${scale110} fade ${
     showFlags3 ? "fade-enter-active" : "fade-exit-active"
   }`;
-  const moreClasses = tw`${width6} ${css({"filter":shadow})} ${scale105}`;
-  const worldFlagClasses = tw`${width12} ${css({"filter":shadow})} ${scale105}`;
+  const moreClasses = tw`${width6} ${css({"filter":shadow,"backdrop-filter":blur})} ${scale105}`;
+  const worldFlagClasses = tw`${width12} ${css({"filter":shadow,"backdrop-filter":blur})} ${scale105}`;
 
   const handleMoreClick = (
     event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
