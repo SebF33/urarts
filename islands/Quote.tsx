@@ -32,7 +32,7 @@ export default function Quote(
   return (
     <div
       id="Quote"
-      class={tw`paper max-w-[900px] mx-auto -mt-4 mb-6 ${
+      class={tw`paper max-w-[900px] mx-auto -mt-4 mb-6 overflow-hidden ${
         css(
           {
             "color": `${colorScheme[currentColorScheme].lighterdark}`,
