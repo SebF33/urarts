@@ -31,7 +31,8 @@ export default function Quote(
 
   return (
     <div
-      class={tw`mx-auto ${
+      id="Quote"
+      class={tw`paper max-w-[900px] mx-auto -mt-4 mb-6 ${
         css(
           {
             "color": `${colorScheme[currentColorScheme].lighterdark}`,
@@ -39,26 +40,30 @@ export default function Quote(
         )
       }`}
     >
-      <p
-        id="Quote"
-        class={tw`text-center text-xl font-bold w-5/6 md:w-1/2 mx-auto`}
+      <div class="top-tape"></div>
+      <div
+        class={tw`w-full mt-4 mx-1`}
       >
-        “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
-        {props.data.last_name}
-      </p>
-      {props.data.signature &&
-        (
-          <div
-            class={tw`flex justify-end w-5/6 md:w-1/3 max-h-9 mx-auto`}
-          >
-            <img
-              class={tw`max-w-[100px]`}
-              src={props.data.signature}
-              alt={props.data.signature}
-              draggable={draggable}
-            />
-          </div>
-        )}
+        <p
+          class={tw`text-center text-xl font-bold mx-auto`}
+        >
+          “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
+          {props.data.last_name}
+        </p>
+        {props.data.signature &&
+          (
+            <div
+              class={tw`flex justify-end md:w-9/12 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
+            >
+              <img
+                class={tw`max-w-[100px]`}
+                src={props.data.signature}
+                alt={props.data.signature}
+                draggable={draggable}
+              />
+            </div>
+          )}
+      </div>
     </div>
   );
 }

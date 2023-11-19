@@ -105,7 +105,7 @@ export default function TalentsPage(
             class={tw`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}
           >
             <div
-              class={tw`paper max-w-[240px]`}
+              class={tw`paper max-w-[240px] mt-5`}
             >
               <div class="top-tape"></div>
               <h1

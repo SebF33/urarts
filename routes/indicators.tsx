@@ -158,7 +158,7 @@ export default function IndicatorsPage(
         <main class={tw`flex-grow font-brush`}>
           <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
             <div
-              class={tw`paper max-w-[230px] mb-6`}
+              class={tw`paper max-w-[230px] mt-5 mb-6`}
             >
               <div class="top-tape"></div>
               <h1 class={tw`text-5xl font-medium mx-auto`}>

@@ -129,7 +129,7 @@ export default function ArtistsSearch() {
         class={tw`p-4 max-w-7xl mx-auto mb-44 sm:mb-28 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={tw`paper max-w-[230px] mb-16`}
+          class={tw`paper max-w-[230px] mt-5 mb-16`}
         >
           <div class="top-tape"></div>
           <h1 class={tw`text-5xl font-medium mx-auto`}>

@@ -73,10 +73,10 @@ export default function HistoSearch() {
         class={tw`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={tw`paper max-w-[280px] mb-4`}
+          class={tw`paper max-w-[260px] mt-5 mb-4`}
         >
           <div class="tape-section"></div>
-          <h1 class={tw`text-5xl leading-none font-medium mx-auto mb-2`}>
+          <h1 class={tw`text-5xl leading-none font-medium mb-2 ml-2`}>
             Personnages historiques
           </h1>
           <div class="tape-section"></div>
