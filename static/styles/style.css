@@ -259,20 +259,26 @@ h1 {
 }
 
 /* Vagues de couleurs
-   - Gradient pour la barre de navigation : https://colorzilla.com/gradient-editor/#67b0e8+0,6cbfbf+52,8ccf7e+100
+   - Gradient pour la barre de navigation : https://colorzilla.com/gradient-editor/#67b0e8+0,c47fd5+90,c47fd5+90,c47fd5+100
 */
 .wave-colors {
-    background: var(--color-blue);
     /* Old browsers */
-    background: -moz-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    background: var(--color-blue);
     /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    background: -moz-linear-gradient(left, var(--color-blue) 0%, var(--color-magenta) 90%, var(--color-magenta) 90%, var(--color-magenta) 100%);
+    /* Chrome4-9, Safari4-5 */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, var(--color-blue)), color-stop(90%, var(--color-magenta)), color-stop(90%, var(--color-magenta)), color-stop(100%, var(--color-magenta)));
     /* Chrome10-25, Safari5.1-6 */
-    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 52%, var(--color-green) 100%);
+    background: -webkit-linear-gradient(left, var(--color-blue) 0%, var(--color-magenta) 90%, var(--color-magenta) 90%, var(--color-magenta) 100%);
+    /* Opera 11.10-11.50 */
+    background: -o-linear-gradient(left, var(--color-blue) 0%, var(--color-magenta) 90%, var(--color-magenta) 90%, var(--color-magenta) 100%);
+    /* IE10 preview */
+    background: -ms-linear-gradient(left, var(--color-blue) 0%, var(--color-magenta) 90%, var(--color-magenta) 90%, var(--color-magenta) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#67b0e8', endColorstr='#8ccf7e', GradientType=1);
-    /* IE6-9 */
-    animation: waveColors 8s ease infinite;
+    background: linear-gradient(to right, var(--color-blue) 0%, var(--color-magenta) 90%, var(--color-magenta) 90%, var(--color-magenta) 100%);
+    /* IE6-8 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67b0e8', endColorstr='#c47fd5', GradientType=1);
+    animation: waveColors 20s ease infinite;
     background-size: 350% 350%;
 }
 
