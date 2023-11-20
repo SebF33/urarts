@@ -115,6 +115,7 @@ export default function WaterDrop({ color }: { color: string }) {
           <a href="mailto:sebastien.flouriot@gmail.com" style="text-decoration:underline">sebastien.flouriot@gmail.com</a>
           en cas de demande ou de litige liés à l'exploitation de ces visuels.`,
         interactive: true,
+        offset: [0, -20],
         placement: "top",
         theme: "urarts",
       });
@@ -128,6 +129,7 @@ export default function WaterDrop({ color }: { color: string }) {
     >
       <svg
         id="Urarts"
+        class={tw`transform-gpu`}
         width="170"
         height="273.41"
         viewBox="0 0 170 273.41"
@@ -291,6 +293,7 @@ export default function WaterDrop({ color }: { color: string }) {
       </svg>
 
       <svg
+        class={tw`transform-gpu`}
         width="100%"
         height="30px"
         viewBox="0 0 100 100"
