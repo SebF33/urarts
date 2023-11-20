@@ -2,7 +2,7 @@ import { ArtCollection } from "@utils/types.tsx";
 import { Db } from "@utils/db.ts";
 import { HandlerContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { talents } from "@utils/variables.ts";
+import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
@@ -102,7 +102,7 @@ export const handler = async (
     case "movement":
       artQuery = artQuery
         .where("movement.slug", "=", slugFilter)
-        .where("artist.slug", "not in", talents)
+        .where("artist.slug", "not in", TALENTS)
         .orderBy("art.name");
       break;
 

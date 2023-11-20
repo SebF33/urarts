@@ -1,6 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { HandlerContext } from "$fresh/server.ts";
-import { talents } from "@utils/variables.ts";
+import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
@@ -29,7 +29,7 @@ export const handler = async (
     ])
     .where("copyright", "!=", 2)
     .where("art.name", "like", "%" + filter + "%")
-    .where("artist.slug", "not in", talents)
+    .where("artist.slug", "not in", TALENTS)
     .orderBy("art.name")
     .orderBy("last_name")
     .execute();

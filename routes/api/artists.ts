@@ -1,7 +1,7 @@
 import { Db } from "@utils/db.ts";
 import { HandlerContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { talents } from "@utils/variables.ts";
+import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
@@ -59,7 +59,7 @@ export const handler = async (
       ))
     .$if(isCountry, (qb) => qb.where("nationality", "=", nationalityFilter))
     .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
-    .where("slug", "not in", talents)
+    .where("slug", "not in", TALENTS)
     .where(({ eb, or }) =>
       or([
         eb("first_name", "like", "%" + nameFilter + "%"),

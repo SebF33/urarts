@@ -5,7 +5,7 @@ import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
-import { talents } from "@utils/variables.ts";
+import { TALENTS } from "@utils/constants.ts";
 import { tw } from "twind";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -24,7 +24,7 @@ export const handler: Handlers<{}> = {
 
     const artistQuery = await db.selectFrom("artist")
       .selectAll()
-      .where("slug", "in", talents)
+      .where("slug", "in", TALENTS)
       .orderBy(sql`random()`)
       .execute();
 
