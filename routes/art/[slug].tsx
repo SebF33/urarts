@@ -197,7 +197,7 @@ export default function ArtistArtsPage(
                     {birthyear + deathyear}
                   </p>
                   <img
-                    class={tw`inline-block mt-2`}
+                    class={tw`inline-block w-12 mt-2`}
                     src={"/flags/" + nationality + ".png"}
                     alt={nationality}
                     draggable={draggable}
@@ -253,15 +253,34 @@ export default function ArtistArtsPage(
               (
                 <div class={tw`flex-grow font-brush`}>
                   <div
-                    class={tw`p-4 max-w-2xl mx-auto px-4 sm:px-6 mt-5`}
+                    class={tw`max-w-2xl mx-auto py-10 px-6 mt-5`}
                   >
-                    <p
-                      class={tw`text-2xl md:text-3xl font-extrabold mx-auto text-center`}
+                    <div
+                      class={tw`paper max-w-[600px] mx-auto`}
                     >
-                      <span class={tw`text-3xl md:text-4xl`}>©</span>
-                      Les œuvres de l’artiste ne sont pas encore disponibles
-                      pour des raisons de droit d’auteur.
-                    </p>
+                      <div class="top-tape"></div>
+                      <div
+                        class={tw`w-full my-5 mx-1`}
+                      >
+                        <p
+                          class={tw`text-2xl md:text-3xl font-extrabold leading-8 text-center ${
+                            css(
+                              {
+                                "color": `${
+                                  colorScheme[currentColorScheme].lighterdark
+                                }`,
+                              },
+                            )
+                          }`}
+                        >
+                          <span class={tw`text-7xl md:text-8xl`}>©</span>
+                          <br />
+                          <br />
+                          Les œuvres de l’artiste ne sont pas encore disponibles
+                          pour des raisons de droit d’auteur.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
