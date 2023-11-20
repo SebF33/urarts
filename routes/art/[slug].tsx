@@ -30,6 +30,7 @@ export const handler: Handlers<{}> = {
         "last_name",
         "avatar_url",
         "color",
+        "site_web",
         "info",
         "nationality",
         "birthyear",
@@ -42,15 +43,16 @@ export const handler: Handlers<{}> = {
 
     let artist: string | null = null;
     let avatar: string | null = null;
+    let birthyear: string | null = null;
     let color: string | null = null;
     let copyright: number | null = null;
+    let deathyear: string | null = null;
     let desc: string | null = null;
     let info: string | null = null;
     let mySlug: string | null = null;
     let nationality: string | null = null;
-    let birthyear: string | null = null;
-    let deathyear: string | null = null;
     let query: string | null = null;
+    let site: string | null = null;
     let title: string | null = null;
 
     if (result) {
@@ -58,32 +60,34 @@ export const handler: Handlers<{}> = {
         ? result.first_name + " " + result.last_name
         : result.last_name;
       avatar = result.avatar_url;
+      birthyear = result.birthyear;
       color = result.color;
       copyright = result.copyright;
+      deathyear = result.deathyear !== "" ? " — " + result.deathyear : "";
       desc = "Les plus belles œuvres de " + artist + ".";
       info = result.info;
       mySlug = result.slug;
       nationality = result.nationality;
-      birthyear = result.birthyear;
-      deathyear = result.deathyear !== "" ? " — " + result.deathyear : "";
       query = url.searchParams.get("id") || "";
+      site = result.site_web;
       title = artist + " - Collection";
     } else return ctx.renderNotFound();
 
     return ctx.render({
       artist,
       avatar,
+      birthyear,
       color,
       copyright,
+      deathyear,
       desc,
       info,
       isFirefox,
       isNotFirefox,
       mySlug,
       nationality,
-      birthyear,
-      deathyear,
       query,
+      site,
       title,
     });
   },
@@ -93,34 +97,36 @@ export default function ArtistArtsPage(
   props: PageProps<{
     artist: string;
     avatar: string;
+    birthyear: string;
     color: string;
     copyright: number;
+    deathyear: string;
     desc: string;
     info: string;
     isFirefox: boolean;
     isNotFirefox: boolean;
     mySlug: string;
     nationality: string;
-    birthyear: string;
-    deathyear: string;
     query: string;
+    site: string;
     title: string;
   }>,
 ) {
   const {
     artist,
     avatar,
+    birthyear,
     color,
     copyright,
+    deathyear,
     desc,
     info,
     isFirefox,
     isNotFirefox,
     mySlug,
     nationality,
-    birthyear,
-    deathyear,
     query,
+    site,
     title,
   } = props.data;
   const draggable = false;
@@ -181,9 +187,11 @@ export default function ArtistArtsPage(
               >
               </div>
 
-              <div class={tw`-mt-[27rem] md:-mt-[13.5rem]`}>
+              <div
+                class={tw`-mt-[27rem] md:-mt-[13.5rem] text-white font-brush`}
+              >
                 <div
-                  class={tw`w-11/12 xl:w-3/6 mx-auto text-center text-white font-brush`}
+                  class={tw`w-11/12 xl:w-3/6 mx-auto text-center`}
                 >
                   <p class="font-bold italic text-xl">
                     {birthyear + deathyear}
@@ -197,8 +205,25 @@ export default function ArtistArtsPage(
                   <p class="font-bold text-lg mb-4">
                     {"Nationalité : " + nationality}
                   </p>
-                  <p class={tw`text-left text-base select-none`}>{info}</p>
+                  <p class={tw`text-left text-base leading-4 select-none`}>
+                    {info}
+                  </p>
                 </div>
+                {site &&
+                  (
+                    <div
+                      class={tw`relative w-11/12 text-right`}
+                    >
+                      <a
+                        href={site}
+                        class={tw`p-0 text-base italic underline select-none`}
+                        draggable={draggable}
+                        target="_blank"
+                      >
+                        {site}
+                      </a>
+                    </div>
+                  )}
 
                 {avatar &&
                   (
