@@ -5,7 +5,7 @@ import { tw } from "twind";
 export default function Footer({ color }: { color: string }) {
   return (
     <footer
-      class={tw`font-brush bottom-0 w-full text-white ${
+      class={tw`relative bottom-0 w-full font-brush text-white ${
         css(
           {
             "background-color": `${color}`,
@@ -14,7 +14,7 @@ export default function Footer({ color }: { color: string }) {
       }`}
     >
       <div
-        class={tw`max-w-7xl -mt-[2px] mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
+        class={tw`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >
         <div class={tw`flex justify-center space-x-8 md:order-2`}>
           <a

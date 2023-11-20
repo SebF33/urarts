@@ -124,7 +124,7 @@ export default function WaterDrop({ color }: { color: string }) {
   return (
     <section
       id="dropy-section"
-      class={tw`w-full flex justify-center items-center flex-col font-brush`}
+      class={tw`relative bottom-0 flex justify-center items-center flex-col w-full font-brush`}
     >
       <svg
         id="Urarts"
