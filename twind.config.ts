@@ -23,6 +23,10 @@ export default {
       "3xl": "1.953rem",
       "4xl": "2.441rem",
       "5xl": "3.052rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem",
+      "8xl": "6rem",
+      "9xl": "8rem",
     },
     screens: {
       xs: "300px",
