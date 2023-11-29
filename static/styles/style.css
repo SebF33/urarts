@@ -33,7 +33,10 @@ html {
 }
 
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@font-face {
+    font-family: Caveat Brush;
+    src: url(/fonts/CaveatBrush.ttf) format("truetype");
+}
 
 @font-face {
     font-family: Five Boroughs Handwriting;
