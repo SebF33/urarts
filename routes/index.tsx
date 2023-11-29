@@ -1,27 +1,21 @@
 import { ArtistQuote, ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
-import { tw } from "twind";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
-import Nav from "@islands/header/Nav.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
 type Quote = Array<ArtistQuote>;
 
-export const handler: Handlers<{}> = {
-  async GET(req, ctx) {
-    const url = new URL(req.url);
-    const pathname = url.pathname;
-
+export const handler: Handlers = {
+  async GET(_, ctx) {
     const db = Db.getInstance();
 
     const artistQuery = await db.selectFrom("artist")
@@ -74,7 +68,7 @@ export const handler: Handlers<{}> = {
     const grid =
       "grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    return ctx.render({ artistQuote, artists, color, grid, pathname });
+    return ctx.render({ artistQuote, artists, color, grid });
   },
 };
 
@@ -84,10 +78,9 @@ export default function HomePage(
     artists: Artists;
     color: string;
     grid: string;
-    pathname: string;
   }>,
 ) {
-  const { artistQuote, artists, color, grid, pathname } = props.data;
+  const { artistQuote, artists, color, grid } = props.data;
   const desc = "Quelles sont les plus belles œuvres d'art au monde ?";
   const title = "Urarts - Accueil";
 
@@ -102,29 +95,13 @@ export default function HomePage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <div
-        class={tw`flex flex-col min-h-screen font-brush ${
-          css({
-            background: `url(/background/gray)`,
-            "background-color": `${colorScheme[currentColorScheme].white}`,
-            "background-position": "center",
-            "background-size": "420px",
-            "-webkit-tap-highlight-color": "transparent",
-          })
-        }`}
-      >
-        <Nav pathname={pathname} />
+      <main class="flex-grow">
+        <ArtistsLayout artists={artists} grid={grid} />
+        <Quote data={artistQuote} />
+      </main>
 
-        <main
-          class={tw`flex-grow`}
-        >
-          <ArtistsLayout artists={artists} grid={grid} />
-          <Quote data={artistQuote} />
-        </main>
-
-        <WaterDrop color={color} />
-        <Footer color={color} />
-      </div>
+      <WaterDrop color={color} />
+      <Footer color={color} />
     </>
   );
 }

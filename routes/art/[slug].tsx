@@ -1,27 +1,17 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
 
-import { AnimBrushStroke, BrushStroke } from "@components/Assets.tsx";
+import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
-import Nav from "@islands/header/Nav.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export const handler: Handlers<{}> = {
+export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug } = ctx.params;
     const url = new URL(req.url);
-
-    // Firefox :
-    // Le clip-path du SVG n'est pas correctement géré par ce navigateur.
-    // Pour sélection de l'asset non animé à la place.
-    const userAgent = req.headers.get("user-agent");
-    const isFirefox = userAgent.toLowerCase().includes("firefox");
-    const isNotFirefox = !isFirefox;
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")
@@ -82,8 +72,6 @@ export const handler: Handlers<{}> = {
       deathyear,
       desc,
       info,
-      isFirefox,
-      isNotFirefox,
       mySlug,
       nationality,
       query,
@@ -103,8 +91,6 @@ export default function ArtistArtsPage(
     deathyear: string;
     desc: string;
     info: string;
-    isFirefox: boolean;
-    isNotFirefox: boolean;
     mySlug: string;
     nationality: string;
     query: string;
@@ -121,8 +107,6 @@ export default function ArtistArtsPage(
     deathyear,
     desc,
     info,
-    isFirefox,
-    isNotFirefox,
     mySlug,
     nationality,
     query,
@@ -142,154 +126,121 @@ export default function ArtistArtsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <div
-        class={tw`flex flex-col min-h-screen ${
-          css({
-            background: `url(/background/gray)`,
-            "background-color": `${colorScheme[currentColorScheme].white}`,
-            "background-position": "center",
-            "background-size": "540px",
-            "-webkit-tap-highlight-color": "transparent",
-          })
-        }`}
+      <main
+        class={`flex-grow mb-20`}
       >
-        <Nav pathname="/arts" />
-
-        <main
-          class={tw`flex-grow`}
+        <div
+          class={`w-auto flex flex-col mx-auto`}
         >
-          <div
-            class={tw`w-auto flex flex-col mx-auto`}
-          >
-            <div class={tw`mx-auto mt-8 z-10`}>
-              {isFirefox &&
-                (
-                  <BrushStroke
-                    color={color}
-                    font="brush"
-                    fontcolor="lighterdark"
-                    title={artist}
-                  />
-                )}
-              {isNotFirefox &&
-                (
-                  <AnimBrushStroke
-                    color={color}
-                    font="brush"
-                    fontcolor="lighterdark"
-                    title={artist}
-                  />
-                )}
-            </div>
-            <div id="bannerInfo" class={tw`-mt-44`}>
-              <div
-                class={tw`h-[38rem] md:h-96 bg-lighterdark shadow-2xl`}
-              >
-              </div>
-
-              <div
-                class={tw`-mt-[27rem] md:-mt-[13.5rem] text-white font-brush`}
-              >
-                <div
-                  class={tw`w-11/12 xl:w-3/6 mx-auto text-center`}
-                >
-                  <p class="font-bold italic text-xl">
-                    {birthyear + deathyear}
-                  </p>
-                  <img
-                    class={tw`inline-block w-12 mt-2`}
-                    src={"/flags/" + nationality + ".png"}
-                    alt={nationality}
-                    draggable={draggable}
-                  />
-                  <p class="font-bold text-lg mb-4">
-                    {"Nationalité : " + nationality}
-                  </p>
-                  <p class={tw`text-left text-base leading-4 select-none`}>
-                    {info}
-                  </p>
-                </div>
-                {site &&
-                  (
-                    <div
-                      class={tw`relative w-11/12 text-right`}
-                    >
-                      <a
-                        href={site}
-                        class={tw`p-0 text-base italic underline select-none`}
-                        draggable={draggable}
-                        target="_blank"
-                      >
-                        {site}
-                      </a>
-                    </div>
-                  )}
-
-                {avatar &&
-                  (
-                    <div
-                      class={tw`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
-                    >
-                      <div class={tw`pt-20 sm:pt-12 sm:pl-12 sm:pr-12`}>
-                        <div
-                          class={tw`p-6 w-60 mx-auto text-center bg-lighterdark rounded-xl overflow-hidden shadow-2xl`}
-                        >
-                          <img
-                            src={avatar}
-                            alt={avatar}
-                            draggable={draggable}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-              </div>
+          <div class={`mx-auto mt-8 z-10`}>
+            <AnimBrushStroke
+              color={color}
+              font="brush"
+              fontcolor="lighterdark"
+              title={artist}
+            />
+          </div>
+          <div class={`-mt-44`}>
+            <div
+              class={`h-[38rem] md:h-96 bg-lighterdark shadow-2xl`}
+            >
             </div>
 
-            {copyright != 2 &&
-              <CollectionSearch id={query} myslug={mySlug} type="artist" />}
-
-            {copyright === 2 &&
-              (
-                <div class={tw`flex-grow font-brush`}>
+            <div
+              class={`-mt-[27rem] md:-mt-[13.5rem] text-white`}
+            >
+              <div
+                class={`w-11/12 xl:w-[38rem] mx-auto text-center`}
+              >
+                <p class="font-bold italic text-xl">
+                  {birthyear + deathyear}
+                </p>
+                <img
+                  class={`inline-block w-12 mt-2`}
+                  src={"/flags/" + nationality + ".png"}
+                  alt={nationality}
+                  draggable={draggable}
+                />
+                <p class="font-bold text-lg mb-2">
+                  {"Nationalité : " + nationality}
+                </p>
+                <p class={`text-left text-[1.1rem] leading-5 select-none`}>
+                  {info}
+                </p>
+              </div>
+              {site &&
+                (
                   <div
-                    class={tw`max-w-2xl mx-auto py-10 px-6 mt-5`}
+                    class={`relative w-11/12 text-right`}
                   >
-                    <div
-                      class={tw`paper max-w-[600px] mx-auto`}
+                    <a
+                      href={site}
+                      class={`p-0 text-base italic underline select-none`}
+                      draggable={draggable}
+                      target="_blank"
                     >
-                      <div class="top-tape"></div>
+                      {site}
+                    </a>
+                  </div>
+                )}
+
+              {avatar &&
+                (
+                  <div
+                    class={`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
+                  >
+                    <div class={`pt-20 sm:pt-12 sm:pl-12 sm:pr-12`}>
                       <div
-                        class={tw`w-full my-5 mx-1`}
+                        class={`p-6 w-60 mx-auto text-center bg-lighterdark rounded-xl overflow-hidden shadow-2xl`}
                       >
-                        <p
-                          class={tw`text-2xl md:text-3xl font-extrabold leading-8 text-center ${
-                            css(
-                              {
-                                "color": `${
-                                  colorScheme[currentColorScheme].lighterdark
-                                }`,
-                              },
-                            )
-                          }`}
-                        >
-                          <span class={tw`text-7xl md:text-8xl`}>©</span>
-                          <br />
-                          <br />
-                          Les œuvres de l’artiste ne sont pas encore disponibles
-                          pour des raisons de droit d’auteur.
-                        </p>
+                        <img
+                          src={avatar}
+                          alt={avatar}
+                          draggable={draggable}
+                        />
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+            </div>
           </div>
-        </main>
 
-        <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
-        <Footer color={colorScheme[currentColorScheme].lighterdark} />
-      </div>
+          {copyright != 2 && (
+            <CollectionSearch id={query} myslug={mySlug} type="artist" />
+          )}
+
+          {copyright === 2 &&
+            (
+              <div class={`flex-grow`}>
+                <div
+                  class={`max-w-2xl mx-auto py-10 px-6 mt-5`}
+                >
+                  <div
+                    class={`paper max-w-[600px] mx-auto`}
+                  >
+                    <div class="top-tape"></div>
+                    <div
+                      class={`w-full my-5 mx-1`}
+                    >
+                      <p
+                        class={`text-2xl md:text-3xl font-extrabold leading-8 text-center text-lighterdark`}
+                      >
+                        <span class={`text-7xl md:text-8xl`}>©</span>
+                        <br />
+                        <br />
+                        Les œuvres de l’artiste ne sont pas encore disponibles
+                        pour des raisons de droit d’auteur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+        </div>
+      </main>
+
+      <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
+      <Footer color={colorScheme[currentColorScheme].lighterdark} />
     </>
   );
 }

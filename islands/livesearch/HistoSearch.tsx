@@ -1,8 +1,8 @@
 import { ArtCollection } from "@utils/types.tsx";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import ky from "ky";
-import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 
@@ -55,6 +55,7 @@ export default function HistoSearch() {
     });
   }, []);
 
+  // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
       ky.get(
@@ -67,25 +68,37 @@ export default function HistoSearch() {
     }, 200);
   }, [searchTerm, searchYears]);
 
+  // Background pour la page des personnages historiques
+  useLayoutEffect(() => {
+    const body = document.querySelector("body");
+
+    if (body) {
+      body.style.background = `url(/background/white)`;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
+      body.style.backgroundPosition = "center";
+      body.style.backgroundSize = "346px";
+    }
+  }, []);
+
   return (
-    <main class={tw`flex-grow font-brush`}>
+    <>
       <div
-        class={tw`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
+        class={`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={tw`paper max-w-[260px] mt-5 mb-4`}
+          class={`paper max-w-[260px] mt-5 mb-4`}
         >
           <div class="tape-section"></div>
-          <h1 class={tw`text-5xl leading-none font-medium mb-2 ml-2`}>
+          <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>
             Personnages historiques
           </h1>
           <div class="tape-section"></div>
         </div>
 
-        <h2 class={tw`text-lg font-medium mx-auto mb-1 w-48`}>
+        <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>
-        <div class={tw`brush-input-box relative w-48 mx-auto mb-4`}>
+        <div class={`brush-input-box relative w-48 mx-auto mb-4`}>
           <input
             type="text"
             value={searchTerm}
@@ -93,21 +106,18 @@ export default function HistoSearch() {
               e.key === "Enter" && e.preventDefault();
             }}
             onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={tw`w-full rounded text-base outline-none py-1 px-3`}
+            class={`w-full rounded text-base outline-none py-1 px-3`}
           />
         </div>
       </div>
 
       <div
         id="slider"
-        class={tw`max-w-3xl mb-[40px] sm:mb-[60px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
+        class={`max-w-3xl mb-[40px] sm:mb-[60px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
       >
       </div>
 
-      <ArtsLayout
-        arts={searchResults}
-        type={type}
-      />
-    </main>
+      <ArtsLayout arts={searchResults} type={type} />
+    </>
   );
 }

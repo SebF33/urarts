@@ -1,9 +1,11 @@
-import { AppProps } from "$fresh/server.ts";
-import { asset } from "$fresh/runtime.ts";
+import { asset, Partial } from "$fresh/runtime.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { defineApp } from "$fresh/server.ts";
 import { UrlBasePath } from "../env.ts";
 
-export default function App({ Component }: AppProps) {
+import Nav from "@islands/header/Nav.tsx";
+
+export default defineApp((_, ctx) => {
   return (
     <html lang="fr">
       <head>
@@ -72,14 +74,29 @@ export default function App({ Component }: AppProps) {
           href={asset("/icons/favicon-192x192.png")}
         />
 
-        {/* CSS */}
+        {/* CSS & JS */}
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
         <link href={asset("/styles/style.css")} rel="stylesheet" />
+        <link
+          href={asset("/styles/lib/nouislider.min.css")}
+          rel="stylesheet"
+        />
+        <link
+          href={asset("/styles/nouislider.css")}
+          rel="stylesheet"
+        />
+        <script src="/styles/lib/nouislider.min.js"></script>
       </head>
 
-      <body>
-        <Component />
+      <body
+        f-client-nav
+        class={`flex flex-col min-h-screen font-brush`}
+      >
+        <Partial name="body">
+          <Nav />
+          <ctx.Component />
+        </Partial>
       </body>
     </html>
   );
-}
+});

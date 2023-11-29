@@ -1,9 +1,8 @@
 import { Any } from "any";
 import { ArtistRow } from "@utils/types.tsx";
-import { css } from "twind/css";
+import { css } from "@twind/core";
 import { h } from "preact";
 import tippy from "tippyjs";
-import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -89,14 +88,14 @@ export default function ArtistsLayout(
   }
 
   return (
-    <div class={tw`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
+    <div class={`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
       {props.artists && props.artists.length > 0
         ? (
-          <div class={tw`${props.grid}`}>
+          <div class={`${props.grid}`}>
             {props.artists.map((p) => (
               <div
                 data-artist-id={p.id}
-                class={tw`artist-frame ${
+                class={`artist-frame ${
                   css(
                     {
                       position: "relative",
@@ -108,7 +107,7 @@ export default function ArtistsLayout(
                 }`}
               >
                 <p
-                  class={tw`font-brush z-10 ${
+                  class={`text-lighterdark z-10 ${
                     css(
                       {
                         position: "absolute",
@@ -125,7 +124,7 @@ export default function ArtistsLayout(
                 </p>
                 {p.signature && (
                   <img
-                    class={tw`w-12 z-10 ${
+                    class={`w-12 z-10 ${
                       css(
                         {
                           position: "absolute",
@@ -141,7 +140,7 @@ export default function ArtistsLayout(
                   />
                 )}
                 <div
-                  class={tw`${
+                  class={`${
                     css(
                       {
                         position: "absolute",
@@ -160,7 +159,7 @@ export default function ArtistsLayout(
                     href={"/art/" + p.slug}
                     onClick={handleClick}
                     draggable={draggable}
-                    class={tw`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
+                    class={`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
                       css(
                         {
                           position: "absolute",
@@ -183,12 +182,12 @@ export default function ArtistsLayout(
                     }`}
                   >
                     <img
-                      class={tw`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
+                      class={`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
                       src={p.avatar_url}
                       alt={p.last_name}
                     />
                     <div
-                      class={tw`absolute w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60 ${
+                      class={`absolute w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60 ${
                         css({
                           "background": "black",
                         })
@@ -196,13 +195,13 @@ export default function ArtistsLayout(
                     />
                   </a>
                 </div>
-                <ul class={tw`artist-side z-20`}>
-                  <a class={tw`w-7`}>
+                <ul class={`artist-side z-20`}>
+                  <a class={`w-7`}>
                     <img
                       src={"/flags/" + p.nationality + ".png"}
                       alt="flag-symbol"
                       draggable={draggable}
-                      class={tw`${
+                      class={`${
                         css(
                           {
                             "filter":
@@ -218,12 +217,12 @@ export default function ArtistsLayout(
           </div>
         )
         : (
-          <div class={tw`${props.grid}`}>
+          <div class={`${props.grid}`}>
             {showPlaceholder
               ? (
                 <div
                   id="Noresults"
-                  class={tw`${
+                  class={`${
                     css(
                       {
                         "position": "relative",
@@ -235,7 +234,7 @@ export default function ArtistsLayout(
                   }`}
                 >
                   <div
-                    class={tw`${
+                    class={`${
                       css(
                         {
                           "position": "absolute",
@@ -251,7 +250,7 @@ export default function ArtistsLayout(
                     }`}
                   >
                     <div
-                      class={tw`group flex justify-center text-center relative overflow-hidden z-20 ${
+                      class={`group flex justify-center text-center relative overflow-hidden z-20 ${
                         css(
                           {
                             "position": "absolute",
@@ -274,7 +273,7 @@ export default function ArtistsLayout(
                       }`}
                     >
                       <img
-                        class={tw`w-full object-cover`}
+                        class={`w-full object-cover`}
                         src="/errors/0.jpg"
                         alt="Pas de résultats"
                       />

@@ -13,13 +13,14 @@
   font-size: 1.3rem;
 }
 
-.noUi-value-large:before {
-  content: "An ";
-}
-
+.noUi-tooltip,
 .noUi-value-large,
 .noUi-value-sub {
   color: var(--color-lighterdark);
+}
+
+.noUi-value-large:before {
+  content: "An ";
 }
 
 /* Vagues de couleurs

@@ -6,7 +6,7 @@ import {
   registerables,
 } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
   props: {
@@ -65,6 +65,18 @@ export default function Doughnut(
         ],
       },
     });
+  }, []);
+
+  // Background pour la page des indicateurs
+  useLayoutEffect(() => {
+    const body = document.querySelector("body");
+
+    if (body) {
+      body.style.background = `url(/background/gray)`;
+      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundPosition = "center";
+      body.style.backgroundSize = "2800px";
+    }
   }, []);
 
   return <canvas ref={canvas}></canvas>;

@@ -32,6 +32,35 @@ html {
     scrollbar-width: none;
 }
 
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
+@font-face {
+    font-family: Five Boroughs Handwriting;
+    src: url(/fonts/FiveBoroughsHandwriting.otf) format("opentype");
+}
+
+@font-face {
+    font-family: Kashima Brush;
+    src: url(/fonts/Kashima.otf) format("opentype");
+}
+
+.font-brush {
+    font-family: Caveat Brush, cursive;
+}
+
+.font-japanese {
+    font-family: Kashima Brush;
+}
+
+.font-street {
+    font-family: Five Boroughs Handwriting;
+}
+
+body {
+    background: var(--color-white);
+}
+
 h1 {
     color: var(--color-lighterdark);
 }
@@ -186,6 +215,7 @@ h1 {
     border-top-color: #ccb;
 }
 
+.art-frame .frame-label,
 .art-frame p {
     position: absolute;
     left: 0.5%;
@@ -198,14 +228,17 @@ h1 {
     font-size: calc(0.875em + 1.7vw);
 }
 
-.art-frame-type-1 p {
-    bottom: -1.7em;
-    font-size: calc(0.675em + 0.7vw);
+.art-frame-type-1 .frame-label {
+    bottom: -3.4em;
 }
 
-.art-frame-type-2 p {
-    top: -2em;
-    font-size: calc(0.675em + 0.7vw);
+.art-frame-type-2 .frame-label {
+    top: -4.2em;
+}
+
+.art-frame-type-1 .frame-label .paper p,
+.art-frame-type-2 .frame-label .paper p {
+    font-size: calc(0.775em + 0.4vw);
 }
 
 .art-frame-type-3 p {
@@ -218,20 +251,32 @@ h1 {
     font-size: calc(0.7em + 0.4vw);
 }
 
+.art-polyptych-1,
+.art-polyptych-2,
+.art-polyptych-3,
+.art-polyptych-5 {
+    margin-top: 8vh;
+    margin-bottom: 1.2vh;
+}
+
 .art-polyptych-1 {
-    margin: 8vh 8vw;
+    margin-right: 8vw;
+    margin-left: 8vw;
 }
 
 .art-polyptych-2 {
-    margin: 8vh 1vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 
 .art-polyptych-3 {
-    margin: 8vh 0.6vw;
+    margin-right: 0.6vw;
+    margin-left: 0.6vw;
 }
 
 .art-polyptych-5 {
-    margin: 8vh 0.3vw;
+    margin-right: 0.3vw;
+    margin-left: 0.3vw;
 }
 
 .art-wrap-1 {
@@ -245,7 +290,6 @@ h1 {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    width: 100%;
     margin-left: 1.75rem;
     margin-right: 1.75rem;
 }
@@ -360,7 +404,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
     box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--color-gray);
 }
 

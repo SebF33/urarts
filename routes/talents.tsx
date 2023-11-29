@@ -1,25 +1,19 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
-import { tw } from "twind";
 
-import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
-import Nav from "@islands/header/Nav.tsx";
+import TalentsList from "@islands/TalentsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
 
-export const handler: Handlers<{}> = {
-  async GET(req, ctx) {
-    const url = new URL(req.url);
-    const pathname = url.pathname;
-
+export const handler: Handlers = {
+  async GET(_, ctx) {
     const db = Db.getInstance();
 
     const artistQuery = await db.selectFrom("artist")
@@ -55,10 +49,7 @@ export const handler: Handlers<{}> = {
     ];
     const color = colors[randomColorsIndex];
 
-    const grid =
-      "grid gap-10 sm:gap-6 md:gap-20 lg:gap-64 xl:gap-96 grid-cols-1 sm:grid-cols-2 pt-10 pb-10 lg:pt-20 md:pb-4 lg:pb-0";
-
-    return ctx.render({ artists, color, grid, pathname });
+    return ctx.render({ artists, color });
   },
 };
 
@@ -66,11 +57,9 @@ export default function TalentsPage(
   props: PageProps<{
     artists: Artists;
     color: string;
-    grid: string;
-    pathname: string;
   }>,
 ) {
-  const { artists, color, grid, pathname } = props.data;
+  const { artists, color } = props.data;
   const desc = "Les talents.";
   const title = "Urarts - Talents";
 
@@ -85,43 +74,12 @@ export default function TalentsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <div
-        class={tw`flex flex-col min-h-screen font-brush ${
-          css({
-            background: `url(/background/white)`,
-            "background-color": `${colorScheme[currentColorScheme].gray}`,
-            "background-position": "center",
-            "background-size": "420px",
-            "-webkit-tap-highlight-color": "transparent",
-          })
-        }`}
-      >
-        <Nav pathname={pathname} />
+      <main class="flex-grow">
+        <TalentsList artists={artists} />
+      </main>
 
-        <main
-          class={tw`flex-grow`}
-        >
-          <div
-            class={tw`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}
-          >
-            <div
-              class={tw`paper max-w-[240px] mt-5`}
-            >
-              <div class="top-tape"></div>
-              <h1
-                class={tw`text-5xl leading-none font-medium mx-auto`}
-              >
-                Talents
-              </h1>
-            </div>
-          </div>
-
-          <ArtistsLayout artists={artists} grid={grid} />
-        </main>
-
-        <WaterDrop color={color} />
-        <Footer color={color} />
-      </div>
+      <WaterDrop color={color} />
+      <Footer color={color} />
     </>
   );
 }

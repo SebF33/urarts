@@ -1,16 +1,29 @@
-import { css } from "twind/css";
-import { tw } from "twind";
+import { css } from "@twind/core";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { useLayoutEffect } from "preact/hooks";
 
 export default function ErrorLayout(
   props: { firstDigit: string; secondDigit: string; thirdDigit: string },
 ) {
+  // Background pour les pages d'erreur
+  useLayoutEffect(() => {
+    const body = document.querySelector("body");
+
+    if (body) {
+      body.style.background = `url(/background/white)`;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
+      body.style.backgroundPosition = "center";
+      body.style.backgroundSize = "3400px";
+    }
+  }, []);
+
   return (
-    <div class={tw`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
+    <div class={`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
       <div
-        class={tw`grid gap-8 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14`}
+        class={`grid gap-8 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14`}
       >
         <div
-          class={tw`${
+          class={`${
             css(
               {
                 "position": "relative",
@@ -22,7 +35,7 @@ export default function ErrorLayout(
           }`}
         >
           <div
-            class={tw`${
+            class={`${
               css(
                 {
                   "position": "absolute",
@@ -37,7 +50,7 @@ export default function ErrorLayout(
             }`}
           >
             <div
-              class={tw`group flex justify-center text-center relative overflow-hidden z-20 ${
+              class={`group flex justify-center text-center relative overflow-hidden z-20 ${
                 css(
                   {
                     "position": "absolute",
@@ -59,7 +72,7 @@ export default function ErrorLayout(
               }`}
             >
               <img
-                class={tw`w-full object-cover`}
+                class={`w-full object-cover`}
                 src={`/errors/${props.firstDigit}.jpg`}
                 alt={props.firstDigit}
               />
@@ -68,7 +81,7 @@ export default function ErrorLayout(
         </div>
 
         <div
-          class={tw`${
+          class={`${
             css(
               {
                 "position": "relative",
@@ -80,7 +93,7 @@ export default function ErrorLayout(
           }`}
         >
           <div
-            class={tw`${
+            class={`${
               css(
                 {
                   "position": "absolute",
@@ -95,7 +108,7 @@ export default function ErrorLayout(
             }`}
           >
             <div
-              class={tw`group flex justify-center text-center relative overflow-hidden z-20 ${
+              class={`group flex justify-center text-center relative overflow-hidden z-20 ${
                 css(
                   {
                     "position": "absolute",
@@ -117,7 +130,7 @@ export default function ErrorLayout(
               }`}
             >
               <img
-                class={tw`w-full object-cover`}
+                class={`w-full object-cover`}
                 src={`/errors/${props.secondDigit}.jpg`}
                 alt={props.secondDigit}
               />
@@ -126,7 +139,7 @@ export default function ErrorLayout(
         </div>
 
         <div
-          class={tw`${
+          class={`${
             css(
               {
                 "position": "relative",
@@ -138,7 +151,7 @@ export default function ErrorLayout(
           }`}
         >
           <div
-            class={tw`${
+            class={`${
               css(
                 {
                   "position": "absolute",
@@ -153,7 +166,7 @@ export default function ErrorLayout(
             }`}
           >
             <div
-              class={tw`group flex justify-center text-center relative overflow-hidden z-20 ${
+              class={`group flex justify-center text-center relative overflow-hidden z-20 ${
                 css(
                   {
                     "position": "absolute",
@@ -175,7 +188,7 @@ export default function ErrorLayout(
               }`}
             >
               <img
-                class={tw`w-full object-cover`}
+                class={`w-full object-cover`}
                 src={`/errors/${props.thirdDigit}.jpg`}
                 alt={props.thirdDigit}
               />

@@ -1,11 +1,10 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
-import { tw } from "twind";
+import { css } from "@twind/core";
 
 export default function Footer({ color }: { color: string }) {
   return (
     <footer
-      class={tw`relative bottom-0 w-full font-brush text-white ${
+      class={`relative bottom-0 w-full text-white ${
         css(
           {
             "background-color": `${color}`,
@@ -14,16 +13,16 @@ export default function Footer({ color }: { color: string }) {
       }`}
     >
       <div
-        class={tw`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
+        class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
       >
-        <div class={tw`flex justify-center space-x-8 md:order-2`}>
+        <div class={`flex justify-center space-x-8 md:order-2`}>
           <a
             href="https://www.linkedin.com/in/sébastien-flouriot-99aa75205"
-            class={tw`hover:text-gray-500`}
+            class={`hover:text-gray-500`}
           >
-            <span class={tw`sr-only`}>LinkedIn</span>
+            <span class={`sr-only`}>LinkedIn</span>
             <svg
-              class={tw`h-5 w-5`}
+              class={`h-5 w-5`}
               fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 448 512"
               aria-hidden="true"
@@ -34,11 +33,11 @@ export default function Footer({ color }: { color: string }) {
 
           <a
             href="https://www.youtube.com/channel/UCjwYESom5l53m9kS_OOnVqw"
-            class={tw`hover:text-gray-500`}
+            class={`hover:text-gray-500`}
           >
-            <span class={tw`sr-only`}>YouTube</span>
+            <span class={`sr-only`}>YouTube</span>
             <svg
-              class={tw`h-5 w-5`}
+              class={`h-5 w-5`}
               fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -49,11 +48,11 @@ export default function Footer({ color }: { color: string }) {
 
           <a
             href="https://github.com/SebF33"
-            class={tw`hover:text-gray-500`}
+            class={`hover:text-gray-500`}
           >
-            <span class={tw`sr-only`}>GitHub</span>
+            <span class={`sr-only`}>GitHub</span>
             <svg
-              class={tw`h-5 w-5`}
+              class={`h-5 w-5`}
               fill={colorScheme[currentColorScheme].white}
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -66,8 +65,8 @@ export default function Footer({ color }: { color: string }) {
             </svg>
           </a>
         </div>
-        <div class={tw`mt-8 md:mt-0 md:order-1`}>
-          <p class={tw`text-center text-xl font-bold`}>© Urarts</p>
+        <div class={`mt-8 md:mt-0 md:order-1`}>
+          <p class={`text-center text-xl font-bold`}>© Urarts</p>
         </div>
       </div>
     </footer>

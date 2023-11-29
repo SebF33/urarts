@@ -12,27 +12,32 @@ import * as $6 from "./routes/art/[slug].tsx";
 import * as $7 from "./routes/artists.tsx";
 import * as $8 from "./routes/arts.tsx";
 import * as $9 from "./routes/background/gray.tsx";
-import * as $10 from "./routes/background/white.tsx";
-import * as $11 from "./routes/histocharacters.tsx";
-import * as $12 from "./routes/index.tsx";
-import * as $13 from "./routes/indicators.tsx";
-import * as $14 from "./routes/movement/[slug].tsx";
-import * as $15 from "./routes/movements.tsx";
-import * as $16 from "./routes/talents.tsx";
-import * as $17 from "./routes/women.tsx";
-import * as $$0 from "./islands/Quote.tsx";
-import * as $$1 from "./islands/chart/Doughnut.tsx";
-import * as $$2 from "./islands/chart/PolarArea.tsx";
-import * as $$3 from "./islands/footer/Footer.tsx";
-import * as $$4 from "./islands/footer/WaterDrop.tsx";
-import * as $$5 from "./islands/header/Nav.tsx";
-import * as $$6 from "./islands/layout/ArtistsLayout.tsx";
-import * as $$7 from "./islands/layout/ArtsLayout.tsx";
-import * as $$8 from "./islands/livesearch/ArtistsSearch.tsx";
-import * as $$9 from "./islands/livesearch/ArtsSearch.tsx";
-import * as $$10 from "./islands/livesearch/CollectionSearch.tsx";
-import * as $$11 from "./islands/livesearch/HistoSearch.tsx";
-import * as $$12 from "./islands/livesearch/WomenSearch.tsx";
+import * as $10 from "./routes/background/gray_half.tsx";
+import * as $11 from "./routes/background/white.tsx";
+import * as $12 from "./routes/histocharacters.tsx";
+import * as $13 from "./routes/index.tsx";
+import * as $14 from "./routes/indicators.tsx";
+import * as $15 from "./routes/movement/[slug].tsx";
+import * as $16 from "./routes/movements.tsx";
+import * as $17 from "./routes/talents.tsx";
+import * as $18 from "./routes/women.tsx";
+import * as $$0 from "./islands/AnimBrushStroke.tsx";
+import * as $$1 from "./islands/MovementsList.tsx";
+import * as $$2 from "./islands/Quote.tsx";
+import * as $$3 from "./islands/TalentsList.tsx";
+import * as $$4 from "./islands/chart/Doughnut.tsx";
+import * as $$5 from "./islands/chart/PolarArea.tsx";
+import * as $$6 from "./islands/footer/Footer.tsx";
+import * as $$7 from "./islands/footer/WaterDrop.tsx";
+import * as $$8 from "./islands/header/Nav.tsx";
+import * as $$9 from "./islands/layout/ArtistsLayout.tsx";
+import * as $$10 from "./islands/layout/ArtsLayout.tsx";
+import * as $$11 from "./islands/layout/ErrorLayout.tsx";
+import * as $$12 from "./islands/livesearch/ArtistsSearch.tsx";
+import * as $$13 from "./islands/livesearch/ArtsSearch.tsx";
+import * as $$14 from "./islands/livesearch/CollectionSearch.tsx";
+import * as $$15 from "./islands/livesearch/HistoSearch.tsx";
+import * as $$16 from "./islands/livesearch/WomenSearch.tsx";
 
 const manifest = {
   routes: {
@@ -46,29 +51,34 @@ const manifest = {
     "./routes/artists.tsx": $7,
     "./routes/arts.tsx": $8,
     "./routes/background/gray.tsx": $9,
-    "./routes/background/white.tsx": $10,
-    "./routes/histocharacters.tsx": $11,
-    "./routes/index.tsx": $12,
-    "./routes/indicators.tsx": $13,
-    "./routes/movement/[slug].tsx": $14,
-    "./routes/movements.tsx": $15,
-    "./routes/talents.tsx": $16,
-    "./routes/women.tsx": $17,
+    "./routes/background/gray_half.tsx": $10,
+    "./routes/background/white.tsx": $11,
+    "./routes/histocharacters.tsx": $12,
+    "./routes/index.tsx": $13,
+    "./routes/indicators.tsx": $14,
+    "./routes/movement/[slug].tsx": $15,
+    "./routes/movements.tsx": $16,
+    "./routes/talents.tsx": $17,
+    "./routes/women.tsx": $18,
   },
   islands: {
-    "./islands/Quote.tsx": $$0,
-    "./islands/chart/Doughnut.tsx": $$1,
-    "./islands/chart/PolarArea.tsx": $$2,
-    "./islands/footer/Footer.tsx": $$3,
-    "./islands/footer/WaterDrop.tsx": $$4,
-    "./islands/header/Nav.tsx": $$5,
-    "./islands/layout/ArtistsLayout.tsx": $$6,
-    "./islands/layout/ArtsLayout.tsx": $$7,
-    "./islands/livesearch/ArtistsSearch.tsx": $$8,
-    "./islands/livesearch/ArtsSearch.tsx": $$9,
-    "./islands/livesearch/CollectionSearch.tsx": $$10,
-    "./islands/livesearch/HistoSearch.tsx": $$11,
-    "./islands/livesearch/WomenSearch.tsx": $$12,
+    "./islands/AnimBrushStroke.tsx": $$0,
+    "./islands/MovementsList.tsx": $$1,
+    "./islands/Quote.tsx": $$2,
+    "./islands/TalentsList.tsx": $$3,
+    "./islands/chart/Doughnut.tsx": $$4,
+    "./islands/chart/PolarArea.tsx": $$5,
+    "./islands/footer/Footer.tsx": $$6,
+    "./islands/footer/WaterDrop.tsx": $$7,
+    "./islands/header/Nav.tsx": $$8,
+    "./islands/layout/ArtistsLayout.tsx": $$9,
+    "./islands/layout/ArtsLayout.tsx": $$10,
+    "./islands/layout/ErrorLayout.tsx": $$11,
+    "./islands/livesearch/ArtistsSearch.tsx": $$12,
+    "./islands/livesearch/ArtsSearch.tsx": $$13,
+    "./islands/livesearch/CollectionSearch.tsx": $$14,
+    "./islands/livesearch/HistoSearch.tsx": $$15,
+    "./islands/livesearch/WomenSearch.tsx": $$16,
   },
   baseUrl: import.meta.url,
 };

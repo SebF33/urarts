@@ -4,7 +4,6 @@
 
 import { Spring } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { tw } from "twind";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import WaveTank from "@components/WaveTank.tsx";
@@ -125,11 +124,11 @@ export default function WaterDrop({ color }: { color: string }) {
   return (
     <section
       id="dropy-section"
-      class={tw`relative bottom-0 flex justify-center items-center flex-col w-full font-brush`}
+      class={`relative bottom-0 flex justify-center items-center flex-col w-full`}
     >
       <svg
         id="Urarts"
-        class={tw`transform-gpu`}
+        class={`transform-gpu`}
         width="170"
         height="273.41"
         viewBox="0 0 170 273.41"
@@ -293,7 +292,7 @@ export default function WaterDrop({ color }: { color: string }) {
       </svg>
 
       <svg
-        class={tw`transform-gpu`}
+        class={`transform-gpu`}
         width="100%"
         height="30px"
         viewBox="0 0 100 100"

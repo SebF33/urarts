@@ -1,23 +1,17 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
-import { tw } from "twind";
 
 import Doughnut from "@islands/chart/Doughnut.tsx";
 import Footer from "@islands/footer/Footer.tsx";
-import Nav from "@islands/header/Nav.tsx";
 import PolarArea from "@islands/chart/PolarArea.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export const handler: Handlers<{}> = {
-  async GET(req, ctx) {
-    const url = new URL(req.url);
-    const pathname = url.pathname;
-
+export const handler: Handlers = {
+  async GET(_, ctx) {
     const db = Db.getInstance();
     const { count } = db.fn;
 
@@ -80,26 +74,11 @@ export const handler: Handlers<{}> = {
       parseFloat(item.art_count)
     );
 
-    const randomColorsIndex = Math.floor(Math.random() * 8);
-    const colors = [
-      colorScheme[currentColorScheme].lighterdark,
-      colorScheme[currentColorScheme].red,
-      colorScheme[currentColorScheme].green,
-      colorScheme[currentColorScheme].yellow,
-      colorScheme[currentColorScheme].blue,
-      colorScheme[currentColorScheme].magenta,
-      colorScheme[currentColorScheme].cyan,
-      colorScheme[currentColorScheme].gray,
-    ];
-    const color = colors[randomColorsIndex];
-
     return ctx.render({
       artistCountResult,
       artistNationalityResult,
-      color,
       movementCountResult,
       movementNameResult,
-      pathname,
       totalArtCountResult,
       totalArtistCountResult,
     });
@@ -110,10 +89,8 @@ export default function IndicatorsPage(
   props: PageProps<{
     artistCountResult: number[];
     artistNationalityResult: string[];
-    color: string;
     movementCountResult: number[];
     movementNameResult: string[];
-    pathname: string;
     totalArtCountResult: number[];
     totalArtistCountResult: number[];
   }>,
@@ -121,10 +98,8 @@ export default function IndicatorsPage(
   const {
     artistCountResult,
     artistNationalityResult,
-    color,
     movementCountResult,
     movementNameResult,
-    pathname,
     totalArtCountResult,
     totalArtistCountResult,
   } = props.data;
@@ -142,51 +117,37 @@ export default function IndicatorsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <div
-        class={tw`flex flex-col min-h-screen ${
-          css({
-            background: `url(/background/gray)`,
-            "background-color": `${colorScheme[currentColorScheme].white}`,
-            "background-position": "center",
-            "background-size": "2800px",
-            "-webkit-tap-highlight-color": "transparent",
-          })
-        }`}
-      >
-        <Nav pathname={pathname} />
-
-        <main class={tw`flex-grow font-brush`}>
-          <div class={tw`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-            <div
-              class={tw`paper max-w-[230px] mt-5 mb-6`}
-            >
-              <div class="top-tape"></div>
-              <h1 class={tw`text-5xl font-medium mx-auto`}>
-                Indicateurs
-              </h1>
-            </div>
-
-            <div
-              class={tw`charts flex items-center justify-evenly mx-auto max-w-xl`}
-            >
-              <Doughnut
-                countResult={artistCountResult}
-                nationalityResult={artistNationalityResult}
-                totalArtistCountResult={totalArtistCountResult}
-              />
-              <div style="height:60px; width:60px"></div>
-              <PolarArea
-                countResult={movementCountResult}
-                nameResult={movementNameResult}
-                totalArtCountResult={totalArtCountResult}
-              />
-            </div>
+      <main class="flex-grow">
+        <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+          <div
+            class={`paper max-w-[230px] mt-5 mb-6`}
+          >
+            <div class="top-tape"></div>
+            <h1 class={`text-5xl font-medium mx-auto`}>
+              Indicateurs
+            </h1>
           </div>
-        </main>
 
-        <WaterDrop color={color} />
-        <Footer color={color} />
-      </div>
+          <div
+            class={`charts flex items-center justify-evenly mx-auto max-w-xl`}
+          >
+            <Doughnut
+              countResult={artistCountResult}
+              nationalityResult={artistNationalityResult}
+              totalArtistCountResult={totalArtistCountResult}
+            />
+            <div style="height:60px; width:60px"></div>
+            <PolarArea
+              countResult={movementCountResult}
+              nameResult={movementNameResult}
+              totalArtCountResult={totalArtCountResult}
+            />
+          </div>
+        </div>
+      </main>
+
+      <WaterDrop color={colorScheme[currentColorScheme].gray} />
+      <Footer color={colorScheme[currentColorScheme].gray} />
     </>
   );
 }

@@ -1,26 +1,53 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "twind/css";
-import { tw } from "twind";
+import { css } from "@twind/core";
+import { useEffect } from "preact/hooks";
 
 import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
 
-export default function Nav(
-  props: { pathname?: string },
-) {
+export default function Nav() {
+  // CSS
   const draggable = false;
+  const desktopCurrent =
+    "data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark";
+  const desktopHover = "hover:text-lighterdark transition duration-300";
+  const desktopPrimaryAnchor =
+    `py-4 px-2 text-lg font-medium ${desktopHover} ${desktopCurrent}`;
+  const desktopHistoAnchor = `py-3 -mr-1 ${desktopHover} ${desktopCurrent}`;
+  const desktopWomanAnchor = `py-3 ${desktopHover} ${desktopCurrent}`;
+  const desktopHeartAnchor = `py-4 mt-1 ${desktopHover} ${desktopCurrent}`;
+  const desktopStatAnchor = desktopHeartAnchor;
+  const mobileCurrent =
+    "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
+  const mobileHover = "hover:bg-lighterdark transition duration-300";
+  const mobilePrimaryAnchor =
+    `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
+  const mobileSecondaryAnchor =
+    `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
-  if (typeof document !== "undefined") {
+  // Menu mobile
+  useEffect(() => {
+    const delay = 120;
+    const anchor = document.querySelectorAll("#mobile-anchor");
     const btn = document.querySelector("button.mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
 
-    btn?.addEventListener("click", () => {
-      menu?.classList.toggle("hidden");
+    anchor.forEach(function (a) {
+      a.addEventListener("click", function () {
+        setTimeout(() => {
+          menu?.classList.toggle("hidden");
+        }, delay);
+      });
     });
-  }
+    btn?.addEventListener("click", () => {
+      setTimeout(() => {
+        menu?.classList.toggle("hidden");
+      }, delay);
+    });
+  }, []);
 
   return (
     <nav
-      class={tw`wave-colors font-brush shadow-lg text-white ${
+      class={`wave-colors shadow-lg text-white z-10 ${
         css(
           {
             "text-shadow": "2px 4px 3px rgba(0,0,0,0.3)",
@@ -28,103 +55,83 @@ export default function Nav(
         )
       }`}
     >
-      <div class={tw`max-w-7xl mx-auto px-4`}>
-        <div class={tw`flex justify-between`}>
-          <div class={tw`flex space-x-7`}>
+      <div class={`max-w-7xl mx-auto px-4`}>
+        <div class={`flex justify-between`}>
+          <div class={`flex space-x-7`}>
             <div>
               <a
                 href="/"
-                class={tw`flex items-center py-3 px-2`}
+                class={`flex items-center py-3 px-2`}
                 draggable={draggable}
               >
                 <img
-                  class={tw`h-10 w-10`}
+                  class={`h-10 w-10`}
                   src="/icon_urarts.svg"
                   alt="Urarts"
                   draggable={draggable}
                 />
               </a>
             </div>
-            <div class={tw`hidden md:flex items-center space-x-4`}>
+            <div class={`hidden md:flex items-center space-x-4 select-none`}>
               <a
                 href="/"
-                class={tw`${
-                  props.pathname === "/"
-                    ? "text-lighterdark border-b-4 border-lighterdark"
-                    : ""
-                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
                 Accueil
               </a>
               <a
                 href="/artists"
-                class={tw`${
-                  props.pathname === "/artists"
-                    ? "text-lighterdark border-b-4 border-lighterdark"
-                    : ""
-                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
                 Artistes
               </a>
               <a
                 href="/arts"
-                class={tw`${
-                  props.pathname === "/arts"
-                    ? "text-lighterdark border-b-4 border-lighterdark"
-                    : ""
-                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
                 Œuvres
               </a>
               <a
                 href="/movements"
-                class={tw`${
-                  props.pathname === "/movements"
-                    ? "text-lighterdark border-b-4 border-lighterdark"
-                    : ""
-                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
                 Mouvements
               </a>
               <a
                 href="/talents"
-                class={tw`${
-                  props.pathname === "/talents"
-                    ? "text-lighterdark border-b-4 border-lighterdark"
-                    : ""
-                } py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300`}
+                class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
                 Talents
               </a>
             </div>
           </div>
-          <div class={tw`hidden md:flex items-center space-x-3`}>
+          <div class={`hidden md:flex items-center space-x-3`}>
             <a
               href="/histocharacters"
-              class={tw`hover:text-lighterdark -mr-1`}
+              class={desktopHistoAnchor}
               draggable={draggable}
             >
               <HistoIcon />
             </a>
             <a
               href="/women"
-              class={tw`hover:text-lighterdark`}
+              class={desktopWomanAnchor}
               draggable={draggable}
             >
               <WomanIcon />
             </a>
             <a
               href="/art/mimi"
-              class={tw`hover:text-lighterdark`}
+              class={desktopHeartAnchor}
               draggable={draggable}
             >
               <svg
-                class={tw`icon-svg h-6 w-6`}
+                class={`icon-svg h-6 w-6`}
                 fill={colorScheme[currentColorScheme].white}
                 viewBox="0 0 16 16"
                 aria-hidden="true"
@@ -137,11 +144,11 @@ export default function Nav(
             </a>
             <a
               href="/indicators"
-              class={tw`hover:text-lighterdark`}
+              class={desktopStatAnchor}
               draggable={draggable}
             >
               <svg
-                class={tw`icon-svg h-6 w-6`}
+                class={`icon-svg h-6 w-6`}
                 fill={colorScheme[currentColorScheme].white}
                 viewBox="0 0 16 16"
                 aria-hidden="true"
@@ -154,12 +161,12 @@ export default function Nav(
             </a>
             <a
               href="/api/arts"
-              class={tw`hover:text-lighterdark`}
+              class="mt-1"
               draggable={draggable}
               target="_blank"
             >
               <svg
-                class={tw`icon-svg h-7 w-7`}
+                class={`icon-svg h-7 w-7`}
                 fill={colorScheme[currentColorScheme].white}
                 viewBox="0 0 576 448"
                 aria-hidden="true"
@@ -177,10 +184,10 @@ export default function Nav(
               </svg>
             </a>
           </div>
-          <div class={tw`md:hidden flex items-center`}>
-            <button class={tw`mobile-menu-button focus:outline-none`}>
+          <div class={`md:hidden flex items-center`}>
+            <button class={`mobile-menu-button focus:outline-none`}>
               <svg
-                class={tw`w-6 h-6 text-white hover:text-lighterdark`}
+                class={`w-6 h-6 text-white hover:text-lighterdark`}
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
@@ -194,110 +201,80 @@ export default function Nav(
           </div>
         </div>
       </div>
-      <div class={tw`hidden mobile-menu`}>
+      <div class={`hidden mobile-menu`}>
         <ul>
-          <li
-            class={tw`${
-              props.pathname === "/"
-                ? "active text-white bg-lighterdark font-semibold"
-                : ""
-            }`}
-          >
+          <li>
             <a
+              id="mobile-anchor"
               href="/"
-              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={mobilePrimaryAnchor}
             >
-              Accueil
+              <span class={`px-2`}>Accueil</span>
             </a>
           </li>
-          <li
-            class={tw`${
-              props.pathname === "/artists"
-                ? "active text-white bg-lighterdark font-semibold"
-                : ""
-            }`}
-          >
+          <li>
             <a
+              id="mobile-anchor"
               href="/artists"
-              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={mobilePrimaryAnchor}
             >
-              Artistes
+              <span class={`px-2`}>Artistes</span>
             </a>
           </li>
-          <li
-            class={tw`${
-              props.pathname === "/arts"
-                ? "active text-white bg-lighterdark font-semibold"
-                : ""
-            }`}
-          >
+          <li>
             <a
+              id="mobile-anchor"
               href="/arts"
-              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={mobilePrimaryAnchor}
             >
-              Œuvres
+              <span class={`px-2`}>Œuvres</span>
             </a>
           </li>
-          <li
-            class={tw`${
-              props.pathname === "/movements"
-                ? "active text-white bg-lighterdark font-semibold"
-                : ""
-            }`}
-          >
+          <li>
             <a
+              id="mobile-anchor"
               href="/movements"
-              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={mobilePrimaryAnchor}
             >
-              Mouvements
+              <span class={`px-2`}>Mouvements</span>
             </a>
           </li>
-          <li
-            class={tw`${
-              props.pathname === "/talents"
-                ? "active text-white bg-lighterdark font-semibold"
-                : ""
-            }`}
-          >
+          <li>
             <a
+              id="mobile-anchor"
               href="/talents"
-              class={tw`block text-lg px-2 py-4 hover:bg-lighterdark transition duration-300`}
+              class={mobilePrimaryAnchor}
             >
-              Talents
+              <span class={`px-2`}>Talents</span>
             </a>
           </li>
-          <li
-            class={tw`flex`}
-          >
-            <div
-              class={tw`flex`}
-            >
+          <li class={`flex`}>
+            <div class={`w-[50px]`}>
               <a
+                id="mobile-anchor"
                 href="/histocharacters"
-                class={tw`flex flex-col items-center justify-center text-lg px-2 py-3 hover:bg-lighterdark transition duration-300`}
+                class={mobileSecondaryAnchor}
               >
                 <HistoIcon />
               </a>
             </div>
-            <div
-              class={tw`flex`}
-            >
+            <div class={`w-[50px]`}>
               <a
+                id="mobile-anchor"
                 href="/women"
-                class={tw`flex flex-col items-center justify-center text-lg px-2 py-3 hover:bg-lighterdark transition duration-300`}
+                class={mobileSecondaryAnchor}
               >
                 <WomanIcon />
               </a>
             </div>
-            <div
-              class={tw`flex`}
-            >
+            <div class={`w-[50px]`}>
               <a
+                id="mobile-anchor"
                 href="/art/mimi"
-                class={tw`flex flex-col items-center justify-center text-lg px-3 py-3 hover:bg-lighterdark transition duration-300`}
+                class={mobileSecondaryAnchor}
               >
                 <svg
-                  class={tw`icon-svg h-6 w-6`}
+                  class={`icon-svg h-6 w-6`}
                   fill={colorScheme[currentColorScheme].white}
                   viewBox="0 0 16 16"
                   aria-hidden="true"
@@ -309,15 +286,14 @@ export default function Nav(
                 </svg>
               </a>
             </div>
-            <div
-              class={tw`flex`}
-            >
+            <div class={`w-[50px]`}>
               <a
+                id="mobile-anchor"
                 href="/indicators"
-                class={tw`flex flex-col items-center justify-center text-lg px-3 py-3 hover:bg-lighterdark transition duration-300`}
+                class={mobileSecondaryAnchor}
               >
                 <svg
-                  class={tw`icon-svg h-6 w-6`}
+                  class={`icon-svg h-6 w-6`}
                   fill={colorScheme[currentColorScheme].white}
                   viewBox="0 0 16 16"
                   aria-hidden="true"
@@ -329,16 +305,14 @@ export default function Nav(
                 </svg>
               </a>
             </div>
-            <div
-              class={tw`flex`}
-            >
+            <div class={`w-[50px]`}>
               <a
                 href="/api/arts"
-                class={tw`flex flex-col items-center justify-center text-lg px-2 py-3 hover:bg-lighterdark transition duration-300`}
+                class={mobileSecondaryAnchor}
                 target="_blank"
               >
                 <svg
-                  class={tw`icon-svg h-7 w-7`}
+                  class={`icon-svg h-7 w-7`}
                   fill={colorScheme[currentColorScheme].white}
                   viewBox="0 0 576 448"
                   aria-hidden="true"

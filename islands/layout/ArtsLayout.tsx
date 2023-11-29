@@ -1,7 +1,6 @@
 import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { tw } from "twind";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -62,71 +61,89 @@ export default function ArtsLayout(
   }, [props.arts]);
 
   return (
-    <div
-      class={tw`row flex flex-wrap mx-auto`}
-    >
+    <div class={`flex flex-wrap mx-auto`}>
       {props.arts &&
         props.arts.map((p) => (
-          <div
-            id={p.id}
-            class={`art-wrap-${p.polyptych}`}
-          >
-            {p.polyptych > 3 &&
-              (
-                <div
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                >
-                  <img
-                    src={p.url_4}
-                    alt={p.name + "_4"}
-                  />
-                </div>
-              )}
-            {p.polyptych > 1 &&
-              (
-                <div
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                >
-                  <img
-                    src={p.url_2}
-                    alt={p.name + "_2"}
-                  />
-                </div>
-              )}
+          <div class={`flex flex-col mx-auto`}>
             <div
-              data-artist-id={p.id}
-              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+              id={p.id}
+              class={`art-wrap-${p.polyptych}`}
             >
-              <p
-                class={tw`font-${p.font ?? props.font}`}
+              {p.polyptych > 3 &&
+                (
+                  <div
+                    class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  >
+                    <img
+                      src={p.url_4}
+                      alt={p.name + "_4"}
+                    />
+                  </div>
+                )}
+              {p.polyptych > 1 &&
+                (
+                  <div
+                    class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  >
+                    <img
+                      src={p.url_2}
+                      alt={p.name + "_2"}
+                    />
+                  </div>
+                )}
+              <div
+                data-artist-id={p.id}
+                class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
               >
-                {p.name}
-              </p>
-              <img
-                src={p.url}
-                alt={p.name}
-              />
+                {(p.frame === 0 || p.frame > 2) &&
+                  (
+                    <p
+                      class={`text-lighterdark font-${p.font ?? props.font}`}
+                    >
+                      {p.name}
+                    </p>
+                  )}
+                <img
+                  src={p.url}
+                  alt={p.name}
+                />
+              </div>
+              {p.polyptych > 2 &&
+                (
+                  <div
+                    class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  >
+                    <img
+                      src={p.url_3}
+                      alt={p.name + "_3"}
+                    />
+                  </div>
+                )}
+              {p.polyptych === 5 &&
+                (
+                  <div
+                    class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  >
+                    <img
+                      src={p.url_5}
+                      alt={p.name + "_5"}
+                    />
+                  </div>
+                )}
             </div>
-            {p.polyptych > 2 &&
+            {(p.frame !== 0 && p.frame < 3) &&
               (
-                <div
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                >
-                  <img
-                    src={p.url_3}
-                    alt={p.name + "_3"}
-                  />
-                </div>
-              )}
-            {p.polyptych === 5 &&
-              (
-                <div
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                >
-                  <img
-                    src={p.url_5}
-                    alt={p.name + "_5"}
-                  />
+                <div class="frame-label flex mx-auto">
+                  <div
+                    class={`paper min-h-[40px] min-w-[220px] mx-auto`}
+                  >
+                    <div class="top-tape"></div>
+                    <p
+                      class={`text-lighterdark font-${p.font ?? props.font}`}
+                    >
+                      {p.name}
+                    </p>
+                  </div>
                 </div>
               )}
           </div>
