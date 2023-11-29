@@ -32,6 +32,7 @@ export const handler = async (
     .where("artist.slug", "not in", TALENTS)
     .orderBy("art.name")
     .orderBy("last_name")
+    .limit(20)
     .execute();
 
   return Promise.resolve(
