@@ -94,6 +94,14 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("name", "varchar", (col) => col.notNull())
     .addColumn("font", "varchar", (col) => col.defaultTo(sql`"brush"`))
+    .addColumn(
+      "info",
+      "varchar(500)",
+      (col) =>
+        col.defaultTo(
+          sql`"La description est à faire pour ce mouvement. Il faut y indiquer son style et ses particularités."`,
+        ),
+    )
     .addColumn("slug", "varchar", (col) => col.notNull())
     .addColumn(
       "modified_at",

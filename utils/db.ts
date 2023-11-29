@@ -55,6 +55,7 @@ interface MovementTable {
   id: Generated<number>;
   name: string;
   font: string;
+  info: string | null;
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
