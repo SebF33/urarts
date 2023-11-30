@@ -27,13 +27,6 @@ export default {
           "8xl": "6rem",
           "9xl": "8rem",
         },
-        screens: {
-          xs: "300px",
-          sm: "480px",
-          md: "768px",
-          lg: "976px",
-          xl: "1440px",
-        },
       }) as Preset<any>,
     ],
   }),
