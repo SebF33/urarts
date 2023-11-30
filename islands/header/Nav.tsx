@@ -58,7 +58,7 @@ export default function Nav() {
       <div class={`max-w-7xl mx-auto px-4`}>
         <div class={`flex justify-between`}>
           <div class={`flex space-x-7`}>
-            <div>
+            <div class={`select-none`}>
               <a
                 href="/"
                 class={`flex items-center py-3 px-2`}

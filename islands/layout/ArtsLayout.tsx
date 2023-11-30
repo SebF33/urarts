@@ -133,13 +133,13 @@ export default function ArtsLayout(
             </div>
             {(p.frame !== 0 && p.frame < 3) &&
               (
-                <div class="frame-label flex mx-auto">
+                <div class="frame-label flex mx-3">
                   <div
-                    class={`paper min-h-[40px] min-w-[220px] mx-auto`}
+                    class={`paper min-h-[30px] md:min-h-[40px] min-w-[180px] mx-auto`}
                   >
                     <div class="top-tape"></div>
                     <p
-                      class={`text-lighterdark font-${p.font ?? props.font}`}
+                      class={`px-3 text-lighterdark font-${p.font ?? props.font} leading-none`}
                     >
                       {p.name}
                     </p>
