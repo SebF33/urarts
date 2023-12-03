@@ -35,7 +35,7 @@ export default function AnimBrushStroke(
 
   return (
     <div
-      class={`h-[144px]`}
+      class={`h-[144px] overflow-hidden`}
     >
       {showAnimBrushStroke && (
         <Fragment>
