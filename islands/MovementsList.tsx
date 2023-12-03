@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { h } from "preact";
 import { MovementRow } from "@utils/types.tsx";
 import { useLayoutEffect } from "preact/hooks";
 
@@ -19,6 +20,14 @@ export default function MovementsList(
     }
   }, []);
 
+  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const href = (event.currentTarget as HTMLAnchorElement).href;
+    setTimeout(() => {
+      window.location.href = href;
+    }, 200);
+  }
+
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
       <div
@@ -38,6 +47,7 @@ export default function MovementsList(
                 <li class={`m-2`} key={index}>
                   <a
                     href={"/movement/" + item.slug}
+                    onClick={handleClick}
                     class={`cursor-pointer`}
                   >
                     <p class={`relative group text-xl`}>

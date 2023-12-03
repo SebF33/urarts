@@ -1,6 +1,7 @@
 import { ArtRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
+import { h } from "preact";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -31,6 +32,14 @@ export default function ArtsSearch() {
       body.style.backgroundSize = "3200px";
     }
   }, []);
+
+  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const href = (event.currentTarget as HTMLAnchorElement).href;
+    setTimeout(() => {
+      window.location.href = href;
+    }, 200);
+  }
 
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
@@ -78,6 +87,7 @@ export default function ArtsSearch() {
                 <li class={`m-2`} key={index}>
                   <a
                     href={"/art/" + item.slug + "?id=" + item.id}
+                    onClick={handleClick}
                     class={`cursor-pointer`}
                   >
                     <p class={`relative group text-xl`}>
