@@ -23,7 +23,7 @@ export default function ArtistsSearch() {
   const blur = "blur(0)";
   const draggable = false;
   const grid =
-    "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
+    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
   const scale105 =
     "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
   const scale110 =

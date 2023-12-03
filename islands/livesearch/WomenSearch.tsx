@@ -12,7 +12,7 @@ export default function WomenSearch() {
 
   const gender = "Femme";
   const grid =
-    "grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-20";
+    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-20";
 
   // Appel à l'API
   useEffect(() => {

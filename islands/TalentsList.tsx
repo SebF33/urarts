@@ -10,7 +10,7 @@ export default function TalentsList(
   props: { artists: Artists },
 ) {
   const grid =
-    "grid gap-10 sm:gap-6 md:gap-20 lg:gap-64 xl:gap-96 grid-cols-1 sm:grid-cols-2 pt-10 pb-10 lg:pt-20 md:pb-4 lg:pb-0";
+    "grid gap-4 sm:gap-5 lg:gap-64 xl:gap-96 grid-cols-1 grid-cols-2 pt-10 pb-10 lg:pt-20 md:pb-4 lg:pb-0";
 
   // Background pour la page des talents
   useLayoutEffect(() => {
