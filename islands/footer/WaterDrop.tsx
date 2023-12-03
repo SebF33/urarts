@@ -124,11 +124,10 @@ export default function WaterDrop({ color }: { color: string }) {
   return (
     <section
       id="dropy-section"
-      class={`relative bottom-0 flex justify-center items-center flex-col w-full`}
+      class={`relative bottom-[-6px] flex justify-center items-center flex-col w-full`}
     >
       <svg
         id="Urarts"
-        class={`transform-gpu`}
         width="170"
         height="273.41"
         viewBox="0 0 170 273.41"
@@ -292,7 +291,6 @@ export default function WaterDrop({ color }: { color: string }) {
       </svg>
 
       <svg
-        class={`transform-gpu`}
         width="100%"
         height="30px"
         viewBox="0 0 100 100"
