@@ -1,29 +1,55 @@
+import { Any } from "any";
 import { ArtistQuote } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import tippy from "tippyjs";
-import { useEffect, useLayoutEffect } from "preact/hooks";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 type Quote = Array<ArtistQuote>;
 
 export default function Quote(
   props: { data: Quote },
 ) {
+  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+
   const draggable = false;
 
   useEffect(() => {
-    const artistQuote = document.querySelector("#Quote");
+    tippyInstances.forEach((instance) => {
+      instance.destroy();
+    });
+    setTippyInstances([]);
+
+    const artistQuote = document.querySelector(
+      `[data-quote-id="${props.data.id}"]`,
+    );
+
     if (artistQuote) {
       tippy(artistQuote, {
         allowHTML: true,
-        content: `<a href="/art/${props.data.slug}" draggable="${draggable}">
+        content:
+          `<a data-anchor-id=${props.data.id} href="/art/${props.data.slug}" draggable="${draggable}">
           <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px" draggable="${draggable}"/>
           </a>`,
         interactive: true,
         placement: "top",
         theme: "urarts",
+        onCreate(instance: Any) {
+          setTippyInstances((prevInstances) => [...prevInstances, instance]);
+          const anchor = instance.popper.querySelector(
+            `[data-anchor-id="${props.data.id}"]`,
+          );
+          anchor.addEventListener("click", (event) => {
+            instance.destroy();
+          });
+        },
+        onDestroy(instance: Any) {
+          setTippyInstances((prevInstances) =>
+            prevInstances.filter((i) => i !== instance)
+          );
+        },
       });
     }
-  }, []);
+  }, [props.data.id]);
 
   // Background pour la page d'accueil
   useLayoutEffect(() => {
@@ -39,7 +65,7 @@ export default function Quote(
 
   return (
     <div
-      id="Quote"
+      data-quote-id={props.data.id}
       class={`paper max-w-[900px] mx-auto -mt-4 mb-6 text-lighterdark overflow-hidden`}
     >
       <div class="top-tape"></div>

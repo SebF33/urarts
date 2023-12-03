@@ -31,6 +31,7 @@ export type ArtRow = {
 };
 
 export type ArtistQuote = {
+  id: number;
   first_name: string | null;
   last_name: string;
   avatar_url: string;
