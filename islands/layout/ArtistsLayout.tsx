@@ -3,7 +3,6 @@ import { ArtistRow } from "@utils/types.tsx";
 import { css } from "@twind/core";
 import { h } from "preact";
 import tippy from "tippyjs";
-import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 type Artists = Array<ArtistRow>;
@@ -59,7 +58,7 @@ export default function ArtistsLayout(
         tippy(artist, {
           allowHTML: true,
           content:
-            `<strong style="font-size:1.2em;color:${p.color}"><a href="${UrlBasePath}/art/${p.slug}">${p.last_name}</a></strong>
+            `<strong style="font-size:1.2em;color:${p.color}"><a href="/art/${p.slug}">${p.last_name}</a></strong>
             <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
             <br>Nationalité : ${p.nationality}
             <p style="margin-top:10px">${p.info}</p>`,

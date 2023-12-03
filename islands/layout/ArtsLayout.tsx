@@ -1,7 +1,6 @@
 import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
 type Arts = Array<ArtCollection>;
@@ -31,13 +30,13 @@ export default function ArtsLayout(
           content =
             `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
         <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
-        <br>Artiste : <strong style="color:${p.color}"><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
+        <br>Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong>
         <p style="margin-top:10px">${p.info}</p>`;
         } else {
           content =
             `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
-        <br><strong><a href="${UrlBasePath}/movement/${p.movement_slug}">${p.movement}</a></strong>
-        <br>Artiste : <strong style="color:${p.color}"><a href="${UrlBasePath}/art/${p.artist_slug}">${p.last_name}</a></strong>
+        <br><strong><a href="/movement/${p.movement_slug}">${p.movement}</a></strong>
+        <br>Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong>
         <p style="margin-top:10px">${p.info}</p>`;
         }
 
