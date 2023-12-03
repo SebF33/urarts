@@ -40,7 +40,7 @@ export default function AnimBrushStroke(
       {showAnimBrushStroke && (
         <Fragment>
           <div
-            class={`font-${props.font} mx-auto text-center relative inline-block p-12 ${
+            class={`font-${props.font} mx-auto text-center relative inline-block p-12 overflow-hidden ${
               css({
                 "&::before": {
                   background: `${props.color}`,
