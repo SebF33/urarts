@@ -164,7 +164,7 @@ export default function ArtistArtsPage(
                 <p class="font-bold text-lg mb-2">
                   {"Nationalité : " + nationality}
                 </p>
-                <p class={`text-left text-[1.1rem] leading-5 select-none`}>
+                <p class={`text-[1.1rem] text-justify leading-5 select-none`}>
                   {info}
                 </p>
               </div>
