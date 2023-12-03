@@ -35,7 +35,7 @@ export default function AnimBrushStroke(
 
   return (
     <div
-      class={`h-[144px] overflow-hidden`}
+      class={`h-[144px]`}
     >
       {showAnimBrushStroke && (
         <Fragment>
@@ -64,6 +64,7 @@ export default function AnimBrushStroke(
           </div>
           <svg
             id="BrushStroke"
+            class={`overflow-hidden`}
             height="0"
             width="0"
             xmlns="http://www.w3.org/2000/svg"
