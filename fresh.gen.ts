@@ -2,85 +2,86 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_500.tsx";
-import * as $2 from "./routes/_app.tsx";
-import * as $3 from "./routes/api/artists.ts";
-import * as $4 from "./routes/api/arts.ts";
-import * as $5 from "./routes/api/collection.ts";
-import * as $6 from "./routes/art/[slug].tsx";
-import * as $7 from "./routes/artists.tsx";
-import * as $8 from "./routes/arts.tsx";
-import * as $9 from "./routes/background/gray.tsx";
-import * as $10 from "./routes/background/gray_half.tsx";
-import * as $11 from "./routes/background/white.tsx";
-import * as $12 from "./routes/histocharacters.tsx";
-import * as $13 from "./routes/index.tsx";
-import * as $14 from "./routes/indicators.tsx";
-import * as $15 from "./routes/movement/[slug].tsx";
-import * as $16 from "./routes/movements.tsx";
-import * as $17 from "./routes/talents.tsx";
-import * as $18 from "./routes/women.tsx";
-import * as $$0 from "./islands/AnimBrushStroke.tsx";
-import * as $$1 from "./islands/MovementsList.tsx";
-import * as $$2 from "./islands/Quote.tsx";
-import * as $$3 from "./islands/TalentsList.tsx";
-import * as $$4 from "./islands/chart/Doughnut.tsx";
-import * as $$5 from "./islands/chart/PolarArea.tsx";
-import * as $$6 from "./islands/footer/Footer.tsx";
-import * as $$7 from "./islands/footer/WaterDrop.tsx";
-import * as $$8 from "./islands/header/Nav.tsx";
-import * as $$9 from "./islands/layout/ArtistsLayout.tsx";
-import * as $$10 from "./islands/layout/ArtsLayout.tsx";
-import * as $$11 from "./islands/layout/ErrorLayout.tsx";
-import * as $$12 from "./islands/livesearch/ArtistsSearch.tsx";
-import * as $$13 from "./islands/livesearch/ArtsSearch.tsx";
-import * as $$14 from "./islands/livesearch/CollectionSearch.tsx";
-import * as $$15 from "./islands/livesearch/HistoSearch.tsx";
-import * as $$16 from "./islands/livesearch/WomenSearch.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_500 from "./routes/_500.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $api_artists from "./routes/api/artists.ts";
+import * as $api_arts from "./routes/api/arts.ts";
+import * as $api_collection from "./routes/api/collection.ts";
+import * as $art_slug_ from "./routes/art/[slug].tsx";
+import * as $artists from "./routes/artists.tsx";
+import * as $arts from "./routes/arts.tsx";
+import * as $background_gray from "./routes/background/gray.tsx";
+import * as $background_gray_half from "./routes/background/gray_half.tsx";
+import * as $background_white from "./routes/background/white.tsx";
+import * as $histocharacters from "./routes/histocharacters.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $indicators from "./routes/indicators.tsx";
+import * as $movement_slug_ from "./routes/movement/[slug].tsx";
+import * as $movements from "./routes/movements.tsx";
+import * as $talents from "./routes/talents.tsx";
+import * as $women from "./routes/women.tsx";
+import * as $AnimBrushStroke from "./islands/AnimBrushStroke.tsx";
+import * as $MovementsList from "./islands/MovementsList.tsx";
+import * as $Quote from "./islands/Quote.tsx";
+import * as $TalentsList from "./islands/TalentsList.tsx";
+import * as $chart_Doughnut from "./islands/chart/Doughnut.tsx";
+import * as $chart_PolarArea from "./islands/chart/PolarArea.tsx";
+import * as $footer_Footer from "./islands/footer/Footer.tsx";
+import * as $footer_WaterDrop from "./islands/footer/WaterDrop.tsx";
+import * as $header_Nav from "./islands/header/Nav.tsx";
+import * as $layout_ArtistsLayout from "./islands/layout/ArtistsLayout.tsx";
+import * as $layout_ArtsLayout from "./islands/layout/ArtsLayout.tsx";
+import * as $layout_ErrorLayout from "./islands/layout/ErrorLayout.tsx";
+import * as $livesearch_ArtistsSearch from "./islands/livesearch/ArtistsSearch.tsx";
+import * as $livesearch_ArtsSearch from "./islands/livesearch/ArtsSearch.tsx";
+import * as $livesearch_CollectionSearch from "./islands/livesearch/CollectionSearch.tsx";
+import * as $livesearch_HistoSearch from "./islands/livesearch/HistoSearch.tsx";
+import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_404.tsx": $0,
-    "./routes/_500.tsx": $1,
-    "./routes/_app.tsx": $2,
-    "./routes/api/artists.ts": $3,
-    "./routes/api/arts.ts": $4,
-    "./routes/api/collection.ts": $5,
-    "./routes/art/[slug].tsx": $6,
-    "./routes/artists.tsx": $7,
-    "./routes/arts.tsx": $8,
-    "./routes/background/gray.tsx": $9,
-    "./routes/background/gray_half.tsx": $10,
-    "./routes/background/white.tsx": $11,
-    "./routes/histocharacters.tsx": $12,
-    "./routes/index.tsx": $13,
-    "./routes/indicators.tsx": $14,
-    "./routes/movement/[slug].tsx": $15,
-    "./routes/movements.tsx": $16,
-    "./routes/talents.tsx": $17,
-    "./routes/women.tsx": $18,
+    "./routes/_404.tsx": $_404,
+    "./routes/_500.tsx": $_500,
+    "./routes/_app.tsx": $_app,
+    "./routes/api/artists.ts": $api_artists,
+    "./routes/api/arts.ts": $api_arts,
+    "./routes/api/collection.ts": $api_collection,
+    "./routes/art/[slug].tsx": $art_slug_,
+    "./routes/artists.tsx": $artists,
+    "./routes/arts.tsx": $arts,
+    "./routes/background/gray.tsx": $background_gray,
+    "./routes/background/gray_half.tsx": $background_gray_half,
+    "./routes/background/white.tsx": $background_white,
+    "./routes/histocharacters.tsx": $histocharacters,
+    "./routes/index.tsx": $index,
+    "./routes/indicators.tsx": $indicators,
+    "./routes/movement/[slug].tsx": $movement_slug_,
+    "./routes/movements.tsx": $movements,
+    "./routes/talents.tsx": $talents,
+    "./routes/women.tsx": $women,
   },
   islands: {
-    "./islands/AnimBrushStroke.tsx": $$0,
-    "./islands/MovementsList.tsx": $$1,
-    "./islands/Quote.tsx": $$2,
-    "./islands/TalentsList.tsx": $$3,
-    "./islands/chart/Doughnut.tsx": $$4,
-    "./islands/chart/PolarArea.tsx": $$5,
-    "./islands/footer/Footer.tsx": $$6,
-    "./islands/footer/WaterDrop.tsx": $$7,
-    "./islands/header/Nav.tsx": $$8,
-    "./islands/layout/ArtistsLayout.tsx": $$9,
-    "./islands/layout/ArtsLayout.tsx": $$10,
-    "./islands/layout/ErrorLayout.tsx": $$11,
-    "./islands/livesearch/ArtistsSearch.tsx": $$12,
-    "./islands/livesearch/ArtsSearch.tsx": $$13,
-    "./islands/livesearch/CollectionSearch.tsx": $$14,
-    "./islands/livesearch/HistoSearch.tsx": $$15,
-    "./islands/livesearch/WomenSearch.tsx": $$16,
+    "./islands/AnimBrushStroke.tsx": $AnimBrushStroke,
+    "./islands/MovementsList.tsx": $MovementsList,
+    "./islands/Quote.tsx": $Quote,
+    "./islands/TalentsList.tsx": $TalentsList,
+    "./islands/chart/Doughnut.tsx": $chart_Doughnut,
+    "./islands/chart/PolarArea.tsx": $chart_PolarArea,
+    "./islands/footer/Footer.tsx": $footer_Footer,
+    "./islands/footer/WaterDrop.tsx": $footer_WaterDrop,
+    "./islands/header/Nav.tsx": $header_Nav,
+    "./islands/layout/ArtistsLayout.tsx": $layout_ArtistsLayout,
+    "./islands/layout/ArtsLayout.tsx": $layout_ArtsLayout,
+    "./islands/layout/ErrorLayout.tsx": $layout_ErrorLayout,
+    "./islands/livesearch/ArtistsSearch.tsx": $livesearch_ArtistsSearch,
+    "./islands/livesearch/ArtsSearch.tsx": $livesearch_ArtsSearch,
+    "./islands/livesearch/CollectionSearch.tsx": $livesearch_CollectionSearch,
+    "./islands/livesearch/HistoSearch.tsx": $livesearch_HistoSearch,
+    "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

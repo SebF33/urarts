@@ -1,11 +1,11 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { UnknownPageProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 
 import ErrorLayout from "@islands/layout/ErrorLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export default function NotFoundPage({ url }: UnknownPageProps) {
+export default function NotFoundPage({ url }: PageProps) {
   return (
     <>
       <main

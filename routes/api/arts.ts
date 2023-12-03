@@ -1,10 +1,10 @@
 import { Db } from "@utils/db.ts";
-import { HandlerContext } from "$fresh/server.ts";
+import { RouteContext } from "$fresh/server.ts";
 import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
-  _ctx: HandlerContext,
+  _ctx: RouteContext,
 ): Promise<Response> => {
   const url = new URL(req.url);
   const query = url.searchParams.get("name") || "";

@@ -1,11 +1,11 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { ErrorPageProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 
 import ErrorLayout from "@islands/layout/ErrorLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export default function Error500Page({ error }: ErrorPageProps) {
+export default function Error500Page({ error }: PageProps) {
   return (
     <>
       <main

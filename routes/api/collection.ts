@@ -1,12 +1,12 @@
 import { ArtCollection } from "@utils/types.tsx";
 import { Db } from "@utils/db.ts";
-import { HandlerContext } from "$fresh/server.ts";
+import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
-  ctx: HandlerContext,
+  ctx: RouteContext,
 ): Promise<Response> => {
   const url = new URL(req.url);
 
