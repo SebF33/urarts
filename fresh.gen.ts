@@ -8,6 +8,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $api_artists from "./routes/api/artists.ts";
 import * as $api_arts from "./routes/api/arts.ts";
 import * as $api_collection from "./routes/api/collection.ts";
+import * as $api_leonardo from "./routes/api/leonardo.ts";
 import * as $art_slug_ from "./routes/art/[slug].tsx";
 import * as $artists from "./routes/artists.tsx";
 import * as $arts from "./routes/arts.tsx";
@@ -48,6 +49,7 @@ const manifest = {
     "./routes/api/artists.ts": $api_artists,
     "./routes/api/arts.ts": $api_arts,
     "./routes/api/collection.ts": $api_collection,
+    "./routes/api/leonardo.ts": $api_leonardo,
     "./routes/art/[slug].tsx": $art_slug_,
     "./routes/artists.tsx": $artists,
     "./routes/arts.tsx": $arts,
