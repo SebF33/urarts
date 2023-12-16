@@ -51,7 +51,7 @@ export default function Nav(props: Props) {
         hideOnClick: "false",
         interactive: true,
         maxWidth: 900,
-        offset: [-220, 16],
+        offset: [-220, 12],
         placement: "bottom-start",
         role: "leonardo",
         theme: "leonardo",
