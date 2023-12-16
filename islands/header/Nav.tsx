@@ -4,7 +4,7 @@ import { h } from "preact";
 import ky from "ky";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 
 import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
 
@@ -33,6 +33,7 @@ export default function Nav(props: Props) {
     `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
   // Leonardo
+  const [leonardoActive, setLeonardoActive] = useState(false);
   useEffect(() => {
     const ref = document.querySelector("#Icon");
 
@@ -43,7 +44,7 @@ export default function Nav(props: Props) {
         arrow: false,
         duration: [1800, 0],
         content:
-          `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
+          `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[90px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
           <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5">...</div>`,
         hideOnClick: "false",
         interactive: true,
@@ -61,7 +62,7 @@ export default function Nav(props: Props) {
 
   // Appel à l'API Leonardo
   useEffect(() => {
-    const delay = 250;
+    const delay = 150;
     //console.log("url : " + props.url);
     const url = new URL(props.url);
 
@@ -106,19 +107,21 @@ export default function Nav(props: Props) {
       };
       fetchData();
     }, delay);
-  }, [props.url]);
+  }, [props.url, leonardoActive]);
 
   // Visibilité Leonardo
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     const ref = event.currentTarget as HTMLAnchorElement;
     const instance = ref._tippy;
+    const isVisible = instance.state.isVisible;
 
-    ref.addEventListener("click", () => {
-      const currentVisibility = instance.popper.style.visibility;
-      instance.popper.style.visibility = currentVisibility === "visible"
-        ? "hidden"
-        : "visible";
-    });
+    if (isVisible) {
+      instance.hide();
+      setLeonardoActive(false);
+    } else {
+      instance.show();
+      setLeonardoActive(true);
+    }
   }
 
   // Menu mobile

@@ -28,9 +28,9 @@ export const handler = async (
 
   if (welcome === "true" && page === "home") {
     htmlContent =
-      "<h2>Bonjour et bienvenue sur Urarts, je suis <strong>Leonardo</strong>...</h2>";
+      '<h2 class="text-justify">Bonjour et bienvenue sur <strong>Urarts</strong>, je suis <strong>Leonardo</strong>...</h2>';
     htmlContent +=
-      '<p class="text-[1rem] mt-0 mb-2">...votre guide dans vos recherches sur l’Art !</p>';
+      '<p class="text-[1rem] text-justify mt-0 mb-2">...votre guide dans vos recherches sur l’<strong>Art</strong> !</p>';
   }
 
   switch (page) {
@@ -80,9 +80,9 @@ export const handler = async (
       );
 
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Faites votre recherche parmi <strong>${totalArtistCountResult}</strong> artistes disponibles...</p>`;
+        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtistCountResult}</strong> artistes disponibles...</p>`;
       htmlContent +=
-        '<p class="text-[1rem] mt-1">Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).</p>';
+        '<p class="text-[1rem] mt-3">Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).</p>';
       break;
 
     case "arts":
@@ -111,7 +111,30 @@ export const handler = async (
 
     case "home":
       htmlContent +=
-        `<p class="text-[1rem]">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>`;
+        '<p class="text-[1rem]">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
+
+      if (welcome === "true") {
+        const randomArtResults = await db.selectFrom("art")
+          .innerJoin("artist", "art.owner_id", "artist.id")
+          .select([
+            "last_name",
+            "slug",
+            "copyright",
+            "art.id as id",
+            "art.name as name",
+            "url",
+          ])
+          .where("copyright", "!=", 2)
+          .where("slug", "not in", TALENTS)
+          .where("polyptych", "=", 1)
+          .orderBy(sql`random()`)
+          .executeTakeFirst();
+
+        htmlContent +=
+          `<p class="text-[1rem] mt-1">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"...</p>`;
+        htmlContent +=
+          `<a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a>`;
+      }
       break;
 
     case "histocharacters":
@@ -207,7 +230,7 @@ export const handler = async (
   }
 
   htmlContent +=
-    `<p class="flex text-[0.7rem] italic mt-4">* Double-cliquez sur l’icône &nbsp; <span><img src="/icon_urarts.svg" class="h-5 w-5" alt="Urarts" draggable=${draggable}/></span> pour désactiver/activer Leonardo.</p>`;
+    `<div class="text-[0.7rem] italic mt-4">* Cliquez sur l’icône &nbsp; <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-top" alt="Urarts" draggable=${draggable}/></span> pour désactiver/activer Leonardo.</div>`;
 
   return Promise.resolve(
     new Response(htmlContent, {
