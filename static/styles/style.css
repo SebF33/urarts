@@ -60,6 +60,13 @@ html {
     font-family: Five Boroughs Handwriting;
 }
 
+/* Twind v1 workaround */
+@media (max-width: 440px) {
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0px, 1fr)) !important;
+    }
+}
+
 body {
     background: var(--color-white);
     -webkit-tap-highlight-color: transparent;
@@ -484,9 +491,81 @@ h1 {
     bottom: 0;
 }
 
-/* Twind v1 workaround */
-@media (max-width: 440px) {
-    .grid-cols-1 {
-        grid-template-columns: repeat(1, minmax(0px, 1fr)) !important;
+/* Yeux Leonardo */
+.eye {
+    background: white;
+    display: inline-block;
+    margin: 40px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.left-eye {
+    width: 6px;
+    height: 3px;
+}
+
+.right-eye {
+    width: 4px;
+    height: 2.5px;
+}
+
+.eyeball {
+    background: #0a0905;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+}
+
+.left-eyeball {
+    width: 4px;
+    height: 4px;
+    transform: translate(-50%, -50%);
+}
+
+.right-eyeball {
+    width: 3px;
+    height: 3px;
+    transform: translate(-60%, -50%);
+}
+
+.eyeshut {
+    width: 8px;
+    height: 4px;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.eyeshut span {
+    display: block;
+    width: 100%;
+    height: 20%;
+    background: #8e7f6a;
+    border-radius: 0 0 60% 60%;
+    transition: 0.4s all;
+
+    @keyframes blink {
+        0% {
+            height: 20%;
+        }
+
+        50% {
+            height: 100%;
+        }
+
+        100% {
+            height: 20%;
+        }
     }
+}
+
+.eye:hover>.eyeshut span {
+    height: 100%;
 }

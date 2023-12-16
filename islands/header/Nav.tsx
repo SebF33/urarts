@@ -44,7 +44,9 @@ export default function Nav(props: Props) {
         arrow: false,
         duration: [1800, 0],
         content:
-          `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[90px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
+          `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
+          <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
+          <div class="absolute top-[-0.62rem] left-[-0.38rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
           <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5">...</div>`,
         hideOnClick: "false",
         interactive: true,
@@ -57,6 +59,31 @@ export default function Nav(props: Props) {
       });
 
       leonardoTooltip.show();
+
+      // Yeux Leonardo
+      const eyes = document.querySelectorAll<HTMLElement>(".eye");
+      eyes.forEach((eye) => {
+        eye.onclick = () => {
+          leonardoTooltip.hide();
+          setLeonardoActive(false);
+        };
+      });
+      const leftEyeball = document.querySelector<HTMLElement>(".left-eyeball");
+      const rightEyeball = document.querySelector<HTMLElement>(".right-eyeball");
+      document.onmousemove = (event: MouseEvent) => {
+        if (leftEyeball) {
+          const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
+          const y = Math.max(5, (event.clientY * 100) / window.innerHeight) + "%";
+          leftEyeball.style.left = x;
+          leftEyeball.style.top = y;
+        }
+        if (rightEyeball) {
+          const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
+          const y = Math.min(50, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
+          rightEyeball.style.left = x;
+          rightEyeball.style.top = y;
+        }
+      };
     }
   }, []);
 
