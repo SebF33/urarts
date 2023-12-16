@@ -20,7 +20,7 @@ export default function ArtistsPage() {
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main class="flex-grow">
+      <main id="page" data-name="artists" class="flex-grow">
         <ArtistsSearch />
       </main>
 

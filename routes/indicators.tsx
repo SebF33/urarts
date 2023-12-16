@@ -117,7 +117,7 @@ export default function IndicatorsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main class="flex-grow">
+      <main id="page" data-name="indicators" class="flex-grow">
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
           <div
             class={`paper max-w-[230px] mt-5 mb-6`}

@@ -8,7 +8,9 @@ import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 
 type Arts = Array<ArtCollection>;
 
-export default function HistoSearch() {
+export default function HistoSearch(
+  props: { id?: string },
+) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchYears, setSearchYears] = useState(["400", "2000"]);
@@ -67,6 +69,19 @@ export default function HistoSearch() {
         });
     }, 200);
   }, [searchTerm, searchYears]);
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      const target: HTMLElement | null = document.getElementById(`${props.id}`);
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }
+    }, 600);
+  }, [props.id]);
 
   // Background pour la page des personnages historiques
   useLayoutEffect(() => {

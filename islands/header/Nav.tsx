@@ -1,10 +1,18 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
+import { h } from "preact";
+import ky from "ky";
+import tippy from "tippyjs";
+import { UrlBasePath } from "../../env.ts";
 import { useEffect } from "preact/hooks";
 
 import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
 
-export default function Nav() {
+export interface Props {
+  url: URL;
+}
+
+export default function Nav(props: Props) {
   // CSS
   const draggable = false;
   const desktopCurrent =
@@ -23,6 +31,95 @@ export default function Nav() {
     `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
   const mobileSecondaryAnchor =
     `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
+
+  // Leonardo
+  useEffect(() => {
+    const ref = document.querySelector("#Icon");
+
+    if (ref) {
+      const leonardoTooltip = tippy(ref, {
+        allowHTML: true,
+        appendTo: () => document.body,
+        arrow: false,
+        duration: [1800, 0],
+        content:
+          `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
+          <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5">...</div>`,
+        hideOnClick: "false",
+        interactive: true,
+        maxWidth: 900,
+        offset: [-220, 16],
+        placement: "bottom-start",
+        role: "leonardo",
+        theme: "leonardo",
+        trigger: "manual",
+      });
+
+      leonardoTooltip.show();
+    }
+  }, []);
+
+  // Appel à l'API Leonardo
+  useEffect(() => {
+    const delay = 250;
+    //console.log("url : " + props.url);
+    const url = new URL(props.url);
+
+    setTimeout(() => {
+      // Paramètre 1
+      let isWelcome = "false";
+      const isPartial = url.searchParams.get("fresh-partial") || "";
+      if (isPartial !== "true") isWelcome = "true";
+      // Paramètre 2
+      const pageName = url.pathname.split("/")[1];
+      // Paramètre 3
+      const subpageSlug = url.pathname.split("/")[2];
+
+      const params = {
+        welcome: isWelcome,
+        page: pageName,
+        subpage: subpageSlug,
+      };
+
+      const queryString = new URLSearchParams(params).toString();
+      //console.log(queryString);
+
+      const fetchData = async () => {
+        try {
+          const response = await ky.get(
+            `${UrlBasePath}/api/leonardo?${queryString}`,
+          );
+          const leonardoResponse = await response.text();
+
+          // Contenu
+          const leonardoContent = document.querySelector("#leonardoContent");
+          if (leonardoContent) {
+            leonardoContent.innerHTML = leonardoResponse;
+          }
+        } catch (error) {
+          console.error("Erreur de l'API Leonardo.", error);
+          const leonardoContent = document.querySelector("#leonardoContent");
+          if (leonardoContent) {
+            leonardoContent.innerHTML = "Erreur de l'API Leonardo.";
+          }
+        }
+      };
+      fetchData();
+    }, delay);
+  }, [props.url]);
+
+  // Visibilité Leonardo
+  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+    const ref = event.currentTarget as HTMLAnchorElement;
+    const instance = ref._tippy;
+
+    ref.addEventListener("click", () => {
+      const currentVisibility = instance.popper.style.visibility;
+      instance.popper.style.visibility = currentVisibility === "visible"
+        ? "hidden"
+        : "visible";
+    });
+  }
 
   // Menu mobile
   useEffect(() => {
@@ -60,11 +157,12 @@ export default function Nav() {
           <div class={`flex space-x-7`}>
             <div class={`select-none`}>
               <a
-                href="/"
-                class={`flex items-center py-3 px-2`}
+                class={`flex items-center py-3 px-2 cursor-zoom-in`}
                 draggable={draggable}
               >
                 <img
+                  id="Icon"
+                  onClick={handleClick}
                   class={`h-10 w-10`}
                   src="/icon_urarts.svg"
                   alt="Urarts"

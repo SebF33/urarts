@@ -62,7 +62,7 @@ export default function MovementsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main class="flex-grow">
+      <main id="page" data-name="movements" class="flex-grow">
         <MovementsList movements={movements} />
       </main>
 

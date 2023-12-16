@@ -93,7 +93,7 @@ export default defineApp((_, ctx) => {
         class={`flex flex-col min-h-screen font-brush`}
       >
         <Partial name="body">
-          <Nav />
+          <Nav url={ctx.url} />
           <ctx.Component />
         </Partial>
       </body>

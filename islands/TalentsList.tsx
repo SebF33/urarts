@@ -41,7 +41,7 @@ export default function TalentsList(
         </div>
       </div>
 
-      <ArtistsLayout artists={props.artists} grid={grid} />
+      <ArtistsLayout artists={props.artists} flag="talents" grid={grid} />
     </>
   );
 }

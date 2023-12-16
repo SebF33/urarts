@@ -74,7 +74,7 @@ export default function TalentsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main class="flex-grow">
+      <main id="page" data-name="talents" class="flex-grow">
         <TalentsList artists={artists} />
       </main>
 

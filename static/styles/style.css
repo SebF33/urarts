@@ -113,9 +113,17 @@ h1 {
     }
 }
 
+/* Tippy.js */
+.tippy-box[data-theme~='leonardo'] {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    border-radius: 12px;
+}
+
 .tippy-box[data-theme~='urarts'] {
     background-color: var(--color-dark);
     color: var(--color-white);
+    border-radius: 8px;
 }
 
 /* Cadres des œuvres */

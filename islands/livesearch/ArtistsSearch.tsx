@@ -14,7 +14,7 @@ export default function ArtistsSearch() {
   const [searchNationality, setSearchNationality] = useState("France");
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchYears, setSearchYears] = useState(["1700", "2000"]);
+  const [searchYears, setSearchYears] = useState(["1900", "2000"]);
   const [showFlags1, setShowFlags1] = useState(true);
   const [showFlags2, setShowFlags2] = useState(true);
   const [showFlags3, setShowFlags3] = useState(true);
@@ -685,11 +685,15 @@ export default function ArtistsSearch() {
 
       <div
         id="slider"
-        class={`max-w-3xl mt-[290px] mb-[40px] sm:mt-[230px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
+        class={`max-w-3xl mt-[290px] mb-[40px] sm:mt-[200px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
       >
       </div>
 
-      <ArtistsLayout artists={searchResults} grid={grid} />
+      <ArtistsLayout
+        artists={searchResults}
+        flag={searchNationality}
+        grid={grid}
+      />
     </>
   );
 }

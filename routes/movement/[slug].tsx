@@ -78,9 +78,7 @@ export default function MovementArtsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main
-        class={`flex-grow mb-20`}
-      >
+      <main id="page" data-name="movement" class={`flex-grow mb-20`}>
         <div
           class={`w-auto flex flex-col mx-auto`}
         >

@@ -8,9 +8,7 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 export default function NotFoundPage({ url }: PageProps) {
   return (
     <>
-      <main
-        class={`flex-grow`}
-      >
+      <main id="page" data-name="notfound" class="flex-grow">
         <ErrorLayout firstDigit="4" secondDigit="0" thirdDigit="4" />
         <div
           class={`mx-auto text-lighterdark`}

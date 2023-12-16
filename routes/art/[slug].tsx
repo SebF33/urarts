@@ -126,9 +126,7 @@ export default function ArtistArtsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main
-        class={`flex-grow mb-20`}
-      >
+      <main id="page" data-name="art" class={`flex-grow mb-20`}>
         <div
           class={`w-auto flex flex-col mx-auto`}
         >

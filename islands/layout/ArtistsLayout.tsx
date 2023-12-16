@@ -8,7 +8,7 @@ import { useEffect, useState } from "preact/hooks";
 type Artists = Array<ArtistRow>;
 
 export default function ArtistsLayout(
-  props: { artists: Artists; grid: string },
+  props: { artists: Artists; flag: string; grid: string },
 ) {
   const [showPlaceholder, setShowPlaceholder] = useState(false);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
@@ -87,7 +87,11 @@ export default function ArtistsLayout(
   }
 
   return (
-    <div class={`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
+    <div
+      id="data-flag"
+      data-flag={`${props.flag}`}
+      class={`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}
+    >
       {props.artists && props.artists.length > 0
         ? (
           <div class={`${props.grid}`}>

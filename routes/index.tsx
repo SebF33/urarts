@@ -96,8 +96,8 @@ export default function HomePage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main class="flex-grow">
-        <ArtistsLayout artists={artists} grid={grid} />
+      <main id="page" data-name="home" class="flex-grow">
+        <ArtistsLayout artists={artists} flag="home" grid={grid} />
         <Quote data={artistQuote} />
       </main>
 

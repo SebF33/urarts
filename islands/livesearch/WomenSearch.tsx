@@ -58,7 +58,7 @@ export default function WomenSearch() {
         </div>
       </div>
 
-      <ArtistsLayout artists={searchResults} grid={grid} />
+      <ArtistsLayout artists={searchResults} flag="women" grid={grid} />
     </>
   );
 }
