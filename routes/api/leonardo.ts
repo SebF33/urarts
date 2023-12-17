@@ -162,8 +162,6 @@ export const handler = async (
       break;
 
     case "movement":
-      htmlContent = "<h2>Voici le mouvement ";
-
       if (subpage !== "undefined") {
         const movementResults = await db.selectFrom("art")
           .innerJoin("artist", "art.owner_id", "artist.id")
@@ -179,7 +177,12 @@ export const handler = async (
           .orderBy(sql`random()`)
           .executeTakeFirst();
 
-        htmlContent += '"' + movementResults.movement + '".</h2>';
+        if (subpage !== "nonclasse") {
+          htmlContent = "<h2>Voici le mouvement ";
+          htmlContent += '"' + movementResults.movement + '".</h2>';
+        } else {
+          htmlContent = "<h2>Voici les œuvres non classées.";
+        }
         htmlContent +=
           `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${movementResults.last_name}</strong>...</p>`;
         htmlContent +=
