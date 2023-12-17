@@ -178,7 +178,7 @@ export const handler = async (
           .executeTakeFirst();
 
         if (subpage !== "nonclasse") {
-          htmlContent = "<h2>Voici le mouvement ";
+          htmlContent = "<h2>Voici le mouvement artistique ";
           htmlContent += '"' + movementResults.movement + '".</h2>';
         } else {
           htmlContent = "<h2>Voici les œuvres non classées.";
@@ -204,7 +204,7 @@ export const handler = async (
       ) => parseFloat(item.movement_count));
 
       htmlContent +=
-        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements disponibles...</p>`;
+        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements artistiques disponibles...</p>`;
       break;
 
     case "talents":
