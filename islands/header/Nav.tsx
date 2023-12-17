@@ -33,16 +33,16 @@ export default function Nav(props: Props) {
     `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
   // Leonardo
-  const [leonardoActive, setLeonardoActive] = useState(false);
+  const [leonardoActive, setLeonardoActive] = useState(true);
   useEffect(() => {
-    const ref = document.querySelector("#Icon");
+    const ref = document.querySelector<HTMLElement>("#Icon");
 
     if (ref) {
       const leonardoTooltip = tippy(ref, {
         allowHTML: true,
         appendTo: () => document.body,
         arrow: false,
-        duration: [1800, 0],
+        duration: [1800, 300],
         content:
           `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
           <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
@@ -89,7 +89,9 @@ export default function Nav(props: Props) {
 
   // Appel à l'API Leonardo
   useEffect(() => {
-    const delay = 150;
+    if (leonardoActive === false) return;
+
+    const delay = 250;
     //console.log("url : " + props.url);
     const url = new URL(props.url);
 
@@ -154,9 +156,9 @@ export default function Nav(props: Props) {
   // Menu mobile
   useEffect(() => {
     const delay = 120;
-    const anchor = document.querySelectorAll("#mobile-anchor");
-    const btn = document.querySelector("button.mobile-menu-button");
-    const menu = document.querySelector(".mobile-menu");
+    const anchor = document.querySelectorAll<HTMLElement>("#mobile-anchor");
+    const btn = document.querySelector<HTMLElement>("button.mobile-menu-button");
+    const menu = document.querySelector<HTMLElement>(".mobile-menu");
 
     anchor.forEach(function (a) {
       a.addEventListener("click", function () {
