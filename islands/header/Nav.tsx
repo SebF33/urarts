@@ -15,22 +15,17 @@ export interface Props {
 export default function Nav(props: Props) {
   // CSS
   const draggable = false;
-  const desktopCurrent =
-    "data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark";
+  const desktopCurrent = "data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark";
   const desktopHover = "hover:text-lighterdark transition duration-300";
-  const desktopPrimaryAnchor =
-    `py-4 px-2 text-lg font-medium ${desktopHover} ${desktopCurrent}`;
+  const desktopPrimaryAnchor = `py-4 px-2 text-lg font-medium ${desktopHover} ${desktopCurrent}`;
   const desktopHistoAnchor = `py-3 -mr-1 ${desktopHover} ${desktopCurrent}`;
   const desktopWomanAnchor = `py-3 ${desktopHover} ${desktopCurrent}`;
   const desktopHeartAnchor = `py-4 mt-1 ${desktopHover} ${desktopCurrent}`;
   const desktopStatAnchor = desktopHeartAnchor;
-  const mobileCurrent =
-    "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
+  const mobileCurrent = "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
   const mobileHover = "hover:bg-lighterdark transition duration-300";
-  const mobilePrimaryAnchor =
-    `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
-  const mobileSecondaryAnchor =
-    `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
+  const mobilePrimaryAnchor = `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
+  const mobileSecondaryAnchor = `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
   // Leonardo
   const [leonardoActive, setLeonardoActive] = useState(true);
@@ -192,9 +187,7 @@ export default function Nav(props: Props) {
   useEffect(() => {
     const delay = 120;
     const anchor = document.querySelectorAll<HTMLElement>("#mobile-anchor");
-    const btn = document.querySelector<HTMLElement>(
-      "button.mobile-menu-button",
-    );
+    const btn = document.querySelector<HTMLElement>("button.mobile-menu-button");
     const menu = document.querySelector<HTMLElement>(".mobile-menu");
 
     anchor.forEach(function (a) {
