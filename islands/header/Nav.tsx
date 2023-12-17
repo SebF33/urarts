@@ -62,24 +62,59 @@ export default function Nav(props: Props) {
 
       // Yeux Leonardo
       const eyes = document.querySelectorAll<HTMLElement>(".eye");
+      const maxShutDelay = 8000;
+      const minShutDelay = 1000;
+
+      eyes.forEach((eye) => {
+        const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+        console.log(eyeshut)
+        if (eyeshut) {
+          eye.addEventListener("mouseover", () => {
+            eyeshut.style.height = "100%";
+          });
+          eye.addEventListener("mouseout", () => {
+            eyeshut.style.height = "0%";
+          });
+        }
+      });
+
+      function animateEyeShut() {
+        const randomDelay = Math.floor(Math.random() * (maxShutDelay - minShutDelay + 1)) + minShutDelay;
+        eyes.forEach((eye) => {
+          const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+          if (eyeshut) {
+            const delayedFunction = () => {
+              eyeshut.style.height = "100%";
+              setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
+            };
+            setTimeout(delayedFunction, randomDelay);
+          }
+        });
+      }
+      animateEyeShut();
+      setInterval(() => { animateEyeShut(); }, maxShutDelay);
+
       eyes.forEach((eye) => {
         eye.onclick = () => {
           leonardoTooltip.hide();
           setLeonardoActive(false);
         };
       });
+
       const leftEyeball = document.querySelector<HTMLElement>(".left-eyeball");
       const rightEyeball = document.querySelector<HTMLElement>(".right-eyeball");
       document.onmousemove = (event: MouseEvent) => {
         if (leftEyeball) {
           const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
           const y = Math.max(5, (event.clientY * 100) / window.innerHeight) + "%";
+          //console.log("leftEyeball : " + x, y);
           leftEyeball.style.left = x;
           leftEyeball.style.top = y;
         }
         if (rightEyeball) {
           const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
-          const y = Math.min(50, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
+          const y = Math.min(80, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
+          //console.log("rightEyeball : " + x, y);
           rightEyeball.style.left = x;
           rightEyeball.style.top = y;
         }
@@ -157,7 +192,9 @@ export default function Nav(props: Props) {
   useEffect(() => {
     const delay = 120;
     const anchor = document.querySelectorAll<HTMLElement>("#mobile-anchor");
-    const btn = document.querySelector<HTMLElement>("button.mobile-menu-button");
+    const btn = document.querySelector<HTMLElement>(
+      "button.mobile-menu-button",
+    );
     const menu = document.querySelector<HTMLElement>(".mobile-menu");
 
     anchor.forEach(function (a) {
