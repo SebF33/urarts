@@ -62,7 +62,6 @@ export default function Nav(props: Props) {
 
       eyes.forEach((eye) => {
         const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
-        console.log(eyeshut)
         if (eyeshut) {
           eye.addEventListener("mouseover", () => {
             eyeshut.style.height = "100%";
