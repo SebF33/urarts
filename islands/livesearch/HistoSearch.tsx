@@ -3,6 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { yearsSignal } from "../../utils/signals.ts";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 
@@ -13,23 +14,23 @@ export default function HistoSearch(
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchYears, setSearchYears] = useState(["400", "2000"]);
+  const [searchYears, setSearchYears] = useState(["300", "2100"]);
 
   const type = "histocharacters";
 
   useEffect(() => {
     const slider: HTMLElement | null = document.getElementById("slider");
     const valuesForSlider = [
-      400,
-      600,
-      800,
-      1000,
-      1200,
-      1400,
-      1600,
-      1800,
-      2000,
-      2200,
+      300,
+      500,
+      700,
+      900,
+      1100,
+      1300,
+      1500,
+      1700,
+      1900,
+      2100,
     ];
     const format = {
       to: function (value) {
@@ -46,14 +47,15 @@ export default function HistoSearch(
       margin: 1,
       pips: { mode: "steps", density: 1.5, format: format },
       range: { min: 0, max: valuesForSlider.length - 1 },
-      start: [400, 2000],
+      start: [300, 2100],
       step: 1,
       tooltips: true,
     });
 
-    slider.noUiSlider.set(["400", "2000"]);
+    slider.noUiSlider.set(["300", "2100"]);
     slider.noUiSlider.on("update", function () {
       setSearchYears(slider.noUiSlider.get());
+      yearsSignal.value = slider.noUiSlider.get();
     });
   }, []);
 

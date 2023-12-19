@@ -3,6 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { Fragment, h } from "preact";
 import ky from "ky";
+import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
@@ -115,6 +116,7 @@ export default function ArtistsSearch() {
     slider.noUiSlider.set(["1900", "2000"]);
     slider.noUiSlider.on("update", function () {
       setSearchYears(slider.noUiSlider.get());
+      yearsSignal.value = slider.noUiSlider.get();
     });
   }, []);
 
@@ -162,7 +164,7 @@ export default function ArtistsSearch() {
             <PaintPalette />
           </div>
           <button
-            onClick={() => setSearchNationality("")}
+            onClick={() => {setSearchNationality(""); nationalitySignal.value = "Monde"}}
             class={`absolute flex items-center -top-16 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none`}
           >
             <img
@@ -177,9 +179,7 @@ export default function ArtistsSearch() {
             (
               <Fragment>
                 <button
-                  onClick={() => {
-                    setSearchNationality("France");
-                  }}
+                  onClick={() => {setSearchNationality("France"); nationalitySignal.value = "France"}}
                   class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
                 >
                   <img
@@ -191,9 +191,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Espagne");
-                  }}
+                  onClick={() => {setSearchNationality("Espagne"); nationalitySignal.value = "Espagne"}}
                   class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
                 >
                   <img
@@ -205,9 +203,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Portugal");
-                  }}
+                  onClick={() => {setSearchNationality("Portugal"); nationalitySignal.value = "Portugal"}}
                   class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -219,9 +215,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Italie");
-                  }}
+                  onClick={() => {setSearchNationality("Italie"); nationalitySignal.value = "Italie"}}
                   class={`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
                 >
                   <img
@@ -233,9 +227,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Pays-Bas");
-                  }}
+                  onClick={() => {setSearchNationality("Pays-Bas"); nationalitySignal.value = "Pays-Bas"}}
                   class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -247,9 +239,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Belgique");
-                  }}
+                  onClick={() => {setSearchNationality("Belgique"); nationalitySignal.value = "Belgique"}}
                   class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
                 >
                   <img
@@ -261,9 +251,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Pologne");
-                  }}
+                  onClick={() => {setSearchNationality("Pologne"); nationalitySignal.value = "Pologne"}}
                   class={`absolute flex items-center sm:left-44 focus:outline-none ${
                     css(
                       {
@@ -285,9 +273,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Allemagne");
-                  }}
+                  onClick={() => {setSearchNationality("Allemagne"); nationalitySignal.value = "Allemagne"}}
                   class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
                     css(
                       {
@@ -308,9 +294,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Autriche");
-                  }}
+                  onClick={() => {setSearchNationality("Autriche"); nationalitySignal.value = "Autriche"}}
                   class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
@@ -322,9 +306,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Hongrie");
-                  }}
+                  onClick={() => {setSearchNationality("Hongrie"); nationalitySignal.value = "Hongrie"}}
                   class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
                 >
                   <img
@@ -341,9 +323,7 @@ export default function ArtistsSearch() {
             (
               <Fragment>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Suisse");
-                  }}
+                  onClick={() => {setSearchNationality("Suisse"); nationalitySignal.value = "Suisse"}}
                   class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
                 >
                   <img
@@ -355,9 +335,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Finlande");
-                  }}
+                  onClick={() => {setSearchNationality("Finlande"); nationalitySignal.value = "Finlande"}}
                   class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
                 >
                   <img
@@ -369,9 +347,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Norvège");
-                  }}
+                  onClick={() => {setSearchNationality("Norvège"); nationalitySignal.value = "Norvège"}}
                   class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -383,9 +359,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Suède");
-                  }}
+                  onClick={() => {setSearchNationality("Suède"); nationalitySignal.value = "Suède"}}
                   class={`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
                 >
                   <img
@@ -397,9 +371,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Danemark");
-                  }}
+                  onClick={() => {setSearchNationality("Danemark"); nationalitySignal.value = "Danemark"}}
                   class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -411,9 +383,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Tchécoslovaquie");
-                  }}
+                  onClick={() => {setSearchNationality("Tchécoslovaquie"); nationalitySignal.value = "Tchécoslovaquie"}}
                   class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
                 >
                   <img
@@ -425,9 +395,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Ukraine");
-                  }}
+                  onClick={() => {setSearchNationality("Ukraine"); nationalitySignal.value = "Ukraine"}}
                   class={`absolute flex items-center sm:left-44 focus:outline-none ${
                     css(
                       {
@@ -449,9 +417,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Arménie");
-                  }}
+                  onClick={() => {setSearchNationality("Arménie"); nationalitySignal.value = "Arménie"}}
                   class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
                     css(
                       {
@@ -472,9 +438,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Biélorussie");
-                  }}
+                  onClick={() => {setSearchNationality("Biélorussie"); nationalitySignal.value = "Biélorussie"}}
                   class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
@@ -486,9 +450,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Russie");
-                  }}
+                  onClick={() => {setSearchNationality("Russie"); nationalitySignal.value = "Russie"}}
                   class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
                 >
                   <img
@@ -505,9 +467,7 @@ export default function ArtistsSearch() {
             (
               <Fragment>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Japon");
-                  }}
+                  onClick={() => {setSearchNationality("Japon"); nationalitySignal.value = "Japon"}}
                   class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
                 >
                   <img
@@ -519,9 +479,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Vietnam");
-                  }}
+                  onClick={() => {setSearchNationality("Vietnam"); nationalitySignal.value = "Vietnam"}}
                   class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
                 >
                   <img
@@ -533,9 +491,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Chine");
-                  }}
+                  onClick={() => {setSearchNationality("Chine"); nationalitySignal.value = "Chine"}}
                   class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -547,9 +503,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Grèce");
-                  }}
+                  onClick={() => {setSearchNationality("Grèce"); nationalitySignal.value = "Grèce"}}
                   class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
                 >
                   <img
@@ -561,9 +515,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Royaume-Uni");
-                  }}
+                  onClick={() => {setSearchNationality("Royaume-Uni"); nationalitySignal.value = "Royaume-Uni"}}
                   class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
                 >
                   <img
@@ -575,9 +527,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Colombie");
-                  }}
+                  onClick={() => {setSearchNationality("Colombie"); nationalitySignal.value = "Colombie"}}
                   class={`absolute flex items-center sm:left-44 focus:outline-none ${
                     css(
                       {
@@ -599,9 +549,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Mexique");
-                  }}
+                  onClick={() => {setSearchNationality("Mexique"); nationalitySignal.value = "Mexique"}}
                   class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
                     css(
                       {
@@ -622,9 +570,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("États-Unis");
-                  }}
+                  onClick={() => {setSearchNationality("États-Unis"); nationalitySignal.value = "États-Unis"}}
                   class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
@@ -636,9 +582,7 @@ export default function ArtistsSearch() {
                   />
                 </button>
                 <button
-                  onClick={() => {
-                    setSearchNationality("Canada");
-                  }}
+                  onClick={() => {setSearchNationality("Canada"); nationalitySignal.value = "Canada"}}
                   class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
                 >
                   <img

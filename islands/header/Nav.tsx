@@ -2,6 +2,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
 import ky from "ky";
+import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
@@ -133,11 +134,16 @@ export default function Nav(props: Props) {
       const pageName = url.pathname.split("/")[1];
       // Paramètre 3
       const subpageSlug = url.pathname.split("/")[2];
+      // Paramètre 4
+      const years = yearsSignal.value.toString().split(",", 2);
+      const ctxArray = [years[0], years[1], nationalitySignal.value];
+      const ctxArrString = JSON.stringify(ctxArray.join("_"));
 
       const params = {
         welcome: isWelcome,
         page: pageName,
         subpage: subpageSlug,
+        pagectx: ctxArrString,
       };
 
       const queryString = new URLSearchParams(params).toString();
@@ -145,9 +151,7 @@ export default function Nav(props: Props) {
 
       const fetchData = async () => {
         try {
-          const response = await ky.get(
-            `${UrlBasePath}/api/leonardo?${queryString}`,
-          );
+          const response = await ky.get(`${UrlBasePath}/api/leonardo?${queryString}`);
           const leonardoResponse = await response.text();
 
           // Contenu
@@ -165,7 +169,7 @@ export default function Nav(props: Props) {
       };
       fetchData();
     }, delay);
-  }, [props.url, leonardoActive]);
+  }, [props.url, leonardoActive, nationalitySignal.value, yearsSignal.value]);
 
   // Visibilité Leonardo
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {

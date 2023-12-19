@@ -15,6 +15,10 @@ export const handler = async (
   let page = query.length ? encodeURIComponent(query) : "";
   query = url.searchParams.get("subpage") || "";
   const subpage = query.length ? encodeURIComponent(query) : "";
+  query = url.searchParams.get("pagectx") || "";
+  const pagectx = query.length
+    ? JSON.parse(decodeURIComponent(query)).split("_")
+    : "";
 
   const db = Db.getInstance();
   const { count } = db.fn;
@@ -83,6 +87,14 @@ export const handler = async (
         `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtistCountResult}</strong> artistes disponibles...</p>`;
       htmlContent +=
         '<p class="text-[1rem] mt-3">Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).</p>';
+      htmlContent +=
+        `<p class="text-[1rem] mt-1">Artistes affichés pour "<strong>${
+          pagectx[2]
+        }</strong>" entre l’an <strong>${pagectx[0]}</strong> et l’an <strong>${
+          pagectx[1]
+        }</strong> &nbsp; <span class="inline-block"><img src="/flags/${
+          pagectx[2]
+        }.png" class="h-6 inline-block align-top" alt="Urarts" draggable=${draggable}/></span></p>`;
       break;
 
     case "arts":
@@ -127,7 +139,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="text-[1rem] mt-1">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"...</p>`;
+          `<p class="text-[1rem] mt-1">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>" de <strong>${randomArtResults.last_name}</strong>...</p>`;
         htmlContent +=
           `<a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a>`;
       }
@@ -146,9 +158,20 @@ export const handler = async (
           "url",
         ])
         .where("histocharacter", "=", 1)
+        .where(
+          sql`((histocharacterbirthyear BETWEEN ${pagectx[0]} AND ${
+            pagectx[1]
+          }) OR (histocharacterdeathyear BETWEEN ${pagectx[0]} AND ${
+            pagectx[1]
+          }))`,
+        )
         .orderBy(sql`random()`)
         .executeTakeFirst();
 
+      htmlContent +=
+        `<p class="text-[1rem] mt-1">Personnages affichés entre l’an <strong>${
+          pagectx[0]
+        }</strong> et l’an <strong>${pagectx[1]}</strong>.</p>`;
       htmlContent +=
         `<p class="text-[1rem] mt-1">Découvrez <strong>${histocharacterResults.name}...</strong></p>`;
       htmlContent +=
