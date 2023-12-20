@@ -21,10 +21,10 @@ export const handler = async (
 
   // Nationalité
   query = url.searchParams.get("nationality") || "";
-  const nationalityFilter = query.length ? query : "";
+  const nationalityFilter = query.length ? query : "Monde";
   let isCountry = false;
   let isWorld = false;
-  nationalityFilter === "" ? isWorld = true : isCountry = true;
+  nationalityFilter === "Monde" ? isWorld = true : isCountry = true;
 
   // Période
   query = url.searchParams.get("years") || "";

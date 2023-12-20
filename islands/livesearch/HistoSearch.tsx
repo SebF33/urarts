@@ -14,7 +14,6 @@ export default function HistoSearch(
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchYears, setSearchYears] = useState(["300", "2100"]);
 
   const type = "histocharacters";
 
@@ -54,7 +53,6 @@ export default function HistoSearch(
 
     slider.noUiSlider.set(["300", "2100"]);
     slider.noUiSlider.on("update", function () {
-      setSearchYears(slider.noUiSlider.get());
       yearsSignal.value = slider.noUiSlider.get();
     });
   }, []);
@@ -63,14 +61,14 @@ export default function HistoSearch(
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/collection?type=${type}&name=${searchTerm}&years=${searchYears}`,
+        `${UrlBasePath}/api/collection?type=${type}&name=${searchTerm}&years=${yearsSignal.value}`,
       )
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, 200);
-  }, [searchTerm, searchYears]);
+  }, [searchTerm, yearsSignal.value]);
 
   useLayoutEffect(() => {
     setTimeout(() => {
