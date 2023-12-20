@@ -57,7 +57,7 @@ export default function AnimBrushStroke(
             }`}
           >
             <h1
-              class={`inline-block text-[2rem] leading-[1.6rem] text-${props.fontcolor} italic`}
+              class={`inline-block text-[1.6rem] sm:text-[2rem] leading-[1.6rem] text-${props.fontcolor} italic`}
             >
               {props.title}
             </h1>
