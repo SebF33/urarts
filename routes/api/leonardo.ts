@@ -40,8 +40,8 @@ export const handler = async (
   switch (page) {
     case "art":
       if (subpage !== "undefined") {
-        const artResults = await db.selectFrom("art")
-          .innerJoin("artist", "art.owner_id", "artist.id")
+        const artResults = await db.selectFrom("artist")
+          .leftJoin("art", "art.owner_id", "artist.id")
           .select([
             "last_name",
             "slug",
@@ -152,11 +152,13 @@ export const handler = async (
         '<p class="text-[1rem] mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>';
 
       const histocharacterResults = await db.selectFrom("art")
+        .innerJoin("artist", "art.owner_id", "artist.id")
         .select([
           "art.id as id",
           "histocharactername as name",
           "url",
         ])
+        .where("copyright", "!=", 2)
         .where("histocharacter", "=", 1)
         .where(
           sql`((histocharacterbirthyear BETWEEN ${pagectx[0]} AND ${
