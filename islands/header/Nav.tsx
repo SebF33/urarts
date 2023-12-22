@@ -29,7 +29,8 @@ export default function Nav(props: Props) {
   const mobileSecondaryAnchor = `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
   // Leonardo
-  const [leonardoActive, setLeonardoActive] = useState(true);
+  const [leonardoActiveContent, setLeonardoActiveContent] = useState();
+  const leonardoStatus = localStorage.getItem('leonardo');
   useEffect(() => {
     const ref = document.querySelector<HTMLElement>("#Icon");
 
@@ -92,7 +93,8 @@ export default function Nav(props: Props) {
       eyes.forEach((eye) => {
         eye.onclick = () => {
           leonardoTooltip.hide();
-          setLeonardoActive(false);
+          localStorage.setItem('leonardo', 'inactive');
+          setLeonardoActiveContent(false);
         };
       });
 
@@ -114,14 +116,16 @@ export default function Nav(props: Props) {
           rightEyeball.style.top = y;
         }
       };
+
+      if (leonardoStatus === 'inactive') { leonardoTooltip.hide(); }
     }
   }, []);
 
   // Appel à l'API Leonardo
+  const delay = 250;
   useEffect(() => {
-    if (leonardoActive === false) return;
+    if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
 
-    const delay = 250;
     //console.log("url : " + props.url);
     const url = new URL(props.url);
 
@@ -169,20 +173,24 @@ export default function Nav(props: Props) {
       };
       fetchData();
     }, delay);
-  }, [props.url, leonardoActive, nationalitySignal.value, yearsSignal.value]);
+  }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
 
   // Visibilité Leonardo
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     const ref = event.currentTarget as HTMLAnchorElement;
     const instance = ref._tippy;
     const isVisible = instance.state.isVisible;
-
+    
     if (isVisible) {
       instance.hide();
-      setLeonardoActive(false);
+      localStorage.setItem('leonardo', 'inactive');
+      setLeonardoActiveContent(false);
     } else {
-      instance.show();
-      setLeonardoActive(true);
+      setLeonardoActiveContent(true);
+      localStorage.setItem('leonardo', 'active');
+      setTimeout(() => {
+        instance.show();
+    }, delay);
     }
   }
 
