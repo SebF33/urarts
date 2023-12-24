@@ -5,6 +5,7 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $_500 from "./routes/_500.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $about from "./routes/about.tsx";
 import * as $api_artists from "./routes/api/artists.ts";
 import * as $api_arts from "./routes/api/arts.ts";
 import * as $api_collection from "./routes/api/collection.ts";
@@ -23,6 +24,7 @@ import * as $movements from "./routes/movements.tsx";
 import * as $talents from "./routes/talents.tsx";
 import * as $women from "./routes/women.tsx";
 import * as $AnimBrushStroke from "./islands/AnimBrushStroke.tsx";
+import * as $Mona from "./islands/Mona.tsx";
 import * as $MovementsList from "./islands/MovementsList.tsx";
 import * as $Quote from "./islands/Quote.tsx";
 import * as $TalentsList from "./islands/TalentsList.tsx";
@@ -46,6 +48,7 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_500.tsx": $_500,
     "./routes/_app.tsx": $_app,
+    "./routes/about.tsx": $about,
     "./routes/api/artists.ts": $api_artists,
     "./routes/api/arts.ts": $api_arts,
     "./routes/api/collection.ts": $api_collection,
@@ -66,6 +69,7 @@ const manifest = {
   },
   islands: {
     "./islands/AnimBrushStroke.tsx": $AnimBrushStroke,
+    "./islands/Mona.tsx": $Mona,
     "./islands/MovementsList.tsx": $MovementsList,
     "./islands/Quote.tsx": $Quote,
     "./islands/TalentsList.tsx": $TalentsList,

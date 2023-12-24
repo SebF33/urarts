@@ -7,7 +7,7 @@ import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
-import { HistoIcon, WomanIcon } from "@components/Assets.tsx";
+import { HistoIcon, InterrogationIcon, WomanIcon } from "@components/Assets.tsx";
 
 export interface Props {
   url: URL;
@@ -23,6 +23,7 @@ export default function Nav(props: Props) {
   const desktopWomanAnchor = `py-3 ${desktopHover} ${desktopCurrent}`;
   const desktopHeartAnchor = `py-4 mt-1 ${desktopHover} ${desktopCurrent}`;
   const desktopStatAnchor = desktopHeartAnchor;
+  const desktopInterrogationAnchor = `py-4 ${desktopHover} ${desktopCurrent}`;
   const mobileCurrent = "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
   const mobileHover = "hover:bg-lighterdark transition duration-300";
   const mobilePrimaryAnchor = `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
@@ -354,6 +355,13 @@ export default function Nav(props: Props) {
                 />
               </svg>
             </a>
+            <a
+              href="/about"
+              class={desktopInterrogationAnchor}
+              draggable={draggable}
+            >
+              <InterrogationIcon />
+            </a>
           </div>
           <div class={`md:hidden flex items-center`}>
             <button class={`mobile-menu-button focus:outline-none`}>
@@ -499,6 +507,15 @@ export default function Nav(props: Props) {
                   C579.1,234.1,579.1,213.9,566.6,201.4C566.6,201.4,566.6,201.4,566.6,201.4L566.6,201.4z"
                   />
                 </svg>
+              </a>
+            </div>
+            <div class={`w-[50px]`}>
+              <a
+                id="mobile-anchor"
+                href="/about"
+                class={mobileSecondaryAnchor}
+              >
+                <InterrogationIcon />
               </a>
             </div>
           </li>

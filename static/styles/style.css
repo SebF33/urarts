@@ -220,10 +220,6 @@ h1 {
     top: -2.5vmin;
 }
 
-.art-frame img {
-    max-width: 100%;
-}
-
 .art-frame-type-2 img,
 .art-frame-type-3 img,
 .art-frame-type-4 img {
@@ -564,4 +560,32 @@ h1 {
             height: 20%;
         }
     }
+}
+
+/* Yeux Mona Lisa */
+.mona-eye {
+    background: transparent;
+    display: inline-block;
+    margin: 40px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mona-left-eye,
+.mona-right-eye {
+    width: 18px;
+    height: 7px;
+}
+
+.mona-eyeball {
+    width: 10px;
+    height: 10px;
+    background: #3d250b;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -50%);
+    border: 3px solid #593417;
+    border-radius: 50%;
 }

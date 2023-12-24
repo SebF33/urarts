@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2023-12-24]
+
+### Nouveautés
+- Ajout de la page "À propos".
+
 ## [2023-12-16]
 
 ### Nouveautés

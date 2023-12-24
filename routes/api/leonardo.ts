@@ -38,6 +38,11 @@ export const handler = async (
   }
 
   switch (page) {
+    case "about":
+      htmlContent =
+        '<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>';
+      break;
+
     case "art":
       if (subpage !== "undefined") {
         const artResults = await db.selectFrom("artist")
