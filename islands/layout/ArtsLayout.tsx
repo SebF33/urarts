@@ -74,6 +74,7 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
+                      class={`max-w-full`}
                       src={p.url_4}
                       alt={p.name + "_4"}
                     />
@@ -85,6 +86,7 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
+                      class={`max-w-full`}
                       src={p.url_2}
                       alt={p.name + "_2"}
                     />
@@ -103,6 +105,7 @@ export default function ArtsLayout(
                     </p>
                   )}
                 <img
+                  class={`max-w-full`}
                   src={p.url}
                   alt={p.name}
                 />
@@ -113,6 +116,7 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
+                      class={`max-w-full`}
                       src={p.url_3}
                       alt={p.name + "_3"}
                     />
@@ -124,6 +128,7 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
+                      class={`max-w-full`}
                       src={p.url_5}
                       alt={p.name + "_5"}
                     />
