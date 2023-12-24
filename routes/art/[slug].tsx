@@ -237,8 +237,8 @@ export default function ArtistArtsPage(
         </div>
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
-      <Footer color={colorScheme[currentColorScheme].lighterdark} />
+      <WaterDrop color={color} />
+      <Footer color={color} />
     </>
   );
 }
