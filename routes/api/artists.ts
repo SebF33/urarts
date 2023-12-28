@@ -66,8 +66,8 @@ export const handler = async (
         eb("last_name", "like", "%" + nameFilter + "%"),
       ])
     )
-    .orderBy("last_name")
-    .orderBy("first_name")
+    .orderBy(({ fn }) => fn("lower", ["last_name"]))
+    .orderBy(({ fn }) => fn("lower", ["first_name"]))
     .execute();
 
   return Promise.resolve(

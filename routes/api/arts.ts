@@ -30,8 +30,8 @@ export const handler = async (
     .where("copyright", "!=", 2)
     .where("art.name", "like", "%" + filter + "%")
     .where("artist.slug", "not in", TALENTS)
-    .orderBy("art.name")
-    .orderBy("last_name")
+    .orderBy(({ fn }) => fn("lower", ["art.name"]))
+    .orderBy(({ fn }) => fn("lower", ["last_name"]))
     .limit(20)
     .execute();
 

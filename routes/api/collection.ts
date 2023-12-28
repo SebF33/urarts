@@ -96,14 +96,14 @@ export const handler = async (
           qb.where(
             sql`((histocharacterbirthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (histocharacterdeathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
           ))
-        .orderBy("histocharactername");
+        .orderBy(({ fn }) => fn("lower", ["histocharactername"]))
       break;
 
     case "movement":
       artQuery = artQuery
         .where("movement.slug", "=", slugFilter)
         .where("artist.slug", "not in", TALENTS)
-        .orderBy("art.name");
+        .orderBy(({ fn }) => fn("lower", ["art.name"]))
       break;
 
     default:
