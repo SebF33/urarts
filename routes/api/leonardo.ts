@@ -45,12 +45,18 @@ export const handler = async (
 
     case "art":
       if (subpage !== "undefined") {
-        const artResults = await db.selectFrom("artist")
-          .leftJoin("art", "art.owner_id", "artist.id")
+        const artistResult = await db.selectFrom("artist")
           .select([
             "last_name",
             "slug",
             "copyright",
+          ])
+          .where("slug", "=", subpage)
+          .executeTakeFirst();
+
+        const artResults = await db.selectFrom("artist")
+          .innerJoin("art", "art.owner_id", "artist.id")
+          .select([
             "art.id as id",
             "art.name as name",
             "url",
@@ -61,13 +67,13 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent = "<h2>Voici l’artiste <strong>" +
-          artResults.last_name + "</strong>.</h2>";
+          artistResult.last_name + "</strong>.</h2>";
 
-        if (artResults.copyright !== 2) {
+        if (artistResult.copyright !== 2) {
           htmlContent +=
             `<p class="text-[1rem] mt-3">Découvrez l’œuvre "<strong>${artResults.name}</strong>"...</p>`;
           htmlContent +=
-            `<a href="/art/${artResults.slug}?id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+            `<a href="/art/${artistResult.slug}?id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
       }
       break;
