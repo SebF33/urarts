@@ -19,7 +19,6 @@ export default function Mona() {
         if (monaRightEyeball) {
           const x = Math.min(70, Math.max(20, (event.pageX * 100) / window.innerWidth)) + "%";
           const y = Math.min(80, (event.pageY * 100) / window.innerHeight) + "%";
-          console.log(x, y);
           monaRightEyeball.style.left = x;
           monaRightEyeball.style.top = y;
         }
