@@ -1,4 +1,3 @@
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
 import ky from "ky";
@@ -7,7 +6,7 @@ import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
-import { HistoIcon, InterrogationIcon, WomanIcon } from "@components/Assets.tsx";
+import { ApiIcon, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
 
 export interface Props {
   url: URL;
@@ -23,6 +22,7 @@ export default function Nav(props: Props) {
   const desktopWomanAnchor = `py-3 ${desktopHover} ${desktopCurrent}`;
   const desktopHeartAnchor = `py-4 mt-1 ${desktopHover} ${desktopCurrent}`;
   const desktopStatAnchor = desktopHeartAnchor;
+  const desktopApiAnchor = desktopStatAnchor;
   const desktopInterrogationAnchor = `py-4 ${desktopHover} ${desktopCurrent}`;
   const mobileCurrent = "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
   const mobileHover = "hover:bg-lighterdark transition duration-300";
@@ -195,6 +195,71 @@ export default function Nav(props: Props) {
     }
   }
 
+  // Infobulles
+  useEffect(() => {
+    const desktopHistoAnchor = document.querySelector<HTMLElement>("#desktopHistoAnchor");
+    const desktopWomanAnchor = document.querySelector<HTMLElement>("#desktopWomanAnchor");
+    const desktopHeartAnchor = document.querySelector<HTMLElement>("#desktopHeartAnchor");
+    const desktopStatAnchor = document.querySelector<HTMLElement>("#desktopStatAnchor");
+    const desktopApiAnchor = document.querySelector<HTMLElement>("#desktopApiAnchor");
+    const desktopInterrogationAnchor = document.querySelector<HTMLElement>("#desktopInterrogationAnchor");
+
+    if (desktopHistoAnchor) {
+      tippy(desktopHistoAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">Les personnages historiques.</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+    if (desktopWomanAnchor) {
+      tippy(desktopWomanAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">Les femmes artistes.</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+    if (desktopHeartAnchor) {
+      tippy(desktopHeartAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">Un talent exceptionnel.</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+    if (desktopStatAnchor) {
+      tippy(desktopStatAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">Les indicateurs pour Urarts.</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+    if (desktopApiAnchor) {
+      tippy(desktopApiAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">Un échantillon de l’API.</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+    if (desktopInterrogationAnchor) {
+      tippy(desktopInterrogationAnchor, {
+        allowHTML: true,
+        content: '<p class="text-[1rem]">À propos de Urarts...</p>',
+        interactive: true,
+        placement: "bottom",
+        theme: "urarts",
+      });
+    }
+  }, []);
+
   // Menu mobile
   useEffect(() => {
     const delay = 120;
@@ -285,6 +350,7 @@ export default function Nav(props: Props) {
           <div class={`hidden md:flex items-center space-x-3`}>
             <a
               href="/histocharacters"
+              id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
             >
@@ -292,6 +358,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/women"
+              id="desktopWomanAnchor"
               class={desktopWomanAnchor}
               draggable={draggable}
             >
@@ -299,64 +366,32 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/art/mimi"
+              id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
             >
-              <svg
-                class={`icon-svg h-6 w-6`}
-                fill={colorScheme[currentColorScheme].white}
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                />
-              </svg>
+              <HeartIcon />
             </a>
             <a
               href="/indicators"
+              id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
             >
-              <svg
-                class={`icon-svg h-6 w-6`}
-                fill={colorScheme[currentColorScheme].white}
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"
-                />
-              </svg>
+              <StatIcon />
             </a>
             <a
               href="/api/arts"
-              class="mt-1"
+              id="desktopApiAnchor"
+              class={desktopApiAnchor}
               draggable={draggable}
               target="_blank"
             >
-              <svg
-                class={`icon-svg h-7 w-7`}
-                fill={colorScheme[currentColorScheme].white}
-                viewBox="0 0 576 448"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M208,0h-48c-53,0-96,43-96,96v37.5c0,8.5-3.4,16.6-9.4,22.6L9.4,201.4c-12.5,12.5-12.5,32.8,0,45.3c0,0,0,0,0,0l45.2,45.2
-                  c6,6,9.4,14.1,9.4,22.6V352c0,53,43,96,96,96h48c8.8,0,16-7.2,16-16v-32c0-8.8-7.2-16-16-16h-48c-17.7,0-32-14.3-32-32v-37.5
-                  c0-25.5-10.1-49.9-28.1-67.9L77.3,224l22.6-22.6c18-18,28.1-42.4,28.1-67.9V96c0-17.7,14.3-32,32-32h48c8.8,0,16-7.2,16-16V16
-                  C224,7.2,216.8,0,208,0z M566.6,201.4l-45.2-45.2c-6-6-9.4-14.2-9.4-22.6V96c0-53-43-96-96-96h-48c-8.8,0-16,7.2-16,16v32
-                  c0,8.8,7.2,16,16,16h48c17.7,0,32,14.3,32,32v37.5c0,25.5,10.1,49.9,28.1,67.9l22.6,22.6l-22.6,22.6c-18,18-28.1,42.4-28.1,67.9V352
-                  c0,17.7-14.3,32-32,32h-48c-8.8,0-16,7.2-16,16v32c0,8.8,7.2,16,16,16h48c53,0,96-43,96-96v-37.5c0-8.5,3.4-16.6,9.4-22.6l45.2-45.2
-                  C579.1,234.1,579.1,213.9,566.6,201.4C566.6,201.4,566.6,201.4,566.6,201.4L566.6,201.4z"
-                />
-              </svg>
+              <ApiIcon />
             </a>
             <a
               href="/about"
+              id="desktopInterrogationAnchor"
               class={desktopInterrogationAnchor}
               draggable={draggable}
             >
@@ -452,17 +487,7 @@ export default function Nav(props: Props) {
                 href="/art/mimi"
                 class={mobileSecondaryAnchor}
               >
-                <svg
-                  class={`icon-svg h-6 w-6`}
-                  fill={colorScheme[currentColorScheme].white}
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                  />
-                </svg>
+                <HeartIcon />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -471,17 +496,7 @@ export default function Nav(props: Props) {
                 href="/indicators"
                 class={mobileSecondaryAnchor}
               >
-                <svg
-                  class={`icon-svg h-6 w-6`}
-                  fill={colorScheme[currentColorScheme].white}
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"
-                  />
-                </svg>
+                <StatIcon />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -490,23 +505,7 @@ export default function Nav(props: Props) {
                 class={mobileSecondaryAnchor}
                 target="_blank"
               >
-                <svg
-                  class={`icon-svg h-7 w-7`}
-                  fill={colorScheme[currentColorScheme].white}
-                  viewBox="0 0 576 448"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M208,0h-48c-53,0-96,43-96,96v37.5c0,8.5-3.4,16.6-9.4,22.6L9.4,201.4c-12.5,12.5-12.5,32.8,0,45.3c0,0,0,0,0,0l45.2,45.2
-                  c6,6,9.4,14.1,9.4,22.6V352c0,53,43,96,96,96h48c8.8,0,16-7.2,16-16v-32c0-8.8-7.2-16-16-16h-48c-17.7,0-32-14.3-32-32v-37.5
-                  c0-25.5-10.1-49.9-28.1-67.9L77.3,224l22.6-22.6c18-18,28.1-42.4,28.1-67.9V96c0-17.7,14.3-32,32-32h48c8.8,0,16-7.2,16-16V16
-                  C224,7.2,216.8,0,208,0z M566.6,201.4l-45.2-45.2c-6-6-9.4-14.2-9.4-22.6V96c0-53-43-96-96-96h-48c-8.8,0-16,7.2-16,16v32
-                  c0,8.8,7.2,16,16,16h48c17.7,0,32,14.3,32,32v37.5c0,25.5,10.1,49.9,28.1,67.9l22.6,22.6l-22.6,22.6c-18,18-28.1,42.4-28.1,67.9V352
-                  c0,17.7-14.3,32-32,32h-48c-8.8,0-16,7.2-16,16v32c0,8.8,7.2,16,16,16h48c53,0,96-43,96-96v-37.5c0-8.5,3.4-16.6,9.4-22.6l45.2-45.2
-                  C579.1,234.1,579.1,213.9,566.6,201.4C566.6,201.4,566.6,201.4,566.6,201.4L566.6,201.4z"
-                  />
-                </svg>
+                <ApiIcon />
               </a>
             </div>
             <div class={`w-[50px]`}>
