@@ -22,6 +22,7 @@ export const handler: Handlers = {
         sql`CASE WHEN nationality IN ('Allemagne', 'Belgique', 'Espagne', 'France', 'Italie') THEN nationality ELSE 'Autres' END as nationality_group`,
         count("id").as("artist_count"),
       ])
+      .where("slug", "not in", TALENTS)
       .groupBy("nationality_group")
       .execute();
 
@@ -42,6 +43,7 @@ export const handler: Handlers = {
         sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
         count("art.id").as("art_count"),
       ])
+      .where("artist.slug", "not in", TALENTS)
       .where("copyright", "!=", 2)
       .groupBy("movement_group")
       .execute();
@@ -50,7 +52,7 @@ export const handler: Handlers = {
       .selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
       .select([count("art.id").as("art_count")])
-      .where("slug", "not in", TALENTS)
+      .where("artist.slug", "not in", TALENTS)
       .where("copyright", "!=", 2)
       .execute();
 
