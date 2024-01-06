@@ -24,7 +24,11 @@ export default function ArtsPage() {
         <ArtsSearch />
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].blue} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].blue}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].magenta}
+      />
       <Footer color={colorScheme[currentColorScheme].blue} />
     </>
   );

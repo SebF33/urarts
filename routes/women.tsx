@@ -24,7 +24,11 @@ export default function WomenPage() {
         <WomenSearch />
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].magenta} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].magenta}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].magenta}
+      />
       <Footer color={colorScheme[currentColorScheme].magenta} />
     </>
   );

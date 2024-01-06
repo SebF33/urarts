@@ -101,7 +101,11 @@ export default function HomePage(
         <Quote data={artistQuote} />
       </main>
 
-      <WaterDrop color={color} />
+      <WaterDrop
+        color={color}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].lighterdark}
+      />
       <Footer color={color} />
     </>
   );

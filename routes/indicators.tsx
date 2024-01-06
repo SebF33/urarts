@@ -148,7 +148,11 @@ export default function IndicatorsPage(
         </div>
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].gray} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].gray}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].gray}
+      />
       <Footer color={colorScheme[currentColorScheme].gray} />
     </>
   );

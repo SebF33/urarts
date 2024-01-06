@@ -78,7 +78,11 @@ export default function TalentsPage(
         <TalentsList artists={artists} />
       </main>
 
-      <WaterDrop color={color} />
+      <WaterDrop
+        color={color}
+        isDropy
+        pencilColor={color}
+      />
       <Footer color={color} />
     </>
   );

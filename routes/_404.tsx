@@ -20,7 +20,11 @@ export default function NotFoundPage({ url }: PageProps) {
         </div>
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].lighterdark}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].lighterdark}
+      />
       <Footer color={colorScheme[currentColorScheme].lighterdark} />
     </>
   );

@@ -41,7 +41,11 @@ export default function HistoCharactersPage(
         <HistoSearch id={query} />
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].dark} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].dark}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].dark}
+      />
       <Footer color={colorScheme[currentColorScheme].dark} />
     </>
   );

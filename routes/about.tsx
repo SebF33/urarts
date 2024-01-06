@@ -88,7 +88,11 @@ export default function AboutPage(
         </div>
       </main>
 
-      <WaterDrop color={color} />
+      <WaterDrop
+        color={color}
+        isDropy
+        pencilColor={color}
+      />
       <Footer color={color} />
     </>
   );

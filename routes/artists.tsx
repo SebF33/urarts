@@ -24,7 +24,11 @@ export default function ArtistsPage() {
         <ArtistsSearch />
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].lighterdark} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].lighterdark}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].lighterdark}
+      />
       <Footer color={colorScheme[currentColorScheme].lighterdark} />
     </>
   );

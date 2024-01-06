@@ -66,7 +66,11 @@ export default function MovementsPage(
         <MovementsList movements={movements} />
       </main>
 
-      <WaterDrop color={colorScheme[currentColorScheme].cyan} />
+      <WaterDrop
+        color={colorScheme[currentColorScheme].cyan}
+        isDropy
+        pencilColor={colorScheme[currentColorScheme].cyan}
+      />
       <Footer color={colorScheme[currentColorScheme].cyan} />
     </>
   );
