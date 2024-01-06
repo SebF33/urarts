@@ -150,9 +150,9 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="text-[1rem] mt-1">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>" de <strong>${randomArtResults.last_name}</strong>...</p>`;
+          `<p class="text-[1rem] leading-none mt-2">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"</br>de <strong>${randomArtResults.last_name}</strong>...</p>`;
         htmlContent +=
-          `<a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a>`;
+          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a></div>`;
       }
       break;
 
