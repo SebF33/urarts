@@ -58,6 +58,11 @@ export const handler = async (
       "url_3",
       "url_4",
       "url_5",
+      "gap_1",
+      "gap_2",
+      "gap_3",
+      "gap_4",
+      "gap_5",
       "color",
       "artist.slug as artist_slug",
     ])

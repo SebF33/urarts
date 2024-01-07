@@ -13,6 +13,11 @@ export type ArtCollection = {
   url_3?: string;
   url_4?: string;
   url_5?: string;
+  gap_1?: string;
+  gap_2?: string;
+  gap_3?: string;
+  gap_4?: string;
+  gap_5?: string;
   info: string | null;
   artist_slug: string;
   histocharacter: number;

@@ -15,6 +15,8 @@ export default function ArtsLayout(
 ) {
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
+  const draggable = false;
+
   useEffect(() => {
     tippyInstances.forEach((instance) => {
       instance.destroy();
@@ -74,9 +76,10 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
-                      class={`max-w-full`}
+                      class={`max-w-full ${p.gap_4}`}
                       src={p.url_4}
                       alt={p.name + "_4"}
+                      draggable={draggable}
                     />
                   </div>
                 )}
@@ -86,9 +89,10 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
-                      class={`max-w-full`}
+                      class={`max-w-full ${p.gap_2}`}
                       src={p.url_2}
                       alt={p.name + "_2"}
+                      draggable={draggable}
                     />
                   </div>
                 )}
@@ -105,9 +109,10 @@ export default function ArtsLayout(
                     </p>
                   )}
                 <img
-                  class={`max-w-full`}
+                  class={`max-w-full ${p.gap_1}`}
                   src={p.url}
                   alt={p.name}
+                  draggable={draggable}
                 />
               </div>
               {p.polyptych > 2 &&
@@ -116,9 +121,10 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
-                      class={`max-w-full`}
+                      class={`max-w-full ${p.gap_3}`}
                       src={p.url_3}
                       alt={p.name + "_3"}
+                      draggable={draggable}
                     />
                   </div>
                 )}
@@ -128,9 +134,10 @@ export default function ArtsLayout(
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   >
                     <img
-                      class={`max-w-full`}
+                      class={`max-w-full ${p.gap_5}`}
                       src={p.url_5}
                       alt={p.name + "_5"}
+                      draggable={draggable}
                     />
                   </div>
                 )}

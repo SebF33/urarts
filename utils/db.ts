@@ -23,6 +23,11 @@ interface ArtTable {
   url_3?: string; // Panneau à droite du central
   url_4?: string; // Panneau à l'extrême gauche du central
   url_5?: string; // Panneau à l'extrême droite du central
+  gap_1?: string; // Décalage du panneau central
+  gap_2?: string; // Décalage du panneau à gauche du central
+  gap_3?: string; // Décalage du panneau à droite du central
+  gap_4?: string; // Décalage du panneau à l'extrême gauche du central
+  gap_5?: string; // Décalage du panneau à l'extrême droite du central
   info: string | null;
   histocharacter: number; // Personnage historique (0: non |1: oui)
   histocharactername: string | null;
