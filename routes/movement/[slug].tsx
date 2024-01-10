@@ -92,13 +92,13 @@ export default function MovementArtsPage(
           </div>
           <div class={`-mt-44`}>
             <div
-              class={`h-[38rem] md:h-96 bg-lighterdark shadow-2xl`}
+              class={`h-fit bg-lighterdark shadow-2xl`}
             >
               <div
                 class={`w-11/12 xl:w-3/6 mx-auto pt-48 text-center`}
               >
                 <p
-                  class={`text-center text-[1.1rem] text-white text-justify leading-5 select-none`}
+                  class={`pb-8 text-center text-[1.1rem] text-white text-justify leading-5 select-none`}
                 >
                   {info}
                 </p>
