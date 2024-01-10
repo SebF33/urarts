@@ -20,6 +20,7 @@ export type ArtCollection = {
   gap_5?: string;
   info: string | null;
   artist_slug: string;
+  copyright: number;
   histocharacter: number;
 };
 

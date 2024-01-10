@@ -1,5 +1,6 @@
 import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 
@@ -25,21 +26,26 @@ export default function ArtsLayout(
 
     props.arts.forEach((p) => {
       let content;
+      let copyright;
       const el = document.querySelector(`[data-artist-id="${p.id}"]`);
 
       if (el) {
+        copyright = p.copyright === 0 ? '<s style="font-size:1.3em">©</s> Domaine public' : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
+
         if (props.type === "histocharacters") {
           content =
-            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
-        <br><span style="font-style:italic">${p.birthyear} — ${p.deathyear}</span>
-        <br>Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong>
-        <p style="margin-top:10px">${p.info}</p>`;
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
+            <p style="margin-top:2px;font-size:1.1em;font-style:italic;line-height:1">${p.birthyear} — ${p.deathyear}</p>
+            <p style="margin-top:6px;line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="margin-top:8px;line-height:1">${p.info}</p>
+            <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         } else {
           content =
-            `<strong style="font-size:1.3em;line-height:0.1">${p.name}</strong>
-        <br><strong><a href="/movement/${p.movement_slug}">${p.movement}</a></strong>
-        <br>Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong>
-        <p style="margin-top:10px">${p.info}</p>`;
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
+            <p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}">${p.movement}</a></strong></p>
+            <p style="line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="margin-top:8px;line-height:1">${p.info}</p>
+            <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         }
 
         tippy(el, {

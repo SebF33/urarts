@@ -65,6 +65,7 @@ export const handler = async (
       "gap_5",
       "color",
       "artist.slug as artist_slug",
+      "copyright",
     ])
     .$if(isArtworks, (qb) => qb.select("art.name as name"))
     .$if(isArtworks, (qb) => qb.select("art.info as info"))
