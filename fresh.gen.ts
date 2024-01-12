@@ -28,6 +28,7 @@ import * as $Mona from "./islands/Mona.tsx";
 import * as $MovementsList from "./islands/MovementsList.tsx";
 import * as $Quote from "./islands/Quote.tsx";
 import * as $TalentsList from "./islands/TalentsList.tsx";
+import * as $ToTopButton from "./islands/ToTopButton.tsx";
 import * as $chart_Doughnut from "./islands/chart/Doughnut.tsx";
 import * as $chart_PolarArea from "./islands/chart/PolarArea.tsx";
 import * as $footer_Footer from "./islands/footer/Footer.tsx";
@@ -73,6 +74,7 @@ const manifest = {
     "./islands/MovementsList.tsx": $MovementsList,
     "./islands/Quote.tsx": $Quote,
     "./islands/TalentsList.tsx": $TalentsList,
+    "./islands/ToTopButton.tsx": $ToTopButton,
     "./islands/chart/Doughnut.tsx": $chart_Doughnut,
     "./islands/chart/PolarArea.tsx": $chart_PolarArea,
     "./islands/footer/Footer.tsx": $footer_Footer,
