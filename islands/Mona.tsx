@@ -59,6 +59,15 @@ export default function Mona() {
           </div>
         </div>
       </div>
+      <div class="art-wrap-1 flex md:hidden">
+        <div class="art-frame art-frame-type-2 art-polyptych-1">
+          <img
+            class="max-w-[200px]"
+            src="arts/devinci/La Joconde.jpg"
+            alt="Mona Lisa"
+          />
+        </div>
+      </div>
     </div>
   );
 }
