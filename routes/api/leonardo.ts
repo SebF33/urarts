@@ -41,6 +41,9 @@ export const handler = async (
     case "about":
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>';
+      htmlContent +=
+        `<p class="text-[1rem] mt-3">Mona Lisa vous observe...</p>`;
+
       break;
 
     case "art":
@@ -76,6 +79,7 @@ export const handler = async (
             `<a href="/art/${artistResult.slug}?id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
       }
+
       break;
 
     case "artists":
@@ -106,6 +110,7 @@ export const handler = async (
         }</strong> &nbsp; <span class="inline-block"><img src="/flags/${
           pagectx[2]
         }.png" class="h-6 inline-block align-top" alt="Urarts" draggable=${draggable}/></span></p>`;
+
       break;
 
     case "arts":
@@ -126,6 +131,7 @@ export const handler = async (
 
       htmlContent +=
         `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtCountResult}</strong> œuvres disponibles...</p>`;
+
       break;
 
     case "home":
@@ -154,6 +160,7 @@ export const handler = async (
         htmlContent +=
           `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a></div>`;
       }
+
       break;
 
     case "histocharacters":
@@ -195,6 +202,9 @@ export const handler = async (
     case "indicators":
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des indicateurs</span> du site Urarts.</h2>';
+      htmlContent +=
+        `<p class="text-[1rem] mt-3">Cliquez sur la légende des widgets pour faire évoluer la visualisation des données.</p>`;
+
       break;
 
     case "movement":
@@ -222,8 +232,9 @@ export const handler = async (
         htmlContent +=
           `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${movementResults.last_name}</strong>...</p>`;
         htmlContent +=
-          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.last_name}" style="max-width:90px" draggable="${draggable}"/></a>`;
+          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.last_name}" style="max-width:90px" draggable="${draggable}"/></a>`;
       }
+
       break;
 
     case "movements":
@@ -241,11 +252,27 @@ export const handler = async (
 
       htmlContent +=
         `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements artistiques disponibles...</p>`;
+
       break;
 
     case "talents":
+      const talentResults = await db.selectFrom("artist")
+        .select([
+          "last_name",
+          "artist.slug as artist_slug",
+          "avatar_url",
+        ])
+        .where("slug", "in", TALENTS)
+        .orderBy(sql`random()`)
+        .executeTakeFirst();
+
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des talents</span>.</h2>';
+      htmlContent +=
+        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${talentResults.last_name}</strong>...</p>`;
+      htmlContent +=
+        `<a href="/art/${talentResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+
       break;
 
     case "women":
