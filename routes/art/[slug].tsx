@@ -1,3 +1,4 @@
+import { ArtistQuote } from "@utils/types.tsx";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -5,7 +6,10 @@ import { Head } from "$fresh/runtime.ts";
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
+import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
+type Quote = Array<ArtistQuote>;
 
 export const handler: Handlers = {
   async GET(req, ctx) {
@@ -19,11 +23,14 @@ export const handler: Handlers = {
         "last_name",
         "avatar_url",
         "color",
+        "secondary_color",
         "site_web",
         "info",
         "nationality",
         "birthyear",
         "deathyear",
+        "signature",
+        "quote",
         "copyright",
         "slug",
       ])
@@ -31,6 +38,7 @@ export const handler: Handlers = {
       .executeTakeFirst();
 
     let artist: string | null = null;
+    let artistQuote: Quote | null = null;
     let avatar: string | null = null;
     let birthyear: string | null = null;
     let color: string | null = null;
@@ -41,6 +49,7 @@ export const handler: Handlers = {
     let mySlug: string | null = null;
     let nationality: string | null = null;
     let query: string | null = null;
+    let secondaryColor: string | null = null;
     let site: string | null = null;
     let title: string | null = null;
 
@@ -48,6 +57,11 @@ export const handler: Handlers = {
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
         : result.last_name;
+      if (result.quote !== null) {
+        artistQuote = {first_name: result.first_name, last_name: result.last_name, signature: result.signature, quote: result.quote};
+      } else {
+        artistQuote = null;
+      }
       avatar = result.avatar_url;
       birthyear = result.birthyear;
       color = result.color;
@@ -58,12 +72,14 @@ export const handler: Handlers = {
       mySlug = result.slug;
       nationality = result.nationality;
       query = url.searchParams.get("id") || "";
+      secondaryColor = result.secondary_color;
       site = result.site_web;
       title = artist + " - Collection";
     } else return ctx.renderNotFound();
 
     return ctx.render({
       artist,
+      artistQuote,
       avatar,
       birthyear,
       color,
@@ -74,6 +90,7 @@ export const handler: Handlers = {
       mySlug,
       nationality,
       query,
+      secondaryColor,
       site,
       title,
     });
@@ -83,6 +100,7 @@ export const handler: Handlers = {
 export default function ArtistArtsPage(
   props: PageProps<{
     artist: string;
+    artistQuote: Quote | null;
     avatar: string;
     birthyear: string;
     color: string;
@@ -93,12 +111,14 @@ export default function ArtistArtsPage(
     mySlug: string;
     nationality: string;
     query: string;
+    secondaryColor: string;
     site: string;
     title: string;
   }>,
 ) {
   const {
     artist,
+    artistQuote,
     avatar,
     birthyear,
     color,
@@ -109,6 +129,7 @@ export default function ArtistArtsPage(
     mySlug,
     nationality,
     query,
+    secondaryColor,
     site,
     title,
   } = props.data;
@@ -133,7 +154,7 @@ export default function ArtistArtsPage(
             <AnimBrushStroke
               color={color}
               font="brush"
-              fontcolor="lighterdark"
+              secondaryColor={secondaryColor}
               title={artist}
             />
           </div>
@@ -202,6 +223,12 @@ export default function ArtistArtsPage(
             </div>
           </div>
 
+          {artistQuote && (
+            <div class="w-full mx-auto mt-8 2xl:-mt-8 mb-4">
+              <Quote data={artistQuote} />
+            </div>
+          )}
+
           {copyright != 2 && (
             <CollectionSearch id={query} myslug={mySlug} type="artist" />
           )}
@@ -239,7 +266,7 @@ export default function ArtistArtsPage(
       <WaterDrop
         color={color}
         isDropy
-        pencilColor={color}
+        pencilColor={secondaryColor}
       />
       <Footer color={color} />
     </>
