@@ -7,18 +7,29 @@ export default function AnimBrushStroke(
   props: {
     color: string;
     font: string;
-    fontcolor: string;
+    secondaryColor: string;
     title: string;
   },
 ) {
   const [showAnimBrushStroke, setShowAnimBrushStroke] = useState(false);
+  const [showH1, setShowH1] = useState(false);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    let delay = 670;
+    if (props.secondaryColor === '#232a2d') delay = 400;
+
+    const timeoutAnimBrushStroke = setTimeout(() => {
       setShowAnimBrushStroke(true);
     }, 80);
 
-    return () => clearTimeout(timeoutId);
+    const timeoutH1 = setTimeout(() => {
+      setShowH1(true);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutAnimBrushStroke);
+      clearTimeout(timeoutH1);
+    };
   }, []);
 
   // Background pour la page d'une collection d'arts
@@ -57,7 +68,11 @@ export default function AnimBrushStroke(
             }`}
           >
             <h1
-              class={`inline-block text-[1.6rem] sm:text-[2rem] leading-[1.6rem] text-${props.fontcolor} italic`}
+              class={`inline-block text-[1.6rem] sm:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${showH1 ? 'show' : ''} ${
+                css({
+                  color: `${props.secondaryColor}`,
+                })
+              }`}
             >
               {props.title}
             </h1>
