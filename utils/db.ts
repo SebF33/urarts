@@ -49,6 +49,7 @@ interface ArtistTable {
   signature: string | null;
   quote: string | null;
   color: string;
+  secondary_color: string;
   site_web: string | null;
   info: string | null;
   slug: string;

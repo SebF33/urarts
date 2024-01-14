@@ -86,7 +86,7 @@ export default function MovementArtsPage(
             <AnimBrushStroke
               color={colorScheme[currentColorScheme].white}
               font={font}
-              fontcolor={colorScheme[currentColorScheme].lighterdark}
+              secondaryColor={colorScheme[currentColorScheme].lighterdark}
               title={movement}
             />
           </div>
