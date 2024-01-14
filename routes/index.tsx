@@ -98,7 +98,9 @@ export default function HomePage(
 
       <main id="page" data-name="home" class="flex-grow">
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
-        <Quote data={artistQuote} />
+        <div class="mx-auto -mt-4 mb-6">
+          <Quote data={artistQuote} />
+        </div>
       </main>
 
       <WaterDrop

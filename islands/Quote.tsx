@@ -66,7 +66,7 @@ export default function Quote(
   return (
     <div
       data-quote-id={props.data.id}
-      class={`paper max-w-[900px] mx-auto -mt-4 mb-6 text-lighterdark overflow-hidden`}
+      class={`paper w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible`}
     >
       <div class="top-tape"></div>
       <div
@@ -81,7 +81,7 @@ export default function Quote(
         {props.data.signature &&
           (
             <div
-              class={`flex justify-end md:w-9/12 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
+              class={`flex justify-end md:w-5/6 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
             >
               <img
                 class={`max-w-[100px]`}
