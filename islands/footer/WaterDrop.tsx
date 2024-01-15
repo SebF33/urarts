@@ -116,7 +116,7 @@ export default function WaterDrop(
           Le but de ce site est d'utiliser ces œuvres historiques à des fins d'information et d'éducation.<br>
           Les visuels sont des images à faible résolution non adaptées à un usage commercial.<br><br>
           Veuillez vous adresser au créateur du site via son adresse email
-          <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@gmail.com</a>
+          <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
           en cas de demande ou de litige liés à l'exploitation de ces visuels.`,
         interactive: true,
         offset: [0, -20],
