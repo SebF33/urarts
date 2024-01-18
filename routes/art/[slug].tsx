@@ -182,9 +182,7 @@ export default function ArtistArtsPage(
                 <p class="font-bold text-lg mb-2">
                   {"Nationalité : " + nationality}
                 </p>
-                <p class={`text-[1.1rem] text-justify leading-5 select-none`}>
-                  {info}
-                </p>
+                <p class={`text-[1.1rem] text-justify leading-5 select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
               </div>
               {site &&
                 (
