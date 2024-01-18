@@ -13,7 +13,7 @@
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "imports": {
     "@/": "./",
-    "$fresh/": "https://deno.land/x/fresh@1.6.2/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "@components/": "./components/",
     "@islands/": "./islands/",
     "@utils/": "./utils/",
