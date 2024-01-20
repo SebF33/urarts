@@ -4,6 +4,7 @@ import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
+import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
@@ -47,18 +48,12 @@ export default function CollectionSearch(
         <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>
+
         <div class={`brush-input-box relative w-48 mx-auto mb-4`}>
-          <input
-            type="text"
-            value={searchTerm}
-            onKeyPress={(e) => {
-              e.key === "Enter" && e.preventDefault();
-            }}
-            onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={`w-full rounded text-base outline-none py-1 px-3`}
-          />
+          <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
         </div>
       </div>
+
       <ArtsLayout
         arts={searchResults}
         font={props.font}

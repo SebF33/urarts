@@ -383,7 +383,7 @@ h1 {
 /* Input */
 .brush-input-box {
     border-width: 18px 18px 18px 18px;
-    border-image: url(../brush-input-box.png) 27 round;
+    border-image: url(../brush-input-box.png) 19 round;
 }
 
 /* Ombre pour SVG */

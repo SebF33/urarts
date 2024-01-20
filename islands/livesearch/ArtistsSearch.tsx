@@ -9,6 +9,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
+import { SearchInput } from "@components/SearchInput.tsx";
 
 export default function ArtistsSearch() {
   const [flags, setFlags] = useState(1);
@@ -608,18 +609,9 @@ export default function ArtistsSearch() {
           >
             Prénom(s), nom(s) :
           </h2>
-          <div
-            class={`brush-input-box absolute w-48 top-40 sm:top-12 left-0 right-0 mx-auto z-10`}
-          >
-            <input
-              type="text"
-              value={searchTerm}
-              onKeyPress={(e) => {
-                e.key === "Enter" && e.preventDefault();
-              }}
-              onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-              class={`w-full rounded text-base outline-none py-1 px-3`}
-            />
+
+          <div class="brush-input-box absolute w-48 top-40 sm:top-12 left-0 right-0 mx-auto z-10">
+            <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
           </div>
         </div>
       </div>

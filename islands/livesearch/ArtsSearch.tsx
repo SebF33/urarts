@@ -6,6 +6,8 @@ import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
+import { SearchInput } from "@components/SearchInput.tsx";
+
 export default function ArtsSearch() {
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,7 +46,7 @@ export default function ArtsSearch() {
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
       <div
-        class={`paper max-w-[230px] mt-5 mb-2`}
+        class={`paper max-w-[230px] my-5`}
       >
         <div class="top-tape"></div>
         <h1 class={`text-5xl font-medium mx-auto`}>
@@ -55,17 +57,11 @@ export default function ArtsSearch() {
       <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
         Nom(s) :
       </h2>
-      <div class={`brush-input-box relative w-48 mx-auto mb-4`}>
-        <input
-          type="text"
-          value={searchTerm}
-          onKeyPress={(e) => {
-            e.key === "Enter" && e.preventDefault();
-          }}
-          onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-          class={`w-full rounded text-base outline-none py-1 px-3`}
-        />
+
+      <div class="brush-input-box relative w-48 mx-auto mb-4">
+        <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
       </div>
+
       <div class={`flex flex-wrap`}>
         {searchResults &&
           (
@@ -94,22 +90,14 @@ export default function ArtsSearch() {
                       <span>{item.name}</span>
                       <span
                         class={`italic ${
-                          css(
-                            {
-                              "font-size": "1.05rem",
-                            },
-                          )
+                          css({"font-size": "1.05rem"})
                         }`}
                       >
                         {" "}({item.last_name})
                       </span>
                       <span
                         class={`absolute -bottom-1 left-0 w-0 h-1 transition-all group-hover:w-full ${
-                          css(
-                            {
-                              "background": item.color,
-                            },
-                          )
+                          css({"background": item.color})
                         }`}
                       >
                       </span>

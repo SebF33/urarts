@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import { yearsSignal } from "../../utils/signals.ts";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
+import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
@@ -101,7 +102,7 @@ export default function HistoSearch(
         class={`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper max-w-[260px] mt-5 mb-4`}
+          class={`paper max-w-[260px] my-5`}
         >
           <div class="tape-section"></div>
           <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>
@@ -113,16 +114,9 @@ export default function HistoSearch(
         <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
           Nom(s) :
         </h2>
+        
         <div class={`brush-input-box relative w-48 mx-auto mb-4`}>
-          <input
-            type="text"
-            value={searchTerm}
-            onKeyPress={(e) => {
-              e.key === "Enter" && e.preventDefault();
-            }}
-            onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
-            class={`w-full rounded text-base outline-none py-1 px-3`}
-          />
+          <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
         </div>
       </div>
 
