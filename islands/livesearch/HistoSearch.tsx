@@ -115,7 +115,7 @@ export default function HistoSearch(
           Nom(s) :
         </h2>
         
-        <div class={`brush-input-box relative w-48 mx-auto mb-4`}>
+        <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
           <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
         </div>
       </div>

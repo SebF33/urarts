@@ -610,7 +610,7 @@ export default function ArtistsSearch() {
             Prénom(s), nom(s) :
           </h2>
 
-          <div class="brush-input-box absolute w-48 top-40 sm:top-12 left-0 right-0 mx-auto z-10">
+          <div class="brush-input-box absolute w-48 max-h-[68px] top-40 sm:top-12 left-0 right-0 mx-auto z-10">
             <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
           </div>
         </div>

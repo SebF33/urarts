@@ -7,7 +7,7 @@ export function SearchInput(
       type="text"
       value={props.value}
       onInput={props.onInput}
-      class="w-full max-h-8 rounded text-lg outline-none py-0.5 px-3"
+      class="w-full rounded text-lg outline-none py-0.5 px-3"
     />
   );
 };
