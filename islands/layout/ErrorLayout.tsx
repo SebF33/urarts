@@ -18,9 +18,9 @@ export default function ErrorLayout(
   }, []);
 
   return (
-    <div class={`max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
+    <div class={`max-w-5xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
       <div
-        class={`grid gap-8 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14`}
+        class={`grid gap-1 sm:gap-2 md:gap-3 lg:gap-4 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14`}
       >
         <div
           class={`${
