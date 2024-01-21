@@ -369,6 +369,7 @@ export default function Nav(props: Props) {
               id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
+              target="_blank"
             >
               <HeartIcon />
             </a>
@@ -486,6 +487,7 @@ export default function Nav(props: Props) {
                 id="mobile-anchor"
                 href="/art/mimi"
                 class={mobileSecondaryAnchor}
+                target="_blank"
               >
                 <HeartIcon />
               </a>
