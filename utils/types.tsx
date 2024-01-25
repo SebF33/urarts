@@ -66,9 +66,4 @@ export type MovementRow = {
   name: string;
   slug: string;
   art_count: string;
-};
-
-export interface Spring {
-  p: number;
-  v: number;
 }

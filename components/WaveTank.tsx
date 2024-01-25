@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: MIT
 // Modifié par Sébastien Flouriot le 28/10/2022
 
-import { Spring } from "@utils/types.tsx";
+export interface Spring {
+  p: number;
+  v: number;
+}
 
 export default class WaveTank {
   springs = [] as Spring[];

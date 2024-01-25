@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT
 // Modifié par Sébastien Flouriot le 06/01/2024
 
-import { Spring } from "@utils/types.tsx";
 import tippy from "tippyjs";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
+import { useSignal } from "@preact/signals";
 
 import WaveTank from "@components/WaveTank.tsx";
 
@@ -18,44 +18,44 @@ export default function WaterDrop(
   props: { color: string; isDropy: boolean; pencilColor: string },
 ) {
   const SVG_WIDTH = 170;
-  const [counter, setCounter] = useState(0);
-  const [dropy, setDropy] = useState(60);
-  const [width, setWidth] = useState(SVG_WIDTH);
-  const widthRef = useRef(width);
-  const [springs, setSprings] = useState<Spring[]>(waveTank.springs);
+  const counter = useSignal(0);
+  const dropy = useSignal(60);
+  const width = useSignal(SVG_WIDTH);
+  const widthRef = useRef(width.value);
+  const springs = useSignal(waveTank.springs);
   const requestIdRef = useRef<number>();
   const grid = SVG_WIDTH / waveTank.waveLength;
   const points = [
     [0, 100],
     [0, 0],
-    ...springs.map((x, i) => [i * grid, x.p]),
-    [width, 0],
-    [width, 100],
+    ...springs.value.map((x, i) => [i * grid, x.p]),
+    [width.value, 0],
+    [width.value, 100],
   ];
   const springsPath = `${points.map((x) => x.join(",")).join(" ")}`;
-  const juice = `M18 ${63 + counter} C15 ${63 + counter} 16 ${
-    63 + counter
+  const juice = `M18 ${63 + counter.value} C15 ${63 + counter.value} 16 ${
+    63 + counter.value
   } 12 61L11 55C14 33 26 33 28 27C36 40 26 43 25 51C25 57 24 59 23 61C20 ${
-    63 + counter
-  } 21 ${63 + counter} 18 ${63 + counter}Z`;
+    63 + counter.value
+  } 21 ${63 + counter.value} 18 ${63 + counter.value}Z`;
 
   function updateJuice(timestamp: number) {
     const amp = 40;
     const x = timestamp / 2000;
     const saw = x - Math.floor(x);
     if (saw < 0.6) {
-      setCounter(easeInCirc(saw) * amp);
-      setDropy(-100);
+      counter.value = easeInCirc(saw) * amp;
+      dropy.value = -100;
     } else {
-      setCounter(easeInCirc(1 - saw) * amp * 0.1);
-      setDropy(70 + Math.pow(saw - 0.6, 2) * 10000);
+      counter.value = easeInCirc(1 - saw) * amp * 0.1;
+      dropy.value = 70 + Math.pow(saw - 0.6, 2) * 10000;
     }
   }
 
   function update(timestamp: number) {
     updateJuice(timestamp);
     waveTank.update(waveTank.springs);
-    setSprings([...waveTank.springs]);
+    springs.value = [...waveTank.springs];
 
     const offset = 500;
     const saw = (timestamp + offset) / 2000 -
@@ -67,10 +67,7 @@ export default function WaterDrop(
   }
 
   function resize() {
-    const el = document.getElementById("dropy-section")?.clientWidth;
-    if (el !== undefined) {
-      setWidth(el);
-    }
+    width.value = document.body.clientWidth;
   }
 
   function drop() {
@@ -81,8 +78,8 @@ export default function WaterDrop(
   }
 
   useEffect(() => {
-    widthRef.current = width;
-  }, [width]);
+    widthRef.current = width.value;
+  }, [width.value]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -288,7 +285,7 @@ export default function WaterDrop(
         />
         <circle
           cx="18"
-          cy={dropy}
+          cy={dropy.value}
           r="4"
           fill={props.color}
         >
