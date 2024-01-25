@@ -110,32 +110,34 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     )
     .execute();
 
-  //1
+  // Mouvement 1
   await db.insertInto("movement").values({
-    name: "Art déco",
-    slug: "artdeco",
+    name: "",
+    slug: "",
   }).execute();
 
-  // Tamara de Lempicka
+  // Artiste 1
   await db.insertInto("artist").values({
-    first_name: "Tamara",
-    last_name: "de Lempicka",
+    first_name: "",
+    last_name: "",
     gender: "Femme",
-    nationality: "Pologne",
-    avatar_url: "/arts/de lempicka/Tamara dans une Bugatti verte.jpg",
-    signature: "/signs/de lempicka.png",
-    quote:
-      "Mon but : ne copie jamais. Crée un nouveau style, clair, des couleurs lumineuses, et perçois l’élégance dans tes modèles.",
-    color: "#318b8c",
-    site_web: "https://www.delempicka.org",
-    info:
-      "Elle occupe une place à part dans l'art du XXe siècle malgré une production modeste, ses œuvres évoquent et reflètent le style et la mode des années folles de l'entre-deux-guerres. Avec une stylisation néo-cubiste, ses œuvres, principalement des portraits, se caractérisent par un modelé accentué, des couleurs vives mais dans une gamme restreinte, mises en valeur par des fonds gris ou noirs.",
-    slug: "delempicka",
+    nationality: "",
+    birthyear: "",
+    deathyear: "",
+    avatar_url: "/arts//Autoportrait.jpg",
+    signature: "/signs/.png",
+    quote: "",
+    color: "#",
+    secondary_color: "#",
+    site_web: "",
+    info: "",
+    copyright: 1,
+    slug: "",
   }).execute();
   await db.insertInto("art").values({
-    name: "Adam et Ève",
+    name: "",
     movement_id: 1,
-    url: "/arts/de lempicka/Adam et Ève.jpg",
+    url: "/arts//.jpg",
     owner_id: 1,
   }).execute();
 }
