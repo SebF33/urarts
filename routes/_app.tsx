@@ -76,6 +76,7 @@ export default defineApp((_, ctx) => {
         />
 
         {/* CSS & JS */}
+        <script src="/styles/lib/alpine3.13.5.min.js" defer></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
         <link href={asset("/styles/style.css")} rel="stylesheet" />
         <link
@@ -91,6 +92,7 @@ export default defineApp((_, ctx) => {
 
       <body
         f-client-nav
+        x-data="{ open: true }"
         class={`flex flex-col min-h-screen font-brush`}
       >
         <Partial name="body">

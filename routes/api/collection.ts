@@ -95,6 +95,13 @@ export const handler = async (
         .where("artist.slug", "=", slugFilter);
       break;
 
+    case "famousart":
+      artQuery = artQuery
+        .where("art.famous_order", "is not", null)
+        .orderBy(sql`random()`)
+        .limit(10)
+      break;
+
     case "histocharacters":
       artQuery = artQuery
         .where("histocharacter", "=", 1)

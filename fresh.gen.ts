@@ -40,6 +40,7 @@ import * as $layout_ErrorLayout from "./islands/layout/ErrorLayout.tsx";
 import * as $livesearch_ArtistsSearch from "./islands/livesearch/ArtistsSearch.tsx";
 import * as $livesearch_ArtsSearch from "./islands/livesearch/ArtsSearch.tsx";
 import * as $livesearch_CollectionSearch from "./islands/livesearch/CollectionSearch.tsx";
+import * as $livesearch_FamousArtSideBar from "./islands/livesearch/FamousArtSideBar.tsx";
 import * as $livesearch_HistoSearch from "./islands/livesearch/HistoSearch.tsx";
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -86,6 +87,7 @@ const manifest = {
     "./islands/livesearch/ArtistsSearch.tsx": $livesearch_ArtistsSearch,
     "./islands/livesearch/ArtsSearch.tsx": $livesearch_ArtsSearch,
     "./islands/livesearch/CollectionSearch.tsx": $livesearch_CollectionSearch,
+    "./islands/livesearch/FamousArtSideBar.tsx": $livesearch_FamousArtSideBar,
     "./islands/livesearch/HistoSearch.tsx": $livesearch_HistoSearch,
     "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
   },

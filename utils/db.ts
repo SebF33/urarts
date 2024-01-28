@@ -29,6 +29,7 @@ interface ArtTable {
   gap_4?: string; // Décalage du panneau à l'extrême gauche du central
   gap_5?: string; // Décalage du panneau à l'extrême droite du central
   info: string | null;
+  famous_order: number | null;
   histocharacter: number; // Personnage historique (0: non |1: oui)
   histocharactername: string | null;
   histocharacterbirthyear: number | null;

@@ -4,7 +4,7 @@ import { css } from "@twind/core";
 export default function Footer({ color }: { color: string }) {
   return (
     <footer
-      class={`relative bottom-0 w-full text-white ${
+      class={`relative bottom-0 w-full text-white z-50 ${
         css(
           {
             "background-color": `${color}`,

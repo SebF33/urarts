@@ -283,7 +283,7 @@ export default function Nav(props: Props) {
 
   return (
     <nav
-      class={`wave-colors shadow-lg text-white z-10 ${
+      class={`wave-colors shadow-lg text-white z-50 ${
         css(
           {
             "text-shadow": "2px 4px 3px rgba(0,0,0,0.3)",

@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2024-01-28]
+
+### Nouveautés
+- Ajout d'une barre latérale de recherche des œuvres célèbres.
+
 ## [2023-12-24]
 
 ### Nouveautés
