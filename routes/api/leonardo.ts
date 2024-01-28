@@ -34,7 +34,7 @@ export const handler = async (
     htmlContent =
       '<h2 class="text-justify">Bonjour et bienvenue sur <strong>Urarts</strong>...</h2>';
     htmlContent +=
-      '<p class="text-[1rem] text-justify mt-0 mb-2">Je suis <strong>Leonardo</strong>, votre guide dans vos recherches sur l’<strong>Art</strong> !</p>';
+      '<p class="text-[1rem] text-justify leading-none mt-1 mb-4">Je suis <strong>Leonardo</strong>, votre guide dans vos recherches sur l’<strong>Art</strong> !</p>';
   }
 
   switch (page) {
@@ -136,7 +136,7 @@ export const handler = async (
 
     case "home":
       htmlContent +=
-        '<p class="text-[1rem]">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
+        '<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
 
       if (welcome === "true") {
         const randomArtResults = await db.selectFrom("art")
@@ -156,9 +156,9 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="text-[1rem] leading-none mt-2">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"</br>de <strong>${randomArtResults.last_name}</strong>...</p>`;
+          `<p class="text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"</br>de <strong>${randomArtResults.last_name}</strong>...</p>`;
         htmlContent +=
-          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img src="${randomArtResults.url}" alt="${randomArtResults.name}" style="max-width:220px" draggable="${draggable}"/></a></div>`;
+          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="w-56 max-w-full" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a></div>`;
       }
 
       break;
@@ -304,7 +304,7 @@ export const handler = async (
   }
 
   htmlContent +=
-    `<div class="text-[0.7rem] italic mt-4">* Cliquez sur mes yeux ou sur l’icône &nbsp; <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-top" alt="Urarts" draggable=${draggable}/></span> pour désactiver/activer Leonardo.</div>`;
+    `<div class="text-[0.85rem] italic leading-none mt-4"><span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="Urarts" draggable=${draggable}/></span>Cliquez sur mes yeux ou sur l’icône pour me désactiver.</div>`;
 
   return Promise.resolve(
     new Response(htmlContent, {
