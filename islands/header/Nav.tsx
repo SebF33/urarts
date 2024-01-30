@@ -1,4 +1,5 @@
 import { css } from "@twind/core";
+import { DELAY_LEONARDO_CALL } from "@utils/constants.ts";
 import { h } from "preact";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
@@ -60,7 +61,7 @@ export default function Nav(props: Props) {
 
       // Yeux Leonardo
       const eyes = document.querySelectorAll<HTMLElement>(".eye");
-      const maxShutDelay = 8000;
+      const maxShutDelay = 7000;
       const minShutDelay = 1000;
 
       eyes.forEach((eye) => {
@@ -123,7 +124,6 @@ export default function Nav(props: Props) {
   }, []);
 
   // Appel à l'API Leonardo
-  const delay = 250;
   useEffect(() => {
     if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
 
@@ -173,7 +173,7 @@ export default function Nav(props: Props) {
         }
       };
       fetchData();
-    }, delay);
+    }, DELAY_LEONARDO_CALL);
   }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
 
   // Visibilité Leonardo
@@ -191,7 +191,7 @@ export default function Nav(props: Props) {
       localStorage.setItem('leonardo', 'active');
       setTimeout(() => {
         instance.show();
-    }, delay);
+    }, DELAY_LEONARDO_CALL);
     }
   }
 

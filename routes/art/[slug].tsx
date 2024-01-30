@@ -48,12 +48,14 @@ export const handler: Handlers = {
     let info: string | null = null;
     let mySlug: string | null = null;
     let nationality: string | null = null;
-    let query: string | null = null;
+    let query: object | null = null;
     let secondaryColor: string | null = null;
     let site: string | null = null;
     let title: string | null = null;
 
     if (result) {
+      const fromLeonardo = url.searchParams.has("fromleonardo");
+      const id = url.searchParams.get("id") || "";
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
         : result.last_name;
@@ -71,7 +73,10 @@ export const handler: Handlers = {
       info = result.info;
       mySlug = result.slug;
       nationality = result.nationality;
-      query = url.searchParams.get("id") || "";
+      query = {
+        fromLeonardo: fromLeonardo,
+        id: id
+      };
       secondaryColor = result.secondary_color;
       site = result.site_web;
       title = artist + " - Collection";
@@ -228,7 +233,7 @@ export default function ArtistArtsPage(
           )}
 
           {copyright != 2 && (
-            <CollectionSearch id={query} myslug={mySlug} type="artist" />
+            <CollectionSearch query={query} myslug={mySlug} type="artist" />
           )}
 
           {copyright === 2 &&

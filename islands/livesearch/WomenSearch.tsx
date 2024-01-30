@@ -1,5 +1,6 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_API_CALL } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -24,7 +25,7 @@ export default function WomenSearch() {
         .then((response) => {
           setSearchResults(response);
         });
-    }, 150);
+    }, DELAY_API_CALL);
   }, []);
 
   // Background pour la page des femmes artistes

@@ -1,6 +1,7 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
+import { DELAY_API_CALL } from "@utils/constants.ts";
 import { Fragment, h } from "preact";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
@@ -128,7 +129,7 @@ export default function ArtistsSearch() {
         .then((response) => {
           setSearchResults(response);
         });
-    }, 150);
+    }, DELAY_API_CALL);
   }, [nationalitySignal.value, searchTerm, yearsSignal.value]);
 
   // Background pour la page des artistes

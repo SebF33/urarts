@@ -1,6 +1,7 @@
 import { Any } from "any";
 import { ArtistRow } from "@utils/types.tsx";
 import { css } from "@twind/core";
+import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
@@ -83,7 +84,7 @@ export default function ArtistsLayout(
     const href = (event.currentTarget as HTMLAnchorElement).href;
     setTimeout(() => {
       window.location.href = href;
-    }, 200);
+    }, DELAY_REACH_HREF);
   }
 
   return (

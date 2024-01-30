@@ -1,5 +1,6 @@
 import { ArtCollection } from "@utils/types.tsx";
 import { css } from "@twind/core";
+import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
@@ -25,7 +26,7 @@ export default function FamousArtSideBar() {
         .then((response) => {
           setSearchResults(response);
         });
-    }, 150);
+    }, DELAY_API_CALL);
   }, [searchTerm]);
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
@@ -33,7 +34,7 @@ export default function FamousArtSideBar() {
     const href = (event.currentTarget as HTMLAnchorElement).href;
     setTimeout(() => {
       window.location.href = href;
-    }, 200);
+    }, DELAY_REACH_HREF);
   }
 
   return (
@@ -101,7 +102,7 @@ export default function FamousArtSideBar() {
                       draggable={draggable}
                     >
                       <div
-                        x-bind:class="{ 'transition-transform duration-100 transform scale-[1.04]': isHovered }"
+                        x-bind:class="{ 'transform-gpu transition-transform duration-100 transform scale-[1.03]': isHovered }"
                         class={`art-frame art-frame-type-${p.frame}`}>
                         <img
                           src={p.url}

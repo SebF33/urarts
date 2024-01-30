@@ -76,7 +76,7 @@ export const handler = async (
           htmlContent +=
             `<p class="text-[1rem] mt-3">Découvrez l’œuvre "<strong>${artResults.name}</strong>"...</p>`;
           htmlContent +=
-            `<a href="/art/${artistResult.slug}?id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+            `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
       }
 

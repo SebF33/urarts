@@ -1,4 +1,5 @@
 import { ArtCollection } from "@utils/types.tsx";
+import { DELAY_API_CALL, DELAY_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -9,7 +10,7 @@ import { SearchInput } from "@components/SearchInput.tsx";
 type Arts = Array<ArtCollection>;
 
 export default function CollectionSearch(
-  props: { font?: string; id?: string; myslug: string; type: string },
+  props: { font?: string; query?: object; myslug: string; type: string },
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,21 +25,27 @@ export default function CollectionSearch(
         .then((response) => {
           setSearchResults(response);
         });
-    }, 150);
+    }, DELAY_API_CALL);
   }, [searchTerm]);
 
+  // Atteindre l'œuvre
   useLayoutEffect(() => {
-    setTimeout(() => {
-      const target: HTMLElement | null = document.getElementById(`${props.id}`);
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest",
-        });
-      }
-    }, 600);
-  }, [props.id]);
+    let delay;
+    props.query?.fromLeonardo ? delay = 10 : delay = DELAY_REACH_ART;
+
+    if (props.query?.id !== "") {
+      setTimeout(() => {
+        const target: HTMLElement | null = document.getElementById(`${props.query?.id}`);
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }, delay);
+    }
+  }, [props.query]);
 
   return (
     <div class={`flex-grow`}>

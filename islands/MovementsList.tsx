@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import { MovementRow } from "@utils/types.tsx";
 import { useLayoutEffect } from "preact/hooks";
@@ -25,7 +26,7 @@ export default function MovementsList(
     const href = (event.currentTarget as HTMLAnchorElement).href;
     setTimeout(() => {
       window.location.href = href;
-    }, 200);
+    }, DELAY_REACH_HREF);
   }
 
   return (
