@@ -1,5 +1,5 @@
 import { ArtCollection } from "@utils/types.tsx";
-import { DELAY_API_CALL, DELAY_REACH_ART } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -31,7 +31,7 @@ export default function CollectionSearch(
   // Atteindre l'œuvre
   useLayoutEffect(() => {
     let delay;
-    props.query?.fromLeonardo ? delay = 10 : delay = DELAY_REACH_ART;
+    props.query?.fromLeonardo ? delay = DELAY_LEONARDO_REACH_ART : delay = DELAY_REACH_ART;
 
     if (props.query?.id !== "") {
       setTimeout(() => {

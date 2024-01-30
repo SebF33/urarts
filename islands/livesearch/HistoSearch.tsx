@@ -1,6 +1,6 @@
 import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_API_CALL } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_LEONARDO_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -72,17 +72,20 @@ export default function HistoSearch(
     }, DELAY_API_CALL);
   }, [searchTerm, yearsSignal.value]);
 
+  // Atteindre l'œuvre
   useLayoutEffect(() => {
-    setTimeout(() => {
-      const target: HTMLElement | null = document.getElementById(`${props.id}`);
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest",
-        });
-      }
-    }, 600);
+    if (props.id !== "") {
+      setTimeout(() => {
+        const target: HTMLElement | null = document.getElementById(`${props.id}`);
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }, DELAY_LEONARDO_REACH_ART);
+    }
   }, [props.id]);
 
   // Background pour la page des personnages historiques
