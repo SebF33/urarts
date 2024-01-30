@@ -138,6 +138,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
     name: "",
     movement_id: 1,
     url: "/arts//.jpg",
+    famous_order: 1,
     owner_id: 1,
   }).execute();
 }
