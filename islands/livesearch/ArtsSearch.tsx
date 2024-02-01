@@ -81,23 +81,19 @@ export default function ArtsSearch() {
               }`}
             >
               {searchResults.map((item, index) => (
-                <li class={`m-2`} key={index}>
+                <li class={`mx-2 my-4`} key={index}>
                   <a
                     href={"/art/" + item.slug + "?id=" + item.id}
                     onClick={handleClick}
                     class={`cursor-pointer`}
                   >
-                    <p class={`relative group text-xl`}>
+                    <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
-                      <span
-                        class={`italic ${
-                          css({"font-size": "1.05rem"})
-                        }`}
-                      >
+                      <span class={`italic text-[1.05rem]`}>
                         {" "}({item.last_name})
                       </span>
                       <span
-                        class={`absolute -bottom-1 left-0 w-0 h-1 transition-all group-hover:w-full ${
+                        class={`absolute -bottom-2 left-0 w-0 h-1 transition-all group-hover:w-full ${
                           css({"background": item.color})
                         }`}
                       >
