@@ -133,12 +133,17 @@ h1 {
     border-radius: 8px;
 }
 
-/* Cadres des œuvres */
+/* Cadres ou filtres des œuvres */
 .art-frame {
     box-sizing: border-box;
     display: inline-block;
     position: relative;
     text-align: center;
+}
+
+.art-frame-type--1 img {
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
 }
 
 .art-frame-type-0 img {
