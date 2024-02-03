@@ -46,7 +46,7 @@ export default function WomenSearch() {
         class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper max-w-[280px] mt-5 mb-16`}
+          class={`paper min-h-[60px] max-w-[280px] mt-5 mb-16`}
         >
           <div class="tape-section"></div>
           <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>

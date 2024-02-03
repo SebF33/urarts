@@ -30,7 +30,7 @@ export default function TalentsList(
         class={`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper max-w-[240px] mt-5`}
+          class={`paper min-h-[60px] max-w-[240px] mt-5`}
         >
           <div class="top-tape"></div>
           <h1

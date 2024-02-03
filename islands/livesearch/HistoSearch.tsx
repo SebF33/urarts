@@ -106,7 +106,7 @@ export default function HistoSearch(
         class={`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper max-w-[260px] my-5`}
+          class={`paper min-h-[60px] max-w-[260px] my-5`}
         >
           <div class="tape-section"></div>
           <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>
