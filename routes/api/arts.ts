@@ -1,5 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { RouteContext } from "$fresh/server.ts";
+import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
@@ -28,7 +29,9 @@ export const handler = async (
       "url",
     ])
     .where("copyright", "!=", 2)
-    .where("art.name", "like", "%" + filter + "%")
+    .where(
+      sql`(art.name LIKE ${"%" + filter + "%"} OR last_name LIKE ${"%" + filter + "%"})`
+    )  
     .where("artist.slug", "not in", TALENTS)
     .orderBy(({ fn }) => fn("lower", ["art.name"]))
     .orderBy(({ fn }) => fn("lower", ["last_name"]))
