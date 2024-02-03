@@ -32,6 +32,12 @@ html {
     scrollbar-width: none;
 }
 
+/* Scrollbar personnalisée pour FireFox */
+.famous-results {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-lighterdark) var(--color-white);
+}
+
 /* Fonts */
 @font-face {
     font-family: Caveat Brush;
@@ -430,7 +436,6 @@ h1 {
     position: relative;
     background: linear-gradient(to bottom right, var(--color-gray), 20%, var(--transparent)), var(--color-white);
     min-width: 220px;
-    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
