@@ -189,19 +189,21 @@ export default function ArtistArtsPage(
                 </p>
                 <p class={`text-[1.1rem] text-justify leading-5 select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
               </div>
+
               {site &&
                 (
-                  <div
-                    class={`relative w-11/12 text-right`}
-                  >
-                    <a
-                      href={site}
-                      class={`p-0 text-base italic underline select-none`}
-                      draggable={draggable}
-                      target="_blank"
-                    >
-                      {site}
-                    </a>
+                  <div class={`relative w-11/12 mt-2`}>
+                    <div class="paper min-h-8 max-w-[230px] ml-auto shadow-none">
+                      <div class="top-tape"></div>
+                      <a
+                        href={site}
+                        class={`z-10 text-lighterdark text-base italic underline select-none`}
+                        draggable={draggable}
+                        target="_blank"
+                      >
+                        {site}
+                      </a>
+                    </div>
                   </div>
                 )}
 
