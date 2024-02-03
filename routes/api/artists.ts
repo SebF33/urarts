@@ -61,7 +61,10 @@ export const handler = async (
     .$if(isWorld, (qb) => qb.where("nationality", "like", "%"))
     .where("slug", "not in", TALENTS)
     .where(
-      sql`((first_name || ' ' || last_name) LIKE ${"%" + nameFilter + "%"} OR (last_name || ' ' || first_name) LIKE ${"%" + nameFilter + "%"})`
+      sql`(first_name LIKE ${"%" + nameFilter + "%"}
+      OR last_name LIKE ${"%" + nameFilter + "%"}
+      OR (first_name || ' ' || last_name) LIKE ${"%" + nameFilter + "%"}
+      OR (last_name || ' ' || first_name) LIKE ${"%" + nameFilter + "%"})`
     )    
     .orderBy(({ fn }) => fn("lower", ["last_name"]))
     .orderBy(({ fn }) => fn("lower", ["first_name"]))

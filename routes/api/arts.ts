@@ -30,7 +30,10 @@ export const handler = async (
     ])
     .where("copyright", "!=", 2)
     .where(
-      sql`(art.name LIKE ${"%" + filter + "%"} OR last_name LIKE ${"%" + filter + "%"})`
+      sql`(art.name LIKE ${"%" + filter + "%"}
+      OR last_name LIKE ${"%" + filter + "%"}
+      OR (art.name || ' ' || last_name) LIKE ${"%" + filter + "%"}
+      OR (last_name || ' ' || art.name) LIKE ${"%" + filter + "%"})`
     )  
     .where("artist.slug", "not in", TALENTS)
     .orderBy(({ fn }) => fn("lower", ["art.name"]))
