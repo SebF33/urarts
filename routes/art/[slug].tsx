@@ -192,7 +192,7 @@ export default function ArtistArtsPage(
 
               {site &&
                 (
-                  <div class={`relative w-11/12 mt-2`}>
+                  <div class={`relative w-11/12 mt-3 sm:mt-2`}>
                     <div class="paper min-h-8 max-w-[230px] ml-auto shadow-none">
                       <div class="top-tape"></div>
                       <a
@@ -212,9 +212,9 @@ export default function ArtistArtsPage(
                   <div
                     class={`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
                   >
-                    <div class={`pt-20 sm:pt-12 sm:pl-12 sm:pr-12`}>
+                    <div class={`pt-16 sm:pt-12 sm:pl-12 sm:pr-12`}>
                       <div
-                        class={`p-6 w-60 mx-auto text-center bg-lighterdark rounded-xl overflow-hidden shadow-2xl`}
+                        class={`p-6 w-60 mx-auto text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
                       >
                         <img
                           src={avatar}
