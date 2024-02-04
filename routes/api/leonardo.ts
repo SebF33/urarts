@@ -51,8 +51,9 @@ export const handler = async (
         const artistResult = await db.selectFrom("artist")
           .select([
             "last_name",
-            "slug",
+            "color",
             "copyright",
+            "slug",
           ])
           .where("slug", "=", subpage)
           .executeTakeFirst();
@@ -69,12 +70,11 @@ export const handler = async (
           .orderBy(sql`random()`)
           .executeTakeFirst();
 
-        htmlContent = "<h2>Voici l’artiste <strong>" +
-          artistResult.last_name + "</strong>.</h2>";
+        htmlContent = `<h2>Voici l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
 
         if (artistResult.copyright !== 2) {
           htmlContent +=
-            `<p class="text-[1rem] mt-3">Découvrez l’œuvre "<strong>${artResults.name}</strong>"...</p>`;
+            `<p class="text-[1rem] mt-3">Découvrez l’œuvre <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
           htmlContent +=
             `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
@@ -143,6 +143,7 @@ export const handler = async (
           .innerJoin("artist", "art.owner_id", "artist.id")
           .select([
             "last_name",
+            "color",
             "slug",
             "copyright",
             "art.id as id",
@@ -156,7 +157,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule "<strong>${randomArtResults.name}</strong>"</br>de <strong>${randomArtResults.last_name}</strong>...</p>`;
+          `<p class="text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a></br>de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
         htmlContent +=
           `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="w-56 max-w-full" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a></div>`;
       }
@@ -213,10 +214,11 @@ export const handler = async (
           .innerJoin("artist", "art.owner_id", "artist.id")
           .innerJoin("movement", "art.movement_id", "movement.id")
           .select([
-            "movement.name as movement",
+            "movement.name as movement_name",
+            "artist.last_name as artist_last_name",
+            "artist.avatar_url as avatar_url",
+            "artist.color as color",
             "artist.slug as artist_slug",
-            "last_name",
-            "avatar_url",
           ])
           .where("movement.slug", "=", subpage)
           .where("artist.slug", "not in", TALENTS)
@@ -225,14 +227,14 @@ export const handler = async (
 
         if (subpage !== "nonclasse") {
           htmlContent = "<h2>Voici le mouvement artistique ";
-          htmlContent += '"' + movementResults.movement + '".</h2>';
+          htmlContent += '"<strong>' + movementResults.movement_name + '</strong>".</h2>';
         } else {
           htmlContent = "<h2>Voici les œuvres non classées.";
         }
         htmlContent +=
-          `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${movementResults.last_name}</strong>...</p>`;
+          `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}" target="_blank">${movementResults.artist_last_name}</a></strong>...</p>`;
         htmlContent +=
-          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.last_name}" style="max-width:90px" draggable="${draggable}"/></a>`;
+          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
       }
 
       break;
@@ -259,8 +261,9 @@ export const handler = async (
       const talentResults = await db.selectFrom("artist")
         .select([
           "last_name",
-          "artist.slug as artist_slug",
           "avatar_url",
+          "color",
+          "slug",
         ])
         .where("slug", "in", TALENTS)
         .orderBy(sql`random()`)
@@ -269,9 +272,9 @@ export const handler = async (
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des talents</span>.</h2>';
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${talentResults.last_name}</strong>...</p>`;
+        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${talentResults.color}"><a href="/art/${talentResults.slug}">${talentResults.last_name}</a></strong>...</p>`;
       htmlContent +=
-        `<a href="/art/${talentResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        `<a href="/art/${talentResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
 
       break;
 
@@ -283,9 +286,10 @@ export const handler = async (
 
       const womenResults = await db.selectFrom("artist")
         .select([
-          "artist.slug as artist_slug",
           "last_name",
           "avatar_url",
+          "color",
+          "slug",
         ])
         .where("gender", "=", "Femme")
         .where("artist.slug", "not in", TALENTS)
@@ -293,9 +297,9 @@ export const handler = async (
         .executeTakeFirst();
 
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong>${womenResults.last_name}</strong>...</p>`;
+        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${womenResults.color}"><a href="/art/${womenResults.slug}">${womenResults.last_name}</a></strong>...</p>`;
       htmlContent +=
-        `<a href="/art/${womenResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:90px" draggable="${draggable}"/></a>`;
+        `<a href="/art/${womenResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
 
       break;
 
