@@ -1,7 +1,11 @@
+import { Any } from "any";
 import { ArtCollection } from "@utils/types.tsx";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
+import { h } from "preact";
 import ky from "ky";
+import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -12,6 +16,7 @@ type Arts = Array<ArtCollection>;
 export default function FamousArtSideBar() {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
   const type = "famousart";
@@ -28,6 +33,39 @@ export default function FamousArtSideBar() {
         });
     }, DELAY_API_CALL);
   }, [searchTerm]);
+
+  // Infobulles
+  useEffect(() => {
+    tippyInstances.forEach((instance) => {
+      instance.destroy();
+    });
+    setTippyInstances([]);
+
+    searchResults.forEach((p) => {
+      const art = document.querySelector(`[data-art-id="${p.id}"]`);
+
+      if (art) {
+        tippy(art, {
+          allowHTML: true,
+          content:
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
+            <p style="line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" target="_blank">${p.last_name}</a></strong></p>`,
+          delay: DELAY_TOOLTIP_TRIGGER,
+          interactive: true,
+          placement: "bottom",
+          theme: "urarts",
+          onCreate(instance: Any) {
+            setTippyInstances((prevInstances) => [...prevInstances, instance]);
+          },
+          onDestroy(instance: Any) {
+            setTippyInstances((prevInstances) =>
+              prevInstances.filter((i) => i !== instance)
+            );
+          },
+        });
+      }
+    });
+  }, [searchResults]);
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -102,6 +140,7 @@ export default function FamousArtSideBar() {
                       draggable={draggable}
                     >
                       <div
+                        data-art-id={p.id}
                         x-bind:class="{ 'transform-gpu transition-transform duration-100 transform scale-[1.03]': isHovered }"
                         class={`art-frame art-frame-type-${p.frame}`}>
                         <img
