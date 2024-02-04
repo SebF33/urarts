@@ -1,6 +1,7 @@
 import { Any } from "any";
 import { ArtistQuote } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import tippy from "tippyjs";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
@@ -13,6 +14,7 @@ export default function Quote(
 
   const draggable = false;
 
+  // Infobulle
   useEffect(() => {
     tippyInstances.forEach((instance) => {
       instance.destroy();
@@ -30,6 +32,7 @@ export default function Quote(
           `<a data-anchor-id=${props.data.id} href="/art/${props.data.slug}" draggable="${draggable}">
           <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px" draggable="${draggable}"/>
           </a>`,
+        delay: DELAY_TOOLTIP_TRIGGER,
         interactive: true,
         placement: "top",
         theme: "urarts",
