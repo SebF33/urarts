@@ -49,7 +49,7 @@ export default function FamousArtSideBar() {
           allowHTML: true,
           content:
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
-            <p style="line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" target="_blank">${p.last_name}</a></strong></p>`,
+            <p style="line-height:1">Artiste : <strong style="color:${p.color}">${p.last_name}</strong></p>`,
           delay: DELAY_TOOLTIP_TRIGGER,
           interactive: true,
           placement: "bottom",
