@@ -77,7 +77,7 @@ export default function FamousArtSideBar() {
 
   return (
     <section
-      x-show="open"
+      x-show="openFamousArt"
       x-transition:enter="transition-opacity ease-out duration-300"
       x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100"
@@ -94,7 +94,7 @@ export default function FamousArtSideBar() {
       }`}
     >
       <div
-        x-show="open"
+        x-show="openFamousArt"
         x-transition:enter="transition-transform ease-out duration-300"
         x-transition:enter-start="transform translate-x-full"
         x-transition:enter-end="transform translate-x-0"
@@ -106,7 +106,7 @@ export default function FamousArtSideBar() {
         <div class="h-full flex flex-col text-lighterdark shadow-xl">
           <div class="w-[282px] mt-16">
             <div
-              x-on:click="open = false"
+              x-on:click="openFamousArt = false"
               class="paper cursor-pointer">
               <span class="sr-only">Fermer</span>
               <h1 class="p-2 text-2xl font-semibold text-center leading-none select-none">Œuvres d’art parmi les plus célèbres...</h1>
