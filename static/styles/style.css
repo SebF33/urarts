@@ -326,8 +326,8 @@ h1 {
     align-self: center;
 }
 
-/* Vagues de couleurs
-   - Gradient pour la barre de navigation : https://colorzilla.com/gradient-editor/#67b0e8+0,c47fd5+90,c47fd5+90,c47fd5+100
+/* Vagues de couleurs Bleu & Magenta
+   - Gradient : https://colorzilla.com/gradient-editor/#67b0e8+0,c47fd5+90,c47fd5+90,c47fd5+100
 */
 .wave-colors {
     /* Old browsers */
@@ -429,19 +429,25 @@ h1 {
     transform: translateX(0);
 }
 
-/* Titres scotchés
+/* Papiers & adhésifs
    - CodePen : https://codepen.io/aitchiss/pen/QWKmPqx
 */
+.header-paper {
+    position: relative;
+    background: linear-gradient(to bottom right, var(--color-white), 32%, var(--transparent)), var(--color-lighterdark);
+}
+
 .paper {
     position: relative;
-    background: linear-gradient(to bottom right, var(--color-gray), 20%, var(--transparent)), var(--color-white);
-    min-width: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 220px;
+    background: linear-gradient(to bottom right, var(--color-gray), 20%, var(--transparent)), var(--color-white);
     box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--color-gray);
 }
 
+.header-paper::after,
 .paper::after {
     content: "";
     position: absolute;

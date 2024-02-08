@@ -76,7 +76,8 @@ export default defineApp((_, ctx) => {
         />
 
         {/* CSS & JS */}
-        <script src="/styles/lib/alpine3.13.5.min.js" defer></script>
+        <script defer src="/styles/lib/alpine-persist3.13.5.min.js"></script>
+        <script defer src="/styles/lib/alpine3.13.5.min.js"></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
         <link href={asset("/styles/style.css")} rel="stylesheet" />
         <link
@@ -92,7 +93,9 @@ export default defineApp((_, ctx) => {
 
       <body
         f-client-nav
-        x-data="{ open: true }"
+        x-data="{ openFamousArt: true,
+          navTheme: $persist(localStorage.getItem('navTheme')),
+          toggleNavTheme: function() { this.navTheme = (this.navTheme !== 'wave-colors') ? 'wave-colors' : 'header-paper'; } }"
         class={`flex flex-col min-h-screen font-brush`}
       >
         <Partial name="body">

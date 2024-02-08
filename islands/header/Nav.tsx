@@ -5,9 +5,9 @@ import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
-import { ApiIcon, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
+import { ApiIcon, ButtonLines, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
 
 export interface Props {
   url: URL;
@@ -46,7 +46,7 @@ export default function Nav(props: Props) {
           `<img class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" draggable=${draggable}/>
           <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
           <div class="absolute top-[-0.62rem] left-[-0.38rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
-          <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5">...</div>`,
+          <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5 select-none">...</div>`,
         hideOnClick: "false",
         interactive: true,
         maxWidth: 900,
@@ -260,13 +260,26 @@ export default function Nav(props: Props) {
     }
   }, []);
 
-  // Menu mobile
-  useEffect(() => {
+  // Hooks menu mobile & thème
+  useLayoutEffect(() => {
     const delay = 120;
     const anchor = document.querySelectorAll<HTMLElement>("#mobile-anchor");
     const btn = document.querySelector<HTMLElement>("button.mobile-menu-button");
     const menu = document.querySelector<HTMLElement>(".mobile-menu");
+    const nav = document.querySelector<HTMLElement>("nav");
+    const navTheme = localStorage.getItem("_x_navTheme");
 
+    // Appliquer le thème à la 1ère génération de la page
+    if (navTheme === '"wave-colors"') {
+      nav?.classList.remove("header-paper");
+      nav?.classList.add("wave-colors");
+    } else {
+      nav?.classList.remove("wave-colors");
+      nav?.classList.add("header-paper");
+      localStorage.setItem('_x_navTheme', '"header-paper"');
+    }
+
+    // Boutons
     anchor.forEach(function (a) {
       a.addEventListener("click", function () {
         setTimeout(() => {
@@ -283,20 +296,15 @@ export default function Nav(props: Props) {
 
   return (
     <nav
-      class={`wave-colors shadow-lg text-white z-50 ${
-        css(
-          {
-            "text-shadow": "2px 4px 3px rgba(0,0,0,0.3)",
-          },
-        )
-      }`}
+      x-bind:class="{ 'header-paper': navTheme === 'header-paper', 'wave-colors': navTheme === 'wave-colors' }"
+      class={`flex flex-wrap text-white z-50 shadow-lg ${css({"text-shadow": "2px 4px 3px rgba(0,0,0,0.3)"})}`}
     >
-      <div class={`max-w-7xl mx-auto px-4`}>
+      <div class={`max-w-7xl w-full mx-auto px-4 z-[60]`}>
         <div class={`flex justify-between`}>
           <div class={`flex space-x-7`}>
             <div class={`select-none`}>
               <a
-                class={`flex items-center py-3 px-2 cursor-zoom-in`}
+                class={`relative z-[60] flex items-center py-3 px-2 cursor-zoom-in`}
                 draggable={draggable}
               >
                 <img
@@ -400,23 +408,13 @@ export default function Nav(props: Props) {
             </a>
           </div>
           <div class={`md:hidden flex items-center`}>
-            <button class={`mobile-menu-button focus:outline-none`}>
-              <svg
-                class={`w-6 h-6 text-white hover:text-lighterdark`}
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
+            <button class={`mobile-menu-button z-[60] text-white hover:text-lighterdark focus:outline-none`}>
+              <ButtonLines />
             </button>
           </div>
         </div>
       </div>
-      <div class={`hidden mobile-menu`}>
+      <div class={`mobile-menu hidden w-full z-[60]`}>
         <ul>
           <li>
             <a

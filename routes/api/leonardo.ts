@@ -136,7 +136,9 @@ export const handler = async (
 
     case "home":
       htmlContent +=
-        '<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
+        '<p class="text-[1rem] text-justify leading-none mb-1">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
+      htmlContent +=
+        '<p class="text-[1rem] text-justify leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
 
       if (welcome === "true") {
         const randomArtResults = await db.selectFrom("art")
@@ -308,7 +310,9 @@ export const handler = async (
   }
 
   htmlContent +=
-    `<div class="text-[0.85rem] italic leading-none mt-4"><span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="Urarts" draggable=${draggable}/></span>Cliquez sur mes yeux ou sur l’icône pour me désactiver.</div>`;
+    `<div class="text-[0.85rem] italic leading-none mt-4">
+    <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="Urarts" draggable=${draggable}/></span>Cliquez sur l’icône ou sur mes yeux pour me désactiver.
+    </div>`;
 
   return Promise.resolve(
     new Response(htmlContent, {

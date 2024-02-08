@@ -28,8 +28,8 @@
   content: "An ";
 }
 
-/* Vagues de couleurs
-   - Gradient pour le slider : https://colorzilla.com/gradient-editor/#232a2d+0,b3b9b8+52,dadada+100
+/* Vagues de Gris pour le slider
+   - Gradient : https://colorzilla.com/gradient-editor/#232a2d+0,b3b9b8+52,dadada+100
 */
 .noUi-connect {
   background: var(--color-lighterdark);
