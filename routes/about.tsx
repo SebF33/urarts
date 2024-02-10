@@ -65,7 +65,7 @@ export default function AboutPage(
               <p class="mb-4 text-xl leading-6">
                 <span class="font-bold underline">Moyens utilisés</span>{" "}
                 : TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush,
-                Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.
+                Alpine.js, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.
               </p>
               <p class="text-xl leading-6">
                 <span class="font-bold underline">Politique de droit d’auteur</span>{" "}
