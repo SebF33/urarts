@@ -46,6 +46,7 @@ export const handler: Handlers = {
     let deathyear: string | null = null;
     let desc: string | null = null;
     let info: string | null = null;
+    let movements: string[] | null = null;
     let mySlug: string | null = null;
     let nationality: string | null = null;
     let query: object | null = null;
@@ -56,6 +57,20 @@ export const handler: Handlers = {
     if (result) {
       const fromLeonardo = url.searchParams.has("fromleonardo");
       const id = url.searchParams.get("id") || "";
+
+      const movementQuery = await db.selectFrom("art")
+      .innerJoin("artist", "art.owner_id", "artist.id")
+      .innerJoin("movement", "art.movement_id", "movement.id")
+      .select(["movement.name", "movement.font", "movement.slug"])
+      .distinct()
+      .where("artist.slug", "=", result.slug)
+      .where("movement.slug", "!=", "nonclasse")
+      .orderBy("movement.name")
+      .execute();
+      
+      const marginValues = ["-ml-2", "ml-6", "-ml-1", "ml-12", "-ml-3", "ml-2"];
+      const rotationValues = ["-rotate-3", "rotate-3", "-rotate-1", "rotate-6", "-rotate-2", "rotate-2"];
+
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
         : result.last_name;
@@ -71,6 +86,12 @@ export const handler: Handlers = {
       deathyear = result.deathyear !== "" ? " — " + result.deathyear : "";
       desc = "Les plus belles œuvres de " + artist + ".";
       info = result.info;
+      movements = movementQuery.map((p, index) => ({
+        font: p.font,
+        movement_name: p.name,
+        position: marginValues[index % marginValues.length] + " " + rotationValues[index % rotationValues.length],
+        movement_slug: p.slug,
+      }));
       mySlug = result.slug;
       nationality = result.nationality;
       query = {
@@ -92,6 +113,7 @@ export const handler: Handlers = {
       deathyear,
       desc,
       info,
+      movements,
       mySlug,
       nationality,
       query,
@@ -113,6 +135,7 @@ export default function ArtistArtsPage(
     deathyear: string;
     desc: string;
     info: string;
+    movements: string[];
     mySlug: string;
     nationality: string;
     query: string;
@@ -131,6 +154,7 @@ export default function ArtistArtsPage(
     deathyear,
     desc,
     info,
+    movements,
     mySlug,
     nationality,
     query,
@@ -155,6 +179,24 @@ export default function ArtistArtsPage(
         <div
           class={`w-auto flex flex-col mx-auto`}
         >
+          {movements &&
+            <div class={`invisible md:visible absolute mt-12 ml-16`}>
+              {movements && movements.map((p) => (
+                <div class={`paper max-w-[140px] min-h-8 mt-1 ${p.position} font-${p.font} shadow-none`}>
+                  <div class="top-tape max-h-3"></div>
+                  <a
+                    href={"/movement/" + p.movement_slug}
+                    class={`z-10 text-lighterdark text-xl italic underline select-none`}
+                    draggable={draggable}
+                    target="_blank"
+                  >
+                    {p.movement_name}
+                  </a>
+                </div>
+              ))}
+            </div>
+          }
+
           <div class={`mx-auto mt-8 z-10`}>
             <AnimBrushStroke
               color={color}
