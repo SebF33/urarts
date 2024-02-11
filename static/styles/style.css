@@ -54,12 +54,30 @@ html {
     src: url(/fonts/Kashima.otf) format("opentype");
 }
 
+@font-face {
+    font-family: Morris Initials Two;
+    src: url(/fonts/MorrisInitialsTwo.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Renaissance Garden;
+    src: url(/fonts/RenaissanceGarden.otf) format("opentype");
+}
+
 .font-brush {
     font-family: Caveat Brush, cursive;
 }
 
 .font-japanese {
     font-family: Kashima Brush;
+}
+
+.font-preraphaelitism {
+    font-family: Morris Initials Two;
+}
+
+.font-renaissance {
+    font-family: Renaissance Garden;
 }
 
 .font-street {
