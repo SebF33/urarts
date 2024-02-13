@@ -23,36 +23,19 @@ export default function ArtistsSearch() {
   // CSS
   const blur = "blur(0)";
   const draggable = false;
-  const grid =
-    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
-  const scale105 =
-    "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
-  const scale110 =
-    "transform-gpu transition-all duration-300 ease-in-out hover:(transform scale-110)";
+  const grid = "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
+  const scale105 = "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
+  const scale110 = "transform-gpu transition-all duration-300 ease-in-out hover:(transform scale-110)";
   const shadow = "drop-shadow(0.01rem 0.01rem 0.04rem rgba(0, 0, 0, 0.5))";
-  const width6 = "w-6 sm:w-8";
   const width8 = "w-8 sm:w-10";
   const width12 = "w-12 sm:w-16";
+  const flagClasses1 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags1 ? "fade-enter-active" : "fade-exit-active"}`;
+  const flagClasses2 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags2 ? "fade-enter-active" : "fade-exit-active"}`;
+  const flagClasses3 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags3 ? "fade-enter-active" : "fade-exit-active"}`;
+  const moreClasses = `w-8 ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
+  const worldFlagClasses = `${width12} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
 
-  const flagClasses1 = `${width8} ${
-    css({ "filter": shadow, "backdrop-filter": blur })
-  } ${scale110} fade ${showFlags1 ? "fade-enter-active" : "fade-exit-active"}`;
-  const flagClasses2 = `${width8} ${
-    css({ "filter": shadow, "backdrop-filter": blur })
-  } ${scale110} fade ${showFlags2 ? "fade-enter-active" : "fade-exit-active"}`;
-  const flagClasses3 = `${width8} ${
-    css({ "filter": shadow, "backdrop-filter": blur })
-  } ${scale110} fade ${showFlags3 ? "fade-enter-active" : "fade-exit-active"}`;
-  const moreClasses = `${width6} ${
-    css({ "filter": shadow, "backdrop-filter": blur })
-  } ${scale105}`;
-  const worldFlagClasses = `${width12} ${
-    css({ "filter": shadow, "backdrop-filter": blur })
-  } ${scale105}`;
-
-  const handleMoreClick = (
-    event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
-  ) => {
+  const handleMoreClick = (event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
     const link = event.currentTarget;
