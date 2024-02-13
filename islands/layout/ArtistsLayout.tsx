@@ -1,31 +1,31 @@
 import { Any } from "any";
+import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
 import { ArtistRow } from "@utils/types.tsx";
 import { css } from "@twind/core";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
+import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 type Artists = Array<ArtistRow>;
 
 export default function ArtistsLayout(
   props: { artists: Artists; flag: string; grid: string },
 ) {
-  const [showPlaceholder, setShowPlaceholder] = useState(false);
+  const [display, setDisplay] = useState<boolean>(false);
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
 
+  // Délai d'affichage
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setShowPlaceholder(true);
-    }, 300);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
+    return () => clearTimeout(timeoutId);
   }, []);
 
+  // Infobulles
   useEffect(() => {
     tippyInstances.forEach((instance) => {
       instance.destroy();
@@ -99,12 +99,11 @@ export default function ArtistsLayout(
             {props.artists.map((p) => (
               <div
                 data-artist-id={p.id}
-                class={`artist-frame ${
+                class={`artist-frame bg-dark ${
                   css(
                     {
                       position: "relative",
                       "padding-bottom": "120%",
-                      background: "black",
                       "box-shadow": "0 10px 7px -5px rgba(0, 0, 0, 0.3)",
                     },
                   )
@@ -143,76 +142,72 @@ export default function ArtistsLayout(
                     draggable={draggable}
                   />
                 )}
-                <div
-                  class={`${
-                    css(
-                      {
-                        position: "absolute",
-                        background: "white",
-                        top: "3.0303%",
-                        bottom: "3.0303%",
-                        left: "2.5%",
-                        right: "2.5%",
-                        "box-shadow":
-                          "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                      },
-                    )
-                  }`}
-                >
-                  <a
-                    href={"/art/" + p.slug}
-                    onClick={handleClick}
-                    draggable={draggable}
-                    class={`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
+                {display && (
+                  <div
+                    class={`${
                       css(
                         {
                           position: "absolute",
-                          top: "16.129%",
-                          bottom: "16.129%",
-                          left: "13.158%",
-                          right: "13.158%",
-                          "&::after": {
-                            content: "",
-                            display: "block",
-                            position: "absolute",
-                            top: "0",
-                            width: "100%",
-                            height: "100%",
-                            "box-shadow":
-                              "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                          },
+                          background: "white",
+                          top: "3.0303%",
+                          bottom: "3.0303%",
+                          left: "2.5%",
+                          right: "2.5%",
+                          "box-shadow":
+                            "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
                         },
                       )
                     }`}
                   >
-                    <img
-                      class={`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
-                      src={p.avatar_url}
-                      alt={p.last_name}
-                    />
-                    <div
-                      class={`absolute w-full h-full opacity-0 transition-opacity duration-500 group-hover:opacity-60 ${
-                        css({
-                          "background": "black",
-                        })
+                    <a
+                      href={"/art/" + p.slug}
+                      onClick={handleClick}
+                      draggable={draggable}
+                      class={`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
+                        css(
+                          {
+                            position: "absolute",
+                            top: "16.129%",
+                            bottom: "16.129%",
+                            left: "13.158%",
+                            right: "13.158%",
+                            "&::after": {
+                              content: "",
+                              display: "block",
+                              position: "absolute",
+                              top: "0",
+                              width: "100%",
+                              height: "100%",
+                              "box-shadow":
+                                "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                            },
+                          },
+                        )
                       }`}
-                    />
-                  </a>
-                </div>
+                    >
+                      <img
+                        style={{ ...ARTIST_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                        src="/placeholder_150.png"
+                        alt="placeholder_150"
+                      />
+                      <img
+                        onLoad={handleImageOnLoad}
+                        style={{ ...imageOnLoadStyle.fullSizeNoTransition }}
+                        class={`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
+                        src={p.avatar_url}
+                        alt={p.last_name}
+                      />
+                      <div class={`absolute w-full h-full bg-black opacity-0 transition-opacity duration-500 group-hover:opacity-60`}/>
+                    </a>
+                  </div>
+                )}
                 <ul class={`artist-side z-20`}>
                   <a class={`w-7`}>
                     <img
                       src={"/flags/" + p.nationality + ".png"}
                       alt="flag-symbol"
                       draggable={draggable}
-                      class={`${
-                        css(
-                          {
-                            "filter":
-                              "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))",
-                          },
-                        )
-                      }`}
+                      class={`${css({"filter": "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))"})}`}
                     />
                   </a>
                 </ul>
@@ -222,16 +217,15 @@ export default function ArtistsLayout(
         )
         : (
           <div class={`${props.grid}`}>
-            {showPlaceholder
+            {display
               ? (
                 <div
                   id="Noresults"
-                  class={`${
+                  class={`bg-dark ${
                     css(
                       {
                         "position": "relative",
                         "padding-bottom": "120%",
-                        "background": "black",
                         "box-shadow": "0 10px 7px -5px rgba(0, 0, 0, 0.3)",
                       },
                     )

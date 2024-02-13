@@ -1,8 +1,10 @@
 import { Any } from "any";
+import { ART_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
+import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
@@ -14,10 +16,19 @@ interface ArtsLayoutProps {
 export default function ArtsLayout(
   props: ArtsLayoutProps,
 ) {
+  const [display, setDisplay] = useState<boolean>(false);
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
 
+  // Délai d'affichage
+  useEffect(() => {
+    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  // Infobulles
   useEffect(() => {
     tippyInstances.forEach((instance) => {
       instance.destroy();
@@ -69,7 +80,7 @@ export default function ArtsLayout(
 
   return (
     <div class={`flex flex-wrap mx-auto`}>
-      {props.arts &&
+      {display && props.arts &&
         props.arts.map((p) => (
           <div class={`flex flex-col mx-auto`}>
             <div
@@ -80,8 +91,16 @@ export default function ArtsLayout(
                 (
                   <div
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                    style={ART_IMG_WRAPPER.wrap}
                   >
                     <img
+                      style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                      src="/placeholder_150.png"
+                      alt="placeholder_150"
+                    />
+                    <img
+                      onLoad={handleImageOnLoad}
+                      style={{ ...imageOnLoadStyle.fullSize }}
                       class={`max-w-full ${p.gap_4}`}
                       src={p.url_4}
                       alt={p.name + "_4"}
@@ -93,8 +112,16 @@ export default function ArtsLayout(
                 (
                   <div
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                    style={ART_IMG_WRAPPER.wrap}
                   >
                     <img
+                      style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                      src="/placeholder_150.png"
+                      alt="placeholder_150"
+                    />
+                    <img
+                      onLoad={handleImageOnLoad}
+                      style={{ ...imageOnLoadStyle.fullSize }}
                       class={`max-w-full ${p.gap_2}`}
                       src={p.url_2}
                       alt={p.name + "_2"}
@@ -105,6 +132,7 @@ export default function ArtsLayout(
               <div
                 data-artist-id={p.id}
                 class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                style={ART_IMG_WRAPPER.wrap}
               >
                 {(p.frame === 0 || p.frame > 2) &&
                   (
@@ -115,6 +143,13 @@ export default function ArtsLayout(
                     </p>
                   )}
                 <img
+                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                  src="/placeholder_150.png"
+                  alt="placeholder_150"
+                />
+                <img
+                  onLoad={handleImageOnLoad}
+                  style={{ ...imageOnLoadStyle.fullSize }}
                   class={`max-w-full ${p.gap_1}`}
                   src={p.url}
                   alt={p.name}
@@ -125,8 +160,16 @@ export default function ArtsLayout(
                 (
                   <div
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                    style={ART_IMG_WRAPPER.wrap}
                   >
                     <img
+                      style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                      src="/placeholder_150.png"
+                      alt="placeholder_150"
+                    />
+                    <img
+                      onLoad={handleImageOnLoad}
+                      style={{ ...imageOnLoadStyle.fullSize }}
                       class={`max-w-full ${p.gap_3}`}
                       src={p.url_3}
                       alt={p.name + "_3"}
@@ -138,8 +181,16 @@ export default function ArtsLayout(
                 (
                   <div
                     class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                    style={ART_IMG_WRAPPER.wrap}
                   >
                     <img
+                      style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                      src="/placeholder_150.png"
+                      alt="placeholder_150"
+                    />
+                    <img
+                      onLoad={handleImageOnLoad}
+                      style={{ ...imageOnLoadStyle.fullSize }}
                       class={`max-w-full ${p.gap_5}`}
                       src={p.url_5}
                       alt={p.name + "_5"}

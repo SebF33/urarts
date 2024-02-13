@@ -1,25 +1,34 @@
 import { Any } from "any";
+import { DELAY_API_CALL, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import { h } from "preact";
 import ky from "ky";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useState } from "preact/hooks";
+import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
 export default function FamousArtSideBar() {
+  const [display, setDisplay] = useState<boolean>(false);
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
   const type = "famousart";
+
+  // Délai d'affichage
+  useEffect(() => {
+    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   // Appel à l'API
   useEffect(() => {
@@ -127,7 +136,7 @@ export default function FamousArtSideBar() {
             }`}
           >
             <div class="grid grid-cols-1 gap-4">
-              {searchResults &&
+              {display && searchResults &&
                 searchResults.map((p) => (
                   <div class="max-w-[250px] flex justify-center p-1 first:mt-4">
                     <a
@@ -142,8 +151,17 @@ export default function FamousArtSideBar() {
                       <div
                         data-art-id={p.id}
                         x-bind:class="{ 'transform-gpu transition-transform duration-100 transform scale-[1.03]': isHovered }"
-                        class={`art-frame art-frame-type-${p.frame}`}>
+                        class={`art-frame art-frame-type-${p.frame}`}
+                        style={FAMOUS_ART_IMG_WRAPPER.wrap}
+                      >
                         <img
+                          style={{ ...FAMOUS_ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                          src="/placeholder_150.png"
+                          alt="placeholder_150"
+                        />
+                        <img
+                          onLoad={handleImageOnLoad}
+                          style={{ ...imageOnLoadStyle.fullSize }}
                           src={p.url}
                           alt={p.name}
                           draggable={draggable}
