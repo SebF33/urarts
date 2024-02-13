@@ -14,15 +14,21 @@ export default function ArtistsLayout(
   props: { artists: Artists; flag: string; grid: string },
 ) {
   const [display, setDisplay] = useState<boolean>(false);
-  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
+  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(false);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
 
-  // Délai d'affichage
+  // Délais d'affichage
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
-    return () => clearTimeout(timeoutId);
+    const timeoutNoresults = setTimeout(() => { setShowPlaceholder(true); }, 300);
+  
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(timeoutNoresults);
+    };
   }, []);
 
   // Infobulles
@@ -193,11 +199,11 @@ export default function ArtistsLayout(
                       <img
                         onLoad={handleImageOnLoad}
                         style={{ ...imageOnLoadStyle.fullSizeNoTransition }}
-                        class={`w-full object-cover ease-in-out duration-500 group-hover:rotate-6 group-hover:scale-125`}
+                        class={`w-full object-cover ease-in-out duration-[400ms] group-hover:rotate-6 group-hover:scale-125`}
                         src={p.avatar_url}
                         alt={p.last_name}
                       />
-                      <div class={`absolute w-full h-full bg-black opacity-0 transition-opacity duration-500 group-hover:opacity-60`}/>
+                      <div class={`absolute w-full h-full bg-black opacity-0 transition-opacity duration-[400ms] group-hover:opacity-60`}/>
                     </a>
                   </div>
                 )}
@@ -217,7 +223,7 @@ export default function ArtistsLayout(
         )
         : (
           <div class={`${props.grid}`}>
-            {display
+            {showPlaceholder
               ? (
                 <div
                   id="Noresults"
