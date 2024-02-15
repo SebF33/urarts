@@ -154,13 +154,12 @@ export default function ArtistsLayout(
                       css(
                         {
                           position: "absolute",
-                          background: "white",
                           top: "3.0303%",
                           bottom: "3.0303%",
                           left: "2.5%",
                           right: "2.5%",
-                          "box-shadow":
-                            "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                          background: "white",
+                          "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
                         },
                       )
                     }`}
@@ -177,6 +176,7 @@ export default function ArtistsLayout(
                             bottom: "16.129%",
                             left: "13.158%",
                             right: "13.158%",
+                            background: "#ddc",
                             "&::after": {
                               content: "",
                               display: "block",
@@ -184,8 +184,7 @@ export default function ArtistsLayout(
                               top: "0",
                               width: "100%",
                               height: "100%",
-                              "box-shadow":
-                                "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                              "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
                             },
                           },
                         )
@@ -241,14 +240,13 @@ export default function ArtistsLayout(
                     class={`${
                       css(
                         {
-                          "position": "absolute",
-                          "background": "white",
-                          "top": "3.0303%",
-                          "bottom": "3.0303%",
-                          "left": "2.5%",
-                          "right": "2.5%",
-                          "box-shadow":
-                            "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                          position: "absolute",
+                          top: "3.0303%",
+                          bottom: "3.0303%",
+                          left: "2.5%",
+                          right: "2.5%",
+                          background: "white",
+                          "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
                         },
                       )
                     }`}
@@ -257,20 +255,20 @@ export default function ArtistsLayout(
                       class={`group flex justify-center text-center relative overflow-hidden z-20 ${
                         css(
                           {
-                            "position": "absolute",
-                            "top": "16.129%",
-                            "bottom": "16.129%",
-                            "left": "13.158%",
-                            "right": "13.158%",
+                            position: "absolute",
+                            top: "16.129%",
+                            bottom: "16.129%",
+                            left: "13.158%",
+                            right: "13.158%",
+                            background: "#ddc",
                             "&::after": {
                               content: "",
-                              "display": "block",
-                              "position": "absolute",
-                              "top": "0",
-                              "width": "100%",
-                              "height": "100%",
-                              "box-shadow":
-                                "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                              display: "block",
+                              position: "absolute",
+                              top: "0",
+                              width: "100%",
+                              height: "100%",
+                              "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
                             },
                           },
                         )
