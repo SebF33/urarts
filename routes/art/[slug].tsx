@@ -69,7 +69,7 @@ export const handler: Handlers = {
       .execute();
       
       const marginValues = ["-ml-2", "ml-6", "-ml-1", "ml-12", "-ml-3", "ml-2"];
-      const rotationValues = ["-rotate-3", "rotate-3", "-rotate-1", "rotate-6", "-rotate-2", "rotate-2"];
+      const rotationValues = ["-rotate-3", "rotate-3", "-rotate-1", "rotate-2", "-rotate-2", "rotate-6"];
 
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
