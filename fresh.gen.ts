@@ -16,6 +16,7 @@ import * as $arts from "./routes/arts.tsx";
 import * as $background_gray from "./routes/background/gray.tsx";
 import * as $background_gray_half from "./routes/background/gray_half.tsx";
 import * as $background_white from "./routes/background/white.tsx";
+import * as $copyright from "./routes/copyright.tsx";
 import * as $histocharacters from "./routes/histocharacters.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $indicators from "./routes/indicators.tsx";
@@ -61,6 +62,7 @@ const manifest = {
     "./routes/background/gray.tsx": $background_gray,
     "./routes/background/gray_half.tsx": $background_gray_half,
     "./routes/background/white.tsx": $background_white,
+    "./routes/copyright.tsx": $copyright,
     "./routes/histocharacters.tsx": $histocharacters,
     "./routes/index.tsx": $index,
     "./routes/indicators.tsx": $indicators,
