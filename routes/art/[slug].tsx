@@ -1,7 +1,7 @@
 import { ArtistQuote } from "@utils/types.tsx";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head, Partial } from "$fresh/runtime.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
@@ -188,7 +188,6 @@ export default function ArtistArtsPage(
                     href={"/movement/" + p.movement_slug}
                     class={`z-10 text-lighterdark text-xl italic underline select-none`}
                     draggable={draggable}
-                    target="_blank"
                   >
                     {p.movement_name}
                   </a>
@@ -241,7 +240,6 @@ export default function ArtistArtsPage(
                         href={site}
                         class={`z-10 text-lighterdark text-base italic underline select-none`}
                         draggable={draggable}
-                        target="_blank"
                       >
                         {site}
                       </a>
@@ -277,7 +275,9 @@ export default function ArtistArtsPage(
           )}
 
           {copyright != 2 && (
-            <CollectionSearch query={query} myslug={mySlug} type="artist" />
+            <Partial name="artist-collection">
+              <CollectionSearch query={query} myslug={mySlug} type="artist" />
+            </Partial>
           )}
 
           {copyright === 2 &&
