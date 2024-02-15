@@ -234,9 +234,9 @@ export const handler = async (
           htmlContent = "<h2>Voici les œuvres non classées.";
         }
         htmlContent +=
-          `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}" target="_blank">${movementResults.artist_last_name}</a></strong>...</p>`;
+          `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
         htmlContent +=
-          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" target="_blank" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+          `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
       }
 
       break;
