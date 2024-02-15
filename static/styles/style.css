@@ -177,7 +177,7 @@ h1 {
     mask-size: cover;
 }
 
-.art-frame-type-1 img {
+.art-frame-type-1 img:nth-of-type(2) {
     box-shadow: 5px 5px 10px;
 }
 
