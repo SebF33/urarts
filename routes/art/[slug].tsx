@@ -239,6 +239,7 @@ export default function ArtistArtsPage(
                       <a
                         href={site}
                         class={`z-10 text-lighterdark text-base italic underline select-none`}
+                        target="_blank"
                         draggable={draggable}
                       >
                         {site}
