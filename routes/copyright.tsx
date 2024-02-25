@@ -67,6 +67,20 @@ export default function HomePage(
       </Head>
 
       <main id="page" data-name="home" class="flex-grow">
+        <div
+          class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
+        >
+          <div
+            class={`paper min-h-[60px] max-w-[260px] my-5`}
+          >
+            <div class="tape-section"></div>
+            <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>
+              Artistes sous copyright ©
+            </h1>
+            <div class="tape-section"></div>
+          </div>
+        </div>
+
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
       </main>
 
