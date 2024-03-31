@@ -32,9 +32,9 @@ export const handler = async (
 
   if (welcome === "true" && page === "home") {
     htmlContent =
-      '<h2 class="text-justify">Bonjour et bienvenue sur <strong>Urarts</strong>...</h2>';
+      '<h2>Bonjour et bienvenue sur <strong>Urarts</strong>...</h2>';
     htmlContent +=
-      '<p class="text-[1rem] text-justify leading-none mt-1 mb-4">Je suis <strong>Leonardo</strong>, votre guide dans vos recherches sur l’<strong>Art</strong> !</p>';
+      '<p class="text-[1rem] leading-none mt-1 mb-4">Je suis <strong>Leonardo</strong>, votre guide dans vos recherches sur l’<strong>Art</strong> !</p>';
   }
 
   switch (page) {
@@ -136,9 +136,9 @@ export const handler = async (
 
     case "home":
       htmlContent +=
-        '<p class="text-[1rem] text-justify leading-none mb-1">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
+        '<p class="text-[1rem] leading-none mb-1">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
       htmlContent +=
-        '<p class="text-[1rem] text-justify leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
+        '<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
 
       if (welcome === "true") {
         const randomArtResults = await db.selectFrom("art")
