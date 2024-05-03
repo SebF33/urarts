@@ -409,6 +409,29 @@ h1 {
     }
 }
 
+/* Palette */
+#PaintPalette .st0 {
+    clip-path: url(#Wood_2);
+    fill: #edceb1;
+}
+
+#PaintPalette .st1 {
+    opacity: 0.5;
+    clip-path: url(#Wood_2);
+}
+
+#PaintPalette .st2 {
+    opacity: 0.3;
+}
+
+#PaintPalette .st3 {
+    fill: #c59568;
+}
+
+#PaintPalette .st4 {
+    fill: #dbab8d;
+}
+
 /* Input */
 .brush-input-box {
     border-width: 18px 18px 18px 18px;
