@@ -4,6 +4,7 @@ import { defineApp } from "$fresh/server.ts";
 import { UrlBasePath } from "../env.ts";
 
 import Nav from "@islands/header/Nav.tsx";
+import ToBottomButton from "@islands/ToBottomButton.tsx";
 import ToTopButton from "@islands/ToTopButton.tsx";
 
 export default defineApp((_, ctx) => {
@@ -101,6 +102,7 @@ export default defineApp((_, ctx) => {
         <Partial name="body">
           <Nav url={ctx.url} />
           <ctx.Component />
+          <ToBottomButton />
           <ToTopButton />
         </Partial>
       </body>
