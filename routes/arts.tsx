@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { Head } from "$fresh/runtime.ts";
 
 import ArtsSearch from "@islands/livesearch/ArtsSearch.tsx";
@@ -20,7 +21,15 @@ export default function ArtsPage() {
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="arts" class="flex-grow">
+      <main id="page" data-name="arts" class={`flex-grow ${
+          css({
+            "mask-image": `linear-gradient(to bottom, black 50%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 50%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 50%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 50%, transparent 100%)`,
+          })
+        }`}
+      >
         <ArtsSearch />
       </main>
 

@@ -65,10 +65,10 @@ export default function MovementsPage(
 
       <main id="page" data-name="movements" class={`scrollable flex-grow xl:max-h-[860px] xl:overflow-y-scroll custom-scrollbar ${
           css({
-            "mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
+            "mask-image": `linear-gradient(to bottom, black 70%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 70%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 70%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 70%, transparent 100%)`,
           })
         }`}
       >

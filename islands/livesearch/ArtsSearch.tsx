@@ -71,20 +71,7 @@ export default function ArtsSearch() {
       <div class={`flex flex-wrap`}>
         {searchResults &&
           (
-            <ul
-              class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 ${
-                css({
-                  "mask-image":
-                    `linear-gradient(to bottom, black 50%, transparent 100%)`,
-                  "-webkit-mask-image":
-                    `linear-gradient(to bottom, black 50%, transparent 100%)`,
-                  "-o-mask-image":
-                    `linear-gradient(to bottom, black 50%, transparent 100%)`,
-                  "-moz-mask-image":
-                    `linear-gradient(to bottom, black 50%, transparent 100%)`,
-                })
-              }`}
-            >
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2`}>
               {searchResults.map((item, index) => (
                 <li class={`mx-2 my-4`} key={index}>
                   <a
