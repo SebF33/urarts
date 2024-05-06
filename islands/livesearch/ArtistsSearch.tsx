@@ -23,7 +23,7 @@ export default function ArtistsSearch() {
   // CSS
   const blur = "blur(0)";
   const draggable = false;
-  const grid = "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 py-20";
+  const grid = "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 my-20 p-4";
   const scale105 = "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
   const scale110 = "transform-gpu transition-all duration-300 ease-in-out hover:(transform scale-110)";
   const shadow = "drop-shadow(0.01rem 0.01rem 0.04rem rgba(0, 0, 0, 0.5))";
@@ -118,12 +118,17 @@ export default function ArtistsSearch() {
   // Background pour la page des artistes
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="artists"]');
 
     if (body) {
-      body.style.background = `url(/background/gray)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].white;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "3400px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/gray)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "3400px";
     }
   }, []);
 
@@ -141,7 +146,7 @@ export default function ArtistsSearch() {
           </h1>
         </div>
 
-        <div class={`relative w-60 sm:w-80 mx-auto mt-24 md:mt-6 mb-24`}>
+        <div class={`relative w-60 sm:w-80 mx-auto mt-24 md:-mt-6 mb-24`}>
           <div class={`absolute w-full -top-16`}>
             <PaintPalette />
           </div>

@@ -8,12 +8,17 @@ export default function ErrorLayout(
   // Background pour les pages d'erreur
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="error"]');
 
     if (body) {
-      body.style.background = `url(/background/white)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "3400px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/white)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "3400px";
     }
   }, []);
 

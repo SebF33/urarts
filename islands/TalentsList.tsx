@@ -10,17 +10,22 @@ export default function TalentsList(
   props: { artists: Artists },
 ) {
   const grid =
-    "grid gap-4 sm:gap-5 lg:gap-64 xl:gap-96 grid-cols-1 grid-cols-2 pt-10 pb-10 lg:pt-20 md:pb-4 lg:pb-0";
+    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 my-20 p-4";
 
   // Background pour la page des talents
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="talents"]');
 
     if (body) {
-      body.style.background = `url(/background/gray_half)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].white;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "420px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/gray_half)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "420px";
     }
   }, []);
 

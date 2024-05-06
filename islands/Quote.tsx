@@ -57,12 +57,17 @@ export default function Quote(
   // Background pour la page d'accueil
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="home"]');
 
     if (body) {
-      body.style.background = `url(/background/gray)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].white;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "420px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/gray)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "420px";
     }
   }, []);
 

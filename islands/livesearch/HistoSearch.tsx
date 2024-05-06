@@ -91,12 +91,17 @@ export default function HistoSearch(
   // Background pour la page des personnages historiques
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="histocharacters"]');
 
     if (body) {
-      body.style.background = `url(/background/white)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "346px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/white)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "346px";
     }
   }, []);
 

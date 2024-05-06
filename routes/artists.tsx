@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { Head } from "$fresh/runtime.ts";
 
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
@@ -20,7 +21,18 @@ export default function ArtistsPage() {
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="artists" class="flex-grow">
+      <main
+        id="page"
+        data-name="artists"
+        class={`scrollable flex-grow xl:max-h-[900px] xl:overflow-y-scroll custom-scrollbar ${
+          css({
+            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+          })
+        }`}
+      >
         <ArtistsSearch />
       </main>
 

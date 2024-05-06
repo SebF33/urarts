@@ -126,7 +126,7 @@ export default function FamousArtSideBar() {
               </div>
             </div>
           </div>
-          <div class={`famous-results h-full px-4 overflow-auto ${
+          <div class={`h-full px-4 overflow-auto custom-scrollbar ${
               css({
                 "mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,
                 "-webkit-mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,

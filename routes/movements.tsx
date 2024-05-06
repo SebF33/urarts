@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -62,7 +63,15 @@ export default function MovementsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="movements" class="flex-grow">
+      <main id="page" data-name="movements" class={`scrollable flex-grow xl:max-h-[860px] xl:overflow-y-scroll custom-scrollbar ${
+          css({
+            "mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
+          })
+        }`}
+      >
         <MovementsList movements={movements} />
       </main>
 

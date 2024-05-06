@@ -23,7 +23,7 @@
     background-color: var(--color-blue);
 }
 
-/* Cacher la scrollbar */
+/* Cacher la scrollbar principale */
 ::-webkit-scrollbar {
     display: none;
 }
@@ -32,8 +32,8 @@ html {
     scrollbar-width: none;
 }
 
-/* Scrollbar personnalisée pour FireFox */
-.famous-results {
+/* Scrollbar personnalisée */
+.custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--color-lighterdark) var(--color-white);
 }

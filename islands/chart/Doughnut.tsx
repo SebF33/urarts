@@ -70,12 +70,17 @@ export default function Doughnut(
   // Background pour la page des indicateurs
   useLayoutEffect(() => {
     const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="indicators"]');
 
     if (body) {
-      body.style.background = `url(/background/gray)`;
       body.style.backgroundColor = colorScheme[currentColorScheme].white;
-      body.style.backgroundPosition = "center";
-      body.style.backgroundSize = "2800px";
+    }
+
+    if (main) {
+      main.style.background = `url(/background/gray)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "2800px";
     }
   }, []);
 

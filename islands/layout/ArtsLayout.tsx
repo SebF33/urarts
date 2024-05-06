@@ -79,7 +79,7 @@ export default function ArtsLayout(
   }, [props.arts]);
 
   return (
-    <div class={`flex flex-wrap mx-auto`}>
+    <div class={`flex flex-wrap mx-auto mb-40`}>
       {display && props.arts &&
         props.arts.map((p) => (
           <div class={`flex flex-col mx-auto`}>

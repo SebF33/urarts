@@ -1,5 +1,6 @@
 import { ArtistRow } from "@utils/types.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -74,7 +75,15 @@ export default function TalentsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="talents" class="flex-grow">
+      <main id="page" data-name="talents" class={`flex-grow ${
+          css({
+            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+          })
+        }`}
+      >
         <TalentsList artists={artists} />
       </main>
 

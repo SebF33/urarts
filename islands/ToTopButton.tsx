@@ -7,17 +7,22 @@ export default function ToTopButton() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowButton(window.scrollY > 200);
+      setShowButton(globalThis.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    globalThis.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      globalThis.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    globalThis.scrollTo({ top: 0, behavior: "smooth" });
+    
+    const target: HTMLElement | null = document.querySelector('.scrollable');
+    if (target) {
+      target.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
