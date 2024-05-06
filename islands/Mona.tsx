@@ -47,7 +47,7 @@ export default function Mona() {
     <div class="flex flex-col md:flex-row mx-auto">
       <div class="art-wrap-1 hidden md:flex">
         <div class="art-frame art-frame-type-2 art-polyptych-1">
-          <img
+          <img loading="lazy"
             class="max-w-full min-w-[449px]"
             src="/monalisa.jpg"
             alt="Mona Lisa"
@@ -66,7 +66,7 @@ export default function Mona() {
       </div>
       <div class="art-wrap-1 flex md:hidden">
         <div class="art-frame art-frame-type-2 art-polyptych-1">
-          <img
+          <img loading="lazy"
             class="max-w-[200px]"
             src="arts/devinci/La Joconde.jpg"
             alt="Mona Lisa"
