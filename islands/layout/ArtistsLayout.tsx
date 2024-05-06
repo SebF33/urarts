@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
-import { ArtistRow } from "@utils/types.tsx";
+import { ArtistRow } from "@utils/types.d.ts";
 import { css } from "@twind/core";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";

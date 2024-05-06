@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { ART_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
-import { ArtCollection } from "@utils/types.tsx";
+import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";

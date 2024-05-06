@@ -3,7 +3,7 @@ import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import { MovementRow } from "@utils/types.tsx";
+import { MovementRow } from "@utils/types.d.ts";
 
 import Footer from "@islands/footer/Footer.tsx";
 import MovementsList from "@islands/MovementsList.tsx";

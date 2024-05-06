@@ -1,4 +1,4 @@
-import { ArtistRow } from "@utils/types.tsx";
+import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL } from "@utils/constants.ts";

@@ -1,4 +1,4 @@
-import { ArtistQuote } from "@utils/types.tsx";
+import { ArtistQuote } from "@utils/types.d.ts";
 import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";

@@ -1,4 +1,4 @@
-import { ArtCollection } from "@utils/types.tsx";
+import { ArtCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";

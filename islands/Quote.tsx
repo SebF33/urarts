@@ -1,5 +1,5 @@
 import { Any } from "any";
-import { ArtistQuote } from "@utils/types.tsx";
+import { ArtistQuote } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import tippy from "tippyjs";

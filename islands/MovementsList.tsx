@@ -1,7 +1,7 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
-import { MovementRow } from "@utils/types.tsx";
+import { MovementRow } from "@utils/types.d.ts";
 import { useLayoutEffect } from "preact/hooks";
 
 type Movements = Array<MovementRow>;

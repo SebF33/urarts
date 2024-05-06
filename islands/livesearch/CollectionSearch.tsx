@@ -1,4 +1,4 @@
-import { ArtCollection } from "@utils/types.tsx";
+import { ArtCollection } from "@utils/types.d.ts";
 import { DELAY_API_CALL, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";

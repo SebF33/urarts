@@ -1,4 +1,4 @@
-import { ArtistQuote, ArtistRow } from "@utils/types.tsx";
+import { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";

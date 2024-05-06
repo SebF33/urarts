@@ -1,4 +1,4 @@
-import { ArtRow } from "@utils/types.tsx";
+import { ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";

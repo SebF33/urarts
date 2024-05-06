@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { DELAY_API_CALL, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
-import { ArtCollection } from "@utils/types.tsx";
+import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
