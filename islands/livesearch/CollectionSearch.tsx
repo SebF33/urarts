@@ -1,7 +1,8 @@
 import { ArtCollection } from "@utils/types.d.ts";
-import { DELAY_API_CALL, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
+import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
@@ -13,20 +14,21 @@ export default function CollectionSearch(
   props: { font?: string; query?: object; myslug: string; type: string },
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${searchTerm}`,
+        `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`,
       )
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
-  }, [searchTerm]);
+  }, [debouncedValue]);
 
   // Atteindre l'œuvre
   useLayoutEffect(() => {

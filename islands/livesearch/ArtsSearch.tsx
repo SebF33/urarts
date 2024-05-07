@@ -1,28 +1,30 @@
 import { ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
+import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import { SearchInput } from "@components/SearchInput.tsx";
 
 export default function ArtsSearch() {
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/arts?name=${searchTerm}`)
+      ky.get(`${UrlBasePath}/api/arts?name=${debouncedValue}`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
-  }, [searchTerm]);
+  }, [debouncedValue]);
 
   // Background pour la page des œuvres d'art
   useLayoutEffect(() => {

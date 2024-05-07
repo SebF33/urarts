@@ -1,5 +1,5 @@
 import { Any } from "any";
-import { DELAY_API_CALL, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
@@ -7,6 +7,7 @@ import { h } from "preact";
 import ky from "ky";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
+import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
@@ -18,8 +19,9 @@ export default function FamousArtSideBar() {
   const [display, setDisplay] = useState<boolean>(false);
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
   const draggable = false;
   const type = "famousart";
@@ -34,14 +36,14 @@ export default function FamousArtSideBar() {
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/collection?type=${type}&name=${searchTerm}`,
+        `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}`,
       )
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
-  }, [searchTerm]);
+  }, [debouncedValue]);
 
   // Infobulles
   useEffect(() => {

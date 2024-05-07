@@ -1,8 +1,9 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_API_CALL, DELAY_LEONARDO_REACH_ART } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART } from "@utils/constants.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
+import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import { yearsSignal } from "../../utils/signals.ts";
 
@@ -15,7 +16,8 @@ export default function HistoSearch(
   props: { id?: string },
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
   const type = "histocharacters";
 
@@ -54,23 +56,32 @@ export default function HistoSearch(
     });
 
     slider.noUiSlider.set(["300", "2100"]);
-    slider.noUiSlider.on("update", function () {
-      yearsSignal.value = slider.noUiSlider.get();
+
+    let debounceTimer;
+    slider.noUiSlider.on("update", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        yearsSignal.value = slider.noUiSlider.get();
+      }, DELAY_DEBOUNCE);
     });
+
+    return () => {
+      slider.noUiSlider.destroy();
+    };
   }, []);
 
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/collection?type=${type}&name=${searchTerm}&years=${yearsSignal.value}`,
+        `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
       )
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
-  }, [searchTerm, yearsSignal.value]);
+  }, [debouncedValue, yearsSignal.value]);
 
   // Atteindre l'œuvre
   useLayoutEffect(() => {

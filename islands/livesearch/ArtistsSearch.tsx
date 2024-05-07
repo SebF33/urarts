@@ -1,11 +1,12 @@
 import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE } from "@utils/constants.ts";
 import { Fragment, h } from "preact";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import { UrlBasePath } from "../../env.ts";
+import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -15,10 +16,11 @@ import { SearchInput } from "@components/SearchInput.tsx";
 export default function ArtistsSearch() {
   const [flags, setFlags] = useState(1);
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [showFlags1, setShowFlags1] = useState(true);
   const [showFlags2, setShowFlags2] = useState(true);
   const [showFlags3, setShowFlags3] = useState(true);
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
   // CSS
   const blur = "blur(0)";
@@ -97,23 +99,32 @@ export default function ArtistsSearch() {
     });
 
     slider.noUiSlider.set(["1900", "2000"]);
-    slider.noUiSlider.on("update", function () {
-      yearsSignal.value = slider.noUiSlider.get();
+
+    let debounceTimer;
+    slider.noUiSlider.on("update", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        yearsSignal.value = slider.noUiSlider.get();
+      }, DELAY_DEBOUNCE);
     });
+
+    return () => {
+      slider.noUiSlider.destroy();
+    };
   }, []);
 
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/artists?nationality=${nationalitySignal.value}&name=${searchTerm}&years=${yearsSignal.value}`,
+        `${UrlBasePath}/api/artists?nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
       )
         .json<ArtistRow[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
-  }, [nationalitySignal.value, searchTerm, yearsSignal.value]);
+  }, [nationalitySignal.value, debouncedValue, yearsSignal.value]);
 
   // Background pour la page des artistes
   useLayoutEffect(() => {
