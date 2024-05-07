@@ -167,38 +167,41 @@ export const handler = async (
       break;
 
     case "histocharacters":
-      htmlContent =
-        '<h2>Vous êtes sur la <span class="underline">page des personnages historiques</span>.</h2>';
-      htmlContent +=
-        '<p class="text-[1rem] mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>';
+      if (pagectx[0] === "" || pagectx[1] === "") htmlContent = "...";
+      else {
+        htmlContent =
+          '<h2>Vous êtes sur la <span class="underline">page des personnages historiques</span>.</h2>';
+        htmlContent +=
+          '<p class="text-[1rem] mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>';
 
-      const histocharacterResults = await db.selectFrom("art")
-        .innerJoin("artist", "art.owner_id", "artist.id")
-        .select([
-          "art.id as id",
-          "histocharactername as name",
-          "url",
-        ])
-        .where("copyright", "!=", 2)
-        .where("histocharacter", "=", 1)
-        .where(
-          sql`((histocharacterbirthyear BETWEEN ${pagectx[0]} AND ${
-            pagectx[1]
-          }) OR (histocharacterdeathyear BETWEEN ${pagectx[0]} AND ${
-            pagectx[1]
-          }))`,
-        )
-        .orderBy(sql`random()`)
-        .executeTakeFirst();
+        const histocharacterResults = await db.selectFrom("art")
+          .innerJoin("artist", "art.owner_id", "artist.id")
+          .select([
+            "art.id as id",
+            "histocharactername as name",
+            "url",
+          ])
+          .where("copyright", "!=", 2)
+          .where("histocharacter", "=", 1)
+          .where(
+            sql`((histocharacterbirthyear BETWEEN ${pagectx[0]} AND ${
+              pagectx[1]
+            }) OR (histocharacterdeathyear BETWEEN ${pagectx[0]} AND ${
+              pagectx[1]
+            }))`,
+          )
+          .orderBy(sql`random()`)
+          .executeTakeFirst();
 
-      htmlContent +=
-        `<p class="text-[1rem] mt-1">Personnages affichés entre l’an <strong>${
-          pagectx[0]
-        }</strong> et l’an <strong>${pagectx[1]}</strong>.</p>`;
-      htmlContent +=
-        `<p class="text-[1rem] mt-1">Découvrez <strong>${histocharacterResults.name}...</strong></p>`;
-      htmlContent +=
-        `<a href="/histocharacters?id=${histocharacterResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${histocharacterResults.url}" alt="${histocharacterResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        htmlContent +=
+          `<p class="text-[1rem] mt-1">Personnages affichés entre l’an <strong>${
+            pagectx[0]
+          }</strong> et l’an <strong>${pagectx[1]}</strong>.</p>`;
+        htmlContent +=
+          `<p class="text-[1rem] mt-1">Découvrez <strong>${histocharacterResults.name}...</strong></p>`;
+        htmlContent +=
+          `<a href="/histocharacters?id=${histocharacterResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${histocharacterResults.url}" alt="${histocharacterResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+      }
 
       break;
 
