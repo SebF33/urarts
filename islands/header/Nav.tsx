@@ -129,6 +129,7 @@ export default function Nav(props: Props) {
 
     //console.log("url : " + props.url);
     const url = new URL(props.url);
+    if ((url.toString().includes("artists") || url.toString().includes("histocharacters")) && yearsSignal.value.length < 1) return;
 
     setTimeout(() => {
       // Paramètre 1

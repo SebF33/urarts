@@ -72,15 +72,17 @@ export default function HistoSearch(
 
   // Appel à l'API
   useEffect(() => {
-    setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
-      )
-        .json<Arts[]>()
-        .then((response) => {
-          setSearchResults(response);
-        });
-    }, DELAY_API_CALL);
+    if (yearsSignal.value.length > 0) {
+      setTimeout(() => {
+        ky.get(
+          `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
+        )
+          .json<Arts[]>()
+          .then((response) => {
+            setSearchResults(response);
+          });
+      }, DELAY_API_CALL);
+    }
   }, [debouncedValue, yearsSignal.value]);
 
   // Atteindre l'œuvre

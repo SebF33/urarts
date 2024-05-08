@@ -115,15 +115,17 @@ export default function ArtistsSearch() {
 
   // Appel à l'API
   useEffect(() => {
-    setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/artists?nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
-      )
-        .json<ArtistRow[]>()
-        .then((response) => {
-          setSearchResults(response);
-        });
-    }, DELAY_API_CALL);
+    if (yearsSignal.value.length > 0) {
+      setTimeout(() => {
+        ky.get(
+          `${UrlBasePath}/api/artists?nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
+        )
+          .json<ArtistRow[]>()
+          .then((response) => {
+            setSearchResults(response);
+          });
+      }, DELAY_API_CALL);
+    }
   }, [nationalitySignal.value, debouncedValue, yearsSignal.value]);
 
   // Background pour la page des artistes
