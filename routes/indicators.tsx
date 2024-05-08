@@ -1,4 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -119,7 +120,15 @@ export default function IndicatorsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="indicators" class="flex-grow">
+      <main id="page" data-name="indicators" class={`flex-grow ${
+          css({
+            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
+          })
+        }`}
+      >
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
           <div
             class={`paper min-h-[60px] max-w-[230px] mt-5 mb-6`}
@@ -131,7 +140,7 @@ export default function IndicatorsPage(
           </div>
 
           <div
-            class={`charts flex items-center justify-evenly mx-auto max-w-xl`}
+            class={`charts flex justify-center mx-auto max-w-xl`}
           >
             <Doughnut
               countResult={artistCountResult}
