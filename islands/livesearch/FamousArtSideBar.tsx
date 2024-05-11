@@ -145,7 +145,7 @@ export default function FamousArtSideBar() {
                       x-on:mouseover="isHovered = true"
                       x-on:mouseout="isHovered = false"
                       x-data="{ isHovered: false }"
-                      href={"/art/" + p.artist_slug + "?id=" + p.id}
+                      href={"/art/" + p.artist_slug + "?alone&id=" + p.id}
                       onClick={handleClick}
                       class="cursor-pointer"
                       draggable={draggable}

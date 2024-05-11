@@ -8,17 +8,23 @@ export const handler = async (
   req: Request,
   _ctx: RouteContext,
 ): Promise<Response> => {
+  let query
   const url = new URL(req.url);
-  let query = url.searchParams.get("welcome") || "";
-  const welcome = query.length ? encodeURIComponent(query) : "";
+
   query = url.searchParams.get("page") || "";
   let page = query.length ? encodeURIComponent(query) : "";
+
+  query = url.searchParams.get("pagectx") || "";
+  let pagectx = query.length ? JSON.parse(decodeURIComponent(query)) : "";
+  let isAlone;
+  pagectx.includes("alone") ? isAlone = true : isAlone = false;
+  pagectx = pagectx.split("_");
+
   query = url.searchParams.get("subpage") || "";
   const subpage = query.length ? encodeURIComponent(query) : "";
-  query = url.searchParams.get("pagectx") || "";
-  const pagectx = query.length
-    ? JSON.parse(decodeURIComponent(query)).split("_")
-    : "";
+
+  query = url.searchParams.get("welcome") || "";
+  const welcome = query.length ? encodeURIComponent(query) : "";
 
   const db = Db.getInstance();
   const { count } = db.fn;
@@ -67,16 +73,22 @@ export const handler = async (
           ])
           .where("slug", "=", subpage)
           .where("polyptych", "=", 1)
+          .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(pagectx)))
           .orderBy(sql`random()`)
           .executeTakeFirst();
 
-        htmlContent = `<h2>Voici l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
-
-        if (artistResult.copyright !== 2) {
+        if (!isAlone && artistResult.copyright !== 2) {
+          htmlContent = `<h2>Voici l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
           htmlContent +=
             `<p class="text-[1rem] mt-3">Découvrez l’œuvre <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
           htmlContent +=
             `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        }
+
+        if (isAlone) {
+          htmlContent = `<h2>Voici l’œuvre "<strong>${artResults.name}</strong>".</h2>`;
+          htmlContent +=
+            `<p class="text-[1rem] mt-3">Découvrez les autres œuvres du même artiste <a href="/art/${artistResult.slug}" target="_blank" class="inline-block"><span class="underline">ici</span></a>.</p>`;
         }
       }
 
@@ -159,15 +171,15 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
+          `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
         htmlContent +=
-          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="w-56 max-w-full" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a></div>`;
+          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="w-56 max-w-full" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a></div>`;
       }
 
       break;
 
     case "histocharacters":
-      if (pagectx[0] === "" || pagectx[1] === "") htmlContent = "...";
+      if (pagectx[0] === "") htmlContent = "...";
       else {
         htmlContent =
           '<h2>Vous êtes sur la <span class="underline">page des personnages historiques</span>.</h2>';

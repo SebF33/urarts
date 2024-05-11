@@ -77,7 +77,7 @@ export default function ArtsSearch() {
               {searchResults.map((item, index) => (
                 <li class={`mx-2 my-4`} key={index}>
                   <a
-                    href={"/art/" + item.slug + "?id=" + item.id}
+                    href={"/art/" + item.slug + "?alone&id=" + item.id}
                     onClick={handleClick}
                     class={`cursor-pointer`}
                   >

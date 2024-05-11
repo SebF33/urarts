@@ -56,6 +56,7 @@ export const handler: Handlers = {
     let title: string | null = null;
 
     if (result) {
+      const alone = url.searchParams.has("alone");
       const fromLeonardo = url.searchParams.has("fromleonardo");
       const id = url.searchParams.get("id") || "";
 
@@ -75,11 +76,10 @@ export const handler: Handlers = {
       artist = result.first_name !== null
         ? result.first_name + " " + result.last_name
         : result.last_name;
-      if (result.quote !== null) {
-        artistQuote = {first_name: result.first_name, last_name: result.last_name, signature: result.signature, quote: result.quote};
-      } else {
-        artistQuote = null;
-      }
+        
+      if (result.quote !== null) artistQuote = {first_name: result.first_name, last_name: result.last_name, signature: result.signature, quote: result.quote};
+      else artistQuote = null;
+
       avatar = result.avatar_url;
       birthyear = result.birthyear;
       color = result.color;
@@ -96,6 +96,7 @@ export const handler: Handlers = {
       mySlug = result.slug;
       nationality = result.nationality;
       query = {
+        alone: alone,
         fromLeonardo: fromLeonardo,
         id: id
       };
@@ -139,7 +140,7 @@ export default function ArtistArtsPage(
     movements: string[];
     mySlug: string;
     nationality: string;
-    query: string;
+    query: object;
     secondaryColor: string;
     site: string;
     title: string;

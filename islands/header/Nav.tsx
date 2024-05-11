@@ -129,27 +129,41 @@ export default function Nav(props: Props) {
 
     //console.log("url : " + props.url);
     const url = new URL(props.url);
-    if ((url.toString().includes("artists") || url.toString().includes("histocharacters")) && yearsSignal.value.length < 1) return;
-
+    
     setTimeout(() => {
       // Paramètre 1
       let isWelcome = "false";
       const isPartial = url.searchParams.get("fresh-partial") || "";
       if (isPartial !== "true") isWelcome = "true";
+
       // Paramètre 2
       const pageName = url.pathname.split("/")[1];
+      if ((pageName === "artists" || pageName === "histocharacters") && yearsSignal.value.length < 1) return;
+
       // Paramètre 3
       const subpageSlug = url.pathname.split("/")[2];
-      // Paramètre 4
-      const years = yearsSignal.value.toString().split(",", 2);
-      const ctxArray = [years[0], years[1], nationalitySignal.value];
-      const ctxArrString = JSON.stringify(ctxArray.join("_"));
 
+      // Paramètre 4
+      let ctxArray:string[] = [];
+      const idArtwork = url.searchParams.get("id") || false;
+      if (idArtwork && pageName !== "histocharacters") {
+        let alone;
+        const isAlone = url.searchParams.has("alone");
+        isAlone ? alone = "alone" : alone = "";
+        ctxArray = [idArtwork, alone];
+      }
+      if (pageName === "artists" || pageName === "histocharacters") {
+        const years = yearsSignal.value.toString().split(",", 2);
+        ctxArray = [years[0], years[1], nationalitySignal.value];
+      }
+      const ctx = JSON.stringify(ctxArray.join("_"));
+
+      // Paramètres
       const params = {
         welcome: isWelcome,
         page: pageName,
         subpage: subpageSlug,
-        pagectx: ctxArrString,
+        pagectx: ctx,
       };
 
       const queryString = new URLSearchParams(params).toString();

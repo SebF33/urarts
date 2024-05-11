@@ -8,9 +8,12 @@ export const handler = async (
   req: Request,
   ctx: RouteContext,
 ): Promise<Response> => {
+  let query
   const url = new URL(req.url);
 
-  let query = url.searchParams.get("name") || "";
+  const isAlone = url.searchParams.has("alone");
+
+  query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
 
   query = url.searchParams.get("slug") || "";
@@ -19,15 +22,17 @@ export const handler = async (
   query = url.searchParams.get("type") || "";
   const type = query.length ? encodeURIComponent(query) : "";
 
+  // Œuvre identifiée
+  query = url.searchParams.get("id") || "";
+  const idFilter = query.length ? query : "";
+
   // Œuvres
   let isArtworks;
   type !== "histocharacters" ? isArtworks = true : isArtworks = false;
 
   // Personnages historiques
   let isHistocharacters;
-  type === "histocharacters"
-    ? isHistocharacters = true
-    : isHistocharacters = false;
+  type === "histocharacters" ? isHistocharacters = true : isHistocharacters = false;
 
   // Période historique
   query = url.searchParams.get("years") || "";
@@ -70,24 +75,13 @@ export const handler = async (
     .$if(isArtworks, (qb) => qb.select("art.name as name"))
     .$if(isArtworks, (qb) => qb.select("art.info as info"))
     .$if(isHistocharacters, (qb) => qb.select("histocharactername as name"))
-    .$if(
-      isHistocharacters,
-      (qb) => qb.select("histocharacterbirthyear as birthyear"),
-    )
-    .$if(
-      isHistocharacters,
-      (qb) => qb.select("histocharacterdeathyear as deathyear"),
-    )
+    .$if(isHistocharacters, (qb) => qb.select("histocharacterbirthyear as birthyear"))
+    .$if(isHistocharacters, (qb) => qb.select("histocharacterdeathyear as deathyear"))
     .$if(isHistocharacters, (qb) => qb.select("histocharacterinfo as info"))
     .where("copyright", "!=", 2)
-    .$if(
-      isArtworks,
-      (qb) => qb.where("art.name", "like", "%" + nameFilter + "%"),
-    )
-    .$if(
-      isHistocharacters,
-      (qb) => qb.where("histocharactername", "like", "%" + nameFilter + "%"),
-    );
+    .$if(isArtworks, (qb) => qb.where("art.name", "like", "%" + nameFilter + "%"))
+    .$if(isHistocharacters, (qb) => qb.where("histocharactername", "like", "%" + nameFilter + "%"))
+    .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(idFilter)));
 
   switch (type) {
     case "artist":

@@ -9,20 +9,26 @@ import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
+export interface Props {
+  font?: string;
+  query?: object;
+  myslug: string;
+  type: string;
+}
 
-export default function CollectionSearch(
-  props: { font?: string; query?: object; myslug: string; type: string },
-) {
+export default function CollectionSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
   // Appel à l'API
   useEffect(() => {
+    let apiUrl;
+    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
+    else apiUrl = `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
+
     setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`,
-      )
+      ky.get(apiUrl)
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
@@ -51,17 +57,19 @@ export default function CollectionSearch(
 
   return (
     <div class={`flex-grow`}>
-      <div
-        class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}
-      >
-        <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
-          Nom(s) :
-        </h2>
 
-        <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
-          <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+    {!props.query?.alone &&
+      (
+        <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}>
+          <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
+            Nom(s) :
+          </h2>
+
+          <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
+            <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+          </div>
         </div>
-      </div>
+      )}
 
       <ArtsLayout
         arts={searchResults}
