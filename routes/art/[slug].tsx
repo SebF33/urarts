@@ -279,7 +279,7 @@ export default function ArtistArtsPage(
             </div>
           </div>
 
-          {artistQuote && (
+          {artistQuote && !query?.alone && (
             <div class="w-full mx-auto mt-8 2xl:-mt-8 mb-4">
               <Quote data={artistQuote} />
             </div>
