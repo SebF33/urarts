@@ -62,9 +62,12 @@ export default function ArtsSearch() {
         </h1>
       </div>
 
-      <h2 class={`text-lg font-medium text-lighterdark mx-auto mb-1 w-48`}>
-        Nom(s) :
-      </h2>
+      <div class="paper max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
+        <div class="top-tape max-h-2.5"></div>
+        <h2 class={`text-lg font-medium text-lighterdark`}>
+          Nom(s) :
+        </h2>
+      </div>
 
       <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
         <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
