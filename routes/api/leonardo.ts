@@ -86,7 +86,7 @@ export const handler = async (
         }
 
         if (isAlone) {
-          htmlContent = `<h2>Voici l’œuvre "<strong>${artResults.name}</strong>".</h2>`;
+          htmlContent = `<h2>Voici l’œuvre "<strong>${artResults.name}</strong>" de l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
           htmlContent +=
             `<p class="text-[1rem] mt-3">Découvrez les autres œuvres du même artiste <a href="/art/${artistResult.slug}" target="_blank" class="inline-block"><span class="underline">ici</span></a>.</p>`;
         }
