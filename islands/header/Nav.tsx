@@ -1,5 +1,5 @@
 import { css } from "@twind/core";
-import { DELAY_LEONARDO_CALL } from "@utils/constants.ts";
+import { DELAY_LEONARDO_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
@@ -31,7 +31,7 @@ export default function Nav(props: Props) {
   const mobileSecondaryAnchor = `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
 
   // Leonardo
-  const [leonardoActiveContent, setLeonardoActiveContent] = useState();
+  const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
   const leonardoStatus = localStorage.getItem('leonardo');
   useEffect(() => {
     const ref = document.querySelector<HTMLElement>("#Icon");
@@ -192,7 +192,7 @@ export default function Nav(props: Props) {
   }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
 
   // Visibilité Leonardo
-  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+  function handleUrartsClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     const ref = event.currentTarget as HTMLAnchorElement;
     const instance = ref._tippy;
     const isVisible = instance.state.isVisible;
@@ -309,6 +309,14 @@ export default function Nav(props: Props) {
     });
   }, []);
 
+  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const href = (event.currentTarget as HTMLAnchorElement).href;
+    setTimeout(() => {
+      window.location.href = href;
+    }, DELAY_REACH_HREF);
+  }
+
   return (
     <nav
       x-bind:class="{ 'header-paper': navTheme === 'header-paper', 'wave-colors': navTheme === 'wave-colors' }"
@@ -324,7 +332,7 @@ export default function Nav(props: Props) {
               >
                 <img
                   id="Icon"
-                  onClick={handleClick}
+                  onClick={handleUrartsClick}
                   class={`h-10 w-10`}
                   src="/icon_urarts.svg"
                   alt="Urarts"
@@ -373,6 +381,7 @@ export default function Nav(props: Props) {
           <div class={`hidden md:flex items-center space-x-3`}>
             <a
               href="/histocharacters"
+              onClick={handleClick}
               id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
@@ -381,6 +390,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/women"
+              onClick={handleClick}
               id="desktopWomanAnchor"
               class={desktopWomanAnchor}
               draggable={draggable}
@@ -389,6 +399,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/art/mimi"
+              onClick={handleClick}
               id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
@@ -397,6 +408,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/indicators"
+              onClick={handleClick}
               id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
@@ -405,6 +417,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/api/arts"
+              onClick={handleClick}
               id="desktopApiAnchor"
               class={desktopApiAnchor}
               draggable={draggable}
@@ -413,6 +426,7 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/about"
+              onClick={handleClick}
               id="desktopInterrogationAnchor"
               class={desktopInterrogationAnchor}
               draggable={draggable}
@@ -479,6 +493,7 @@ export default function Nav(props: Props) {
               <a
                 id="mobile-anchor"
                 href="/histocharacters"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <HistoIcon />
@@ -488,6 +503,7 @@ export default function Nav(props: Props) {
               <a
                 id="mobile-anchor"
                 href="/women"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <WomanIcon />
@@ -497,6 +513,7 @@ export default function Nav(props: Props) {
               <a
                 id="mobile-anchor"
                 href="/art/mimi"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <HeartIcon />
@@ -506,6 +523,7 @@ export default function Nav(props: Props) {
               <a
                 id="mobile-anchor"
                 href="/indicators"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <StatIcon />
@@ -514,6 +532,7 @@ export default function Nav(props: Props) {
             <div class={`w-[50px]`}>
               <a
                 href="/api/arts"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <ApiIcon />
@@ -523,6 +542,7 @@ export default function Nav(props: Props) {
               <a
                 id="mobile-anchor"
                 href="/about"
+                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <InterrogationIcon />

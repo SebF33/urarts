@@ -81,7 +81,7 @@ export default function HomePage(
           </div>
         </div>
 
-        <ArtistsLayout artists={artists} flag="home" grid={grid} />
+        <ArtistsLayout artists={artists} flag="copyright" grid={grid} />
       </main>
 
       <WaterDrop
