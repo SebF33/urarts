@@ -1,5 +1,5 @@
 import { Any } from "any";
-import { ART_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
+import { ART_IMG_WRAPPER, DELAY_DISPLAY, NB_LOADING_ARTS } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import tippy from "tippyjs";
@@ -24,7 +24,7 @@ export default function ArtsLayout(
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   // Rendu des œuvres d'art
-  const displayedArts = display ? props.arts.slice(0, displayedArtIndex + 4) : [];
+  const displayedArts = display ? props.arts.slice(0, displayedArtIndex + NB_LOADING_ARTS) : [];
   const draggable = false;
 
   // Délai d'affichage initial
@@ -36,8 +36,8 @@ export default function ArtsLayout(
   // Chargement à la fin de la liste
   useEffect(() => {
     if (isIntersecting) {
-      if (displayedArtIndex + 4 < props.arts.length) { // Vérifier s'il reste des éléments à afficher
-        setDisplayedArtIndex(displayedArtIndex + 4); // Mettre à jour pour afficher les 4 prochains
+      if (displayedArtIndex + NB_LOADING_ARTS < props.arts.length) { // Vérifier s'il reste des éléments à afficher
+        setDisplayedArtIndex(displayedArtIndex + NB_LOADING_ARTS); // Mettre à jour pour afficher les prochains
       }
     }
   }, [isIntersecting]);

@@ -1,12 +1,12 @@
 import { Any } from "any";
-import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY } from "@utils/constants.ts";
+import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY, DELAY_REACH_HREF, NB_LOADING_ARTISTS } from "@utils/constants.ts";
 import { ArtistRow } from "@utils/types.d.ts";
 import { css } from "@twind/core";
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
+import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
 
 type Artists = Array<ArtistRow>;
 
@@ -14,13 +14,17 @@ export default function ArtistsLayout(
   props: { artists: Artists; flag: string; grid: string },
 ) {
   const [display, setDisplay] = useState<boolean>(false);
+  const [displayedArtistIndex, setDisplayedArtistIndex] = useState<number>(0);
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
+  const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }) // Seuil d'intersection des éléments
   const [showPlaceholder, setShowPlaceholder] = useState<boolean>(false);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
+  // Rendu des artistes
+  const displayedArtists = display ? props.artists.slice(0, displayedArtistIndex + NB_LOADING_ARTISTS) : [];
   const draggable = false;
 
-  // Délais d'affichage
+  // Délais d'affichage initiaux
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
     const timeoutNoresults = setTimeout(() => { setShowPlaceholder(true); }, 300);
@@ -30,6 +34,15 @@ export default function ArtistsLayout(
       clearTimeout(timeoutNoresults);
     };
   }, []);
+
+  // Chargement à la fin de la liste
+  useEffect(() => {
+    if (isIntersecting) {
+      if (displayedArtistIndex + NB_LOADING_ARTISTS < props.artists.length) { // Vérifier s'il reste des éléments à afficher
+        setDisplayedArtistIndex(displayedArtistIndex + NB_LOADING_ARTISTS); // Mettre à jour pour afficher les prochains
+      }
+    }
+  }, [isIntersecting]);
 
   // Infobulles
   useEffect(() => {
@@ -58,7 +71,7 @@ export default function ArtistsLayout(
       });
     }
 
-    props.artists.forEach((p) => {
+    displayedArtists.forEach((p) => {
       const artist = document.querySelector(`[data-artist-id="${p.id}"]`);
 
       if (artist) {
@@ -83,7 +96,7 @@ export default function ArtistsLayout(
         });
       }
     });
-  }, [props.artists]);
+  }, [props.artists, isIntersecting]);
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -99,11 +112,13 @@ export default function ArtistsLayout(
       data-flag={`${props.flag}`}
       class={`max-w-7xl mx-auto mb-40 px-6 sm:px-8 md:px-10 lg:px-12`}
     >
-      {props.artists && props.artists.length > 0
+      {displayedArtists && displayedArtists.length > 0
         ? (
           <div class={`${props.grid}`}>
-            {props.artists.map((p) => (
+            {/* Liste des artistes */}
+            {displayedArtists.map((p, index) => (
               <div
+                key={index + 1}
                 data-artist-id={p.id}
                 class={`artist-frame bg-dark ${
                   css(
@@ -218,6 +233,8 @@ export default function ArtistsLayout(
                 </ul>
               </div>
             ))}
+            {/* Référence à la fin de la liste */}
+            <div ref={endRef}></div>
           </div>
         )
         : (

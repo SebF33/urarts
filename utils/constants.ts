@@ -8,6 +8,8 @@ export const DELAY_LEONARDO_REACH_ART = 10;
 export const DELAY_REACH_ART = 1150;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
+export const NB_LOADING_ARTS = 5;
+export const NB_LOADING_ARTISTS = 10;
 export const TALENTS = ["albert","mimi"];
 
 export const ART_IMG_WRAPPER: Record<string, Any> = {
