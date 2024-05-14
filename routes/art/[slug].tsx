@@ -281,7 +281,7 @@ export default function ArtistArtsPage(
 
           {artistQuote && !query?.alone && (
             <div class="w-full mx-auto mt-8 2xl:-mt-8 mb-4">
-              <Quote data={artistQuote} />
+              <Quote data={artistQuote} delay={10} />
             </div>
           )}
 

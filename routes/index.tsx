@@ -118,7 +118,7 @@ export default function HomePage(
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
 
         <div class="mx-auto -mt-4 mb-6">
-          <Quote data={artistQuote} />
+          <Quote data={artistQuote} delay={100} />
         </div>
       </main>
 

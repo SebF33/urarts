@@ -465,7 +465,13 @@ h1 {
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.appear-effect-x-3px.show {
+.appear-effect-y-14px {
+    opacity: 0;
+    transform: translateY(-14px);
+}
+
+.appear-effect-x-3px.show,
+.appear-effect-y-14px.show {
     opacity: 1;
     transform: translateX(0);
 }

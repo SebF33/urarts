@@ -3,16 +3,31 @@ import { ArtistQuote } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import tippy from "tippyjs";
-import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 
 type Quote = Array<ArtistQuote>;
 
 export default function Quote(
-  props: { data: Quote },
+  props: { data: Quote; delay: number },
 ) {
+  const [display, setDisplay] = useState<boolean>(false);
+  const quoteRef = useRef<HTMLDivElement>(null);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   const draggable = false;
+
+  // Délai d'affichage initial
+  useEffect(() => {
+    const timeoutId = setTimeout(() => { setDisplay(true); }, props.delay);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  // Animation
+  useEffect(() => {
+    if (display && quoteRef.current) {
+      quoteRef.current.classList.add("show");
+    }
+  }, [display]);
 
   // Infobulle
   useEffect(() => {
@@ -52,7 +67,7 @@ export default function Quote(
         },
       });
     }
-  }, [props.data.id]);
+  }, [display, props.data.id]);
 
   // Background pour la page d'accueil
   useLayoutEffect(() => {
@@ -72,34 +87,39 @@ export default function Quote(
   }, []);
 
   return (
-    <div
-      data-quote-id={props.data.id}
-      class={`paper w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible`}
-    >
-      <div class="top-tape"></div>
-      <div
-        class={`w-full mt-4 mx-1`}
-      >
-        <p
-          class={`text-center text-xl font-bold mx-auto`}
+    <>
+      {display && (
+        <div
+          ref={quoteRef}
+          data-quote-id={props.data.id}
+          class={`paper w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible appear-effect-y-14px transition-all duration-500 ease-in-out`}
         >
-          “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
-          {props.data.last_name}
-        </p>
-        {props.data.signature &&
-          (
-            <div
-              class={`flex justify-end md:w-5/6 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
+          <div class="top-tape"></div>
+          <div
+            class={`w-full mt-4 mx-1`}
+          >
+            <p
+              class={`text-center text-xl font-bold mx-auto`}
             >
-              <img
-                class={`max-w-[100px]`}
-                src={props.data.signature}
-                alt={props.data.signature}
-                draggable={draggable}
-              />
-            </div>
-          )}
-      </div>
-    </div>
+              “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
+              {props.data.last_name}
+            </p>
+            {props.data.signature &&
+              (
+                <div
+                  class={`flex justify-end md:w-5/6 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
+                >
+                  <img
+                    class={`max-w-[100px]`}
+                    src={props.data.signature}
+                    alt={props.data.signature}
+                    draggable={draggable}
+                  />
+                </div>
+              )}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

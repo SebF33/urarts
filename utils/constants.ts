@@ -1,8 +1,11 @@
 import { Any } from "any";
 
+// Constantes globales
 export const DELAY_API_CALL = 150;
 export const DELAY_DEBOUNCE = 300;
 export const DELAY_DISPLAY = 20;
+export const DELAY_DISPLAY_FOOTER = 200;
+export const DELAY_DISPLAY_WATERDROP = 150;
 export const DELAY_LEONARDO_CALL = 250;
 export const DELAY_LEONARDO_REACH_ART = 10;
 export const DELAY_REACH_ART = 1150;
