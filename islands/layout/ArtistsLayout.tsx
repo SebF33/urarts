@@ -96,7 +96,7 @@ export default function ArtistsLayout(
         });
       }
     });
-  }, [props.artists, isIntersecting]);
+  }, [display, props.artists, isIntersecting]);
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();

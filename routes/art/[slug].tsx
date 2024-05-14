@@ -302,13 +302,12 @@ export default function ArtistArtsPage(
                   >
                     <div class="top-tape"></div>
                     <div
-                      class={`w-full my-5 mx-1`}
+                      class={`w-full my-3 mx-1`}
                     >
                       <p
-                        class={`text-2xl md:text-3xl font-extrabold leading-8 text-center text-lighterdark`}
+                        class={`text-2xl md:text-3xl font-extrabold leading-5 text-center text-lighterdark`}
                       >
                         <span class={`text-7xl md:text-8xl`}>©</span>
-                        <br />
                         <br />
                         Les œuvres de l’artiste ne sont pas encore disponibles
                         pour des raisons de droit d’auteur.

@@ -70,6 +70,7 @@ export const handler = async (
             "art.id as id",
             "art.name as name",
             "url",
+            count("art.id").as("art_count")
           ])
           .where("slug", "=", subpage)
           .where("polyptych", "=", 1)
@@ -77,10 +78,14 @@ export const handler = async (
           .orderBy(sql`random()`)
           .executeTakeFirst();
 
-        if (!isAlone && artistResult.copyright !== 2) {
+        if (!isAlone) {
           htmlContent = `<h2>Voici l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
+        }
+
+        if (!isAlone && artistResult.copyright !== 2) {
+          htmlContent += `<p class="text-[1rem] mt-3"><strong>${artResults.art_count}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
           htmlContent +=
-            `<p class="text-[1rem] mt-3">Découvrez l’œuvre <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
+            `<p class="text-[1rem]">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
           htmlContent +=
             `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
