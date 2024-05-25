@@ -47,6 +47,7 @@ interface ArtistTable {
   birthyear: string;
   deathyear: string;
   avatar_url?: string;
+  avatar_info: string | null;
   signature: string | null;
   quote: string | null;
   color: string;

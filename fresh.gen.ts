@@ -25,6 +25,7 @@ import * as $movements from "./routes/movements.tsx";
 import * as $talents from "./routes/talents.tsx";
 import * as $women from "./routes/women.tsx";
 import * as $AnimBrushStroke from "./islands/AnimBrushStroke.tsx";
+import * as $Avatar from "./islands/Avatar.tsx";
 import * as $Mona from "./islands/Mona.tsx";
 import * as $MovementsList from "./islands/MovementsList.tsx";
 import * as $Quote from "./islands/Quote.tsx";
@@ -74,6 +75,7 @@ const manifest = {
   },
   islands: {
     "./islands/AnimBrushStroke.tsx": $AnimBrushStroke,
+    "./islands/Avatar.tsx": $Avatar,
     "./islands/Mona.tsx": $Mona,
     "./islands/MovementsList.tsx": $MovementsList,
     "./islands/Quote.tsx": $Quote,

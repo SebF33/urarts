@@ -5,6 +5,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
+import Avatar from "@islands/Avatar.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/Quote.tsx";
@@ -23,6 +24,7 @@ export const handler: Handlers = {
         "first_name",
         "last_name",
         "avatar_url",
+        "avatar_info",
         "color",
         "secondary_color",
         "site_web",
@@ -41,6 +43,7 @@ export const handler: Handlers = {
     let artist: string | null = null;
     let artistQuote: Quote | null = null;
     let avatar: string | null = null;
+    let avatarInfo: string | null = null;
     let birthyear: string | null = null;
     let color: string | null = null;
     let copyright: number | null = null;
@@ -81,6 +84,7 @@ export const handler: Handlers = {
       else artistQuote = null;
 
       avatar = result.avatar_url;
+      avatarInfo = result.avatar_info;
       birthyear = result.birthyear;
       color = result.color;
       copyright = result.copyright;
@@ -109,6 +113,7 @@ export const handler: Handlers = {
       artist,
       artistQuote,
       avatar,
+      avatarInfo,
       birthyear,
       color,
       copyright,
@@ -131,6 +136,7 @@ export default function ArtistArtsPage(
     artist: string;
     artistQuote: Quote | null;
     avatar: string;
+    avatarInfo: string;
     birthyear: string;
     color: string;
     copyright: number;
@@ -150,6 +156,7 @@ export default function ArtistArtsPage(
     artist,
     artistQuote,
     avatar,
+    avatarInfo,
     birthyear,
     color,
     copyright,
@@ -164,6 +171,7 @@ export default function ArtistArtsPage(
     site,
     title,
   } = props.data;
+
   const draggable = false;
 
   return (
@@ -264,15 +272,7 @@ export default function ArtistArtsPage(
                     class={`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
                   >
                     <div class={`pt-16 sm:pt-12 sm:pl-12 sm:pr-12`}>
-                      <div
-                        class={`p-6 w-60 mx-auto text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
-                      >
-                        <img
-                          src={avatar}
-                          alt={avatar}
-                          draggable={draggable}
-                        />
-                      </div>
+                      <Avatar copyright={copyright} info={avatarInfo} name={artist} url={avatar} />
                     </div>
                   </div>
                 )}
