@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2024-05-31]
+
+### Nouveautés
+- Ajout des traductions.
+
 ## [2024-01-28]
 
 ### Nouveautés

@@ -4,6 +4,8 @@ import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import ky from "ky";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
@@ -120,7 +122,7 @@ export default function FamousArtSideBar() {
               x-on:click="openFamousArt = false"
               class="paper cursor-pointer">
               <span class="sr-only">Fermer</span>
-              <h1 class="p-2 text-2xl font-semibold text-center leading-none select-none">Œuvres d’art parmi les plus célèbres...</h1>
+              <h1 class="p-2 text-2xl font-semibold text-center leading-none select-none">{i18next.t("paper.famousart", { ns: "translation" })}</h1>
             </div>
             <div class="mt-5 px-4">
               <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">

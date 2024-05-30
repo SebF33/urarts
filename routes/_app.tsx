@@ -9,7 +9,7 @@ import ToTopButton from "@islands/ToTopButton.tsx";
 
 export default defineApp((_, ctx) => {
   return (
-    <html lang="fr">
+    <html lang="en">
       <head>
         {/* Google tag */}
         <script

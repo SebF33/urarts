@@ -22,7 +22,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 
 **Langage :** TypeScript.
 
-[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Kysely](/.github/Kysely.png)](https://kysely.dev) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Alpine.js](/.github/Alpine.js.png)](https://alpinejs.dev) [![Tippy.js](/.github/Tippy.js.png)](https://atomiks.github.io/tippyjs) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![Fly.io](/.github/Fly.io.png)](https://fly.io) 
+[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Kysely](/.github/Kysely.png)](https://kysely.dev) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Alpine.js](/.github/Alpine.js.png)](https://alpinejs.dev) [![Tippy.js](/.github/Tippy.js.png)](https://atomiks.github.io/tippyjs) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![i18next](/.github/i18next.png)](https://www.i18next.com) [![Fly.io](/.github/Fly.io.png)](https://fly.io)
 
 :toolbox: **Technologies :**
 - [Deno](https://deno.land/manual)
@@ -36,6 +36,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 - [Tippy.js](https://atomiks.github.io/tippyjs/v6/getting-started)
 - [Chart.js](https://www.chartjs.org/docs/latest)
 - [noUiSlider](https://refreshless.com/nouislider)
+- [i18next](https://www.i18next.com/overview/getting-started)
 - [Fly.io](https://fly.io/docs/getting-started/deno)
 
 

@@ -1,6 +1,8 @@
 import { css } from "@twind/core";
 import { DELAY_LEONARDO_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import tippy from "tippyjs";
@@ -222,7 +224,7 @@ export default function Nav(props: Props) {
     if (desktopHistoAnchor) {
       tippy(desktopHistoAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">Les personnages historiques.</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.histocharacters", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -231,7 +233,7 @@ export default function Nav(props: Props) {
     if (desktopWomanAnchor) {
       tippy(desktopWomanAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">Les femmes artistes.</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.women", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -240,7 +242,7 @@ export default function Nav(props: Props) {
     if (desktopHeartAnchor) {
       tippy(desktopHeartAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">Un talent exceptionnel.</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.mimi", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -249,7 +251,7 @@ export default function Nav(props: Props) {
     if (desktopStatAnchor) {
       tippy(desktopStatAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">Les indicateurs pour Urarts.</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.indicators", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -258,7 +260,7 @@ export default function Nav(props: Props) {
     if (desktopApiAnchor) {
       tippy(desktopApiAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">Un échantillon de l’API.</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.api", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -267,7 +269,7 @@ export default function Nav(props: Props) {
     if (desktopInterrogationAnchor) {
       tippy(desktopInterrogationAnchor, {
         allowHTML: true,
-        content: '<p class="text-[1rem]">À propos de Urarts...</p>',
+        content: `<p class="text-[1rem]">${i18next.t("nav.about", { ns: "translation" })}</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -346,35 +348,35 @@ export default function Nav(props: Props) {
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
-                Accueil
+                {i18next.t("nav.home", { ns: "translation" })}
               </a>
               <a
                 href="/artists"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
-                Artistes
+                {i18next.t("nav.artists", { ns: "translation" })}
               </a>
               <a
                 href="/arts"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
-                Œuvres
+                {i18next.t("nav.arts", { ns: "translation" })}
               </a>
               <a
                 href="/movements"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
-                Mouvements
+                {i18next.t("nav.movements", { ns: "translation" })}
               </a>
               <a
                 href="/talents"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
               >
-                Talents
+                {i18next.t("nav.talents", { ns: "translation" })}
               </a>
             </div>
           </div>
@@ -449,7 +451,7 @@ export default function Nav(props: Props) {
               href="/"
               class={mobilePrimaryAnchor}
             >
-              <span class={`px-2`}>Accueil</span>
+              <span class={`px-2`}>{i18next.t("nav.home", { ns: "translation" })}</span>
             </a>
           </li>
           <li>
@@ -458,7 +460,7 @@ export default function Nav(props: Props) {
               href="/artists"
               class={mobilePrimaryAnchor}
             >
-              <span class={`px-2`}>Artistes</span>
+              <span class={`px-2`}>{i18next.t("nav.artists", { ns: "translation" })}</span>
             </a>
           </li>
           <li>
@@ -467,7 +469,7 @@ export default function Nav(props: Props) {
               href="/arts"
               class={mobilePrimaryAnchor}
             >
-              <span class={`px-2`}>Œuvres</span>
+              <span class={`px-2`}>{i18next.t("nav.arts", { ns: "translation" })}</span>
             </a>
           </li>
           <li>
@@ -476,7 +478,7 @@ export default function Nav(props: Props) {
               href="/movements"
               class={mobilePrimaryAnchor}
             >
-              <span class={`px-2`}>Mouvements</span>
+              <span class={`px-2`}>{i18next.t("nav.movements", { ns: "translation" })}</span>
             </a>
           </li>
           <li>
@@ -485,7 +487,7 @@ export default function Nav(props: Props) {
               href="/talents"
               class={mobilePrimaryAnchor}
             >
-              <span class={`px-2`}>Talents</span>
+              <span class={`px-2`}>{i18next.t("nav.talents", { ns: "translation" })}</span>
             </a>
           </li>
           <li class={`flex`}>

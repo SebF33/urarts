@@ -10,7 +10,10 @@
     "start": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run --watch=static/,routes/ main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
-  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
   "imports": {
     "@/": "./",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
@@ -19,6 +22,8 @@
     "@utils/": "./utils/",
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
     "chartjs": "https://cdn.skypack.dev/chart.js@4.3.0",
+    "i18next": "https://deno.land/x/i18next@v23.11.4/index.js",
+    "i18next-browser-languagedetector": "npm:i18next-browser-languagedetector@8.0.0",
     "ky": "https://esm.sh/ky@v0.33.3",
     "kysely": "https://esm.sh/kysely@0.26.0",
     "preact": "https://esm.sh/preact@10.19.6",
