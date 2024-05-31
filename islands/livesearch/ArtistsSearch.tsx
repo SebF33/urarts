@@ -606,11 +606,15 @@ export default function ArtistsSearch() {
               draggable={draggable}
             />
           </button>
-          <h2
-            class={`absolute text-lg font-medium text-lighterdark w-48 top-32 sm:top-5 left-0 right-0 mx-auto z-10`}
-          >
-            Prénom(s), nom(s) :
-          </h2>
+
+          <div class="absolute top-32 sm:top-5 left-0 right-0 mx-auto z-10 -translate-x-9">
+            <div class="paper max-w-[122px] min-w-[122px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
+              <div class="top-tape max-h-2.5"></div>
+              <h2 class="text-lg font-medium text-lighterdark">
+                Prénom(s), nom(s) :
+              </h2>
+            </div>
+          </div>
 
           <div class="brush-input-box absolute w-48 max-h-[68px] top-40 sm:top-12 left-0 right-0 mx-auto z-10">
             <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
