@@ -6,6 +6,8 @@ import {
   registerables,
 } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
@@ -33,8 +35,7 @@ export default function Doughnut(
           size: 19,
         },
         fullSize: false,
-        text: props.totalArtistCountResult +
-          " artistes disponibles par nationalité",
+        text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
       },
     },
   };

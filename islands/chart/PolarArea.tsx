@@ -6,6 +6,8 @@ import {
   registerables,
 } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function PolarArea(
@@ -33,8 +35,7 @@ export default function PolarArea(
           size: 19,
         },
         fullSize: false,
-        text: props.totalArtCountResult +
-          " œuvres d’art disponibles par mouvement",
+        text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" }),
       },
     },
   };

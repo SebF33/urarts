@@ -1,5 +1,9 @@
 // Français
 const translation = {
+  indicator: {
+    doughnut_title: "artistes disponibles par nationalité",
+    polararea_title: "œuvres d’art disponibles par mouvement",
+  },
   nav: {
     home: "Accueil",
     artists: "Artistes",

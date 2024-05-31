@@ -1,5 +1,9 @@
 // Anglais
 const translation = {
+  indicator: {
+    doughnut_title: "artists available by nationality",
+    polararea_title: "arts available by movement",
+  },
   nav: {
     home: "Home",
     artists: "Artists",

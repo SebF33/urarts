@@ -6,7 +6,33 @@ import translationFrench from "./fr/translation.ts";
 export const defaultNS = "en";
 
 const options = {
-  order: ["navigator", "querystring", "cookie", "localStorage", "htmlTag"],
+  // order and from where user language should be detected
+  order: [
+    "querystring",
+    "cookie",
+    "localStorage",
+    "sessionStorage",
+    "navigator",
+    "htmlTag",
+    "path",
+    "subdomain",
+  ],
+
+  // keys or params to lookup language from
+  lookupQuerystring: "lng",
+  lookupCookie: "i18next",
+  lookupLocalStorage: "i18nextLng",
+  lookupSessionStorage: "i18nextLng",
+  lookupFromPathIndex: 0,
+  lookupFromSubdomainIndex: 0,
+
+  // cache user language on
+  caches: ["localStorage", "cookie"],
+  excludeCacheFor: ["cimode"], // languages to not persist (cookie, localStorage)
+
+  // optional expiry and domain for set cookie
+  cookieMinutes: 10,
+  cookieDomain: "urarts.art",
 };
 
 export const resources = {
