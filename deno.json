@@ -2,6 +2,7 @@
   "tasks": {
     "build": "deno run -A dev.ts build",
     "cache": "deno cache --reload main.ts",
+    "check": "deno check main.ts",
     "dev": "deno run -A --watch=static/,routes/ dev.ts",
     "migrate": "deno run -A utils/db_migration.ts",
     "migrate_down": "deno run -A utils/db_migration.ts --down",
