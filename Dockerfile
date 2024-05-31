@@ -1,6 +1,6 @@
 # Voir : https://github.com/denoland/deno_docker/blob/main/alpine.dockerfile
 
-ARG DENO_VERSION=1.43.1
+ARG DENO_VERSION=1.44.0
 ARG BIN_IMAGE=denoland/deno:bin-${DENO_VERSION}
 FROM ${BIN_IMAGE} AS bin
 
