@@ -1,6 +1,8 @@
 import { css } from "@twind/core";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "../utils/i18n/config.ts";
 
 import Footer from "@islands/footer/Footer.tsx";
 import Mona from "@islands/Mona.tsx";
@@ -59,7 +61,7 @@ export default function AboutPage(
           <div class="paper min-h-[60px] max-w-[230px] mt-5 mb-6">
             <div class="top-tape"></div>
             <h1 class="text-5xl font-medium mx-auto">
-              À propos
+              {i18next.t("title.about", { ns: "translation" })}
             </h1>
           </div>
 

@@ -2,6 +2,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "../utils/i18n/config.ts";
 
 import Footer from "@islands/footer/Footer.tsx";
 import HistoSearch from "@islands/livesearch/HistoSearch.tsx";

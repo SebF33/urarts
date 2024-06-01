@@ -4,6 +4,8 @@ import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "../utils/i18n/config.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 

@@ -1,6 +1,8 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
+import i18next from "i18next";
+import "../utils/i18n/config.ts";
 import { MovementRow } from "@utils/types.d.ts";
 import { useLayoutEffect } from "preact/hooks";
 
@@ -41,7 +43,7 @@ export default function MovementsList(
       >
         <div class="top-tape"></div>
         <h1 class={`text-5xl font-medium mx-auto`}>
-          Mouvements
+          {i18next.t("title.movements", { ns: "translation" })}
         </h1>
       </div>
 

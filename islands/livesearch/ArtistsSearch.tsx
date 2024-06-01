@@ -3,6 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE } from "@utils/constants.ts";
 import { Fragment, h } from "preact";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
 import { UrlBasePath } from "../../env.ts";
@@ -155,7 +157,7 @@ export default function ArtistsSearch() {
         >
           <div class="top-tape"></div>
           <h1 class={`text-5xl font-medium mx-auto`}>
-            Artistes
+            {i18next.t("title.artists", { ns: "translation" })}
           </h1>
         </div>
 

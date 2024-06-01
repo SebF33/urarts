@@ -1,5 +1,7 @@
 import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import i18next from "i18next";
+import "../utils/i18n/config.ts";
 import { useLayoutEffect } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -38,10 +40,8 @@ export default function TalentsList(
           class={`paper min-h-[60px] max-w-[240px] mt-5`}
         >
           <div class="top-tape"></div>
-          <h1
-            class={`text-5xl leading-none font-medium mx-auto`}
-          >
-            Talents
+          <h1 class={`text-5xl leading-none font-medium mx-auto`}>
+            {i18next.t("title.talents", { ns: "translation" })}
           </h1>
         </div>
       </div>

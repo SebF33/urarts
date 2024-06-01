@@ -3,22 +3,22 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import translationEnglish from "./en/translation.ts";
 import translationFrench from "./fr/translation.ts";
 
-export const defaultNS = "en";
+const defaultNS = "translation";
 
 const options = {
-  // order and from where user language should be detected
+  // ordre à partir duquel la langue de l'utilisateur doit être détectée
   order: [
-    "querystring",
-    "cookie",
-    "localStorage",
-    "sessionStorage",
-    "navigator",
-    "htmlTag",
-    "path",
-    "subdomain",
+    "querystring", // permet de définir explicitement la langue via un paramètre URL (?lng=fr)
+    "cookie", // cookies utilisés pour se souvenir des préférences des utilisateurs au fil des sessions
+    "localStorage", // stocke les préférences des utilisateurs et peut être utilisé pour des données plus persistantes
+    "sessionStorage", // stocke les données pour la durée de la session de la page
+    "navigator", // vérifie les paramètres de langue du navigateur (langue préférée de l'utilisateur pour la navigation)
+    "htmlTag", // examine l'attribut "lang" de la balise "html"
+    "path", // extrait la langue du chemin URL (/fr/page)
+    "subdomain", // extrait la langue du sous-domaine (fr.example.com)
   ],
 
-  // keys or params to lookup language from
+  // clés ou paramètres à partir desquels rechercher la langue
   lookupQuerystring: "lng",
   lookupCookie: "i18next",
   lookupLocalStorage: "i18nextLng",
@@ -26,11 +26,11 @@ const options = {
   lookupFromPathIndex: 0,
   lookupFromSubdomainIndex: 0,
 
-  // cache user language on
+  // mettre en cache la langue de l'utilisateur
   caches: ["localStorage", "cookie"],
-  excludeCacheFor: ["cimode"], // languages to not persist (cookie, localStorage)
+  excludeCacheFor: ["cimode"], // langues à ne pas persister (cookie, localStorage)
 
-  // optional expiry and domain for set cookie
+  // expiration et domaine pour le cookie défini
   cookieMinutes: 10,
   cookieDomain: "urarts.art",
 };
@@ -44,10 +44,14 @@ export const resources = {
   },
 };
 
-i18next.use(LanguageDetector).init({
-  //debug: true,
-  defaultNS,
-  detection: options,
-  resources,
-  supportedLngs: ["en", "fr"],
-});
+i18next
+  .use(LanguageDetector)
+  .init({
+    //debug: true,
+    defaultNS,
+    detection: options,
+    fallbackLng: "en",
+    ns: ["translation"],
+    resources,
+    supportedLngs: ["en", "fr"],
+  });

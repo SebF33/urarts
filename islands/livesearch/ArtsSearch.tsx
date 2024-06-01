@@ -3,6 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
+import i18next from "i18next";
+import "../../utils/i18n/config.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
@@ -58,7 +60,7 @@ export default function ArtsSearch() {
       >
         <div class="top-tape"></div>
         <h1 class={`text-5xl font-medium mx-auto`}>
-          Œuvres
+          {i18next.t("title.arts", { ns: "translation" })}
         </h1>
       </div>
 
