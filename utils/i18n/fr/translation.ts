@@ -1,8 +1,30 @@
 // Français
 const translation = {
+  about: {
+    msg:
+      `<p class="mb-4 text-2xl leading-6">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
+    <p class="mb-4 text-xl leading-6">
+    <span class="font-bold underline">Moyens utilisés</span> : TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Alpine.js, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
+    <p class="text-xl leading-6">
+    <span class="font-bold underline">Politique de droit d’auteur</span> : Urarts montre des œuvres d’art du domaine public et tente d’obtenir l’autorisation pour celles protégées par le droit d’auteur.
+    Le but de ce site est d’utiliser ces œuvres historiques à des fins d’information et d’éducation.
+    Les visuels sont des images à faible résolution non adaptées à un usage commercial.
+    Veuillez vous adresser au créateur du site via son adresse email
+    <a href="mailto:sebastien.flouriot@urarts.art" class="relative underline z-10">sebastien.flouriot@urarts.art</a> en cas de demande ou de litige liés à l’exploitation de ces visuels.</p>`,
+  },
   indicator: {
     doughnut_title: "artistes disponibles par nationalité",
     polararea_title: "œuvres d’art disponibles par mouvement",
+  },
+  logo: {
+    msg:
+      `<p><strong style="font-size:1.3em;text-decoration:underline">Politique de droit d'auteur :</strong></p>
+    <p style="margin-top:6px;line-height:1.1">Urarts montre des œuvres d'art du domaine public et tente d'obtenir l'autorisation pour celles protégées par le droit d'auteur.<br>
+    Le but de ce site est d'utiliser ces œuvres historiques à des fins d'information et d'éducation.<br>
+    Les visuels sont des images à faible résolution non adaptées à un usage commercial.</p>
+    <p style="margin-top:8px;line-height:1.1">Veuillez vous adresser au créateur du site via son adresse email
+    <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
+    en cas de demande ou de litige liés à l'exploitation de ces visuels.</p>`,
   },
   nav: {
     about: "À propos de Urarts...",

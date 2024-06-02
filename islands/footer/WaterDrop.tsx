@@ -3,6 +3,8 @@
 // Modifié par Sébastien Flouriot le 06/01/2024
 
 import { DELAY_DISPLAY_WATERDROP } from "@utils/constants.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { useSignal } from "@preact/signals";
@@ -116,14 +118,7 @@ export default function WaterDrop(
     if (logo) {
       tippy(logo, {
         allowHTML: true,
-        content:
-          `<p><strong style="font-size:1.3em;text-decoration:underline">Politique de droit d'auteur :</strong></p>
-          <p style="margin-top:6px;line-height:1.1">Urarts montre des œuvres d'art du domaine public et tente d'obtenir l'autorisation pour celles protégées par le droit d'auteur.<br>
-          Le but de ce site est d'utiliser ces œuvres historiques à des fins d'information et d'éducation.<br>
-          Les visuels sont des images à faible résolution non adaptées à un usage commercial.</p>
-          <p style="margin-top:8px;line-height:1.1">Veuillez vous adresser au créateur du site via son adresse email
-          <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
-          en cas de demande ou de litige liés à l'exploitation de ces visuels.</p>`,
+        content: i18next.t("logo.msg", { ns: "translation" }),
         interactive: true,
         offset: [0, -20],
         placement: "top",
