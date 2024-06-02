@@ -5,7 +5,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
 import i18next from "i18next";
-import "../../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import ky from "ky";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";

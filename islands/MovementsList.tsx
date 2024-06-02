@@ -2,7 +2,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
-import "../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import { MovementRow } from "@utils/types.d.ts";
 import { useLayoutEffect } from "preact/hooks";
 

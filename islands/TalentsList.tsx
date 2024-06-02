@@ -1,7 +1,7 @@
 import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
-import "../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import { useLayoutEffect } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";

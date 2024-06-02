@@ -2,7 +2,7 @@ import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_API_CALL } from "@utils/constants.ts";
 import i18next from "i18next";
-import "../../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";

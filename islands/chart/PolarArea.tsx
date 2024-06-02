@@ -7,7 +7,7 @@ import {
 } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
-import "../../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function PolarArea(

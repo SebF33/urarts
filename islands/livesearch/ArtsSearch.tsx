@@ -4,7 +4,7 @@ import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
-import "../../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
