@@ -12,6 +12,7 @@ import Doughnut from "@islands/chart/Doughnut.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import PolarArea from "@islands/chart/PolarArea.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import Title from "@islands/Title.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
@@ -59,25 +60,13 @@ export const handler: Handlers = {
       .where("copyright", "!=", 2)
       .execute();
 
-    const artistCountResult: number[] = artistQuery.map((item) =>
-      parseFloat(item.artist_count)
-    );
-    const artistNationalityResult: string[] = artistQuery.map((item) =>
-      item.nationality_group
-    );
-    const totalArtistCountResult: number[] = totalArtistQuery.map((item) =>
-      parseFloat(item.artist_count)
-    );
+    const artistCountResult: number[] = artistQuery.map((item) => parseFloat(item.artist_count));
+    const artistNationalityResult: string[] = artistQuery.map((item) => item.nationality_group);
+    const totalArtistCountResult: number[] = totalArtistQuery.map((item) => parseFloat(item.artist_count));
 
-    const movementCountResult: number[] = movementQuery.map((item) =>
-      parseFloat(item.art_count)
-    );
-    const movementNameResult: string[] = movementQuery.map((item) =>
-      item.movement_group
-    );
-    const totalArtCountResult: number[] = totalArtQuery.map((item) =>
-      parseFloat(item.art_count)
-    );
+    const movementCountResult: number[] = movementQuery.map((item) => parseFloat(item.art_count));
+    const movementNameResult: string[] = movementQuery.map((item) => item.movement_group);
+    const totalArtCountResult: number[] = totalArtQuery.map((item) => parseFloat(item.art_count));
 
     return ctx.render({
       artistCountResult,
@@ -132,14 +121,11 @@ export default function IndicatorsPage(
         }`}
       >
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-          <div
-            class={`paper min-h-[60px] max-w-[230px] mt-5 mb-6`}
-          >
-            <div class="top-tape"></div>
-            <h1 class={`text-5xl font-medium mx-auto`}>
-              {i18next.t("title.indicators", { ns: "translation" })}
-            </h1>
-          </div>
+          <Title
+            name="indicators"
+            dimension="min-h-[60px] max-w-[230px]"
+            margin="mt-5 mb-6"
+          />
 
           <div
             class={`charts flex justify-center mx-auto max-w-xl`}

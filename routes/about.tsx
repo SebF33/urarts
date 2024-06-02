@@ -7,9 +7,10 @@ import "@utils/i18n/config.ts";
 import Footer from "@islands/footer/Footer.tsx";
 import Mona from "@islands/Mona.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import Title from "@islands/Title.tsx";
 
 export const handler: Handlers = {
-  async GET(_, ctx) {
+  GET(_, ctx) {
     // Couleurs Mona Lisa
     const randomColorsIndex = Math.floor(Math.random() * 7);
     const colors = [
@@ -58,12 +59,11 @@ export default function AboutPage(
         }`}
       >
         <div class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="paper min-h-[60px] max-w-[230px] mt-5 mb-6">
-            <div class="top-tape"></div>
-            <h1 class="text-5xl font-medium mx-auto">
-              {i18next.t("title.about", { ns: "translation" })}
-            </h1>
-          </div>
+          <Title
+            name="about"
+            dimension="min-h-[60px] max-w-[230px]"
+            margin="mt-5 mb-6"
+          />
 
           <div class="paper max-w-[700px] mx-auto mt-12 md:mt-2 mb-2">
             <div class="tape-section"></div>
