@@ -613,7 +613,7 @@ export default function ArtistsSearch() {
             <div class="paper max-w-[122px] min-w-[122px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
               <div class="top-tape max-h-2.5"></div>
               <h2 class="text-lg font-medium text-lighterdark">
-                Prénom(s), nom(s) :
+                {i18next.t("paper.names", { ns: "translation" })}
               </h2>
             </div>
           </div>

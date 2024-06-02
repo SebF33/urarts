@@ -1,5 +1,7 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
@@ -64,7 +66,7 @@ export default function CollectionSearch(props: Props) {
           <div class="paper max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
           <div class="top-tape max-h-2.5"></div>
             <h2 class={`text-lg font-medium text-lighterdark`}>
-              Nom(s) :
+              {i18next.t("paper.name", { ns: "translation" })}
             </h2>
           </div>
 

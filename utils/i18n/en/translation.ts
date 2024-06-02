@@ -19,6 +19,8 @@ const translation = {
   },
   paper: {
     famousart: "Some of the most famous arts...",
+    name: "Name(s):",
+    names: "Name(s):",
   },
   title: {
     about: "About",
