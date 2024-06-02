@@ -22,6 +22,9 @@ const translation = {
     name: "Name(s):",
     names: "Name(s):",
   },
+  slider: {
+    value_large: "Year ",
+  },
   title: {
     about: "About",
     artists: "Artists",

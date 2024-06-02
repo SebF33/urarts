@@ -25,18 +25,9 @@ export default function HistoSearch(
 
   useEffect(() => {
     const slider: HTMLElement | null = document.getElementById("slider");
-    const valuesForSlider = [
-      300,
-      500,
-      700,
-      900,
-      1100,
-      1300,
-      1500,
-      1700,
-      1900,
-      2100,
-    ];
+
+    const valuesForSlider = [300,500,700,900,1100,1300,1500,1700,1900,2100];
+
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -57,10 +48,16 @@ export default function HistoSearch(
       tooltips: true,
     });
 
-    slider.noUiSlider.set(["300", "2100"]);
+    slider?.noUiSlider.set(["300", "2100"]);
+
+    // Extrémités
+    const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
+    for (let i = 0; i < valuesLarge.length; i++) {
+      valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
+    }
 
     let debounceTimer;
-    slider.noUiSlider.on("update", () => {
+    slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         yearsSignal.value = slider.noUiSlider.get();
@@ -68,7 +65,7 @@ export default function HistoSearch(
     });
 
     return () => {
-      slider.noUiSlider.destroy();
+      slider?.noUiSlider.destroy();
     };
   }, []);
 

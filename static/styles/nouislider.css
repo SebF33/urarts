@@ -24,10 +24,6 @@
   color: var(--color-lighterdark);
 }
 
-.noUi-value-large:before {
-  content: "An ";
-}
-
 /* Vagues de Gris pour le slider
    - Gradient : https://colorzilla.com/gradient-editor/#232a2d+0,b3b9b8+52,dadada+100
 */

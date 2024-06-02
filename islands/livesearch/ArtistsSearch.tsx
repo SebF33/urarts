@@ -70,16 +70,9 @@ export default function ArtistsSearch() {
 
   useEffect(() => {
     const slider: HTMLElement | null = document.getElementById("slider");
-    const valuesForSlider = [
-      1400,
-      1500,
-      1600,
-      1700,
-      1800,
-      1900,
-      2000,
-      2100,
-    ];
+
+    const valuesForSlider = [1400,1500,1600,1700,1800,1900,2000,2100];
+
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -100,10 +93,16 @@ export default function ArtistsSearch() {
       tooltips: true,
     });
 
-    slider.noUiSlider.set(["1900", "2000"]);
+    slider?.noUiSlider.set(["1900", "2000"]);
+
+    // Extrémités
+    const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
+    for (let i = 0; i < valuesLarge.length; i++) {
+      valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
+    }
 
     let debounceTimer;
-    slider.noUiSlider.on("update", () => {
+    slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         yearsSignal.value = slider.noUiSlider.get();
@@ -111,7 +110,7 @@ export default function ArtistsSearch() {
     });
 
     return () => {
-      slider.noUiSlider.destroy();
+      slider?.noUiSlider.destroy();
     };
   }, []);
 
