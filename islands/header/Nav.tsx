@@ -1,10 +1,12 @@
+import { Any } from "any";
 import { css } from "@twind/core";
 import { DELAY_LEONARDO_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
-import "../../utils/i18n/config.ts";
+import "@utils/i18n/config.ts";
 import ky from "ky";
-import { nationalitySignal, yearsSignal } from "../../utils/signals.ts";
+import { Language } from "@utils/i18n/i18next.d.ts";
+import { nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "../../env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -178,15 +180,12 @@ export default function Nav(props: Props) {
 
           // Contenu
           const leonardoContent = document.querySelector("#leonardoContent");
-          if (leonardoContent) {
-            leonardoContent.innerHTML = leonardoResponse;
-          }
+          if (leonardoContent) leonardoContent.innerHTML = leonardoResponse;
+
         } catch (error) {
           console.error("Erreur de l'API Leonardo.", error);
           const leonardoContent = document.querySelector("#leonardoContent");
-          if (leonardoContent) {
-            leonardoContent.innerHTML = "Erreur de l'API Leonardo.";
-          }
+          if (leonardoContent) leonardoContent.innerHTML = "Erreur de l'API Leonardo.";
         }
       };
       fetchData();
@@ -277,7 +276,7 @@ export default function Nav(props: Props) {
     }
   }, []);
 
-  // Hooks menu mobile & thème
+  // Menu mobile & thème
   useLayoutEffect(() => {
     const delay = 120;
     const anchor = document.querySelectorAll<HTMLElement>("#mobile-anchor");
@@ -311,12 +310,22 @@ export default function Nav(props: Props) {
     });
   }, []);
 
+  // Délai au click
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => {
-      window.location.href = href;
-    }, DELAY_REACH_HREF);
+    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+  }
+
+  // Langue
+  (globalThis as Any).handleLanguage = function(lng: Language) {
+    const storedLng = localStorage.getItem("i18nextLng");
+
+    if (storedLng !== lng) {
+      i18next.changeLanguage(lng);
+      i18next.on("languageChanged", (lng: Language) => { localStorage.setItem("i18nextLng", lng); });
+      location.reload();
+    }
   }
 
   return (

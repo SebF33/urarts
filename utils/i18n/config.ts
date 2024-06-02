@@ -3,14 +3,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import translationEnglish from "./en/translation.ts";
 import translationFrench from "./fr/translation.ts";
 
-const defaultNS = "translation";
+export const defaultNS = "translation";
 
 const options = {
   // ordre à partir duquel la langue de l'utilisateur doit être détectée
   order: [
-    "querystring", // permet de définir explicitement la langue via un paramètre URL (?lng=fr)
-    "cookie", // cookies utilisés pour se souvenir des préférences des utilisateurs au fil des sessions
     "localStorage", // stocke les préférences des utilisateurs et peut être utilisé pour des données plus persistantes
+    "cookie", // cookies utilisés pour se souvenir des préférences des utilisateurs au fil des sessions
+    "querystring", // permet de définir explicitement la langue via un paramètre URL (?lng=fr)
     "sessionStorage", // stocke les données pour la durée de la session de la page
     "navigator", // vérifie les paramètres de langue du navigateur (langue préférée de l'utilisateur pour la navigation)
     "htmlTag", // examine l'attribut "lang" de la balise "html"
@@ -36,12 +36,8 @@ const options = {
 };
 
 export const resources = {
-  en: {
-    translation: translationEnglish,
-  },
-  fr: {
-    translation: translationFrench,
-  },
+  en: { translation: translationEnglish },
+  fr: { translation: translationFrench },
 };
 
 i18next

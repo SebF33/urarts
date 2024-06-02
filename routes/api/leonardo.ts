@@ -152,8 +152,21 @@ export const handler = async (
       break;
 
     case "home":
+
+      htmlContent += `
+        <p class="text-[1rem] leading-none mb-1">Choisissez votre langue : &nbsp;
+          <button onclick="handleLanguage('en')" class="inline-block flex items-center focus:outline-none">
+            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-105)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
+          </button>
+          <button onclick="handleLanguage('fr')" class="inline-block flex items-center focus:outline-none">
+            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-105)" src="/flags/France.png" alt="fr" draggable=false/>
+          </button>
+        </p>    
+      `;
+
       htmlContent +=
         '<p class="text-[1rem] leading-none mb-1">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
+      
       htmlContent +=
         '<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
 
