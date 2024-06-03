@@ -12,11 +12,7 @@ export default defineApp((_, ctx) => {
     <html lang="en">
       <head>
         {/* Google tag */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-QCTN24H4SD"
-        >
-        </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCTN24H4SD"></script>
         <script src="/gtag.js"></script>
 
         {/* Meta */}
@@ -24,28 +20,21 @@ export default defineApp((_, ctx) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta key="words" name="keywords" content="arts" />
-        <meta property="og:url" content={UrlBasePath} />
+        <meta name="thumbnail" content={asset("/thumbnail.png")} />
+        <meta property="og:image" content={asset("/thumbnail.png")} />
         <meta property="og:site_name" content="Urarts" />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={UrlBasePath} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="default"
-        />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Urarts" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta
-          name="msapplication-TileColor"
-          content={colorScheme[currentColorScheme].dark}
-        />
+        <meta name="msapplication-TileColor" content={colorScheme[currentColorScheme].dark} />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta
-          name="theme-color"
-          content={colorScheme[currentColorScheme].dark}
-        />
+        <meta name="theme-color" content={colorScheme[currentColorScheme].dark} />
         <meta name="format-detection" content="telephone=no" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href={asset("/manifest.json")} />
 
         {/* Favicon */}
         <link
