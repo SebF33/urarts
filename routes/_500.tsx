@@ -18,16 +18,7 @@ export default function Error500Page({ error }: PageProps) {
           })
         }`}
       >
-        <ErrorLayout firstDigit="5" secondDigit="0" thirdDigit="0" />
-        <div class="paper max-w-[500px] mx-auto mb-6 text-lighterdark overflow-hidden sm:overflow-visible">
-          <div class="top-tape"></div>
-          <div class="w-full my-5 mx-1">
-            <h2 class="text-center text-4xl font-bold">Erreur 500 !</h2>
-            <p class="text-center text-xl font-bold">
-              Problème interne du serveur : {(error as Error).message}
-            </p>
-          </div>
-        </div>
+        <ErrorLayout firstDigit="5" secondDigit="0" thirdDigit="0" msg={(error as Error).message} />
       </main>
 
       <WaterDrop

@@ -2,15 +2,25 @@
 const translation = {
   about: {
     msg:
-      `<p class="mb-4 text-2xl leading-6">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
-    <p class="mb-4 text-xl leading-6">
+      `<p class="mb-4 text-2xl leading-5">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
+    <p class="mb-4 text-xl leading-5">
     <span class="font-bold underline">Moyens utilisés</span> : TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Alpine.js, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
-    <p class="text-xl leading-6">
+    <p class="text-xl leading-5">
     <span class="font-bold underline">Politique de droit d’auteur</span> : Urarts montre des œuvres d’art du domaine public et tente d’obtenir l’autorisation pour celles protégées par le droit d’auteur.
     Le but de ce site est d’utiliser ces œuvres historiques à des fins d’information et d’éducation.
     Les visuels sont des images à faible résolution non adaptées à un usage commercial.
     Veuillez vous adresser au créateur du site via son adresse email
     <a href="mailto:sebastien.flouriot@urarts.art" class="relative underline z-10">sebastien.flouriot@urarts.art</a> en cas de demande ou de litige liés à l’exploitation de ces visuels.</p>`,
+  },
+  error: {
+    notfound: {
+      msg: "Page introuvable :",
+      title: "Erreur 404 !",
+    },
+    server: {
+      msg: "Problème interne du serveur :",
+      title: "Erreur 500 !",
+    },
   },
   indicator: {
     doughnut_title: "artistes disponibles par nationalité",
