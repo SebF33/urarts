@@ -510,9 +510,9 @@ h1 {
 
 .top-tape {
     position: absolute;
-    height: 2vmin;
     top: -5px;
-    width: 110%;
+    height: 2vmin;
+    width: calc(110% - 14px);
     background-color: var(--tape-gray);
     border-right: 1px dotted var(--tape-edge-gray);
     border-left: 1px dotted var(--tape-edge-gray);
