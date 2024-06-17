@@ -120,6 +120,7 @@ export default function ArtsSearch() {
                     class="cursor-pointer"
                     onClick={handleClick}
                     onMouseEnter={() => handleMouseEnter(item.id, item.slug)}
+                    onPointerEnter={() => handleMouseEnter(item.id, item.slug)}
                   >
                     <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
@@ -141,7 +142,7 @@ export default function ArtsSearch() {
 
           {/* Aperçu */}
           <div class="preview-frame mt-20 mx-auto lg:mr-0">
-            <div class="paper absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] z-10">
+            <div class="paper absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] transform-gpu z-10">
               <div class="top-tape max-h-2"></div>
               {i18next.t("arts.preview", { ns: "translation" })}
             </div>
