@@ -149,6 +149,9 @@ export const handler = async (
       htmlContent +=
         `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtCountResult}</strong> œuvres disponibles...</p>`;
 
+      htmlContent +=
+        '<p class="text-[1rem] leading-none">ou survolez le nom d’une œuvre pour peindre son aperçu.</p>';
+      
       break;
 
     case "home":

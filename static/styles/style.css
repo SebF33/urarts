@@ -664,3 +664,81 @@ h1 {
     border: 3px solid #593417;
     border-radius: 50%;
 }
+
+/* Aperçu avec effet d'apparition liquide
+   - CodePen : https://codepen.io/iamryanyu/pen/GXpyLQ
+*/
+.preview-frame {
+    height: 400px;
+    max-width: 550px;
+    width: 100%;
+    background-color: #f9f8f3;
+    box-shadow:
+        -50px -50px 0 -41px var(--color-dark),
+        50px 50px 0 -41px var(--color-dark);
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
+.preview {
+    height: 400px;
+    max-width: 550px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.preview::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-image: url(../liquid-mask-before.png);
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+}
+
+.preview::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    content: '';
+    height: 100%;
+    width: 4000%;
+    background-image: url(../liquid-mask-after.png);
+    background-size: 100% 100%;
+    transform: translateX(-1.25%);
+}
+
+.preview.is-active::after {
+    animation: liquid-transition 2s steps(39) 0.5s forwards;
+}
+
+.preview-img {
+    height: 100%;
+    color: #f9f8f3;
+    object-fit: cover;
+    object-position: 50% 0;
+    opacity: 0;
+    width: 100%;
+}
+
+.is-active .preview-img {
+    opacity: 1;
+}
+
+@keyframes liquid-transition {
+    0% {
+        transform: translateX(-1.25%);
+    }
+
+    99% {
+        transform: translateX(-98.75%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-98.75%);
+        opacity: 0;
+    }
+}

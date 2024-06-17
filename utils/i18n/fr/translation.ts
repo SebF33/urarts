@@ -12,6 +12,9 @@ const translation = {
     Veuillez vous adresser au créateur du site via son adresse email
     <a href="mailto:sebastien.flouriot@urarts.art" class="relative underline z-10">sebastien.flouriot@urarts.art</a> en cas de demande ou de litige liés à l’exploitation de ces visuels.</p>`,
   },
+  arts: {
+    preview: "Aperçu",
+  },
   error: {
     notfound: {
       msg: "Page introuvable :",

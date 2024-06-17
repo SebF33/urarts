@@ -1,3 +1,4 @@
+import { ArtCollection } from "@utils/types.d.ts";
 import { ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
@@ -12,10 +13,40 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import { SearchInput } from "@components/SearchInput.tsx";
 
+type Arts = Array<ArtCollection>;
+
 export default function ArtsSearch() {
+  const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
+  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+
+
+  // Aperçu
+  useEffect(() => {
+    const previews = document.querySelectorAll(".preview");
+    previews.forEach(preview => { preview.classList.add("is-active"); });
+  }, [hoveredImageUrl]);
+
+  const handleMouseEnter = (id: number, slug: string) => {
+    if (hoverTimeout !== null) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setHoveredImageUrl(null);
+    const timeoutId = setTimeout(() => { getPreviewImageUrl(id, slug) }, DELAY_API_CALL);
+    setHoverTimeout(timeoutId);
+  };
+
+  async function getPreviewImageUrl(id: number, slug: string) {
+    const response = await ky
+      .get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`)
+      .json<Arts>();
+    
+    setHoveredImageUrl(response[0].url);
+  }
+  
 
   // Appel à l'API
   useEffect(() => {
@@ -27,6 +58,7 @@ export default function ArtsSearch() {
         });
     }, DELAY_API_CALL);
   }, [debouncedValue]);
+
 
   // Background pour la page des œuvres d'art
   useLayoutEffect(() => {
@@ -45,13 +77,14 @@ export default function ArtsSearch() {
     }
   }, []);
 
+
+  // Délai au click
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => {
-      window.location.href = href;
-    }, DELAY_REACH_HREF);
+    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
   }
+
 
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
@@ -76,6 +109,7 @@ export default function ArtsSearch() {
       </div>
 
       <div class={`flex flex-wrap`}>
+        {/* Liste des arts */}
         {searchResults &&
           (
             <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2`}>
@@ -83,8 +117,9 @@ export default function ArtsSearch() {
                 <li class={`mx-2 my-4`} key={index}>
                   <a
                     href={"/art/" + item.slug + "?alone&id=" + item.id}
+                    class="cursor-pointer"
                     onClick={handleClick}
-                    class={`cursor-pointer`}
+                    onMouseEnter={() => handleMouseEnter(item.id, item.slug)}
                   >
                     <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
@@ -103,7 +138,21 @@ export default function ArtsSearch() {
               ))}
             </ul>
           )}
+
+          {/* Aperçu */}
+          <div class="preview-frame mt-20 mx-auto lg:mr-0">
+            <div class="paper absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] z-10">
+              <div class="top-tape max-h-2"></div>
+              {i18next.t("arts.preview", { ns: "translation" })}
+            </div>
+            {hoveredImageUrl && (
+              <div class="preview mx-auto">
+                <img class="preview-img" src={hoveredImageUrl} alt={i18next.t("arts.preview", { ns: "translation" })} />
+              </div>
+            )}
+          </div>
       </div>
+
     </div>
   );
 }
