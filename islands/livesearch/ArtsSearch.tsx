@@ -1,3 +1,5 @@
+
+import { ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
@@ -10,12 +12,14 @@ import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
 export default function ArtsSearch() {
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
@@ -148,7 +152,18 @@ export default function ArtsSearch() {
             </div>
             {hoveredImageUrl && (
               <div class="preview mx-auto">
-                <img class="preview-img" src={hoveredImageUrl} alt={i18next.t("arts.preview", { ns: "translation" })} />
+                <img
+                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                  src="/placeholder_150.png"
+                  alt="placeholder_150"
+                />
+                <img
+                  onLoad={handleImageOnLoad}
+                  style={{ ...imageOnLoadStyle.fullSize }}
+                  class="preview-img"
+                  src={hoveredImageUrl}
+                  alt={i18next.t("arts.preview", { ns: "translation" })}
+                />
               </div>
             )}
           </div>
