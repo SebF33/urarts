@@ -50,6 +50,7 @@ export default function Quote(
         delay: DELAY_TOOLTIP_TRIGGER,
         interactive: true,
         placement: "top",
+        popperOptions: { strategy: "fixed" },
         theme: "urarts",
         onCreate(instance: Any) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);

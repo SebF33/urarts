@@ -122,6 +122,7 @@ export default function WaterDrop(
         interactive: true,
         offset: [0, -20],
         placement: "top",
+        popperOptions: { strategy: "fixed" },
         theme: "urarts",
       });
     }
