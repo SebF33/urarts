@@ -1,6 +1,5 @@
 import { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -99,15 +98,7 @@ export default function HomePage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="home" class={`flex-grow ${
-          css({
-            "mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 96%, transparent 100%)`,
-          })
-        }`}
-      >
+      <main id="page" data-name="home" class="flex-grow transparent-mask-96">
         <button
           x-on:click="openFamousArt = true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">

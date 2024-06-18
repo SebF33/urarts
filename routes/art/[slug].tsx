@@ -1,5 +1,4 @@
 import { ArtistQuote } from "@utils/types.d.ts";
-import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
@@ -185,15 +184,7 @@ export default function ArtistArtsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="collection" class={`scrollable flex-grow mb-6 xl:max-h-screen xl:overflow-y-scroll custom-scrollbar ${
-          css({
-            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-          })
-        }`}
-      >
+      <main id="page" data-name="collection" class="scrollable flex-grow mb-6 xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
         <div
           class={`relative w-auto flex flex-col mx-auto`}
         >

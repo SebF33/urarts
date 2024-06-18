@@ -1,4 +1,3 @@
-import { css } from "@twind/core";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -49,15 +48,7 @@ export default function AboutPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="about" class={`mona-page scrollable flex-grow xl:max-h-screen xl:overflow-y-scroll custom-scrollbar ${
-          css({
-            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-          })
-        }`}
-      >
+      <main id="page" data-name="about" class="mona-page scrollable flex-grow xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
         <div class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Title
             name="about"

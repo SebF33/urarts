@@ -2,7 +2,6 @@ import { Any } from "any";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -97,15 +96,7 @@ export default function FamousArtSideBar() {
       x-transition:leave="transition-opacity ease-in duration-300"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      class={`absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden ${
-        css({
-          "mask-image": `linear-gradient(to bottom, black 94%, transparent 96%)`,
-          "-webkit-mask-image": `linear-gradient(to bottom, black 94%, transparent 96%)`,
-          "-o-mask-image": `linear-gradient(to bottom, black 94%, transparent 96%)`,
-          "-moz-mask-image": `linear-gradient(to bottom, black 94%, transparent 96%)`,
-        })
-      }`}
-    >
+      class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden transparent-mask-94-96">
       <div
         x-show="openFamousArt"
         x-transition:enter="transition-transform ease-out duration-300"
@@ -130,15 +121,7 @@ export default function FamousArtSideBar() {
               </div>
             </div>
           </div>
-          <div class={`h-full px-4 overflow-auto custom-scrollbar ${
-              css({
-                "mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,
-                "-webkit-mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,
-                "-o-mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,
-                "-moz-mask-image": `linear-gradient(to top, black 99%, transparent 100%)`,
-              })
-            }`}
-          >
+          <div class="h-full px-4 overflow-auto custom-scrollbar transparent-mask-99">
             <div class="grid grid-cols-1 gap-4">
               {display && searchResults &&
                 searchResults.map((p) => (

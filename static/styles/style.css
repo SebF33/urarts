@@ -742,3 +742,39 @@ h1 {
         opacity: 0;
     }
 }
+
+/* Masques de transparence */
+.transparent-mask-50 {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -o-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -moz-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.transparent-mask-70 {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -o-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -moz-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.transparent-mask-94-96 {
+    mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
+    -webkit-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
+    -o-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
+    -moz-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
+}
+
+.transparent-mask-96 {
+    mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
+    -o-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
+    -moz-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
+}
+
+.transparent-mask-99 {
+    mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
+    -o-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
+    -moz-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
+}

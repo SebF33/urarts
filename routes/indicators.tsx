@@ -1,5 +1,4 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -111,15 +110,7 @@ export default function IndicatorsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="indicators" class={`flex-grow ${
-          css({
-            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-          })
-        }`}
-      >
+      <main id="page" data-name="indicators" class="flex-grow transparent-mask-99">
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
           <Title
             name="indicators"

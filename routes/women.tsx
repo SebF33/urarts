@@ -1,5 +1,4 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -23,15 +22,7 @@ export default function WomenPage() {
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="women" class={`scrollable flex-grow xl:max-h-[870px] xl:overflow-y-scroll custom-scrollbar ${
-          css({
-            "mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-webkit-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-o-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-            "-moz-mask-image": `linear-gradient(to bottom, black 99%, transparent 100%)`,
-          })
-        }`}
-      >
+      <main id="page" data-name="women" class="scrollable flex-grow xl:max-h-[870px] xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
         <WomenSearch />
       </main>
 
