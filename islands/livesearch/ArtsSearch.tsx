@@ -1,7 +1,5 @@
 
-import { ART_IMG_WRAPPER } from "@utils/constants.ts";
-import { ArtCollection } from "@utils/types.d.ts";
-import { ArtRow } from "@utils/types.d.ts";
+import { ArtCollection, ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_REACH_HREF } from "@utils/constants.ts";
@@ -12,14 +10,14 @@ import ky from "ky";
 import { UrlBasePath } from "../../env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
-import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
+import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
+
 export default function ArtsSearch() {
-  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
@@ -144,29 +142,7 @@ export default function ArtsSearch() {
             </ul>
           )}
 
-          {/* Aperçu */}
-          <div class="preview-frame mt-20 mx-auto lg:mr-0">
-            <div class="paper absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] transform-gpu z-10">
-              <div class="top-tape max-h-2"></div>
-              {i18next.t("arts.preview", { ns: "translation" })}
-            </div>
-            {hoveredImageUrl && (
-              <div class="preview mx-auto">
-                <img
-                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                  src="/placeholder_150.png"
-                  alt="placeholder_150"
-                />
-                <img
-                  onLoad={handleImageOnLoad}
-                  style={{ ...imageOnLoadStyle.fullSize }}
-                  class="preview-img"
-                  src={hoveredImageUrl}
-                  alt={i18next.t("arts.preview", { ns: "translation" })}
-                />
-              </div>
-            )}
-          </div>
+          <Preview imageUrl={hoveredImageUrl} />
       </div>
 
     </div>
