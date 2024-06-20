@@ -139,6 +139,16 @@ export default function ArtsSearch() {
                   </a>
                 </li>
               ))}
+
+              {/* Pas de résultats */}
+              {searchResults.length === 0 && searchTerm !== "" &&
+                (
+                  <li class="mx-2 my-4">
+                    <p class="text-4xl leading-none">
+                      {i18next.t("common.no_results", { ns: "translation" })} {" => «"} {searchTerm} {"»"}
+                    </p>
+                  </li>
+                )}
             </ul>
           )}
 

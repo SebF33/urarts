@@ -3,6 +3,8 @@ import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY, DELAY_REACH_HREF, NB_LOADING_ARTISTS
 import { ArtistRow } from "@utils/types.d.ts";
 import { css } from "@twind/core";
 import { h } from "preact";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
@@ -56,7 +58,7 @@ export default function ArtistsLayout(
     if (noresults) {
       tippy(noresults, {
         allowHTML: true,
-        content: "<p>Pas de résultats.</p>",
+        content: `<p>${i18next.t("common.no_results", { ns: "translation" })}.</p>`,
         interactive: true,
         placement: "bottom",
         theme: "urarts",
@@ -294,7 +296,7 @@ export default function ArtistsLayout(
                       <img
                         class={`w-full object-cover`}
                         src="/errors/0.jpg"
-                        alt="Pas de résultats"
+                        alt={i18next.t("common.no_results", { ns: "translation" })}
                       />
                     </div>
                   </div>

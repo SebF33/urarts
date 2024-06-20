@@ -15,6 +15,9 @@ const translation = {
   arts: {
     preview: "Aperçu",
   },
+  common: {
+    no_results: "Pas de résultats",
+  },
   error: {
     notfound: {
       msg: "Page introuvable :",
