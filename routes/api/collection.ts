@@ -12,6 +12,7 @@ export const handler = async (
   const url = new URL(req.url);
 
   const isAlone = url.searchParams.has("alone");
+  const isNotAlone = url.searchParams.has("notalone");
 
   query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
@@ -110,6 +111,7 @@ export const handler = async (
       artQuery = artQuery
         .where("movement.slug", "=", slugFilter)
         .where("artist.slug", "not in", TALENTS)
+        .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(({ fn }) => fn("lower", ["art.name"]))
       break;
 

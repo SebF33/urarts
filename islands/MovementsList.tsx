@@ -1,16 +1,51 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { MovementRow } from "@utils/types.d.ts";
-import { useLayoutEffect } from "preact/hooks";
+import { ArtCollection, MovementRow } from "@utils/types.d.ts";
+import ky from "ky";
+import { UrlBasePath } from "../env.ts";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
+import Preview from "@islands/Preview.tsx";
+
+type Arts = Array<ArtCollection>;
 type Movements = Array<MovementRow>;
+
 
 export default function MovementsList(
   props: { movements: Movements },
 ) {
+  const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
+  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
+
+  
+  // Aperçu
+  useEffect(() => {
+    const previews = document.querySelectorAll(".preview");
+    previews.forEach(preview => { preview.classList.add("is-active"); });
+  }, [hoveredImageUrl]);
+
+  const handleMouseEnter = (slug: string) => {
+    if (hoverTimeout !== null) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setHoveredImageUrl(null);
+    const timeoutId = setTimeout(() => { getPreviewImageUrl(slug) }, DELAY_API_CALL);
+    setHoverTimeout(timeoutId);
+  };
+
+  async function getPreviewImageUrl(slug: string) {
+    const response = await ky
+      .get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}&notalone`)
+      .json<Arts>();
+    
+    setHoveredImageUrl(response[0].url);
+  }
+
+
   // Background pour la page des mouvements
   useLayoutEffect(() => {
     const body = document.querySelector("body");
@@ -28,13 +63,14 @@ export default function MovementsList(
     }
   }, []);
 
+
+  // Délai au click
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => {
-      window.location.href = href;
-    }, DELAY_REACH_HREF);
+    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
   }
+
 
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
@@ -48,15 +84,18 @@ export default function MovementsList(
       </div>
 
       <div class={`flex flex-wrap`}>
+        {/* Liste des mouvements */}
         {props.movements &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 transparent-mask-70`}>
               {props.movements.map((item, index) => (
                 <li class={`mx-2 my-4`} key={index}>
                   <a
                     href={"/movement/" + item.slug}
+                    class="cursor-pointer"
                     onClick={handleClick}
-                    class={`cursor-pointer`}
+                    onMouseEnter={() => handleMouseEnter(item.slug)}
+                    onPointerEnter={() => handleMouseEnter(item.slug)}
                   >
                     <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
@@ -74,6 +113,8 @@ export default function MovementsList(
               ))}
             </ul>
           )}
+
+          <Preview imageUrl={hoveredImageUrl} />
       </div>
     </div>
   );

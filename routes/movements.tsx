@@ -64,7 +64,7 @@ export default function MovementsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="movements" class="scrollable flex-grow xl:max-h-[860px] xl:overflow-y-scroll custom-scrollbar transparent-mask-70">
+      <main id="page" data-name="movements" class="scrollable flex-grow xl:max-h-[860px] xl:overflow-y-scroll custom-scrollbar">
         <MovementsList movements={movements} />
       </main>
 

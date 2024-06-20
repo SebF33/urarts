@@ -293,6 +293,9 @@ export const handler = async (
       htmlContent +=
         `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements artistiques disponibles...</p>`;
 
+      htmlContent +=
+        '<p class="text-[1rem] leading-none">ou survolez le nom d’un mouvement pour peindre l’aperçu d’une œuvre associée.</p>';
+
       break;
 
     case "talents":
