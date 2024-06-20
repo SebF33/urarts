@@ -8,7 +8,7 @@ import ky from "ky";
 import { Language } from "@utils/i18n/i18next.d.ts";
 import { nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import tippy from "tippyjs";
-import { UrlBasePath } from "../../env.ts";
+import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import { ApiIcon, ButtonLines, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";

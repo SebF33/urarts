@@ -4,7 +4,7 @@ import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART } from "@utils
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { UrlBasePath } from "../../env.ts";
+import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import { yearsSignal } from "@utils/signals.ts";

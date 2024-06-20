@@ -7,7 +7,7 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { nationalitySignal, yearsSignal } from "@utils/signals.ts";
-import { UrlBasePath } from "../../env.ts";
+import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
@@ -608,7 +608,7 @@ export default function ArtistsSearch() {
             />
           </button>
 
-          <div class="absolute top-32 sm:top-5 left-0 right-0 mx-auto z-10 -translate-x-9">
+          <div class="absolute w-[122px] top-32 sm:top-5 left-5 sm:left-16 right-0 z-10">
             <div class="paper max-w-[122px] min-w-[122px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
               <div class="top-tape max-h-2.5"></div>
               <h2 class="text-lg font-medium text-lighterdark">

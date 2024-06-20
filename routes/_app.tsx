@@ -1,7 +1,7 @@
 import { asset, Partial } from "$fresh/runtime.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { defineApp } from "$fresh/server.ts";
-import { UrlBasePath } from "../env.ts";
+import { UrlBasePath } from "@/env.ts";
 
 import Nav from "@islands/header/Nav.tsx";
 import ToBottomButton from "@islands/ToBottomButton.tsx";

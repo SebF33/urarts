@@ -1,4 +1,4 @@
-import { DatabaseName } from "../env.ts";
+import { DatabaseName } from "@/env.ts";
 import { SqliteDriver } from "@utils/sqlite_driver.ts";
 
 import {

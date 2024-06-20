@@ -5,7 +5,7 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { ArtCollection, MovementRow } from "@utils/types.d.ts";
 import ky from "ky";
-import { UrlBasePath } from "../env.ts";
+import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";

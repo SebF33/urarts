@@ -7,7 +7,7 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import tippy from "tippyjs";
-import { UrlBasePath } from "../../env.ts";
+import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
