@@ -18,6 +18,7 @@ export default function Note() {
           class="inline-block ml-auto z-10"
           draggable={draggable}
           target="_blank"
+          rel="noopener"
         >
           <img
             class="w-32"
