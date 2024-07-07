@@ -48,6 +48,7 @@ export default function Quote(
           <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px" draggable="${draggable}"/>
           </a>`,
         delay: DELAY_TOOLTIP_TRIGGER,
+        flip: false,
         interactive: true,
         placement: "top",
         popperOptions: { strategy: "fixed" },
@@ -100,7 +101,7 @@ export default function Quote(
             class={`w-full mt-4 mx-1`}
           >
             <p
-              class={`text-center text-xl font-bold mx-auto`}
+              class={`text-center text-xl font-bold leading-6 mx-auto`}
             >
               “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
               {props.data.last_name}
