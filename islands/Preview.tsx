@@ -9,7 +9,7 @@ export default function Preview(
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
 
   return (
-    <div class="preview-frame relative mt-20 mx-auto lg:mr-0">
+    <div class="preview-frame relative mt-16 mb-6 mx-auto lg:mr-0">
       <div class="paper absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] transform-gpu z-10">
         <div class="top-tape max-h-2"></div>
         {i18next.t("arts.preview", { ns: "translation" })}

@@ -87,7 +87,7 @@ export default function MovementsList(
         {/* Liste des mouvements */}
         {props.movements &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 transparent-mask-70`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2`}>
               {props.movements.map((item, index) => (
                 <li class={`mx-2 my-4`} key={index}>
                   <a
