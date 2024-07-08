@@ -48,10 +48,9 @@ export default function Quote(
           <img src="${props.data.avatar_url}" alt="${props.data.last_name}" style="max-width:90px" draggable="${draggable}"/>
           </a>`,
         delay: DELAY_TOOLTIP_TRIGGER,
-        flip: false,
         interactive: true,
         placement: "top",
-        popperOptions: { strategy: "fixed" },
+        popperOptions: { strategy: "fixed", modifiers: [{ name: 'flip', enabled: false }] },
         theme: "urarts",
         onCreate(instance: Any) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);

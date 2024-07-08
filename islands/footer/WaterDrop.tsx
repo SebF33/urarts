@@ -119,11 +119,10 @@ export default function WaterDrop(
       tippy(logo, {
         allowHTML: true,
         content: i18next.t("logo.msg", { ns: "translation" }),
-        flip: false,
         interactive: true,
         offset: [0, -20],
         placement: "top",
-        popperOptions: { strategy: "fixed" },
+        popperOptions: { strategy: "fixed", modifiers: [{ name: 'flip', enabled: false }] },
         theme: "urarts",
       });
     }
