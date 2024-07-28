@@ -66,14 +66,8 @@ export const handler = async (
 
         const artResults = await db.selectFrom("artist")
           .innerJoin("art", "art.owner_id", "artist.id")
-          .select([
-            "art.id as id",
-            "art.name as name",
-            "url",
-            count("art.id").as("art_count")
-          ])
+          .select(["art.id as id", "art.name as name", "url", "url_2", "url_3", "url_4", "url_5"])
           .where("slug", "=", subpage)
-          .where("polyptych", "=", 1)
           .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(pagectx)))
           .orderBy(sql`random()`)
           .executeTakeFirst();
@@ -83,11 +77,19 @@ export const handler = async (
         }
 
         if (!isAlone && artistResult.copyright !== 2) {
-          htmlContent += `<p class="text-[1rem] mt-3"><strong>${artResults.art_count}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
-          htmlContent +=
-            `<p class="text-[1rem]">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
-          htmlContent +=
-            `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+          const countArtResults = await db.selectFrom("artist")
+            .innerJoin("art", "art.owner_id", "artist.id")
+            .select([count("art.id").as("number")])
+            .where("slug", "=", subpage)
+            .executeTakeFirst();
+
+          htmlContent += `<p class="text-[1rem] mt-3"><strong>${countArtResults.number}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
+          htmlContent += `<p class="text-[1rem]">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
+          if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_3) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_3}" alt="${artResults.name + "_3"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_5) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_5}" alt="${artResults.name + "_5"}" style="max-height:200px" draggable="${draggable}"/></a>`;
         }
 
         if (isAlone) {
@@ -183,18 +185,21 @@ export const handler = async (
             "copyright",
             "art.id as id",
             "art.name as name",
-            "url",
+            "url", "url_2", "url_3", "url_4", "url_5"
           ])
           .where("copyright", "!=", 2)
           .where("slug", "not in", TALENTS)
-          .where("polyptych", "=", 1)
           .orderBy(sql`random()`)
           .executeTakeFirst();
 
-        htmlContent +=
-          `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
-        htmlContent +=
-          `<div class="mt-3 text-center"><a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="w-56 max-w-full" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a></div>`;
+        htmlContent += `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
+        htmlContent += `<div class="mt-3 text-center">`;
+        if (randomArtResults.url_4) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_4}" alt="${randomArtResults.name + "_4"}" draggable="${draggable}"/></a>`;
+        if (randomArtResults.url_2) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_2}" alt="${randomArtResults.name + "_2"}" draggable="${draggable}"/></a>`;
+        htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a>`;
+        if (randomArtResults.url_3) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_3}" alt="${randomArtResults.name + "_3"}" draggable="${draggable}"/></a>`;
+        if (randomArtResults.url_5) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_5}" alt="${randomArtResults.name + "_5"}" draggable="${draggable}"/></a>`;
+        htmlContent += `</div>`;
       }
 
       break;
