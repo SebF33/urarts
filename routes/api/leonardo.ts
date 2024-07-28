@@ -48,7 +48,7 @@ export const handler = async (
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>';
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Mona Lisa vous observe...</p>`;
+        `<p class="text-[1rem] leading-none mt-3">Mona Lisa vous observe...</p>`;
 
       break;
 
@@ -83,19 +83,21 @@ export const handler = async (
             .where("slug", "=", subpage)
             .executeTakeFirst();
 
-          htmlContent += `<p class="text-[1rem] mt-3"><strong>${countArtResults.number}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
-          htmlContent += `<p class="text-[1rem]">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
-          if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-          if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-          htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
-          if (artResults.url_3) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_3}" alt="${artResults.name + "_3"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-          if (artResults.url_5) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${artResults.url_5}" alt="${artResults.name + "_5"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-2">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
+          htmlContent += `<div class="flex mt-3 text-left">`;
+          if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_3) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_3}" alt="${artResults.name + "_3"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          if (artResults.url_5) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_5}" alt="${artResults.name + "_5"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+          htmlContent += `</div>`;
         }
 
         if (isAlone) {
           htmlContent = `<h2>Voici l’œuvre "<strong>${artResults.name}</strong>" de l’artiste <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
           htmlContent +=
-            `<p class="text-[1rem] mt-3">Découvrez les autres œuvres du même artiste <a href="/art/${artistResult.slug}" target="_blank" rel="noopener" class="inline-block"><span class="underline">ici</span></a>.</p>`;
+            `<p class="text-[1rem] leading-none mt-3">Découvrez les autres œuvres du même artiste <a href="/art/${artistResult.slug}" target="_blank" rel="noopener" class="inline-block"><span class="underline">ici</span></a>.</p>`;
         }
       }
 
@@ -118,11 +120,11 @@ export const handler = async (
       );
 
       htmlContent +=
-        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtistCountResult}</strong> artistes disponibles...</p>`;
+        `<p class="text-[1rem] leading-none mt-1">Faites votre recherche parmi <strong>${totalArtistCountResult}</strong> artistes disponibles...</p>`;
       htmlContent +=
-        '<p class="text-[1rem] mt-3">Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).</p>';
+        '<p class="text-[1rem] leading-none mt-3">Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).</p>';
       htmlContent +=
-        `<p class="text-[1rem] mt-1">Artistes affichés pour "<strong>${
+        `<p class="text-[1rem] leading-none mt-1">Artistes affichés pour "<strong>${
           pagectx[2]
         }</strong>" entre l’an <strong>${pagectx[0]}</strong> et l’an <strong>${
           pagectx[1]
@@ -149,7 +151,7 @@ export const handler = async (
       );
 
       htmlContent +=
-        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalArtCountResult}</strong> œuvres disponibles...</p>`;
+        `<p class="text-[1rem] leading-none mt-1">Faites votre recherche parmi <strong>${totalArtCountResult}</strong> œuvres disponibles...</p>`;
 
       htmlContent +=
         '<p class="text-[1rem] leading-none">ou survolez le nom d’une œuvre pour peindre son aperçu.</p>';
@@ -159,7 +161,7 @@ export const handler = async (
     case "home":
 
       htmlContent += `
-        <p class="text-[1rem] leading-none mb-1">Choisissez votre langue : &nbsp;
+        <p class="text-[1rem] leading-none mb-2">Choisissez votre langue : &nbsp;
           <button onclick="handleLanguage('en')" class="inline-block flex items-center focus:outline-none">
             <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-105)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
           </button>
@@ -170,7 +172,7 @@ export const handler = async (
       `;
 
       htmlContent +=
-        '<p class="text-[1rem] leading-none mb-1">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
+        '<p class="text-[1rem] leading-none mb-2">Cliquez <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">ici</span> pour changer le thème de la barre de navigation.</p>';
       
       htmlContent +=
         '<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>';
@@ -193,7 +195,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent += `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
-        htmlContent += `<div class="mt-3 text-center">`;
+        htmlContent += `<div class="flex mt-3 text-center">`;
         if (randomArtResults.url_4) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_4}" alt="${randomArtResults.name + "_4"}" draggable="${draggable}"/></a>`;
         if (randomArtResults.url_2) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_2}" alt="${randomArtResults.name + "_2"}" draggable="${draggable}"/></a>`;
         htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a>`;
@@ -210,7 +212,7 @@ export const handler = async (
         htmlContent =
           '<h2>Vous êtes sur la <span class="underline">page des personnages historiques</span>.</h2>';
         htmlContent +=
-          '<p class="text-[1rem] mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>';
+          '<p class="text-[1rem] leading-none mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>';
 
         const histocharacterResults = await db.selectFrom("art")
           .innerJoin("artist", "art.owner_id", "artist.id")
@@ -232,11 +234,11 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent +=
-          `<p class="text-[1rem] mt-1">Personnages affichés entre l’an <strong>${
+          `<p class="text-[1rem] leading-none mt-1">Personnages affichés entre l’an <strong>${
             pagectx[0]
           }</strong> et l’an <strong>${pagectx[1]}</strong>.</p>`;
         htmlContent +=
-          `<p class="text-[1rem] mt-1">Découvrez <strong>${histocharacterResults.name}...</strong></p>`;
+          `<p class="text-[1rem] leading-none mt-2">Découvrez <strong>${histocharacterResults.name}...</strong></p>`;
         htmlContent +=
           `<a href="/histocharacters?id=${histocharacterResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${histocharacterResults.url}" alt="${histocharacterResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
       }
@@ -247,7 +249,7 @@ export const handler = async (
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des indicateurs</span> du site Urarts.</h2>';
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Cliquez sur la légende des widgets pour faire évoluer la visualisation des données.</p>`;
+        `<p class="text-[1rem] leading-none mt-3">Cliquez sur la légende des widgets pour faire évoluer la visualisation des données.</p>`;
 
       break;
 
@@ -275,7 +277,7 @@ export const handler = async (
           htmlContent = "<h2>Voici les œuvres non classées.";
         }
         htmlContent +=
-          `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
+          `<p class="text-[1rem] leading-none mt-3">Découvrez l’artiste <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
         htmlContent +=
           `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
       }
@@ -296,7 +298,7 @@ export const handler = async (
       ) => parseFloat(item.movement_count));
 
       htmlContent +=
-        `<p class="text-[1rem] mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements artistiques disponibles...</p>`;
+        `<p class="text-[1rem] leading-none mt-1">Faites votre recherche parmi <strong>${totalMovementCountResult}</strong> mouvements artistiques disponibles...</p>`;
 
       htmlContent +=
         '<p class="text-[1rem] leading-none">ou survolez le nom d’un mouvement pour peindre l’aperçu d’une œuvre associée.</p>';
@@ -318,7 +320,7 @@ export const handler = async (
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des talents</span>.</h2>';
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${talentResults.color}"><a href="/art/${talentResults.slug}">${talentResults.last_name}</a></strong>...</p>`;
+        `<p class="text-[1rem] leading-none mt-3">Découvrez l’artiste <strong style="color:${talentResults.color}"><a href="/art/${talentResults.slug}">${talentResults.last_name}</a></strong>...</p>`;
       htmlContent +=
         `<a href="/art/${talentResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
 
@@ -328,7 +330,7 @@ export const handler = async (
       htmlContent =
         '<h2>Vous êtes sur la <span class="underline">page des femmes artistes</span>.</h2>';
       htmlContent +=
-        '<p class="text-[1rem] mt-1">Cliquez sur le portrait d’une artiste pour accéder à ses œuvres.</p>';
+        '<p class="text-[1rem] leading-none mt-1">Cliquez sur le portrait d’une artiste pour accéder à ses œuvres.</p>';
 
       const womenResults = await db.selectFrom("artist")
         .select([
@@ -343,7 +345,7 @@ export const handler = async (
         .executeTakeFirst();
 
       htmlContent +=
-        `<p class="text-[1rem] mt-3">Découvrez l’artiste <strong style="color:${womenResults.color}"><a href="/art/${womenResults.slug}">${womenResults.last_name}</a></strong>...</p>`;
+        `<p class="text-[1rem] leading-none mt-3">Découvrez l’artiste <strong style="color:${womenResults.color}"><a href="/art/${womenResults.slug}">${womenResults.last_name}</a></strong>...</p>`;
       htmlContent +=
         `<a href="/art/${womenResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
 
