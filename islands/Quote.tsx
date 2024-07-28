@@ -83,7 +83,7 @@ export default function Quote(
       main.style.background = `url(/background/gray)`;
       main.style.backgroundAttachment = "local";
       main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "420px";
+      main.style.backgroundSize = "466px";
     }
   }, []);
 

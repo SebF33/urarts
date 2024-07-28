@@ -98,7 +98,7 @@ export default function HomePage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="home" class="flex-grow transparent-mask-96">
+      <main id="page" data-name="home" class="flex-grow transparent-mask-99">
         <button
           x-on:click="openFamousArt = true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
@@ -108,7 +108,7 @@ export default function HomePage(
 
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
 
-        <div class="mx-auto -mt-4 mb-6">
+        <div class="mx-auto -mt-28 mb-10">
           <Quote data={artistQuote} delay={100} />
         </div>
       </main>
