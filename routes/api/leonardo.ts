@@ -85,7 +85,7 @@ export const handler = async (
 
           htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> œuvre(s) sont actuellement disponible(s).</p>`;
           htmlContent += `<p class="text-[1rem] leading-none mt-2">Découvrez <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
-          htmlContent += `<div class="flex mt-3 text-left">`;
+          htmlContent += `<div class="flex justify-start mt-3">`;
           if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
           if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
           htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
@@ -195,7 +195,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent += `<p class="max-w-sm text-[1rem] leading-none mt-4">L’œuvre du moment s’intitule <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> de <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
-        htmlContent += `<div class="flex mt-3 text-center">`;
+        htmlContent += `<div class="flex justify-center mt-3">`;
         if (randomArtResults.url_4) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_4}" alt="${randomArtResults.name + "_4"}" draggable="${draggable}"/></a>`;
         if (randomArtResults.url_2) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_2}" alt="${randomArtResults.name + "_2"}" draggable="${draggable}"/></a>`;
         htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a>`;
