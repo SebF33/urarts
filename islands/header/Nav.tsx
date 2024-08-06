@@ -346,7 +346,7 @@ export default function Nav(props: Props) {
                   onClick={handleUrartsClick}
                   class={`h-10 w-10`}
                   src="/icon_urarts.svg"
-                  alt="Urarts"
+                  alt="U"
                   draggable={draggable}
                 />
               </a>

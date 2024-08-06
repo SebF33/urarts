@@ -1,7 +1,7 @@
 import { Any } from "any";
-import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -125,7 +125,7 @@ export default function FamousArtSideBar() {
             <div class="grid grid-cols-1 gap-4">
               {display && searchResults &&
                 searchResults.map((p) => (
-                  <div class="max-w-[250px] flex justify-center p-1 first:mt-4">
+                  <div class="max-w-[220px] flex mx-auto p-1 first:mt-4">
                     <a
                       x-on:mouseover="isHovered = true"
                       x-on:mouseout="isHovered = false"
@@ -138,7 +138,7 @@ export default function FamousArtSideBar() {
                       <div
                         data-art-id={p.id}
                         x-bind:class="{ 'transform-gpu transition-transform duration-100 transform scale-[1.03]': isHovered }"
-                        class={`art-frame art-frame-type-${p.frame}`}
+                        class="famous-art-shadow"
                         style={FAMOUS_ART_IMG_WRAPPER.wrap}
                       >
                         <img

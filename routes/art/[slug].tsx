@@ -229,7 +229,7 @@ export default function ArtistArtsPage(
                   {birthyear + deathyear}
                 </p>
                 <img
-                  class={`inline-block w-12 mt-2`}
+                  class={`inline-block w-12 mt-1`}
                   src={"/flags/" + nationality + ".png"}
                   alt={nationality}
                   draggable={draggable}
@@ -237,7 +237,7 @@ export default function ArtistArtsPage(
                 <p class="font-bold text-lg mb-2">
                   {"Nationalité : " + nationality}
                 </p>
-                <p class={`text-[1.1rem] text-justify leading-[1.18rem] select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
+                <p class={`text-[1.1rem] text-justify leading-[1.16rem] select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
               </div>
 
               {site &&
