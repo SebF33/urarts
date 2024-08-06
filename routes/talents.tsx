@@ -8,7 +8,9 @@ import "@utils/i18n/config.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
+import { ButtonLines } from "@components/Assets.tsx";
 import Footer from "@islands/footer/Footer.tsx";
+import TalentsArtSideBar from "@islands/livesearch/TalentsArtSideBar.tsx";
 import TalentsList from "@islands/TalentsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
@@ -77,8 +79,17 @@ export default function TalentsPage(
       </Head>
 
       <main id="page" data-name="talents" class="flex-grow transparent-mask-99">
+        <button
+          x-on:click="openTalentsArt = true"
+          class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
+          <span class="sr-only">Ouvrir</span>
+          <ButtonLines />
+        </button>
+
         <TalentsList artists={artists} />
       </main>
+
+      <TalentsArtSideBar />
 
       <WaterDrop
         color={color}

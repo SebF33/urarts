@@ -77,9 +77,12 @@ export default defineApp((_, ctx) => {
 
       <body
         f-client-nav
-        x-data="{ openFamousArt: true,
+        x-data="{
           navTheme: $persist(localStorage.getItem('navTheme')),
-          toggleNavTheme: function() { this.navTheme = (this.navTheme !== 'wave-colors') ? 'wave-colors' : 'header-paper'; } }"
+          openFamousArt: true,
+          openTalentsArt: true,
+          toggleNavTheme: function() { this.navTheme = (this.navTheme !== 'wave-colors') ? 'wave-colors' : 'header-paper'; }
+        }"
         class={`flex flex-col min-h-screen font-brush`}
       >
         <Partial name="body">

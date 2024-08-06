@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2024-08-06]
+
+### Nouveautés
+- Ajout d'une barre latérale de recherche des œuvres des talents.
+
 ## [2024-05-31]
 
 ### Nouveautés

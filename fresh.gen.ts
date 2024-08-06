@@ -49,6 +49,7 @@ import * as $livesearch_ArtsSearch from "./islands/livesearch/ArtsSearch.tsx";
 import * as $livesearch_CollectionSearch from "./islands/livesearch/CollectionSearch.tsx";
 import * as $livesearch_FamousArtSideBar from "./islands/livesearch/FamousArtSideBar.tsx";
 import * as $livesearch_HistoSearch from "./islands/livesearch/HistoSearch.tsx";
+import * as $livesearch_TalentsArtSideBar from "./islands/livesearch/TalentsArtSideBar.tsx";
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
@@ -103,6 +104,7 @@ const manifest = {
     "./islands/livesearch/CollectionSearch.tsx": $livesearch_CollectionSearch,
     "./islands/livesearch/FamousArtSideBar.tsx": $livesearch_FamousArtSideBar,
     "./islands/livesearch/HistoSearch.tsx": $livesearch_HistoSearch,
+    "./islands/livesearch/TalentsArtSideBar.tsx": $livesearch_TalentsArtSideBar,
     "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
   },
   baseUrl: import.meta.url,

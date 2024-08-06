@@ -59,6 +59,7 @@ const translation = {
     famousart: "Some of the most famous arts...",
     name: "Name(s):",
     names: "Name(s):",
+    talentsart: "Some works by talented artists...",
   },
   slider: {
     value_large: "Year ",

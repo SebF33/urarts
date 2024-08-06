@@ -115,6 +115,13 @@ export const handler = async (
         .orderBy(({ fn }) => fn("lower", ["art.name"]))
       break;
 
+    case "talentsart":
+      artQuery = artQuery
+        .where("artist.slug", "in", TALENTS)
+        .orderBy(sql`random()`)
+        .limit(10)
+      break;
+
     default:
       return ctx.renderNotFound();
   }
