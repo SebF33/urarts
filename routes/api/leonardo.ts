@@ -130,7 +130,9 @@ export const handler = async (
           pagectx[1]
         }</strong> &nbsp; <span class="inline-block"><img src="/flags/${
           pagectx[2]
-        }.png" class="h-6 inline-block align-top" alt="Urarts" draggable=${draggable}/></span></p>`;
+        }.png" class="h-6 inline-block align-top" alt="${
+          pagectx[2]
+        }" draggable=${draggable}/></span></p>`;
 
       break;
 
@@ -357,7 +359,7 @@ export const handler = async (
 
   htmlContent +=
     `<div class="text-[0.85rem] italic leading-none mt-4">
-    <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="Urarts" draggable=${draggable}/></span>Cliquez sur l’icône ou sur mes yeux pour me désactiver.
+    <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="U" draggable=${draggable}/></span>Cliquez sur l’icône ou sur mes yeux pour me désactiver.
     </div>`;
 
   return Promise.resolve(
