@@ -11,11 +11,12 @@ export default function AnimBrushStroke(
     title: string;
   },
 ) {
-  const [showAnimBrushStroke, setShowAnimBrushStroke] = useState(false);
-  const [showH1, setShowH1] = useState(false);
+  const [showAnimBrushStroke, setShowAnimBrushStroke] = useState<boolean>(false);
+  const [showH1, setShowH1] = useState<boolean>(false);
 
+  // Délai d'affichage initial
   useEffect(() => {
-    let delay = 670;
+    let delay = 480;
     if (props.secondaryColor === '#232a2d') delay = 400;
 
     const timeoutAnimBrushStroke = setTimeout(() => {
@@ -58,25 +59,16 @@ export default function AnimBrushStroke(
           <div
             class={`font-${props.font} mx-auto text-center relative inline-block p-12 overflow-hidden ${
               css({
-                "&::before": {
-                  background: `${props.color}`,
-                  content: '""',
-                  position: "absolute",
-                  height: "100%",
-                  width: "100%",
-                  top: "0",
-                  left: "0",
-                  "z-index": "-1",
-                  "clip-path": "url(#clip)",
-                },
+                background: `${props.color}`,
+                position: "relative",
+                "z-index": "-1",
+                "clip-path": "url(#clip)",
               })
             }`}
           >
             <h1
               class={`inline-block text-[1.6rem] sm:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${showH1 ? 'show' : ''} ${
-                css({
-                  color: `${props.secondaryColor}`,
-                })
+                css({color: `${props.secondaryColor}`})
               }`}
             >
               {props.title}
@@ -84,25 +76,13 @@ export default function AnimBrushStroke(
           </div>
           <svg
             id="BrushStroke"
-            class={`overflow-hidden`}
-            height="0"
-            width="0"
+            width="100" height="100" viewBox="0 0 100 100"
+            class="overflow-hidden"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
               <clipPath id="rect-cp">
-                <rect id="rect" x="0" y="0" width="0" height="1">
-                  <animate
-                    id="anim"
-                    attributeName="width"
-                    dur="1.000s"
-                    fill="freeze"
-                    calcMode="spline"
-                    keyTimes="0;1"
-                    keySplines="0.5,0,0.5,1"
-                    values="0;1"
-                  />
-                </rect>
+                <rect id="anim-rect" x="0" y="0"></rect>
               </clipPath>
               <clipPath id="clip" clipPathUnits="objectBoundingBox">
                 <use href="#brush-shape" clip-path="url(#rect-cp)" />

@@ -785,3 +785,15 @@ h1 {
     -o-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
     -moz-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
 }
+
+/* Brush stroke */
+@keyframes expand {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+#anim-rect {
+    width: 0;
+    height: 100%;
+    animation: expand 7s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+}
