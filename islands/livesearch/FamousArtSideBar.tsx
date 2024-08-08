@@ -27,7 +27,7 @@ export default function FamousArtSideBar() {
   const draggable = false;
   const type = "famousart";
 
-  // Délai d'affichage
+  // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
     return () => clearTimeout(timeoutId);

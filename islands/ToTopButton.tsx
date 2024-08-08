@@ -3,7 +3,7 @@ import { useEffect, useState } from "preact/hooks";
 import { UrartsTrimBrush } from "@components/Assets.tsx";
 
 export default function ToTopButton() {
-  const [showButton, setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
