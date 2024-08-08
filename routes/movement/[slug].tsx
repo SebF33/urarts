@@ -97,7 +97,7 @@ export default function MovementArtsPage(
               <div
                 class={`w-11/12 xl:w-3/6 mx-auto pt-48 text-center`}
               >
-                <p class={`pb-8 text-center text-[1.1rem] text-white text-justify leading-5 select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
+                <p class={`relative pb-8 text-center text-[1.1rem] text-white text-justify leading-5 z-10 select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
               </div>
             </div>
           </div>
