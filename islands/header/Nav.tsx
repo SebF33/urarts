@@ -164,6 +164,7 @@ export default function Nav(props: Props) {
 
       // Paramètres
       const params = {
+        lng: i18next.language,
         welcome: isWelcome,
         page: pageName,
         subpage: subpageSlug,
