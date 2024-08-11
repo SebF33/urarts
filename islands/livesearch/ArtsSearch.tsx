@@ -18,7 +18,7 @@ type Arts = Array<ArtCollection>;
 
 
 export default function ArtsSearch() {
-  const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState<object | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -36,6 +36,7 @@ export default function ArtsSearch() {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
     }
+
     setHoveredImageUrl(null);
     const timeoutId = setTimeout(() => { getPreviewImageUrl(id, slug) }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
@@ -45,8 +46,13 @@ export default function ArtsSearch() {
     const response = await ky
       .get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`)
       .json<Arts>();
-    
-    setHoveredImageUrl(response[0].url);
+
+    const hoveredImageUrl = {
+      id: response[0].id,
+      slug: response[0].artist_slug,
+      url: response[0].url
+    }
+    setHoveredImageUrl(hoveredImageUrl);
   }
   
 
@@ -152,7 +158,7 @@ export default function ArtsSearch() {
             </ul>
           )}
 
-          <Preview imageUrl={hoveredImageUrl} />
+          <Preview image={hoveredImageUrl} />
       </div>
 
     </div>

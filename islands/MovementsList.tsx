@@ -17,7 +17,7 @@ type Movements = Array<MovementRow>;
 export default function MovementsList(
   props: { movements: Movements },
 ) {
-  const [hoveredImageUrl, setHoveredImageUrl] = useState<string | null>(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState<object | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
 
   
@@ -32,6 +32,7 @@ export default function MovementsList(
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
     }
+    
     setHoveredImageUrl(null);
     const timeoutId = setTimeout(() => { getPreviewImageUrl(slug) }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
@@ -41,8 +42,13 @@ export default function MovementsList(
     const response = await ky
       .get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}&notalone`)
       .json<Arts>();
-    
-    setHoveredImageUrl(response[0].url);
+
+    const hoveredImageUrl = {
+      id: response[0].id,
+      slug: response[0].artist_slug,
+      url: response[0].url
+    }
+    setHoveredImageUrl(hoveredImageUrl);
   }
 
 
@@ -114,7 +120,7 @@ export default function MovementsList(
             </ul>
           )}
 
-          <Preview imageUrl={hoveredImageUrl} />
+          <Preview image={hoveredImageUrl} />
       </div>
     </div>
   );
