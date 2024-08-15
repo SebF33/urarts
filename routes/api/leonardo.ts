@@ -138,12 +138,12 @@ export const handler = async (
       htmlContent += `
         <p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.lng", { ns: "translation" })} &nbsp;
           <button onclick="handleLanguage('en')" class="inline-block flex items-center focus:outline-none">
-            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-105)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
+            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
           </button>
           <button onclick="handleLanguage('fr')" class="inline-block flex items-center focus:outline-none">
-            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-105)" src="/flags/France.png" alt="fr" draggable=false/>
+            <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/France.png" alt="fr" draggable=false/>
           </button>
-        </p>    
+        </p>
       `;
 
       htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.click", { ns: "translation" })} <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</span> ${i18next.t("leonardo.nav_theme", { ns: "translation" })}</p>`;
