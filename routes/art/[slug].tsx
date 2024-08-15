@@ -2,6 +2,8 @@ import { ArtistQuote } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import Avatar from "@islands/Avatar.tsx";
@@ -301,8 +303,7 @@ export default function ArtistArtsPage(
                       >
                         <span class={`text-7xl md:text-8xl`}>©</span>
                         <br />
-                        Les œuvres de l’artiste ne sont pas encore disponibles
-                        pour des raisons de droit d’auteur.
+                        {i18next.t("paper.copyright", { ns: "translation" })}
                       </p>
                     </div>
                   </div>
