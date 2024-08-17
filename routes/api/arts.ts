@@ -7,8 +7,13 @@ export const handler = async (
   req: Request,
   _ctx: RouteContext,
 ): Promise<Response> => {
+  let query
   const url = new URL(req.url);
-  const query = url.searchParams.get("name") || "";
+
+  query = url.searchParams.get("lng") || "";
+  const lng = query.length ? encodeURIComponent(query) : "en";
+
+  query = url.searchParams.get("name") || "";
   const filter = query.length ? query : "";
 
   const db = Db.getInstance();
@@ -18,16 +23,16 @@ export const handler = async (
     .select([
       "art.id",
       "art.name as name",
-      "first_name",
-      "last_name",
+      "first_name", "last_name",
       "gender",
       "avatar_url",
       "color",
       "artist.slug as slug",
-      "movement.name as movement",
       "polyptych",
       "url",
     ])
+    .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
+    .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
     .where("copyright", "!=", 2)
     .where(
       sql`(art.name LIKE ${"%" + filter + "%"}

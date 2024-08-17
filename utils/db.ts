@@ -62,6 +62,7 @@ interface ArtistTable {
 interface MovementTable {
   id: Generated<number>;
   name: string;
+  name_en: string;
   font: string;
   info: string | null;
   slug: string;

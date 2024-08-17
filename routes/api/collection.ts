@@ -11,6 +11,9 @@ export const handler = async (
   let query
   const url = new URL(req.url);
 
+  query = url.searchParams.get("lng") || "";
+  const lng = query.length ? encodeURIComponent(query) : "en";
+
   const isAlone = url.searchParams.has("alone");
   const isNotAlone = url.searchParams.has("notalone");
 
@@ -51,28 +54,19 @@ export const handler = async (
     .innerJoin("artist", "art.owner_id", "artist.id")
     .innerJoin("movement", "art.movement_id", "movement.id")
     .select([
-      "first_name",
-      "last_name",
+      "first_name", "last_name",
       "art.id",
       "movement.font as font",
-      "movement.name as movement",
       "movement.slug as movement_slug",
-      "polyptych",
-      "frame",
-      "url",
-      "url_2",
-      "url_3",
-      "url_4",
-      "url_5",
-      "gap_1",
-      "gap_2",
-      "gap_3",
-      "gap_4",
-      "gap_5",
+      "polyptych", "frame",
+      "url", "url_2", "url_3", "url_4", "url_5",
+      "gap_1", "gap_2", "gap_3", "gap_4", "gap_5",
       "color",
       "artist.slug as artist_slug",
       "copyright",
     ])
+    .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
+    .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
     .$if(isArtworks, (qb) => qb.select("art.name as name"))
     .$if(isArtworks, (qb) => qb.select("art.info as info"))
     .$if(isHistocharacters, (qb) => qb.select("histocharactername as name"))

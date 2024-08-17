@@ -15,6 +15,8 @@ import Title from "@islands/Title.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
+    const lng = i18next.language;
+
     const db = Db.getInstance();
     const { count } = db.fn;
 
@@ -41,11 +43,16 @@ export const handler: Handlers = {
       .selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
       .innerJoin("movement", "art.movement_id", "movement.id")
-      .select([
+      .$if(lng === 'fr', (qb) => qb.select([
         "movement.name",
         sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
         count("art.id").as("art_count"),
-      ])
+      ]))
+      .$if(lng === 'en', (qb) => qb.select([
+        "movement.name_en as name",
+        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name_en ELSE 'Others' END as movement_group`,
+        count("art.id").as("art_count"),
+      ]))
       .where("artist.slug", "not in", TALENTS)
       .where("copyright", "!=", 2)
       .groupBy("movement_group")

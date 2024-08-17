@@ -209,12 +209,13 @@ export const handler = async (
           .innerJoin("artist", "art.owner_id", "artist.id")
           .innerJoin("movement", "art.movement_id", "movement.id")
           .select([
-            "movement.name as movement_name",
             "artist.last_name as artist_last_name",
             "artist.avatar_url as avatar_url",
             "artist.color as color",
             "artist.slug as artist_slug",
           ])
+          .$if(lng === 'fr', (qb) => qb.select("movement.name as movement_name"))
+          .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement_name"))
           .where("movement.slug", "=", subpage)
           .where("artist.slug", "not in", TALENTS)
           .orderBy(sql`random()`)

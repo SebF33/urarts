@@ -13,7 +13,10 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 type Movements = Array<MovementRow>;
 
 export const handler: Handlers = {
-  async GET(_, ctx) {
+  async GET(req, ctx) {
+    const url = new URL(req.url);
+    const lng = url.searchParams.get("lng");
+    
     const db = Db.getInstance();
     const { count } = db.fn;
 
@@ -23,14 +26,16 @@ export const handler: Handlers = {
       .innerJoin("artist", "art.owner_id", "artist.id")
       .select([
         "movement.id",
-        "movement.name",
         "movement.slug",
         count("art.id").as("art_count"),
       ])
+      .$if(lng === 'fr', (qb) => qb.select("movement.name"))
+      .$if(lng === 'en', (qb) => qb.select("movement.name_en as name"))
       .where("movement.slug", "!=", "nonclasse")
       .where("copyright", "!=", 2)
       .groupBy("movement.id")
-      .orderBy("movement.name")
+      .$if(lng === 'fr', (qb) => qb.orderBy("movement.name"))
+      .$if(lng === 'en', (qb) => qb.orderBy("movement.name_en"))
       .execute();
 
     const movements = results.map((p) => ({

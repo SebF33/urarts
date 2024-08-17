@@ -18,6 +18,7 @@ export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug } = ctx.params;
     const url = new URL(req.url);
+    const lng = url.searchParams.get("lng");
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")
@@ -67,11 +68,14 @@ export const handler: Handlers = {
       const movementQuery = await db.selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
       .innerJoin("movement", "art.movement_id", "movement.id")
-      .select(["movement.name", "movement.font", "movement.slug"])
+      .select(["movement.font", "movement.slug"])
+      .$if(lng === 'fr', (qb) => qb.select("movement.name"))
+      .$if(lng === 'en', (qb) => qb.select("movement.name_en as name"))
       .distinct()
       .where("artist.slug", "=", result.slug)
       .where("movement.slug", "!=", "nonclasse")
-      .orderBy("movement.name")
+      .$if(lng === 'fr', (qb) => qb.orderBy("movement.name"))
+      .$if(lng === 'en', (qb) => qb.orderBy("movement.name_en"))
       .execute();
       
       const marginValues = ["-ml-2", "ml-6", "-ml-1", "ml-12", "-ml-3", "ml-2"];

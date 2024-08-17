@@ -2,6 +2,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
@@ -12,14 +14,14 @@ export const handler: Handlers = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
 
+    const lng = i18next.language;
+
     const db = Db.getInstance();
     const result = await db.selectFrom("movement")
-      .select([
-        "name",
-        "font",
-        "info",
-        "slug",
-      ]).where("slug", "=", slug).executeTakeFirst();
+      .select(["name", "font", "info", "slug"])
+      .$if(lng === 'fr', (qb) => qb.select("name"))
+      .$if(lng === 'en', (qb) => qb.select("name_en as name"))
+      .where("slug", "=", slug).executeTakeFirst();
 
     let desc: string | null = null;
     let font: string | null = null;
