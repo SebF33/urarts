@@ -13,9 +13,8 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 type Movements = Array<MovementRow>;
 
 export const handler: Handlers = {
-  async GET(req, ctx) {
-    const url = new URL(req.url);
-    const lng = url.searchParams.get("lng");
+  async GET(_, ctx) {
+    const lng = i18next.language;
     
     const db = Db.getInstance();
     const { count } = db.fn;

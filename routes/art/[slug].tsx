@@ -18,7 +18,8 @@ export const handler: Handlers = {
   async GET(req, ctx) {
     const { slug } = ctx.params;
     const url = new URL(req.url);
-    const lng = url.searchParams.get("lng");
+    
+    const lng = i18next.language;
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")

@@ -66,13 +66,13 @@ export default defineApp((_, ctx) => {
         />
 
         {/* CSS & JS */}
-        <script defer src="/styles/lib/alpine-persist3.13.5.min.js"></script>
-        <script defer src="/styles/lib/alpine3.13.5.min.js"></script>
+        <script defer src={asset("/styles/lib/alpine-persist3.13.5.min.js")}></script>
+        <script defer src={asset("/styles/lib/alpine3.13.5.min.js")}></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
         <link href={asset("/styles/style.css")} rel="stylesheet" />
         <link href={asset("/styles/lib/nouislider.min.css")} rel="stylesheet" />
         <link href={asset("/styles/nouislider.css")} rel="stylesheet" />
-        <script src="/styles/lib/nouislider.min.js"></script>
+        <script src={asset("/styles/lib/nouislider.min.js")}></script>
       </head>
 
       <body
