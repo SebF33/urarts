@@ -1,6 +1,7 @@
 import { Any } from "any";
 
 // Constantes globales
+export const DEFAULT_LNG = "en";
 export const DELAY_API_CALL = 150;
 export const DELAY_DEBOUNCE = 300;
 export const DELAY_DISPLAY = 20;

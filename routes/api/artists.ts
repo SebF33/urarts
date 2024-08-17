@@ -1,16 +1,21 @@
 import { Db } from "@utils/db.ts";
+import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
   _ctx: RouteContext,
 ): Promise<Response> => {
+  let query
   const url = new URL(req.url);
 
+  // Langue
+  query = url.searchParams.get("lng") || "";
+  const lng = query.length ? encodeURIComponent(query) : DEFAULT_LNG;
+
   // Genre
-  let query = url.searchParams.get("gender") || "";
+  query = url.searchParams.get("gender") || "";
   const genderFilter = query.length ? query : "";
   let hasGender;
   genderFilter === "" ? hasGender = false : hasGender = true;

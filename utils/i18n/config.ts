@@ -1,3 +1,5 @@
+
+import { DEFAULT_LNG } from "@utils/constants.ts";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import translationEnglish from "./en/translation.ts";
@@ -46,7 +48,7 @@ i18next
     //debug: true,
     defaultNS,
     detection: options,
-    fallbackLng: "en",
+    fallbackLng: DEFAULT_LNG,
     ns: ["translation"],
     resources,
     supportedLngs: ["en", "fr"],

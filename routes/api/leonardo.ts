@@ -1,8 +1,8 @@
 import { Db } from "@utils/db.ts";
+import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import i18next from "i18next";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { TALENTS } from "@utils/constants.ts";
 
 // API Leonardo
 export const handler = async (
@@ -12,8 +12,9 @@ export const handler = async (
   let query
   const url = new URL(req.url);
 
+  // Langue
   query = url.searchParams.get("lng") || "";
-  const lng = query.length ? encodeURIComponent(query) : "en";
+  const lng = query.length ? encodeURIComponent(query) : DEFAULT_LNG;
   i18next.changeLanguage(lng);
 
   query = url.searchParams.get("page") || "";

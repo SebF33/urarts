@@ -26,8 +26,8 @@ export default function CollectionSearch(props: Props) {
   // Appel à l'API
   useEffect(() => {
     let apiUrl;
-    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
-    else apiUrl = `${UrlBasePath}/api/collection?type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
+    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${i18next.language}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
+    else apiUrl = `${UrlBasePath}/api/collection?lng=${i18next.language}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
 
     setTimeout(() => {
       ky.get(apiUrl)

@@ -1,3 +1,4 @@
+import { DEFAULT_LNG } from "@utils/constants.ts";
 import { FreshContext } from "$fresh/server.ts";
 import { Cookie, getCookies, setCookie } from "cookie";
 import i18next from "i18next";
@@ -11,7 +12,7 @@ export async function handler(req: Request, ctx: FreshContext) {
 
   if (!lng) {
     // valeur par défaut si aucune langue n'est spécifiée
-    lng = "en";
+    lng = DEFAULT_LNG;
 
     // valeur selon le domaine
     if (domain === "urarts.fr") lng = "fr";

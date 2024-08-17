@@ -59,7 +59,7 @@ export default function ArtsSearch() {
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/arts?name=${debouncedValue}`)
+      ky.get(`${UrlBasePath}/api/arts?lng=${i18next.language}&name=${debouncedValue}`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);

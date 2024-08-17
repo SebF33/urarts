@@ -1,7 +1,7 @@
 import { Db } from "@utils/db.ts";
+import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { TALENTS } from "@utils/constants.ts";
 
 export const handler = async (
   req: Request,
@@ -10,8 +10,9 @@ export const handler = async (
   let query
   const url = new URL(req.url);
 
+  // Langue
   query = url.searchParams.get("lng") || "";
-  const lng = query.length ? encodeURIComponent(query) : "en";
+  const lng = query.length ? encodeURIComponent(query) : DEFAULT_LNG;
 
   query = url.searchParams.get("name") || "";
   const filter = query.length ? query : "";
