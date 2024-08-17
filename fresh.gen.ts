@@ -51,7 +51,7 @@ import * as $livesearch_FamousArtSideBar from "./islands/livesearch/FamousArtSid
 import * as $livesearch_HistoSearch from "./islands/livesearch/HistoSearch.tsx";
 import * as $livesearch_TalentsArtSideBar from "./islands/livesearch/TalentsArtSideBar.tsx";
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
-import type { Manifest } from "$fresh/server.ts";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
