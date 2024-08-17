@@ -8,6 +8,15 @@ export default function Note() {
 
   // Langue
   function handleLanguage(lng: Language) {
+    const storedLng = localStorage.getItem("i18nextLng");
+
+    if (storedLng !== lng) {
+      i18next.changeLanguage(lng);
+      i18next.on("languageChanged", (lng: Language) => { localStorage.setItem("i18nextLng", lng); });
+      globalThis.location.reload();
+    }
+    
+    /*
     if (i18next.language !== lng) {
       i18next.changeLanguage(lng, (err: Any, _t: Any) => {
         if (!err) {
@@ -18,6 +27,7 @@ export default function Note() {
         }
       });
     }
+    */
   };
 
   return (

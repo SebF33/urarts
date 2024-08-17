@@ -6,7 +6,8 @@ export async function handler(req: Request, ctx: FreshContext) {
   const url = new URL(req.url);
   const cookies = getCookies(req.headers);
   const domain = url.hostname;
-  let lng: string | null = url.searchParams.get("lng") || cookies.i18next;
+  let lng: string | null = cookies.i18next;
+  //let lng: string | null = url.searchParams.get("lng") || cookies.i18next;
 
   if (!lng) {
     // valeur par défaut si aucune langue n'est spécifiée
@@ -20,6 +21,7 @@ export async function handler(req: Request, ctx: FreshContext) {
   // définir la langue dans i18next
   await i18next.changeLanguage(lng);
 
+  /*
   // mettre à jour l'URL avec la langue si elle n'est pas présente ou incorrecte
   if (url.searchParams.get("lng") !== lng) {
     url.searchParams.set("lng", lng);
@@ -30,6 +32,7 @@ export async function handler(req: Request, ctx: FreshContext) {
       },
     });
   }
+  */
 
   // mettre à jour le cookie
   const response = await ctx.next();
