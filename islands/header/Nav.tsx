@@ -14,7 +14,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import { ApiIcon, ButtonLines, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
 
 export interface Props {
-  url: URL;
+  readonly url: URL;
 }
 
 export default function Nav(props: Props) {
@@ -320,12 +320,15 @@ export default function Nav(props: Props) {
 
   // Langue
   (globalThis as Any).handleLanguage = function(lng: Language) {
-    const storedLng = localStorage.getItem("i18nextLng");
-
-    if (storedLng !== lng) {
-      i18next.changeLanguage(lng);
-      i18next.on("languageChanged", (lng: Language) => { localStorage.setItem("i18nextLng", lng); });
-      location.reload();
+    if (i18next.language !== lng) {
+      i18next.changeLanguage(lng, (err: Any, _t: Any) => {
+        if (!err) {
+          const newUrl = new URL(globalThis.location.href);
+          newUrl.searchParams.set("lng", lng);
+          globalThis.history.replaceState({}, '', newUrl.toString());
+          location.reload();
+        }
+      });
     }
   }
 
