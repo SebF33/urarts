@@ -18,7 +18,7 @@ export type ArtCollection = {
   gap_3?: string;
   gap_4?: string;
   gap_5?: string;
-  info: string | null;
+  info: string;
   artist_slug: string;
   copyright: number;
   histocharacter: number;
@@ -53,11 +53,11 @@ export type ArtistRow = {
   nationality: string;
   birthyear: string;
   deathyear: string;
-  avatar_url?: string;
+  avatar_url: string;
   signature: string | null;
   color: string;
   site_web: string | null;
-  info: string | null;
+  info: string;
   slug: string;
 };
 
