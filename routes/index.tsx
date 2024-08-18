@@ -3,6 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
@@ -18,10 +20,14 @@ type Quote = Array<ArtistQuote>;
 
 export const handler: Handlers = {
   async GET(_, ctx) {
+    const lng = i18next.language;
+
     const db = Db.getInstance();
 
     const artistQuery = await db.selectFrom("artist")
       .selectAll()
+      .$if(lng === 'fr', (qb) => qb.select("info"))
+      .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .where("slug", "not in", TALENTS)
       .orderBy(sql`random()`)
       .limit(4)
@@ -45,8 +51,7 @@ export const handler: Handlers = {
     const artistQuote = await db.selectFrom("artist")
       .select([
         "id",
-        "first_name",
-        "last_name",
+        "first_name", "last_name",
         "avatar_url",
         "signature",
         "quote",
