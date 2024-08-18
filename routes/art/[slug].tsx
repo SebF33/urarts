@@ -24,22 +24,20 @@ export const handler: Handlers = {
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")
       .select([
-        "first_name",
-        "last_name",
+        "first_name", "last_name",
         "avatar_url",
-        "avatar_info",
-        "color",
-        "secondary_color",
+        "color", "secondary_color",
         "site_web",
-        "info",
         "nationality",
-        "birthyear",
-        "deathyear",
-        "signature",
-        "quote",
+        "birthyear", "deathyear",
+        "signature", "quote",
         "copyright",
         "slug",
       ])
+      .$if(lng === 'fr', (qb) => qb.select("avatar_info"))
+      .$if(lng === 'en', (qb) => qb.select("avatar_info_en as avatar_info"))
+      .$if(lng === 'fr', (qb) => qb.select("info"))
+      .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .where("slug", "=", slug)
       .executeTakeFirst();
 
@@ -242,7 +240,7 @@ export default function ArtistArtsPage(
                   draggable={draggable}
                 />
                 <p class="font-bold text-lg mb-2">
-                  {"Nationalité : " + nationality}
+                  {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                 </p>
                 <p class={`relative text-[1.1rem] text-justify leading-[1.16rem] select-none z-10`} dangerouslySetInnerHTML={{ __html: info }}></p>
               </div>

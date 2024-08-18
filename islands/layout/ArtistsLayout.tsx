@@ -82,7 +82,7 @@ export default function ArtistsLayout(
           content:
             `<strong style="font-size:1.3em;line-height:1.2;color:${p.color}"><a href="/art/${p.slug}">${p.last_name}</a></strong>
             <p style="font-size:1.15em;font-style:italic">${p.birthyear} — ${p.deathyear}</p>
-            <p style="font-size:1em;line-height:1.05;padding-bottom:8px">Nationalité : ${p.nationality}</p>
+            <p style="font-size:1em;line-height:1.05;padding-bottom:8px">${i18next.t("artists.nationality", { ns: "translation" })} ${p.nationality}</p>
             <p style="margin:8px;font-size:1.1em;text-justify:auto;line-height:1.2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>`,
           interactive: true,
           placement: "bottom",

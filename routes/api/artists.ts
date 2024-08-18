@@ -44,19 +44,18 @@ export const handler = async (
   const results = await db.selectFrom("artist")
     .select([
       "id",
-      "first_name",
-      "last_name",
+      "first_name", "last_name",
       "gender",
       "nationality",
-      "birthyear",
-      "deathyear",
+      "birthyear", "deathyear",
       "avatar_url",
       "signature",
       "color",
       "site_web",
-      "info",
       "slug",
     ])
+    .$if(lng === 'fr', (qb) => qb.select("info"))
+    .$if(lng === 'en', (qb) => qb.select("info_en as info"))
     .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
     .$if(hasYears, (qb) =>
       qb.where(

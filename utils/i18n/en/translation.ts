@@ -12,8 +12,13 @@ const translation = {
       Please contact the creator of the site via his email address
       <a href="mailto:sebastien.flouriot@urarts.art" class="relative underline z-10">sebastien.flouriot@urarts.art</a> in the event of a request or dispute relating to the exploitation of these visuals.</p>`,
   },
+  artists: {
+    artist: "Artist:",
+    nationality: "Nationality:",
+  },
   arts: {
     preview: "Preview",
+    public_domain: "Public domain",
   },
   common: {
     no_results: "No results",

@@ -1,3 +1,5 @@
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
 import { useEffect } from "preact/hooks";
 
@@ -13,7 +15,7 @@ export default function Avatar(
 
     if (avatar) {
       copyright = props.copyright === 0
-        ? '<s style="font-size:1.3em">©</s> Domaine public'
+        ? '<s style="font-size:1.3em">©</s> ' + i18next.t("arts.public_domain", { ns: "translation" })
         : '<span style="font-size:1.3em">©</span> ' + props.name;
 
       tippy(avatar, {

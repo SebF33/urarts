@@ -2,6 +2,8 @@ import { Any } from "any";
 import { ART_IMG_WRAPPER, DELAY_DISPLAY, NB_LOADING_ARTS } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
@@ -55,20 +57,20 @@ export default function ArtsLayout(
       const el = document.querySelector(`[data-artist-id="${p.id}"]`);
 
       if (el) {
-        copyright = p.copyright === 0 ? '<s style="font-size:1.3em">©</s> Domaine public' : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
+        copyright = p.copyright === 0 ? '<s style="font-size:1.3em">©</s> ' + i18next.t("arts.public_domain", { ns: "translation" }) : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
 
         if (props.type === "histocharacters") {
           content =
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
             <p style="margin-top:2px;font-size:1.1em;font-style:italic;line-height:1">${p.birthyear} — ${p.deathyear}</p>
-            <p style="margin-top:6px;line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="margin-top:6px;line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
             <p style="min-width:180px;margin-top:8px;line-height:1">${p.info}</p>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         } else {
           content =
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
             <p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}">${p.movement}</a></strong></p>
-            <p style="line-height:1">Artiste : <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
             <p style="min-width:180px;margin-top:8px;line-height:1">${p.info}</p>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         }

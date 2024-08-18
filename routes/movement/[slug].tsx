@@ -18,9 +18,11 @@ export const handler: Handlers = {
 
     const db = Db.getInstance();
     const result = await db.selectFrom("movement")
-      .select(["name", "font", "info", "slug"])
+      .select(["font", "slug"])
       .$if(lng === 'fr', (qb) => qb.select("name"))
       .$if(lng === 'en', (qb) => qb.select("name_en as name"))
+      .$if(lng === 'fr', (qb) => qb.select("info"))
+      .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .where("slug", "=", slug).executeTakeFirst();
 
     let desc: string | null = null;

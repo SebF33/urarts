@@ -61,7 +61,7 @@ export default function TalentsArtSideBar() {
           allowHTML: true,
           content:
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
-            <p style="line-height:1">Artiste : <strong style="color:${p.color}">${p.last_name}</strong></p>`,
+            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}">${p.last_name}</strong></p>`,
           delay: DELAY_TOOLTIP_TRIGGER,
           interactive: true,
           placement: "bottom",
