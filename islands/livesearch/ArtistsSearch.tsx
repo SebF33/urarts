@@ -119,7 +119,7 @@ export default function ArtistsSearch() {
     if (yearsSignal.value.length > 0) {
       setTimeout(() => {
         ky.get(
-          `${UrlBasePath}/api/artists?nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
+          `${UrlBasePath}/api/artists?lng=${i18next.language}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
         )
           .json<ArtistRow[]>()
           .then((response) => {
