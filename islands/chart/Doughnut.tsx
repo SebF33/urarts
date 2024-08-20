@@ -43,6 +43,30 @@ export default function Doughnut(
   useEffect(() => {
     if (!canvas.current) return;
 
+    const lng = i18next.language;
+    let backgroundColor: string[] = [];
+
+    if (lng === 'en') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].red}`,
+      ]
+    }
+    if (lng === 'fr') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].green}`,
+      ]
+    }
+
     Chart.register(...registerables);
     new Chart(canvas.current, {
       type: "doughnut",
@@ -52,14 +76,7 @@ export default function Doughnut(
         datasets: [
           {
             data: props.countResult,
-            backgroundColor: [
-              `${colorScheme[currentColorScheme].lighterdark}`,
-              `${colorScheme[currentColorScheme].gray}`,
-              `${colorScheme[currentColorScheme].yellow}`,
-              `${colorScheme[currentColorScheme].red}`,
-              `${colorScheme[currentColorScheme].blue}`,
-              `${colorScheme[currentColorScheme].green}`,
-            ],
+            backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
             hoverOffset: 1,
           } as ChartDataset,

@@ -43,6 +43,34 @@ export default function PolarArea(
   useEffect(() => {
     if (!canvas.current) return;
 
+    const lng = i18next.language;
+    let backgroundColor: string[] = [];
+
+    if (lng === 'en') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].magenta}`,
+        `${colorScheme[currentColorScheme].cyan}`,
+      ]
+    }
+    if (lng === 'fr') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].magenta}`,
+        `${colorScheme[currentColorScheme].cyan}`,
+      ]
+    }
+
     Chart.register(...registerables);
     new Chart(canvas.current, {
       type: "polarArea",
@@ -52,16 +80,7 @@ export default function PolarArea(
         datasets: [
           {
             data: props.countResult,
-            backgroundColor: [
-              `${colorScheme[currentColorScheme].lighterdark}`,
-              `${colorScheme[currentColorScheme].gray}`,
-              `${colorScheme[currentColorScheme].red}`,
-              `${colorScheme[currentColorScheme].green}`,
-              `${colorScheme[currentColorScheme].yellow}`,
-              `${colorScheme[currentColorScheme].blue}`,
-              `${colorScheme[currentColorScheme].magenta}`,
-              `${colorScheme[currentColorScheme].cyan}`,
-            ],
+            backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
           } as ChartDataset,
         ],
