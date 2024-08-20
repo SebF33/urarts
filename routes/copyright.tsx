@@ -3,6 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { TALENTS } from "@utils/constants.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -13,10 +15,23 @@ type Artists = Array<ArtistRow>;
 
 export const handler: Handlers = {
   async GET(_, ctx) {
+    const lng = i18next.language;
+
     const db = Db.getInstance();
 
     const artistQuery = await db.selectFrom("artist")
-      .selectAll()
+      .innerJoin("country", "artist.country_id", "country.id")
+      .select([
+        "artist.id",
+        "first_name", "last_name",
+        "birthyear", "deathyear",
+        "avatar_url", "signature", "color", "site_web",
+        "slug",
+      ])
+      .$if(lng === 'fr', (qb) => qb.select("info"))
+      .$if(lng === 'en', (qb) => qb.select("info_en as info"))
+      .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
+      .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
       .where("slug", "not in", TALENTS)
       .where("copyright", "=", 2)
       .orderBy(({ fn }) => fn("lower", ["last_name"]))

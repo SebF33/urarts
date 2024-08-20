@@ -26,7 +26,13 @@ export const handler: Handlers = {
 
     const artistQuery = await db.selectFrom("artist")
       .innerJoin("country", "artist.country_id", "country.id")
-      .selectAll()
+      .select([
+        "artist.id",
+        "first_name", "last_name",
+        "birthyear", "deathyear",
+        "avatar_url", "signature", "color", "site_web",
+        "slug",
+      ])
       .$if(lng === 'fr', (qb) => qb.select("info"))
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
