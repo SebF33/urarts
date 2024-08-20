@@ -42,20 +42,18 @@ export const handler = async (
 
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")
+    .innerJoin("country", "artist.country_id", "country.id")
     .select([
-      "id",
-      "first_name", "last_name",
-      "gender",
-      "nationality",
+      "artist.id",
+      "first_name", "last_name", "gender",
       "birthyear", "deathyear",
-      "avatar_url",
-      "signature",
-      "color",
-      "site_web",
+      "avatar_url", "signature", "color", "site_web",
       "slug",
     ])
     .$if(lng === 'fr', (qb) => qb.select("info"))
     .$if(lng === 'en', (qb) => qb.select("info_en as info"))
+    .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
+    .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
     .$if(hasGender, (qb) => qb.where("gender", "=", genderFilter))
     .$if(hasYears, (qb) =>
       qb.where(

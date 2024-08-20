@@ -11,12 +11,19 @@ import {
   SqliteQueryCompiler,
 } from "kysely";
 
+interface CountryTable {
+  id: Generated<number>;
+  name: string; // Nom du pays (fr)
+  name_en: string; // Nom du pays (en)
+  modified_at: ColumnType<Date, string | undefined, never>;
+}
+
 interface ArtistTable {
   id: Generated<number>;
+  country_id: number; // Pays d'origine de l'artiste
   first_name: string | null; // Prénom de l'artiste
   last_name: string; // Nom ou surnom de l'artiste
   gender: "Femme" | "Homme" | "Autre"; // Genre de l'artiste
-  nationality: string; // Pays d'origine de l'artiste
   birthyear: string; // Année de naissance de l'artiste
   deathyear: string; // Année de décès de l'artiste ("": non renseignée)
   avatar_url: string; // Avatar de l'artiste
@@ -48,8 +55,8 @@ interface MovementTable {
 
 interface ArtTable {
   id: Generated<number>;
-  owner_id: number;
-  movement_id: number;
+  owner_id: number; // Artiste de l'œuvre
+  movement_id: number; // Mouvement artistique de l'œuvre
   name: string; // Nom de l'œuvre d'art (fr)
   polyptych: number; // Nombre de panneaux
   frame: number; // Type d'encadrement (-1: atypique |0: street |1: canvas |2: cadre sans passe-partout |3: cadre avec passe-partout |4: cadre avec passe-partout sur photo)
@@ -77,11 +84,13 @@ interface ArtTable {
 
 export type Art = Selectable<ArtTable>;
 export type Artist = Selectable<ArtistTable>;
+export type Country = Selectable<CountryTable>;
 export type Movement = Selectable<MovementTable>;
 
 export interface DbSchema {
   art: ArtTable;
   artist: ArtistTable;
+  country: CountryTable;
   movement: MovementTable;
 }
 

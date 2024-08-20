@@ -23,12 +23,10 @@ export const handler: Handlers = {
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")
+      .innerJoin("country", "artist.country_id", "country.id")
       .select([
         "first_name", "last_name",
-        "avatar_url",
-        "color", "secondary_color",
-        "site_web",
-        "nationality",
+        "avatar_url", "color", "secondary_color", "site_web",
         "birthyear", "deathyear",
         "signature", "quote",
         "copyright",
@@ -38,6 +36,8 @@ export const handler: Handlers = {
       .$if(lng === 'en', (qb) => qb.select("avatar_info_en as avatar_info"))
       .$if(lng === 'fr', (qb) => qb.select("info"))
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
+      .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
+      .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
       .where("slug", "=", slug)
       .executeTakeFirst();
 

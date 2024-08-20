@@ -22,11 +22,17 @@ export const handler: Handlers = {
 
     const artistQuery = await db
       .selectFrom("artist")
-      .select([
-        "nationality",
-        sql`CASE WHEN nationality IN ('Allemagne', 'Belgique', 'Espagne', 'France', 'Italie') THEN nationality ELSE 'Autres' END as nationality_group`,
-        count("id").as("artist_count"),
-      ])
+      .innerJoin("country", "artist.country_id", "country.id")
+      .$if(lng === 'fr', (qb) => qb.select([
+        "country.name as nationality",
+        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Autres' END as nationality_group`,
+        count("artist.id").as("artist_count"),
+      ]))
+      .$if(lng === 'en', (qb) => qb.select([
+        "country.name_en as nationality",
+        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name_en ELSE 'Others' END as nationality_group`,
+        count("artist.id").as("artist_count"),
+      ]))
       .where("slug", "not in", TALENTS)
       .groupBy("nationality_group")
       .execute();
