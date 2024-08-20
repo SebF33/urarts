@@ -18,10 +18,23 @@ type Artists = Array<ArtistRow>;
 
 export const handler: Handlers = {
   async GET(_, ctx) {
+    const lng = i18next.language;
+
     const db = Db.getInstance();
 
     const artistQuery = await db.selectFrom("artist")
-      .selectAll()
+      .innerJoin("country", "artist.country_id", "country.id")
+      .select([
+        "artist.id",
+        "first_name", "last_name",
+        "birthyear", "deathyear",
+        "avatar_url", "signature", "color", "site_web",
+        "slug",
+      ])
+      .$if(lng === 'fr', (qb) => qb.select("info"))
+      .$if(lng === 'en', (qb) => qb.select("info_en as info"))
+      .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
+      .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
       .where("slug", "in", TALENTS)
       .orderBy(sql`random()`)
       .execute();
