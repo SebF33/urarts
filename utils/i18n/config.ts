@@ -1,5 +1,6 @@
 
 import { DEFAULT_LNG } from "@utils/constants.ts";
+import { CookieDomain } from "@/env.ts";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import translationEnglish from "./en/translation.ts";
@@ -34,7 +35,7 @@ const options = {
 
   // expiration et domaine pour le cookie défini
   cookieMinutes: 10,
-  cookieDomain: "urarts.art",
+  cookieDomain: CookieDomain,
 };
 
 export const resources = {
