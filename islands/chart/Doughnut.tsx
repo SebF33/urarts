@@ -18,6 +18,29 @@ export default function Doughnut(
   },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const lng = i18next.language;
+  let backgroundColor: string[] = [];
+
+  if (lng === 'en') {
+    backgroundColor = [
+      `${colorScheme[currentColorScheme].yellow}`,
+      `${colorScheme[currentColorScheme].blue}`,
+      `${colorScheme[currentColorScheme].lighterdark}`,
+      `${colorScheme[currentColorScheme].green}`,
+      `${colorScheme[currentColorScheme].gray}`,
+      `${colorScheme[currentColorScheme].red}`,
+    ]
+  }
+  if (lng === 'fr') {
+    backgroundColor = [
+      `${colorScheme[currentColorScheme].lighterdark}`,
+      `${colorScheme[currentColorScheme].gray}`,
+      `${colorScheme[currentColorScheme].yellow}`,
+      `${colorScheme[currentColorScheme].red}`,
+      `${colorScheme[currentColorScheme].blue}`,
+      `${colorScheme[currentColorScheme].green}`,
+    ]
+  }
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -43,30 +66,6 @@ export default function Doughnut(
   useEffect(() => {
     if (!canvas.current) return;
 
-    const lng = i18next.language;
-    let backgroundColor: string[] = [];
-
-    if (lng === 'en') {
-      backgroundColor = [
-        `${colorScheme[currentColorScheme].yellow}`,
-        `${colorScheme[currentColorScheme].blue}`,
-        `${colorScheme[currentColorScheme].lighterdark}`,
-        `${colorScheme[currentColorScheme].green}`,
-        `${colorScheme[currentColorScheme].gray}`,
-        `${colorScheme[currentColorScheme].red}`,
-      ]
-    }
-    if (lng === 'fr') {
-      backgroundColor = [
-        `${colorScheme[currentColorScheme].lighterdark}`,
-        `${colorScheme[currentColorScheme].gray}`,
-        `${colorScheme[currentColorScheme].yellow}`,
-        `${colorScheme[currentColorScheme].red}`,
-        `${colorScheme[currentColorScheme].blue}`,
-        `${colorScheme[currentColorScheme].green}`,
-      ]
-    }
-
     Chart.register(...registerables);
     new Chart(canvas.current, {
       type: "doughnut",
@@ -83,7 +82,7 @@ export default function Doughnut(
         ],
       },
     });
-  }, []);
+  }, [lng]);
 
   // Background pour la page des indicateurs
   useLayoutEffect(() => {

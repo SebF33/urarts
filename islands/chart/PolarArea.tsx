@@ -18,6 +18,33 @@ export default function PolarArea(
   },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const lng = i18next.language;
+  let backgroundColor: string[] = [];
+
+  if (lng === 'en') {
+    backgroundColor = [
+      `${colorScheme[currentColorScheme].lighterdark}`,
+      `${colorScheme[currentColorScheme].red}`,
+      `${colorScheme[currentColorScheme].green}`,
+      `${colorScheme[currentColorScheme].yellow}`,
+      `${colorScheme[currentColorScheme].blue}`,
+      `${colorScheme[currentColorScheme].gray}`,
+      `${colorScheme[currentColorScheme].magenta}`,
+      `${colorScheme[currentColorScheme].cyan}`,
+    ]
+  }
+  if (lng === 'fr') {
+    backgroundColor = [
+      `${colorScheme[currentColorScheme].lighterdark}`,
+      `${colorScheme[currentColorScheme].gray}`,
+      `${colorScheme[currentColorScheme].red}`,
+      `${colorScheme[currentColorScheme].green}`,
+      `${colorScheme[currentColorScheme].yellow}`,
+      `${colorScheme[currentColorScheme].blue}`,
+      `${colorScheme[currentColorScheme].magenta}`,
+      `${colorScheme[currentColorScheme].cyan}`,
+    ]
+  }
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -43,34 +70,6 @@ export default function PolarArea(
   useEffect(() => {
     if (!canvas.current) return;
 
-    const lng = i18next.language;
-    let backgroundColor: string[] = [];
-
-    if (lng === 'en') {
-      backgroundColor = [
-        `${colorScheme[currentColorScheme].lighterdark}`,
-        `${colorScheme[currentColorScheme].red}`,
-        `${colorScheme[currentColorScheme].green}`,
-        `${colorScheme[currentColorScheme].yellow}`,
-        `${colorScheme[currentColorScheme].blue}`,
-        `${colorScheme[currentColorScheme].gray}`,
-        `${colorScheme[currentColorScheme].magenta}`,
-        `${colorScheme[currentColorScheme].cyan}`,
-      ]
-    }
-    if (lng === 'fr') {
-      backgroundColor = [
-        `${colorScheme[currentColorScheme].lighterdark}`,
-        `${colorScheme[currentColorScheme].gray}`,
-        `${colorScheme[currentColorScheme].red}`,
-        `${colorScheme[currentColorScheme].green}`,
-        `${colorScheme[currentColorScheme].yellow}`,
-        `${colorScheme[currentColorScheme].blue}`,
-        `${colorScheme[currentColorScheme].magenta}`,
-        `${colorScheme[currentColorScheme].cyan}`,
-      ]
-    }
-
     Chart.register(...registerables);
     new Chart(canvas.current, {
       type: "polarArea",
@@ -86,7 +85,7 @@ export default function PolarArea(
         ],
       },
     });
-  }, []);
+  }, [lng]);
 
   return <canvas ref={canvas}></canvas>;
 }
