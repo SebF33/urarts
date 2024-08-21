@@ -38,7 +38,7 @@ export default function Nav(props: Props) {
   const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
   const leonardoStatus = localStorage.getItem('leonardo');
   useEffect(() => {
-    const ref = document.querySelector<HTMLElement>("#Icon");
+    const ref = document.querySelector<HTMLAnchorElement>("#U-Icon");
 
     if (ref) {
       const leonardoTooltip = tippy(ref, {
@@ -350,15 +350,15 @@ export default function Nav(props: Props) {
       <div class={`max-w-7xl w-full mx-auto px-4 z-[60]`}>
         <div class={`flex justify-between`}>
           <div class={`flex space-x-7`}>
-            <div class={`select-none`}>
+            <div class={`py-3 px-2 select-none`}>
               <a
-                class={`relative z-[60] flex items-center py-3 px-2 cursor-zoom-in`}
+                id="U-Icon"
+                onClick={handleUrartsClick}
+                class={`relative z-[60] flex items-center`}
                 draggable={draggable}
               >
                 <img
-                  id="Icon"
-                  onClick={handleUrartsClick}
-                  class={`h-10 w-10`}
+                  class={`block h-10 w-10`}
                   src="/icon_urarts.svg"
                   alt="U"
                   draggable={draggable}

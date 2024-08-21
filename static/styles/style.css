@@ -38,6 +38,17 @@ html {
     scrollbar-color: var(--color-lighterdark) var(--color-white);
 }
 
+/* Curseurs */
+.cursor-auto, body {
+    cursor: url(/cursors/cursor-auto.png), auto !important;
+}
+.cursor-help, #U-Icon {
+    cursor: url(/cursors/cursor-help.png), help !important;
+}
+.cursor-pointer, a:hover, button:hover {
+    cursor: url(/cursors/cursor-pointer.png), pointer !important;
+}
+
 /* Fonts */
 @font-face {
     font-family: Caveat Brush;
