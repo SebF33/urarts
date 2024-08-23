@@ -1,4 +1,3 @@
-import { Any } from "any";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { Language } from "@utils/i18n/i18next.d.ts";
@@ -8,33 +7,17 @@ export default function Note() {
 
   // Langue
   function handleLanguage(lng: Language) {
-    const storedLng = localStorage.getItem("i18nextLng");
-
-    if (storedLng !== lng) {
-      i18next.changeLanguage(lng);
-      i18next.on("languageChanged", (lng: Language) => { localStorage.setItem("i18nextLng", lng); });
-      globalThis.location.reload();
-    }
-    
-    /*
     if (i18next.language !== lng) {
-      i18next.changeLanguage(lng, (err: Any, _t: Any) => {
-        if (!err) {
-          const newUrl = new URL(globalThis.location.href);
-          newUrl.searchParams.set("lng", lng);
-          globalThis.history.replaceState({}, '', newUrl.toString());
-          location.reload();
-        }
-      });
+      i18next.changeLanguage(lng);
+      setTimeout(() => { globalThis.location.reload(); }, 200);
     }
-    */
   };
 
   return (
     <div class="paper max-w-[700px] mx-auto mt-12 md:mt-2 mb-2">
       <div class="tape-section"></div>
       <div class="flex flex-col w-full p-6 font-medium">
-        <p class="mb-4 text-2xl leading-5 z-10 select-none">
+        <p class="mb-4 text-2xl leading-6 z-10 select-none">
           {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
           <div class="inline-block">
             <button

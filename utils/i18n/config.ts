@@ -12,8 +12,8 @@ const options = {
   // ordre à partir duquel la langue de l'utilisateur doit être détectée
   order: [
     "querystring", // permet de définir explicitement la langue via un paramètre URL (?lng=fr)
-    "localStorage", // stocke les préférences des utilisateurs et peut être utilisé pour des données plus persistantes
     "cookie", // cookies utilisés pour se souvenir des préférences des utilisateurs au fil des sessions
+    "localStorage", // stocke les préférences des utilisateurs et peut être utilisé pour des données plus persistantes
     "sessionStorage", // stocke les données pour la durée de la session de la page
     "navigator", // vérifie les paramètres de langue du navigateur (langue préférée de l'utilisateur pour la navigation)
     "htmlTag", // examine l'attribut "lang" de la balise "html"
