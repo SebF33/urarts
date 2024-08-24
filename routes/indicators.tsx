@@ -15,8 +15,8 @@ import Title from "@islands/Title.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
-    const lng = i18next.language;
-
+    const lng = i18next.t("currentLng", { ns: "translation" });
+    
     const db = Db.getInstance();
     const { count } = db.fn;
 
@@ -131,9 +131,7 @@ export default function IndicatorsPage(
             margin="mt-5 mb-6"
           />
 
-          <div
-            class={`charts flex justify-center mx-auto max-w-xl`}
-          >
+          <div class={`charts flex justify-center mx-auto max-w-xl`}>
             <Doughnut
               countResult={artistCountResult}
               nationalityResult={artistNationalityResult}

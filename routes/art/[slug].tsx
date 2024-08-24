@@ -1,5 +1,6 @@
 import { ArtistQuote } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
+import DOMPurify from "npm:isomorphic-dompurify"
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -19,7 +20,7 @@ export const handler: Handlers = {
     const { slug } = ctx.params;
     const url = new URL(req.url);
     
-    const lng = i18next.language;
+    const lng = i18next.t("currentLng", { ns: "translation" });
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")
@@ -242,7 +243,7 @@ export default function ArtistArtsPage(
                 <p class="font-bold text-lg mb-2">
                   {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                 </p>
-                <p class={`relative text-[1.1rem] text-justify leading-[1.16rem] select-none z-10`} dangerouslySetInnerHTML={{ __html: info }}></p>
+                <p class={`relative text-[1.1rem] text-justify leading-[1.16rem] select-none z-10`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info) }}></p>
               </div>
 
               {site &&

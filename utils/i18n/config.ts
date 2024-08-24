@@ -1,6 +1,6 @@
 
-import { DEFAULT_LNG } from "@utils/constants.ts";
 import { CookieDomain } from "@/env.ts";
+import { DEFAULT_LNG } from "@utils/constants.ts";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import translationEnglish from "./en/translation.ts";

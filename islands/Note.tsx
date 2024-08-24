@@ -1,15 +1,17 @@
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { Language } from "@utils/i18n/i18next.d.ts";
+import { languageSignal } from "@utils/signals.ts";
 
 export default function Note() {
   const draggable = false;
 
   // Langue
   function handleLanguage(lng: Language) {
-    if (i18next.language !== lng) {
+    if (languageSignal.value !== lng) {
       i18next.changeLanguage(lng);
-      setTimeout(() => { globalThis.location.reload(); }, 200);
+      languageSignal.value = lng;
+      setTimeout(() => { globalThis.location.reload(); }, 100);
     }
   };
 

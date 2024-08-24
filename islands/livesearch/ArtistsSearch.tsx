@@ -6,7 +6,7 @@ import { Fragment, h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { nationalitySignal, yearsSignal } from "@utils/signals.ts";
+import { languageSignal, nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -119,7 +119,7 @@ export default function ArtistsSearch() {
     if (yearsSignal.value.length > 0) {
       setTimeout(() => {
         ky.get(
-          `${UrlBasePath}/api/artists?lng=${i18next.language}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
+          `${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`,
         )
           .json<ArtistRow[]>()
           .then((response) => {

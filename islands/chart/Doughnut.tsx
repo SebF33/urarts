@@ -8,39 +8,18 @@ import {
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { languageSignal } from "@utils/signals.ts";
 import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
   props: {
-    countResult: number[];
-    nationalityResult: string[];
-    totalArtistCountResult: number[];
+    readonly countResult: number[];
+    readonly nationalityResult: string[];
+    readonly totalArtistCountResult: number[];
   },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
-  const lng = i18next.language;
-  let backgroundColor: string[] = [];
-
-  if (lng === 'en') {
-    backgroundColor = [
-      `${colorScheme[currentColorScheme].yellow}`,
-      `${colorScheme[currentColorScheme].blue}`,
-      `${colorScheme[currentColorScheme].lighterdark}`,
-      `${colorScheme[currentColorScheme].green}`,
-      `${colorScheme[currentColorScheme].gray}`,
-      `${colorScheme[currentColorScheme].red}`,
-    ]
-  }
-  if (lng === 'fr') {
-    backgroundColor = [
-      `${colorScheme[currentColorScheme].lighterdark}`,
-      `${colorScheme[currentColorScheme].gray}`,
-      `${colorScheme[currentColorScheme].yellow}`,
-      `${colorScheme[currentColorScheme].red}`,
-      `${colorScheme[currentColorScheme].blue}`,
-      `${colorScheme[currentColorScheme].green}`,
-    ]
-  }
+  const lng = languageSignal.value;
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -54,9 +33,7 @@ export default function Doughnut(
       },
       title: {
         display: true,
-        font: {
-          size: 19,
-        },
+        font: { size: 19 },
         fullSize: false,
         text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
       },
@@ -65,6 +42,29 @@ export default function Doughnut(
 
   useEffect(() => {
     if (!canvas.current) return;
+
+    let backgroundColor: string[] = [];
+  
+    if (lng === 'en') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].red}`,
+      ]
+    }
+    if (lng === 'fr') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].green}`,
+      ]
+    }
 
     Chart.register(...registerables);
     new Chart(canvas.current, {
@@ -82,7 +82,7 @@ export default function Doughnut(
         ],
       },
     });
-  }, [lng]);
+  }, []);
 
   // Background pour la page des indicateurs
   useLayoutEffect(() => {

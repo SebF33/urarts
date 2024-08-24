@@ -7,6 +7,7 @@ import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -59,7 +60,7 @@ export default function ArtsSearch() {
   // Appel à l'API
   useEffect(() => {
     setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/arts?lng=${i18next.language}&name=${debouncedValue}`)
+      ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);

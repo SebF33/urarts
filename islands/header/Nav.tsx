@@ -6,7 +6,7 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { Language } from "@utils/i18n/i18next.d.ts";
-import { nationalitySignal, yearsSignal } from "@utils/signals.ts";
+import { languageSignal, nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -164,7 +164,7 @@ export default function Nav(props: Props) {
 
       // Paramètres
       const params = {
-        lng: i18next.language,
+        lng: languageSignal.value,
         welcome: isWelcome,
         page: pageName,
         subpage: subpageSlug,
@@ -320,9 +320,10 @@ export default function Nav(props: Props) {
 
   // Langue
   (globalThis as Any).handleLanguage = function(lng: Language) {
-    if (i18next.language !== lng) {
+    if (languageSignal.value !== lng) {
       i18next.changeLanguage(lng);
-      setTimeout(() => { globalThis.location.reload(); }, 200);
+      languageSignal.value = lng;
+      setTimeout(() => { globalThis.location.reload(); }, 100);
     }
   }
 

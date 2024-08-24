@@ -1,5 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import DOMPurify from "npm:isomorphic-dompurify"
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -14,7 +15,7 @@ export const handler: Handlers = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
 
-    const lng = i18next.language;
+    const lng = i18next.t("currentLng", { ns: "translation" });
 
     const db = Db.getInstance();
     const result = await db.selectFrom("movement")
@@ -101,7 +102,7 @@ export default function MovementArtsPage(
               <div
                 class={`w-11/12 xl:w-3/6 mx-auto pt-48 text-center`}
               >
-                <p class={`relative pb-8 text-center text-[1.1rem] text-white text-justify leading-5 z-10 select-none`} dangerouslySetInnerHTML={{ __html: info }}></p>
+                <p class={`relative pb-8 text-center text-[1.1rem] text-white text-justify leading-5 z-10 select-none`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info) }}></p>
               </div>
             </div>
           </div>

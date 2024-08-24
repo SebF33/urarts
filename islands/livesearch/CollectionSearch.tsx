@@ -3,6 +3,7 @@ import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART, DELAY_REACH_A
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -26,8 +27,8 @@ export default function CollectionSearch(props: Props) {
   // Appel à l'API
   useEffect(() => {
     let apiUrl;
-    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${i18next.language}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
-    else apiUrl = `${UrlBasePath}/api/collection?lng=${i18next.language}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
+    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
+    else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
 
     setTimeout(() => {
       ky.get(apiUrl)

@@ -23,6 +23,7 @@ const translation = {
   common: {
     no_results: "No results",
   },
+  currentLng: "en",
   error: {
     notfound: {
       msg: "Page not found:",

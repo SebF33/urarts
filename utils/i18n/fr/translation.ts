@@ -23,6 +23,7 @@ const translation = {
   common: {
     no_results: "Pas de résultats",
   },
+  currentLng: "fr",
   error: {
     notfound: {
       msg: "Page introuvable :",

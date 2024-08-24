@@ -4,6 +4,7 @@ import { DELAY_API_CALL } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
@@ -21,7 +22,7 @@ export default function WomenSearch() {
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/artists?lng=${i18next.language}&gender=${gender}`,
+        `${UrlBasePath}/api/artists?lng=${languageSignal.value}&gender=${gender}`,
       )
         .json<ArtistRow[]>()
         .then((response) => {

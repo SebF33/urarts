@@ -8,43 +8,18 @@ import {
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { languageSignal } from "@utils/signals.ts";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function PolarArea(
   props: {
-    countResult: number[];
-    nameResult: string[];
-    totalArtCountResult: number[];
+    readonly countResult: number[];
+    readonly nameResult: string[];
+    readonly totalArtCountResult: number[];
   },
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
-  const lng = i18next.language;
-  let backgroundColor: string[] = [];
-
-  if (lng === 'en') {
-    backgroundColor = [
-      `${colorScheme[currentColorScheme].lighterdark}`,
-      `${colorScheme[currentColorScheme].red}`,
-      `${colorScheme[currentColorScheme].green}`,
-      `${colorScheme[currentColorScheme].yellow}`,
-      `${colorScheme[currentColorScheme].blue}`,
-      `${colorScheme[currentColorScheme].gray}`,
-      `${colorScheme[currentColorScheme].magenta}`,
-      `${colorScheme[currentColorScheme].cyan}`,
-    ]
-  }
-  if (lng === 'fr') {
-    backgroundColor = [
-      `${colorScheme[currentColorScheme].lighterdark}`,
-      `${colorScheme[currentColorScheme].gray}`,
-      `${colorScheme[currentColorScheme].red}`,
-      `${colorScheme[currentColorScheme].green}`,
-      `${colorScheme[currentColorScheme].yellow}`,
-      `${colorScheme[currentColorScheme].blue}`,
-      `${colorScheme[currentColorScheme].magenta}`,
-      `${colorScheme[currentColorScheme].cyan}`,
-    ]
-  }
+  const lng = languageSignal.value;
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -66,9 +41,36 @@ export default function PolarArea(
       },
     },
   };
-
+  
   useEffect(() => {
     if (!canvas.current) return;
+    
+    let backgroundColor: string[] = [];
+  
+    if (lng === 'en') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].magenta}`,
+        `${colorScheme[currentColorScheme].cyan}`,
+      ]
+    }
+    if (lng === 'fr') {
+      backgroundColor = [
+        `${colorScheme[currentColorScheme].lighterdark}`,
+        `${colorScheme[currentColorScheme].gray}`,
+        `${colorScheme[currentColorScheme].red}`,
+        `${colorScheme[currentColorScheme].green}`,
+        `${colorScheme[currentColorScheme].yellow}`,
+        `${colorScheme[currentColorScheme].blue}`,
+        `${colorScheme[currentColorScheme].magenta}`,
+        `${colorScheme[currentColorScheme].cyan}`,
+      ]
+    }
 
     Chart.register(...registerables);
     new Chart(canvas.current, {
@@ -85,7 +87,7 @@ export default function PolarArea(
         ],
       },
     });
-  }, [lng]);
+  }, []);
 
   return <canvas ref={canvas}></canvas>;
 }

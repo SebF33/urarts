@@ -2,8 +2,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import i18next from "i18next";
-import "@utils/i18n/config.ts";
+import { languageSignal } from "@utils/signals.ts";
 import { MovementRow } from "@utils/types.d.ts";
 
 import Footer from "@islands/footer/Footer.tsx";
@@ -14,7 +13,7 @@ type Movements = Array<MovementRow>;
 
 export const handler: Handlers = {
   async GET(_, ctx) {
-    const lng = i18next.language;
+    const lng = languageSignal.value;
     
     const db = Db.getInstance();
     const { count } = db.fn;
