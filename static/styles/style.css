@@ -20,7 +20,7 @@
 
 /* Surligner un texte sélectionné en couleur */
 ::selection {
-    background-color: var(--color-blue);
+    background-color: var(--color-cyan);
 }
 
 /* Cacher la scrollbar principale */
@@ -42,11 +42,17 @@ html {
 .cursor-auto, body {
     cursor: url(/cursors/cursor-auto.png), auto !important;
 }
-.cursor-help, #U-Icon {
+.cursor-grab, .noUi-handle, .noUi-handle:hover {
+    cursor: url(/cursors/cursor-grab.png), grab !important;
+}
+.cursor-help, #U-Icon, #Urarts {
     cursor: url(/cursors/cursor-help.png), help !important;
 }
-.cursor-pointer, a:hover, button:hover {
+.cursor-pointer, a:hover, button:hover, canvas, .eye, .noUi-connects {
     cursor: url(/cursors/cursor-pointer.png), pointer !important;
+}
+.cursor-text, input {
+    cursor: url(/cursors/cursor-text.png), text !important;
 }
 
 /* Fonts */
@@ -588,7 +594,6 @@ h1 {
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .left-eye {

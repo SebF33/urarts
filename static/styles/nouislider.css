@@ -1,13 +1,5 @@
 /* noUiSlider */
 
-.noUi-connects {
-  cursor: pointer;
-}
-
-.noUi-handle {
-  cursor: grab;
-}
-
 .noUi-marker-large,
 .noUi-marker-sub,
 .noUi-touch-area {
