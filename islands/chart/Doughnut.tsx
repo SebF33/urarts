@@ -1,3 +1,4 @@
+import { Any } from "any";
 import {
   Chart,
   ChartDataset,
@@ -6,9 +7,10 @@ import {
   registerables,
 } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { languageSignal } from "@utils/signals.ts";
+import { languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
@@ -16,9 +18,11 @@ export default function Doughnut(
     readonly countResult: number[];
     readonly nationalityResult: string[];
     readonly totalArtistCountResult: number[];
+    readonly valueResult: string[];
   },
 ) {
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartInstanceRef = useRef<Chart | null>(null);
   const lng = languageSignal.value;
 
   // Options
@@ -26,7 +30,7 @@ export default function Doughnut(
   const options: ChartOptions = {
     plugins: {
       legend: {
-        onHover: (event, legendItem, legend) => {
+        onHover: (event: Any) => {
           (event?.native?.target as HTMLElement).style.cursor = "pointer";
         },
         position: "top",
@@ -38,10 +42,26 @@ export default function Doughnut(
         text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
       },
     },
+    onClick: (event: Any) => {
+      if (chartInstanceRef.current) {
+        const elements = chartInstanceRef.current.getElementsAtEventForMode(
+          event,
+          'nearest',
+          { intersect: true },
+          false
+        );
+
+        if (elements.length > 0) {
+          const customDataValue = chartInstanceRef.current.data.datasets[elements[0].datasetIndex].customData[elements[0].index];
+          const href = '/artists?nationality=' + customDataValue;
+          setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+        }
+      }
+    }
   };
 
   useEffect(() => {
-    if (!canvas.current) return;
+    if (!canvasRef.current) return;
 
     let backgroundColor: string[] = [];
   
@@ -67,7 +87,8 @@ export default function Doughnut(
     }
 
     Chart.register(...registerables);
-    new Chart(canvas.current, {
+
+    chartInstanceRef.current = new Chart(canvasRef.current, {
       type: "doughnut",
       options: options,
       data: {
@@ -77,12 +98,20 @@ export default function Doughnut(
             data: props.countResult,
             backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
+            customData: props.valueResult,
             hoverOffset: 1,
           } as ChartDataset,
         ],
       },
     });
-  }, []);
+
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+        chartInstanceRef.current = null;
+      }
+    };
+  }, [lng]);
 
   // Background pour la page des indicateurs
   useLayoutEffect(() => {
@@ -101,5 +130,5 @@ export default function Doughnut(
     }
   }, []);
 
-  return <canvas ref={canvas}></canvas>;
+  return <canvas ref={canvasRef}></canvas>;
 }

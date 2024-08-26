@@ -19,7 +19,7 @@
     "@islands/": "./islands/",
     "@utils/": "./utils/",
     "any": "https://deno.land/std@0.159.0/encoding/_yaml/utils.ts",
-    "chartjs": "https://cdn.skypack.dev/chart.js@4.3.0",
+    "chartjs": "https://cdn.skypack.dev/chart.js@4.4.4",
     "cookie": "https://deno.land/std@0.224.0/http/cookie.ts",
     "i18next": "https://deno.land/x/i18next@v23.11.4/index.js",
     "i18next-browser-languagedetector": "npm:i18next-browser-languagedetector@8.0.0",

@@ -15,7 +15,7 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 
-export default function ArtistsSearch() {
+export default function ArtistsSearch(props: { nationality: string }) {
   const [flags, setFlags] = useState(1);
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -63,16 +63,12 @@ export default function ArtistsSearch() {
   };
 
   useEffect(() => {
-    if (flags === 4) {
-      setFlags(1);
-    }
-  }, [flags]);
+    // Nationalité si paramètre dans l'URL
+    if (props.nationality !== "") nationalitySignal.value = props.nationality;
 
-  useEffect(() => {
+    // Slider
     const slider: HTMLElement | null = document.getElementById("slider");
-
     const valuesForSlider = [1400,1500,1600,1700,1800,1900,2000,2100];
-
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -95,7 +91,7 @@ export default function ArtistsSearch() {
 
     slider?.noUiSlider.set(["1900", "2000"]);
 
-    // Extrémités
+    // Extrémités du slider
     const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
     for (let i = 0; i < valuesLarge.length; i++) {
       valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
@@ -113,6 +109,12 @@ export default function ArtistsSearch() {
       slider?.noUiSlider.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    if (flags === 4) {
+      setFlags(1);
+    }
+  }, [flags]);
 
   // Appel à l'API
   useEffect(() => {

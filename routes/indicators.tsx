@@ -13,6 +13,7 @@ import PolarArea from "@islands/chart/PolarArea.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import Title from "@islands/Title.tsx";
 
+
 export const handler: Handlers = {
   async GET(_, ctx) {
     const lng = i18next.t("currentLng", { ns: "translation" });
@@ -25,12 +26,16 @@ export const handler: Handlers = {
       .innerJoin("country", "artist.country_id", "country.id")
       .$if(lng === 'fr', (qb) => qb.select([
         "country.name as nationality",
+        "country.name as nationality_value",
         sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Autres' END as nationality_group`,
+        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
         count("artist.id").as("artist_count"),
       ]))
       .$if(lng === 'en', (qb) => qb.select([
         "country.name_en as nationality",
+        "country.name as nationality_value",
         sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name_en ELSE 'Others' END as nationality_group`,
+        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
         count("artist.id").as("artist_count"),
       ]))
       .where("slug", "not in", TALENTS)
@@ -51,12 +56,16 @@ export const handler: Handlers = {
       .innerJoin("movement", "art.movement_id", "movement.id")
       .$if(lng === 'fr', (qb) => qb.select([
         "movement.name",
+        "movement.slug as movement_value",
         sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
+        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
         count("art.id").as("art_count"),
       ]))
       .$if(lng === 'en', (qb) => qb.select([
         "movement.name_en as name",
+        "movement.slug as movement_value",
         sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name_en ELSE 'Others' END as movement_group`,
+        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
         count("art.id").as("art_count"),
       ]))
       .where("artist.slug", "not in", TALENTS)
@@ -74,29 +83,36 @@ export const handler: Handlers = {
 
     const artistCountResult: number[] = artistQuery.map((item) => parseFloat(item.artist_count));
     const artistNationalityResult: string[] = artistQuery.map((item) => item.nationality_group);
+    const artistNationalityValueResult: string[] = artistQuery.map((item) => item.nationality_value);
     const totalArtistCountResult: number[] = totalArtistQuery.map((item) => parseFloat(item.artist_count));
-
+    
     const movementCountResult: number[] = movementQuery.map((item) => parseFloat(item.art_count));
     const movementNameResult: string[] = movementQuery.map((item) => item.movement_group);
+    const movementValueResult: string[] = movementQuery.map((item) => item.movement_value);
     const totalArtCountResult: number[] = totalArtQuery.map((item) => parseFloat(item.art_count));
-
+    
     return ctx.render({
       artistCountResult,
       artistNationalityResult,
+      artistNationalityValueResult,
       movementCountResult,
       movementNameResult,
+      movementValueResult,
       totalArtCountResult,
       totalArtistCountResult,
     });
   },
 };
 
+
 export default function IndicatorsPage(
   props: PageProps<{
     artistCountResult: number[];
     artistNationalityResult: string[];
+    artistNationalityValueResult: string[];
     movementCountResult: number[];
     movementNameResult: string[];
+    movementValueResult: string[];
     totalArtCountResult: number[];
     totalArtistCountResult: number[];
   }>,
@@ -104,13 +120,16 @@ export default function IndicatorsPage(
   const {
     artistCountResult,
     artistNationalityResult,
+    artistNationalityValueResult,
     movementCountResult,
     movementNameResult,
+    movementValueResult,
     totalArtCountResult,
     totalArtistCountResult,
   } = props.data;
   const desc = "Indicateurs pour Urarts.";
   const title = "Urarts - Indicateurs";
+
 
   return (
     <>
@@ -136,12 +155,14 @@ export default function IndicatorsPage(
               countResult={artistCountResult}
               nationalityResult={artistNationalityResult}
               totalArtistCountResult={totalArtistCountResult}
+              valueResult={artistNationalityValueResult}
             />
             <div style="height:60px; width:60px"></div>
             <PolarArea
               countResult={movementCountResult}
               nameResult={movementNameResult}
               totalArtCountResult={totalArtCountResult}
+              valueResult={movementValueResult}
             />
           </div>
         </div>
