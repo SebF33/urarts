@@ -1,6 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -15,8 +15,8 @@ import Title from "@islands/Title.tsx";
 
 
 export const handler: Handlers = {
-  async GET(_, ctx) {
-    const lng = i18next.t("currentLng", { ns: "translation" });
+  async GET(_: Request, ctx: FreshContext) {
+    const lng = i18next.language;
     
     const db = Db.getInstance();
     const { count } = db.fn;

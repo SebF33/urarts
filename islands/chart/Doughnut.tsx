@@ -1,16 +1,9 @@
-import { Any } from "any";
-import {
-  Chart,
-  ChartDataset,
-  ChartOptions,
-  defaults,
-  registerables,
-} from "chartjs";
+import { Chart, defaults, registerables } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_CHART_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { languageSignal, nationalitySignal } from "@utils/signals.ts";
+import { languageSignal } from "@utils/signals.ts";
 import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export default function Doughnut(
@@ -27,12 +20,9 @@ export default function Doughnut(
 
   // Options
   defaults.font.family = "Caveat Brush";
-  const options: ChartOptions = {
+  const options = {
     plugins: {
       legend: {
-        onHover: (event: Any) => {
-          (event?.native?.target as HTMLElement).style.cursor = "pointer";
-        },
         position: "top",
       },
       title: {
@@ -42,7 +32,7 @@ export default function Doughnut(
         text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
       },
     },
-    onClick: (event: Any) => {
+    onClick: (event: MouseEvent) => {
       if (chartInstanceRef.current) {
         const elements = chartInstanceRef.current.getElementsAtEventForMode(
           event,
@@ -54,7 +44,7 @@ export default function Doughnut(
         if (elements.length > 0) {
           const customDataValue = chartInstanceRef.current.data.datasets[elements[0].datasetIndex].customData[elements[0].index];
           const href = '/artists?nationality=' + customDataValue;
-          setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+          setTimeout(() => { window.location.href = href; }, DELAY_CHART_REACH_HREF);
         }
       }
     }
@@ -100,7 +90,7 @@ export default function Doughnut(
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
             hoverOffset: 1,
-          } as ChartDataset,
+          }
         ],
       },
     });

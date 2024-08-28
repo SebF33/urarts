@@ -108,7 +108,6 @@ const translation = {
     copyright: "The artist’s artwork is not yet available for copyright reasons.",
     famousart: "Some of the most famous arts...",
     name: "Name(s):",
-    names: "Name(s):",
     talentsart: "Some artwork by talented artists...",
   },
   slider: {

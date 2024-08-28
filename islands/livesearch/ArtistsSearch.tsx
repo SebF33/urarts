@@ -168,7 +168,7 @@ export default function ArtistsSearch(props: { nationality: string }) {
           </div>
           <button
             onClick={() => {nationalitySignal.value = "Monde"}}
-            class={`absolute flex items-center -top-16 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none`}
+            class={`absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none`}
           >
             <img
               class={worldFlagClasses}
@@ -610,11 +610,11 @@ export default function ArtistsSearch(props: { nationality: string }) {
             />
           </button>
 
-          <div class="absolute w-[122px] top-32 sm:top-5 left-5 sm:left-16 right-0 z-10">
-            <div class="paper max-w-[122px] min-w-[122px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
+          <div class="absolute w-[80px] top-32 sm:top-5 left-5 sm:left-16 right-0 z-10">
+            <div class="paper max-w-[80px] min-w-[80px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
               <div class="top-tape max-h-2.5"></div>
               <h2 class="text-lg font-medium text-lighterdark">
-                {i18next.t("paper.names", { ns: "translation" })}
+                {i18next.t("paper.name", { ns: "translation" })}
               </h2>
             </div>
           </div>

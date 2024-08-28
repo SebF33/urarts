@@ -108,7 +108,6 @@ const translation = {
     copyright: "Les œuvres de l’artiste ne sont pas encore disponibles pour des raisons de droit d’auteur.",
     famousart: "Œuvres d’art parmi les plus célèbres...",
     name: "Nom(s) :",
-    names: "Prénom(s), nom(s) :",
     talentsart: "Quelques œuvres d’artistes talentueux...",
   },
   slider: {

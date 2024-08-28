@@ -1,13 +1,6 @@
-import { Any } from "any";
-import {
-  Chart,
-  ChartDataset,
-  ChartOptions,
-  defaults,
-  registerables,
-} from "chartjs";
+import { Chart, defaults, registerables } from "chartjs";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_CHART_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { languageSignal } from "@utils/signals.ts";
@@ -27,12 +20,9 @@ export default function PolarArea(
 
   // Options
   defaults.font.family = "Caveat Brush";
-  const options: ChartOptions = {
+  const options = {
     plugins: {
       legend: {
-        onHover: (event: Any) => {
-          (event?.native?.target as HTMLElement).style.cursor = "pointer";
-        },
         position: "top",
       },
       title: {
@@ -42,7 +32,7 @@ export default function PolarArea(
         text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" }),
       },
     },
-    onClick: (event: Any) => {
+    onClick: (event: MouseEvent) => {
       if (chartInstanceRef.current) {
         const elements = chartInstanceRef.current.getElementsAtEventForMode(
           event,
@@ -56,7 +46,7 @@ export default function PolarArea(
           let href;
           if (customDataValue === 'movements')  href = '/' + customDataValue;
           else  href = '/movement/' + customDataValue;
-          setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+          setTimeout(() => { window.location.href = href; }, DELAY_CHART_REACH_HREF);
         }
       }
     }
@@ -105,7 +95,7 @@ export default function PolarArea(
             backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
-          } as ChartDataset,
+          }
         ],
       },
     });

@@ -1,7 +1,7 @@
 import { ArtistQuote } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import DOMPurify from "npm:isomorphic-dompurify"
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -16,11 +16,10 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 type Quote = Array<ArtistQuote>;
 
 export const handler: Handlers = {
-  async GET(req, ctx) {
+  async GET(req: Request, ctx: FreshContext) {
+    const lng = i18next.language;
     const { slug } = ctx.params;
     const url = new URL(req.url);
-    
-    const lng = i18next.t("currentLng", { ns: "translation" });
 
     const db = Db.getInstance();
     const result = await db.selectFrom("artist")

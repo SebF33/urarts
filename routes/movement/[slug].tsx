@@ -1,7 +1,7 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import DOMPurify from "npm:isomorphic-dompurify"
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -12,10 +12,9 @@ import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 export const handler: Handlers = {
-  async GET(_, ctx) {
+  async GET(_: Request, ctx: FreshContext) {
+    const lng = i18next.language;
     const { slug } = ctx.params;
-
-    const lng = i18next.t("currentLng", { ns: "translation" });
 
     const db = Db.getInstance();
     const result = await db.selectFrom("movement")
