@@ -2,11 +2,26 @@ import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
+import { UrlBasePath } from "@/env.ts";
 
+
+// API Artistes
 export const handler = async (
   req: Request,
   _ctx: RouteContext,
 ): Promise<Response> => {
+
+  // Déterminer si l'origine de la demande est autorisée
+  const requestOrigin = req.headers.get("Origin") || req.headers.get("Referer") || "";
+  const isAllowedOrigin = requestOrigin.startsWith(UrlBasePath);
+  if (!isAllowedOrigin) {
+    return new Response(JSON.stringify({ error: "Access Denied" }), {
+      status: 403,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+
+
   let query
   const url = new URL(req.url);
 
@@ -20,7 +35,7 @@ export const handler = async (
   let hasGender;
   genderFilter === "" ? hasGender = false : hasGender = true;
 
-  // Nom
+  // Noms
   query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
 
@@ -72,11 +87,12 @@ export const handler = async (
     .orderBy(({ fn }) => fn("lower", ["first_name"]))
     .execute();
 
+  
   return Promise.resolve(
     new Response(JSON.stringify(results), {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": UrlBasePath,
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers": "X-Requested-With",
       },
