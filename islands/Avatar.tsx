@@ -33,7 +33,7 @@ export default function Avatar(
   return (
     <div
       id="Avatar"
-      class={`p-6 w-60 mx-auto text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
+      class={`relative p-6 w-60 mx-auto text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
     >
       <img
         src={props.url}

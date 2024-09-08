@@ -82,7 +82,7 @@ export const handler = async (
 
     if (factResult) {
       htmlContent = `<h2><strong>${i18next.t("leonardo.fact", { ns: "translation" })}</strong></h2>`;
-      htmlContent += `<p class="text-[1rem] leading-none mt-1">${factResult.msg}</p>`;
+      htmlContent += `<p class="text-[1rem] leading-none mt-1" style="max-width:400px">${factResult.msg}</p>`;
     }
     else {
       return Promise.resolve(
