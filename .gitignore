@@ -10,6 +10,6 @@ TO_DO_LIST.md
 /static/fonts
 /static/signs
 /static/symbols
-/utils/db_migration.ts
+/utils/db
 # Fresh build directory
 _fresh/
