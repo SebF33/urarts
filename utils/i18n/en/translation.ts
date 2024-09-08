@@ -97,7 +97,7 @@ const translation = {
     about: "About Urarts...",
     api: "A sample of the API.",
     artists: "Artists",
-    arts: "Arts",
+    arts: "Artworks",
     histocharacters: "Historical figures.",
     home: "Home",
     indicators: "Indicators for Urarts.",
@@ -118,7 +118,7 @@ const translation = {
   title: {
     about: "About",
     artists: "Artists",
-    arts: "Arts",
+    arts: "Artworks",
     histocharacters: "Historical figures",
     indicators: "Indicators",
     movements: "Movements",
