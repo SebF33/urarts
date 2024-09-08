@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2024-09-08]
+
+### Nouveautés
+- Ajout des anecdotes du guide contextuel "Leonardo".
+
 ## [2024-08-06]
 
 ### Nouveautés

@@ -82,6 +82,23 @@ interface ArtTable {
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
+interface TopicTable {
+  id: Generated<number>;
+  name: string; // 
+  name_en: string; // 
+  slug: string;
+  modified_at: ColumnType<Date, string | undefined, never>;
+}
+
+interface FactTable {
+  id: Generated<number>;
+  topic_slug: string; // 
+  target_slug: string; //
+  msg: string; // 
+  msg_en: string; // 
+  modified_at: ColumnType<Date, string | undefined, never>;
+}
+
 export type Art = Selectable<ArtTable>;
 export type Artist = Selectable<ArtistTable>;
 export type Country = Selectable<CountryTable>;
@@ -91,7 +108,9 @@ export interface DbSchema {
   art: ArtTable;
   artist: ArtistTable;
   country: CountryTable;
+  fact: FactTable;
   movement: MovementTable;
+  topic: TopicTable;
 }
 
 export class Db {

@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { css } from "@twind/core";
-import { DELAY_LEONARDO_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -33,6 +33,7 @@ export default function Nav(props: Props) {
   const mobileHover = "hover:bg-lighterdark transition duration-300";
   const mobilePrimaryAnchor = `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
   const mobileSecondaryAnchor = `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
+
 
   // Leonardo
   const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
@@ -127,71 +128,60 @@ export default function Nav(props: Props) {
     }
   }, []);
 
-  // Appel à l'API Leonardo
+
+  // Appels à l'API Leonardo
   useEffect(() => {
     if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
-
-    //console.log("url : " + props.url);
+  
     const url = new URL(props.url);
     
     setTimeout(() => {
-      // Paramètre 1
-      let isWelcome = "false";
-      const isPartial = url.searchParams.get("fresh-partial") || "";
-      if (isPartial !== "true") isWelcome = "true";
-
-      // Paramètre 2
+      // Paramètres pour la requête
       const pageName = url.pathname.split("/")[1];
-      if ((pageName === "artists" || pageName === "histocharacters") && yearsSignal.value.length < 1) return;
-
-      // Paramètre 3
       const subpageSlug = url.pathname.split("/")[2];
-
-      // Paramètre 4
-      let ctxArray:string[] = [];
-      const idArtwork = url.searchParams.get("id") || false;
-      if (idArtwork && pageName !== "histocharacters") {
-        let alone;
-        const isAlone = url.searchParams.has("alone");
-        isAlone ? alone = "alone" : alone = "";
-        ctxArray = [idArtwork, alone];
-      }
-      if (pageName === "artists" || pageName === "histocharacters") {
-        const years = yearsSignal.value.toString().split(",", 2);
-        ctxArray = [years[0], years[1], nationalitySignal.value];
-      }
+      const ctxArray = url.searchParams.get("id") ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""] 
+        : (pageName === "artists" || pageName === "histocharacters") ? [yearsSignal.value[0], yearsSignal.value[1], nationalitySignal.value] : [];
       const ctx = JSON.stringify(ctxArray.join("_"));
 
-      // Paramètres
-      const params = {
-        lng: languageSignal.value,
-        welcome: isWelcome,
-        page: pageName,
-        subpage: subpageSlug,
-        pagectx: ctx,
-      };
+      // Appel
+      const fetchLeonardo = async (params: Record<string, Any>) => {
+        const leonardoContent = document.querySelector("#leonardoContent");
 
-      const queryString = new URLSearchParams(params).toString();
-      //console.log(queryString);
-
-      const fetchData = async () => {
         try {
-          const response = await ky.get(`${UrlBasePath}/api/leonardo?${queryString}`);
+          const response = await ky.get(`${UrlBasePath}/api/leonardo?${new URLSearchParams(params).toString()}`);
           const leonardoResponse = await response.text();
 
           // Contenu
-          const leonardoContent = document.querySelector("#leonardoContent");
-          if (leonardoContent) leonardoContent.innerHTML = leonardoResponse;
+          if (leonardoContent && leonardoResponse !== "no_change") leonardoContent.innerHTML = leonardoResponse;
 
-        } catch (error) {
-          console.error("Erreur de l'API Leonardo.", error);
-          const leonardoContent = document.querySelector("#leonardoContent");
-          if (leonardoContent) leonardoContent.innerHTML = "Erreur de l'API Leonardo.";
+        } catch {
+          if (leonardoContent) leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
         }
       };
-      fetchData();
+    
+      // Requête initiale
+      fetchLeonardo({
+        lng: languageSignal.value,
+        welcome: url.searchParams.get("fresh-partial") !== "true" ? "true" : "false",
+        page: pageName,
+        subpage: subpageSlug,
+        pagectx: ctx,
+      });
+    
+      // Seconde requête (pour l'anecdote)
+      setTimeout(() => {
+        fetchLeonardo({
+          lng: languageSignal.value,
+          page: pageName,
+          subpage: subpageSlug,
+          pagectx: ctx,
+          fact: "true",
+        });
+      }, DELAY_LEONARDO_FACT_TRIGGER);
     }, DELAY_LEONARDO_CALL);
+
   }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
+  
 
   // Visibilité Leonardo
   function handleUrartsClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
@@ -211,6 +201,7 @@ export default function Nav(props: Props) {
     }, DELAY_LEONARDO_CALL);
     }
   }
+
 
   // Infobulles
   useEffect(() => {
@@ -277,6 +268,7 @@ export default function Nav(props: Props) {
     }
   }, []);
 
+
   // Menu mobile & thème
   useLayoutEffect(() => {
     const delay = 120;
@@ -311,6 +303,7 @@ export default function Nav(props: Props) {
     });
   }, []);
 
+
   // Délai au click
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -318,6 +311,7 @@ export default function Nav(props: Props) {
     setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
   }
 
+  
   // Langue
   (globalThis as Any).handleLanguage = function(lng: Language) {
     if (languageSignal.value !== lng) {
@@ -326,6 +320,7 @@ export default function Nav(props: Props) {
       setTimeout(() => { globalThis.location.reload(); }, 100);
     }
   }
+
 
   return (
     <nav

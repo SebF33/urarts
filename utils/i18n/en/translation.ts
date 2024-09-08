@@ -51,6 +51,8 @@ const translation = {
     discover: "Discover",
     discover_artist: "Discover the artist",
     discover_arts: "Discover other artwork by the same artist",
+    error: "Leonardo API error.",
+    fact: "Did you know?",
     from: "from",
     from_artist: "of the artist",
     here: "here",

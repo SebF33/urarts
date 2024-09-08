@@ -9,6 +9,7 @@ export const DELAY_DISPLAY = 20;
 export const DELAY_DISPLAY_FOOTER = 200;
 export const DELAY_DISPLAY_WATERDROP = 150;
 export const DELAY_LEONARDO_CALL = 250;
+export const DELAY_LEONARDO_FACT_TRIGGER = Math.floor(Math.random() * (20000 - 8000)) + 8000;
 export const DELAY_LEONARDO_REACH_ART = 10;
 export const DELAY_REACH_ART = 1150;
 export const DELAY_REACH_HREF = 200;
