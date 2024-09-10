@@ -64,6 +64,7 @@ const translation = {
     movements_available: "artistic movements available",
     nationality_period: "Choose a nationality and the period of existence of the artist(s) sought.",
     nav_theme: "to change the navigation bar theme.",
+    new_artists: "Discover the latest artists added:",
     off: "Click the icon or my eyes to mute me.",
     page_about: `<h2>You are on the <span class="underline">about page</span> of the Urarts website.</h2>`,
     page_about_msg: `<p class="text-[1rem] leading-none mt-3">Mona Lisa is watching you...</p>`,
