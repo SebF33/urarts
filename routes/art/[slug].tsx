@@ -135,7 +135,7 @@ export const handler: Handlers = {
   },
 };
 
-export default function ArtistArtsPage(
+export default function ArtistArtPage(
   props: PageProps<{
     artist: string;
     artistQuote: Quote | null;
@@ -242,17 +242,17 @@ export default function ArtistArtsPage(
                 <p class="font-bold text-lg mb-2">
                   {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                 </p>
-                <p class={`relative text-[1.1rem] text-justify leading-[1.16rem] select-none z-10`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info) }}></p>
+                <p class={`relative text-[1.1rem] text-justify leading-[1.12rem] select-none z-10`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info) }}></p>
               </div>
 
               {site &&
                 (
                   <div class={`relative w-11/12 mt-3 sm:mt-2`}>
-                    <div class="paper min-h-8 max-w-[230px] ml-auto shadow-none">
+                    <div class="paper min-h-8 max-w-[230px] ml-auto z-10 shadow-none">
                       <div class="top-tape"></div>
                       <a
                         href={site}
-                        class={`z-10 text-lighterdark text-base italic underline select-none`}
+                        class={`text-lighterdark text-base italic underline z-10 select-none`}
                         target="_blank"
                         rel="noopener"
                         draggable={draggable}
@@ -268,7 +268,7 @@ export default function ArtistArtsPage(
                   <div
                     class={`-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3`}
                   >
-                    <div class={`pt-16 sm:pt-12 sm:pl-12 sm:pr-12`}>
+                    <div class={`pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12`}>
                       <Avatar copyright={copyright} info={avatarInfo} name={artist} url={avatar} />
                     </div>
                   </div>
