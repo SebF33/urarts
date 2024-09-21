@@ -1,7 +1,7 @@
 export type ArtCollection = {
+  id: string;
   first_name: string | null;
   last_name: string;
-  id: string;
   name: string;
   movement: string;
   movement_slug: string;
@@ -20,8 +20,11 @@ export type ArtCollection = {
   gap_5?: string;
   info: string;
   artist_slug: string;
+  color: string;
   copyright: number;
   histocharacter: number;
+  birthyear: string;
+  deathyear: string;
 };
 
 export type ArtRow = {
