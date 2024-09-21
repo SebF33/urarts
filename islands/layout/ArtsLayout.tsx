@@ -9,12 +9,27 @@ import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
 
+
 type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
   arts: Arts;
   font?: string;
   type?: string;
 }
+
+
+// Ajuster la luminosité d'une couleur HEX
+function adjustColorBrightness(hex: string, amount: number): string {
+  const color = hex.startsWith('#') ? hex.slice(1) : hex;
+  const num = parseInt(color, 16);
+
+  const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+  const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
+  const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
+
+  return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
+}
+
 
 export default function ArtsLayout(
   props: ArtsLayoutProps,
@@ -94,8 +109,10 @@ export default function ArtsLayout(
     });
   }, [props.arts, isIntersecting]);
 
+
   return (
     <div class={`flex flex-wrap mx-auto mb-40`}>
+
       {/* Liste des œuvres d'art */}
       {displayedArts.map((p, index) => (
         <div key={index + 1} class={`flex flex-col mx-auto`}>
@@ -107,7 +124,16 @@ export default function ArtsLayout(
               (
                 <div
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                  style={ART_IMG_WRAPPER.wrap}
+                  style={{
+                    ...ART_IMG_WRAPPER.wrap,
+                    ...(p.frame === 2 || p.frame === 4 ? {
+                      border: `solid 1.8vmin ${p.color}`,
+                      borderBottomColor: adjustColorBrightness(p.color, 50),
+                      borderLeftColor: p.color,
+                      borderRightColor: p.color,
+                      borderTopColor: adjustColorBrightness(p.color, -20),
+                    } : {})
+                  }}
                 >
                   <img
                     style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
@@ -116,8 +142,17 @@ export default function ArtsLayout(
                   />
                   <img
                     onLoad={handleImageOnLoad}
-                    style={{ ...imageOnLoadStyle.fullSize }}
                     class={`max-w-full ${p.gap_4}`}
+                    style={{
+                      ...imageOnLoadStyle.fullSize,
+                      ...(p.frame === 2 || p.frame === 4 ? {
+                        border: 'solid 2px',
+                        borderBottomColor: adjustColorBrightness(p.color, 50),
+                        borderLeftColor: adjustColorBrightness(p.color, -20),
+                        borderRightColor: adjustColorBrightness(p.color, -20),
+                        borderTopColor: adjustColorBrightness(p.color, -40),
+                      } : {})
+                    }}
                     src={p.url_4}
                     alt={p.name + "_4"}
                     draggable={draggable}
@@ -128,7 +163,16 @@ export default function ArtsLayout(
               (
                 <div
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                  style={ART_IMG_WRAPPER.wrap}
+                  style={{
+                    ...ART_IMG_WRAPPER.wrap,
+                    ...(p.frame === 2 || p.frame === 4 ? {
+                      border: `solid 1.8vmin ${p.color}`,
+                      borderBottomColor: adjustColorBrightness(p.color, 50),
+                      borderLeftColor: p.color,
+                      borderRightColor: p.color,
+                      borderTopColor: adjustColorBrightness(p.color, -20),
+                    } : {})
+                  }}
                 >
                   <img
                     style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
@@ -137,8 +181,17 @@ export default function ArtsLayout(
                   />
                   <img
                     onLoad={handleImageOnLoad}
-                    style={{ ...imageOnLoadStyle.fullSize }}
                     class={`max-w-full ${p.gap_2}`}
+                    style={{
+                      ...imageOnLoadStyle.fullSize,
+                      ...(p.frame === 2 || p.frame === 4 ? {
+                        border: 'solid 2px',
+                        borderBottomColor: adjustColorBrightness(p.color, 50),
+                        borderLeftColor: adjustColorBrightness(p.color, -20),
+                        borderRightColor: adjustColorBrightness(p.color, -20),
+                        borderTopColor: adjustColorBrightness(p.color, -40),
+                      } : {})
+                    }}
                     src={p.url_2}
                     alt={p.name + "_2"}
                     draggable={draggable}
@@ -148,7 +201,16 @@ export default function ArtsLayout(
             <div
               data-artist-id={p.id}
               class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-              style={ART_IMG_WRAPPER.wrap}
+              style={{
+                ...ART_IMG_WRAPPER.wrap,
+                ...(p.frame === 2 || p.frame === 4 ? {
+                  border: `solid 1.8vmin ${p.color}`,
+                  borderBottomColor: adjustColorBrightness(p.color, 50),
+                  borderLeftColor: p.color,
+                  borderRightColor: p.color,
+                  borderTopColor: adjustColorBrightness(p.color, -20),
+                } : {})
+              }}
             >
               {(p.frame === 0 || p.frame > 2) &&
                 (
@@ -166,8 +228,17 @@ export default function ArtsLayout(
               />
               <img
                 onLoad={handleImageOnLoad}
-                style={{ ...imageOnLoadStyle.fullSize }}
                 class={`max-w-full ${p.gap_1}`}
+                style={{
+                  ...imageOnLoadStyle.fullSize,
+                  ...(p.frame === 2 || p.frame === 4 ? {
+                    border: 'solid 2px',
+                    borderBottomColor: adjustColorBrightness(p.color, 50),
+                    borderLeftColor: adjustColorBrightness(p.color, -20),
+                    borderRightColor: adjustColorBrightness(p.color, -20),
+                    borderTopColor: adjustColorBrightness(p.color, -40),
+                  } : {})
+                }}
                 src={p.url}
                 alt={p.name}
                 draggable={draggable}
@@ -177,7 +248,16 @@ export default function ArtsLayout(
               (
                 <div
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                  style={ART_IMG_WRAPPER.wrap}
+                  style={{
+                    ...ART_IMG_WRAPPER.wrap,
+                    ...(p.frame === 2 || p.frame === 4 ? {
+                      border: `solid 1.8vmin ${p.color}`,
+                      borderBottomColor: adjustColorBrightness(p.color, 50),
+                      borderLeftColor: p.color,
+                      borderRightColor: p.color,
+                      borderTopColor: adjustColorBrightness(p.color, -20),
+                    } : {})
+                  }}
                 >
                   <img
                     style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
@@ -186,8 +266,17 @@ export default function ArtsLayout(
                   />
                   <img
                     onLoad={handleImageOnLoad}
-                    style={{ ...imageOnLoadStyle.fullSize }}
                     class={`max-w-full ${p.gap_3}`}
+                    style={{
+                      ...imageOnLoadStyle.fullSize,
+                      ...(p.frame === 2 || p.frame === 4 ? {
+                        border: 'solid 2px',
+                        borderBottomColor: adjustColorBrightness(p.color, 50),
+                        borderLeftColor: adjustColorBrightness(p.color, -20),
+                        borderRightColor: adjustColorBrightness(p.color, -20),
+                        borderTopColor: adjustColorBrightness(p.color, -40),
+                      } : {})
+                    }}
                     src={p.url_3}
                     alt={p.name + "_3"}
                     draggable={draggable}
@@ -198,7 +287,16 @@ export default function ArtsLayout(
               (
                 <div
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
-                  style={ART_IMG_WRAPPER.wrap}
+                  style={{
+                    ...ART_IMG_WRAPPER.wrap,
+                    ...(p.frame === 2 || p.frame === 4 ? {
+                      border: `solid 1.8vmin ${p.color}`,
+                      borderBottomColor: adjustColorBrightness(p.color, 50),
+                      borderLeftColor: p.color,
+                      borderRightColor: p.color,
+                      borderTopColor: adjustColorBrightness(p.color, -20),
+                    } : {})
+                  }}
                 >
                   <img
                     style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
@@ -207,8 +305,17 @@ export default function ArtsLayout(
                   />
                   <img
                     onLoad={handleImageOnLoad}
-                    style={{ ...imageOnLoadStyle.fullSize }}
                     class={`max-w-full ${p.gap_5}`}
+                    style={{
+                      ...imageOnLoadStyle.fullSize,
+                      ...(p.frame === 2 || p.frame === 4 ? {
+                        border: 'solid 2px',
+                        borderBottomColor: adjustColorBrightness(p.color, 50),
+                        borderLeftColor: adjustColorBrightness(p.color, -20),
+                        borderRightColor: adjustColorBrightness(p.color, -20),
+                        borderTopColor: adjustColorBrightness(p.color, -40),
+                      } : {})
+                    }}
                     src={p.url_5}
                     alt={p.name + "_5"}
                     draggable={draggable}
@@ -234,6 +341,7 @@ export default function ArtsLayout(
             )}
         </div>
       ))}
+
       {/* Référence à la fin de la liste */}
       <div ref={endRef}></div>
     </div>
