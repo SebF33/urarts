@@ -3,7 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import { languageSignal } from "@utils/signals.ts";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { TALENTS } from "@utils/constants.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
@@ -14,7 +15,7 @@ type Artists = Array<ArtistRow>;
 
 export const handler: Handlers = {
   async GET(_, ctx) {
-    const lng = languageSignal.value;
+    const lng = i18next.language;
 
     const db = Db.getInstance();
 

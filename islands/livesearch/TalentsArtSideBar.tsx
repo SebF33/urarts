@@ -6,6 +6,7 @@ import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
@@ -37,7 +38,7 @@ export default function TalentsArtSideBar() {
   useEffect(() => {
     setTimeout(() => {
       ky.get(
-        `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}`,
+        `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`,
       )
         .json<Arts[]>()
         .then((response) => {

@@ -4,6 +4,7 @@ import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART } from "@utils
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -74,7 +75,7 @@ export default function HistoSearch(
     if (yearsSignal.value.length > 0) {
       setTimeout(() => {
         ky.get(
-          `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
+          `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
         )
           .json<Arts[]>()
           .then((response) => {
