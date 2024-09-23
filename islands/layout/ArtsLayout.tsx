@@ -44,11 +44,13 @@ export default function ArtsLayout(
   const displayedArts = display ? props.arts.slice(0, displayedArtIndex + NB_LOADING_ARTS) : [];
   const draggable = false;
 
+
   // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
     return () => clearTimeout(timeoutId);
   }, []);
+
 
   // Chargement à la fin de la liste
   useEffect(() => {
@@ -59,12 +61,16 @@ export default function ArtsLayout(
     }
   }, [isIntersecting]);
 
+
   // Infobulles
   useEffect(() => {
+    // Détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
-      instance.destroy();
+      if (!instance.state.isVisible) { instance.destroy(); }
     });
-    setTippyInstances([]);
+
+    // Mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
+    setTippyInstances((prevInstances) => prevInstances.filter((instance) => instance.state.isVisible));
 
     displayedArts.forEach((p) => {
       let content;

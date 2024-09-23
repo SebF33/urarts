@@ -12,6 +12,7 @@ import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts
 
 type Artists = Array<ArtistRow>;
 
+
 export default function ArtistsLayout(
   props: { artists: Artists; flag: string; grid: string },
 ) {
@@ -26,6 +27,7 @@ export default function ArtistsLayout(
   const displayedArtists = display ? props.artists.slice(0, displayedArtistIndex + NB_LOADING_ARTISTS) : [];
   const draggable = false;
 
+
   // Délais d'affichage initiaux
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
@@ -37,6 +39,7 @@ export default function ArtistsLayout(
     };
   }, []);
 
+
   // Chargement à la fin de la liste
   useEffect(() => {
     if (isIntersecting) {
@@ -46,12 +49,16 @@ export default function ArtistsLayout(
     }
   }, [isIntersecting]);
 
+
   // Infobulles
   useEffect(() => {
+    // Détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
-      instance.destroy();
+      if (!instance.state.isVisible) { instance.destroy(); }
     });
-    setTippyInstances([]);
+
+    // Mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
+    setTippyInstances((prevInstances) => prevInstances.filter((instance) => instance.state.isVisible));
 
     const noresults = document.querySelector("#Noresults");
 
@@ -100,6 +107,7 @@ export default function ArtistsLayout(
     });
   }, [display, props.artists, isIntersecting]);
 
+
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
@@ -107,6 +115,7 @@ export default function ArtistsLayout(
       window.location.href = href;
     }, DELAY_REACH_HREF);
   }
+
 
   return (
     <div
