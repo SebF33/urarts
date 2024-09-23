@@ -261,8 +261,13 @@ h1 {
     top: -2.5vmin;
 }
 
-.art-frame-type-3 img {
+.art-frame-type-2 img,
+.art-frame-type-3 img,
+.art-frame-type-4 img {
     border: solid 2px;
+}
+
+.art-frame-type-3 img {
     border-bottom-color: #ffe;
     border-left-color: #eed;
     border-right-color: #eed;

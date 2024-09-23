@@ -1,5 +1,7 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import { useEffect, useLayoutEffect } from "preact/hooks";
+
 
 export default function Mona() {
   useEffect(() => {
@@ -26,6 +28,7 @@ export default function Mona() {
     };
   }, []);
 
+
   // Background pour la page à propos
   useLayoutEffect(() => {
     const body = document.querySelector("body");
@@ -43,14 +46,23 @@ export default function Mona() {
     }
   }, []);
 
+
   return (
     <div class="flex flex-col md:flex-row mx-auto">
       <div class="art-wrap-1 hidden md:flex">
-        <div class="art-frame art-frame-type-2 art-polyptych-1">
+        <div class={`art-frame art-frame-type-2 art-polyptych-1 ${
+            css(
+              {
+                "border": "solid 1.8vmin",
+                "border-color": "rgb(225, 207, 187) rgb(245, 227, 207) rgb(255, 255, 255)",
+              },
+            )
+          }`}
+        >
           <img loading="lazy"
-            class="max-w-full min-w-[449px]"
             src="/monalisa.jpg"
             alt="Mona Lisa"
+            class="max-w-full min-w-[449px]"
           />
           <div class="absolute top-[7.2rem] left-[8.2rem]">
             <div class="mona-eye mona-left-eye">
@@ -65,11 +77,19 @@ export default function Mona() {
         </div>
       </div>
       <div class="art-wrap-1 flex md:hidden">
-        <div class="art-frame art-frame-type-2 art-polyptych-1">
+        <div class={`art-frame art-frame-type-2 art-polyptych-1 ${
+            css(
+              {
+                "border": "solid 1.8vmin",
+                "border-color": "rgb(225, 207, 187) rgb(245, 227, 207) rgb(255, 255, 255)",
+              },
+            )
+          }`}
+        >
           <img loading="lazy"
-            class="max-w-[200px]"
             src="arts/devinci/La Joconde.jpg"
             alt="Mona Lisa"
+            class="max-w-[200px]"
           />
         </div>
       </div>
