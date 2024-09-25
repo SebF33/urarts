@@ -5,11 +5,13 @@ import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { sql } from "kysely";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
 
 export const handler: Handlers = {
   async GET(_: Request, ctx: FreshContext) {
@@ -25,6 +27,7 @@ export const handler: Handlers = {
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .where("slug", "=", slug).executeTakeFirst();
 
+    let artists: string[] | null = null;
     let desc: string | null = null;
     let font: string | null = null;
     let info: string | null = null;
@@ -33,6 +36,27 @@ export const handler: Handlers = {
     let title: string | null = null;
 
     if (result) {
+      const artistQuery = await db.selectFrom("art")
+      .innerJoin("artist", "art.owner_id", "artist.id")
+      .innerJoin("movement", "art.movement_id", "movement.id")
+      .select(["artist.avatar_url", "artist.last_name", "artist.slug"])
+      .distinct()
+      .where("movement.slug", "=", result.slug)
+      .orderBy(sql`random()`)
+      .limit(12)
+      .execute();
+      
+      // Position des artistes
+      const lValues = ["-ml-2", "ml-36", "-ml-1", "ml-40", "-ml-3", "ml-2", "-ml-2", "ml-1", "-ml-2", "ml-40", "-ml-3", "ml-36"];
+      const rValues = ["-rotate-3", "rotate-6", "rotate-2", "-rotate-2", "-rotate-2", "rotate-6", "-rotate-3", "rotate-3", "rotate-0", "rotate-3", "rotate-1", "-rotate-12"];
+      const tValues = ["-mt-2", "-mt-12", "-mt-1", "-mt-14", "-mt-3", "mt-2", "-mt-2", "mt-1", "-mt-2", "-mt-24", "mt-6", "-mt-16"];
+
+      artists = artistQuery.map((p, index) => ({
+        avatar_url: p.avatar_url,
+        name: p.last_name,
+        position: tValues[index % tValues.length] + " " + lValues[index % lValues.length] + " " + rValues[index % rValues.length],
+        slug: p.slug,
+      }));
       movement = result.name;
       desc = movement + ".";
       font = result.font;
@@ -42,6 +66,7 @@ export const handler: Handlers = {
     } else return ctx.renderNotFound();
 
     return ctx.render({
+      artists,
       desc,
       font,
       info,
@@ -52,8 +77,10 @@ export const handler: Handlers = {
   },
 };
 
+
 export default function MovementArtsPage(
   props: PageProps<{
+    artists: string[];
     desc: string;
     font: string;
     info: string;
@@ -63,6 +90,7 @@ export default function MovementArtsPage(
   }>,
 ) {
   const {
+    artists,
     desc,
     font,
     info,
@@ -71,6 +99,9 @@ export default function MovementArtsPage(
     title,
   } = props.data;
 
+  const draggable = false;
+
+  
   return (
     <>
       <Head>
@@ -84,8 +115,26 @@ export default function MovementArtsPage(
 
       <main id="page" data-name="collection" class="scrollable flex-grow mb-6 xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
         <div
-          class={`w-auto flex flex-col mx-auto`}
+          class={`relative w-auto flex flex-col mx-auto`}
         >
+          {artists &&
+            <div class={`invisible xl:visible absolute mt-12 ml-16`}>
+              {artists && artists.map((p) => (
+                <div class={`paper max-w-[140px] min-h-8 ${p.position} shadow-none`}>
+                  <div class="top-tape max-h-3"></div>
+                  <a
+                    href={"/art/" + p.slug}
+                    class={`z-10 text-center text-lighterdark text-xl italic underline select-none`}
+                    draggable={draggable}
+                  >
+                    {p.name}
+                  </a>
+                  <img class={`w-14 ml-3 p-1`} src={p.avatar_url} alt={p.name} />
+                </div>
+              ))}
+            </div>
+          }
+
           <div class={`mx-auto mt-8 z-10`}>
             <AnimBrushStroke
               color={colorScheme[currentColorScheme].white}
