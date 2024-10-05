@@ -6,6 +6,7 @@ import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { sql } from "kysely";
+import { TALENTS } from "@utils/constants.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
@@ -42,6 +43,7 @@ export const handler: Handlers = {
       .select(["artist.avatar_url", "artist.last_name", "artist.slug"])
       .distinct()
       .where("movement.slug", "=", result.slug)
+      .where("artist.slug", "not in", TALENTS)
       .orderBy(sql`random()`)
       .limit(12)
       .execute();
@@ -118,7 +120,7 @@ export default function MovementArtsPage(
           class={`relative w-auto flex flex-col mx-auto`}
         >
           {artists &&
-            <div class={`invisible xl:visible absolute mt-12 ml-16`}>
+            <div class={`invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible`}>
               {artists && artists.map((p) => (
                 <div class={`paper max-w-[140px] min-h-8 ${p.position} shadow-none`}>
                   <div class="top-tape max-h-3"></div>
