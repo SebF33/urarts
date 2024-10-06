@@ -90,7 +90,7 @@ export const handler = async (
       htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
       
       newArtists.forEach((p) => {
-        htmlContent += `<a href="/art/${p.slug}" class="inline-block mt-3 mx-2" draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+        htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
       });
     }
     else {
