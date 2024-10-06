@@ -167,7 +167,7 @@ export const handler = async (
 
           if (isAlone) {
             htmlContent = `<h2>${i18next.t("leonardo.art", { ns: "translation" })} "<strong>${artResults.name}</strong>" ${i18next.t("leonardo.from_artist", { ns: "translation" })} <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
-            htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_arts", { ns: "translation" })} <a href="/art/${artistResult.slug}" target="_blank" rel="noopener" class="inline-block"><span class="underline">ici</span></a>.</p>`;
+            htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_arts", { ns: "translation" })} <a href="/art/${artistResult.slug}" f-client-nav={false} class="inline-block"><span class="underline">${i18next.t("leonardo.here", { ns: "translation" })}</span></a>.</p>`;
           }
         }
         break;

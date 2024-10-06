@@ -303,14 +303,6 @@ export default function Nav(props: Props) {
     });
   }, []);
 
-
-  // Délai au click
-  function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
-  }
-
   
   // Langue
   (globalThis as Any).handleLanguage = function(lng: Language) {
@@ -386,7 +378,6 @@ export default function Nav(props: Props) {
           <div class={`hidden md:flex items-center space-x-3`}>
             <a
               href="/histocharacters"
-              onClick={handleClick}
               id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
@@ -395,7 +386,6 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/women"
-              onClick={handleClick}
               id="desktopWomanAnchor"
               class={desktopWomanAnchor}
               draggable={draggable}
@@ -403,8 +393,7 @@ export default function Nav(props: Props) {
               <WomanIcon />
             </a>
             <a
-              href="/art/mimi"
-              onClick={handleClick}
+              href="/art/mimi" f-client-nav={false}
               id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
@@ -413,7 +402,6 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/indicators"
-              onClick={handleClick}
               id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
@@ -422,7 +410,6 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/api/arts"
-              onClick={handleClick}
               id="desktopApiAnchor"
               class={desktopApiAnchor}
               draggable={draggable}
@@ -431,7 +418,6 @@ export default function Nav(props: Props) {
             </a>
             <a
               href="/about"
-              onClick={handleClick}
               id="desktopInterrogationAnchor"
               class={desktopInterrogationAnchor}
               draggable={draggable}
@@ -450,8 +436,8 @@ export default function Nav(props: Props) {
         <ul>
           <li>
             <a
-              id="mobile-anchor"
               href="/"
+              id="mobile-anchor"
               class={mobilePrimaryAnchor}
             >
               <span class={`px-2`}>{i18next.t("nav.home", { ns: "translation" })}</span>
@@ -459,8 +445,8 @@ export default function Nav(props: Props) {
           </li>
           <li>
             <a
-              id="mobile-anchor"
               href="/artists"
+              id="mobile-anchor"
               class={mobilePrimaryAnchor}
             >
               <span class={`px-2`}>{i18next.t("nav.artists", { ns: "translation" })}</span>
@@ -468,8 +454,8 @@ export default function Nav(props: Props) {
           </li>
           <li>
             <a
-              id="mobile-anchor"
               href="/arts"
+              id="mobile-anchor"
               class={mobilePrimaryAnchor}
             >
               <span class={`px-2`}>{i18next.t("nav.arts", { ns: "translation" })}</span>
@@ -477,8 +463,8 @@ export default function Nav(props: Props) {
           </li>
           <li>
             <a
-              id="mobile-anchor"
               href="/movements"
+              id="mobile-anchor"
               class={mobilePrimaryAnchor}
             >
               <span class={`px-2`}>{i18next.t("nav.movements", { ns: "translation" })}</span>
@@ -486,8 +472,8 @@ export default function Nav(props: Props) {
           </li>
           <li>
             <a
-              id="mobile-anchor"
               href="/talents"
+              id="mobile-anchor"
               class={mobilePrimaryAnchor}
             >
               <span class={`px-2`}>{i18next.t("nav.talents", { ns: "translation" })}</span>
@@ -496,9 +482,8 @@ export default function Nav(props: Props) {
           <li class={`flex`}>
             <div class={`w-[50px]`}>
               <a
-                id="mobile-anchor"
                 href="/histocharacters"
-                onClick={handleClick}
+                id="mobile-anchor"
                 class={mobileSecondaryAnchor}
               >
                 <HistoIcon />
@@ -506,9 +491,8 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
-                id="mobile-anchor"
                 href="/women"
-                onClick={handleClick}
+                id="mobile-anchor"
                 class={mobileSecondaryAnchor}
               >
                 <WomanIcon />
@@ -516,9 +500,8 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
+                href="/art/mimi" f-client-nav={false}
                 id="mobile-anchor"
-                href="/art/mimi"
-                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <HeartIcon />
@@ -526,9 +509,8 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
-                id="mobile-anchor"
                 href="/indicators"
-                onClick={handleClick}
+                id="mobile-anchor"
                 class={mobileSecondaryAnchor}
               >
                 <StatIcon />
@@ -537,7 +519,6 @@ export default function Nav(props: Props) {
             <div class={`w-[50px]`}>
               <a
                 href="/api/arts"
-                onClick={handleClick}
                 class={mobileSecondaryAnchor}
               >
                 <ApiIcon />
@@ -545,9 +526,8 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
-                id="mobile-anchor"
                 href="/about"
-                onClick={handleClick}
+                id="mobile-anchor"
                 class={mobileSecondaryAnchor}
               >
                 <InterrogationIcon />

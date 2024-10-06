@@ -90,8 +90,8 @@ export default function ArtsLayout(
         } else {
           content =
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
-            <p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}">${p.movement}</a></strong></p>
-            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}" f-client-nav={false}>${p.movement}</a></strong></p>
+            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" f-client-nav={false}>${p.last_name}</a></strong></p>
             <p style="min-width:180px;margin-top:8px;line-height:1">${p.info}</p>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         }
