@@ -166,6 +166,7 @@ h1 {
     background-color: var(--color-dark);
     color: var(--color-white);
     border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .tippy-box[data-theme~='urarts'] {
@@ -584,7 +585,11 @@ h1 {
     bottom: 0;
 }
 
-/* Yeux Leonardo */
+/* Leonardo */
+#leonardoAvatar {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
 .eye {
     background: white;
     display: inline-block;
