@@ -409,8 +409,10 @@ export default function Nav(props: Props) {
               <StatIcon />
             </a>
             <a
-              href="/api/arts"
+              href="/api/arts" f-client-nav={false}
               id="desktopApiAnchor"
+              target="_blank"
+              rel="noopener"
               class={desktopApiAnchor}
               draggable={draggable}
             >
@@ -518,7 +520,9 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
-                href="/api/arts"
+                href="/api/arts" f-client-nav={false}
+                target="_blank"
+                rel="noopener"
                 class={mobileSecondaryAnchor}
               >
                 <ApiIcon />
