@@ -1,10 +1,11 @@
+import { ArtCollection, ArtRow, MovementRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { ArtCollection, MovementRow } from "@utils/types.d.ts";
 import ky from "ky";
+import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
@@ -15,7 +16,7 @@ type Movements = Array<MovementRow>;
 
 
 export default function MovementsList(
-  props: { movements: Movements },
+  props: { readonly movements: Movements },
 ) {
   const [hoveredImageUrl, setHoveredImageUrl] = useState<object | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
@@ -23,9 +24,28 @@ export default function MovementsList(
   
   // Aperçu
   useEffect(() => {
+    async function fetchInitialPreview() {
+      try {
+        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
+
+        if (response && response.length > 0) {
+          const firstArt = response[0];
+          getPreviewImageUrl(firstArt.id.toString(), firstArt.slug, firstArt.url);
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
+    }
+
+    fetchInitialPreview();
+  }, []);
+
+
+  useEffect(() => {
     const previews = document.querySelectorAll(".preview");
     previews.forEach(preview => { preview.classList.add("is-active"); });
   }, [hoveredImageUrl]);
+
 
   const handleMouseEnter = (slug: string) => {
     if (hoverTimeout !== null) {
@@ -34,19 +54,34 @@ export default function MovementsList(
     }
     
     setHoveredImageUrl(null);
-    const timeoutId = setTimeout(() => { getPreviewImageUrl(slug) }, DELAY_API_CALL);
+
+    const timeoutId = setTimeout(() => {
+
+      async function fetchPreview() {
+        try {
+          const response = await ky.get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}&notalone`).json<Arts>();
+  
+          if (response && response.length > 0) {
+            const art = response[0];
+            getPreviewImageUrl(art.id, art.artist_slug, art.url);
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      }
+  
+      fetchPreview();
+
+    }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
   };
 
-  async function getPreviewImageUrl(slug: string) {
-    const response = await ky
-      .get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}&notalone`)
-      .json<Arts>();
 
+  function getPreviewImageUrl(id: string, slug: string, url: string) {
     const hoveredImageUrl = {
-      id: response[0].id,
-      slug: response[0].artist_slug,
-      url: response[0].url
+      id: id,
+      slug: slug,
+      url: url
     }
     setHoveredImageUrl(hoveredImageUrl);
   }

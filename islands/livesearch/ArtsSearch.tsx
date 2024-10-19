@@ -1,4 +1,3 @@
-
 import { ArtCollection, ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
@@ -28,9 +27,28 @@ export default function ArtsSearch() {
 
   // Aperçu
   useEffect(() => {
+    async function fetchInitialPreview() {
+      try {
+        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
+
+        if (response && response.length > 0) {
+          const firstArt = response[0];
+          getPreviewImageUrl(firstArt.id.toString(), firstArt.slug, firstArt.url);
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
+    }
+
+    fetchInitialPreview();
+  }, []);
+
+
+  useEffect(() => {
     const previews = document.querySelectorAll(".preview");
     previews.forEach(preview => { preview.classList.add("is-active"); });
   }, [hoveredImageUrl]);
+
 
   const handleMouseEnter = (id: number, slug: string) => {
     if (hoverTimeout !== null) {
@@ -39,19 +57,34 @@ export default function ArtsSearch() {
     }
 
     setHoveredImageUrl(null);
-    const timeoutId = setTimeout(() => { getPreviewImageUrl(id, slug) }, DELAY_API_CALL);
+
+    const timeoutId = setTimeout(() => {
+
+      async function fetchPreview() {
+        try {
+          const response = await ky.get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`).json<Arts>();
+  
+          if (response && response.length > 0) {
+            const art = response[0];
+            getPreviewImageUrl(art.id, art.artist_slug, art.url);
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      }
+  
+      fetchPreview();
+
+    }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
   };
 
-  async function getPreviewImageUrl(id: number, slug: string) {
-    const response = await ky
-      .get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`)
-      .json<Arts>();
 
+  function getPreviewImageUrl(id: string, slug: string, url: string) {
     const hoveredImageUrl = {
-      id: response[0].id,
-      slug: response[0].artist_slug,
-      url: response[0].url
+      id: id,
+      slug: slug,
+      url: url
     }
     setHoveredImageUrl(hoveredImageUrl);
   }

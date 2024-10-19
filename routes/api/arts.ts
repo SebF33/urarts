@@ -31,7 +31,11 @@ export const handler = async (
 
   // Noms
   query = url.searchParams.get("name") || "";
-  const filter = query.length ? query : "";
+  const name = query.length ? query : "";
+
+  // Aléatoire
+  const random = url.searchParams.has("random");
+  
 
   const db = Db.getInstance();
   const results = await db.selectFrom("art")
@@ -51,15 +55,16 @@ export const handler = async (
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
     .where("copyright", "!=", 2)
-    .where(
-      sql`(art.name LIKE ${"%" + filter + "%"}
-      OR last_name LIKE ${"%" + filter + "%"}
-      OR (art.name || ' ' || last_name) LIKE ${"%" + filter + "%"}
-      OR (last_name || ' ' || art.name) LIKE ${"%" + filter + "%"})`
-    )  
+    .$if( ! random, (qb) => qb.where(
+      sql`(art.name LIKE ${"%" + name + "%"}
+      OR last_name LIKE ${"%" + name + "%"}
+      OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
+      OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"})`
+    ))
     .where("artist.slug", "not in", TALENTS)
-    .orderBy(({ fn }) => fn("lower", ["art.name"]))
-    .orderBy(({ fn }) => fn("lower", ["last_name"]))
+    .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["art.name"])))
+    .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name"])))
+    .$if(random, (qb) => qb.orderBy(sql`random()`))
     .limit(20)
     .execute();
 
