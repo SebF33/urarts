@@ -186,9 +186,21 @@ export const handler = async (
           parseFloat(item.artist_count)
         );
 
+        const countryResult = await db.selectFrom("country")
+        .$if(lng === 'fr', (qb) => qb.select("name"))
+        .$if(lng === 'en', (qb) => qb.select("name_en as name"))
+        .where("name", "=", pagectx[2])
+        .executeTakeFirst();
+
         htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.search_among", { ns: "translation" })} <strong>${totalArtistCountResult}</strong> ${i18next.t("leonardo.artists_available", { ns: "translation" })}...</p>`;
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.nationality_period", { ns: "translation" })}</p>`;
-        htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} "<strong>${pagectx[2]}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/${pagectx[2]}.png" class="h-6 inline-block align-top" alt="${pagectx[2]}" draggable=${draggable}/></span></p>`;
+        
+        if (countryResult) {
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.for", { ns: "translation" })} "<strong>${countryResult.name}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/${pagectx[2]}.png" class="h-6 inline-block align-top" alt="${countryResult.name}" draggable=${draggable}/></span></p>`;
+        }
+        else {
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/Monde.png" class="h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
+        }
         break;
 
       
@@ -297,10 +309,20 @@ export const handler = async (
             .orderBy(sql`random()`)
             .executeTakeFirst();
 
+          const countArtResults = await db.selectFrom("art")
+            .innerJoin("artist", "art.owner_id", "artist.id")
+            .innerJoin("movement", "art.movement_id", "movement.id")
+            .select([count("art.id").as("number")])
+            .where("movement.slug", "=", subpage)
+            .where("artist.slug", "not in", TALENTS)
+            .where("copyright", "!=", 2)
+            .executeTakeFirst();
+
           if (subpage !== "nonclasse") htmlContent = `<h2>${i18next.t("leonardo.movement", { ns: "translation" })} "<strong>${movementResults.movement_name}</strong>".</h2>`;
           else htmlContent = i18next.t("leonardo.unclassified_arts", { ns: "translation" });
 
-          htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> ${i18next.t("leonardo.arts_currently_available", { ns: "translation" })}</p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-2">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
           htmlContent += `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
         break;
