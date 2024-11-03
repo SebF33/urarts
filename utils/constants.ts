@@ -9,42 +9,65 @@ export const DELAY_DISPLAY = 20;
 export const DELAY_DISPLAY_FOOTER = 200;
 export const DELAY_DISPLAY_WATERDROP = 150;
 export const DELAY_LEONARDO_CALL = 250;
-export const DELAY_LEONARDO_FACT_TRIGGER =
-  Math.floor(Math.random() * (18000 - 8000)) + 8000;
+export const DELAY_LEONARDO_FACT_TRIGGER = Math.floor(Math.random() * (18000 - 8000)) + 8000;
 export const DELAY_LEONARDO_REACH_ART = 10;
 export const DELAY_REACH_ART = 1150;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
 export const NATIONALITIES: string[] = [
   "Allemagne",
+  "Armenia",
   "Arménie",
+  "Austria",
   "Autriche",
+  "Belarus",
   "Belgique",
+  "Belgium",
   "Biélorussie",
   "Canada",
+  "China",
   "Chine",
+  "Colombia",
   "Colombie",
+  "Czechoslovakia",
   "Danemark",
+  "Denmark",
   "Espagne",
   "États-Unis",
+  "Finland",
   "Finlande",
   "France",
+  "Germany",
   "Grèce",
+  "Greece",
   "Hongrie",
+  "Hungary",
   "Italie",
+  "Italy",
+  "Japan",
   "Japon",
+  "Mexico",
   "Mexique",
   "Monde",
+  "Netherlands",
   "Norvège",
+  "Norway",
   "Pays-Bas",
+  "Poland",
   "Pologne",
   "Portugal",
   "Royaume-Uni",
+  "Russia",
   "Russie",
+  "Spain",
   "Suède",
   "Suisse",
+  "Sweden",
+  "Switzerland",
   "Tchécoslovaquie",
   "Ukraine",
+  "United Kingdom",
+  "United States",
   "Vietnam",
 ];
 export const NB_LOADING_ARTS = 5;

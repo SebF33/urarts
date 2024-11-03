@@ -19,6 +19,7 @@ export const handler: Handlers = {
     let nationality: string = url.searchParams.get("nationality") || "";
 
     if (nationality !== "") {
+      // Contrôle nationalités définies
       NATIONALITIES.includes(nationality) ? nationality : nationality = "Monde";
 
       if (nationality !== "Monde") {
