@@ -233,7 +233,7 @@ export default function ArtistsLayout(
                   </div>
                 )}
                 <ul class={`artist-side z-20`}>
-                  <a class={`w-7`}>
+                  <a href={"/artists?nationality=" + p.nationality} class={`w-7`}>
                     <img
                       src={"/flags/" + p.nationality + ".png"}
                       alt="flag-symbol"

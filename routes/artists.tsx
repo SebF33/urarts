@@ -1,24 +1,39 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { Db } from "@utils/db.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { NATIONALITIES } from "@utils/constants.ts";
+import { sql } from "kysely";
 
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
+
 export const handler: Handlers = {
-  GET(req: Request, ctx: FreshContext) {
+  async GET(req: Request, ctx: FreshContext) {
     const url = new URL(req.url);
 
-    const values = ["Allemagne", "Belgique", "Espagne", "France", "Italie", "Monde"]
     let nationality: string = url.searchParams.get("nationality") || "";
-    if (nationality !== "")  values.includes(nationality) ? nationality : nationality = "Monde";
+
+    if (nationality !== "") {
+      NATIONALITIES.includes(nationality) ? nationality : nationality = "Monde";
+
+      if (nationality !== "Monde") {
+        const db = Db.getInstance();
+        const result = await db.selectFrom("country").select("name")
+          .where(sql`(name = ${nationality} OR name_en = ${nationality})`)
+          .executeTakeFirst();
+        nationality = result.name;
+      }
+    }
 
     return ctx.render({ nationality });
   },
 };
+
 
 export default function ArtistsPage(
   props: PageProps<{ nationality: string }>,
