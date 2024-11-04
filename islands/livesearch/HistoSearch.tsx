@@ -15,8 +15,9 @@ import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
+
 export default function HistoSearch(
-  props: { id?: string },
+  props: { readonly id?: string },
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -24,11 +25,12 @@ export default function HistoSearch(
 
   const type = "histocharacters";
 
+
+  // Slider
   useEffect(() => {
+    // Création du slider
     const slider: HTMLElement | null = document.getElementById("slider");
-
     const valuesForSlider = [300,500,700,900,1100,1300,1500,1700,1900,2100];
-
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -49,14 +51,15 @@ export default function HistoSearch(
       tooltips: true,
     });
 
-    slider?.noUiSlider.set(["300", "2100"]);
+    //slider?.noUiSlider.set(["300", "2100"]);
 
-    // Extrémités
+    // Extrémités du slider
     const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
     for (let i = 0; i < valuesLarge.length; i++) {
       valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
     }
 
+    // Mise à jour du slider
     let debounceTimer;
     slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
@@ -70,13 +73,12 @@ export default function HistoSearch(
     };
   }, []);
 
+
   // Appel à l'API
   useEffect(() => {
     if (yearsSignal.value.length > 0) {
       setTimeout(() => {
-        ky.get(
-          `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`,
-        )
+        ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`)
           .json<Arts[]>()
           .then((response) => {
             setSearchResults(response);
@@ -84,6 +86,7 @@ export default function HistoSearch(
       }, DELAY_API_CALL);
     }
   }, [debouncedValue, yearsSignal.value]);
+
 
   // Atteindre l'œuvre
   useLayoutEffect(() => {
@@ -101,6 +104,7 @@ export default function HistoSearch(
     }
   }, [props.id]);
 
+
   // Background pour la page des personnages historiques
   useLayoutEffect(() => {
     const body = document.querySelector("body");
@@ -117,6 +121,7 @@ export default function HistoSearch(
       main.style.backgroundSize = "346px";
     }
   }, []);
+
 
   return (
     <>
