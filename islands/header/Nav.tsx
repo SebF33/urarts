@@ -129,56 +129,70 @@ export default function Nav(props: Props) {
   }, []);
 
 
-  // Appels à l'API Leonardo
+  // Appel à l'API "Leonardo"
+  const fetchLeonardoData = async (params: Record<string, Any>, signal: AbortSignal) => {
+    const leonardoContent = document.querySelector("#leonardoContent");
+  
+    try {
+      const response = await ky.get(`${UrlBasePath}/api/leonardo`, {
+        searchParams: params,
+        signal,
+      });
+      const leonardoResponse = await response.text();
+  
+      // Contenu
+      if (leonardoContent && leonardoResponse !== "no_change") leonardoContent.innerHTML = leonardoResponse;
+    
+    } catch (error) {
+      if (error.name !== 'AbortError' && leonardoContent)  leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
+      if (leonardoContent)  leonardoContent.innerHTML = '...';
+    }
+  };
+
+
   useEffect(() => {
     if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
-  
+    
+    // Paramètres pour la requête
     const url = new URL(props.url);
-    
-    setTimeout(() => {
-      // Paramètres pour la requête
-      const pageName = url.pathname.split("/")[1];
-      const subpageSlug = url.pathname.split("/")[2];
-      const ctxArray = url.searchParams.get("id") ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""] 
-        : (pageName === "artists" || pageName === "histocharacters") ? [yearsSignal.value[0], yearsSignal.value[1], nationalitySignal.value] : [];
-      const ctx = JSON.stringify(ctxArray.join("_"));
+    const pageName = url.pathname.split("/")[1];
+    const subpageSlug = url.pathname.split("/")[2];
+    const ctxArray = url.searchParams.get("id")
+      ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""]
+      : (pageName === "artists" || pageName === "histocharacters") ? [yearsSignal.value[0], yearsSignal.value[1], nationalitySignal.value] : [];
+    const ctx = JSON.stringify(ctxArray.join("_"));
 
-      // Appel
-      const fetchLeonardo = async (params: Record<string, Any>) => {
-        const leonardoContent = document.querySelector("#leonardoContent");
-
-        try {
-          const response = await ky.get(`${UrlBasePath}/api/leonardo?${new URLSearchParams(params).toString()}`);
-          const leonardoResponse = await response.text();
-
-          // Contenu
-          if (leonardoContent && leonardoResponse !== "no_change") leonardoContent.innerHTML = leonardoResponse;
-
-        } catch {
-          if (leonardoContent) leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
-        }
-      };
-    
-      // Requête initiale
-      fetchLeonardo({
+    // Gérer l'annulation des requêtes
+    const controller = new AbortController();
+  
+    // Appel initial
+    const firstTimer = setTimeout(() => {
+      fetchLeonardoData({
         lng: languageSignal.value,
         welcome: url.searchParams.get("fresh-partial") !== "true" ? "true" : "false",
         page: pageName,
         subpage: subpageSlug,
         pagectx: ctx,
-      });
-    
-      // Seconde requête (pour l'anecdote)
-      setTimeout(() => {
-        fetchLeonardo({
-          lng: languageSignal.value,
-          page: pageName,
-          subpage: subpageSlug,
-          pagectx: ctx,
-          fact: "true",
-        });
-      }, DELAY_LEONARDO_FACT_TRIGGER);
+      }, controller.signal);
     }, DELAY_LEONARDO_CALL);
+  
+    // Deuxième appel (pour l'anecdote)
+    const secondTimer = setTimeout(() => {
+      fetchLeonardoData({
+        lng: languageSignal.value,
+        page: pageName,
+        subpage: subpageSlug,
+        pagectx: ctx,
+        fact: "true",
+      }, controller.signal);
+    }, DELAY_LEONARDO_CALL + DELAY_LEONARDO_FACT_TRIGGER);
+    
+    // Nettoyer les délais et annuler les requêtes lorsque les dépendances changent ou le composant est démonté
+    return () => {
+      clearTimeout(firstTimer);
+      clearTimeout(secondTimer);
+      controller.abort();
+    };
 
   }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
   

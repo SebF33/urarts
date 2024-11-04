@@ -18,17 +18,17 @@ export default function WomenSearch() {
   const grid =
     "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-20";
 
-  // Appel à l'API
+  // Appel à l'API "Artistes"
   useEffect(() => {
-    setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/artists?lng=${languageSignal.value}&gender=${gender}`,
-      )
+    const timer = setTimeout(() => {
+      ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&gender=${gender}`)
         .json<ArtistRow[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Background pour la page des femmes artistes

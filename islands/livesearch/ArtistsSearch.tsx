@@ -127,16 +127,18 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   }, [flags]);
 
 
-  // Appel à l'API
+  // Appel à l'API "Artistes"
   useEffect(() => {
     if (yearsSignal.value.length > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`)
           .json<ArtistRow[]>()
           .then((response) => {
             setSearchResults(response);
           });
       }, DELAY_API_CALL);
+
+      return () => clearTimeout(timer);
     }
   }, [nationalitySignal.value, debouncedValue, yearsSignal.value]);
 

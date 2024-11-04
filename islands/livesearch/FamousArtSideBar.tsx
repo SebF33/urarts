@@ -33,9 +33,9 @@ export default function FamousArtSideBar() {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Appel à l'API
+  // Appel à l'API "Collection"
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       ky.get(
         `${UrlBasePath}/api/collection?type=${type}&name=${debouncedValue}`,
       )
@@ -44,6 +44,8 @@ export default function FamousArtSideBar() {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
+
+    return () => clearTimeout(timer);
   }, [debouncedValue]);
 
   // Infobulles

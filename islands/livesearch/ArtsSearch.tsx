@@ -90,15 +90,17 @@ export default function ArtsSearch() {
   }
   
 
-  // Appel à l'API
+  // Appel à l'API "Œuvres d'art"
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
+
+    return () => clearTimeout(timer);
   }, [debouncedValue]);
 
 

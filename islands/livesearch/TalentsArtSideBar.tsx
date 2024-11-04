@@ -34,17 +34,17 @@ export default function TalentsArtSideBar() {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Appel à l'API
+  // Appel à l'API "Collection"
   useEffect(() => {
-    setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`,
-      )
+    const timer = setTimeout(() => {
+      ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`)
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
+
+    return () => clearTimeout(timer);
   }, [debouncedValue]);
 
   // Infobulles

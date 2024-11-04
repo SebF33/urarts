@@ -5,7 +5,7 @@ import { sql } from "kysely";
 import { UrlBasePath } from "@/env.ts";
 
 
-// API Artistes
+// API "Artistes"
 export const handler = async (
   req: Request,
   _ctx: RouteContext,

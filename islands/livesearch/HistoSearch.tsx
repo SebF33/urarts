@@ -74,16 +74,18 @@ export default function HistoSearch(
   }, []);
 
 
-  // Appel à l'API
+  // Appel à l'API "Collection"
   useEffect(() => {
     if (yearsSignal.value.length > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`)
           .json<Arts[]>()
           .then((response) => {
             setSearchResults(response);
           });
       }, DELAY_API_CALL);
+
+      return () => clearTimeout(timer);
     }
   }, [debouncedValue, yearsSignal.value]);
 

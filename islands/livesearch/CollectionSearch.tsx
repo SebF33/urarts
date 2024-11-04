@@ -24,19 +24,21 @@ export default function CollectionSearch(props: Props) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
-  // Appel à l'API
+  // Appel à l'API "Collection"
   useEffect(() => {
     let apiUrl;
     if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
     else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       ky.get(apiUrl)
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
         });
     }, DELAY_API_CALL);
+
+    return () => clearTimeout(timer);
   }, [debouncedValue]);
 
   // Atteindre l'œuvre
