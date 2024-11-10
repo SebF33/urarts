@@ -1,12 +1,12 @@
 import { Any } from "any";
+import { artistsYearsSignal, histocharactersYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { css } from "@twind/core";
-import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER, DELAY_REACH_HREF } from "@utils/constants.ts";
+import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { Language } from "@utils/i18n/i18next.d.ts";
-import { languageSignal, nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -46,7 +46,7 @@ export default function Nav(props: Props) {
         allowHTML: true,
         appendTo: () => document.body,
         arrow: false,
-        duration: [1800, 300],
+        duration: [600, 300],
         content:
           `<img id="leonardoAvatar" class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" loading="lazy" draggable=${draggable}/>
           <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
@@ -159,7 +159,11 @@ export default function Nav(props: Props) {
     const subpageSlug = url.pathname.split("/")[2];
     const ctxArray = url.searchParams.get("id")
       ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""]
-      : (pageName === "artists" || pageName === "histocharacters") ? [yearsSignal.value[0], yearsSignal.value[1], nationalitySignal.value] : [];
+      : (pageName === "artists") 
+        ? [artistsYearsSignal.value[0], artistsYearsSignal.value[1], nationalitySignal.value] 
+        : (pageName === "histocharacters") 
+          ? [histocharactersYearsSignal.value[0], histocharactersYearsSignal.value[1], nationalitySignal.value] 
+          : [];
     const ctx = JSON.stringify(ctxArray.join("_"));
 
     // Gérer l'annulation des requêtes
@@ -194,7 +198,7 @@ export default function Nav(props: Props) {
       controller.abort();
     };
 
-  }, [props.url, leonardoActiveContent, nationalitySignal.value, yearsSignal.value]);
+  }, [props.url, leonardoActiveContent, nationalitySignal.value, artistsYearsSignal.value, histocharactersYearsSignal.value]);
   
 
   // Visibilité Leonardo

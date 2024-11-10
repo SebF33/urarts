@@ -1,14 +1,13 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART } from "@utils/constants.ts";
+import { histocharactersYearsSignal, languageSignal } from "@utils/signals.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
-import { yearsSignal } from "@utils/signals.ts";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
@@ -28,6 +27,10 @@ export default function HistoSearch(
 
   // Slider
   useEffect(() => {
+    // Valeur à l'initialisation
+    let value = [300, 2100];
+    if (histocharactersYearsSignal.value.length !== 0 && (histocharactersYearsSignal.value[0] !== value[0] || histocharactersYearsSignal.value[1] !== value[1]))  value = histocharactersYearsSignal.value;
+
     // Création du slider
     const slider: HTMLElement | null = document.getElementById("slider");
     const valuesForSlider = [300,500,700,900,1100,1300,1500,1700,1900,2100];
@@ -46,7 +49,7 @@ export default function HistoSearch(
       margin: 1,
       pips: { mode: "steps", density: 1.5, format: format },
       range: { min: 0, max: valuesForSlider.length - 1 },
-      start: [300, 2100],
+      start: value,
       step: 1,
       tooltips: true,
     });
@@ -64,7 +67,7 @@ export default function HistoSearch(
     slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        yearsSignal.value = slider.noUiSlider.get();
+        if (histocharactersYearsSignal.value[0] !== slider.noUiSlider.get()[0] || histocharactersYearsSignal.value[1] !== slider.noUiSlider.get()[1])  histocharactersYearsSignal.value = slider.noUiSlider.get();
       }, DELAY_DEBOUNCE);
     });
 
@@ -76,9 +79,9 @@ export default function HistoSearch(
 
   // Appel à l'API "Collection"
   useEffect(() => {
-    if (yearsSignal.value.length > 0) {
+    if (histocharactersYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${yearsSignal.value}`)
+        ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${histocharactersYearsSignal.value}`)
           .json<Arts[]>()
           .then((response) => {
             setSearchResults(response);
@@ -87,7 +90,7 @@ export default function HistoSearch(
 
       return () => clearTimeout(timer);
     }
-  }, [debouncedValue, yearsSignal.value]);
+  }, [debouncedValue, histocharactersYearsSignal.value]);
 
 
   // Atteindre l'œuvre

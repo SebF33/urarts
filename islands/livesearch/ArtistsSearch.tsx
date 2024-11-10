@@ -1,4 +1,5 @@
 import { ArtistRow } from "@utils/types.d.ts";
+import { artistsYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE } from "@utils/constants.ts";
@@ -6,7 +7,6 @@ import { Fragment, h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { languageSignal, nationalitySignal, yearsSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -67,12 +67,15 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
   // Slider
   useEffect(() => {
+    // Valeur à l'initialisation
+    let value = [1900, 2000];
+    if (artistsYearsSignal.value.length !== 0 && (artistsYearsSignal.value[0] !== value[0] || artistsYearsSignal.value[1] !== value[1]))  value = artistsYearsSignal.value;
+
     // Nationalité et années définies si paramètre "nationality" dans l'URL
     if (props.nationality !== "") {
       nationalitySignal.value = props.nationality;
-      yearsSignal.value = [1400, 2100];
+      value = [1400, 2100];
     }
-    else  yearsSignal.value = [1900, 2000];
 
     // Création du slider
     const slider: HTMLElement | null = document.getElementById("slider");
@@ -92,7 +95,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
       margin: 1,
       pips: { mode: "steps", density: 1.5, format: format },
       range: { min: 0, max: valuesForSlider.length - 1 },
-      start: yearsSignal.value,
+      start: value,
       step: 1,
       tooltips: true,
     });
@@ -110,7 +113,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
     slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        yearsSignal.value = slider.noUiSlider.get();
+        if (artistsYearsSignal.value[0] !== slider.noUiSlider.get()[0] || artistsYearsSignal.value[1] !== slider.noUiSlider.get()[1])  artistsYearsSignal.value = slider.noUiSlider.get();
       }, DELAY_DEBOUNCE);
     });
 
@@ -129,9 +132,9 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
   // Appel à l'API "Artistes"
   useEffect(() => {
-    if (yearsSignal.value.length > 0) {
+    if (artistsYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${yearsSignal.value}`)
+        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`)
           .json<ArtistRow[]>()
           .then((response) => {
             setSearchResults(response);
@@ -140,7 +143,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
       return () => clearTimeout(timer);
     }
-  }, [nationalitySignal.value, debouncedValue, yearsSignal.value]);
+  }, [nationalitySignal.value, debouncedValue, artistsYearsSignal.value]);
 
 
   // Background pour la page des artistes
