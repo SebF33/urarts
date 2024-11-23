@@ -141,7 +141,13 @@ export default function Nav(props: Props) {
       const leonardoResponse = await response.text();
   
       // Contenu
-      if (leonardoContent && leonardoResponse !== "no_change") leonardoContent.innerHTML = leonardoResponse;
+      if (leonardoContent && leonardoResponse !== "no_change") {
+        // Nettoyage des images déjà présentes
+        const images = leonardoContent.querySelectorAll("img");
+        images.forEach((img) => img.remove());
+
+        leonardoContent.innerHTML = leonardoResponse;
+      }
     
     } catch (error) {
       if (error.name !== 'AbortError' && leonardoContent)  leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
