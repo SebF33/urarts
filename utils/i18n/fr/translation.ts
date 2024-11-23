@@ -95,6 +95,9 @@ const translation = {
     <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
     en cas de demande ou de litige liés à l'exploitation de ces visuels.</p>`,
   },
+  modal: {
+    description: "Description :",
+  },
   nav: {
     about: "À propos de Urarts...",
     api: "Un échantillon de l’API.",

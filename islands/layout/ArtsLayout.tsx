@@ -1,6 +1,7 @@
 import { Any } from "any";
-import { ART_IMG_WRAPPER, DELAY_DISPLAY, NB_LOADING_ARTS } from "@utils/constants.ts";
+import { ART_IMG_WRAPPER, DELAY_DISPLAY, DELAY_MODAL_TRIGGER, NB_LOADING_ARTS } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
+import { artModalOpenSignal } from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -8,6 +9,8 @@ import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
+
+import ArtModal from "@islands/layout/ArtModal.tsx";
 
 
 type Arts = Array<ArtCollection>;
@@ -38,6 +41,8 @@ export default function ArtsLayout(
   const [displayedArtIndex, setDisplayedArtIndex] = useState<number>(0);
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }) // Seuil d'intersection des éléments
+  const [selectedArt, setSelectedArt] = useState(null);
+  const [selectedUrl, setSelectedUrl] = useState(null);
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   // Rendu des œuvres d'art
@@ -115,6 +120,14 @@ export default function ArtsLayout(
     });
   }, [props.arts, isIntersecting]);
 
+  
+  // Modal
+  const handleClick = (art, url) => {
+    setSelectedArt(art);
+    setSelectedUrl(url);
+    setTimeout(() => artModalOpenSignal.value = true, DELAY_MODAL_TRIGGER);
+  };
+
 
   return (
     <div class={`flex flex-wrap mx-auto mb-40`}>
@@ -129,6 +142,7 @@ export default function ArtsLayout(
             {p.polyptych > 3 &&
               (
                 <div
+                  onClick={() => handleClick(p, p.url_4)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -168,6 +182,7 @@ export default function ArtsLayout(
             {p.polyptych > 1 &&
               (
                 <div
+                  onClick={() => handleClick(p, p.url_2)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -205,6 +220,7 @@ export default function ArtsLayout(
                 </div>
               )}
             <div
+              onClick={() => handleClick(p, p.url)}
               data-artist-id={p.id}
               class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
               style={{
@@ -253,6 +269,7 @@ export default function ArtsLayout(
             {p.polyptych > 2 &&
               (
                 <div
+                  onClick={() => handleClick(p, p.url_3)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -292,6 +309,7 @@ export default function ArtsLayout(
             {p.polyptych === 5 &&
               (
                 <div
+                  onClick={() => handleClick(p, p.url_5)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -350,6 +368,11 @@ export default function ArtsLayout(
 
       {/* Référence à la fin de la liste */}
       <div ref={endRef}></div>
+
+      {/* Modal */}
+      {artModalOpenSignal.value && (
+        <ArtModal art={selectedArt} url={selectedUrl} />
+      )}
     </div>
   );
 }

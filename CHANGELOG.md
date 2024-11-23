@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2024-11-24]
+
+### Nouveautés
+- Ajout d'une fenêtre descriptive au clic des œuvres.
+
 ## [2024-09-08]
 
 ### Nouveautés

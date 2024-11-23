@@ -41,6 +41,7 @@ import * as $chart_PolarArea from "./islands/chart/PolarArea.tsx";
 import * as $footer_Footer from "./islands/footer/Footer.tsx";
 import * as $footer_WaterDrop from "./islands/footer/WaterDrop.tsx";
 import * as $header_Nav from "./islands/header/Nav.tsx";
+import * as $layout_ArtModal from "./islands/layout/ArtModal.tsx";
 import * as $layout_ArtistsLayout from "./islands/layout/ArtistsLayout.tsx";
 import * as $layout_ArtsLayout from "./islands/layout/ArtsLayout.tsx";
 import * as $layout_ErrorLayout from "./islands/layout/ErrorLayout.tsx";
@@ -96,6 +97,7 @@ const manifest = {
     "./islands/footer/Footer.tsx": $footer_Footer,
     "./islands/footer/WaterDrop.tsx": $footer_WaterDrop,
     "./islands/header/Nav.tsx": $header_Nav,
+    "./islands/layout/ArtModal.tsx": $layout_ArtModal,
     "./islands/layout/ArtistsLayout.tsx": $layout_ArtistsLayout,
     "./islands/layout/ArtsLayout.tsx": $layout_ArtsLayout,
     "./islands/layout/ErrorLayout.tsx": $layout_ErrorLayout,
