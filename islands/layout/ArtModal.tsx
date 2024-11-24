@@ -54,7 +54,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
   return (
     <div
       onClick={(event: MouseEvent) => handleClickOutside(event)}
-      class={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[99999] 
+      class={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 z-[99999]
       modal-overlay ${isVisible ? "visible" : ""}`}
     >
 
@@ -62,7 +62,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`relative bg-white rounded-lg m-4 p-6 max-w-4xl w-full
+        class={`relative bg-white rounded-lg m-4 p-6 max-w-4xl w-full max-h-screen overflow-y-auto
         art-modal-container ${isVisible ? "visible" : ""}`}
       >
         <button
@@ -74,22 +74,22 @@ export default function ArtModal({ art, url }: ArtModalProps) {
 
         <div class="flex flex-col md:flex-row gap-6">
           {/* Section gauche : Image */}
-          <div class="flex-shrink-0 mt-2 mr-2 ml-2">
+          <div class="flex-shrink-0 mt-2 mr-2 ml-2 flex flex-col items-center md:items-start">
             <img
               class="h-60 w-auto max-w-full object-contain rounded-lg drop-shadow-md"
               src={url}
               alt={art.name}
             />
             {art.copyright === 0 ? (
-              <>
-                <s className="text-base">©</s>
-                {i18next.t("arts.public_domain", { ns: "translation" })}
-              </>
+              <div className="flex items-center">
+                <s className="text-base inline">©</s>
+                <span className="text-base inline ml-1">{i18next.t("arts.public_domain", { ns: "translation" })}</span>
+              </div>
             ) : (
-              <>
-                <span className="text-base">©</span>
-                {art.first_name ?? ""} {art.last_name}
-              </>
+              <div className="flex items-center">
+                <span className="text-base inline">©</span>
+                <span className="text-base inline ml-1">{art.first_name ?? ""} {art.last_name}</span>
+              </div>
             )}
           </div>
 
