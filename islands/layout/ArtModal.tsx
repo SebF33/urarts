@@ -21,6 +21,25 @@ export default function ArtModal({ art, url }: ArtModalProps) {
     const timer = setTimeout(() => setIsVisible(true), 0);
     return () => clearTimeout(timer);
   }, []);
+  
+  // Désactiver le scroll à l'ouverture
+  useEffect(() => {
+    if (artModalOpenSignal.value) {
+      // Évite le décalage dû à la scrollbar
+      const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.style.paddingRight = "";
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      // Réactiver le scroll si fermeture
+      document.body.style.paddingRight = "";
+      document.body.classList.remove("body-no-scroll");
+    };
+  }, [artModalOpenSignal.value]);
 
 
   // Fermeture de la modal

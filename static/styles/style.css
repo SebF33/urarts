@@ -18,12 +18,12 @@
     --transparent: rgba(213, 224, 249, 0);
 }
 
-/* Surligner un texte sélectionné en couleur */
+/* Surlignage de texte */
 ::selection {
     background-color: var(--color-cyan);
 }
 
-/* Cacher la scrollbar principale */
+/* Scrollbars */
 ::-webkit-scrollbar {
     display: none;
 }
@@ -32,12 +32,15 @@ html {
     scrollbar-width: none;
 }
 
-/* Scrollbar personnalisée */
 .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--color-lighterdark) var(--color-white);
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+  
 /* Curseurs */
 .cursor-auto, body {
     cursor: url(/cursors/cursor-auto.png), auto !important;

@@ -69,6 +69,15 @@ export default function ArtsLayout(
 
   // Infobulles
   useEffect(() => {
+
+    const isTouchDevice = () => {
+      return (
+        'ontouchstart' in globalThis || 
+        navigator.maxTouchPoints > 0 || 
+        globalThis.matchMedia("(pointer: coarse)").matches
+      );
+    };
+
     // Détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
       if (!instance.state.isVisible) { instance.destroy(); }
@@ -107,6 +116,7 @@ export default function ArtsLayout(
           interactive: true,
           placement: "bottom",
           theme: "urarts",
+          trigger: isTouchDevice() ? "manual" : "mouseenter focus",
           onCreate(instance: Any) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
@@ -143,7 +153,7 @@ export default function ArtsLayout(
               (
                 <div
                   onClick={() => handleClick(p, p.url_4)}
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
                     ...(p.frame === 2 || p.frame === 4 ? {
@@ -183,7 +193,7 @@ export default function ArtsLayout(
               (
                 <div
                   onClick={() => handleClick(p, p.url_2)}
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
                     ...(p.frame === 2 || p.frame === 4 ? {
@@ -222,7 +232,7 @@ export default function ArtsLayout(
             <div
               onClick={() => handleClick(p, p.url)}
               data-artist-id={p.id}
-              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
               style={{
                 ...ART_IMG_WRAPPER.wrap,
                 ...(p.frame === 2 || p.frame === 4 ? {
@@ -270,7 +280,7 @@ export default function ArtsLayout(
               (
                 <div
                   onClick={() => handleClick(p, p.url_3)}
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
                     ...(p.frame === 2 || p.frame === 4 ? {
@@ -310,7 +320,7 @@ export default function ArtsLayout(
               (
                 <div
                   onClick={() => handleClick(p, p.url_5)}
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych}`}
+                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
                     ...(p.frame === 2 || p.frame === 4 ? {
