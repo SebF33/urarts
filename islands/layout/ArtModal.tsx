@@ -24,7 +24,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
   
   // Désactiver le scroll à l'ouverture
   useEffect(() => {
-    if (artModalOpenSignal.value) {
+    if (isVisible) {
       // Évite le décalage dû à la scrollbar
       const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -39,7 +39,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
       document.body.style.paddingRight = "";
       document.body.classList.remove("body-no-scroll");
     };
-  }, [artModalOpenSignal.value]);
+  }, [isVisible]);
 
 
   // Fermeture de la modal
@@ -81,7 +81,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`relative bg-white rounded-lg m-4 p-6 max-w-4xl w-full max-h-screen overflow-y-auto
+        class={`relative bg-white rounded-lg mx-auto p-4 max-w-[90%] lg:max-w-4xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar
         art-modal-container ${isVisible ? "visible" : ""}`}
       >
         <button
@@ -95,42 +95,39 @@ export default function ArtModal({ art, url }: ArtModalProps) {
           {/* Section gauche : Image */}
           <div class="flex-shrink-0 mt-2 mr-2 ml-2 flex flex-col items-center md:items-start">
             <img
-              class="h-60 w-auto max-w-full object-contain rounded-lg drop-shadow-md"
+              class="h-60 w-auto max-w-full object-contain rounded-lg drop-shadow-md md:h-40 lg:h-60"
               src={url}
               alt={art.name}
             />
             {art.copyright === 0 ? (
-              <div className="flex items-center">
-                <s className="text-base inline">©</s>
-                <span className="text-base inline ml-1">{i18next.t("arts.public_domain", { ns: "translation" })}</span>
+              <div class="flex items-center">
+                <s class="text-base inline">©</s>
+                <span class="text-base inline ml-1">{i18next.t("arts.public_domain", { ns: "translation" })}</span>
               </div>
             ) : (
-              <div className="flex items-center">
-                <span className="text-base inline">©</span>
-                <span className="text-base inline ml-1">{art.first_name ?? ""} {art.last_name}</span>
+              <div class="flex items-center">
+                <span class="text-base inline">©</span>
+                <span class="text-base inline ml-1">{art.first_name ?? ""} {art.last_name}</span>
               </div>
             )}
           </div>
 
+
           {/* Section droite : Détails */}
-          <div class="flex flex-col justify-start flex-grow">
-            <h2 class="text-2xl font-bold leading-5 mb-2">{art.name}</h2>
-            <p class="text-lg mb-4 leading-5">
+          <div class="flex flex-col justify-start flex-grow text-center md:text-left">
+            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-2">{art.name}</h2>
+            <p class="text-base mb-4 leading-5">
               <span class="font-semibold underline">{i18next.t("artists.artist", { ns: "translation" })}</span>{" "}
               {(art.first_name ?? "") + " " + art.last_name}
             </p>
-            <div class="mt-auto">
-              <p class="italic">
-                {art.movement}.
-              </p>
-            </div>
+            <p class="text-base italic">{art.movement}.</p>
           </div>
         </div>
 
         {/* Section bas : Description */}
-        <div class="mt-6 pt-4 border-t">
+        <div class="mt-6 pt-4 border-t text-center md:text-left">
           <h3 class="text-lg font-semibold underline">{i18next.t("modal.description", { ns: "translation" })}</h3>
-          <p class="leading-5">{art.info}</p>
+          <p class="text-base leading-5">{art.info}</p>
         </div>
       </div>
     </div>
