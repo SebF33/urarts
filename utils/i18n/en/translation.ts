@@ -97,6 +97,10 @@ const translation = {
   },
   modal: {
     description: "Description:",
+    panel_far_left: "(Panel on the far left)",
+    panel_far_right: "(Panel on the far right)",
+    panel_left: "(Panel on the left)",
+    panel_right: "(Panel on the right)",
   },
   nav: {
     about: "About Urarts...",

@@ -832,7 +832,7 @@ h1 {
         var(--color-white) 10px,
         #e0e0e0 10px,
         #e0e0e0 20px
-      );
+    );
     box-shadow: inset 2px 2px 4px var(--color-dark), 
                 inset -2px -2px 4px var(--color-gray);
     transform: translateY(-16px);

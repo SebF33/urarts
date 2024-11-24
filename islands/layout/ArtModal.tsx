@@ -8,10 +8,11 @@ import { useEffect, useRef, useState } from "preact/hooks";
 
 type ArtModalProps = {
   readonly art: Any;
+  readonly panel: string;
   readonly url: string;
 };
 
-export default function ArtModal({ art, url }: ArtModalProps) {
+export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +71,24 @@ export default function ArtModal({ art, url }: ArtModalProps) {
   };
 
 
+  // Panneau
+  function panelText(panel: string) {
+    let txt = '';
+
+    if (panel === '2') {
+      txt = ` ${i18next.t("modal.panel_left", { ns: "translation" })}`;
+    } else if (panel === '3') {
+      txt = ` ${i18next.t("modal.panel_right", { ns: "translation" })}`;
+    } else if (panel === '4') {
+      txt = ` ${i18next.t("modal.panel_far_left", { ns: "translation" })}`;
+    } else if (panel === '5') {
+      txt = ` ${i18next.t("modal.panel_far_right", { ns: "translation" })}`;
+    }
+  
+    return txt;
+  }
+
+
   return (
     <div
       onClick={(event: MouseEvent) => handleClickOutside(event)}
@@ -81,12 +100,12 @@ export default function ArtModal({ art, url }: ArtModalProps) {
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`relative bg-white rounded-lg mx-auto p-4 max-w-[90%] lg:max-w-4xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar
+        class={`relative bg-white mx-auto p-4 max-w-[90%] lg:max-w-4xl w-full max-h-[80vh] overflow-y-auto custom-scrollbar
         art-modal-container ${isVisible ? "visible" : ""}`}
       >
         <button
           onClick={handleClose}
-          class="absolute top-2 right-3 text-dark hover:text-red font-black"
+          class="absolute top-2 right-3 text-dark hover:text-red text-base sm:text-xl md:text-2xl font-black"
         >
           &#10005;
         </button>
@@ -95,7 +114,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
           {/* Section gauche : Image */}
           <div class="flex-shrink-0 mt-2 mr-2 ml-2 flex flex-col items-center md:items-start">
             <img
-              class="h-60 w-auto max-w-full object-contain rounded-lg drop-shadow-md md:h-40 lg:h-60"
+              class="h-60 w-auto max-w-full object-contain drop-shadow-md md:h-40 lg:h-60"
               src={url}
               alt={art.name}
             />
@@ -115,7 +134,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start flex-grow text-center md:text-left">
-            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-2">{art.name}</h2>
+            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-2">{art.name + panelText(panel)}</h2>
             <p class="text-base mb-4 leading-5">
               <span class="font-semibold underline">{i18next.t("artists.artist", { ns: "translation" })}</span>{" "}
               {(art.first_name ?? "") + " " + art.last_name}
@@ -127,7 +146,7 @@ export default function ArtModal({ art, url }: ArtModalProps) {
         {/* Section bas : Description */}
         <div class="mt-6 pt-4 border-t text-center md:text-left">
           <h3 class="text-lg font-semibold underline">{i18next.t("modal.description", { ns: "translation" })}</h3>
-          <p class="text-base leading-5">{art.info}</p>
+          <p class="text-base leading-4">{art.info}</p>
         </div>
       </div>
     </div>

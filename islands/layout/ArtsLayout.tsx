@@ -42,7 +42,8 @@ export default function ArtsLayout(
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }) // Seuil d'intersection des éléments
   const [selectedArt, setSelectedArt] = useState(null);
-  const [selectedUrl, setSelectedUrl] = useState(null);
+  const [selectedPanel, setSelectedPanel] = useState<string>("");
+  const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
 
   // Rendu des œuvres d'art
@@ -132,8 +133,9 @@ export default function ArtsLayout(
 
   
   // Modal
-  const handleClick = (art, url) => {
+  const handleClick = (art, panel: string, url: string) => {
     setSelectedArt(art);
+    setSelectedPanel(panel);
     setSelectedUrl(url);
     setTimeout(() => artModalOpenSignal.value = true, DELAY_MODAL_TRIGGER);
   };
@@ -152,7 +154,7 @@ export default function ArtsLayout(
             {p.polyptych > 3 &&
               (
                 <div
-                  onClick={() => handleClick(p, p.url_4)}
+                  onClick={() => handleClick(p, '4', p.url_4)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -192,7 +194,7 @@ export default function ArtsLayout(
             {p.polyptych > 1 &&
               (
                 <div
-                  onClick={() => handleClick(p, p.url_2)}
+                  onClick={() => handleClick(p, '2', p.url_2)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -230,7 +232,7 @@ export default function ArtsLayout(
                 </div>
               )}
             <div
-              onClick={() => handleClick(p, p.url)}
+              onClick={() => handleClick(p, '1', p.url)}
               data-artist-id={p.id}
               class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
               style={{
@@ -279,7 +281,7 @@ export default function ArtsLayout(
             {p.polyptych > 2 &&
               (
                 <div
-                  onClick={() => handleClick(p, p.url_3)}
+                  onClick={() => handleClick(p, '3', p.url_3)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -319,7 +321,7 @@ export default function ArtsLayout(
             {p.polyptych === 5 &&
               (
                 <div
-                  onClick={() => handleClick(p, p.url_5)}
+                  onClick={() => handleClick(p, '5', p.url_5)}
                   class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                   style={{
                     ...ART_IMG_WRAPPER.wrap,
@@ -381,7 +383,7 @@ export default function ArtsLayout(
 
       {/* Modal */}
       {artModalOpenSignal.value && (
-        <ArtModal art={selectedArt} url={selectedUrl} />
+        <ArtModal art={selectedArt} panel={selectedPanel} url={selectedUrl} />
       )}
     </div>
   );
