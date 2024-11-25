@@ -1,6 +1,6 @@
-import { DEFAULT_LNG } from "@utils/constants.ts";
-import { FreshContext } from "$fresh/server.ts";
 import { Cookie, getCookies, setCookie } from "cookie";
+import { DEFAULT_LNG, URL_1, URL_2 } from "@utils/constants.ts";
+import { FreshContext } from "$fresh/server.ts";
 import i18next from "i18next";
 
 export async function handler(req: Request, ctx: FreshContext) {
@@ -35,14 +35,36 @@ export async function handler(req: Request, ctx: FreshContext) {
   }
   */
 
-  // mettre à jour le cookie
   const response = await ctx.next();
+
+  // en-têtes de sécurité
+  response.headers.set(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload;",
+  );
+  response.headers.set(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=()",
+  );
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("X-DNS-Prefetch-Control", "on");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  response.headers.set("X-XSS-Protection", "1; mode=block");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set(
+    "Content-Security-Policy",
+    `default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'unsafe-inline' 'unsafe-eval' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'; style-src 'self' 'unsafe-inline'; child-src 'self'; img-src 'self' data: blob: ${URL_1} ${URL_2}; media-src 'self' data: blob: ${URL_1} ${URL_2}; connect-src 'self' ${URL_1} ${URL_2}; font-src 'self'; worker-src 'self'; frame-src 'self'; frame-ancestors 'self';`,
+  );
+
+  // mettre à jour le cookie
   const cookie: Cookie = {
     name: "i18next",
     value: lng,
     maxAge: 60 * 60 * 24 * 7, // 1 semaine
     domain: domain,
     path: "/",
+    secure: true,
+    httpOnly: true,
   };
   setCookie(response.headers, cookie);
 
