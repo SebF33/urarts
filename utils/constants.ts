@@ -75,8 +75,11 @@ export const NATIONALITIES: string[] = [
 export const NB_LOADING_ARTS = 5;
 export const NB_LOADING_ARTISTS = 10;
 export const TALENTS: string[] = ["albert", "mimi"];
-export const URL_1 = "https://www.urarts.art";
-export const URL_2 = "https://urarts.fly.dev";
+export const URL_GA = "https://www.google-analytics.com";
+export const URL_GT = "https://www.googletagmanager.com";
+export const URL_URARTS_1 = "https://www.urarts.art";
+export const URL_URARTS_2 = "https://urarts.fly.dev";
+export const URL_URARTS_3 = "https://www.urarts.fr";
 
 export const ART_IMG_WRAPPER: Record<string, Any> = {
   wrap: {
