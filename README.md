@@ -71,12 +71,11 @@ Ouvrir dans le navigateur :
 `flyctl open`
 
 
-[![Made with Fresh](https://fresh.deno.dev/fresh-badge-dark.svg)](https://fresh.deno.dev)
-
 <p align="right">
-  <img align="right" width="400" src="https://raw.githubusercontent.com/sebf33/urarts/master/.github/my-dino.png" />
+  <img align="right" width="200" src="https://raw.githubusercontent.com/sebf33/urarts/master/.github/my-dino.png" />
 </p>
 
+[![Made with Fresh](https://fresh.deno.dev/fresh-badge-dark.svg)](https://fresh.deno.dev)
 
 <p align="center">
   <img align="center" width="100" src="https://raw.githubusercontent.com/sebf33/sebf33/master/assets/avatar.png" />
