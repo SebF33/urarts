@@ -25,7 +25,7 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 [![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Kysely](/.github/Kysely.png)](https://kysely.dev) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Alpine.js](/.github/Alpine.js.png)](https://alpinejs.dev) [![Tippy.js](/.github/Tippy.js.png)](https://atomiks.github.io/tippyjs) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![i18next](/.github/i18next.png)](https://www.i18next.com) [![Fly.io](/.github/Fly.io.png)](https://fly.io)
 
 :toolbox: **Technologies :**
-- [Deno](https://deno.land/manual)
+- [Deno 2](https://deno.land/manual)
 - [Fresh](https://fresh.deno.dev/docs/introduction)
 - [SQLite](https://github.com/dyedgreen/deno-sqlite)
 - [Kysely](https://kysely-org.github.io/kysely)
@@ -73,6 +73,9 @@ Ouvrir dans le navigateur :
 
 [![Made with Fresh](https://fresh.deno.dev/fresh-badge-dark.svg)](https://fresh.deno.dev)
 
+<p align="right">
+  <img align="right" width="100" src="https://raw.githubusercontent.com/sebf33/urarts/master/.github/my-dino.png" />
+</p>
 
 <p align="center">
   <img align="center" width="100" src="https://raw.githubusercontent.com/sebf33/sebf33/master/assets/avatar.png" />
