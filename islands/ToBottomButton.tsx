@@ -2,12 +2,14 @@ import { useEffect, useState } from "preact/hooks";
 
 import { UrartsPencilTip } from "@components/Assets.tsx";
 
-export default function ToBottomButton() {
-  const [showButton, setShowButton] = useState(true);
 
+export default function ToBottomButton() {
+  const [showButton, setShowButton] = useState<boolean>(true);
+
+  
   useEffect(() => {
     const handleScroll = () => {
-      setShowButton(globalThis.scrollY < 50);
+      setShowButton(globalThis.scrollY < 100);
     };
 
     globalThis.addEventListener("scroll", handleScroll);
@@ -16,12 +18,14 @@ export default function ToBottomButton() {
     };
   }, []);
 
+
   const scrollToBottom = () => {
     globalThis.scrollTo({
       top: document.body.scrollHeight,
       behavior: "smooth",
     });
   };
+
 
   return (
     <>

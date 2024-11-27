@@ -2,19 +2,37 @@ import { useEffect, useState } from "preact/hooks";
 
 import { UrartsTrimBrush } from "@components/Assets.tsx";
 
+
 export default function ToTopButton() {
   const [showButton, setShowButton] = useState<boolean>(false);
 
+
   useEffect(() => {
     const handleScroll = () => {
-      setShowButton(globalThis.scrollY > 50);
+      const globalScrolled = globalThis.scrollY > 100;
+      const scrollableElement = document.querySelector<HTMLElement>(".scrollable");
+      const elementScrolled = scrollableElement
+        ? scrollableElement.scrollTop > 36
+        : false;
+
+      setShowButton(globalScrolled || elementScrolled);
     };
 
     globalThis.addEventListener("scroll", handleScroll);
+
+    const scrollableElement = document.querySelector<HTMLElement>(".scrollable");
+    if (scrollableElement) {
+      scrollableElement.addEventListener("scroll", handleScroll);
+    }
+
     return () => {
       globalThis.removeEventListener("scroll", handleScroll);
+      if (scrollableElement) {
+        scrollableElement.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
+
 
   const scrollToTop = () => {
     globalThis.scrollTo({ top: 0, behavior: "smooth" });
@@ -24,6 +42,7 @@ export default function ToTopButton() {
       target.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
 
   return (
     <>
