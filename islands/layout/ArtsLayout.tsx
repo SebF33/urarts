@@ -15,9 +15,9 @@ import ArtModal from "@islands/layout/ArtModal.tsx";
 
 type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
-  arts: Arts;
-  font?: string;
-  type?: string;
+  readonly arts: Arts;
+  readonly font?: string;
+  readonly type?: string;
 }
 
 
@@ -90,9 +90,9 @@ export default function ArtsLayout(
     displayedArts.forEach((p) => {
       let content;
       let copyright;
-      const el = document.querySelector(`[data-artist-id="${p.id}"]`);
+      const artElement: HTMLElement | null = document.querySelector(`[data-artist-id="${p.id}"]`);
 
-      if (el) {
+      if (artElement) {
         copyright = p.copyright === 0 ? '<s style="font-size:1.3em">©</s> ' + i18next.t("arts.public_domain", { ns: "translation" }) : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
 
         if (props.type === "histocharacters") {
@@ -111,7 +111,7 @@ export default function ArtsLayout(
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         }
 
-        tippy(el, {
+        tippy(artElement, {
           allowHTML: true,
           content: content,
           interactive: true,
@@ -129,6 +129,11 @@ export default function ArtsLayout(
         });
       }
     });
+
+    return () => {
+      // Nettoyer les listeners et instances pour éviter les fuites mémoire
+      tippyInstances.forEach((instance) => instance.destroy());
+    };
   }, [props.arts, isIntersecting]);
 
   

@@ -17,6 +17,7 @@ import { SearchInput } from "@components/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
+
 export default function TalentsArtSideBar() {
   const [display, setDisplay] = useState<boolean>(false);
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
@@ -28,11 +29,13 @@ export default function TalentsArtSideBar() {
   const draggable = false;
   const type = "talentsart";
 
+
   // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
     return () => clearTimeout(timeoutId);
   }, []);
+
 
   // Appel à l'API "Collection"
   useEffect(() => {
@@ -47,18 +50,17 @@ export default function TalentsArtSideBar() {
     return () => clearTimeout(timer);
   }, [debouncedValue]);
 
+
   // Infobulles
   useEffect(() => {
-    tippyInstances.forEach((instance) => {
-      instance.destroy();
-    });
+    tippyInstances.forEach((instance) => { instance.destroy(); });
     setTippyInstances([]);
 
     searchResults.forEach((p) => {
-      const art = document.querySelector(`[data-art-id="${p.id}"]`);
+      const artElement: HTMLElement | null = document.querySelector(`[data-art-id="${p.id}"]`);
 
-      if (art) {
-        tippy(art, {
+      if (artElement) {
+        tippy(artElement, {
           allowHTML: true,
           content:
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
@@ -78,7 +80,13 @@ export default function TalentsArtSideBar() {
         });
       }
     });
+
+    return () => {
+      // Nettoyer les listeners et instances pour éviter les fuites mémoire
+      tippyInstances.forEach((instance) => instance.destroy());
+    };
   }, [searchResults]);
+
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -87,6 +95,7 @@ export default function TalentsArtSideBar() {
       window.location.href = href;
     }, DELAY_REACH_HREF);
   }
+
 
   return (
     <section

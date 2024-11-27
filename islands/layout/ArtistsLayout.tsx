@@ -14,7 +14,7 @@ type Artists = Array<ArtistRow>;
 
 
 export default function ArtistsLayout(
-  props: { artists: Artists; flag: string; grid: string },
+  props: { readonly artists: Artists; readonly flag: string; readonly grid: string },
 ) {
   const [display, setDisplay] = useState<boolean>(false);
   const [displayedArtistIndex, setDisplayedArtistIndex] = useState<number>(0);
@@ -60,10 +60,10 @@ export default function ArtistsLayout(
     // Mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
     setTippyInstances((prevInstances) => prevInstances.filter((instance) => instance.state.isVisible));
 
-    const noresults = document.querySelector("#Noresults");
+    const noresultsElement: HTMLElement | null = document.querySelector("#Noresults");
 
-    if (noresults) {
-      tippy(noresults, {
+    if (noresultsElement) {
+      tippy(noresultsElement, {
         allowHTML: true,
         content: `<p>${i18next.t("common.no_results", { ns: "translation" })}.</p>`,
         interactive: true,
@@ -81,10 +81,10 @@ export default function ArtistsLayout(
     }
 
     displayedArtists.forEach((p) => {
-      const artist = document.querySelector(`[data-artist-id="${p.id}"]`);
+      const artistElement: HTMLElement | null = document.querySelector(`[data-artist-id="${p.id}"]`);
 
-      if (artist) {
-        tippy(artist, {
+      if (artistElement) {
+        tippy(artistElement, {
           allowHTML: true,
           content:
             `<strong style="font-size:1.3em;line-height:1.2;color:${p.color}"><a href="/art/${p.slug}">${p.last_name}</a></strong>
@@ -105,6 +105,11 @@ export default function ArtistsLayout(
         });
       }
     });
+
+    return () => {
+      // Nettoyer les listeners et instances pour éviter les fuites mémoire
+      tippyInstances.forEach((instance) => instance.destroy());
+    };
   }, [display, props.artists, isIntersecting]);
 
 

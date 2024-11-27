@@ -7,8 +7,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 
 type Quote = Array<ArtistQuote>;
 
+
 export default function Quote(
-  props: { data: Quote; delay: number },
+  props: { readonly data: Quote; readonly delay: number },
 ) {
   const [display, setDisplay] = useState<boolean>(false);
   const quoteRef = useRef<HTMLDivElement>(null);
@@ -16,11 +17,13 @@ export default function Quote(
 
   const draggable = false;
 
+
   // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, props.delay);
     return () => clearTimeout(timeoutId);
   }, []);
+
 
   // Animation
   useEffect(() => {
@@ -29,19 +32,16 @@ export default function Quote(
     }
   }, [display]);
 
+
   // Infobulle
   useEffect(() => {
-    tippyInstances.forEach((instance) => {
-      instance.destroy();
-    });
+    tippyInstances.forEach((instance) => { instance.destroy(); });
     setTippyInstances([]);
 
-    const artistQuote = document.querySelector(
-      `[data-quote-id="${props.data.id}"]`,
-    );
+    const artistQuoteElement: HTMLElement | null = document.querySelector(`[data-quote-id="${props.data.id}"]`);
 
-    if (artistQuote) {
-      tippy(artistQuote, {
+    if (artistQuoteElement) {
+      tippy(artistQuoteElement, {
         allowHTML: true,
         content:
           `<a data-anchor-id=${props.data.id} href="/art/${props.data.slug}" draggable="${draggable}">
@@ -54,10 +54,8 @@ export default function Quote(
         theme: "urarts",
         onCreate(instance: Any) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);
-          const anchor = instance.popper.querySelector(
-            `[data-anchor-id="${props.data.id}"]`,
-          );
-          anchor.addEventListener("click", (event) => {
+          const anchor = instance.popper.querySelector(`[data-anchor-id="${props.data.id}"]`) as HTMLElement;
+          anchor.addEventListener("click", (_event: MouseEvent) => {
             instance.destroy();
           });
         },
@@ -69,6 +67,7 @@ export default function Quote(
       });
     }
   }, [display, props.data.id]);
+
 
   // Background pour la page d'accueil
   useLayoutEffect(() => {
@@ -87,6 +86,7 @@ export default function Quote(
     }
   }, []);
 
+  
   return (
     <>
       {display && (
