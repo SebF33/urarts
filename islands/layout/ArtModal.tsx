@@ -12,6 +12,7 @@ type ArtModalProps = {
   readonly url: string;
 };
 
+
 export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
     const timer = setTimeout(() => setIsVisible(true), 0);
     return () => clearTimeout(timer);
   }, []);
+  
   
   // Désactiver le scroll à l'ouverture
   useEffect(() => {
@@ -100,21 +102,21 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`relative bg-white mx-auto p-4 max-w-[90%] lg:max-w-4xl w-full max-h-[80vh] overflow-y-auto custom-scrollbar
+        class={`relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-white overflow-y-auto custom-scrollbar
         art-modal-container ${isVisible ? "visible" : ""}`}
       >
         <button
           onClick={handleClose}
-          class="absolute top-2 right-3 text-dark hover:text-red text-base sm:text-xl md:text-2xl font-black"
+          class="absolute top-1.5 right-2.5 md:top-2 md:right-3 text-dark hover:text-red text-base sm:text-xl md:text-2xl font-black"
         >
           &#10005;
         </button>
 
-        <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex flex-wrap gap-6">
           {/* Section gauche : Image */}
-          <div class="flex-shrink-0 mt-2 mr-2 ml-2 flex flex-col items-center md:items-start">
+          <div class="flex-shrink-0 mt-4 px-2 flex flex-col items-center md:items-start">
             <img
-              class="h-60 w-auto max-w-full object-contain drop-shadow-md md:h-40 lg:h-60"
+              class="max-w-[70vw] md:max-w-[30vw] max-h-60 md:max-h-80 object-contain drop-shadow-md"
               src={url}
               alt={art.name}
             />
@@ -131,10 +133,9 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
             )}
           </div>
 
-
           {/* Section droite : Détails */}
-          <div class="flex flex-col justify-start flex-grow text-center md:text-left">
-            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-2">{art.name + panelText(panel)}</h2>
+          <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
+            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-1">{art.name + panelText(panel)}</h2>
             <p class="text-base mb-4 leading-5">
               <span class="font-semibold underline">{i18next.t("artists.artist", { ns: "translation" })}</span>{" "}
               {(art.first_name ?? "") + " " + art.last_name}
@@ -144,8 +145,9 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         </div>
 
         {/* Section bas : Description */}
-        <div class="mt-6 pt-4 border-t text-center md:text-left">
-          <h3 class="text-lg font-semibold underline">{i18next.t("modal.description", { ns: "translation" })}</h3>
+        <div class="relative mt-6 pt-4 text-center md:text-left">
+          <div class="drawline-animation"></div>
+          <h3 class="text-lg font-semibold">{i18next.t("modal.description", { ns: "translation" })}</h3>
           <p class="text-base leading-4">{art.info}</p>
         </div>
       </div>

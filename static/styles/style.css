@@ -40,21 +40,36 @@ html {
 .no-scroll {
     overflow: hidden;
 }
-  
+
 /* Curseurs */
-.cursor-auto, body {
+.cursor-auto,
+body {
     cursor: url(/cursors/cursor-auto.png), auto !important;
 }
-.cursor-grab, .noUi-handle, .noUi-handle:hover {
+
+.cursor-grab,
+.noUi-handle,
+.noUi-handle:hover {
     cursor: url(/cursors/cursor-grab.png), grab !important;
 }
-.cursor-help, #U-Icon, #Urarts {
+
+.cursor-help,
+#U-Icon,
+#Urarts {
     cursor: url(/cursors/cursor-help.png), help !important;
 }
-.cursor-pointer, a:hover, button:hover, canvas, .eye, .noUi-connects {
+
+.cursor-pointer,
+a:hover,
+button:hover,
+canvas,
+.eye,
+.noUi-connects {
     cursor: url(/cursors/cursor-pointer.png), pointer !important;
 }
-.cursor-text, input {
+
+.cursor-text,
+input {
     cursor: url(/cursors/cursor-text.png), text !important;
 }
 
@@ -461,10 +476,7 @@ h1 {
 
 /* Ombres */
 .famous-art-shadow {
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08)) 
-            drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) 
-            drop-shadow(0 4px 4px rgba(0, 0, 0, 0.16)) 
-            drop-shadow(0 8px 8px rgba(0, 0, 0, 0.20));
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) drop-shadow(0 4px 4px rgba(0, 0, 0, 0.16)) drop-shadow(0 8px 8px rgba(0, 0, 0, 0.20));
 }
 
 .icon-svg,
@@ -812,8 +824,13 @@ h1 {
 
 /* Brush stroke */
 @keyframes expand {
-    0% { width: 0; }
-    100% { width: 100%; }
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 #anim-rect {
@@ -826,15 +843,13 @@ h1 {
 .art-modal-container {
     border: 5px solid var(--color-gray);
     border-radius: 12px;
-    background: repeating-linear-gradient(
-        45deg,
-        var(--color-white),
-        var(--color-white) 10px,
-        #e0e0e0 10px,
-        #e0e0e0 20px
-    );
-    box-shadow: inset 2px 2px 4px var(--color-dark), 
-                inset -2px -2px 4px var(--color-gray);
+    background: repeating-linear-gradient(45deg,
+            var(--color-white),
+            var(--color-white) 10px,
+            #e0e0e0 10px,
+            #e0e0e0 20px);
+    box-shadow: inset 2px 2px 4px var(--color-dark),
+        inset -2px -2px 4px var(--color-gray);
     transform: translateY(-16px);
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
@@ -849,6 +864,33 @@ h1 {
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
     opacity: 0;
 }
+
 .modal-overlay.visible {
     opacity: 1;
+}
+
+.drawline-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: var(--color-dark);
+    animation: drawLine 3s ease-out forwards;
+}
+
+@keyframes drawLine {
+    0% {
+        width: 0;
+        clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    50% {
+        width: 60%;
+        clip-path: polygon(0 60%, 100% 20%, 100% 80%, 0% 90%);
+    }
+
+    100% {
+        width: 100%;
+        clip-path: polygon(0 50%, 100% 30%, 100% 70%, 0% 50%);
+    }
 }
