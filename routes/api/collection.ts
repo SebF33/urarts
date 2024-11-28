@@ -63,6 +63,7 @@ export const handler = async (
   const beginFilter = years[0];
   const endFilter = years[1];
 
+  
   const db = Db.getInstance();
   let results: Array<ArtCollection> | null = null;
 
@@ -124,7 +125,9 @@ export const handler = async (
         .where("movement.slug", "=", slugFilter)
         .where("artist.slug", "not in", TALENTS)
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
+        .orderBy(sql`random()`)
         .orderBy(({ fn }) => fn("lower", ["art.name"]))
+        .limit(50)
       break;
 
     case "talentsart":
