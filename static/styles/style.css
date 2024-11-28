@@ -516,6 +516,26 @@ h1 {
     transform: translateX(0);
 }
 
+.appear-effect-fast-fadein {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.appear-effect-fast-fadein img {
+    will-change: opacity, transform;
+}
+
+@keyframes fadeIn {
+    80% {
+        opacity: 0;
+        transform: scale(0.99);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 /* Papiers & adhésifs
    - CodePen : https://codepen.io/aitchiss/pen/QWKmPqx
 */

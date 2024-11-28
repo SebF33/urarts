@@ -48,7 +48,7 @@ export const handler: Handlers = {
       .limit(12)
       .execute();
       
-      // Position des artistes
+      // Position des étiquettes d'artiste
       const lValues = ["-ml-2", "ml-36", "-ml-1", "ml-40", "-ml-3", "ml-2", "-ml-2", "ml-1", "-ml-2", "ml-40", "-ml-3", "ml-36"];
       const rValues = ["-rotate-3", "rotate-6", "rotate-2", "-rotate-2", "-rotate-2", "rotate-6", "-rotate-3", "rotate-3", "rotate-0", "rotate-3", "rotate-1", "-rotate-12"];
       const tValues = ["-mt-2", "-mt-12", "-mt-1", "-mt-14", "-mt-3", "mt-2", "-mt-2", "mt-1", "-mt-2", "-mt-24", "mt-6", "-mt-16"];
@@ -122,7 +122,9 @@ export default function MovementArtsPage(
           {artists &&
             <div class={`invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible`}>
               {artists && artists.map((p) => (
-                <div class={`paper max-w-[140px] min-h-8 ${p.position} shadow-none`}>
+                <div
+                  class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 ${p.position} shadow-none`}
+                >
                   <div class="top-tape max-h-3"></div>
                   <a
                     href={"/art/" + p.slug}

@@ -77,6 +77,7 @@ export const handler: Handlers = {
       .$if(lng === 'en', (qb) => qb.orderBy("movement.name_en"))
       .execute();
       
+      // Position des étiquettes de mouvement artistique
       const marginValues = ["-ml-2", "ml-6", "-ml-1", "ml-12", "-ml-3", "ml-2"];
       const rotationValues = ["-rotate-3", "rotate-3", "-rotate-1", "rotate-2", "-rotate-2", "rotate-6"];
 
@@ -196,7 +197,9 @@ export default function ArtistArtPage(
           {movements &&
             <div class={`invisible md:visible absolute mt-12 ml-16`}>
               {movements && movements.map((p) => (
-                <div class={`paper max-w-[140px] min-h-8 mt-1 ${p.position} font-${p.font} shadow-none`}>
+                <div
+                  class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 mt-1 ${p.position} font-${p.font} shadow-none`}
+                >
                   <div class="top-tape max-h-3"></div>
                   <a
                     href={"/movement/" + p.movement_slug}
