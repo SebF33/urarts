@@ -45,31 +45,52 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   }, [isVisible]);
 
 
-  // Fermeture de la modal
+  // Annuler les clics dans la barre de navigation
+  useEffect(() => {
+    const navElement = document.getElementById("Urarts-Nav");
+  
+    if (navElement) {
+      if (isVisible) {
+        navElement.classList.add("pointer-events-none");
+      } else {
+        navElement.classList.remove("pointer-events-none");
+      }
+    }
+  
+    return () => {
+      if (navElement) {
+        navElement.classList.remove("pointer-events-none");
+      }
+    };
+  }, [isVisible]);
+
+
+  // Fermeture de la modal avec Escape ou clic à l'extérieur
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") handleClose();
     };
-    globalThis.addEventListener("keydown", handleKeyDown);
-    return () => globalThis.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
-  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        handleClose();
+      }
+    };
+
     if (isVisible) {
+      globalThis.addEventListener("keydown", handleKeyDown);
       globalThis.addEventListener("click", handleClickOutside);
-      return () => globalThis.removeEventListener("click", handleClickOutside);
     }
+
+    return () => {
+      globalThis.removeEventListener("keydown", handleKeyDown);
+      globalThis.removeEventListener("click", handleClickOutside);
+    };
   }, [isVisible]);
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(() => artModalOpenSignal.value = false, DELAY_MODAL_CLOSE);
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      handleClose();
-    }
+    setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
   };
 
 
@@ -93,7 +114,6 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
 
   return (
     <div
-      onClick={(event: MouseEvent) => handleClickOutside(event)}
       class={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 z-[99999]
       modal-overlay ${isVisible ? "visible" : ""}`}
     >

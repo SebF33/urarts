@@ -340,6 +340,7 @@ export default function Nav(props: Props) {
 
   return (
     <nav
+      id="Urarts-Nav"
       x-bind:class="{ 'header-paper': navTheme === 'header-paper', 'wave-colors': navTheme === 'wave-colors' }"
       class={`flex flex-wrap text-white z-50 shadow-lg ${css({"text-shadow": "2px 4px 3px rgba(0,0,0,0.3)"})}`}
     >
