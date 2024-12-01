@@ -10,6 +10,7 @@ import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";
+import Title from "@islands/Title.tsx";
 
 type Arts = Array<ArtCollection>;
 type Movements = Array<MovementRow>;
@@ -30,7 +31,7 @@ export default function MovementsList(
 
         if (response && response.length > 0) {
           const firstArt = response[0];
-          getPreviewImageUrl(firstArt.id.toString(), firstArt.slug, firstArt.url);
+          getPreviewImageUrl(firstArt.id.toString(), firstArt.name, firstArt.slug, firstArt.url);
         }
       } catch (error) {
         console.error("Error", error);
@@ -63,7 +64,7 @@ export default function MovementsList(
   
           if (response && response.length > 0) {
             const art = response[0];
-            getPreviewImageUrl(art.id, art.artist_slug, art.url);
+            getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
           }
         } catch (error) {
           console.error("Error", error);
@@ -77,9 +78,10 @@ export default function MovementsList(
   };
 
 
-  function getPreviewImageUrl(id: string, slug: string, url: string) {
+  function getPreviewImageUrl(id: string, name: string, slug: string, url: string) {
     const hoveredImageUrl = {
       id: id,
+      name: name,
       slug: slug,
       url: url
     }
@@ -115,14 +117,12 @@ export default function MovementsList(
 
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-      <div
-        class={`paper min-h-[60px] max-w-[230px] mt-5 mb-6`}
-      >
-        <div class="top-tape"></div>
-        <h1 class={`text-5xl font-medium mx-auto`}>
-          {i18next.t("title.movements", { ns: "translation" })}
-        </h1>
-      </div>
+      
+      <Title
+        name="movements"
+        dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
+        margin="mt-5 mb-6"
+      />
 
       <div class={`flex flex-wrap`}>
         {/* Liste des mouvements */}

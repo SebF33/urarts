@@ -1,6 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -12,8 +12,11 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Movements = Array<MovementRow>;
 
+
 export const handler: Handlers = {
-  async GET(_, ctx) {
+  async GET(_: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.movements.desc", { ns: "translation" });
+    const title = i18next.t("meta.movements.title", { ns: "translation" });
     const lng = i18next.language;
     
     const db = Db.getInstance();
@@ -44,18 +47,20 @@ export const handler: Handlers = {
       art_count: String(p.art_count),
     }));
 
-    return ctx.render({ movements });
+    return ctx.render({ desc, movements, title });
   },
 };
 
+
 export default function MovementsPage(
   props: PageProps<{
+    desc: string;
     movements: Movements;
+    title: string;
   }>,
 ) {
-  const { movements } = props.data;
-  const desc = "Les principaux mouvements artistiques.";
-  const title = "Urarts - Mouvements";
+
+  const { desc, movements, title } = props.data;
 
   return (
     <>

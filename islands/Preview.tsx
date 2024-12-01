@@ -6,14 +6,17 @@ import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 interface PreviewProps {
   id: string;
+  name: string;
   slug: string;
   url: string;
 }
 
+
 export default function Preview(
-  props: { image: PreviewProps | null },
+  props: { readonly image: PreviewProps | null },
 ) {
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
+
 
   // Délai au click
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
@@ -21,6 +24,7 @@ export default function Preview(
     const href = (event.currentTarget as HTMLAnchorElement).href;
     setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
   }
+
 
   return (
     <div class="preview-frame relative mt-16 mb-6 mx-auto lg:mr-0">
@@ -33,6 +37,7 @@ export default function Preview(
           href={"/art/" + props.image.slug + "?alone&id=" + props.image.id}
           class="preview block mx-auto cursor-pointer"
           onClick={handleClick}
+          title={props.image.name}
         >
           <img
             style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
@@ -45,6 +50,7 @@ export default function Preview(
             class="preview-img"
             src={props.image.url}
             alt={i18next.t("arts.preview", { ns: "translation" })}
+            title={props.image.name}
           />
         </a>
       )}

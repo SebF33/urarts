@@ -1,4 +1,4 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -9,8 +9,12 @@ import Note from "@islands/Note.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import Title from "@islands/Title.tsx";
 
+
 export const handler: Handlers = {
-  GET(_, ctx) {
+  GET(_: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.about.desc", { ns: "translation" });
+    const title = i18next.t("meta.about.title", { ns: "translation" });
+
     // Couleurs Mona Lisa
     const randomColorsIndex = Math.floor(Math.random() * 7);
     const colors = [
@@ -24,18 +28,20 @@ export const handler: Handlers = {
     ];
     const color = colors[randomColorsIndex];
 
-    return ctx.render({ color });
+    return ctx.render({ color, desc, title });
   },
 };
+
 
 export default function AboutPage(
   props: PageProps<{
     color: string;
+    desc: string;
+    title: string;
   }>,
 ) {
-  const { color } = props.data;
-  const desc = "À propos de Urarts...";
-  const title = "Urarts - À propos";
+
+  const { color, desc, title } = props.data;
 
   return (
     <>
@@ -52,7 +58,7 @@ export default function AboutPage(
         <div class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Title
             name="about"
-            dimension="min-h-[60px] max-w-[230px]"
+            dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
             margin="mt-5 mb-6"
           />
           <Note />

@@ -11,12 +11,14 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { WomanLogo } from "@components/Assets.tsx";
 
+
 export default function WomenSearch() {
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
 
   const gender = "Femme";
   const grid =
     "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 pb-20";
+
 
   // Appel à l'API "Artistes"
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function WomenSearch() {
 
     return () => clearTimeout(timer);
   }, []);
+
 
   // Background pour la page des femmes artistes
   useLayoutEffect(() => {
@@ -48,19 +51,20 @@ export default function WomenSearch() {
     }
   }, []);
 
+
   return (
     <>
       <div
         class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper min-h-[60px] max-w-[280px] mt-5 mb-16`}
+          class={`paper min-h-[30px] max-w-[140px] md:min-h-[60px] md:max-w-[280px] mt-5 mb-16`}
         >
           <div class="tape-section"></div>
-          <h1 class={`text-5xl leading-none font-medium mb-2 ml-2`}>
+          <h1 class={`text-2xl md:text-4xl leading-none font-medium text-center mb-2 ml-2`}>
             {i18next.t("title.women", { ns: "translation" })}
           </h1>
-          <div class={`w-full m-3`}>
+          <div class={`w-6/12 m-2`}>
             <WomanLogo />
           </div>
           <div class="tape-section"></div>

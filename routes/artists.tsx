@@ -14,6 +14,8 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 export const handler: Handlers = {
   async GET(req: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.artists.desc", { ns: "translation" });
+    const title = i18next.t("meta.artists.title", { ns: "translation" });
     const url = new URL(req.url);
 
     let nationality: string = url.searchParams.get("nationality") || "";
@@ -31,17 +33,20 @@ export const handler: Handlers = {
       }
     }
 
-    return ctx.render({ nationality });
+    return ctx.render({ desc, nationality, title });
   },
 };
 
 
 export default function ArtistsPage(
-  props: PageProps<{ nationality: string }>,
+  props: PageProps<{
+    desc: string;
+    nationality: string;
+    title: string;
+  }>,
 ) {
-  const { nationality } = props.data;
-  const desc = "Les meilleurs artistes au monde.";
-  const title = "Urarts - Artistes";
+
+  const { desc, nationality, title } = props.data;
 
   return (
     <>

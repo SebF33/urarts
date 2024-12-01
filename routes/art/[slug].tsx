@@ -15,6 +15,7 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Quote = Array<ArtistQuote>;
 
+
 export const handler: Handlers = {
   async GET(req: Request, ctx: FreshContext) {
     const lng = i18next.language;
@@ -94,7 +95,7 @@ export const handler: Handlers = {
       color = result.color;
       copyright = result.copyright;
       deathyear = result.deathyear !== "" ? " — " + result.deathyear : "";
-      desc = "Les plus belles œuvres de " + artist + ".";
+      desc = i18next.t("meta.collection.desc", { ns: "translation" }) + " " + artist + ".";
       info = result.info;
       movements = movementQuery.map((p, index) => ({
         font: p.font,
@@ -111,7 +112,7 @@ export const handler: Handlers = {
       };
       secondaryColor = result.secondary_color;
       site = result.site_web;
-      title = artist + " - Collection";
+      title = artist + " " + i18next.t("meta.collection.title", { ns: "translation" });
     } else return ctx.renderNotFound();
 
     return ctx.render({
@@ -136,6 +137,7 @@ export const handler: Handlers = {
   },
 };
 
+
 export default function ArtistArtPage(
   props: PageProps<{
     artist: string;
@@ -157,6 +159,7 @@ export default function ArtistArtPage(
     title: string;
   }>,
 ) {
+  
   const {
     artist,
     artistQuote,

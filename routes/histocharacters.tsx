@@ -1,5 +1,5 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -8,25 +8,30 @@ import Footer from "@islands/footer/Footer.tsx";
 import HistoSearch from "@islands/livesearch/HistoSearch.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
-export const handler: Handlers = {
-  async GET(req, ctx) {
-    const url = new URL(req.url);
-    let query: string | null = null;
 
+export const handler: Handlers = {
+  GET(req: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.histocharacters.desc", { ns: "translation" });
+    const title = i18next.t("meta.histocharacters.title", { ns: "translation" });
+    const url = new URL(req.url);
+
+    let query: string | null = null;
     query = url.searchParams.get("id") || "";
 
-    return ctx.render({ query });
+    return ctx.render({ desc, query, title });
   },
 };
 
+
 export default function HistoCharactersPage(
   props: PageProps<{
+    desc: string;
     query: string;
+    title: string;
   }>,
 ) {
-  const { query } = props.data;
-  const desc = "Les personnages historiques.";
-  const title = "Urarts - Personnages historiques";
+
+  const { desc, query, title } = props.data;
 
   return (
     <>

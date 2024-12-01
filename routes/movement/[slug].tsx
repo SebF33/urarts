@@ -64,7 +64,7 @@ export const handler: Handlers = {
       font = result.font;
       info = result.info;
       mySlug = result.slug;
-      title = movement + " - Collection";
+      title = movement + " " + i18next.t("meta.collection.title", { ns: "translation" });
     } else return ctx.renderNotFound();
 
     return ctx.render({
@@ -91,6 +91,7 @@ export default function MovementArtsPage(
     title: string;
   }>,
 ) {
+
   const {
     artists,
     desc,
@@ -103,7 +104,6 @@ export default function MovementArtsPage(
 
   const draggable = false;
 
-  
   return (
     <>
       <Head>

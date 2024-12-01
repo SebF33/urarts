@@ -13,6 +13,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
+import Title from "@islands/Title.tsx";
 
 type Arts = Array<ArtCollection>;
 
@@ -33,7 +34,7 @@ export default function ArtsSearch() {
 
         if (response && response.length > 0) {
           const firstArt = response[0];
-          getPreviewImageUrl(firstArt.id.toString(), firstArt.slug, firstArt.url);
+          getPreviewImageUrl(firstArt.id.toString(), firstArt.name, firstArt.slug, firstArt.url);
         }
       } catch (error) {
         console.error("Error", error);
@@ -66,7 +67,7 @@ export default function ArtsSearch() {
   
           if (response && response.length > 0) {
             const art = response[0];
-            getPreviewImageUrl(art.id, art.artist_slug, art.url);
+            getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
           }
         } catch (error) {
           console.error("Error", error);
@@ -80,9 +81,10 @@ export default function ArtsSearch() {
   };
 
 
-  function getPreviewImageUrl(id: string, slug: string, url: string) {
+  function getPreviewImageUrl(id: string, name: string, slug: string, url: string) {
     const hoveredImageUrl = {
       id: id,
+      name: name,
       slug: slug,
       url: url
     }
@@ -132,14 +134,12 @@ export default function ArtsSearch() {
 
   return (
     <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-      <div
-        class={`paper min-h-[60px] max-w-[230px] my-5`}
-      >
-        <div class="top-tape"></div>
-        <h1 class={`text-5xl font-medium mx-auto`}>
-          {i18next.t("title.arts", { ns: "translation" })}
-        </h1>
-      </div>
+      
+      <Title
+        name="arts"
+        dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
+        margin="my-5"
+      />
 
       <div class="paper max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
         <div class="top-tape max-h-2.5"></div>

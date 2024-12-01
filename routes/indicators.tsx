@@ -16,6 +16,8 @@ import Title from "@islands/Title.tsx";
 
 export const handler: Handlers = {
   async GET(_: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.indicators.desc", { ns: "translation" });
+    const title = i18next.t("meta.indicators.title", { ns: "translation" });
     const lng = i18next.language;
     
     const db = Db.getInstance();
@@ -95,9 +97,11 @@ export const handler: Handlers = {
       artistCountResult,
       artistNationalityResult,
       artistNationalityValueResult,
+      desc,
       movementCountResult,
       movementNameResult,
       movementValueResult,
+      title,
       totalArtCountResult,
       totalArtistCountResult,
     });
@@ -110,27 +114,29 @@ export default function IndicatorsPage(
     artistCountResult: number[];
     artistNationalityResult: string[];
     artistNationalityValueResult: string[];
+    desc: string;
     movementCountResult: number[];
     movementNameResult: string[];
     movementValueResult: string[];
+    title: string;
     totalArtCountResult: number[];
     totalArtistCountResult: number[];
   }>,
 ) {
+
   const {
     artistCountResult,
     artistNationalityResult,
     artistNationalityValueResult,
+    desc,
     movementCountResult,
     movementNameResult,
     movementValueResult,
+    title,
     totalArtCountResult,
     totalArtistCountResult,
   } = props.data;
-  const desc = "Indicateurs pour Urarts.";
-  const title = "Urarts - Indicateurs";
-
-
+  
   return (
     <>
       <Head>
@@ -146,7 +152,7 @@ export default function IndicatorsPage(
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
           <Title
             name="indicators"
-            dimension="min-h-[60px] max-w-[230px]"
+            dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
             margin="mt-5 mb-6"
           />
 

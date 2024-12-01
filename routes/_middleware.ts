@@ -3,8 +3,8 @@ import {
   DEFAULT_LNG,
   URL_GA,
   URL_GT,
-  URL_URARTS_1,
-  URL_URARTS_2,
+  URL_URARTS_ART,
+  URL_URARTS_DEV,
 } from "@utils/constants.ts";
 import { FreshContext } from "$fresh/server.ts";
 import i18next from "i18next";
@@ -60,7 +60,7 @@ export async function handler(req: Request, ctx: FreshContext) {
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set(
     "Content-Security-Policy",
-    `default-src 'self'; script-src 'self' ${URL_GT} ${URL_GA} 'unsafe-inline' 'unsafe-eval' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'; style-src 'self' 'unsafe-inline'; child-src 'self'; img-src 'self' ${URL_GA} data: blob: ${URL_URARTS_1} ${URL_URARTS_2}; media-src 'self' data: blob: ${URL_URARTS_1} ${URL_URARTS_2}; connect-src 'self' ${URL_URARTS_1} ${URL_URARTS_2} ${URL_GA} ${URL_GT}; font-src 'self'; worker-src 'self'; frame-src 'self'; frame-ancestors 'self';`,
+    `default-src 'self'; script-src 'self' ${URL_GT} ${URL_GA} 'unsafe-inline' 'unsafe-eval' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'; style-src 'self' 'unsafe-inline'; child-src 'self'; img-src 'self' ${URL_GA} data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}; media-src 'self' data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}; connect-src 'self' ${URL_URARTS_ART} ${URL_URARTS_DEV} ${URL_GA} ${URL_GT}; font-src 'self'; worker-src 'self'; frame-src 'self'; frame-ancestors 'self';`,
   );
 
   // mettre à jour le cookie

@@ -95,6 +95,52 @@ const translation = {
     <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
     in the event of a request or dispute related to the use of these visuals.</p>`,
   },
+  meta: {
+    about: {
+      desc: "About Urarts...",
+      title: "Urarts - About",
+    },
+    artists: {
+      desc: "The best artists in the world.",
+      title: "Urarts - Artists",
+    },
+    arts: {
+      desc: "All the most beautiful works of art in the world.",
+      title: "Urarts - Artworks",
+    },
+    copyright: {
+      desc: "Artists under copyright.",
+      title: "Urarts - Copyright",
+    },
+    collection: {
+      desc: "The most beautiful works of",
+      title: "- Collection",
+    },
+    histocharacters: {
+      desc: "Historical characters.",
+      title: "Urarts - Historical Characters",
+    },
+    home: {
+      desc: "What are the most beautiful works of art in the world?",
+      title: "Urarts - Home",
+    },
+    indicators: {
+      desc: "Indicators for Urarts.",
+      title: "Urarts - Indicators",
+    },
+    movements: {
+      desc: "The main artistic movements.",
+      title: "Urarts - Movements",
+    },
+    talents: {
+      desc: "The talents.",
+      title: "Urarts - Talents",
+    },
+    women: {
+      desc: "Women artists.",
+      title: "Urarts - Women Artists",
+    },    
+  },
   modal: {
     description: "Description:",
     panel_far_left: "(Panel on the far left)",

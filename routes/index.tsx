@@ -1,7 +1,7 @@
 import { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -18,8 +18,11 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 type Artists = Array<ArtistRow>;
 type Quote = Array<ArtistQuote>;
 
+
 export const handler: Handlers = {
-  async GET(_, ctx) {
+  async GET(_: Request, ctx: FreshContext) {
+    const desc = i18next.t("meta.home.desc", { ns: "translation" });
+    const title = i18next.t("meta.home.title", { ns: "translation" });
     const lng = i18next.language;
 
     const db = Db.getInstance();
@@ -85,21 +88,23 @@ export const handler: Handlers = {
     const grid =
       "grid gap-4 sm:gap-10 grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    return ctx.render({ artistQuote, artists, color, grid });
+    return ctx.render({ artistQuote, artists, color, desc, grid, title });
   },
 };
+
 
 export default function HomePage(
   props: PageProps<{
     artistQuote: Quote;
     artists: Artists;
     color: string;
+    desc: string;
     grid: string;
+    title: string;
   }>,
 ) {
-  const { artistQuote, artists, color, grid } = props.data;
-  const desc = "Quelles sont les plus belles œuvres d'art au monde ?";
-  const title = "Urarts - Accueil";
+
+  const { artistQuote, artists, color, desc, grid, title } = props.data;
 
   return (
     <>

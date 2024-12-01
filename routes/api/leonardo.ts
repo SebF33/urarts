@@ -1,6 +1,7 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
 import { UrlBasePath } from "@/env.ts";

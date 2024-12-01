@@ -95,6 +95,52 @@ const translation = {
     <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
     en cas de demande ou de litige liés à l'exploitation de ces visuels.</p>`,
   },
+  meta: {
+    about: {
+      desc: "À propos de Urarts...",
+      title: "Urarts - À propos",
+    },
+    artists: {
+      desc: "Les meilleurs artistes au monde.",
+      title: "Urarts - Artistes",
+    },
+    arts: {
+      desc: "Toutes les plus belles œuvres d’art au monde.",
+      title: "Urarts - Œuvres",
+    },
+    copyright: {
+      desc: "Artistes sous copyright.",
+      title: "Urarts - Copyright",
+    },
+    collection: {
+      desc: "Les plus belles œuvres de",
+      title: "- Collection",
+    },
+    histocharacters: {
+      desc: "Les personnages historiques.",
+      title: "Urarts - Personnages historiques",
+    },
+    home: {
+      desc: "Quelles sont les plus belles œuvres d'art au monde ?",
+      title: "Urarts - Accueil",
+    },
+    indicators: {
+      desc: "Indicateurs pour Urarts.",
+      title: "Urarts - Indicateurs",
+    },
+    movements: {
+      desc: "Les principaux mouvements artistiques.",
+      title: "Urarts - Mouvements",
+    },
+    talents: {
+      desc: "Les talents.",
+      title: "Urarts - Talents",
+    },
+    women: {
+      desc: "Les femmes artistes.",
+      title: "Urarts - Femmes artistes",
+    },
+  },
   modal: {
     description: "Description :",
     panel_far_left: "(Panneau tout à gauche)",
