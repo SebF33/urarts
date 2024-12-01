@@ -121,7 +121,7 @@ export default function MovementsList(
       <Title
         name="movements"
         dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-        margin="mt-5 mb-6"
+        margin="mt-2 mb-5 md:mt-5 md:mb-6"
       />
 
       <div class={`flex flex-wrap`}>

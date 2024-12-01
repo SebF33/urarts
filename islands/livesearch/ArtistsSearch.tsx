@@ -174,7 +174,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
         <Title
           name="artists"
           dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-          margin="mt-5 mb-16"
+          margin="mt-2 md:mt-5"
         />
 
         <div class={`relative w-60 sm:w-80 mx-auto mt-24 md:-mt-6 mb-24`}>

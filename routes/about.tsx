@@ -59,7 +59,7 @@ export default function AboutPage(
           <Title
             name="about"
             dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-            margin="mt-5 mb-6"
+            margin="mt-2 mb-6 md:mt-5"
           />
           <Note />
           <Mona />

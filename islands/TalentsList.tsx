@@ -11,8 +11,9 @@ type Artists = Array<ArtistRow>;
 export default function TalentsList(
   props: { readonly artists: Artists },
 ) {
+
   const grid =
-    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 my-20 p-4";
+    "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mt-6 mb-2 md:mb-20 p-4";
 
   
   // Background pour la page des talents
@@ -39,7 +40,7 @@ export default function TalentsList(
         <Title
           name="talents"
           dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-          margin="mt-5"
+          margin="mt-2 md:mt-5 md:mb-6"
         />
       </div>
 

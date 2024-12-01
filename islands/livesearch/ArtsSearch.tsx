@@ -138,7 +138,7 @@ export default function ArtsSearch() {
       <Title
         name="arts"
         dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-        margin="my-5"
+        margin="mt-2 mb-5 md:mt-5"
       />
 
       <div class="paper max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">

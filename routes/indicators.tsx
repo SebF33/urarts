@@ -150,10 +150,11 @@ export default function IndicatorsPage(
 
       <main id="page" data-name="indicators" class="flex-grow transparent-mask-99">
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+
           <Title
             name="indicators"
             dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-            margin="mt-5 mb-6"
+            margin="mt-2 mb-6 md:mt-5"
           />
 
           <div class={`charts flex justify-center mx-auto max-w-xl`}>
@@ -163,7 +164,7 @@ export default function IndicatorsPage(
               totalArtistCountResult={totalArtistCountResult}
               valueResult={artistNationalityValueResult}
             />
-            <div style="height:60px; width:60px"></div>
+            <div class="h-14 w-14"></div>
             <PolarArea
               countResult={movementCountResult}
               nameResult={movementNameResult}
