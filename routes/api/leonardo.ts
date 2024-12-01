@@ -1,5 +1,5 @@
 import { Db } from "@utils/db.ts";
-import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { DEFAULT_LNG, TALENTS, URL_URARTS_DEV } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { RouteContext } from "$fresh/server.ts";
@@ -12,9 +12,27 @@ export const handler = async (
   req: Request,
   _ctx: RouteContext,
 ): Promise<Response> => {
+  
+  let htmlContent = "";
+  const requestOrigin = req.headers.get("Origin") || req.headers.get("Referer") || "";
+
+
+  // Suggérer une redirection
+  if (requestOrigin.startsWith(URL_URARTS_DEV)) {
+    htmlContent = i18next.t("leonardo.redirect", { ns: "translation" });
+    return Promise.resolve(
+      new Response(htmlContent, {
+        headers: {
+          "Content-Type": "text/html",
+          "Access-Control-Allow-Origin": URL_URARTS_DEV,
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "X-Requested-With",
+        },
+      }),
+    );
+  }
 
   // Déterminer si l'origine de la demande est autorisée
-  const requestOrigin = req.headers.get("Origin") || req.headers.get("Referer") || "";
   const isAllowedOrigin = requestOrigin.startsWith(UrlBasePath);
   if (!isAllowedOrigin) {
     return new Response(JSON.stringify({ error: "Access Denied" }), {
@@ -61,7 +79,6 @@ export const handler = async (
   const { count } = db.fn;
 
   const draggable = false;
-  let htmlContent = "";
 
 
   if (page === "") page = "home";
