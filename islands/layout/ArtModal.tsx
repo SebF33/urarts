@@ -3,6 +3,7 @@ import { artModalOpenSignal } from "@utils/signals.ts";
 import { DELAY_MODAL_CLOSE } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { render } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 
@@ -16,6 +17,22 @@ type ArtModalProps = {
 export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const portalRef = useRef<HTMLDivElement | null>(null);
+
+  
+  // Créer un conteneur de portail dans le body
+  useEffect(() => {
+    portalRef.current = document.createElement("div");
+    document.body.appendChild(portalRef.current);
+
+    return () => {
+      if (portalRef.current) {
+        render(null, portalRef.current);
+        document.body.removeChild(portalRef.current);
+        portalRef.current = null;
+      }
+    };
+  }, []);
 
 
   // Ouverture de la modal
@@ -112,7 +129,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   }
 
 
-  return (
+  const modalLayout = (
     <div
       class={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 z-[99999]
       modal-overlay ${isVisible ? "visible" : ""}`}
@@ -173,4 +190,14 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       </div>
     </div>
   );
+
+  // Rendre le contenu dans le portail
+  useEffect(() => {
+    if (portalRef.current) {
+      render(modalLayout, portalRef.current);
+    }
+  }, [modalLayout]);
+
+
+  return null;
 }
