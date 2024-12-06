@@ -3,8 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_CHART_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { languageSignal } from "@utils/signals.ts";
 import { useEffect, useRef } from "preact/hooks";
+
 
 export default function PolarArea(
   props: {
@@ -14,9 +14,11 @@ export default function PolarArea(
     readonly valueResult: string[];
   },
 ) {
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart | null>(null);
-  const lng = languageSignal.value;
+  const lng = i18next.language;
+
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -52,6 +54,7 @@ export default function PolarArea(
     }
   };
   
+
   useEffect(() => {
     if (!canvasRef.current) return;
     
@@ -107,6 +110,7 @@ export default function PolarArea(
       }
     };
   }, [lng]);
+
 
   return <canvas ref={canvasRef}></canvas>;
 }

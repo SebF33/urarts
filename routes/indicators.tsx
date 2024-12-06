@@ -23,65 +23,67 @@ export const handler: Handlers = {
     const db = Db.getInstance();
     const { count } = db.fn;
 
-    const artistQuery = await db
-      .selectFrom("artist")
-      .innerJoin("country", "artist.country_id", "country.id")
-      .$if(lng === 'fr', (qb) => qb.select([
-        "country.name as nationality",
-        "country.name as nationality_value",
-        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Autres' END as nationality_group`,
-        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
-        count("artist.id").as("artist_count"),
-      ]))
-      .$if(lng === 'en', (qb) => qb.select([
-        "country.name_en as nationality",
-        "country.name as nationality_value",
-        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name_en ELSE 'Others' END as nationality_group`,
-        sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
-        count("artist.id").as("artist_count"),
-      ]))
-      .where("slug", "not in", TALENTS)
-      .groupBy("nationality_group")
-      .execute();
+    const [artistQuery, totalArtistQuery, movementQuery, totalArtQuery] = await Promise.all([
+      db
+        .selectFrom("artist")
+        .innerJoin("country", "artist.country_id", "country.id")
+        .$if(lng === 'fr', (qb) => qb.select([
+          "country.name as nationality",
+          "country.name as nationality_value",
+          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Autres' END as nationality_group`,
+          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
+          count("artist.id").as("artist_count"),
+        ]))
+        .$if(lng === 'en', (qb) => qb.select([
+          "country.name_en as nationality",
+          "country.name as nationality_value",
+          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name_en ELSE 'Others' END as nationality_group`,
+          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
+          count("artist.id").as("artist_count"),
+        ]))
+        .where("slug", "not in", TALENTS)
+        .groupBy("nationality_group")
+        .execute(),
 
-    const totalArtistQuery = await db
-      .selectFrom("artist")
-      .select([
-        count("id").as("artist_count"),
-      ])
-      .where("slug", "not in", TALENTS)
-      .execute();
+      db
+        .selectFrom("artist")
+        .select([
+          count("id").as("artist_count"),
+        ])
+        .where("slug", "not in", TALENTS)
+        .execute(),
 
-    const movementQuery = await db
-      .selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .innerJoin("movement", "art.movement_id", "movement.id")
-      .$if(lng === 'fr', (qb) => qb.select([
-        "movement.name",
-        "movement.slug as movement_value",
-        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
-        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
-        count("art.id").as("art_count"),
-      ]))
-      .$if(lng === 'en', (qb) => qb.select([
-        "movement.name_en as name",
-        "movement.slug as movement_value",
-        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name_en ELSE 'Others' END as movement_group`,
-        sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
-        count("art.id").as("art_count"),
-      ]))
-      .where("artist.slug", "not in", TALENTS)
-      .where("copyright", "!=", 2)
-      .groupBy("movement_group")
-      .execute();
+      db
+        .selectFrom("art")
+        .innerJoin("artist", "art.owner_id", "artist.id")
+        .innerJoin("movement", "art.movement_id", "movement.id")
+        .$if(lng === 'fr', (qb) => qb.select([
+          "movement.name",
+          "movement.slug as movement_value",
+          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
+          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
+          count("art.id").as("art_count"),
+        ]))
+        .$if(lng === 'en', (qb) => qb.select([
+          "movement.name_en as name",
+          "movement.slug as movement_value",
+          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name_en ELSE 'Others' END as movement_group`,
+          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
+          count("art.id").as("art_count"),
+        ]))
+        .where("artist.slug", "not in", TALENTS)
+        .where("copyright", "!=", 2)
+        .groupBy("movement_group")
+        .execute(),
 
-    const totalArtQuery = await db
-      .selectFrom("art")
-      .innerJoin("artist", "art.owner_id", "artist.id")
-      .select([count("art.id").as("art_count")])
-      .where("artist.slug", "not in", TALENTS)
-      .where("copyright", "!=", 2)
-      .execute();
+      db
+        .selectFrom("art")
+        .innerJoin("artist", "art.owner_id", "artist.id")
+        .select([count("art.id").as("art_count")])
+        .where("artist.slug", "not in", TALENTS)
+        .where("copyright", "!=", 2)
+        .execute(),
+    ]);
 
     const artistCountResult: number[] = artistQuery.map((item) => parseFloat(item.artist_count));
     const artistNationalityResult: string[] = artistQuery.map((item) => item.nationality_group);

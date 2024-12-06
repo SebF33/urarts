@@ -3,8 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_CHART_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { languageSignal } from "@utils/signals.ts";
 import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
+
 
 export default function Doughnut(
   props: {
@@ -14,9 +14,11 @@ export default function Doughnut(
     readonly valueResult: string[];
   },
 ) {
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart | null>(null);
-  const lng = languageSignal.value;
+  const lng = i18next.language;
+
 
   // Options
   defaults.font.family = "Caveat Brush";
@@ -49,6 +51,7 @@ export default function Doughnut(
       }
     }
   };
+
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -102,6 +105,7 @@ export default function Doughnut(
       }
     };
   }, [lng]);
+  
 
   // Background pour la page des indicateurs
   useLayoutEffect(() => {
@@ -119,6 +123,7 @@ export default function Doughnut(
       main.style.backgroundSize = "2800px";
     }
   }, []);
+
 
   return <canvas ref={canvasRef}></canvas>;
 }
