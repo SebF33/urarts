@@ -17,14 +17,26 @@ export async function handler(req: Request, ctx: FreshContext) {
   let lng: string | null = cookies.i18next;
   //let lng: string | null = url.searchParams.get("lng") || cookies.i18next;
 
-  if (!lng) {
-    // valeur par défaut si aucune langue n'est spécifiée
-    lng = DEFAULT_LNG;
 
-    // valeur selon le domaine
-    if (domain === "urarts.fr") lng = "fr";
-    //if (domain === "urarts.art" || domain === "urarts.fly.dev") lng = "en";
+  // aucune langue n'est spécifiée
+  if (!lng) {
+    // valeur par défaut si aucune langue n'est détectée
+    lng = DEFAULT_LNG;
+    // récupérer la première langue préférée du navigateur
+    const acceptLanguage = req.headers.get("accept-language");
+    if (acceptLanguage) {
+      const languages = acceptLanguage
+        .split(",")
+        .map((lang) => lang.split(";")[0].trim())
+        .map((lang) => lang.split("-")[0]);
+      const browserLang = languages.length > 0 ? languages[0] : null;
+      
+      if (browserLang && ["en", "fr"].includes(browserLang)) {
+        lng = browserLang;
+      }
+    }
   }
+
 
   // définir la langue dans i18next
   await i18next.changeLanguage(lng);
