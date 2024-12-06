@@ -36,7 +36,7 @@ export default function TalentsList(
 
   return (
     <>
-      <div class={`p-4 max-w-7xl mx-auto mb-5 sm:mb-8 px-4 sm:px-6 lg:px-8`}>
+      <div class={`p-4 max-w-7xl mx-auto mb-16 sm:mb-8 px-4 sm:px-6 lg:px-8`}>
         <Title
           name="talents"
           dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
