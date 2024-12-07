@@ -23,15 +23,25 @@ export default function PolarArea(
   // Options
   defaults.font.family = "Caveat Brush";
   const options = {
+    layout: {
+      padding: { bottom: 16 }
+    },
     plugins: {
       legend: {
+        labels: {
+          font: { size: 13 }
+        },
         position: "top",
       },
       title: {
         display: true,
-        font: { size: 19 },
+        font: { size: 21 },
         fullSize: false,
         text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" }),
+      },
+      tooltip: {
+        bodyFont: { size: 16 },
+        titleFont: { size: 16 }
       },
     },
     onClick: (event: MouseEvent) => {
@@ -98,6 +108,7 @@ export default function PolarArea(
             backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
+            hoverOffset: 2,
           }
         ],
       },

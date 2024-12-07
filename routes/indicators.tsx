@@ -139,6 +139,7 @@ export default function IndicatorsPage(
     totalArtistCountResult,
   } = props.data;
   
+
   return (
     <>
       <Head>
@@ -159,14 +160,13 @@ export default function IndicatorsPage(
             margin="mt-2 mb-6 md:mt-5"
           />
 
-          <div class={`charts flex justify-center mx-auto max-w-xl`}>
+          <div class={`charts flex justify-center max-w-xl mt-12 mx-auto`}>
             <Doughnut
               countResult={artistCountResult}
               nationalityResult={artistNationalityResult}
               totalArtistCountResult={totalArtistCountResult}
               valueResult={artistNationalityValueResult}
             />
-            <div class="h-14 w-14"></div>
             <PolarArea
               countResult={movementCountResult}
               nameResult={movementNameResult}

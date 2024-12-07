@@ -23,15 +23,25 @@ export default function Doughnut(
   // Options
   defaults.font.family = "Caveat Brush";
   const options = {
+    layout: {
+      padding: { bottom: 16 }
+    },
     plugins: {
       legend: {
+        labels: {
+          font: { size: 13 }
+        },
         position: "top",
       },
       title: {
         display: true,
-        font: { size: 19 },
+        font: { size: 21 },
         fullSize: false,
         text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
+      },
+      tooltip: {
+        bodyFont: { size: 16 },
+        titleFont: { size: 16 }
       },
     },
     onClick: (event: MouseEvent) => {
@@ -92,7 +102,7 @@ export default function Doughnut(
             backgroundColor: backgroundColor,
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
-            hoverOffset: 1,
+            hoverOffset: 12,
           }
         ],
       },
@@ -125,5 +135,5 @@ export default function Doughnut(
   }, []);
 
 
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} class="mb-8"></canvas>;
 }
