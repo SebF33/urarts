@@ -42,8 +42,8 @@ export const handler = async (
   }
 
 
-  let query
   const url = new URL(req.url);
+  let query
   
 
   // Anecdote
@@ -91,51 +91,76 @@ export const handler = async (
 
   if (fact === "true") {
 
-    if (page === "home" || page === "artists") {
-      const newArtistsResult = await db.selectFrom("artist")
-      .select(["last_name", "avatar_url", "slug"])
-      .where("slug", "not in", TALENTS)
-      .orderBy("id", "desc")
-      .limit(3)
-      .execute();
+    switch (page) {
+      case "artists":
+        const newArtistsResult = await db.selectFrom("artist")
+        .select(["last_name", "avatar_url", "slug"])
+        .where("slug", "not in", TALENTS)
+        .orderBy("id", "desc")
+        .limit(5)
+        .execute();
+  
+        const newArtists = newArtistsResult.map((p) => ({
+          last_name: p.last_name,
+          avatar_url: p.avatar_url,
+          slug: p.slug,
+        }));
+  
+        htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
+        
+        newArtists.forEach((p) => {
+          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+        });
+        break;
+  
+      case "home":
+        const currentYear = new Date().getFullYear();
 
-      const newArtists = newArtistsResult.map((p) => ({
-        last_name: p.last_name,
-        avatar_url: p.avatar_url,
-        slug: p.slug,
-      }));
-
-      htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
-      
-      newArtists.forEach((p) => {
-        htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
-      });
-    }
-    else {
-      const factResult = await db.selectFrom("fact")
-      .$if(lng === 'fr', (qb) => qb.select("msg"))
-      .$if(lng === 'en', (qb) => qb.select("msg_en as msg"))
-      .where("topic_slug", "=", page)
-      .$if(subpage !== "undefined", (qb) => qb.where("target_slug", "=", subpage))
-      .orderBy(sql`random()`)
-      .executeTakeFirst();
-
-      if (factResult) {
-        htmlContent = `<h2><strong>${i18next.t("leonardo.fact", { ns: "translation" })}</strong></h2>`;
-        htmlContent += `<p class="text-[1rem] leading-none mt-1" style="max-width:400px">${factResult.msg}</p>`;
-      }
-      else {
-        return Promise.resolve(
-          new Response("no_change", {
-            headers: {
-              "Content-Type": "text/html",
-              "Access-Control-Allow-Origin": UrlBasePath,
-              "Access-Control-Allow-Methods": "GET",
-              "Access-Control-Allow-Headers": "X-Requested-With",
-            },
-          }),
-        );
-      }
+        const publicDomainArtistsResult = await db.selectFrom("artist")
+        .select(["last_name", "avatar_url", "slug"])
+        .where("slug", "not in", TALENTS)
+        .where(sql`${currentYear} - CAST(deathyear AS INTEGER) = 71`)
+        .orderBy(sql`random()`)
+        .execute();
+  
+        const publicDomainArtists = publicDomainArtistsResult.map((p) => ({
+          last_name: p.last_name,
+          avatar_url: p.avatar_url,
+          slug: p.slug,
+        }));
+  
+        htmlContent = `<h2><strong>${i18next.t("leonardo.new_public_domain_artists", { ns: "translation" })}</strong></h2>`;
+        
+        publicDomainArtists.forEach((p) => {
+          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+        });
+        break;
+  
+      default:
+        const factResult = await db.selectFrom("fact")
+        .$if(lng === 'fr', (qb) => qb.select("msg"))
+        .$if(lng === 'en', (qb) => qb.select("msg_en as msg"))
+        .where("topic_slug", "=", page)
+        .$if(subpage !== "undefined", (qb) => qb.where("target_slug", "=", subpage))
+        .orderBy(sql`random()`)
+        .executeTakeFirst();
+  
+        if (factResult) {
+          htmlContent = `<h2><strong>${i18next.t("leonardo.fact", { ns: "translation" })}</strong></h2>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-1" style="max-width:400px">${factResult.msg}</p>`;
+        }
+        else {
+          return Promise.resolve(
+            new Response("no_change", {
+              headers: {
+                "Content-Type": "text/html",
+                "Access-Control-Allow-Origin": UrlBasePath,
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "X-Requested-With",
+              },
+            }),
+          );
+        }
     }
   }
 

@@ -70,6 +70,7 @@ const translation = {
       "Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).",
     nav_theme: "pour changer le thème de la barre de navigation.",
     new_artists: "Découvrez les derniers artistes ajoutés :",
+    new_public_domain_artists: "Découvrez les artistes dans le domaine public cette année :",
     off: "Cliquez sur l’icône ou sur mes yeux pour me désactiver.",
     page_about:
       `<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>`,
