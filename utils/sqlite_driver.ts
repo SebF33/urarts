@@ -62,6 +62,15 @@ class SqliteConnection implements DatabaseConnection {
       rows: stmt.allEntries(parameters as QueryParameterSet) as unknown as O[],
     });
   }
+
+  async *streamQuery<O>(compiledQuery: CompiledQuery): AsyncGenerator<O, void, unknown> {
+    const { sql, parameters } = compiledQuery;
+    const stmt = this.#db.prepareQuery(sql);
+
+    for (const row of stmt.iterEntries(parameters as QueryParameterSet)) {
+      yield row as unknown as O;
+    }
+  }
 }
 
 class ConnectionMutex {
