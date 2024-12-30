@@ -1,4 +1,4 @@
-import { Any } from "any";
+import { ArtCollection } from "@utils/types.d.ts";
 import { artModalOpenSignal } from "@utils/signals.ts";
 import { DELAY_MODAL_CLOSE } from "@utils/constants.ts";
 import i18next from "i18next";
@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 
 
 type ArtModalProps = {
-  readonly art: Any;
+  readonly art: ArtCollection;
   readonly panel: string;
   readonly url: string;
 };
@@ -131,7 +131,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
 
   const modalLayout = (
     <div
-      class={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 z-[99999]
+      class={`fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 z-[99999]
       modal-overlay ${isVisible ? "visible" : ""}`}
     >
 
@@ -172,12 +172,27 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
-            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-1">{art.name + panelText(panel)}</h2>
-            <p class="text-base mb-4 leading-5">
-              <span class="font-semibold underline">{i18next.t("artists.artist", { ns: "translation" })}</span>{" "}
-              {(art.first_name ?? "") + " " + art.last_name}
-            </p>
-            <p class="text-base italic">{art.movement}.</p>
+            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
+            <div class="flex gap-4 mb-4">
+              <div class="paper min-h-8 min-w-[100px] z-10 transform -rotate-2">
+                <div class="top-tape"></div>
+                <a
+                  href={`/art/${art.artist_slug}`}
+                  class={`text-base italic underline px-2 z-10 select-none`}
+                >
+                  {(art.first_name ?? "") + " " + art.last_name}
+                </a>
+              </div>       
+              <div class="paper min-h-8 min-w-[100px] z-10 transform rotate-3">
+                <div class="top-tape"></div>
+                <a
+                  href={`/movement/${art.movement_slug}`}
+                  class={`text-base italic underline px-2 z-10 select-none`}
+                >
+                  {art.movement}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -190,6 +205,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       </div>
     </div>
   );
+
 
   // Rendre le contenu dans le portail
   useEffect(() => {
