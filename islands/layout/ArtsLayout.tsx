@@ -41,7 +41,7 @@ export default function ArtsLayout(
   const [displayedArtIndex, setDisplayedArtIndex] = useState<number>(0);
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
   const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }) // Seuil d'intersection des éléments
-  const [selectedArt, setSelectedArt] = useState(null);
+  const [selectedArt, setSelectedArt] = useState<ArtCollection | null>(null);
   const [selectedPanel, setSelectedPanel] = useState<string>("");
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
@@ -138,7 +138,7 @@ export default function ArtsLayout(
 
   
   // Modal
-  const handleClick = (art, panel: string, url: string) => {
+  const handleClick = (art: ArtCollection, panel: string, url: string) => {
     setSelectedArt(art);
     setSelectedPanel(panel);
     setSelectedUrl(url);

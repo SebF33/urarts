@@ -1,72 +1,72 @@
 export type ArtCollection = {
-  id: string;
+  artist_slug: string;
+  birthyear: string;
+  color: string;
+  copyright: number;
+  deathyear: string;
   first_name: string | null;
-  last_name: string;
-  name: string;
-  movement: string;
-  movement_slug: string;
   font?: string;
-  polyptych: number;
   frame: number;
-  url: string;
-  url_2?: string;
-  url_3?: string;
-  url_4?: string;
-  url_5?: string;
   gap_1?: string;
   gap_2?: string;
   gap_3?: string;
   gap_4?: string;
   gap_5?: string;
-  info: string;
-  artist_slug: string;
-  color: string;
-  copyright: number;
   histocharacter: number;
-  birthyear: string;
-  deathyear: string;
+  id: string;
+  info: string;
+  last_name: string;
+  movement: string;
+  movement_slug: string;
+  name: string;
+  polyptych: number;
+  url: string;
+  url_2?: string;
+  url_3?: string;
+  url_4?: string;
+  url_5?: string;
 };
 
 export type ArtRow = {
-  id: number;
-  name: string;
-  first_name: string | null;
-  last_name: string;
-  gender: string;
   avatar_url: string;
-  slug: string;
+  first_name: string | null;
+  gender: string;
+  id: number;
+  last_name: string;
   movement: string;
+  name: string;
+  slug: string;
   url: string;
 };
 
 export type ArtistQuote = {
-  id: number;
-  first_name: string | null;
-  last_name: string;
   avatar_url: string;
-  signature: string | null;
+  first_name: string | null;
+  id: number;
+  last_name: string;
   quote: string | null;
+  signature: string | null;
   slug: string;
 };
 
 export type ArtistRow = {
-  id: number;
+  avatar_url: string;
+  birthyear: string;
+  color: string;
+  deathyear: string;
   first_name: string | null;
+  id: number;
+  info: string;
   last_name: string;
   nationality: string;
-  birthyear: string;
-  deathyear: string;
-  avatar_url: string;
   signature: string | null;
-  color: string;
   site_web: string | null;
-  info: string;
   slug: string;
 };
 
 export type MovementRow = {
+  art_count: string;
   id: number;
   name: string;
   slug: string;
-  art_count: string;
-}
+};
