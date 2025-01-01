@@ -6,6 +6,8 @@ import "@utils/i18n/config.ts";
 import { render } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 
+import { ButtonCross } from "@components/Assets.tsx";
+
 
 type ArtModalProps = {
   readonly art: ArtCollection;
@@ -144,9 +146,9 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       >
         <button
           onClick={handleClose}
-          class="absolute top-1.5 right-2.5 md:top-2 md:right-3 text-dark hover:text-red text-base sm:text-xl md:text-2xl font-black"
+          class="absolute top-2.5 right-2.5 text-lighterdark hover:text-red focus:outline-none"
         >
-          &#10005;
+          <ButtonCross />
         </button>
 
         <div class="flex flex-wrap gap-6">
@@ -178,7 +180,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 <div class="top-tape"></div>
                 <a
                   href={`/art/${art.artist_slug}`}
-                  class={`text-base italic underline px-2 z-10 select-none`}
+                  class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
                 >
                   {(art.first_name ?? "") + " " + art.last_name}
                 </a>
@@ -187,7 +189,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 <div class="top-tape"></div>
                 <a
                   href={`/movement/${art.movement_slug}`}
-                  class={`text-base italic underline px-2 z-10 select-none`}
+                  class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
                 >
                   {art.movement}
                 </a>
