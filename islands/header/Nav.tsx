@@ -163,15 +163,17 @@ export default function Nav(props: Props) {
     const url = new URL(props.url);
     const pageName = url.pathname.split("/")[1];
     const subpageSlug = url.pathname.split("/")[2];
-    const ctxArray = url.searchParams.get("id")
+
+    const ctxArray = (pageName !== "artists" && pageName !== "histocharacters" && url.searchParams.has("id"))
       ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""]
       : (pageName === "artists") 
         ? [artistsYearsSignal.value[0], artistsYearsSignal.value[1], nationalitySignal.value] 
         : (pageName === "histocharacters") 
           ? [histocharactersYearsSignal.value[0], histocharactersYearsSignal.value[1], nationalitySignal.value] 
-          : [];
+          : []; 
+    
     const ctx = JSON.stringify(ctxArray.join("_"));
-
+    
     // Gérer l'annulation des requêtes
     const controller = new AbortController();
   
