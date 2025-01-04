@@ -2,7 +2,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import DOMPurify from "npm:isomorphic-dompurify"
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head, Partial } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { sql } from "kysely";
@@ -120,23 +120,25 @@ export default function MovementArtsPage(
           class={`relative w-auto flex flex-col mx-auto`}
         >
           {artists &&
-            <div class={`invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible`}>
-              {artists && artists.map((p) => (
-                <div
-                  class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 ${p.position} shadow-none`}
-                >
-                  <div class="top-tape max-h-3"></div>
-                  <a
-                    href={"/art/" + p.slug}
-                    class={`z-10 text-center text-lighterdark text-xl italic underline select-none`}
-                    draggable={draggable}
+            <Partial name="artists-paper">
+              <div class={`invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible`}>
+                {artists && artists.map((p) => (
+                  <div
+                    class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 ${p.position} shadow-none`}
                   >
-                    {p.name}
-                  </a>
-                  <img class={`w-14 ml-3 p-1`} src={p.avatar_url} alt={p.name} />
-                </div>
-              ))}
-            </div>
+                    <div class="top-tape max-h-3"></div>
+                    <a
+                      href={"/art/" + p.slug}
+                      class={`z-10 text-center text-lighterdark text-xl italic underline select-none`}
+                      draggable={draggable}
+                    >
+                      {p.name}
+                    </a>
+                    <img class={`w-14 ml-3 p-1`} src={p.avatar_url} alt={p.name} />
+                  </div>
+                ))}
+              </div>
+            </Partial>
           }
 
           <div class={`mx-auto mt-8 z-10`}>
