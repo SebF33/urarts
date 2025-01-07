@@ -19,6 +19,8 @@ export default defineApp((_, ctx) => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta name="google" content="notranslate" />
         <meta key="words" name="keywords" content="arts" />
         <meta name="thumbnail" content={asset("/thumbnail.png")} />
         <meta property="og:image" content={asset("/thumbnail.png")} />
