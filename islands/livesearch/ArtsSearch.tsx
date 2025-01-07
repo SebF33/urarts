@@ -158,7 +158,7 @@ export default function ArtsSearch() {
           (
             <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 transparent-mask-50`}>
               {searchResults.map((item, index) => (
-                <li class={`mx-2 my-4`} key={index}>
+                <li class={`appear-effect-list-fadein mx-2 my-4`} key={index}>
                   <a
                     href={"/art/" + item.slug + "?alone&id=" + item.id}
                     class="cursor-pointer"
@@ -185,10 +185,16 @@ export default function ArtsSearch() {
               {/* Pas de résultats */}
               {searchResults.length === 0 && searchTerm !== "" &&
                 (
-                  <li class="mx-2 my-4">
-                    <p class="text-4xl leading-none">
-                      {i18next.t("common.no_results", { ns: "translation" })} {" => «"} {searchTerm} {"»"}
-                    </p>
+                  <li class="appear-effect-list-fadein mx-2 my-4">
+                    <div class="paper min-h-[70px] max-w-[360px]">
+                      <div class="tape-section"></div>
+                      <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
+                        {i18next.t("common.no_results", { ns: "translation" })} {" =>"}
+                        <br />
+                        {"«"} {searchTerm} {"»"}
+                      </p>
+                      <div class="tape-section"></div>
+                    </div>
                   </li>
                 )}
             </ul>
