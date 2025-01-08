@@ -518,21 +518,42 @@ h1 {
 
 .appear-effect-fast-fadein {
     opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fast-fadeIn 0.8s ease-out forwards;
 }
 
-.appear-effect-fast-fadein img {
+.appear-effect-very-fast-fadein {
+    opacity: 0;
+    animation: very-fast-fadeIn 0.4s ease-out forwards;
+}
+
+.appear-effect-fast-fadein img,
+.appear-effect-very-fast-fadein img {
     will-change: opacity, transform;
 }
 
-@keyframes fadeIn {
+@keyframes fast-fadeIn {
     80% {
         opacity: 0;
         transform: scale(0.99);
+        filter: blur(8px);
     }
 
     100% {
         opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes very-fast-fadeIn {
+    40% {
+        opacity: 0;
+        transform: scale(0.99);
+        filter: blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
     }
 }
 

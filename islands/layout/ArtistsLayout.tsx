@@ -136,7 +136,7 @@ export default function ArtistsLayout(
               <div
                 key={index + 1}
                 data-artist-id={p.id}
-                class={`artist-frame bg-dark ${
+                class={`artist-frame transform-gpu appear-effect-very-fast-fadein bg-dark ${
                   css(
                     {
                       position: "relative",
@@ -259,7 +259,7 @@ export default function ArtistsLayout(
               ? (
                 <div
                   id="Noresults"
-                  class={`bg-dark ${
+                  class={`transform-gpu appear-effect-fast-fadein bg-dark ${
                     css(
                       {
                         "position": "relative",
