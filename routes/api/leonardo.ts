@@ -109,7 +109,7 @@ export const handler = async (
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
         
         newArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
         });
         break;
   
@@ -132,7 +132,7 @@ export const handler = async (
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_public_domain_artists", { ns: "translation" })}</strong></h2>`;
         
         publicDomainArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
         });
         break;
   
@@ -200,11 +200,11 @@ export const handler = async (
             htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> ${i18next.t("leonardo.arts_currently_available", { ns: "translation" })}</p>`;
             htmlContent += `<p class="text-[1rem] leading-none mt-2">${i18next.t("leonardo.discover", { ns: "translation" })} <a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block">"<strong>${artResults.name}</strong>"</a>...</p>`;
             htmlContent += `<div class="flex justify-start mt-3">`;
-            if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-            if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-            htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
-            if (artResults.url_3) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_3}" alt="${artResults.name + "_3"}" style="max-height:200px" draggable="${draggable}"/></a>`;
-            if (artResults.url_5) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="inline-block" draggable="${draggable}"><img src="${artResults.url_5}" alt="${artResults.name + "_5"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+            if (artResults.url_4) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="appear-effect-very-fast-fadein inline-block" draggable="${draggable}"><img src="${artResults.url_4}" alt="${artResults.name + "_4"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+            if (artResults.url_2) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="appear-effect-very-fast-fadein inline-block" draggable="${draggable}"><img src="${artResults.url_2}" alt="${artResults.name + "_2"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+            htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="appear-effect-very-fast-fadein inline-block" draggable="${draggable}"><img src="${artResults.url}" alt="${artResults.name}" style="max-height:200px" draggable="${draggable}"/></a>`;
+            if (artResults.url_3) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="appear-effect-very-fast-fadein inline-block" draggable="${draggable}"><img src="${artResults.url_3}" alt="${artResults.name + "_3"}" style="max-height:200px" draggable="${draggable}"/></a>`;
+            if (artResults.url_5) htmlContent += `<a href="/art/${artistResult.slug}?fromleonardo&id=${artResults.id}" class="appear-effect-very-fast-fadein inline-block" draggable="${draggable}"><img src="${artResults.url_5}" alt="${artResults.name + "_5"}" style="max-height:200px" draggable="${draggable}"/></a>`;
             htmlContent += `</div>`;
           }
 
@@ -239,10 +239,10 @@ export const handler = async (
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.nationality_period", { ns: "translation" })}</p>`;
         
         if (countryResult) {
-          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.for", { ns: "translation" })} "<strong>${countryResult.name}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/${pagectx[2]}.png" class="h-6 inline-block align-top" alt="${countryResult.name}" draggable=${draggable}/></span></p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.for", { ns: "translation" })} "<strong>${countryResult.name}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/${pagectx[2]}.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="${countryResult.name}" draggable=${draggable}/></span></p>`;
         }
         else {
-          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/Monde.png" class="h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/Monde.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
         }
         break;
 
@@ -267,11 +267,11 @@ export const handler = async (
       
       case "home":
         htmlContent += `
-          <p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.lng", { ns: "translation" })} &nbsp;
-            <button onclick="handleLanguage('en')" class="inline-block flex items-center focus:outline-none">
+          <p class="text-[1.18rem] leading-none mb-2">${i18next.t("leonardo.lng", { ns: "translation" })} &nbsp;
+            <button onclick="handleLanguage('en')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
               <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
             </button>
-            <button onclick="handleLanguage('fr')" class="inline-block flex items-center focus:outline-none">
+            <button onclick="handleLanguage('fr')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
               <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/France.png" alt="fr" draggable=false/>
             </button>
           </p>
@@ -296,11 +296,11 @@ export const handler = async (
 
           htmlContent += `<p class="max-w-sm text-[1rem] leading-none mt-4">${i18next.t("leonardo.page_home_msg_2", { ns: "translation" })} <a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block">"<strong>${randomArtResults.name}</strong>"</a> ${i18next.t("leonardo.from", { ns: "translation" })} <strong style="color:${randomArtResults.color}"><a href="/art/${randomArtResults.slug}">${randomArtResults.last_name}</a></strong>...</p>`;
           htmlContent += `<div class="flex justify-center mt-3">`;
-          if (randomArtResults.url_4) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_4}" alt="${randomArtResults.name + "_4"}" draggable="${draggable}"/></a>`;
-          if (randomArtResults.url_2) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_2}" alt="${randomArtResults.name + "_2"}" draggable="${draggable}"/></a>`;
-          htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a>`;
-          if (randomArtResults.url_3) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_3}" alt="${randomArtResults.name + "_3"}" draggable="${draggable}"/></a>`;
-          if (randomArtResults.url_5) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_5}" alt="${randomArtResults.name + "_5"}" draggable="${draggable}"/></a>`;
+          if (randomArtResults.url_4) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="appear-effect-fast-fadein inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_4}" alt="${randomArtResults.name + "_4"}" draggable="${draggable}"/></a>`;
+          if (randomArtResults.url_2) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="appear-effect-fast-fadein inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_2}" alt="${randomArtResults.name + "_2"}" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="appear-effect-fast-fadein inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url}" alt="${randomArtResults.name}" draggable="${draggable}"/></a>`;
+          if (randomArtResults.url_3) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="appear-effect-fast-fadein inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_3}" alt="${randomArtResults.name + "_3"}" draggable="${draggable}"/></a>`;
+          if (randomArtResults.url_5) htmlContent += `<a href="/art/${randomArtResults.slug}?alone&id=${randomArtResults.id}" class="appear-effect-fast-fadein inline-block" draggable="${draggable}"><img class="max-h-72 w-auto" src="${randomArtResults.url_5}" alt="${randomArtResults.name + "_5"}" draggable="${draggable}"/></a>`;
           htmlContent += `</div>`;
         }
         break;
@@ -323,7 +323,7 @@ export const handler = async (
 
           htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.characters_displayed_between", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong>.</p>`;
           htmlContent += `<p class="text-[1rem] leading-none mt-2">${i18next.t("leonardo.discover", { ns: "translation" })} <strong>${histocharacterResults.name}...</strong></p>`;
-          htmlContent += `<a href="/histocharacters?id=${histocharacterResults.id}" class="inline-block mt-3" draggable="${draggable}"><img src="${histocharacterResults.url}" alt="${histocharacterResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/histocharacters?id=${histocharacterResults.id}" class="appear-effect-very-fast-fadein inline-block mt-3" draggable="${draggable}"><img src="${histocharacterResults.url}" alt="${histocharacterResults.name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
         break;
 
@@ -366,7 +366,7 @@ export const handler = async (
 
           htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> ${i18next.t("leonardo.arts_currently_available", { ns: "translation" })}</p>`;
           htmlContent += `<p class="text-[1rem] leading-none mt-2">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${movementResults.color}"><a href="/art/${movementResults.artist_slug}">${movementResults.artist_last_name}</a></strong>...</p>`;
-          htmlContent += `<a href="/art/${movementResults.artist_slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${movementResults.artist_slug}" class="appear-effect-very-fast-fadein inline-block mt-3" draggable="${draggable}"><img src="${movementResults.avatar_url}" alt="${movementResults.artist_last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         }
         break;
 
@@ -396,7 +396,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${talentResults.color}"><a href="/art/${talentResults.slug}">${talentResults.last_name}</a></strong>...</p>`;
-        htmlContent += `<a href="/art/${talentResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        htmlContent += `<a href="/art/${talentResults.slug}" class="appear-effect-very-fast-fadein inline-block mt-3" draggable="${draggable}"><img src="${talentResults.avatar_url}" alt="${talentResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         break;
 
       
@@ -412,7 +412,7 @@ export const handler = async (
           .executeTakeFirst();
 
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${womenResults.color}"><a href="/art/${womenResults.slug}">${womenResults.last_name}</a></strong>...</p>`;
-        htmlContent += `<a href="/art/${womenResults.slug}" class="inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        htmlContent += `<a href="/art/${womenResults.slug}" class="appear-effect-very-fast-fadein inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
         break;
 
       
@@ -421,10 +421,9 @@ export const handler = async (
     }
   }
 
+
   htmlContent +=
-    `<div class="text-[0.85rem] italic leading-none mt-4">
-    <span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="U" draggable=${draggable}/></span>${i18next.t("leonardo.off", { ns: "translation" })}
-    </div>`;
+    `<div class="text-[0.85rem] italic leading-none mt-4"><span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="U" draggable=${draggable}/></span>${i18next.t("leonardo.off", { ns: "translation" })}</div>`;
 
 
   return Promise.resolve(

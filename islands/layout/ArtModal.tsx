@@ -153,7 +153,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
 
         <div class="flex flex-wrap gap-6">
           {/* Section gauche : Image */}
-          <div class="flex-shrink-0 mt-4 px-2 flex flex-col items-center md:items-start">
+          <div class="flex-shrink-0 mt-5 px-2 flex flex-col items-center md:items-start">
             <img
               class="max-w-[70vw] md:max-w-[30vw] max-h-60 md:max-h-80 object-contain drop-shadow-md"
               src={url}
@@ -202,7 +202,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         <div class="relative mt-6 pt-4 text-center md:text-left">
           <div class="drawline-animation"></div>
           <h3 class="text-lg font-semibold">{i18next.t("modal.description", { ns: "translation" })}</h3>
-          <p class="text-base leading-4">{art.info}</p>
+          <p class="text-base text-justify leading-4 px-4">{art.info}</p>
         </div>
       </div>
     </div>
