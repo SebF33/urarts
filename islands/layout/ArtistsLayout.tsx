@@ -215,7 +215,9 @@ export default function ArtistsLayout(
                               top: "0",
                               width: "100%",
                               height: "100%",
-                              "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                              ...(imageOnLoadStyle.fullSizeNoTransition && {
+                                boxShadow: "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
+                              }),
                             },
                           },
                         )
