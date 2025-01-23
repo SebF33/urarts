@@ -194,6 +194,14 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 3px 1px;
 }
 
+.tippy-box[data-theme~='urarts'] .tippy-arrow {
+    color: var(--color-dark) !important;
+}
+
+.tippy-box[data-theme~='urarts'] .tippy-arrow::after {
+    border-color: var(--color-dark) !important;
+}
+
 /* Cadres ou filtres des œuvres */
 .art-frame {
     box-sizing: border-box;
@@ -559,14 +567,14 @@ h1 {
 
 .appear-effect-list-fadein {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     animation: list-fadeIn 0.5s ease-in-out forwards;
 }
 
 @keyframes list-fadeIn {
     0% {
       opacity: 0;
-      transform: translateY(-8px);
+      transform: translateY(-4px);
     }
 
     100% {
