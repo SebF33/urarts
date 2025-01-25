@@ -147,12 +147,12 @@ export default function ArtistsLayout(
                 }`}
               >
                 <p
-                  class={`text-lighterdark z-10 ${
+                  class={`text-lighterdark leading-3 pr-2 z-10 ${
                     css(
                       {
                         position: "absolute",
-                        top: "6.0303%",
-                        bottom: "3.0303%",
+                        top: "6.5%",
+                        bottom: "3%",
                         left: "10.5%",
                         right: "2.5%",
                         "font-size": "calc(0.8em + 0.16vw)",
