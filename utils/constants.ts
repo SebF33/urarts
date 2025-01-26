@@ -1,4 +1,5 @@
 import { Any } from "any";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 // Constantes globales
 export const DEFAULT_LNG = "en";
@@ -117,5 +118,100 @@ export const FAMOUS_ART_IMG_WRAPPER: Record<string, Any> = {
     left: 0,
     width: "100%",
     height: "100%",
+  },
+};
+
+export const BG_STYLE: Record<string, { background: string; backgroundSize: string }> = {
+  artabstrait: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/artabstrait.png)`,
+    backgroundSize: "570px",
+  },
+  artdeco: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/artdeco.png)`,
+    backgroundSize: "900px",
+  },
+  artnaif: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/artnaif.png)`,
+    backgroundSize: "470px",
+  },
+  baroque: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/baroque.png)`,
+    backgroundSize: "600px",
+  },
+  classicisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/classicisme.png)`,
+    backgroundSize: "610px",
+  },
+  cubisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/cubisme.png)`,
+    backgroundSize: "400px",
+  },
+  dadaisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/dadaisme.png)`,
+    backgroundSize: "450px",
+  },
+  dynastieqing: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/dynastieqing.png)`,
+    backgroundSize: "500px",
+  },
+  fauvisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/fauvisme.png)`,
+    backgroundSize: "480px",
+  },
+  hauterenaissance: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/hauterenaissance.png)`,
+    backgroundSize: "750px",
+  },
+  impressionnisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/impressionnisme.png)`,
+    backgroundSize: "600px",
+  },
+  japonisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/japonisme.png)`,
+    backgroundSize: "850px",
+  },
+  kitsch: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/kitsch.png)`,
+    backgroundSize: "470px",
+  },
+  manierisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/manierisme.png)`,
+    backgroundSize: "290px",
+  },
+  nonclasse: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/nonclasse.png)`,
+    backgroundSize: "440px",
+  },
+  orientalisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/orientalisme.png)`,
+    backgroundSize: "560px",
+  },
+  preraphaelisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/preraphaelisme.png)`,
+    backgroundSize: "580px",
+  },
+  rococo: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/rococo.png)`,
+    backgroundSize: "840px",
+  },
+  romantisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/romantisme.png)`,
+    backgroundSize: "460px",
+  },
+  streetart: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/streetart.png)`,
+    backgroundSize: "650px",
+  },
+  surrealisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/surrealisme.png)`,
+    backgroundSize: "420px",
+  },
+  symbolisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/symbolisme.png)`,
+    backgroundSize: "240px",
+  },
+  ukiyoe: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/ukiyoe.png)`,
+    backgroundSize: "420px",
   },
 };

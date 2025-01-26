@@ -1,6 +1,6 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { artModalOpenSignal } from "@utils/signals.ts";
-import { DELAY_MODAL_CLOSE } from "@utils/constants.ts";
+import { BG_STYLE, DELAY_MODAL_CLOSE } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
@@ -143,6 +143,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         onClick={(event) => event.stopPropagation()}
         class={`relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-white overflow-y-auto custom-scrollbar
         art-modal-container ${isVisible ? "visible" : ""}`}
+        style={BG_STYLE[art.movement_slug]}
       >
         <button
           onClick={handleClose}
