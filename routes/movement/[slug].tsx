@@ -61,12 +61,12 @@ export const handler: Handlers<MovementPageProps> = {
       .where("movement.slug", "=", movementDetails.slug)
       .where("artist.slug", "not in", TALENTS)
       .orderBy(sql`random()`)
-      .limit(12)
+      .limit(7)
       .execute();
 
-    const lValues = ["-ml-2", "ml-36", "-ml-1", "ml-40", "-ml-3", "ml-2", "-ml-2", "ml-1", "-ml-2", "ml-40", "-ml-3", "ml-36"];
-    const rValues = ["-rotate-3", "rotate-6", "rotate-2", "-rotate-2", "-rotate-2", "rotate-6", "-rotate-3", "rotate-3", "rotate-0", "rotate-3", "rotate-1", "-rotate-12"];
-    const tValues = ["-mt-2", "-mt-12", "-mt-1", "-mt-14", "-mt-3", "mt-2", "-mt-2", "mt-1", "-mt-2", "-mt-24", "mt-6", "-mt-16"];
+    const lValues = ["-ml-2", "ml-36", "-ml-1", "ml-40", "-ml-3", "ml-2", "-ml-2"];
+    const rValues = ["-rotate-3", "rotate-6", "rotate-2", "-rotate-2", "-rotate-2", "rotate-6", "-rotate-3"];
+    const tValues = ["-mt-2", "-mt-12", "-mt-1", "-mt-14", "-mt-3", "mt-2", "-mt-2"];
 
     const artists = artistQuery.map((p, index) => ({
       avatar_url: p.avatar_url,
