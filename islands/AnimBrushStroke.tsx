@@ -1,7 +1,7 @@
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { Fragment } from "preact";
-import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+
 
 export default function AnimBrushStroke(
   props: {
@@ -33,22 +33,6 @@ export default function AnimBrushStroke(
     };
   }, []);
 
-  // Background pour la page d'une collection d'arts
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="collection"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/gray)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "540px";
-    }
-  }, []);
 
   return (
     <div

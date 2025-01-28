@@ -126,6 +126,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/artabstrait.png)`,
     backgroundSize: "570px",
   },
+  artconceptuel: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/artconceptuel.png)`,
+    backgroundSize: "400px",
+  },
   artdeco: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/artdeco.png)`,
     backgroundSize: "900px",
@@ -133,6 +137,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   artnaif: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/artnaif.png)`,
     backgroundSize: "470px",
+  },
+  artnouveau: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/artnouveau.png)`,
+    backgroundSize: "360px",
   },
   baroque: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/baroque.png)`,
@@ -154,9 +162,17 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/dynastieqing.png)`,
     backgroundSize: "500px",
   },
+  expressionnisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/expressionnisme.png)`,
+    backgroundSize: "610px",
+  },
   fauvisme: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/fauvisme.png)`,
     backgroundSize: "480px",
+  },
+  futurisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/futurisme.png)`,
+    backgroundSize: "570px",
   },
   hauterenaissance: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/hauterenaissance.png)`,
@@ -189,6 +205,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   preraphaelisme: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/preraphaelisme.png)`,
     backgroundSize: "580px",
+  },
+  regionalisme: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/regionalisme.png)`,
+    backgroundSize: "720px",
   },
   rococo: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/rococo.png)`,

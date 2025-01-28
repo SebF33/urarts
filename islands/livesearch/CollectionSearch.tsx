@@ -1,4 +1,6 @@
 import { ArtCollection } from "@utils/types.d.ts";
+import { BG_STYLE } from "@utils/constants.ts";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -11,6 +13,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 
+
 type Arts = Array<ArtCollection>;
 export interface Props {
   font?: string;
@@ -18,6 +21,7 @@ export interface Props {
   myslug: string;
   type: string;
 }
+
 
 export default function CollectionSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
@@ -41,6 +45,7 @@ export default function CollectionSearch(props: Props) {
     return () => clearTimeout(timer);
   }, [debouncedValue]);
 
+
   // Atteindre l'œuvre
   useLayoutEffect(() => {
     let delay;
@@ -60,9 +65,37 @@ export default function CollectionSearch(props: Props) {
     }
   }, [props.query]);
 
+
+  // Background pour la page d'une collection d'arts
+  useLayoutEffect(() => {
+    const body = document.querySelector("body");
+    const main = document.querySelector<HTMLElement>('[data-name="collection"]');
+    const styleForSlug = BG_STYLE[props.myslug];
+
+    if (body) {
+      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+    }
+  
+    if (main && styleForSlug) {
+      // Défini dans BG_STYLE
+      const { background, backgroundSize } = styleForSlug;
+      main.style.background = background;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = backgroundSize;
+    } else if (main) {
+      // Fallback si non défini dans BG_STYLE
+      main.style.background = `${colorScheme[currentColorScheme].white} url(../textures/nonclasse.png)`;
+      main.style.backgroundAttachment = "local";
+      main.style.backgroundPosition = "center";
+      main.style.backgroundSize = "440px";
+    }
+  }, []);
+
+
   return (
     <div class={`flex-grow`}>
-
+    
     {!props.query?.alone &&
       (
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}>

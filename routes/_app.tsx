@@ -83,14 +83,18 @@ export default defineApp((_, ctx) => {
         <link rel="preload" href="/cursors/cursor-text.png" as="image" />
         <link rel="preload" href="/symbols/add.png" as="image" />
         <link rel="preload" href="/textures/artabstrait.png" as="image" />
+        <link rel="preload" href="/textures/artconceptuel.png" as="image" />
         <link rel="preload" href="/textures/artdeco.png" as="image" />
         <link rel="preload" href="/textures/artnaif.png" as="image" />
+        <link rel="preload" href="/textures/artnouveau.png" as="image" />
         <link rel="preload" href="/textures/baroque.png" as="image" />
         <link rel="preload" href="/textures/classicisme.png" as="image" />
         <link rel="preload" href="/textures/cubisme.png" as="image" />
         <link rel="preload" href="/textures/dadaisme.png" as="image" />
         <link rel="preload" href="/textures/dynastieqing.png" as="image" />
+        <link rel="preload" href="/textures/expressionnisme.png" as="image" />
         <link rel="preload" href="/textures/fauvisme.png" as="image" />
+        <link rel="preload" href="/textures/futurisme.png" as="image" />
         <link rel="preload" href="/textures/hauterenaissance.png" as="image" />
         <link rel="preload" href="/textures/impressionnisme.png" as="image" />
         <link rel="preload" href="/textures/japonisme.png" as="image" />
@@ -99,6 +103,7 @@ export default defineApp((_, ctx) => {
         <link rel="preload" href="/textures/nonclasse.png" as="image" />
         <link rel="preload" href="/textures/orientalisme.png" as="image" />
         <link rel="preload" href="/textures/preraphaelisme.png" as="image" />
+        <link rel="preload" href="/textures/regionalisme.png" as="image" />
         <link rel="preload" href="/textures/rococo.png" as="image" />
         <link rel="preload" href="/textures/romantisme.png" as="image" />
         <link rel="preload" href="/textures/streetart.png" as="image" />
