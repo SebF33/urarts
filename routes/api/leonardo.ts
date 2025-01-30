@@ -361,7 +361,7 @@ export const handler = async (
             .where("copyright", "!=", 2)
             .executeTakeFirst();
 
-          if (subpage !== "nonclasse") htmlContent = `<h2>${i18next.t("leonardo.movement", { ns: "translation" })} "<strong>${movementResults.movement_name}</strong>".</h2>`;
+          if (subpage !== "unclassified") htmlContent = `<h2>${i18next.t("leonardo.movement", { ns: "translation" })} "<strong>${movementResults.movement_name}</strong>".</h2>`;
           else htmlContent = i18next.t("leonardo.unclassified_arts", { ns: "translation" });
 
           htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> ${i18next.t("leonardo.arts_currently_available", { ns: "translation" })}</p>`;

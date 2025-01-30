@@ -85,7 +85,7 @@ export default function CollectionSearch(props: Props) {
       main.style.backgroundSize = backgroundSize;
     } else if (main) {
       // Fallback si non défini dans BG_STYLE
-      main.style.background = `${colorScheme[currentColorScheme].white} url(../textures/nonclasse.png)`;
+      main.style.background = `${colorScheme[currentColorScheme].white} url(../textures/unclassified.png)`;
       main.style.backgroundAttachment = "local";
       main.style.backgroundPosition = "center";
       main.style.backgroundSize = "440px";

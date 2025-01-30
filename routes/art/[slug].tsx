@@ -94,7 +94,7 @@ export const handler: Handlers<ArtistPageProps> = {
       .$if(lng === 'en', (query) => query.select("movement.name_en as name"))
       .distinct()
       .where("artist.slug", "=", artistDetails.slug)
-      .where("movement.slug", "!=", "nonclasse")
+      .where("movement.slug", "!=", "unclassified")
       .$if(lng === 'fr', (query) => query.orderBy("movement.name"))
       .$if(lng === 'en', (query) => query.orderBy("movement.name_en"))
       .execute();

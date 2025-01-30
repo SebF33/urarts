@@ -33,7 +33,7 @@ export const handler: Handlers = {
       ])
       .$if(lng === 'fr', (qb) => qb.select("movement.name"))
       .$if(lng === 'en', (qb) => qb.select("movement.name_en as name"))
-      .where("movement.slug", "!=", "nonclasse")
+      .where("movement.slug", "!=", "unclassified")
       .where("copyright", "!=", 2)
       .groupBy("movement.id")
       .$if(lng === 'fr', (qb) => qb.orderBy("movement.name"))

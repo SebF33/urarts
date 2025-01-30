@@ -4,8 +4,8 @@ import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { INDICATORS_MOVEMENTS, TALENTS } from "@utils/constants.ts";
 import { sql } from "kysely";
-import { TALENTS } from "@utils/constants.ts";
 
 import Doughnut from "@islands/chart/Doughnut.tsx";
 import Footer from "@islands/footer/Footer.tsx";
@@ -60,15 +60,15 @@ export const handler: Handlers = {
         .$if(lng === 'fr', (qb) => qb.select([
           "movement.name",
           "movement.slug as movement_value",
-          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name ELSE 'Autres' END as movement_group`,
-          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
+          sql`CASE WHEN movement.slug IN (${sql.join(INDICATORS_MOVEMENTS)}) THEN movement.name ELSE 'Autres' END as movement_group`,
+          sql`CASE WHEN movement.slug IN (${sql.join(INDICATORS_MOVEMENTS)}) THEN movement.slug ELSE 'movements' END as movement_value`,
           count("art.id").as("art_count"),
         ]))
         .$if(lng === 'en', (qb) => qb.select([
           "movement.name_en as name",
           "movement.slug as movement_value",
-          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.name_en ELSE 'Others' END as movement_group`,
-          sql`CASE WHEN movement.slug IN ('artdeco', 'baroque', 'cubisme', 'impressionnisme', 'realisme', 'renaissanceitalienne', 'surrealisme') THEN movement.slug ELSE 'movements' END as movement_value`,
+          sql`CASE WHEN movement.slug IN (${sql.join(INDICATORS_MOVEMENTS)}) THEN movement.name_en ELSE 'Others' END as movement_group`,
+          sql`CASE WHEN movement.slug IN (${sql.join(INDICATORS_MOVEMENTS)}) THEN movement.slug ELSE 'movements' END as movement_value`,
           count("art.id").as("art_count"),
         ]))
         .where("artist.slug", "not in", TALENTS)
