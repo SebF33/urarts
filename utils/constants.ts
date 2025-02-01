@@ -135,6 +135,18 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/abstractart.png)`,
     backgroundSize: "570px",
   },
+  academicart: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/academicart.png)`,
+    backgroundSize: "710px",
+  },
+  americanrealism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/americanrealism.png)`,
+    backgroundSize: "750px",
+  },
+  analyticalrealism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/analyticalrealism.png)`,
+    backgroundSize: "840px",
+  },
   artdeco: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/artdeco.png)`,
     backgroundSize: "900px",
@@ -151,6 +163,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/classicism.png)`,
     backgroundSize: "610px",
   },
+  cloisonnism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/cloisonnism.png)`,
+    backgroundSize: "620px",
+  },
   conceptualart: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/conceptualart.png)`,
     backgroundSize: "400px",
@@ -162,6 +178,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   dadaism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/dadaism.png)`,
     backgroundSize: "450px",
+  },
+  earlyrenaissance: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/earlyrenaissance.png)`,
+    backgroundSize: "720px",
   },
   expressionnism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/expressionnism.png)`,
@@ -183,6 +203,14 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/impressionnism.png)`,
     backgroundSize: "600px",
   },
+  intimism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/intimism.png)`,
+    backgroundSize: "610px",
+  },
+  italianrenaissance: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/italianrenaissance.png)`,
+    backgroundSize: "780px",
+  },
   japonism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/japonism.png)`,
     backgroundSize: "850px",
@@ -190,6 +218,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   kitsch: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/kitsch.png)`,
     backgroundSize: "470px",
+  },
+  magicalrealism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/magicalrealism.png)`,
+    backgroundSize: "560px",
   },
   mannerism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/mannerism.png)`,
@@ -199,9 +231,33 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/naiveart.png)`,
     backgroundSize: "470px",
   },
+  neoclassicism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/neoclassicism.png)`,
+    backgroundSize: "770px",
+  },
+  neoimpressionnism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/neoimpressionnism.png)`,
+    backgroundSize: "570px",
+  },
+  neoplasticism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/neoplasticism.png)`,
+    backgroundSize: "1000px",
+  },
+  northernrenaissance: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/northernrenaissance.png)`,
+    backgroundSize: "880px",
+  },
   orientalism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/orientalism.png)`,
     backgroundSize: "560px",
+  },
+  orphism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/orphism.png)`,
+    backgroundSize: "580px",
+  },
+  postimpressionnism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/postimpressionnism.png)`,
+    backgroundSize: "540px",
   },
   preraphaelitism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/preraphaelitism.png)`,
@@ -210,6 +266,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   qingdynasty: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/qingdynasty.png)`,
     backgroundSize: "500px",
+  },
+  realism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/realism.png)`,
+    backgroundSize: "900px",
   },
   regionalism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/regionalism.png)`,
@@ -227,6 +287,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/streetart.png)`,
     backgroundSize: "650px",
   },
+  suprematism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/suprematism.png)`,
+    backgroundSize: "700px",
+  },
   surrealism: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/surrealism.png)`,
     backgroundSize: "420px",
@@ -235,12 +299,16 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].white} url(../textures/symbolism.png)`,
     backgroundSize: "240px",
   },
+  synthetism: {
+    background: `${colorScheme[currentColorScheme].white} url(../textures/synthetism.png)`,
+    backgroundSize: "550px",
+  },
   ukiyoe: {
     background: `${colorScheme[currentColorScheme].white} url(../textures/ukiyoe.png)`,
     backgroundSize: "420px",
   },
   unclassified: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/unclassified.png)`,
-    backgroundSize: "440px",
+    background: `${colorScheme[currentColorScheme].white} url(../textures/default.png)`,
+    backgroundSize: "480px",
   },
 };
