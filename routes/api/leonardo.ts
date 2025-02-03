@@ -97,7 +97,7 @@ export const handler = async (
         .select(["last_name", "avatar_url", "slug"])
         .where("slug", "not in", TALENTS)
         .orderBy("id", "desc")
-        .limit(5)
+        .limit(6)
         .execute();
   
         const newArtists = newArtistsResult.map((p) => ({
