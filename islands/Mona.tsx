@@ -50,7 +50,7 @@ export default function Mona() {
   return (
     <div class="flex flex-col md:flex-row mx-auto">
       <div class="art-wrap-1 hidden md:flex">
-        <div class={`art-frame art-frame-type-2 art-polyptych-1 ${
+        <div class={`art-frame art-frame-type-2 art-polyptych-1 cursor-auto ${
             css(
               {
                 "border": "solid 1.8vmin",
@@ -77,7 +77,7 @@ export default function Mona() {
         </div>
       </div>
       <div class="art-wrap-1 flex md:hidden">
-        <div class={`art-frame art-frame-type-2 art-polyptych-1 ${
+        <div class={`art-frame art-frame-type-2 art-polyptych-1 cursor-auto ${
             css(
               {
                 "border": "solid 1.8vmin",

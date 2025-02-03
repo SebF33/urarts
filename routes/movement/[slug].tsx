@@ -123,7 +123,7 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
                     <div class="top-tape max-h-3"></div>
                     <a
                       href={`/art/${artist.slug}`}
-                      class="z-10 text-center text-lighterdark text-xl italic underline select-none"
+                      class="z-10 text-center text-lighterdark text-xl italic leading-5 underline select-none"
                       draggable={draggable}
                     >
                       {artist.name}
