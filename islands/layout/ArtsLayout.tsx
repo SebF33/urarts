@@ -147,11 +147,14 @@ export default function ArtsLayout(
 
 
   return (
-    <div class={`flex flex-wrap mx-auto mb-40`}>
+    <div class={`flex flex-wrap mx-auto mb-40 md:mx-10`}>
       {/* Liste des œuvres d'art */}
       {displayedArts && displayedArts.length > 0 ? (
         displayedArts.map((p, index) => (
-          <div key={index + 1} class={`flex flex-col mx-auto`}>
+          <div
+            key={index + 1}
+            class={`art-container flex flex-col mx-auto`}
+          >
             <div
               id={p.id}
               class={`art-wrap-${p.polyptych}`}

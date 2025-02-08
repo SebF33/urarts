@@ -202,6 +202,30 @@ h1 {
     border-color: var(--color-dark) !important;
 }
 
+/* Conteneurs des œuvres */
+@media (min-width: 1024px) and (max-width: 1920px) {
+
+    /* flex : flex-grow | flex-shrink | flex-basis */
+    .art-container:has(.art-frame-type--1) {
+        flex: 0 0 90%;
+    }
+
+    .art-container:has(.art-frame-type-1),
+    .art-container:has(.art-frame-type-2),
+    .art-container:has(.art-frame-type-3),
+    .art-container:has(.art-frame-type-4) {
+        flex: 0 0 50%;
+    }
+
+    .art-container:has(.art-polyptych-3) {
+        flex: 0 0 70%;
+    }
+
+    .art-container:has(.art-polyptych-5) {
+        flex: 0 0 60%;
+    }
+}
+
 /* Cadres ou filtres des œuvres */
 .art-frame {
     box-sizing: border-box;
@@ -265,7 +289,7 @@ h1 {
     border-right-color: #eee;
     border-top-color: #ddd;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .25) inset, 0 5px 10px 5px rgba(0, 0, 0, .25);
-    padding: 6vmin;
+    padding: 5vmin;
 }
 
 .art-frame-type-3:before {
