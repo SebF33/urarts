@@ -67,67 +67,6 @@ export default defineApp((_, ctx) => {
           href={asset("/icons/favicon-192x192.png")}
         />
 
-        {/* Assets */}
-        <link rel="preload" href="/brush-input-box.png" as="image" />
-        <link rel="preload" href="/leonardo.png" as="image" />
-        <link rel="preload" href="/liquid-mask-after.png" as="image" />
-        <link rel="preload" href="/liquid-mask-before.png" as="image" />
-        <link rel="preload" href="/monalisa.png" as="image" />
-        <link rel="preload" href="/mural-mask.png" as="image" />
-        <link rel="preload" href="/placeholder_150.png" as="image" />
-        <link rel="preload" href="/wood-engraving.png" as="image" />
-        <link rel="preload" href="/cursors/cursor-auto.png" as="image" />
-        <link rel="preload" href="/cursors/cursor-grab.png" as="image" />
-        <link rel="preload" href="/cursors/cursor-help.png" as="image" />
-        <link rel="preload" href="/cursors/cursor-pointer.png" as="image" />
-        <link rel="preload" href="/cursors/cursor-text.png" as="image" />
-        <link rel="preload" href="/symbols/add.png" as="image" />
-        <link rel="preload" href="/textures/abstractart.png" as="image" />
-        <link rel="preload" href="/textures/academicart.png" as="image" />
-        <link rel="preload" href="/textures/americanrealism.png" as="image" />
-        <link rel="preload" href="/textures/analyticalrealism.png" as="image" />
-        <link rel="preload" href="/textures/artdeco.png" as="image" />
-        <link rel="preload" href="/textures/artnouveau.png" as="image" />
-        <link rel="preload" href="/textures/baroque.png" as="image" />
-        <link rel="preload" href="/textures/classicism.png" as="image" />
-        <link rel="preload" href="/textures/cloisonnism.png" as="image" />
-        <link rel="preload" href="/textures/conceptualart.png" as="image" />
-        <link rel="preload" href="/textures/cubism.png" as="image" />
-        <link rel="preload" href="/textures/dadaism.png" as="image" />
-        <link rel="preload" href="/textures/earlyrenaissance.png" as="image" />
-        <link rel="preload" href="/textures/expressionnism.png" as="image" />
-        <link rel="preload" href="/textures/fauvism.png" as="image" />
-        <link rel="preload" href="/textures/futurism.png" as="image" />
-        <link rel="preload" href="/textures/highrenaissance.png" as="image" />
-        <link rel="preload" href="/textures/impressionnism.png" as="image" />
-        <link rel="preload" href="/textures/intimism.png" as="image" />
-        <link rel="preload" href="/textures/italianrenaissance.png" as="image" />
-        <link rel="preload" href="/textures/japonism.png" as="image" />
-        <link rel="preload" href="/textures/kitsch.png" as="image" />
-        <link rel="preload" href="/textures/magicalrealism.png" as="image" />
-        <link rel="preload" href="/textures/mannerism.png" as="image" />
-        <link rel="preload" href="/textures/naiveart.png" as="image" />
-        <link rel="preload" href="/textures/neoclassicism.png" as="image" />
-        <link rel="preload" href="/textures/neoimpressionnism.png" as="image" />
-        <link rel="preload" href="/textures/neoplasticism.png" as="image" />
-        <link rel="preload" href="/textures/northernrenaissance.png" as="image" />
-        <link rel="preload" href="/textures/orientalism.png" as="image" />
-        <link rel="preload" href="/textures/orphism.png" as="image" />
-        <link rel="preload" href="/textures/postimpressionnism.png" as="image" />
-        <link rel="preload" href="/textures/preraphaelitism.png" as="image" />
-        <link rel="preload" href="/textures/qingdynasty.png" as="image" />
-        <link rel="preload" href="/textures/realism.png" as="image" />
-        <link rel="preload" href="/textures/regionalism.png" as="image" />
-        <link rel="preload" href="/textures/rococo.png" as="image" />
-        <link rel="preload" href="/textures/romanticism.png" as="image" />
-        <link rel="preload" href="/textures/streetart.png" as="image" />
-        <link rel="preload" href="/textures/suprematism.png" as="image" />
-        <link rel="preload" href="/textures/surrealism.png" as="image" />
-        <link rel="preload" href="/textures/symbolism.png" as="image" />
-        <link rel="preload" href="/textures/synthetism.png" as="image" />
-        <link rel="preload" href="/textures/ukiyoe.png" as="image" />
-        <link rel="preload" href="/textures/unclassified.png" as="image" />
-
         {/* CSS & JS */}
         <script defer src={asset("/styles/lib/alpine-persist3.13.5.min.js")}></script>
         <script defer src={asset("/styles/lib/alpine3.13.5.min.js")}></script>
