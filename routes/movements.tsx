@@ -62,6 +62,7 @@ export default function MovementsPage(
 
   const { desc, movements, title } = props.data;
 
+  
   return (
     <>
       <Head>
@@ -73,7 +74,11 @@ export default function MovementsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="movements" class="scrollable flex-grow xl:max-h-[860px] xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
+      <main
+        id="page"
+        data-name="movements"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+      >
         <MovementsList movements={movements} />
       </main>
 

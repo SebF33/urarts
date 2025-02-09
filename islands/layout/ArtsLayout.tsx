@@ -118,6 +118,7 @@ export default function ArtsLayout(
           placement: "bottom",
           theme: "urarts",
           trigger: isTouchDevice() ? "manual" : "mouseenter focus",
+          zIndex: 30,
           onCreate(instance: Any) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
@@ -147,7 +148,7 @@ export default function ArtsLayout(
 
 
   return (
-    <div class={`flex flex-wrap mx-auto mb-40 md:mx-10`}>
+    <div class="flex flex-wrap mx-auto md:mx-10 mb-48">
       {/* Liste des œuvres d'art */}
       {displayedArts && displayedArts.length > 0 ? (
         displayedArts.map((p, index) => (

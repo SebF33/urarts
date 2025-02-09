@@ -28,6 +28,7 @@ export default function ArtsPage(
 
   const { desc, title } = props.data;
 
+  
   return (
     <>
       <Head>
@@ -39,7 +40,11 @@ export default function ArtsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="arts" class="flex-grow">
+      <main
+        id="page"
+        data-name="arts"
+        class="flex-grow"
+      >
         <ArtsSearch />
       </main>
 

@@ -106,6 +106,7 @@ export default function HomePage(
 
   const { artistQuote, artists, color, desc, grid, title } = props.data;
 
+  
   return (
     <>
       <Head>
@@ -117,7 +118,11 @@ export default function HomePage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="home" class="flex-grow transparent-mask-99">
+      <main
+        id="page"
+        data-name="home"
+        class="flex-grow xl:-mb-[35vh]"
+      >
         <button
           x-on:click="openFamousArt = true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
@@ -127,7 +132,7 @@ export default function HomePage(
 
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
 
-        <div class="mx-auto -mt-28 mb-10">
+        <div class="mx-auto -mt-[17.5vh] mb-24">
           <Quote data={artistQuote} delay={100} />
         </div>
       </main>

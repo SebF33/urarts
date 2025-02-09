@@ -116,19 +116,18 @@ export default function MovementsList(
 
 
   return (
-    <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-      
+    <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8 mb-24">
       <Title
         name="movements"
         dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
         margin="mt-2 mb-5 md:mt-5 md:mb-6"
       />
 
-      <div class={`flex flex-wrap`}>
+      <div class="flex flex-wrap">
         {/* Liste des mouvements */}
         {props.movements &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 lg:mb-20 p-2`}>
               {props.movements.map((item, index) => (
                 <li class={`mx-2 my-4`} key={index}>
                   <a

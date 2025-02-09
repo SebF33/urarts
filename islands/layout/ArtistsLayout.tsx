@@ -69,6 +69,7 @@ export default function ArtistsLayout(
         interactive: true,
         placement: "bottom",
         theme: "urarts",
+        zIndex: 30,
         onCreate(instance: Any) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);
         },
@@ -94,6 +95,7 @@ export default function ArtistsLayout(
           interactive: true,
           placement: "bottom",
           theme: "urarts",
+          zIndex: 30,
           onCreate(instance: Any) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
@@ -126,7 +128,7 @@ export default function ArtistsLayout(
     <div
       id="data-flag"
       data-flag={`${props.flag}`}
-      class={`max-w-7xl mx-auto mb-40 px-6 sm:px-8 md:px-10 lg:px-12`}
+      class="max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12 mb-48"
     >
       {displayedArtists && displayedArtists.length > 0
         ? (

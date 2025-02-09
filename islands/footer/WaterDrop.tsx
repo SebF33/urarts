@@ -11,15 +11,25 @@ import { useSignal } from "@preact/signals";
 
 import WaveTank from "@components/WaveTank.tsx";
 
+
 function easeInCirc(x: number) {
   return 1 - Math.sqrt(1 - Math.pow(x, 2));
 }
 
 const waveTank = new WaveTank();
 
-export default function WaterDrop(
-  props: { color: string; isDropy: boolean; pencilColor: string },
-) {
+
+export default function WaterDrop({
+  backgroundColor = 'white',
+  color,
+  isDropy,
+  pencilColor,
+}: {
+  readonly backgroundColor: string;
+  readonly color: string;
+  readonly isDropy: boolean;
+  readonly pencilColor: string;
+}) {
   const [display, setDisplay] = useState<boolean>(false);
   const SVG_WIDTH = 170;
   const counter = useSignal(0);
@@ -91,7 +101,7 @@ export default function WaterDrop(
       return;
     }
 
-    if (props.isDropy) {
+    if (isDropy) {
       requestIdRef.current = requestAnimationFrame(update);
     }
 
@@ -133,10 +143,11 @@ export default function WaterDrop(
       {display && (
         <section
           id="dropy-section"
-          class={`relative bottom-[-6px] flex justify-center items-center flex-col w-full`}
+          class={`mask-footer-${backgroundColor} relative bottom-[-6px] flex justify-center items-center flex-col w-full z-40`}
         >
           <svg
             id="Urarts"
+            class="relative"
             width="170"
             height="273.41"
             viewBox="0 0 170 273.41"
@@ -211,7 +222,7 @@ export default function WaterDrop(
               <path
                 d="M405.62,357.19,398.33,350a18.73,18.73,0,0,0-.7,12.14C404.51,358.69,405.62,357.19,405.62,357.19Z"
                 transform="translate(-250.67 -237.81)"
-                style={`fill: ${props.pencilColor}`}
+                style={`fill: ${pencilColor}`}
               />
               <path
                 d="M417.53,374.34a2.93,2.93,0,0,0,.26-1.8,2.82,2.82,0,0,0-1.87-2.18c-1-2.33-2-4.64-2.67-6.24a2.84,2.84,0,0,0-1.92-4.71h-.21c-2.72-8.5-7-22.77-9.56-31.13-2.52-8.08-4.85-15.72-6.71-21.19-2.89-8.73-9-14.06-16.68-14.64h-.07a20.54,20.54,0,0,0-12.6,3.45,27.47,27.47,0,0,0-9.61,10.92c-6.34,12.78-13.14,27.1-15.7,32.47l-.44.94a64.7,64.7,0,0,0-9.82,3c-8.84,3.52-15.67,8.74-19.75,15.09a24.58,24.58,0,0,0-1.13,25.33,18.64,18.64,0,0,0,15.66,10.56,22.85,22.85,0,0,0,3.51,0,32,32,0,0,0,17.88-8A41.94,41.94,0,0,0,358,369q3.26.25,6.81.71c1.84.24,3.94.55,6.16.88,3.23.48,6.53,1,9.33,1.28a2.81,2.81,0,0,0,.46,2.3,2.84,2.84,0,0,0,2.09,1.22,3.22,3.22,0,0,0,.76,0c.8,2.17,1.95,5.25,3.19,8.37l-.11.15a2.83,2.83,0,0,0,.39,4h0a2.84,2.84,0,0,0,1.59.63h.07l.09.23c2.7,6.41,4.65,11,9,12.77a8.94,8.94,0,0,0,2.79.65c2.61.19,5.73-.55,9.71-2.26,7.91-3.4,9.58-7.4,10.14-10.12.82-4-.41-8.5-2.64-14.57A3.66,3.66,0,0,1,417.53,374.34Zm-19.18-14.21c-1.68-2.69-.37-5.75.41-7.14,1.83,1.5,3.34,2.91,4.43,4-1.3.88-2.95,2-4.9,3.15Zm-5,2.75a54.33,54.33,0,0,1-8.22,3.36c-2.8-2.9-4.39-8.25-2.08-14.67,1.28-3.52,3.21-5.48,4.65-5.78a51.37,51.37,0,0,1,6.46,3.77,17.14,17.14,0,0,0-1.71,3.78,11.58,11.58,0,0,0,.84,9.6Zm14.13,2.26c.52,1.21,1.55,3.53,2.6,6.07a52.27,52.27,0,0,0-18.77,8.5c-1.12-2.89-2.13-5.59-2.76-7.29,4.31-2.67,11.85-6.59,18.87-7.28ZM361,309.37c3.57-7.19,10.3-11.71,16.72-11.26h0c5.39.41,9.54,4.22,11.7,10.75,1.8,5.43,4.16,13,6.69,21.1,1.87,6,3.83,12.3,5.72,18.21-3.28-2.64-10.58-7.69-14.67-8-1.72-.12-6.21-.51-8.12-.64-1.21-3.94-2.63-10.83-3.13-13.48a2.83,2.83,0,0,0-5.51-.27,53.28,53.28,0,0,1-5.82,12.81l-2.83-.13a89.33,89.33,0,0,0-15.16.6c3.12-6.59,8.91-18.7,14.35-29.69ZM373,339.09l-2-.14c.47-.83.9-1.68,1.32-2.52.15.9.38,1.8.61,2.66Zm-7.54,25.07c-18.3-2.43-31.33-.49-39.89,5.8a2.84,2.84,0,0,0,1.48,5.12,2.74,2.74,0,0,0,1.89-.55c5.28-3.88,12.85-5.76,22.93-5.69a35.83,35.83,0,0,1-9.56,13.09,26.47,26.47,0,0,1-14.66,6.63,13.27,13.27,0,0,1-13.63-7.41,18.85,18.85,0,0,1,.84-19.68c3.44-5.34,9.35-9.79,17.08-12.88a72,72,0,0,1,29.5-4.4c6.19.26,12.65.71,18.35,1.14a20.67,20.67,0,0,0-2.16,4.37A21.73,21.73,0,0,0,378,366c-2-.27-4.21-.6-6.26-.9C369.5,364.69,367.38,364.37,365.5,364.16Zm49.37,24.47c-.33,1.6-1.4,3.73-6.8,6.07-3.95,1.7-6.62,2.21-8.17,1.58-2.14-.87-4.86-7.29-6.43-11a34.91,34.91,0,0,1,3.27-2.37,49.29,49.29,0,0,1,15.47-6.31c.08.25.18.49.27.72,1.83,4.86,2.93,8.74,2.39,11.33Z"
@@ -288,18 +299,19 @@ export default function WaterDrop(
             </g>
             <path
               d={juice}
-              fill={props.color}
+              fill={color}
             />
             <circle
               cx="18"
               cy={dropy.value}
               r="4"
-              fill={props.color}
+              fill={color}
             >
             </circle>
           </svg>
 
           <svg
+            class="relative"
             width="100%"
             height="30px"
             viewBox="0 0 100 100"
@@ -307,7 +319,7 @@ export default function WaterDrop(
           >
             <polygon
               points={springsPath}
-              fill={props.color}
+              fill={color}
               transform="translate(0, 50)"
             >
             </polygon>

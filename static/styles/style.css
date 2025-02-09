@@ -18,6 +18,11 @@
     --transparent: rgba(213, 224, 249, 0);
 }
 
+main {
+    min-height: calc(100vh + 64px);
+    margin-bottom: -64px;
+}
+
 /* Surlignage de texte */
 ::selection {
     background-color: var(--color-cyan);
@@ -878,39 +883,49 @@ h1 {
 }
 
 /* Masques de transparence */
-.transparent-mask-50 {
+.mask-50 {
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     -o-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     -moz-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
-.transparent-mask-70 {
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -o-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -moz-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-}
-
-.transparent-mask-94-96 {
+.mask-94-96 {
     mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
     -webkit-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
     -o-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
     -moz-mask-image: linear-gradient(to bottom, black 94%, transparent 96%);
 }
 
-.transparent-mask-96 {
-    mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
-    -o-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
-    -moz-mask-image: linear-gradient(to bottom, black 96%, transparent 100%);
-}
-
-.transparent-mask-99 {
+.mask-99 {
     mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
     -o-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
     -moz-mask-image: linear-gradient(to bottom, black 99%, transparent 100%);
+}
+
+.mask-footer-gray::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, var(--color-gray) 90%, transparent 100%);
+    mask-image: inherit;
+    -webkit-mask-image: inherit;
+}
+
+.mask-footer-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, var(--color-white) 90%, transparent 100%);
+    mask-image: inherit;
+    -webkit-mask-image: inherit;
 }
 
 /* Brush stroke */

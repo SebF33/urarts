@@ -28,6 +28,7 @@ export default function WomenPage(
 
   const { desc, title } = props.data;
 
+  
   return (
     <>
       <Head>
@@ -39,11 +40,16 @@ export default function WomenPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="women" class="scrollable flex-grow xl:max-h-[870px] xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
+      <main
+        id="page"
+        data-name="women"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+      >
         <WomenSearch />
       </main>
 
       <WaterDrop
+        backgroundColor="gray"
         color={colorScheme[currentColorScheme].magenta}
         isDropy
         pencilColor={colorScheme[currentColorScheme].magenta}

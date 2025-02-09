@@ -48,6 +48,7 @@ export default function ArtistsPage(
 
   const { desc, nationality, title } = props.data;
 
+  
   return (
     <>
       <Head>
@@ -62,7 +63,8 @@ export default function ArtistsPage(
       <main
         id="page"
         data-name="artists"
-        class="scrollable flex-grow xl:max-h-[900px] xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+      >
         <ArtistsSearch nationality={nationality} />
       </main>
 

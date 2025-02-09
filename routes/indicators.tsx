@@ -10,8 +10,8 @@ import { sql } from "kysely";
 import Doughnut from "@islands/chart/Doughnut.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import PolarArea from "@islands/chart/PolarArea.tsx";
-import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import Title from "@islands/Title.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
 export const handler: Handlers = {
@@ -151,16 +151,19 @@ export default function IndicatorsPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="indicators" class="flex-grow transparent-mask-99">
+      <main
+        id="page"
+        data-name="indicators"
+        class="flex-grow"
+      >
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-
           <Title
             name="indicators"
             dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
             margin="mt-2 mb-6 md:mt-5"
           />
 
-          <div class={`charts flex justify-center max-w-xl mt-12 mx-auto`}>
+          <div class={`charts flex justify-center max-w-xl mx-auto mt-12 mb-24`}>
             <Doughnut
               countResult={artistCountResult}
               nationalityResult={artistNationalityResult}

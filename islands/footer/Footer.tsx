@@ -1,7 +1,8 @@
-import { DELAY_DISPLAY_FOOTER } from "@utils/constants.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
+import { DELAY_DISPLAY_FOOTER } from "@utils/constants.ts";
 import { useEffect, useState } from "preact/hooks";
+
 
 export default function Footer({ color }: { color: string }) {
   const [display, setDisplay] = useState<boolean>(false);
@@ -11,6 +12,7 @@ export default function Footer({ color }: { color: string }) {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY_FOOTER);
     return () => clearTimeout(timeoutId);
   }, []);
+
 
   return (
     <>

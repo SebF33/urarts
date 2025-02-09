@@ -8,11 +8,16 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 export default function NotFoundPage({ url }: PageProps) {
   return (
     <>
-      <main id="page" data-name="error" class="flex-grow transparent-mask-96">
+      <main
+        id="page"
+        data-name="error"
+        class="flex-grow"
+      >
         <ErrorLayout firstDigit="4" secondDigit="0" thirdDigit="4" msg={url.pathname} />
       </main>
 
       <WaterDrop
+        backgroundColor="gray"
         color={colorScheme[currentColorScheme].lighterdark}
         isDropy
         pencilColor={colorScheme[currentColorScheme].lighterdark}

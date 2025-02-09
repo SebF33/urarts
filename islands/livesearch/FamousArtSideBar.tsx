@@ -107,7 +107,7 @@ export default function FamousArtSideBar() {
       x-transition:leave="transition-opacity ease-in duration-300"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden transparent-mask-94-96">
+      class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden mask-94-96">
       <div
         x-show="openFamousArt"
         x-transition:enter="transition-transform ease-out duration-300"
@@ -132,7 +132,7 @@ export default function FamousArtSideBar() {
               </div>
             </div>
           </div>
-          <div class="h-full px-4 overflow-auto custom-scrollbar transparent-mask-99">
+          <div class="h-full px-4 overflow-auto custom-scrollbar mask-99">
             <div class="grid grid-cols-1 gap-4">
               {display && searchResults &&
                 searchResults.map((p) => (

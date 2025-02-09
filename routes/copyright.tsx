@@ -75,6 +75,7 @@ export default function CopyrightPage(
 
   const { artists, desc, grid, title } = props.data;
 
+
   return (
     <>
       <Head>
@@ -86,7 +87,11 @@ export default function CopyrightPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="copyright" class="flex-grow">
+      <main
+        id="page"
+        data-name="copyright"
+        class="flex-grow"
+      >
         <div
           class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
         >

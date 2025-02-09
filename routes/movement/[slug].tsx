@@ -112,7 +112,7 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
       <main
         id="page"
         data-name="collection"
-        class="scrollable flex-grow mb-6 xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
           {artists.length > 0 && (

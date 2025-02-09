@@ -6,8 +6,8 @@ import "@utils/i18n/config.ts";
 import Footer from "@islands/footer/Footer.tsx";
 import Mona from "@islands/Mona.tsx";
 import Note from "@islands/Note.tsx";
-import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import Title from "@islands/Title.tsx";
+import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
 export const handler: Handlers = {
@@ -43,6 +43,7 @@ export default function AboutPage(
 
   const { color, desc, title } = props.data;
 
+
   return (
     <>
       <Head>
@@ -54,8 +55,12 @@ export default function AboutPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="about" class="mona-page scrollable flex-grow xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
-        <div class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main
+        id="page"
+        data-name="about"
+        class="mona-page flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+      >
+        <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8 mb-48">
           <Title
             name="about"
             dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
@@ -67,6 +72,7 @@ export default function AboutPage(
       </main>
 
       <WaterDrop
+        backgroundColor="gray"
         color={color}
         isDropy
         pencilColor={color}

@@ -55,7 +55,7 @@ export default function WomenSearch() {
   return (
     <>
       <div
-        class={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-48"
       >
         <div
           class={`paper min-h-[30px] max-w-[140px] md:min-h-[60px] md:max-w-[280px] mt-6 mb-8 md:mt-9 md:mb-16`}

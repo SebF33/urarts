@@ -33,6 +33,7 @@ export default function HistoCharactersPage(
 
   const { desc, query, title } = props.data;
 
+
   return (
     <>
       <Head>
@@ -44,11 +45,16 @@ export default function HistoCharactersPage(
         <meta name="twitter:description" content={desc} />
       </Head>
 
-      <main id="page" data-name="histocharacters" class="scrollable flex-grow xl:max-h-[870px] xl:overflow-y-scroll custom-scrollbar transparent-mask-99">
+      <main
+        id="page"
+        data-name="histocharacters"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+      >
         <HistoSearch id={query} />
       </main>
 
       <WaterDrop
+        backgroundColor="gray"
         color={colorScheme[currentColorScheme].dark}
         isDropy
         pencilColor={colorScheme[currentColorScheme].dark}

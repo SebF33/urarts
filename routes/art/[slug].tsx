@@ -180,7 +180,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
       <main
         id="page"
         data-name="collection"
-        class="scrollable flex-grow mb-6 xl:max-h-screen xl:overflow-y-scroll custom-scrollbar transparent-mask-99"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
           {movements.length > 0 && (
@@ -244,7 +244,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
               <CollectionSearch query={queryParameters} myslug={slug} type="artist" />
             </Partial>
           ) : (
-            <div class="flex-grow">
+            <div class="flex-grow mb-24">
               <div class="max-w-2xl mx-auto py-10 px-6 mt-5">
                 <div class="paper max-w-[600px] mx-auto">
                   <div class="top-tape"></div>

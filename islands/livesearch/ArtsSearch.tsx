@@ -133,8 +133,7 @@ export default function ArtsSearch() {
 
 
   return (
-    <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
-      
+    <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8 mb-24">
       <Title
         name="arts"
         dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
@@ -156,7 +155,7 @@ export default function ArtsSearch() {
         {/* Liste des arts */}
         {searchResults &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 transparent-mask-50`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 mask-50`}>
               {searchResults.map((item, index) => (
                 <li class={`appear-effect-list-fadein mx-2 my-4`} key={index}>
                   <a

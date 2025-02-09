@@ -168,9 +168,8 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   return (
     <>
       <div
-        class={`p-4 max-w-7xl mx-auto mb-44 sm:mb-28 px-4 sm:px-6 lg:px-8`}
+        class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        
         <Title
           name="artists"
           dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
