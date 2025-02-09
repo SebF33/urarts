@@ -21,6 +21,7 @@ const translation = {
     public_domain: "Public domain",
   },
   common: {
+    art: "artwork",
     no_results: "No results",
   },
   currentLng: "en",
@@ -184,7 +185,7 @@ const translation = {
   paper: {
     copyright:
       "The artist’s artwork is not yet available for copyright reasons.",
-    famousart: "Some of the most famous arts...",
+    famousart: "Some of the most famous masterpieces...",
     name: "Name(s):",
     talentsart: "Some artwork by talented artists...",
   },

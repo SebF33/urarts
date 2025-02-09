@@ -140,8 +140,7 @@ export default function MovementsList(
                     <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
                       <span class={`italic text-[1.05rem]`}>
-                        {" "}({item.art_count}{" "}
-                        œuvre{item.art_count === "1" ? "" : "s"})
+                        {" "}({item.art_count}{" "}{i18next.t("common.art", { ns: "translation" })}{item.art_count === "1" ? "" : "s"})
                       </span>
                       <span
                         class={`absolute -bottom-2 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}

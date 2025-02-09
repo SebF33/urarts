@@ -21,6 +21,7 @@ const translation = {
     public_domain: "Domaine public",
   },
   common: {
+    art: "œuvre",
     no_results: "Pas de résultats",
   },
   currentLng: "fr",
@@ -184,7 +185,7 @@ const translation = {
   paper: {
     copyright:
       "Les œuvres de l’artiste ne sont pas encore disponibles pour des raisons de droit d’auteur.",
-    famousart: "Œuvres d’art parmi les plus célèbres...",
+    famousart: "Quelques-uns des chefs-d’œuvre les plus célèbres...",
     name: "Nom(s) :",
     talentsart: "Quelques œuvres d’artistes talentueux...",
   },
