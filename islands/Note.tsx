@@ -21,7 +21,7 @@ export default function Note() {
       <div class="flex flex-col w-full p-6 font-medium">
         <p class="mb-4 text-xl md:text-2xl leading-6 z-10 select-none">
           {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
-          <div class="inline-block">
+          <div class="appear-effect-very-fast-fadein inline-block">
             <button
               onClick={() => handleLanguage("en")}
               class="inline-block flex items-center focus:outline-none"
@@ -50,7 +50,7 @@ export default function Note() {
         <div dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}/>
         <a
           href="https://fresh.deno.dev"
-          class="inline-block ml-auto z-10"
+          class="appear-effect-very-fast-fadein inline-block ml-auto z-10"
           draggable={draggable}
           target="_blank"
           rel="noopener"

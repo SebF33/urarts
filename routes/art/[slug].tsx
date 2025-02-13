@@ -205,7 +205,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             <div class="-mt-[27rem] md:-mt-[13.5rem] text-white">
               <div class="w-11/12 xl:w-[38rem] mx-auto text-center">
                 <p class="font-bold italic text-xl">{birthyear + deathyear}</p>
-                <img class="inline-block w-12 mt-1" src={`/flags/${nationality}.png`} alt={nationality} draggable={draggable} />
+                <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/flags/${nationality}.png`} alt={nationality} draggable={draggable} />
                 <p class="font-bold text-lg mb-2">
                   {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                 </p>

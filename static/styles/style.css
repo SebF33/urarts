@@ -556,11 +556,15 @@ h1 {
 .appear-effect-fast-fadein {
     opacity: 0;
     animation: fast-fadeIn 0.8s ease-out forwards;
+    /* éviter le flash */
+    animation-delay: 0.1s;
 }
 
 .appear-effect-very-fast-fadein {
     opacity: 0;
     animation: very-fast-fadeIn 0.4s ease-out forwards;
+    /* éviter le flash */
+    animation-delay: 0.1s;
 }
 
 .appear-effect-fast-fadein img,
