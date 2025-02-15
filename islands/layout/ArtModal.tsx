@@ -1,6 +1,6 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { artModalOpenSignal } from "@utils/signals.ts";
-import { BG_STYLE, DELAY_MODAL_CLOSE } from "@utils/constants.ts";
+import { BG_STYLE, DELAY_MODAL_CLOSE, TALENTS } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
@@ -185,16 +185,18 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 >
                   {(art.first_name ?? "") + " " + art.last_name}
                 </a>
-              </div>       
-              <div class="paper min-h-8 min-w-[100px] z-10 transform rotate-3">
-                <div class="top-tape"></div>
-                <a
-                  href={`/movement/${art.movement_slug}`}
-                  class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
-                >
-                  {art.movement}
-                </a>
               </div>
+              {!TALENTS.includes(art.artist_slug) && (
+                <div class="paper min-h-8 min-w-[100px] z-10 transform rotate-3">
+                  <div class="top-tape"></div>
+                  <a
+                    href={`/movement/${art.movement_slug}`}
+                    class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
+                  >
+                    {art.movement}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
