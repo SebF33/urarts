@@ -158,7 +158,7 @@ export default function ArtsLayout(
           >
             <div
               id={p.id}
-              class={`art-wrap-${p.polyptych}`}
+              class={`art-wrap-${p.polyptych} ${p.custom_css}`}
             >
               {p.polyptych > 3 &&
                 (

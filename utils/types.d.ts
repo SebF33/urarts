@@ -3,6 +3,7 @@ export type ArtCollection = {
   birthyear: string;
   color: string;
   copyright: number;
+  custom_css?: string;
   deathyear: string;
   first_name: string | null;
   font?: string;

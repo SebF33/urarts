@@ -78,6 +78,7 @@ export const handler = async (
       "polyptych", "frame",
       "url", "url_2", "url_3", "url_4", "url_5",
       "gap_1", "gap_2", "gap_3", "gap_4", "gap_5",
+      "custom_css",
       "color",
       "artist.slug as artist_slug",
       "copyright",

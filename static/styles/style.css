@@ -211,6 +211,10 @@ h1 {
 @media (min-width: 1024px) and (max-width: 1920px) {
 
     /* flex : flex-grow | flex-shrink | flex-basis */
+    .art-container:has(.art-wide) {
+        flex: 0 0 100% !important;
+    }
+
     .art-container:has(.art-frame-type--1) {
         flex: 0 0 90%;
     }

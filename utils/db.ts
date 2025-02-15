@@ -70,6 +70,7 @@ interface ArtTable {
   gap_3: string | null; // Décalage du panneau à droite du central
   gap_4: string | null; // Décalage du panneau à l'extrême gauche du central
   gap_5: string | null; // Décalage du panneau à l'extrême droite du central
+  custom_css: string | null; // Classe(s) pour CSS personnalisé (art-wide)
   info: string; // Informations sur l'œuvre d'art (fr)
   info_en: string; // Informations sur l'œuvre d'art (en)
   famous_order: number | null; // Numéro d'ordre de célébrité
