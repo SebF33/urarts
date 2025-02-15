@@ -1,6 +1,5 @@
 import { ArtistQuote } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
-import DOMPurify from "npm:isomorphic-dompurify";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -209,7 +208,10 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 <p class="font-bold text-lg mb-2">
                   {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                 </p>
-                <p class="relative text-[1.1rem] text-justify leading-[1.12rem] select-none z-10" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(info) }}></p>
+                <p
+                  class="relative text-[1.1rem] text-justify leading-[1.12rem] select-none z-10"
+                  dangerouslySetInnerHTML={{ __html: info }}
+                ></p>
               </div>
 
               {site && (
