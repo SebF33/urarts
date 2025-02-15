@@ -11,6 +11,10 @@ TO_DO_LIST.md
 /static/signs
 /static/symbols
 /static/textures
-/utils/db
+/utils/db/artist_art.ts
+/utils/db/country.ts
+/utils/db/fact.ts
+/utils/db/movement.ts
+/utils/db/topic.ts
 # Fresh build directory
 _fresh/
