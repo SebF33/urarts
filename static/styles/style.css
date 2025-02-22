@@ -54,7 +54,8 @@ body {
 
 .cursor-grab,
 .noUi-handle,
-.noUi-handle:hover {
+.noUi-handle:hover,
+.rolling-gallery-track {
     cursor: url(/cursors/cursor-grab.png), grab !important;
 }
 
@@ -1002,5 +1003,78 @@ h1 {
     100% {
         width: 100%;
         clip-path: polygon(0 50%, 100% 30%, 100% 70%, 0% 50%);
+    }
+}
+
+/* Galerie roulante
+   - React Bits : https://www.reactbits.dev/components/rolling-gallery
+*/
+.rolling-gallery-container {
+    position: relative;
+    width: 100%;
+}
+
+.rolling-gallery-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.rolling-gallery-track {
+    display: flex;
+    height: auto;
+    min-height: 200px;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    width: 100%;
+}
+
+.rolling-gallery-item {
+    position: absolute;
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    padding: 8%;
+    /* backface-visibility: hidden; */
+}
+
+.rolling-gallery-img {
+    height: 120px;
+    width: 300px;
+    border: none;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .rolling-gallery-item {
+        padding: 6%;
+    }
+
+    .rolling-gallery-img {
+        height: 100px;
+        width: 220px;
+    }
+}
+
+@media (max-width: 440px) {
+    .rolling-gallery-container {
+        overflow: hidden;
+    }
+
+    .rolling-gallery-item {
+        padding: 10%;
+    }
+
+    .rolling-gallery-img {
+        height: 80px;
+        width: 140px;
     }
 }

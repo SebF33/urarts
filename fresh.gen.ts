@@ -32,6 +32,7 @@ import * as $MovementsList from "./islands/MovementsList.tsx";
 import * as $Note from "./islands/Note.tsx";
 import * as $Preview from "./islands/Preview.tsx";
 import * as $Quote from "./islands/Quote.tsx";
+import * as $RollingGallery from "./islands/RollingGallery.tsx";
 import * as $TalentsList from "./islands/TalentsList.tsx";
 import * as $Title from "./islands/Title.tsx";
 import * as $ToBottomButton from "./islands/ToBottomButton.tsx";
@@ -88,6 +89,7 @@ const manifest = {
     "./islands/Note.tsx": $Note,
     "./islands/Preview.tsx": $Preview,
     "./islands/Quote.tsx": $Quote,
+    "./islands/RollingGallery.tsx": $RollingGallery,
     "./islands/TalentsList.tsx": $TalentsList,
     "./islands/Title.tsx": $Title,
     "./islands/ToBottomButton.tsx": $ToBottomButton,
