@@ -54,7 +54,11 @@ export default function ArtsLayout(
       .slice()
       .sort(() => Math.random() - 0.5)
       .slice(0, 10)
-      .map(item => item.url);
+      .map(item => ({
+        artist_slug: item.artist_slug,
+        id: item.id,
+        url: item.url
+      }));
   }, [props.arts]);
   
   const draggable = false;
@@ -392,7 +396,7 @@ export default function ArtsLayout(
                 (
                   <div class="frame-label flex mx-3">
                     <div
-                      class={`paper transform-gpu appear-effect-very-fast-fadein min-h-[30px] md:min-h-[40px] min-w-[180px] mx-auto`}
+                      class={`paper paper-shadow transform-gpu appear-effect-very-fast-fadein min-h-[30px] md:min-h-[40px] min-w-[180px] mx-auto`}
                     >
                       <div class="top-tape"></div>
                       <p
@@ -407,7 +411,7 @@ export default function ArtsLayout(
             </div>
           ))
         ) : ( // Pas de résultats
-          <div class="paper transform-gpu appear-effect-fast-fadein min-h-[70px] max-w-[360px] mx-auto my-2">
+          <div class="paper paper-shadow transform-gpu appear-effect-fast-fadein min-h-[70px] max-w-[360px] mx-auto my-2">
             <div class="tape-section"></div>
             <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
               {i18next.t("common.no_results", { ns: "translation" })}
