@@ -132,183 +132,183 @@ export const FAMOUS_ART_IMG_WRAPPER: Record<string, Any> = {
 
 export const BG_STYLE: Record<string, { background: string; backgroundSize: string }> = {
   abstractart: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/abstractart.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/abstractart.png)`,
     backgroundSize: "570px",
   },
   academicart: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/academicart.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/academicart.png)`,
     backgroundSize: "710px",
   },
   americanrealism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/americanrealism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/americanrealism.png)`,
     backgroundSize: "750px",
   },
   analyticalrealism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/analyticalrealism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/analyticalrealism.png)`,
     backgroundSize: "840px",
   },
   artdeco: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/artdeco.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/artdeco.png)`,
     backgroundSize: "900px",
   },
   artnouveau: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/artnouveau.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/artnouveau.png)`,
     backgroundSize: "360px",
   },
   baroque: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/baroque.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/baroque.png)`,
     backgroundSize: "600px",
   },
   classicism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/classicism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/classicism.png)`,
     backgroundSize: "610px",
   },
   cloisonnism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/cloisonnism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/cloisonnism.png)`,
     backgroundSize: "620px",
   },
   conceptualart: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/conceptualart.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/conceptualart.png)`,
     backgroundSize: "400px",
   },
   cubism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/cubism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/cubism.png)`,
     backgroundSize: "400px",
   },
   dadaism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/dadaism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/dadaism.png)`,
     backgroundSize: "450px",
   },
   earlyrenaissance: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/earlyrenaissance.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/earlyrenaissance.png)`,
     backgroundSize: "720px",
   },
   expressionnism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/expressionnism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionnism.png)`,
     backgroundSize: "610px",
   },
   fauvism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/fauvism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/fauvism.png)`,
     backgroundSize: "480px",
   },
   futurism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/futurism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/futurism.png)`,
     backgroundSize: "570px",
   },
   highrenaissance: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/highrenaissance.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/highrenaissance.png)`,
     backgroundSize: "750px",
   },
   impressionnism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/impressionnism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/impressionnism.png)`,
     backgroundSize: "600px",
   },
   intimism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/intimism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/intimism.png)`,
     backgroundSize: "610px",
   },
   italianrenaissance: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/italianrenaissance.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/italianrenaissance.png)`,
     backgroundSize: "780px",
   },
   japonism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/japonism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/japonism.png)`,
     backgroundSize: "850px",
   },
   kitsch: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/kitsch.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/kitsch.png)`,
     backgroundSize: "470px",
   },
   magicalrealism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/magicalrealism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/magicalrealism.png)`,
     backgroundSize: "560px",
   },
   mannerism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/mannerism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/mannerism.png)`,
     backgroundSize: "290px",
   },
   naiveart: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/naiveart.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/naiveart.png)`,
     backgroundSize: "470px",
   },
   neoclassicism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/neoclassicism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/neoclassicism.png)`,
     backgroundSize: "770px",
   },
   neoimpressionnism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/neoimpressionnism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/neoimpressionnism.png)`,
     backgroundSize: "570px",
   },
   neoplasticism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/neoplasticism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/neoplasticism.png)`,
     backgroundSize: "1000px",
   },
   northernrenaissance: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/northernrenaissance.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/northernrenaissance.png)`,
     backgroundSize: "880px",
   },
   orientalism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/orientalism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/orientalism.png)`,
     backgroundSize: "560px",
   },
   orphism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/orphism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/orphism.png)`,
     backgroundSize: "580px",
   },
   postimpressionnism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/postimpressionnism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionnism.png)`,
     backgroundSize: "540px",
   },
   preraphaelitism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/preraphaelitism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/preraphaelitism.png)`,
     backgroundSize: "580px",
   },
   qingdynasty: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/qingdynasty.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/qingdynasty.png)`,
     backgroundSize: "500px",
   },
   realism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/realism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/realism.png)`,
     backgroundSize: "900px",
   },
   regionalism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/regionalism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/regionalism.png)`,
     backgroundSize: "720px",
   },
   rococo: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/rococo.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/rococo.png)`,
     backgroundSize: "840px",
   },
   romanticism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/romanticism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/romanticism.png)`,
     backgroundSize: "460px",
   },
   streetart: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/streetart.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/streetart.png)`,
     backgroundSize: "650px",
   },
   suprematism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/suprematism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/suprematism.png)`,
     backgroundSize: "700px",
   },
   surrealism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/surrealism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/surrealism.png)`,
     backgroundSize: "420px",
   },
   symbolism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/symbolism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/symbolism.png)`,
     backgroundSize: "240px",
   },
   synthetism: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/synthetism.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/synthetism.png)`,
     backgroundSize: "550px",
   },
   ukiyoe: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/ukiyoe.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/ukiyoe.png)`,
     backgroundSize: "420px",
   },
   unclassified: {
-    background: `${colorScheme[currentColorScheme].white} url(../textures/default.png)`,
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`,
     backgroundSize: "480px",
   },
 };

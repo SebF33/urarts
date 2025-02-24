@@ -93,7 +93,7 @@ export default function Quote(
         <div
           ref={quoteRef}
           data-quote-id={props.data.id}
-          class={`paper w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible appear-effect-y-14px transition-all duration-500 ease-in-out`}
+          class={`paper paper-shadow w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible appear-effect-y-14px transition-all duration-500 ease-in-out`}
         >
           <div class="top-tape"></div>
           <div

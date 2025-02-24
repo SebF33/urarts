@@ -159,6 +159,7 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
       </main>
 
       <WaterDrop
+        backgroundColor="gray"
         color={colorScheme[currentColorScheme].lighterdark}
         isDropy
         pencilColor={colorScheme[currentColorScheme].lighterdark}

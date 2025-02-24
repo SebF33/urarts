@@ -141,8 +141,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-white overflow-y-auto custom-scrollbar
-        art-modal-container ${isVisible ? "visible" : ""}`}
+        class={`art-modal-container relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""}`}
         style={BG_STYLE[art.movement_slug]}
       >
         <button
@@ -177,7 +176,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <h2 class="text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
             <div class="flex gap-4 mb-4">
-              <div class="paper min-h-8 min-w-[100px] z-10 transform -rotate-2">
+              <div class="paper paper-shadow min-h-8 min-w-[100px] z-10 transform -rotate-2">
                 <div class="top-tape"></div>
                 <a
                   href={`/art/${art.artist_slug}`}
@@ -187,7 +186,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 </a>
               </div>
               {!TALENTS.includes(art.artist_slug) && (
-                <div class="paper min-h-8 min-w-[100px] z-10 transform rotate-3">
+                <div class="paper paper-shadow min-h-8 min-w-[100px] z-10 transform rotate-3">
                   <div class="top-tape"></div>
                   <a
                     href={`/movement/${art.movement_slug}`}

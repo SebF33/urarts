@@ -264,7 +264,12 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
         </div>
       </main>
 
-      <WaterDrop color={color} isDropy pencilColor={secondaryColor} />
+      <WaterDrop
+        backgroundColor="gray"
+        color={color}
+        isDropy
+        pencilColor={secondaryColor}
+      />
       <Footer color={color} />
     </>
   );

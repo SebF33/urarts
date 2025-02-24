@@ -648,6 +648,10 @@ h1 {
     background: linear-gradient(var(--transparent), 50%, var(--color-gray), 51%, var(--transparent)), linear-gradient(to right, var(--transparent), 50%, var(--color-gray), 51%, var(--transparent));
 }
 
+.paper-shadow {
+    box-shadow: var(--shadow-size) var(--shadow-size) 2px #6c777c !important;
+}
+
 .tape-section {
     position: absolute;
     width: 100%;
@@ -1050,7 +1054,6 @@ h1 {
     object-fit: cover;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
     transition: 0.3s ease;
-    pointer-events: none;
 }
 
 @media (max-width: 768px) {

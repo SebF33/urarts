@@ -73,7 +73,7 @@ export default function CollectionSearch(props: Props) {
     const styleForSlug = BG_STYLE[props.myslug];
 
     if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
     }
   
     if (main && styleForSlug) {
@@ -85,7 +85,7 @@ export default function CollectionSearch(props: Props) {
       main.style.backgroundSize = backgroundSize;
     } else if (main) {
       // Fallback si non défini dans BG_STYLE
-      main.style.background = `${colorScheme[currentColorScheme].white} url(../textures/default.png)`;
+      main.style.background = `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`;
       main.style.backgroundAttachment = "local";
       main.style.backgroundPosition = "center";
       main.style.backgroundSize = "480px";
@@ -99,7 +99,7 @@ export default function CollectionSearch(props: Props) {
     {!props.query?.alone &&
       (
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3`}>
-          <div class="paper max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
+          <div class="paper paper-shadow max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
           <div class="top-tape max-h-2.5"></div>
             <h2 class={`text-lg font-medium text-lighterdark`}>
               {i18next.t("paper.name", { ns: "translation" })}
