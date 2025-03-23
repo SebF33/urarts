@@ -394,6 +394,14 @@ h1 {
     margin-left: 0.6vw;
 }
 
+/* fix basses résolutions */
+.art-frame-type-2.art-polyptych-3 img {
+    /* supprimer la marge du bas.. */
+    height: 100%;
+    /* ..sans déformation de l'image */
+    object-fit: cover;
+}
+
 .art-polyptych-5 {
     margin-right: 0.3vw;
     margin-left: 0.3vw;
