@@ -402,6 +402,17 @@ h1 {
     object-fit: cover;
 }
 
+/* hauteur explicite nécessaire pour Safari */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .art-frame-type-2.art-polyptych-3 {
+            height: 30vh;
+        }
+    }
+}
+
+/**************************/
+
 .art-polyptych-5 {
     margin-right: 0.3vw;
     margin-left: 0.3vw;
