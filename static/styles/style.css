@@ -397,18 +397,11 @@ h1 {
 /* fix basses résolutions */
 .art-frame-type-2.art-polyptych-3 img {
     /* supprimer la marge du bas.. */
-    height: 100%;
+    /* ("min-height" et non "height" pour Safari) */
+    min-height: 100%;
+    width: 100%;
     /* ..sans déformation de l'image */
     object-fit: cover;
-}
-
-/* hauteur explicite nécessaire pour Safari */
-@media not all and (min-resolution:.001dpcm) {
-    @supports (-webkit-appearance:none) {
-        .art-frame-type-2.art-polyptych-3 {
-            height: 30vh;
-        }
-    }
 }
 
 /**************************/
