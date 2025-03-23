@@ -19,9 +19,11 @@ export default function Note() {
     <div class="paper max-w-[700px] mx-auto mt-12 md:mt-2 mb-2">
       <div class="tape-section"></div>
       <div class="flex flex-col w-full p-6 font-medium">
-        <p class="mb-4 text-xl md:text-2xl leading-6 z-10 select-none">
-          {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
-          <div class="appear-effect-very-fast-fadein inline-block">
+        <div class="flex items-center mb-4 z-10 select-none">
+          <p class="text-xl leading-6 md:text-2xl">
+            {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
+          </p>
+          <div class="appear-effect-very-fast-fadein inline-block ml-3">
             <button
               onClick={() => handleLanguage("en")}
               class="inline-block flex items-center focus:outline-none"
@@ -46,7 +48,7 @@ export default function Note() {
               />
             </button>
           </div>
-        </p>
+        </div>
         <div dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}/>
         <a
           href="https://fresh.deno.dev"
