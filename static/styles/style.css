@@ -1068,6 +1068,10 @@ h1 {
     transition: 0.3s ease;
 }
 
+.rolling-gallery-histocharacters-img {
+    object-position: top;
+}
+
 @media (max-width: 768px) {
     .rolling-gallery-item {
         padding: 6%;

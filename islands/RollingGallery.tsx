@@ -20,6 +20,7 @@ export default function RollingGallery(
     readonly autoplay: boolean;
     readonly images: GalleryImage[];
     readonly pauseOnHover: boolean;
+    readonly type: string;
   },
 ) {
   const innerWidth = 768;
@@ -151,7 +152,10 @@ export default function RollingGallery(
               >
                 <img loading="lazy"
                   src={p.url}
-                  class="rolling-gallery-img transform-gpu will-change-transform"
+                  class={
+                    "rolling-gallery-img transform-gpu will-change-transform" +
+                    (props.type === "histocharacters" ? " rolling-gallery-histocharacters-img" : "")
+                  }
                   alt="Urarts"
                   draggable={draggable}
                 />

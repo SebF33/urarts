@@ -169,6 +169,7 @@ export default function ArtsLayout(
               autoplay={true}
               images={galleryImages}
               pauseOnHover={true}
+              type={props.type}
             />
         ) : null}
       </div>
