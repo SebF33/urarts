@@ -980,6 +980,9 @@ h1 {
     transform: translateY(-16px);
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
+    -webkit-overflow-scrolling: touch;
+    touch-action: auto;
+    pointer-events: auto;
 }
 
 .art-modal-container.visible {
