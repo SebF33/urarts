@@ -1,7 +1,7 @@
 import { Any } from "any";
 import { artistsYearsSignal, histocharactersYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { css } from "@twind/core";
-import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER } from "@utils/constants.ts";
+import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER, DELAY_LEONARDO_FIRST_CALL } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -38,94 +38,104 @@ export default function Nav(props: Props) {
   // Leonardo
   const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
   const leonardoStatus = localStorage.getItem('leonardo');
+
   useEffect(() => {
     const ref = document.querySelector<HTMLAnchorElement>("#U-Icon");
+    if (!ref) return;
+    
+    const leonardoTooltip = tippy(ref, {
+      allowHTML: true,
+      appendTo: () => document.body,
+      arrow: false,
+      duration: [600, 300],
+      content:
+        `<img id="leonardoAvatar" class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" loading="lazy" draggable=${draggable}/>
+        <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
+        <div class="absolute top-[-0.62rem] left-[-0.38rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
+        <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5 select-none">...</div>`,
+      hideOnClick: "false",
+      interactive: true,
+      maxWidth: 900,
+      offset: [-220, 12],
+      placement: "bottom-start",
+      role: "leonardo",
+      theme: "leonardo",
+      trigger: "manual",
+    });
 
-    if (ref) {
-      const leonardoTooltip = tippy(ref, {
-        allowHTML: true,
-        appendTo: () => document.body,
-        arrow: false,
-        duration: [600, 300],
-        content:
-          `<img id="leonardoAvatar" class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/leonardo.png" alt="Leonardo" loading="lazy" draggable=${draggable}/>
-          <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
-          <div class="absolute top-[-0.62rem] left-[-0.38rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
-          <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5 select-none">...</div>`,
-        hideOnClick: "false",
-        interactive: true,
-        maxWidth: 900,
-        offset: [-220, 12],
-        placement: "bottom-start",
-        role: "leonardo",
-        theme: "leonardo",
-        trigger: "manual",
-      });
+    // Retarde l'apparition au chargement
+    const firstShowTimer = setTimeout(() => {
+      if (localStorage.getItem('leonardo') !== 'inactive') {
+        leonardoTooltip.show();
+        setLeonardoActiveContent(true);
+      }
+    }, DELAY_LEONARDO_FIRST_CALL);
 
-      leonardoTooltip.show();
+    // Yeux Leonardo
+    const eyes = document.querySelectorAll<HTMLElement>(".eye");
+    const maxShutDelay = 7000;
+    const minShutDelay = 1000;
 
-      // Yeux Leonardo
-      const eyes = document.querySelectorAll<HTMLElement>(".eye");
-      const maxShutDelay = 7000;
-      const minShutDelay = 1000;
+    eyes.forEach((eye) => {
+      const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+      if (eyeshut) {
+        eye.addEventListener("mouseover", () => {
+          eyeshut.style.height = "100%";
+        });
+        eye.addEventListener("mouseout", () => {
+          eyeshut.style.height = "0%";
+        });
+      }
+    });
 
+    function animateEyeShut() {
+      const randomDelay = Math.floor(Math.random() * (maxShutDelay - minShutDelay + 1)) + minShutDelay;
       eyes.forEach((eye) => {
         const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
         if (eyeshut) {
-          eye.addEventListener("mouseover", () => {
+          const delayedFunction = () => {
             eyeshut.style.height = "100%";
-          });
-          eye.addEventListener("mouseout", () => {
-            eyeshut.style.height = "0%";
-          });
+            setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
+          };
+          setTimeout(delayedFunction, randomDelay);
         }
       });
-
-      function animateEyeShut() {
-        const randomDelay = Math.floor(Math.random() * (maxShutDelay - minShutDelay + 1)) + minShutDelay;
-        eyes.forEach((eye) => {
-          const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
-          if (eyeshut) {
-            const delayedFunction = () => {
-              eyeshut.style.height = "100%";
-              setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
-            };
-            setTimeout(delayedFunction, randomDelay);
-          }
-        });
-      }
-      animateEyeShut();
-      setInterval(() => { animateEyeShut(); }, maxShutDelay);
-
-      eyes.forEach((eye) => {
-        eye.onclick = () => {
-          leonardoTooltip.hide();
-          localStorage.setItem('leonardo', 'inactive');
-          setLeonardoActiveContent(false);
-        };
-      });
-
-      const leftEyeball = document.querySelector<HTMLElement>(".left-eyeball");
-      const rightEyeball = document.querySelector<HTMLElement>(".right-eyeball");
-      document.onmousemove = (event: MouseEvent) => {
-        if (leftEyeball) {
-          const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
-          const y = Math.max(5, (event.clientY * 100) / window.innerHeight) + "%";
-          //console.log("leftEyeball : " + x, y);
-          leftEyeball.style.left = x;
-          leftEyeball.style.top = y;
-        }
-        if (rightEyeball) {
-          const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
-          const y = Math.min(80, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
-          //console.log("rightEyeball : " + x, y);
-          rightEyeball.style.left = x;
-          rightEyeball.style.top = y;
-        }
-      };
-
-      if (leonardoStatus === 'inactive') { leonardoTooltip.hide(); }
     }
+    animateEyeShut();
+    setInterval(() => { animateEyeShut(); }, maxShutDelay);
+
+    eyes.forEach((eye) => {
+      eye.onclick = () => {
+        leonardoTooltip.hide();
+        localStorage.setItem('leonardo', 'inactive');
+        setLeonardoActiveContent(false);
+      };
+    });
+
+    const leftEyeball = document.querySelector<HTMLElement>(".left-eyeball");
+    const rightEyeball = document.querySelector<HTMLElement>(".right-eyeball");
+    document.onmousemove = (event: MouseEvent) => {
+      if (leftEyeball) {
+        const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
+        const y = Math.max(5, (event.clientY * 100) / window.innerHeight) + "%";
+        //console.log("leftEyeball : " + x, y);
+        leftEyeball.style.left = x;
+        leftEyeball.style.top = y;
+      }
+      if (rightEyeball) {
+        const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
+        const y = Math.min(80, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
+        //console.log("rightEyeball : " + x, y);
+        rightEyeball.style.left = x;
+        rightEyeball.style.top = y;
+      }
+    };
+
+    if (leonardoStatus === 'inactive') { leonardoTooltip.hide(); }
+
+    return () => {
+      clearTimeout(firstShowTimer);
+    };
   }, []);
 
 
