@@ -5098,7 +5098,7 @@ export function PaintPalette() {
           style="overflow:visible;user-select:none"
           width="137"
           height="112"
-          xlink:href="/wood-engraving.png"
+          xlink:href="/textures/wood-engraving.png"
           transform="matrix(1 0 0 1 252.9052 81.0932)"
         >
         </image>

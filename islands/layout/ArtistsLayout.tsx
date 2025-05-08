@@ -227,7 +227,7 @@ export default function ArtistsLayout(
                     >
                       <img
                         style={{ ...ARTIST_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                        src="/placeholder_150.png"
+                        src="/textures/placeholder_150.png"
                         alt="placeholder_150"
                       />
                       <img

@@ -251,8 +251,8 @@ h1 {
 }
 
 .art-frame-type-0 img {
-    -webkit-mask-image: url(../mural-mask.png);
-    mask-image: url(../mural-mask.png);
+    -webkit-mask-image: url(../textures/mural-mask.png);
+    mask-image: url(../textures/mural-mask.png);
     -webkit-mask-size: cover;
     mask-size: cover;
 }
@@ -525,7 +525,7 @@ h1 {
 /* Input */
 .brush-input-box {
     border-width: 18px 18px 18px 18px;
-    border-image: url(../brush-input-box.png) 19 round;
+    border-image: url(../textures/brush-input-box.png) 19 round;
 }
 
 /* Ombres */
@@ -857,7 +857,7 @@ h1 {
     content: '';
     height: 100%;
     width: 100%;
-    background-image: url(../liquid-mask-before.png);
+    background-image: url(../textures/liquid-mask-before.png);
     background-size: 100% 100%;
     background-position: 50% 50%;
 }
@@ -869,7 +869,7 @@ h1 {
     content: '';
     height: 100%;
     width: 4000%;
-    background-image: url(../liquid-mask-after.png);
+    background-image: url(../textures/liquid-mask-after.png);
     background-size: 100% 100%;
     transform: translateX(-1.25%);
 }
