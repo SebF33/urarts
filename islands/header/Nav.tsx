@@ -39,10 +39,14 @@ export default function Nav(props: Props) {
   const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
   const leonardoStatus = localStorage.getItem('leonardo');
 
+  // Activation/désactivation de Leonardo
   useEffect(() => {
     const ref = document.querySelector<HTMLAnchorElement>("#U-Icon");
     if (!ref) return;
     
+    let shutInterval: number;
+    let mousemoveHandler: (e: MouseEvent) => void;
+
     const leonardoTooltip = tippy(ref, {
       allowHTML: true,
       appendTo: () => document.body,
@@ -61,75 +65,71 @@ export default function Nav(props: Props) {
       role: "leonardo",
       theme: "leonardo",
       trigger: "manual",
+      // à chaque ouverture
+      onShow(instance) {
+        const tooltipEl = instance.popper;
+        // yeux de Leonardo
+        const eyes = tooltipEl.querySelectorAll<HTMLElement>(".eye");
+        const maxShutDelay = 7000;
+        const minShutDelay = 1000;
+        // événements hover & click sur chaque œil
+        eyes.forEach((eye) => {
+          const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+          if (!eyeshut) return;
+          eye.addEventListener("mouseover", () => eyeshut.style.height = "100%");
+          eye.addEventListener("mouseout",  () => eyeshut.style.height = "0%");
+          eye.addEventListener("click",     () => {
+            instance.hide();
+            localStorage.setItem("leonardo", "inactive");
+            setLeonardoActiveContent(false);
+          });
+        });
+        // animation de clignement aléatoire
+        function animateEyeShut() {
+          const delay = Math.random() * (maxShutDelay - minShutDelay) + minShutDelay;
+          eyes.forEach((eye) => {
+            const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+            if (!eyeshut) return;
+            setTimeout(() => {
+              eyeshut.style.height = "100%";
+              setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
+            }, delay);
+          });
+        }
+        animateEyeShut();
+        shutInterval = window.setInterval(animateEyeShut, maxShutDelay);
+        // suivi du regard
+        mousemoveHandler = (e) => {
+          const xPct = (e.clientX * 100) / window.innerWidth;
+          const yPct = (e.clientY * 100) / window.innerHeight;
+          eyes.forEach((eye, i) => {
+            const eyeball = eye.querySelector<HTMLElement>(".eyeball");
+            if (!eyeball) return;
+            // calculs pour chaque œil
+            const x = Math.max(50, xPct) + "%";
+            const y = i === 0
+              ? Math.max(5, yPct) + "%"
+              : Math.min(80, Math.max(20, yPct)) + "%";
+            eyeball.style.left = x;
+            eyeball.style.top  = y;
+          });
+        };
+        document.addEventListener("mousemove", mousemoveHandler);
+      },
+      // à chaque fermeture
+      onHide() {
+        clearInterval(shutInterval);
+        document.removeEventListener("mousemove", mousemoveHandler);
+      }
     });
 
-    // Retarde l'apparition au chargement
+    // retarde l'apparition au chargement de la page
     const firstShowTimer = setTimeout(() => {
       if (localStorage.getItem('leonardo') !== 'inactive') {
         leonardoTooltip.show();
         setLeonardoActiveContent(true);
       }
     }, DELAY_LEONARDO_FIRST_CALL);
-
-    // Yeux Leonardo
-    const eyes = document.querySelectorAll<HTMLElement>(".eye");
-    const maxShutDelay = 7000;
-    const minShutDelay = 1000;
-
-    eyes.forEach((eye) => {
-      const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
-      if (eyeshut) {
-        eye.addEventListener("mouseover", () => {
-          eyeshut.style.height = "100%";
-        });
-        eye.addEventListener("mouseout", () => {
-          eyeshut.style.height = "0%";
-        });
-      }
-    });
-
-    function animateEyeShut() {
-      const randomDelay = Math.floor(Math.random() * (maxShutDelay - minShutDelay + 1)) + minShutDelay;
-      eyes.forEach((eye) => {
-        const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
-        if (eyeshut) {
-          const delayedFunction = () => {
-            eyeshut.style.height = "100%";
-            setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
-          };
-          setTimeout(delayedFunction, randomDelay);
-        }
-      });
-    }
-    animateEyeShut();
-    setInterval(() => { animateEyeShut(); }, maxShutDelay);
-
-    eyes.forEach((eye) => {
-      eye.onclick = () => {
-        leonardoTooltip.hide();
-        localStorage.setItem('leonardo', 'inactive');
-        setLeonardoActiveContent(false);
-      };
-    });
-
-    const leftEyeball = document.querySelector<HTMLElement>(".left-eyeball");
-    const rightEyeball = document.querySelector<HTMLElement>(".right-eyeball");
-    document.onmousemove = (event: MouseEvent) => {
-      if (leftEyeball) {
-        const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
-        const y = Math.max(5, (event.clientY * 100) / window.innerHeight) + "%";
-        //console.log("leftEyeball : " + x, y);
-        leftEyeball.style.left = x;
-        leftEyeball.style.top = y;
-      }
-      if (rightEyeball) {
-        const x = Math.max(50, (event.clientX * 100) / window.innerWidth) + "%";
-        const y = Math.min(80, Math.max(20, (event.clientY * 100) / window.innerHeight)) + "%";
-        //console.log("rightEyeball : " + x, y);
-        rightEyeball.style.left = x;
-        rightEyeball.style.top = y;
-      }
-    };
 
     if (leonardoStatus === 'inactive') { leonardoTooltip.hide(); }
 
