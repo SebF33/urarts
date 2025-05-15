@@ -70,9 +70,12 @@ const translation = {
     nationality_period:
       "Choose a nationality and the period of existence of the artist(s) sought.",
     nav_theme: "to change the navigation bar theme.",
+    nav_worldmap: "to travel through Art...",
     new_artists: "Discover the latest artists added:",
-    new_public_domain_artists: "Check out the artists in the public domain this year:",
+    new_public_domain_artists:
+      "Check out the artists in the public domain this year:",
     off: "Click the icon or my eyes to mute me.",
+    or_click: "...or click",
     page_about:
       `<h2>You are on the <span class="underline">about page</span> of the Urarts website.</h2>`,
     page_about_msg:
@@ -86,7 +89,7 @@ const translation = {
     page_histocharacters_msg:
       `<p class="text-[1rem] leading-none mt-3">Choose the period of the character(s) sought.</p>`,
     page_home_msg:
-      `<p class="text-[1rem] leading-none">Click on the portrait of an artist to access their artwork.</p>`,
+      `<p class="text-[1rem] leading-none">Click on the portrait of an artist to access their artwork...</p>`,
     page_home_msg_2: "The artwork of the moment is entitled",
     page_indicators:
       `<h2>You are on the <span class="underline">indicators page</span> of the Urarts site.</h2>`,
@@ -100,6 +103,10 @@ const translation = {
       `<h2>You are on the <span class="underline">women artists page</span>.</h2>`,
     page_women_msg:
       `<p class="text-[1rem] leading-none mt-1">Click on the portrait of an artist to access her artwork.</p>`,
+    page_worldmap:
+      `<h2>I drew you a <span class="underline">world map</span>.</h2>`,
+    page_worldmap_msg:
+      `<p class="text-[1rem] leading-none mt-3">Click on the countries to travel through the Art of each culture.</p>`,
     redirect:
       `<p class="text-[1rem] leading-none">Please redirect to <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> to take full advantage of my features.</p>`,
     search_among: "Do your search among",
@@ -161,6 +168,10 @@ const translation = {
       desc: "Women artists.",
       title: "Urarts - Women Artists",
     },
+    worldmap: {
+      desc: "The world map.",
+      title: "Urarts - World Map",
+    },
   },
   modal: {
     description: "Description:",
@@ -201,6 +212,14 @@ const translation = {
     movements: "Movements",
     talents: "Talents",
     women: "Women artists",
+    worldmap: "World map",
+  },
+  worldmap: {
+    artists: "Artists",
+    discover: "Discover",
+    no_artist: "No artists found.",
+    no_artwork: "No artworks found.",
+    representations: "Representations",
   },
 } as const;
 

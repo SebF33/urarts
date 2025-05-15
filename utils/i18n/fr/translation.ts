@@ -53,7 +53,7 @@ const translation = {
     discover: "Découvrez",
     discover_artist: "Découvrez l’artiste",
     discover_arts: "Découvrez les autres œuvres du même artiste",
-    error: "Erreur de l'API Leonardo.",
+    error: "Erreur de l’API Leonardo.",
     fact: "Le saviez-vous ?",
     for: "pour",
     from: "de",
@@ -70,9 +70,12 @@ const translation = {
     nationality_period:
       "Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).",
     nav_theme: "pour changer le thème de la barre de navigation.",
+    nav_worldmap: "pour voyager à travers l’Art...",
     new_artists: "Découvrez les derniers artistes ajoutés :",
-    new_public_domain_artists: "Découvrez les artistes dans le domaine public cette année :",
+    new_public_domain_artists:
+      "Découvrez les artistes dans le domaine public cette année :",
     off: "Cliquez sur l’icône ou sur mes yeux pour me désactiver.",
+    or_click: "...ou cliquez",
     page_about:
       `<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>`,
     page_about_msg:
@@ -86,7 +89,7 @@ const translation = {
     page_histocharacters_msg:
       `<p class="text-[1rem] leading-none mt-3">Choisissez la période du ou des personnage(s) recherché(s).</p>`,
     page_home_msg:
-      `<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres.</p>`,
+      `<p class="text-[1rem] leading-none">Cliquez sur le portrait d’un(e) artiste pour accéder à ses œuvres...</p>`,
     page_home_msg_2: "L’œuvre du moment s’intitule",
     page_indicators:
       `<h2>Vous êtes sur la <span class="underline">page des indicateurs</span> du site Urarts.</h2>`,
@@ -100,6 +103,10 @@ const translation = {
       `<h2>Vous êtes sur la <span class="underline">page des femmes artistes</span>.</h2>`,
     page_women_msg:
       `<p class="text-[1rem] leading-none mt-1">Cliquez sur le portrait d’une artiste pour accéder à ses œuvres.</p>`,
+    page_worldmap:
+      `<h2>Je vous ai dessiné une <span class="underline">carte du Monde</span>.</h2>`,
+    page_worldmap_msg:
+      `<p class="text-[1rem] leading-none mt-3">Cliquez sur les pays pour voyager à travers l’Art de chaque culture.</p>`,
     redirect:
       `<p class="text-[1rem] leading-none">Veuillez vous rediriger sur <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> pour profiter pleinement de mes fonctionnalités.</p>`,
     search_among: "Faites votre recherche parmi",
@@ -108,13 +115,13 @@ const translation = {
   },
   logo: {
     msg:
-      `<p><strong style="font-size:1.3em;text-decoration:underline">Politique de droit d'auteur :</strong></p>
-    <p style="margin-top:6px;line-height:1.1">Urarts montre des œuvres d'art du domaine public et tente d'obtenir l'autorisation pour celles protégées par le droit d'auteur.<br>
-    Le but de ce site est d'utiliser ces œuvres historiques à des fins d'information et d'éducation.<br>
+      `<p><strong style="font-size:1.3em;text-decoration:underline">Politique de droit d’auteur :</strong></p>
+    <p style="margin-top:6px;line-height:1.1">Urarts montre des œuvres d’art du domaine public et tente d’obtenir l’autorisation pour celles protégées par le droit d’auteur.<br>
+    Le but de ce site est d’utiliser ces œuvres historiques à des fins d’information et d’éducation.<br>
     Les visuels sont des images à faible résolution non adaptées à un usage commercial.</p>
     <p style="margin-top:8px;line-height:1.1">Veuillez vous adresser au créateur du site via son adresse email
     <a href="mailto:sebastien.flouriot@urarts.art" style="text-decoration:underline">sebastien.flouriot@urarts.art</a>
-    en cas de demande ou de litige liés à l'exploitation de ces visuels.</p>`,
+    en cas de demande ou de litige liés à l’exploitation de ces visuels.</p>`,
   },
   meta: {
     about: {
@@ -142,7 +149,7 @@ const translation = {
       title: "Urarts - Personnages historiques",
     },
     home: {
-      desc: "Quelles sont les plus belles œuvres d'art au monde ?",
+      desc: "Quelles sont les plus belles œuvres d’art au monde ?",
       title: "Urarts - Accueil",
     },
     indicators: {
@@ -160,6 +167,10 @@ const translation = {
     women: {
       desc: "Les femmes artistes.",
       title: "Urarts - Femmes artistes",
+    },
+    worldmap: {
+      desc: "La carte du Monde.",
+      title: "Urarts - Carte du Monde",
     },
   },
   modal: {
@@ -201,6 +212,14 @@ const translation = {
     movements: "Mouvements",
     talents: "Talents",
     women: "Femmes artistes",
+    worldmap: "Carte du Monde",
+  },
+  worldmap: {
+    artists: "Artistes",
+    discover: "Découvrir",
+    no_artist: "Aucun artiste trouvé.",
+    no_artwork: "Aucune œuvre trouvée.",
+    representations: "Représentations",
   },
 } as const;
 
