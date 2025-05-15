@@ -1,5 +1,5 @@
-/* 🎨 Palette Everblush
-      https://github.com/Everblush/everblush
+/* 🎨 Palette Everblush — https://github.com/Everblush/everblush
+      + extras
 */
 :root {
     --color-dark: #141b1e;
@@ -16,6 +16,7 @@
     --tape-edge-gray: #b7b49d;
     --tape-gray: #dbd8be;
     --transparent: rgba(213, 224, 249, 0);
+    --water: #e0f7fa;
 }
 
 main {
@@ -937,6 +938,18 @@ h1 {
     right: 0;
     bottom: 0;
     background: linear-gradient(to top, var(--color-gray) 90%, transparent 100%);
+    mask-image: inherit;
+    -webkit-mask-image: inherit;
+}
+
+.mask-footer-water::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, var(--water) 90%, transparent 100%);
     mask-image: inherit;
     -webkit-mask-image: inherit;
 }

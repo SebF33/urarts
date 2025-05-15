@@ -25,6 +25,7 @@ import * as $movement_slug_ from "./routes/movement/[slug].tsx";
 import * as $movements from "./routes/movements.tsx";
 import * as $talents from "./routes/talents.tsx";
 import * as $women from "./routes/women.tsx";
+import * as $worldmap from "./routes/worldmap.tsx";
 import * as $AnimBrushStroke from "./islands/AnimBrushStroke.tsx";
 import * as $Avatar from "./islands/Avatar.tsx";
 import * as $Mona from "./islands/Mona.tsx";
@@ -37,6 +38,7 @@ import * as $TalentsList from "./islands/TalentsList.tsx";
 import * as $Title from "./islands/Title.tsx";
 import * as $ToBottomButton from "./islands/ToBottomButton.tsx";
 import * as $ToTopButton from "./islands/ToTopButton.tsx";
+import * as $WorldMap from "./islands/WorldMap.tsx";
 import * as $chart_Doughnut from "./islands/chart/Doughnut.tsx";
 import * as $chart_PolarArea from "./islands/chart/PolarArea.tsx";
 import * as $footer_Footer from "./islands/footer/Footer.tsx";
@@ -53,6 +55,8 @@ import * as $livesearch_FamousArtSideBar from "./islands/livesearch/FamousArtSid
 import * as $livesearch_HistoSearch from "./islands/livesearch/HistoSearch.tsx";
 import * as $livesearch_TalentsArtSideBar from "./islands/livesearch/TalentsArtSideBar.tsx";
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
+import * as $panel_WorldArtistsPanel from "./islands/panel/WorldArtistsPanel.tsx";
+import * as $panel_WorldArtsPanel from "./islands/panel/WorldArtsPanel.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -80,6 +84,7 @@ const manifest = {
     "./routes/movements.tsx": $movements,
     "./routes/talents.tsx": $talents,
     "./routes/women.tsx": $women,
+    "./routes/worldmap.tsx": $worldmap,
   },
   islands: {
     "./islands/AnimBrushStroke.tsx": $AnimBrushStroke,
@@ -94,6 +99,7 @@ const manifest = {
     "./islands/Title.tsx": $Title,
     "./islands/ToBottomButton.tsx": $ToBottomButton,
     "./islands/ToTopButton.tsx": $ToTopButton,
+    "./islands/WorldMap.tsx": $WorldMap,
     "./islands/chart/Doughnut.tsx": $chart_Doughnut,
     "./islands/chart/PolarArea.tsx": $chart_PolarArea,
     "./islands/footer/Footer.tsx": $footer_Footer,
@@ -110,6 +116,8 @@ const manifest = {
     "./islands/livesearch/HistoSearch.tsx": $livesearch_HistoSearch,
     "./islands/livesearch/TalentsArtSideBar.tsx": $livesearch_TalentsArtSideBar,
     "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
+    "./islands/panel/WorldArtistsPanel.tsx": $panel_WorldArtistsPanel,
+    "./islands/panel/WorldArtsPanel.tsx": $panel_WorldArtsPanel,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

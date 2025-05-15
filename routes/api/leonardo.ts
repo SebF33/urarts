@@ -279,6 +279,7 @@ export const handler = async (
 
         htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.click", { ns: "translation" })} <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</span> ${i18next.t("leonardo.nav_theme", { ns: "translation" })}</p>`;
         htmlContent += i18next.t("leonardo.page_home_msg", { ns: "translation" });
+        htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.or_click", { ns: "translation" })} <a href="/worldmap" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</a> ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}</p>`;
 
         if (welcome === "true") {
           const randomArtResults = await db.selectFrom("art")
@@ -413,6 +414,12 @@ export const handler = async (
 
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_artist", { ns: "translation" })} <strong style="color:${womenResults.color}"><a href="/art/${womenResults.slug}">${womenResults.last_name}</a></strong>...</p>`;
         htmlContent += `<a href="/art/${womenResults.slug}" class="appear-effect-very-fast-fadein inline-block mt-3" draggable="${draggable}"><img src="${womenResults.avatar_url}" alt="${womenResults.last_name}" style="max-width:120px" draggable="${draggable}"/></a>`;
+        break;
+
+
+      case "worldmap":
+        htmlContent = i18next.t("leonardo.page_worldmap", { ns: "translation" });
+        htmlContent += i18next.t("leonardo.page_worldmap_msg", { ns: "translation" });
         break;
 
       

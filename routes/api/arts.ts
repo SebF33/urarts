@@ -33,6 +33,11 @@ export const handler = async (
   query = url.searchParams.get("name") || "";
   const name = query.length ? query : "";
 
+  // Tag
+  query = url.searchParams.get("tag") || "";
+  const tag = query.length ? query : "";
+  const tagColumn = lng === "en" ? "tag.name_en" : "tag.name";
+
   // Aléatoire
   const random = url.searchParams.has("random");
   
@@ -41,6 +46,11 @@ export const handler = async (
   const results = await db.selectFrom("art")
     .innerJoin("artist", "art.owner_id", "artist.id")
     .innerJoin("movement", "art.movement_id", "movement.id")
+    .$if( !! tag, (qb) =>
+      qb
+        .innerJoin("art_tag", "art.id", "art_tag.art_id")
+        .innerJoin("tag", "art_tag.tag_id", "tag.id")
+    )
     .select([
       "art.id",
       "art.name as name",
@@ -61,6 +71,9 @@ export const handler = async (
       OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
       OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"})`
     ))
+    .$if( !! tag, (qb) =>
+      qb.where(tagColumn, "=", tag)
+    )
     .where("artist.slug", "not in", TALENTS)
     .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["art.name"])))
     .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name"])))

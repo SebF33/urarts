@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2025-05-15]
+
+### Nouveautés
+- Ajout d'une page de la carte du Monde.
+
 ## [2025-02-22]
 
 ### Nouveautés
