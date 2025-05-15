@@ -147,6 +147,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         <button
           onClick={handleClose}
           class="absolute top-2.5 right-2.5 text-lighterdark hover:text-red focus:outline-none"
+          aria-label="Fermer"
         >
           <ButtonCross />
         </button>
