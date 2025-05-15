@@ -18,6 +18,7 @@ export const DELAY_MODAL_TRIGGER = 80;
 export const DELAY_REACH_ART = 1150;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
+
 export const INDICATORS_MOVEMENTS: string[] = [
   "artdeco",
   "baroque",
@@ -27,6 +28,7 @@ export const INDICATORS_MOVEMENTS: string[] = [
   "italianrenaissance",
   "surrealism",
 ];
+
 export const NATIONALITIES: string[] = [
   "Allemagne",
   "Armenia",
@@ -46,7 +48,7 @@ export const NATIONALITIES: string[] = [
   "Danemark",
   "Denmark",
   "Espagne",
-  "États-Unis",
+  "États-Unis d'Amérique",
   "Finland",
   "Finlande",
   "France",
@@ -80,17 +82,79 @@ export const NATIONALITIES: string[] = [
   "Tchécoslovaquie",
   "Ukraine",
   "United Kingdom",
-  "United States",
+  "United States of America",
   "Vietnam",
 ];
+
 export const NB_LOADING_ARTS = 5;
 export const NB_LOADING_ARTISTS = 10;
+
 export const TALENTS: string[] = ["albert", "mimi"];
+
 export const URL_GA = "*.google-analytics.com";
 export const URL_GT = "https://www.googletagmanager.com";
 export const URL_URARTS_ART = "https://www.urarts.art";
 export const URL_URARTS_DEV = "https://urarts.fly.dev";
 export const URL_URARTS_FR = "https://www.urarts.fr";
+
+type Tag = {
+  name: string;
+  name_en: string;
+  slug: string;
+};
+export const TAGS: Tag[] = [
+  { name: "Abstrait", name_en: "Abstract", slug: "abstract" },
+  { name: "Allégorie", name_en: "Allegory", slug: "allegory" },
+  { name: "Allemagne", name_en: "Germany", slug: "germany" },
+  { name: "Amour", name_en: "Love", slug: "love" },
+  { name: "Animaux", name_en: "Animals", slug: "animals" },
+  { name: "Architecture", name_en: "Architecture", slug: "architecture" },
+  { name: "Arménie", name_en: "Armenia", slug: "armenia" },
+  { name: "Autoportrait", name_en: "Self-portrait", slug: "self-portrait" },
+  { name: "Autriche", name_en: "Austria", slug: "austria" },
+  { name: "Belgique", name_en: "Belgium", slug: "belgium" },
+  { name: "Biélorussie", name_en: "Belarus", slug: "belarus" },
+  { name: "Canada", name_en: "Canada", slug: "canada" },
+  { name: "Chine", name_en: "China", slug: "china" },
+  { name: "Colombie", name_en: "Colombia", slug: "colombia" },
+  { name: "Danemark", name_en: "Denmark", slug: "denmark" },
+  { name: "Danse", name_en: "Dance", slug: "dance" },
+  { name: "Égypte", name_en: "Egypt", slug: "egypt" },
+  { name: "Espagne", name_en: "Spain", slug: "spain" },
+  { name: "États-Unis d'Amérique", name_en: "United States of America", slug: "usa" },
+  { name: "Fantastique", name_en: "Fantasy", slug: "fantasy" },
+  { name: "Fleurs", name_en: "Flowers", slug: "flowers" },
+  { name: "Finlande", name_en: "Finland", slug: "finland" },
+  { name: "France", name_en: "France", slug: "france" },
+  { name: "Grèce", name_en: "Greece", slug: "greece" },
+  { name: "Guerre", name_en: "War", slug: "war" },
+  { name: "Histoire", name_en: "History", slug: "history" },
+  { name: "Hongrie", name_en: "Hungary", slug: "hungary" },
+  { name: "Italie", name_en: "Italy", slug: "italy" },
+  { name: "Japon", name_en: "Japan", slug: "japan" },
+  { name: "Mexique", name_en: "Mexico", slug: "mexico" },
+  { name: "Monde", name_en: "World", slug: "world" },
+  { name: "Mort", name_en: "Death", slug: "death" },
+  { name: "Mythologie", name_en: "Mythology", slug: "mythology" },
+  { name: "Nature morte", name_en: "Still Life", slug: "still-life" },
+  { name: "Norvège", name_en: "Norway", slug: "norway" },
+  { name: "Nu", name_en: "Nude", slug: "nude" },
+  { name: "Pays-Bas", name_en: "Netherlands", slug: "netherlands" },
+  { name: "Paysage", name_en: "Landscape", slug: "landscape" },
+  { name: "Pologne", name_en: "Poland", slug: "poland" },
+  { name: "Portrait", name_en: "Portrait", slug: "portrait" },
+  { name: "Portugal", name_en: "Portugal", slug: "portugal" },
+  { name: "Religion", name_en: "Religion", slug: "religion" },
+  { name: "Rêve", name_en: "Dream", slug: "dream" },
+  { name: "Russie", name_en: "Russia", slug: "russia" },
+  { name: "Royaume-Uni", name_en: "United Kingdom", slug: "uk" },
+  { name: "Suède", name_en: "Sweden", slug: "sweden" },
+  { name: "Suisse", name_en: "Switzerland", slug: "switzerland" },
+  { name: "Tchécoslovaquie", name_en: "Czechoslovakia", slug: "czechoslovakia" },
+  { name: "Trompe-l'œil", name_en: "Trompe-l'oeil", slug: "trompe-l-oeil" },
+  { name: "Ukraine", name_en: "Ukraine", slug: "ukraine" },
+  { name: "Vietnam", name_en: "Vietnam", slug: "vietnam" },
+];
 
 export const ART_IMG_WRAPPER: Record<string, Any> = {
   wrap: {

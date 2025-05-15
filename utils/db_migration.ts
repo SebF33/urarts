@@ -5,15 +5,18 @@ import { upCountry } from "@utils/db/country.ts";
 import { upFact } from "@utils/db/fact.ts";
 import { upMovement } from "@utils/db/movement.ts";
 import { upTables } from "@utils/db/tables.ts";
+import { upTag } from "@utils/db/tag.ts";
 import { upTopic } from "@utils/db/topic.ts";
 
 async function down(db: Kysely<DbSchema>): Promise<void> {
+  await db.schema.dropTable("art_tag").ifExists().execute();
   await db.schema.dropTable("art").ifExists().execute();
   await db.schema.dropTable("artist").ifExists().execute();
   await db.schema.dropTable("movement").ifExists().execute();
   await db.schema.dropTable("fact").ifExists().execute();
   await db.schema.dropTable("topic").ifExists().execute();
   await db.schema.dropTable("country").ifExists().execute();
+  await db.schema.dropTable("tag").ifExists().execute();
 }
 
 async function run() {
@@ -27,6 +30,7 @@ async function run() {
     await upTopic(db);
     await upFact(db);
     await upMovement(db);
+    await upTag(db);
     await upArtistArt(db);
   } else if (args.includes("--down")) {
     await down(db);
@@ -37,6 +41,7 @@ async function run() {
     await upTopic(db);
     await upFact(db);
     await upMovement(db);
+    await upTag(db);
     await upArtistArt(db);
   }
 }

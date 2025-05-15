@@ -18,6 +18,14 @@ interface CountryTable {
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
+interface TagTable {
+  id: Generated<number>;
+  name: string; //
+  name_en: string; //
+  slug: string;
+  modified_at: ColumnType<Date, string | undefined, never>;
+}
+
 interface ArtistTable {
   id: Generated<number>;
   country_id: number; // Pays d'origine de l'artiste
@@ -85,19 +93,27 @@ interface ArtTable {
 
 interface TopicTable {
   id: Generated<number>;
-  name: string; // 
-  name_en: string; // 
+  name: string; //
+  name_en: string; //
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
 interface FactTable {
   id: Generated<number>;
-  topic_slug: string; // 
+  topic_slug: string; //
   target_slug: string; //
-  msg: string; // 
-  msg_en: string; // 
+  msg: string; //
+  msg_en: string; //
   modified_at: ColumnType<Date, string | undefined, never>;
+}
+
+/**
+ * Table de liaison Arts ↔ Tags
+ */
+interface ArtTagTable {
+  art_id: number; // PK, FK vers art.id
+  tag_id: number; // PK, FK vers tag.id
 }
 
 export type Art = Selectable<ArtTable>;
@@ -107,10 +123,12 @@ export type Movement = Selectable<MovementTable>;
 
 export interface DbSchema {
   art: ArtTable;
+  art_tag: ArtTagTable;
   artist: ArtistTable;
   country: CountryTable;
   fact: FactTable;
   movement: MovementTable;
+  tag: TagTable;
   topic: TopicTable;
 }
 

@@ -248,6 +248,44 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     )
     .execute();
 
+  // Table "Tags"
+  await db.schema
+    .createTable("tag")
+    .ifNotExists()
+    .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
+    .addColumn("name", "varchar", (col) => col.notNull().unique())
+    .addColumn("name_en", "varchar", (col) => col.notNull().unique())
+    .addColumn("slug", "varchar", (col) => col.notNull().unique())
+    .addColumn(
+      "modified_at",
+      "timestamp",
+      (col) => col.defaultTo(sql`CURRENT_TIMESTAMP`),
+    )
+    .execute();
+
+  // Table de liaison "Arts/Tags"
+  await db.schema
+    .createTable("art_tag")
+    .ifNotExists()
+    .addColumn("art_id", "integer", (col) => col.notNull())
+    .addColumn("tag_id", "integer", (col) => col.notNull())
+    .addForeignKeyConstraint(
+      "art_tag_art_fk",
+      ["art_id"],
+      "art",
+      ["id"],
+      (cb) => cb.onDelete("cascade"),
+    )
+    .addForeignKeyConstraint(
+      "art_tag_tag_fk",
+      ["tag_id"],
+      "tag",
+      ["id"],
+      (cb) => cb.onDelete("cascade"),
+    )
+    .addUniqueConstraint("art_tag_unique", ["art_id", "tag_id"])
+    .execute();
+
   // Index "art_owner_id_index"
   await db.schema
     .createIndex("art_owner_id_index")
