@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from "motion";
 import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { css } from "@twind/core";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
 import { ButtonCross } from "@components/Assets.tsx";
+
 
 interface ArtistPanelProps {
   readonly country: string;
@@ -39,11 +41,11 @@ export function WorldArtistsPanel(
                 src={`/flags/${country}.png`}
                 alt={country}
                 title={country}
-                className="w-6 h-4 mr-2 object-cover"
+                className={`w-6 h-4 mr-2 object-cover ${css({"filter": "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))"})}`}
                 draggable={false}
               />
               <h2
-                className="text-2xl font-bold"
+                className="text-2xl font-bold leading-6"
                 style={{ color: theme.dark }}
               >
                 {i18next.t("worldmap.artists", { ns: "translation" })} — {country}
@@ -86,14 +88,14 @@ export function WorldArtistsPanel(
                 />
                 <div className="flex-1">
                   <h3
-                    className="text-lg font-medium"
+                    className="text-lg font-medium leading-5"
                     style={{ color: theme.dark }}
                   >
                     {a.first_name} {a.last_name}
                   </h3>
                   {a.info && (
                     <p
-                      className="mt-1 text-sm overflow-hidden"
+                      className="mt-1 text-sm leading-4 overflow-hidden"
                       style={{
                         color: theme.lighterdark,
                         display: "-webkit-box",
