@@ -2,6 +2,7 @@ import { Any } from "any";
 import { ArtistRow, ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme, extraColors, tagColorsEN, tagColorsFR, worldColors } from "@utils/colors.ts";
 import { createPortal } from "react-dom";
+import { DELAY_DEBOUNCE, NATIONALITIES } from "@utils/constants.ts";
 import { feature } from "topojson-client";
 import { geoMercator, geoPath } from "d3-geo";
 import i18next from "i18next";
@@ -12,7 +13,6 @@ import isoCountries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json" with { type: "json" };
 import fr from "i18n-iso-countries/langs/fr.json" with { type: "json" };
 import ky from "ky";
-import { NATIONALITIES } from "@utils/constants.ts";
 import tippy, { hideAll } from "tippyjs"
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
@@ -39,6 +39,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   const [selectedArtsCountry, setSelectedArtsCountry] = useState<string | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+  const [lastClickTime, setLastClickTime] = useState(0);
 
 
   // Convertir TopoJSON en GeoJSON
@@ -166,7 +167,19 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
 
   // Ouverture des panels au click d'un pays
   const handleCountryClick = async (name: string) => {
-    hideAll(); // fermer toute infobulle avant
+    // anti-spam
+    const now = Date.now();
+    if (now - lastClickTime < DELAY_DEBOUNCE) return;
+    setLastClickTime(now);
+
+    // fermer toute infobulle avant
+    hideAll();
+
+    // nettoyage des données précédentes
+    setSelectedArtistsCountry(null);
+    setSelectedArtsCountry(null);
+    setArtists([]);
+    setArts([]);
 
     setSelectedArtistsCountry(name);
     setSelectedArtsCountry(name);
