@@ -134,7 +134,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const modalLayout = (
     <div
       class={`fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 z-[99999]
-      modal-overlay ${isVisible ? "visible" : ""}`}
+      overlay-transition ${isVisible ? "visible" : ""}`}
     >
 
       {/* Modal */}

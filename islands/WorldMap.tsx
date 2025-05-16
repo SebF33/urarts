@@ -1,17 +1,19 @@
 import { Any } from "any";
 import { ArtistRow, ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme, extraColors, tagColorsEN, tagColorsFR, worldColors } from "@utils/colors.ts";
+import { createPortal } from "react-dom";
 import { feature } from "topojson-client";
 import { geoMercator, geoPath } from "d3-geo";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { IS_BROWSER } from "$fresh/runtime.ts"; // typeof document !== "undefined"
 import iso from "iso-3166-1";
 import isoCountries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json" with { type: "json" };
 import fr from "i18n-iso-countries/langs/fr.json" with { type: "json" };
 import ky from "ky";
 import { NATIONALITIES } from "@utils/constants.ts";
-import tippy from "tippyjs";
+import tippy, { hideAll } from "tippyjs"
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 import worldData from "world-atlas/countries-110m.json" with { type: "json" };
@@ -24,6 +26,7 @@ isoCountries.registerLocale(fr);
 
 
 export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCountries: string[] }) {
+  const lng = i18next.language;
   const [artists, setArtists] = useState<ArtistRow[]>([]);
   const [arts, setArts] = useState<ArtRow[]>([]);
   const [countries, setCountries] = useState<Any[]>([]);
@@ -32,8 +35,10 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     width: typeof globalThis !== "undefined" ? globalThis.innerWidth : 800,
     height: typeof globalThis !== "undefined" ? globalThis.innerHeight : 600,
   }));
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const lng = i18next.language;
+  const [selectedArtistsCountry, setSelectedArtistsCountry] = useState<string | null>(null);
+  const [selectedArtsCountry, setSelectedArtsCountry] = useState<string | null>(null);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
 
   // Convertir TopoJSON en GeoJSON
@@ -142,9 +147,29 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   const pathGenerator = geoPath().projection(projection);
 
 
+  // Afficher l'overlay
+  useEffect(() => {
+    if (selectedArtistsCountry || selectedArtsCountry) {
+      setIsOverlayVisible(false);
+      requestAnimationFrame(() => setIsOverlayVisible(true));
+    } else {
+      setIsOverlayVisible(false);
+    }
+  }, [selectedArtistsCountry, selectedArtsCountry]);
+
+  useEffect(() => {
+    if (IS_BROWSER) {
+      setPortalRoot(document.body);
+    }
+  }, []);
+
+
   // Ouverture des panels au click d'un pays
   const handleCountryClick = async (name: string) => {
-    setSelectedCountry(name);
+    hideAll(); // fermer toute infobulle avant
+
+    setSelectedArtistsCountry(name);
+    setSelectedArtsCountry(name);
 
     const [artistsResp, artsResp] = await Promise.all([
 
@@ -159,6 +184,13 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
 
     setArtists(artistsResp);
     setArts(artsResp);
+  };
+
+  
+  // Fermeture des panels
+  const closeAllPanels = () => {
+    setSelectedArtistsCountry(null);
+    setSelectedArtsCountry(null);
   };
 
 
@@ -232,24 +264,30 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         })}
       </svg>
 
+      {/* Overlay */}
+      {portalRoot &&
+        createPortal(
+          (selectedArtistsCountry || selectedArtsCountry) && (
+            <div
+              className={`fixed inset-0 bg-black bg-opacity-70 z-[99999] overlay-transition ${isOverlayVisible ? "visible" : ""}`}
+              onClick={closeAllPanels}
+            />
+          ),
+          portalRoot,
+        )}
+
       {/* Panneau des artistes */}
       <WorldArtistsPanel
-        country={selectedCountry!}
+        country={selectedArtistsCountry}
         artists={artists}
-        onClose={() => {
-          setSelectedCountry(null);
-          setArtists([]);
-        }}
+        onClose={() => setSelectedArtistsCountry(null)}
       />
 
       {/* Panneau des œuvres */}
       <WorldArtsPanel
-        country={selectedCountry!}
+        country={selectedArtsCountry}
         artworks={arts}
-        onClose={() => {
-          setSelectedCountry(null);
-          setArts([]);
-        }}
+        onClose={() => setSelectedArtsCountry(null)}
       />
     </>
   );

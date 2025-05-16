@@ -142,6 +142,16 @@ h1 {
     color: var(--color-lighterdark);
 }
 
+/* Overlay */
+.overlay-transition {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+    opacity: 0;
+}
+
+.overlay-transition.visible {
+    opacity: 1;
+}
+
 /* Cadre des artistes */
 .artist-frame {
     overflow: hidden;
@@ -1000,15 +1010,6 @@ h1 {
 
 .art-modal-container.visible {
     transform: translateY(0);
-    opacity: 1;
-}
-
-.modal-overlay {
-    transition: opacity 0.3s ease-in-out, visibility 0.3s;
-    opacity: 0;
-}
-
-.modal-overlay.visible {
     opacity: 1;
 }
 
