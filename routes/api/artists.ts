@@ -74,7 +74,8 @@ export const handler = async (
       qb.where(
         sql`((birthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (deathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
       ))
-    .$if(isCountry, (qb) => qb.where("country.name", "=", nationalityFilter))
+    .$if(isCountry && lng === 'fr', (qb) => qb.where("country.name", "=", nationalityFilter))
+    .$if(isCountry && lng === 'en', (qb) => qb.where("country.name_en", "=", nationalityFilter))
     .$if(isWorld, (qb) => qb.where("country.name", "like", "%"))
     .where("slug", "not in", TALENTS)
     .where(
