@@ -70,7 +70,7 @@ const translation = {
     nationality_period:
       "Choisissez une nationalité et la période d’existence du ou des artiste(s) recherché(s).",
     nav_theme: "pour changer le thème de la barre de navigation.",
-    nav_worldmap: "pour voyager à travers l’Art...",
+    nav_worldmap: "pour voyager à travers l’Art.",
     new_artists: "Découvrez les derniers artistes ajoutés :",
     new_public_domain_artists:
       "Découvrez les artistes dans le domaine public cette année :",
@@ -199,6 +199,7 @@ const translation = {
     famousart: "Quelques-uns des chefs-d’œuvre les plus célèbres...",
     name: "Nom(s) :",
     talentsart: "Quelques œuvres d’artistes talentueux...",
+    worldmap: "Carte du Monde",
   },
   slider: {
     value_large: "An ",
