@@ -30,25 +30,28 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   const [artists, setArtists] = useState<ArtistRow[]>([]);
   const [arts, setArts] = useState<ArtRow[]>([]);
   const [countries, setCountries] = useState<Any[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
-  const [dimensions, setDimensions] = useState(() => ({
-    width: typeof globalThis !== "undefined" ? globalThis.innerWidth : 800,
-    height: typeof globalThis !== "undefined" ? globalThis.innerHeight : 600,
-  }));
   const [selectedArtistsCountry, setSelectedArtistsCountry] = useState<string | null>(null);
   const [selectedArtsCountry, setSelectedArtsCountry] = useState<string | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [lastClickTime, setLastClickTime] = useState(0);
 
+  const TOP_OFFSET = 0; // si besoin : décalage vertical de la carte
+  const WIDTH_COEF = 1; // si besoin : largeur de la carte
+
 
   // Convertir TopoJSON en GeoJSON
   useEffect(() => {
-    const geo = feature(
-      worldData as Any,
-      (worldData as Any).objects.countries,
-    ) as Any;
-    setCountries(geo.features);
+    const geo = feature(worldData as Any, (worldData as Any).objects.countries) as Any;
+    // sans l'Antarctique
+    const filtered = geo.features.filter((f: Any) => {
+      const alpha2 = iso.whereNumeric(String(f.id))?.alpha2;
+      return alpha2 !== "AQ";
+    });
+    setCountries(filtered);
   }, []);
 
 
@@ -111,21 +114,26 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   }, []);
 
 
-  // Dimensions pour projection et viewBox en fonction du viewport
-  useLayoutEffect(() => {
-    const updateDimensions = () => {
-      setDimensions({
-        width: globalThis.innerWidth,
-        height: globalThis.innerHeight,
+  // Dimensions pour projection
+  useEffect(() => {
+    if (!containerRef.current) return;
+    let frame = 0;
+    const ro = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        setContainerSize({ width, height });
       });
+    });
+    ro.observe(containerRef.current);
+    return () => {
+      cancelAnimationFrame(frame);
+      ro.disconnect();
     };
-    updateDimensions();
-    globalThis.addEventListener("resize", updateDimensions);
-    return () => globalThis.removeEventListener("resize", updateDimensions);
   }, []);
-
-  const internalWidth = dimensions.width * 0.72;
-  const internalHeight = dimensions.height;
+  
+  const internalWidth  = containerSize.width / WIDTH_COEF;
+  const internalHeight = containerSize.height;
 
 
   // Couleur pour chaque pays
@@ -208,12 +216,23 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
 
 
   return (
-    <>
+    <div
+      ref={containerRef}
+      style={{
+        width: "100%",
+        height: "100vh",
+        paddingTop: `${TOP_OFFSET}px`,
+        overflow: "hidden",
+      }}
+    >
       <svg
         ref={svgRef}
         viewBox={`0 0 ${internalWidth} ${internalHeight}`}
         preserveAspectRatio="xMidYMid meet"
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          width: "100%",
+          display: "block",
+        }}
       >
         <defs>
           <filter id="brush">
@@ -271,6 +290,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
               data-tippy-content={name}
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
+              tabindex={-1}
               onClick={() => isActive && handleCountryClick(name)}
             />
           );
@@ -302,6 +322,6 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         artworks={arts}
         onClose={() => setSelectedArtsCountry(null)}
       />
-    </>
+    </div>
   );
 }
