@@ -43,7 +43,7 @@ export default function ArtsPage(
       <main
         id="page"
         data-name="arts"
-        class="flex-grow"
+        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <ArtsSearch />
       </main>

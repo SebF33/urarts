@@ -182,12 +182,13 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
         class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
+          {/* Post-it : mouvements */}
           {movements.length > 0 && (
             <div class="invisible md:visible absolute mt-12 ml-16">
               {movements.map((movement) => (
                 <div class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 mt-1 ${movement.position} font-${movement.font} shadow-none`}>
                   <div class="top-tape max-h-3"></div>
-                  <a href={`/movement/${movement.movementSlug}`} class="z-10 text-lighterdark text-xl italic underline select-none" draggable={draggable}>
+                  <a href={`/movement/${movement.movementSlug}`} class="z-10 px-6 text-lighterdark text-xl italic underline select-none" draggable={draggable}>
                     {movement.movementName}
                   </a>
                 </div>

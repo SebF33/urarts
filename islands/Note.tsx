@@ -23,7 +23,7 @@ export default function Note() {
           <p class="text-xl leading-6 md:text-2xl">
             {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
           </p>
-          <div class="appear-effect-very-fast-fadein inline-block ml-3">
+          <div class="appear-effect-very-fast-fadein inline-flex items-center space-x-2 ml-3">
             <button
               onClick={() => handleLanguage("en")}
               class="inline-block flex items-center focus:outline-none"

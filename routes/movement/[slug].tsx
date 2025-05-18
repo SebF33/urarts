@@ -114,11 +114,12 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
         class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
+          {/* Post-it : artistes */}
           {artists.length > 0 && (
             <Partial name="artists-paper">
               <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible">
                 {artists.map((artist) => (
-                  <div class={`paper appear-effect-fast-fadein max-w-[140px] min-h-8 ${artist.position} shadow-none`}>
+                  <div class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position} shadow-none`}>
                     <div class="top-tape max-h-3"></div>
                     <a
                       href={`/art/${artist.slug}`}
