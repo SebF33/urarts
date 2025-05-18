@@ -9,6 +9,7 @@ import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
+import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import Preview from "@islands/Preview.tsx";
 import Title from "@islands/Title.tsx";
 
@@ -117,11 +118,16 @@ export default function MovementsList(
 
   return (
     <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8 mb-24">
-      <Title
-        name="movements"
-        dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-        margin="mt-2 mb-5 md:mt-5 md:mb-6"
-      />
+      <div class="flex justify-between items-start md:mb-6">
+        {/* Titre de la page */}
+        <Title
+          name="movements"
+          dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
+          margin="mt-2 mb-5 md:mt-5"
+        />
+        {/* Post-it : lien vers la carte du Monde */}
+        <PaperWorldMap />
+      </div>
 
       <div class="flex flex-wrap">
         {/* Liste des mouvements */}

@@ -11,6 +11,7 @@ import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
+import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 import Title from "@islands/Title.tsx";
@@ -134,19 +135,24 @@ export default function ArtsSearch() {
 
   return (
     <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8 mb-24">
-      <Title
-        name="arts"
-        dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-        margin="mt-2 mb-5 md:mt-5"
-      />
+      <div class="flex justify-between items-start">
+        {/* Titre de la page */}
+        <Title
+          name="arts"
+          dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
+          margin="mt-2 mb-5 md:mt-5"
+        />
+        {/* Post-it : lien vers la carte du Monde */}
+        <PaperWorldMap />
+      </div>
 
+      {/* Entrée de recherche */}
       <div class="paper paper-shadow max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
         <div class="top-tape max-h-2.5"></div>
         <h2 class={`text-lg font-medium text-lighterdark`}>
           {i18next.t("paper.name", { ns: "translation" })}
         </h2>
       </div>
-
       <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
         <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
       </div>

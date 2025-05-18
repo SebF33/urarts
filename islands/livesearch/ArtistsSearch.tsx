@@ -13,6 +13,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
+import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 import Title from "@islands/Title.tsx";
 
@@ -167,15 +168,19 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
   return (
     <>
-      <div
-        class="p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <Title
-          name="artists"
-          dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-          margin="mt-2 md:mt-5 md:mb-16"
-        />
+      <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-start md:mb-16">
+          {/* Titre de la page */}
+          <Title
+            name="artists"
+            dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
+            margin="mt-2 md:mt-5"
+          />
+          {/* Post-it : lien vers la carte du Monde */}
+          <PaperWorldMap />
+        </div>
 
+        {/* Palette */}
         <div class={`relative w-60 sm:w-80 mx-auto mt-24 md:-mt-6 mb-24`}>
           <div class={`absolute w-full -top-16`}>
             <PaintPalette />
