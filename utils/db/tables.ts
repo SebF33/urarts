@@ -150,7 +150,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("gap_3", "varchar")
     .addColumn("gap_4", "varchar")
     .addColumn("gap_5", "varchar")
-    .addColumn("custom_css", "varchar", (col) => col.defaultTo(sql`""`))
+    .addColumn("custom_css", "varchar", (col) => col.defaultTo(sql`"art-default"`))
     .addColumn(
       "info",
       "varchar",
