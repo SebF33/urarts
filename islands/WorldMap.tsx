@@ -35,6 +35,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedArtistsCountry, setSelectedArtistsCountry] = useState<string | null>(null);
   const [selectedArtsCountry, setSelectedArtsCountry] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [lastClickTime, setLastClickTime] = useState(0);
@@ -188,23 +189,22 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     setSelectedArtsCountry(null);
     setArtists([]);
     setArts([]);
+ 
+    setLoading(true);
 
-    setSelectedArtistsCountry(name);
-    setSelectedArtsCountry(name);
+    try {
+      const [artistsResp, artsResp] = await Promise.all([
+        ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: name } }).json<ArtistRow[]>(),
+        ky.get(`${UrlBasePath}/api/arts`, { searchParams: { lng, tag: name } }).json<ArtRow[]>(),
+      ]);
 
-    const [artistsResp, artsResp] = await Promise.all([
-
-      ky.get(`${UrlBasePath}/api/artists`, {
-        searchParams: { lng: lng, nationality: name },
-      }).json<ArtistRow[]>(),
-
-      ky.get(`${UrlBasePath}/api/arts`, {
-        searchParams: { lng: lng, tag: name },
-      }).json<ArtRow[]>(),
-    ]);
-
-    setArtists(artistsResp);
-    setArts(artsResp);
+      setArtists(artistsResp);
+      setArts(artsResp);
+      setSelectedArtistsCountry(name);
+      setSelectedArtsCountry(name);
+    } finally {
+      setLoading(false);
+    }
   };
 
   
@@ -310,18 +310,22 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         )}
 
       {/* Panneau des artistes */}
-      <WorldArtistsPanel
-        country={selectedArtistsCountry}
-        artists={artists}
-        onClose={() => setSelectedArtistsCountry(null)}
-      />
+      {!loading && (
+        <WorldArtistsPanel
+          country={selectedArtistsCountry}
+          artists={artists}
+          onClose={() => setSelectedArtistsCountry(null)}
+        />
+      )}
 
       {/* Panneau des œuvres */}
-      <WorldArtsPanel
-        country={selectedArtsCountry}
-        artworks={arts}
-        onClose={() => setSelectedArtsCountry(null)}
-      />
+      {!loading && (
+        <WorldArtsPanel
+          country={selectedArtsCountry}
+          artworks={arts}
+          onClose={() => setSelectedArtsCountry(null)}
+        />
+      )}
     </div>
   );
 }
