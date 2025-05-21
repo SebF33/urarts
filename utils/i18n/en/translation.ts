@@ -75,7 +75,7 @@ const translation = {
     new_public_domain_artists:
       "Check out the artists in the public domain this year:",
     off: "Click the icon or my eyes to mute me.",
-    or_click: "...or click",
+    or_click: "...or click on",
     page_about:
       `<h2>You are on the <span class="underline">about page</span> of the Urarts website.</h2>`,
     page_about_msg:

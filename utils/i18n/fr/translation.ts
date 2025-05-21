@@ -75,7 +75,7 @@ const translation = {
     new_public_domain_artists:
       "Découvrez les artistes dans le domaine public cette année :",
     off: "Cliquez sur l’icône ou sur mes yeux pour me désactiver.",
-    or_click: "...ou cliquez",
+    or_click: "...ou cliquez sur",
     page_about:
       `<h2>Vous êtes sur la <span class="underline">page "à propos"</span> du site Urarts.</h2>`,
     page_about_msg:

@@ -279,7 +279,16 @@ export const handler = async (
 
         htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.click", { ns: "translation" })} <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</span> ${i18next.t("leonardo.nav_theme", { ns: "translation" })}</p>`;
         htmlContent += i18next.t("leonardo.page_home_msg", { ns: "translation" });
-        htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.or_click", { ns: "translation" })} <a href="/worldmap" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</a> ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}</p>`;
+        htmlContent += `
+          <p class="text-[1rem] leading-none mb-2">
+            ${i18next.t("leonardo.or_click", { ns: "translation" })} 
+            <a href="/worldmap" class="appear-effect-very-fast-fadein inline-block align-middle" draggable=false>
+              <img class="w-10 h-auto inline-block transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/Monde.png" alt="world" draggable=false/>
+            </a> 
+            ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}
+          </p>
+        `;
+      
 
         if (welcome === "true") {
           const randomArtResults = await db.selectFrom("art")
