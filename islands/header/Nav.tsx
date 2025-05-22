@@ -97,11 +97,13 @@ export default function Nav(props: Props) {
           });
         }
         animateEyeShut();
-        shutInterval = window.setInterval(animateEyeShut, maxShutDelay);
+        shutInterval = globalThis.setInterval(animateEyeShut, maxShutDelay);
         // suivi du regard
         mousemoveHandler = (e) => {
-          const xPct = (e.clientX * 100) / window.innerWidth;
-          const yPct = (e.clientY * 100) / window.innerHeight;
+          const viewportHeight = document.documentElement.clientHeight;
+          const viewportWidth  = document.documentElement.clientWidth;
+          const xPct = (e.clientX * 100) / viewportWidth;
+          const yPct = (e.clientY * 100) / viewportHeight;
           eyes.forEach((eye, i) => {
             const eyeball = eye.querySelector<HTMLElement>(".eyeball");
             if (!eyeball) return;
