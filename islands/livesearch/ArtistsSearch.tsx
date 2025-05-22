@@ -592,14 +592,14 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                   />
                 </button>
                 <button
-                  onClick={() => {nationalitySignal.value = "États-Unis"}}
+                  onClick={() => {nationalitySignal.value = "États-Unis d'Amérique"}}
                   class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/États-Unis.png"
-                    alt="États-Unis"
-                    title="États-Unis"
+                    src="/flags/États-Unis d'Amérique.png"
+                    alt="États-Unis d'Amérique"
+                    title="États-Unis d'Amérique"
                     draggable={draggable}
                   />
                 </button>
