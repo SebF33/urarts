@@ -40,6 +40,9 @@ export const handler = async (
 
   // Aléatoire
   const random = url.searchParams.has("random");
+
+  // Lieux géographiques
+  const geolocation = url.searchParams.has("geolocation");
   
 
   const db = Db.getInstance();
@@ -65,16 +68,15 @@ export const handler = async (
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
     .where("copyright", "!=", 2)
+    .where("artist.slug", "not in", TALENTS)
     .$if( ! random, (qb) => qb.where(
       sql`(art.name LIKE ${"%" + name + "%"}
       OR last_name LIKE ${"%" + name + "%"}
       OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
       OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"})`
     ))
-    .$if( !! tag, (qb) =>
-      qb.where(tagColumn, "=", tag)
-    )
-    .where("artist.slug", "not in", TALENTS)
+    .$if(geolocation, (qb) => qb.where("geolocation", "=", 1))
+    .$if( !! tag, (qb) => qb.where(tagColumn, "=", tag))
     .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["art.name"])))
     .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name"])))
     .$if(random, (qb) => qb.orderBy(sql`random()`))

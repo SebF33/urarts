@@ -82,6 +82,7 @@ interface ArtTable {
   info: string; // Informations sur l'œuvre d'art (fr)
   info_en: string; // Informations sur l'œuvre d'art (en)
   famous_order: number | null; // Numéro d'ordre de célébrité
+  geolocation: number; // Lieu géographique (0: non |1: oui)
   histocharacter: number; // Personnage historique (0: non |1: oui)
   histocharactername: string | null; // Nom du personnage historique
   histocharacterbirthyear: number | null; // Année de naissance du personnage historique

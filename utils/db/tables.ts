@@ -169,6 +169,11 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     )
     .addColumn("famous_order", "integer")
     .addColumn(
+      "geolocation",
+      "integer",
+      (col) => col.defaultTo(sql`0`).notNull(),
+    )
+    .addColumn(
       "histocharacter",
       "integer",
       (col) => col.defaultTo(sql`0`).notNull(),

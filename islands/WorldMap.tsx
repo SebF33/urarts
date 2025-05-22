@@ -195,7 +195,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     try {
       const [artistsResp, artsResp] = await Promise.all([
         ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: name } }).json<ArtistRow[]>(),
-        ky.get(`${UrlBasePath}/api/arts`, { searchParams: { lng, tag: name } }).json<ArtRow[]>(),
+        ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`).json<ArtRow[]>(),
       ]);
 
       setArtists(artistsResp);
