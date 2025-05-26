@@ -8,6 +8,7 @@ import "@utils/i18n/config.ts";
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import Avatar from "@islands/Avatar.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
+import Copyright from "@islands/Copyright.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
@@ -247,20 +248,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
               <CollectionSearch query={queryParameters} myslug={slug} type="artist" />
             </Partial>
           ) : (
-            <div class="flex-grow mb-24">
-              <div class="max-w-2xl mx-auto py-10 px-6 mt-5">
-                <div class="paper max-w-[600px] mx-auto">
-                  <div class="top-tape"></div>
-                  <div class="w-full my-3 mx-1">
-                    <p class="text-2xl md:text-3xl font-extrabold leading-5 text-center text-lighterdark">
-                      <span class="text-7xl md:text-8xl">©</span>
-                      <br />
-                      {i18next.t("paper.copyright", { ns: "translation" })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Copyright />
           )}
         </div>
       </main>

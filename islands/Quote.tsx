@@ -97,7 +97,7 @@ export default function Quote(
         >
           <div class="top-tape"></div>
           <div
-            class={`w-full mt-4 mx-1`}
+            class={`w-full mt-4 mx-1 z-10`}
           >
             <p
               class={`text-center text-xl font-bold leading-6 mx-auto`}
