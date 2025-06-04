@@ -290,7 +290,6 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
               data-tippy-content={name}
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
-              tabindex={-1}
               onClick={() => isActive && handleCountryClick(name)}
             />
           );

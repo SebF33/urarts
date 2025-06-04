@@ -1115,3 +1115,12 @@ h1 {
         width: 140px;
     }
 }
+
+/* SVG : Pas d'indicateurs visuels */
+svg path:focus {
+    outline: none;
+}
+
+svg path::-moz-focus-inner {
+    border: none;
+}
