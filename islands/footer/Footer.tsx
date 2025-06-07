@@ -70,7 +70,9 @@ export default function Footer({ color }: { color: string }) {
               </a>
             </div>
             <div class={`mt-8 md:mt-0 md:order-1`}>
-              <p class={`text-center text-xl font-bold`}>© Urarts</p>
+              <p className="text-center text-xl font-bold">
+                © 2022–{new Date().getFullYear()} Urarts
+              </p>
             </div>
           </div>
         </footer>
