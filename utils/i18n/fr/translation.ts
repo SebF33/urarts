@@ -111,6 +111,7 @@ const translation = {
       `<p class="text-[1rem] leading-none">Veuillez vous rediriger sur <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> pour profiter pleinement de mes fonctionnalités.</p>`,
     search_among: "Faites votre recherche parmi",
     unclassified_arts: "<h2>Voici les œuvres non classées.</h2>",
+    warning: "Mes travaux ont commencé en français, la traduction anglaise est en cours.",
     welcome: `<h2>Bonjour et bienvenue sur <strong>Urarts</strong>...</h2>`,
   },
   logo: {

@@ -442,6 +442,10 @@ export const handler = async (
     `<div class="text-[0.85rem] italic leading-none mt-4"><span class="inline-block"><img src="/icon_urarts.svg" class="h-5 w-5 inline-block align-bottom" alt="U" draggable=${draggable}/></span>${i18next.t("leonardo.off", { ns: "translation" })}</div>`;
 
 
+  htmlContent +=
+  `<div class="text-[0.85rem] italic leading-none mt-1"><span class="inline-block"><img src="/symbols/warning.svg" class="h-4 w-4 inline-block align-bottom" alt="warning" draggable=${draggable}/></span>&nbsp;${i18next.t("leonardo.warning", { ns: "translation" })}</div>`;
+
+
   return Promise.resolve(
     new Response(htmlContent, {
       headers: {
