@@ -86,7 +86,7 @@ export const handler: Handlers = {
     const color = colors[randomColorsIndex];
 
     const grid =
-      "grid gap-4 sm:gap-10 grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
+      "grid gap-4 sm:gap-10 grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:px-8 2xl:px-20 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
     return ctx.render({ artistQuote, artists, color, desc, grid, title });
   },

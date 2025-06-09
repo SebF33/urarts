@@ -107,7 +107,8 @@ export default function FamousArtSideBar() {
       x-transition:leave="transition-opacity ease-in duration-300"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden mask-94-96">
+      class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden mask-94-96"
+    >
       <div
         x-show="openFamousArt"
         x-transition:enter="transition-transform ease-out duration-300"
@@ -118,13 +119,13 @@ export default function FamousArtSideBar() {
         x-transition:leave-end="transform translate-x-full"
         class="max-w-md"
       >
-        <div class="h-full flex flex-col text-lighterdark shadow-xl">
+        <div class="h-full flex flex-col text-lighterdark bg-gradient-to-r from-transparent via-black/30 to-transparent backdrop-blur-md shadow-2xl rounded-lg ring-1 ring-white/10">
           <div class="w-[282px] mt-16">
             <div
               x-on:click="openFamousArt = false"
-              class="paper cursor-pointer">
+              class="paper paper-shadow cursor-pointer">
               <span class="sr-only">Fermer</span>
-              <h1 class="p-2 text-2xl font-semibold text-center leading-none select-none">{i18next.t("paper.famousart", { ns: "translation" })}</h1>
+              <h1 class="p-2 text-2xl font-semibold text-center leading-none z-10 select-none">{i18next.t("paper.famousart", { ns: "translation" })}</h1>
             </div>
             <div class="mt-5 px-4">
               <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
