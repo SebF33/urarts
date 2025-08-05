@@ -54,8 +54,8 @@ export default function Nav(props: Props) {
       duration: [600, 300],
       content:
         `<img id="leonardoAvatar" class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/textures/leonardo.png" alt="Leonardo" loading="lazy" draggable=${draggable}/>
-        <div class="absolute top-[-0.6rem] left-[-1.4rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
-        <div class="absolute top-[-0.62rem] left-[-0.38rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
+        <div class="absolute top-[-0.6rem] left-[-2.0rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
+        <div class="absolute top-[-0.57rem] left-[-0.60rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
         <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5 select-none">...</div>`,
       hideOnClick: "false",
       interactive: true,
@@ -65,13 +65,16 @@ export default function Nav(props: Props) {
       role: "leonardo",
       theme: "leonardo",
       trigger: "manual",
+
       // à chaque ouverture
       onShow(instance) {
         const tooltipEl = instance.popper;
+
         // yeux de Leonardo
-        const eyes = tooltipEl.querySelectorAll<HTMLElement>(".eye");
+        const eyes = Array.from(tooltipEl.querySelectorAll<HTMLElement>(".eye"));
         const maxShutDelay = 7000;
         const minShutDelay = 1000;
+
         // événements hover & click sur chaque œil
         eyes.forEach((eye) => {
           const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
@@ -84,6 +87,7 @@ export default function Nav(props: Props) {
             setLeonardoActiveContent(false);
           });
         });
+
         // animation de clignement aléatoire
         function animateEyeShut() {
           const delay = Math.random() * (maxShutDelay - minShutDelay) + minShutDelay;
@@ -98,26 +102,40 @@ export default function Nav(props: Props) {
         }
         animateEyeShut();
         shutInterval = globalThis.setInterval(animateEyeShut, maxShutDelay);
-        // suivi du regard
-        mousemoveHandler = (e) => {
-          const viewportHeight = document.documentElement.clientHeight;
-          const viewportWidth  = document.documentElement.clientWidth;
-          const xPct = (e.clientX * 100) / viewportWidth;
-          const yPct = (e.clientY * 100) / viewportHeight;
-          eyes.forEach((eye, i) => {
+
+        // suivi du regard précis
+        mousemoveHandler = (e: MouseEvent) => {
+          // intensité du suivi en px
+          const strengthX = 2.5;
+          const strengthYDown = 1.5; // vers le bas
+          const strengthYUp = 2.0; // vers le haut
+          eyes.forEach((eye) => {
             const eyeball = eye.querySelector<HTMLElement>(".eyeball");
             if (!eyeball) return;
-            // calculs pour chaque œil
-            const x = Math.max(50, xPct) + "%";
-            const y = i === 0
-              ? Math.max(5, yPct) + "%"
-              : Math.min(80, Math.max(20, yPct)) + "%";
-            eyeball.style.left = x;
-            eyeball.style.top  = y;
+            // centre de l'œil
+            const rect = eye.getBoundingClientRect();
+            const cx = rect.left + rect.width  / 2;
+            const cy = rect.top  + rect.height / 2;
+            // delta vers le pointeur
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            // décalage horizontal
+            const x = Math.max(-strengthX, Math.min(strengthX, dx / (globalThis.innerWidth  / 2) * strengthX));
+            // décalage vertical, avec limite adaptée selon la direction
+            const yRaw = dy / (globalThis.innerHeight / 2);
+            let y: number;
+            if (yRaw < 0) {
+              y = Math.max(-strengthYUp, Math.min(0, yRaw * strengthYUp));
+            } else {
+              y = Math.max(0, Math.min(strengthYDown, yRaw * strengthYDown));
+            }
+            // centrage de base + offset
+            eyeball.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
           });
         };
         document.addEventListener("mousemove", mousemoveHandler);
       },
+
       // à chaque fermeture
       onHide() {
         clearInterval(shutInterval);
