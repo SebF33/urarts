@@ -68,6 +68,7 @@ export default defineApp((_, ctx) => {
         />
 
         {/* CSS & JS */}
+        <script defer type="module" src={asset("/styles/event/zoom-block.js")}></script>
         <script defer src={asset("/styles/lib/alpine-persist3.13.5.min.js")}></script>
         <script defer src={asset("/styles/lib/alpine3.13.5.min.js")}></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
