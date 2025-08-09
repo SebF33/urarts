@@ -60,7 +60,7 @@ export default defineApp((_, ctx) => {
         <link
           rel="icon"
           type="image/x-icon"
-          href={asset("/icons/favicon.ico")}
+          href={asset("/icons/favicon.svg")}
         />
         <link
           rel="apple-touch-icon"
