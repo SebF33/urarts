@@ -1,5 +1,6 @@
 export type ArtCollection = {
   artist_slug: string;
+  avatar_url: string;
   birthyear: string;
   color: string;
   copyright: number;

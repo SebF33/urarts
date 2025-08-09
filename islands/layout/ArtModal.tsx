@@ -155,11 +155,13 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         <div class="flex flex-wrap gap-6">
           {/* Section gauche : Image */}
           <div class="flex-shrink-0 flex flex-col items-center md:items-start px-2 mt-5">
-            <img
-              class="max-w-[70vw] md:max-w-[30vw] max-h-60 md:max-h-80 object-contain drop-shadow-md"
-              src={url}
-              alt={art.name}
-            />
+            <div class="img-marble-engraved-wrapper">
+              <img
+                src={url}
+                alt={art.name}
+                class="max-w-[70vw] md:max-w-[30vw] max-h-60 md:max-h-80 object-contain"
+              />
+            </div>
             {art.copyright === 0 ? (
               <div class="flex items-center">
                 <s class="text-base inline">©</s>
@@ -175,19 +177,24 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
-            <h2 class="text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
+            <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
             <div class="flex gap-4 mb-4">
-              <div class="paper paper-shadow min-h-8 min-w-[100px] z-10 transform -rotate-2">
-                <div class="top-tape"></div>
+              <div class={`paper paper-shadow min-h-8 min-w-[100px] z-10 transform -rotate-3`}>
+                <div class="top-tape max-h-3"></div>
                 <a
                   href={`/art/${art.artist_slug}`}
-                  class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
+                  class="text-base italic text-center leading-4 underline px-2 py-1 z-10 select-none"
                 >
                   {(art.first_name ?? "") + " " + art.last_name}
                 </a>
+                <img
+                  class="w-14 ml-3 p-1"
+                  src={art.avatar_url}
+                  alt={(art.first_name ?? "") + " " + art.last_name}
+                />
               </div>
               {!TALENTS.includes(art.artist_slug) && (
-                <div class="paper paper-shadow min-h-8 min-w-[100px] z-10 transform rotate-3">
+                <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] z-10 transform rotate-6">
                   <div class="top-tape"></div>
                   <a
                     href={`/movement/${art.movement_slug}`}

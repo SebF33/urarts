@@ -71,7 +71,7 @@ export const handler = async (
     .innerJoin("artist", "art.owner_id", "artist.id")
     .innerJoin("movement", "art.movement_id", "movement.id")
     .select([
-      "first_name", "last_name",
+      "first_name", "last_name", "avatar_url",
       "art.id",
       "movement.font as font",
       "movement.slug as movement_slug",
