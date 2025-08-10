@@ -155,11 +155,11 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
         <div class="flex flex-wrap gap-6">
           {/* Section gauche : Image */}
           <div class="flex-shrink-0 flex flex-col items-center md:items-start px-2 mt-5">
-            <div class="img-marble-engraved-wrapper">
+            <div class="img-marble-engraved-wrapper max-w-[70vw] md:max-w-[30vw]">
               <img
                 src={url}
                 alt={art.name}
-                class="max-w-[70vw] md:max-w-[30vw] max-h-60 md:max-h-80 object-contain"
+                class="max-h-60 md:max-h-80"
               />
             </div>
             {art.copyright === 0 ? (

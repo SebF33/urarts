@@ -988,10 +988,13 @@ h1 {
 /* Modal d'une œuvre d'art */
 .art-modal-container {
     border-radius: 12px;
-    border: 12px solid var(--color-gray);
+    border: 12px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
     box-shadow:
-        inset 2px 2px 4px var(--color-dark),
-        inset -2px -2px 4px var(--color-dark);
+        inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+        0 0 12px rgba(0, 0, 0, 0.4),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.5);
     transform: translateY(-16px);
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
@@ -1006,7 +1009,9 @@ h1 {
 }
 
 .img-marble-engraved-wrapper {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    max-width: 100%;
     padding: 8px;
     background-color: var(--color-gray);
     border-radius: 8px;
@@ -1017,8 +1022,9 @@ h1 {
 
 .img-marble-engraved-wrapper img {
     display: block;
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: contain;
 }
 
 .title-marble-engraved {
