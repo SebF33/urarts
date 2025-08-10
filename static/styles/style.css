@@ -1010,7 +1010,6 @@ h1 {
 
 .img-marble-engraved-wrapper {
     display: block;
-    width: 100%;
     max-width: 100%;
     padding: 8px;
     background-color: var(--color-gray);

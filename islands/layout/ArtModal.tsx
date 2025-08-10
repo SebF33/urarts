@@ -21,6 +21,8 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
 
+  const draggable = false;
+
   
   // Créer un conteneur de portail dans le body
   useEffect(() => {
@@ -160,6 +162,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 src={url}
                 alt={art.name}
                 class="max-h-60 md:max-h-80"
+                draggable={draggable}
               />
             </div>
             {art.copyright === 0 ? (
@@ -179,26 +182,32 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
             <div class="flex gap-4 mb-4">
-              <div class={`paper paper-shadow min-h-8 min-w-[100px] z-10 transform -rotate-3`}>
-                <div class="top-tape max-h-3"></div>
-                <a
-                  href={`/art/${art.artist_slug}`}
-                  class="text-base italic text-center leading-4 underline px-2 py-1 z-10 select-none"
-                >
-                  {(art.first_name ?? "") + " " + art.last_name}
-                </a>
-                <img
-                  class="w-14 ml-3 p-1"
-                  src={art.avatar_url}
-                  alt={(art.first_name ?? "") + " " + art.last_name}
-                />
+              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3 overflow-hidden`}>
+                <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
+                <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1">
+                  <a
+                    href={`/art/${art.artist_slug}`}
+                    class="text-sm sm:text-base leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
+                    title={(art.first_name ?? "") + " " + art.last_name}
+                    draggable={draggable}
+                  >
+                    {(art.first_name ?? "") + " " + art.last_name}
+                  </a>
+                  <img
+                    src={art.avatar_url}
+                    alt={(art.first_name ?? "") + " " + art.last_name}
+                    class="w-12 h-12 sm:w-14 sm:h-14 p-1 object-cover flex-none max-w-full"
+                    draggable={draggable}
+                  />
+                </div>
               </div>
               {!TALENTS.includes(art.artist_slug) && (
                 <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] z-10 transform rotate-6">
                   <div class="top-tape"></div>
                   <a
                     href={`/movement/${art.movement_slug}`}
-                    class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
+                    class={`text-base italic leading-4 underline px-2 py-1 select-none`}
+                    draggable={draggable}
                   >
                     {art.movement}
                   </a>
