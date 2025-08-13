@@ -30,7 +30,7 @@ export default function Note() {
             >
               <img
                 class="w-7 md:w-9 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)"
-                src="/flags/Royaume-Uni.png"
+                src="/icons/Royaume-Uni.png"
                 alt="en"
                 draggable={draggable}
               />
@@ -42,7 +42,7 @@ export default function Note() {
             >
               <img
                 class="w-7 md:w-9 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)"
-                src="/flags/France.png"
+                src="/icons/France.png"
                 alt="fr"
                 draggable={draggable}
               />

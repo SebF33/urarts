@@ -1,3 +1,9 @@
+export type TagCollection = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
 export type ArtCollection = {
   artist_slug: string;
   avatar_url: string;
@@ -22,6 +28,7 @@ export type ArtCollection = {
   movement_slug: string;
   name: string;
   polyptych: number;
+  tags?: TagCollection[];
   url: string;
   url_2?: string;
   url_3?: string;

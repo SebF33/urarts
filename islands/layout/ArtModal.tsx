@@ -22,6 +22,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const portalRef = useRef<HTMLDivElement | null>(null);
 
   const draggable = false;
+  const rotationClasses: string[] = ['-rotate-2', 'rotate-1', '-rotate-3', 'rotate-2', '-rotate-1', 'rotate-3'];
 
   
   // Créer un conteneur de portail dans le body
@@ -181,6 +182,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
+            {/* Artiste et mouvement */}
             <div class="flex gap-4 mb-4">
               <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3 overflow-hidden`}>
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
@@ -214,6 +216,33 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
                 </div>
               )}
             </div>
+            {/* Tags de l'œuvre */}
+            {art.tags && art.tags.length > 0 && (
+              <div class="flex flex-wrap gap-3 mb-4">
+                {art.tags.map((tag, idx) => (
+                  <div
+                    key={idx}
+                    class={`paper paper-shadow overflow-hidden rounded-md transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px]`}
+                  >
+                    <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
+                    <div class="flex items-center gap-2 px-2 py-1">
+                      <a
+                        href={`/tag/${tag.slug}`}
+                        class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
+                        draggable={draggable}
+                      >
+                        <img
+                          src={`/icons/${tag.name}.png`}
+                          alt={tag.name}
+                          class="w-8"
+                          draggable={draggable}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -223,7 +252,7 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
           <h3 class="text-lg font-semibold">{i18next.t("modal.description", { ns: "translation" })}</h3>
           <div class="paper paper-shadow w-[90%] md:w-[80%] min-h-[60px] mx-auto mb-4">
             <div class="tape-section"></div>
-            <p class="text-lg text-justify leading-4 p-4 z-10">
+            <p class="text-lg text-justify leading-4 p-4 z-10 select-none">
               {art.info}
             </p>
             <div class="tape-section"></div>

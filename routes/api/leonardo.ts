@@ -239,10 +239,10 @@ export const handler = async (
         htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.nationality_period", { ns: "translation" })}</p>`;
         
         if (countryResult) {
-          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.for", { ns: "translation" })} "<strong>${countryResult.name}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/${pagectx[2]}.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="${countryResult.name}" draggable=${draggable}/></span></p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.for", { ns: "translation" })} "<strong>${countryResult.name}</strong>" ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/icons/${pagectx[2]}.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="${countryResult.name}" draggable=${draggable}/></span></p>`;
         }
         else {
-          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/flags/Monde.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
+          htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.artists_displayed", { ns: "translation" })} ${i18next.t("leonardo.between_the_year", { ns: "translation" })} <strong>${pagectx[0]}</strong> ${i18next.t("leonardo.and_year", { ns: "translation" })} <strong>${pagectx[1]}</strong> &nbsp; <span class="inline-block"><img src="/icons/Monde.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
         }
         break;
 
@@ -269,10 +269,10 @@ export const handler = async (
         htmlContent += `
           <p class="text-[1.18rem] leading-none mb-2">${i18next.t("leonardo.lng", { ns: "translation" })} &nbsp;
             <button onclick="handleLanguage('en')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/Royaume-Uni.png" alt="en" draggable=false/>
+              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Royaume-Uni.png" alt="en" draggable=false/>
             </button>
             <button onclick="handleLanguage('fr')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/France.png" alt="fr" draggable=false/>
+              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/France.png" alt="fr" draggable=false/>
             </button>
           </p>
         `;
@@ -283,7 +283,7 @@ export const handler = async (
           <p class="text-[1rem] leading-none mb-2">
             ${i18next.t("leonardo.or_click", { ns: "translation" })} 
             <a href="/worldmap" class="appear-effect-very-fast-fadein inline-block align-middle" draggable=false>
-              <img class="w-10 h-auto inline-block transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/flags/Monde.png" alt="world" draggable=false/>
+              <img class="w-10 h-auto inline-block transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Monde.png" alt="world" draggable=false/>
             </a> 
             ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}
           </p>

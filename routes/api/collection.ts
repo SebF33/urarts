@@ -1,4 +1,4 @@
-import { ArtCollection } from "@utils/types.d.ts";
+import { ArtCollection, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { RouteContext } from "$fresh/server.ts";
@@ -78,10 +78,8 @@ export const handler = async (
       "polyptych", "frame",
       "url", "url_2", "url_3", "url_4", "url_5",
       "gap_1", "gap_2", "gap_3", "gap_4", "gap_5",
-      // si l'œuvre est toute seule on ajoute la classe 'art-wide'
-      sql<{
-        custom_css: string
-      }>`
+      // ajouter la classe 'art-wide' si l'œuvre est toute seule
+      sql<{custom_css: string}>`
         CASE
           WHEN ${isAlone} AND "custom_css" <> 'art-wide'
           THEN "custom_css" || ' art-wide'
@@ -91,6 +89,26 @@ export const handler = async (
       "color",
       "artist.slug as artist_slug",
       "copyright",
+      // agréger les tags en JSON
+      sql<TagCollection[]>`
+        COALESCE(
+          (
+            SELECT json_group_array(json(tag_json))
+            FROM (
+              SELECT json_object(
+                'id', t.id,
+                'name', name,
+                'slug', t.slug
+              ) AS tag_json
+              FROM art_tag at
+              JOIN tag t ON t.id = at.tag_id
+              WHERE at.art_id = art.id
+              ORDER BY name
+            )
+          ),
+          json('[]')
+        )
+      `.as('tags')
     ])
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
@@ -151,7 +169,10 @@ export const handler = async (
       return ctx.renderNotFound();
   }
 
-  results = await artQuery.execute();
+  results = (await artQuery.execute()).map(row => ({
+    ...row,
+    tags: typeof row.tags === "string" ? JSON.parse(row.tags) : (row.tags || [])
+  }));  
 
 
   return Promise.resolve(

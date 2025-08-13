@@ -191,7 +191,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
           >
             <img
               class={worldFlagClasses}
-              src="/flags/Monde.png"
+              src="/icons/Monde.png"
               alt="Monde"
               title="Monde"
               draggable={draggable}
@@ -206,7 +206,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/France.png"
+                    src="/icons/France.png"
                     alt="France"
                     title="France"
                     draggable={draggable}
@@ -218,7 +218,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Espagne.png"
+                    src="/icons/Espagne.png"
                     alt="Espagne"
                     title="Espagne"
                     draggable={draggable}
@@ -230,7 +230,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Portugal.png"
+                    src="/icons/Portugal.png"
                     alt="Portugal"
                     title="Portugal"
                     draggable={draggable}
@@ -242,7 +242,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Italie.png"
+                    src="/icons/Italie.png"
                     alt="Italie"
                     title="Italie"
                     draggable={draggable}
@@ -254,7 +254,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Pays-Bas.png"
+                    src="/icons/Pays-Bas.png"
                     alt="Pays-Bas"
                     title="Pays-Bas"
                     draggable={draggable}
@@ -266,7 +266,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Belgique.png"
+                    src="/icons/Belgique.png"
                     alt="Belgique"
                     title="Belgique"
                     draggable={draggable}
@@ -288,7 +288,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Pologne.png"
+                    src="/icons/Pologne.png"
                     alt="Pologne"
                     title="Pologne"
                     draggable={draggable}
@@ -309,7 +309,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Allemagne.png"
+                    src="/icons/Allemagne.png"
                     alt="Allemagne"
                     title="Allemagne"
                     draggable={draggable}
@@ -321,7 +321,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Autriche.png"
+                    src="/icons/Autriche.png"
                     alt="Autriche"
                     title="Autriche"
                     draggable={draggable}
@@ -333,7 +333,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses1}
-                    src="/flags/Hongrie.png"
+                    src="/icons/Hongrie.png"
                     alt="Hongrie"
                     title="Hongrie"
                     draggable={draggable}
@@ -350,7 +350,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Suisse.png"
+                    src="/icons/Suisse.png"
                     alt="Suisse"
                     title="Suisse"
                     draggable={draggable}
@@ -362,7 +362,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Finlande.png"
+                    src="/icons/Finlande.png"
                     alt="Finlande"
                     title="Finlande"
                     draggable={draggable}
@@ -374,7 +374,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Norvège.png"
+                    src="/icons/Norvège.png"
                     alt="Norvège"
                     title="Norvège"
                     draggable={draggable}
@@ -386,7 +386,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Suède.png"
+                    src="/icons/Suède.png"
                     alt="Suède"
                     title="Suède"
                     draggable={draggable}
@@ -398,7 +398,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Danemark.png"
+                    src="/icons/Danemark.png"
                     alt="Danemark"
                     title="Danemark"
                     draggable={draggable}
@@ -410,7 +410,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Tchécoslovaquie.png"
+                    src="/icons/Tchécoslovaquie.png"
                     alt="Tchécoslovaquie"
                     title="Tchécoslovaquie"
                     draggable={draggable}
@@ -432,7 +432,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Ukraine.png"
+                    src="/icons/Ukraine.png"
                     alt="Ukraine"
                     title="Ukraine"
                     draggable={draggable}
@@ -453,7 +453,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Arménie.png"
+                    src="/icons/Arménie.png"
                     alt="Arménie"
                     title="Arménie"
                     draggable={draggable}
@@ -465,7 +465,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Biélorussie.png"
+                    src="/icons/Biélorussie.png"
                     alt="Biélorussie"
                     title="Biélorussie"
                     draggable={draggable}
@@ -477,7 +477,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses2}
-                    src="/flags/Russie.png"
+                    src="/icons/Russie.png"
                     alt="Russie"
                     title="Russie"
                     draggable={draggable}
@@ -494,7 +494,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Japon.png"
+                    src="/icons/Japon.png"
                     alt="Japon"
                     title="Japon"
                     draggable={draggable}
@@ -506,7 +506,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Vietnam.png"
+                    src="/icons/Vietnam.png"
                     alt="Vietnam"
                     title="Vietnam"
                     draggable={draggable}
@@ -518,7 +518,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Chine.png"
+                    src="/icons/Chine.png"
                     alt="Chine"
                     title="Chine"
                     draggable={draggable}
@@ -530,7 +530,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Grèce.png"
+                    src="/icons/Grèce.png"
                     alt="Grèce"
                     title="Grèce"
                     draggable={draggable}
@@ -542,7 +542,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Royaume-Uni.png"
+                    src="/icons/Royaume-Uni.png"
                     alt="Royaume-Uni"
                     title="Royaume-Uni"
                     draggable={draggable}
@@ -564,7 +564,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Colombie.png"
+                    src="/icons/Colombie.png"
                     alt="Colombie"
                     title="Colombie"
                     draggable={draggable}
@@ -585,7 +585,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Mexique.png"
+                    src="/icons/Mexique.png"
                     alt="Mexique"
                     title="Mexique"
                     draggable={draggable}
@@ -597,7 +597,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/États-Unis d'Amérique.png"
+                    src="/icons/États-Unis d'Amérique.png"
                     alt="États-Unis d'Amérique"
                     title="États-Unis d'Amérique"
                     draggable={draggable}
@@ -609,7 +609,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 >
                   <img
                     class={flagClasses3}
-                    src="/flags/Canada.png"
+                    src="/icons/Canada.png"
                     alt="Canada"
                     title="Canada"
                     draggable={draggable}

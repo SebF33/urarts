@@ -244,7 +244,7 @@ export default function ArtistsLayout(
                 <ul class={`artist-side z-20`}>
                   <a href={"/artists?nationality=" + p.nationality} class={`w-7`}>
                     <img
-                      src={"/flags/" + p.nationality + ".png"}
+                      src={"/icons/" + p.nationality + ".png"}
                       alt="flag-symbol"
                       draggable={draggable}
                       class={`${css({"filter": "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))"})}`}

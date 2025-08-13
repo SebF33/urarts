@@ -38,7 +38,7 @@ export function WorldArtistsPanel(
           >
             <div className="flex items-center">
               <img
-                src={`/flags/${country}.png`}
+                src={`/icons/${country}.png`}
                 alt={country}
                 title={country}
                 className={`w-6 h-4 mr-2 object-cover ${css({"filter": "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))"})}`}
