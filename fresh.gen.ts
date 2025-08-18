@@ -12,6 +12,7 @@ import * as $api_arts from "./routes/api/arts.ts";
 import * as $api_collection from "./routes/api/collection.ts";
 import * as $api_leonardo from "./routes/api/leonardo.ts";
 import * as $art_slug_ from "./routes/art/[slug].tsx";
+import * as $art_slug_gallery from "./routes/art/[slug]/gallery.tsx";
 import * as $artists from "./routes/artists.tsx";
 import * as $arts from "./routes/arts.tsx";
 import * as $background_gray from "./routes/background/gray.tsx";
@@ -72,6 +73,7 @@ const manifest = {
     "./routes/api/collection.ts": $api_collection,
     "./routes/api/leonardo.ts": $api_leonardo,
     "./routes/art/[slug].tsx": $art_slug_,
+    "./routes/art/[slug]/gallery.tsx": $art_slug_gallery,
     "./routes/artists.tsx": $artists,
     "./routes/arts.tsx": $arts,
     "./routes/background/gray.tsx": $background_gray,

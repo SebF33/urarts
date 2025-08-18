@@ -8,6 +8,8 @@ import ToBottomButton from "@islands/ToBottomButton.tsx";
 import ToTopButton from "@islands/ToTopButton.tsx";
 
 export default defineApp((_, ctx) => {
+  const isPersoGallery = ctx.url.pathname.endsWith("/gallery");
+
   return (
     <html lang="en">
       <head>
@@ -89,9 +91,9 @@ export default defineApp((_, ctx) => {
         class={`flex flex-col min-h-screen font-brush`}
       >
         <Partial name="body">
-          <Nav url={ctx.url} />
+          {!isPersoGallery && <Nav url={ctx.url} />}
           <ctx.Component />
-          <ToBottomButton />
+          {!isPersoGallery && <ToBottomButton />}
           <ToTopButton />
         </Partial>
       </body>

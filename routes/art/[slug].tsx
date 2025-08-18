@@ -164,6 +164,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
   } = props.data;
 
   const draggable = false;
+  const isPersoGallery = props.url.pathname.endsWith("/gallery");
 
 
   return (
@@ -218,7 +219,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
 
               {site && (
                 <div class="relative w-11/12 mt-3 sm:mt-2">
-                  <div class="paper min-h-8 max-w-[230px] ml-auto z-10 shadow-none">
+                  <div class="paper min-h-8 max-w-[240px] ml-auto z-10 shadow-none">
                     <div class="top-tape"></div>
                     <a href={site} class="text-lighterdark text-base italic underline z-10 select-none" target="_blank" rel="noopener" draggable={draggable}>
                       {site}
@@ -245,7 +246,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
 
           {copyright !== 2 ? (
             <Partial name="artist-collection">
-              <CollectionSearch query={queryParameters} myslug={slug} type="artist" />
+              <CollectionSearch ispersogallery={isPersoGallery} query={queryParameters} myslug={slug} type="artist" />
             </Partial>
           ) : (
             <Copyright />
@@ -253,13 +254,17 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
         </div>
       </main>
 
-      <WaterDrop
-        backgroundColor="gray"
-        color={color}
-        isDropy
-        pencilColor={secondaryColor}
-      />
-      <Footer color={color} />
+      {!isPersoGallery && (
+        <>
+          <WaterDrop
+            backgroundColor="gray"
+            color={color}
+            isDropy
+            pencilColor={secondaryColor}
+          />
+          <Footer color={color} />
+        </>
+      )}
     </>
   );
 }

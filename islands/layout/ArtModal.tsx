@@ -1,6 +1,7 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { artModalOpenSignal } from "@utils/signals.ts";
 import { BG_STYLE, DELAY_MODAL_CLOSE, TALENTS } from "@utils/constants.ts";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
@@ -11,12 +12,13 @@ import { ButtonCross } from "@components/Assets.tsx";
 
 type ArtModalProps = {
   readonly art: ArtCollection;
+  readonly ispersogallery?: boolean;
   readonly panel: string;
   readonly url: string;
 };
 
 
-export default function ArtModal({ art, panel, url }: ArtModalProps) {
+export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
@@ -24,6 +26,37 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   const draggable = false;
   const rotationClasses: string[] = ['-rotate-2', 'rotate-1', '-rotate-3', 'rotate-2', '-rotate-1', 'rotate-3'];
 
+
+  // Background de la modal
+  const isPersoGallery = !!ispersogallery;
+  const basePath = isPersoGallery ? "../../textures/" : "../textures/";
+  const rawBgStyle = BG_STYLE[art.movement_slug];
+  const resolvedBgStyle = rawBgStyle
+    ? {
+        ...rawBgStyle,
+        background: rawBgStyle.background.replace("../textures/", basePath),
+      }
+    : {
+        background: `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
+        backgroundSize: "480px",
+      };
+
+  // Style pour page perso
+  const LinksDisablerStyle = (
+    isPersoGallery ? (
+      <style>
+        {`
+          .art-modal-container.no-links a,
+          .art-modal-container.no-links a * {
+            pointer-events: none;
+            cursor: default;
+            text-decoration: none !important;
+          }
+        `}
+      </style>
+    ) : null
+  );
+  
   
   // Créer un conteneur de portail dans le body
   useEffect(() => {
@@ -116,6 +149,33 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
   };
 
 
+  // Pas de liens si page perso
+  useEffect(() => {
+    if (!isPersoGallery || !modalRef.current) return;
+
+    const anchors = modalRef.current.querySelectorAll<HTMLAnchorElement>("a");
+    anchors.forEach((a) => {
+      if (a.hasAttribute("href")) {
+        a.dataset.href = a.getAttribute("href") || "";
+        a.removeAttribute("href");
+      }
+      a.setAttribute("aria-disabled", "true");
+      a.setAttribute("tabindex", "-1");
+    });
+
+    return () => {
+      anchors.forEach((a) => {
+        if (a.dataset.href) {
+          a.setAttribute("href", a.dataset.href);
+          delete a.dataset.href;
+        }
+        a.removeAttribute("aria-disabled");
+        a.removeAttribute("tabindex");
+      });
+    };
+  }, [isPersoGallery, isVisible]);
+
+
   // Panneau
   function panelText(panel: string) {
     let txt = '';
@@ -139,13 +199,14 @@ export default function ArtModal({ art, panel, url }: ArtModalProps) {
       class={`fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 z-[99999]
       overlay-transition ${isVisible ? "visible" : ""}`}
     >
+      {LinksDisablerStyle}
 
       {/* Modal */}
       <div
         ref={modalRef}
         onClick={(event) => event.stopPropagation()}
-        class={`art-modal-container relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""}`}
-        style={BG_STYLE[art.movement_slug]}
+        class={`art-modal-container relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""} ${isPersoGallery ? "no-links" : ""}`}
+        style={resolvedBgStyle}
       >
         <button
           onClick={handleClose}

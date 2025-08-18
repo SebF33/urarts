@@ -18,6 +18,7 @@ type Arts = Array<ArtCollection>;
 interface ArtsLayoutProps {
   readonly arts: Arts;
   readonly font?: string;
+  readonly ispersogallery?: boolean;
   readonly type?: string;
 }
 
@@ -46,6 +47,10 @@ export default function ArtsLayout(
   const [selectedPanel, setSelectedPanel] = useState<string>("");
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  
+  const draggable = false;
+  const isPersoGallery = !!props.ispersogallery;
+
 
   // Rendu des œuvres d'art
   const displayedArts = display ? props.arts.slice(0, displayedArtIndex + NB_LOADING_ARTS) : [];
@@ -60,8 +65,6 @@ export default function ArtsLayout(
         url: item.url
       }));
   }, [props.arts]);
-  
-  const draggable = false;
 
 
   // Délai d'affichage initial
@@ -116,12 +119,14 @@ export default function ArtsLayout(
             <p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         } else {
-          content =
-            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
-            <p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}" f-client-nav={false}>${p.movement}</a></strong></p>
-            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" f-client-nav={false}>${p.last_name}</a></strong></p>
-            <p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>
-            <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
+          const parts = [
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>`,
+            !isPersoGallery && `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}" f-client-nav="false">${p.movement}</a></strong></p>`,
+            !isPersoGallery && `<p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" f-client-nav="false">${p.last_name}</a></strong></p>`,
+            `<p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>`,
+            `<p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`,
+          ];
+          content = parts.filter(Boolean).join("");
         }
 
         tippy(artElement, {
@@ -165,12 +170,13 @@ export default function ArtsLayout(
       <div className="appear-effect-fast-fadein flex flex-col mx-auto mt-4 max-w-[600px] items-center justify-center">
         {/* Galerie roulante */}
         {galleryImages && galleryImages.length > 9 ? (
-            <RollingGallery
-              autoplay={true}
-              images={galleryImages}
-              pauseOnHover={true}
-              type={props.type}
-            />
+          <RollingGallery
+            autoplay={true}
+            images={galleryImages}
+            ispersogallery={isPersoGallery}
+            pauseOnHover={true}
+            type={props.type}
+          />
         ) : null}
       </div>
       <div class="flex flex-wrap mx-auto md:mx-10 mb-48">
@@ -426,7 +432,12 @@ export default function ArtsLayout(
 
         {/* Modal */}
         {artModalOpenSignal.value && (
-          <ArtModal art={selectedArt} panel={selectedPanel} url={selectedUrl} />
+          <ArtModal
+            art={selectedArt}
+            ispersogallery={isPersoGallery}
+            panel={selectedPanel}
+            url={selectedUrl}
+          />
         )}
       </div>
     </>

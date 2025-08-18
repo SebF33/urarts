@@ -19,12 +19,15 @@ export default function RollingGallery(
   props: {
     readonly autoplay: boolean;
     readonly images: GalleryImage[];
+    readonly ispersogallery?: boolean;
     readonly pauseOnHover: boolean;
     readonly type: string;
   },
 ) {
   const innerWidth = 768;
   const [isScreenSizeSm, setIsScreenSizeSm] = useState(globalThis.innerWidth <= innerWidth);
+
+  const isPersoGallery = !!props.ispersogallery;
 
   const autoplayRef = useRef();
   const controls = useAnimation();
@@ -145,7 +148,7 @@ export default function RollingGallery(
                 transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`}}
             >
               <a
-                href={"/art/" + p.artist_slug + "?alone&id=" + p.id}
+                href={`/art/${p.artist_slug}${isPersoGallery ? "/gallery" : ""}?alone&id=${p.id}`}
                 onClick={handleClick}
                 class="cursor-pointer"
                 draggable={draggable}

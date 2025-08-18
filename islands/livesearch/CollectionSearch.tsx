@@ -17,8 +17,9 @@ import { SearchInput } from "@components/SearchInput.tsx";
 type Arts = Array<ArtCollection>;
 export interface Props {
   font?: string;
-  query?: object;
+  ispersogallery?: boolean;
   myslug: string;
+  query?: object;
   type: string;
 }
 
@@ -27,6 +28,9 @@ export default function CollectionSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
+
+  const isPersoGallery = !!props.ispersogallery;
+
 
   // Appel à l'API "Collection"
   useEffect(() => {
@@ -71,6 +75,7 @@ export default function CollectionSearch(props: Props) {
     const body = document.querySelector("body");
     const main = document.querySelector<HTMLElement>('[data-name="collection"]');
     const styleForSlug = BG_STYLE[props.myslug];
+    const basePath = isPersoGallery ? "../../textures/" : "../textures/";
 
     if (body) {
       body.style.backgroundColor = colorScheme[currentColorScheme].gray;
@@ -79,13 +84,13 @@ export default function CollectionSearch(props: Props) {
     if (main && styleForSlug) {
       // Défini dans BG_STYLE
       const { background, backgroundSize } = styleForSlug;
-      main.style.background = background;
+      main.style.background = background.replace("../textures/", basePath);
       main.style.backgroundAttachment = "local";
       main.style.backgroundPosition = "center";
       main.style.backgroundSize = backgroundSize;
     } else if (main) {
       // Fallback si non défini dans BG_STYLE
-      main.style.background = `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`;
+      main.style.background = `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`;
       main.style.backgroundAttachment = "local";
       main.style.backgroundPosition = "center";
       main.style.backgroundSize = "480px";
@@ -115,6 +120,7 @@ export default function CollectionSearch(props: Props) {
       <ArtsLayout
         arts={searchResults}
         font={props.font}
+        ispersogallery={isPersoGallery}
       />
     </div>
   );
