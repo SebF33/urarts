@@ -49,7 +49,9 @@ html {
 
 /* Curseurs */
 .cursor-auto,
-body {
+body,
+.art-modal-container.no-links a,
+.art-modal-container.no-links a * {
     cursor: url(/cursors/cursor-auto.png), auto !important;
 }
 

@@ -46,11 +46,14 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     isPersoGallery ? (
       <style>
         {`
-          .art-modal-container.no-links a,
-          .art-modal-container.no-links a * {
-            pointer-events: none;
-            cursor: default;
+          .art-modal-container.no-links a {
             text-decoration: none !important;
+          }
+          .art-modal-container.no-links a:not(:has(img)) {
+            pointer-events: none !important;
+          }
+          .art-modal-container.no-links a img {
+            pointer-events: auto !important;
           }
         `}
       </style>
@@ -244,7 +247,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
             {/* Artiste et mouvement */}
-            <div class="flex gap-4 mb-4">
+            <div class="flex gap-4 m-auto md:m-2">
               <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3 overflow-hidden`}>
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
                 <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1">
@@ -279,7 +282,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
             </div>
             {/* Tags de l'œuvre */}
             {art.tags && art.tags.length > 0 && (
-              <div class="flex flex-wrap gap-3 mb-4">
+              <div class="flex flex-wrap gap-3 my-4">
                 {art.tags.map((tag, idx) => (
                   <div
                     key={idx}
@@ -295,6 +298,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                         <img
                           src={`/icons/${tag.name}.png`}
                           alt={tag.name}
+                          title={tag.name}
                           class="w-8"
                           draggable={draggable}
                         />
