@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2025-08-20]
+
+### Nouveautés
+- Ajout des pages des œuvres par thématique.
+
 ## [2025-05-15]
 
 ### Nouveautés

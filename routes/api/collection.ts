@@ -158,6 +158,24 @@ export const handler = async (
         .limit(50)
       break;
 
+    case "tag":
+      artQuery = artQuery
+        .where((eb) =>
+          eb.exists(
+            db.selectFrom("art_tag as at")
+              .innerJoin("tag as t", "t.id", "at.tag_id")
+              .select(sql`1`)
+              .whereRef("at.art_id", "=", "art.id")
+              .where("t.slug", "=", slugFilter)
+          )
+        )
+        .where("artist.slug", "not in", TALENTS)
+        .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
+        .orderBy(sql`random()`)
+        .orderBy(({ fn }) => fn("lower", ["art.name"]))
+        .limit(50);
+      break;
+
     case "talentsart":
       artQuery = artQuery
         .where("artist.slug", "in", TALENTS)

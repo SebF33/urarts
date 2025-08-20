@@ -79,3 +79,11 @@ export type MovementRow = {
   name: string;
   slug: string;
 };
+
+export type TagConst = {
+  name: string;
+  name_en: string;
+  info: string;
+  info_en: string;
+  slug: string;
+};

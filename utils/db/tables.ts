@@ -260,6 +260,22 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("name", "varchar", (col) => col.notNull().unique())
     .addColumn("name_en", "varchar", (col) => col.notNull().unique())
+    .addColumn(
+      "info",
+      "varchar(500)",
+      (col) =>
+        col.defaultTo(
+          sql`"La description est à faire pour ce tag."`,
+        ).notNull(),
+    )
+    .addColumn(
+      "info_en",
+      "varchar(500)",
+      (col) =>
+        col.defaultTo(
+          sql`"The description is to be made for this tag."`,
+        ).notNull(),
+    )
     .addColumn("slug", "varchar", (col) => col.notNull().unique())
     .addColumn(
       "modified_at",

@@ -24,6 +24,7 @@ import * as $index from "./routes/index.tsx";
 import * as $indicators from "./routes/indicators.tsx";
 import * as $movement_slug_ from "./routes/movement/[slug].tsx";
 import * as $movements from "./routes/movements.tsx";
+import * as $tag_slug_ from "./routes/tag/[slug].tsx";
 import * as $talents from "./routes/talents.tsx";
 import * as $women from "./routes/women.tsx";
 import * as $worldmap from "./routes/worldmap.tsx";
@@ -85,6 +86,7 @@ const manifest = {
     "./routes/indicators.tsx": $indicators,
     "./routes/movement/[slug].tsx": $movement_slug_,
     "./routes/movements.tsx": $movements,
+    "./routes/tag/[slug].tsx": $tag_slug_,
     "./routes/talents.tsx": $talents,
     "./routes/women.tsx": $women,
     "./routes/worldmap.tsx": $worldmap,

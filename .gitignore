@@ -10,6 +10,7 @@ TO_DO_LIST.md
 /static/icons
 /static/signs
 /static/symbols
+/static/tags
 /static/textures
 /utils/db/artist_art
 /utils/db/country.ts

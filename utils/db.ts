@@ -20,8 +20,10 @@ interface CountryTable {
 
 interface TagTable {
   id: Generated<number>;
-  name: string; //
-  name_en: string; //
+  name: string; // Nom du tag (fr)
+  name_en: string; // Nom du tag (en)
+  info: string; // Informations sur le tag (fr)
+  info_en: string; // Informations sur le tag (en)
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
@@ -121,6 +123,7 @@ export type Art = Selectable<ArtTable>;
 export type Artist = Selectable<ArtistTable>;
 export type Country = Selectable<CountryTable>;
 export type Movement = Selectable<MovementTable>;
+export type Tag = Selectable<TagTable>;
 
 export interface DbSchema {
   art: ArtTable;

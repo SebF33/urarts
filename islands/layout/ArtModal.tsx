@@ -24,7 +24,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   const portalRef = useRef<HTMLDivElement | null>(null);
 
   const draggable = false;
-  const rotationClasses: string[] = ['-rotate-2', 'rotate-1', '-rotate-3', 'rotate-2', '-rotate-1', 'rotate-3'];
+  const rotationClasses: string[] = ['rotate-3', '-rotate-6', 'rotate-2', '-rotate-2', 'rotate-1', '-rotate-3'];
 
 
   // Background de la modal
@@ -246,6 +246,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
+
             {/* Artiste et mouvement */}
             <div class="flex gap-4 m-auto md:m-2">
               <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3 overflow-hidden`}>
@@ -280,6 +281,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 </div>
               )}
             </div>
+
             {/* Tags de l'œuvre */}
             {art.tags && art.tags.length > 0 && (
               <div class="flex flex-wrap gap-3 my-4">
@@ -289,7 +291,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                     class={`paper paper-shadow overflow-hidden rounded-md transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px]`}
                   >
                     <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
-                    <div class="flex items-center gap-2 px-2 py-1">
+                    <div class="flex flex-col items-center gap-1 px-2 py-1">
                       <a
                         href={`/tag/${tag.slug}`}
                         class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
@@ -303,6 +305,14 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                           draggable={draggable}
                         />
                       </a>
+                      {isPersoGallery && (
+                        <span
+                          class="block text-[11px] sm:text-xs leading-4 text-lighterdark text-center w-full truncate"
+                          title={tag.name}
+                        >
+                          {tag.name}
+                        </span>
+                      )}
                     </div>
                   </div>
                 ))}
