@@ -1,4 +1,5 @@
 import { ArtistQuote } from "@utils/types.d.ts";
+import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
@@ -12,6 +13,7 @@ import Copyright from "@islands/Copyright.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
 
 type Quote = Array<ArtistQuote>;
 
@@ -254,7 +256,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
         </div>
       </main>
 
-      {!isPersoGallery && (
+      {!isPersoGallery ? (
         <>
           <WaterDrop
             backgroundColor="gray"
@@ -263,8 +265,19 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             pencilColor={secondaryColor}
           />
           <Footer color={color} />
-        </>
-      )}
+          </>
+        ) : (
+          <footer class={`relative bottom-0 w-full text-white z-50 ${css({"background-color": `${color}`})}`}>
+            <div class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}>
+              <div class={`mt-8 md:mt-0 md:order-1`}>
+                <p className="text-center text-lg md:text-xl font-bold">
+                  © {birthyear}–{new Date().getFullYear()} {artist}
+                </p>
+              </div>
+            </div>
+          </footer>
+        )
+      }
     </>
   );
 }
