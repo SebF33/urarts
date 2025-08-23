@@ -27,7 +27,7 @@ export default function RollingGallery(
   const innerWidth = 768;
   const [isScreenSizeSm, setIsScreenSizeSm] = useState(globalThis.innerWidth <= innerWidth);
 
-  const isPersoGallery = !!props.ispersogallery;
+  const isPersoGallery: boolean = !!props.ispersogallery;
 
   const autoplayRef = useRef();
   const controls = useAnimation();

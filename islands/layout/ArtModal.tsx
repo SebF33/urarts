@@ -1,11 +1,22 @@
 import { ArtCollection } from "@utils/types.d.ts";
-import { artModalOpenSignal } from "@utils/signals.ts";
-import { BG_STYLE, DELAY_MODAL_CLOSE, TALENTS } from "@utils/constants.ts";
+import {
+  artistNameSignal,
+  artistSlugSignal,
+  artModalOpenSignal,
+  isClickableSignal,
+  isForAloneArtistSignal,
+} from "@utils/signals.ts";
+import {
+  BG_STYLE,
+  DELAY_MODAL_CLOSE,
+  DELAY_REACH_ART_FROM_MODAL,
+  TALENTS,
+} from "@utils/constants.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 import { ButtonCross } from "@components/Assets.tsx";
 
@@ -23,23 +34,11 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
 
-  const draggable = false;
-  const rotationClasses: string[] = ['rotate-3', '-rotate-6', 'rotate-2', '-rotate-2', 'rotate-1', '-rotate-3'];
-
-
-  // Background de la modal
   const isPersoGallery = !!ispersogallery;
   const basePath = isPersoGallery ? "../../textures/" : "../textures/";
-  const rawBgStyle = BG_STYLE[art.movement_slug];
-  const resolvedBgStyle = rawBgStyle
-    ? {
-        ...rawBgStyle,
-        background: rawBgStyle.background.replace("../textures/", basePath),
-      }
-    : {
-        background: `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
-        backgroundSize: "480px",
-      };
+
+  const draggable = false;
+  const rotationClasses: string[] = ['rotate-3', '-rotate-6', 'rotate-2', '-rotate-2', 'rotate-1', '-rotate-3'];
 
   // Style pour page perso
   const LinksDisablerStyle = (
@@ -59,8 +58,24 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       </style>
     ) : null
   );
-  
-  
+
+
+  // Background de la modal
+  const resolvedBgStyle = useMemo(() => {
+    const rawBgStyle = BG_STYLE[art.movement_slug];
+    
+    return rawBgStyle
+      ? {
+          ...rawBgStyle,
+          background: rawBgStyle.background.replace("../textures/", basePath),
+        }
+      : {
+          background: `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
+          backgroundSize: "480px",
+        };
+  }, [ispersogallery, art.movement_slug]);
+
+
   // Créer un conteneur de portail dans le body
   useEffect(() => {
     portalRef.current = document.createElement("div");
@@ -146,6 +161,46 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     };
   }, [isVisible]);
 
+
+  // Clic sur un lien dans la modal
+  const handleLinkClick = (event: MouseEvent, href: string) => {
+    // pas d'action si le clic n'est pas autorisé
+    if (!isClickableSignal.value) return;
+    // pas d'action pour une page perso
+    if (isPersoGallery) return;
+
+    // désactiver les clics pendant le délai
+    isClickableSignal.value = false;
+
+    event.preventDefault();
+
+    // on précise que c'est pour du contenu concernant seulement un(e) artiste
+    isForAloneArtistSignal.value = true;
+    artistNameSignal.value = art.last_name;
+    artistSlugSignal.value = art.artist_slug;
+    
+    // si c'est dans une page perso
+    //const finalHref = isPersoGallery ? `${href}/gallery` : href;
+
+    // fermer la modal
+    handleClose();
+
+    // pour préserver la navigation Fresh côté client
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = href;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, DELAY_REACH_ART_FROM_MODAL);
+
+    // réactiver les clics après le délai
+    setTimeout(() => {
+      isClickableSignal.value = true;
+    }, DELAY_REACH_ART_FROM_MODAL + 200);
+  };
+
+
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
@@ -207,7 +262,6 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       {/* Modal */}
       <div
         ref={modalRef}
-        onClick={(event) => event.stopPropagation()}
         class={`art-modal-container relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""} ${isPersoGallery ? "no-links" : ""}`}
         style={resolvedBgStyle}
       >
@@ -253,7 +307,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
                 <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1">
                   <a
-                    href={`/art/${art.artist_slug}`}
+                    onClick={(e) => handleLinkClick(e, `/art/${art.artist_slug}`)}
                     class="text-sm sm:text-base leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
                     title={(art.first_name ?? "") + " " + art.last_name}
                     draggable={draggable}
@@ -272,7 +326,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] z-10 transform rotate-6">
                   <div class="top-tape"></div>
                   <a
-                    href={`/movement/${art.movement_slug}`}
+                    onClick={(e) => handleLinkClick(e, `/movement/${art.movement_slug}`)}
                     class={`text-base italic leading-4 underline px-2 py-1 select-none`}
                     draggable={draggable}
                   >
@@ -293,7 +347,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                     <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
                     <div class="flex flex-col items-center gap-1 px-2 py-1">
                       <a
-                        href={`/tag/${tag.slug}`}
+                        onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
                         class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
                         draggable={draggable}
                       >
@@ -305,14 +359,12 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                           draggable={draggable}
                         />
                       </a>
-                      {isPersoGallery && (
-                        <span
-                          class="block text-[11px] sm:text-xs leading-4 text-lighterdark text-center w-full truncate"
-                          title={tag.name}
-                        >
-                          {tag.name}
-                        </span>
-                      )}
+                      <span
+                        class="block text-[11px] sm:text-xs leading-4 text-lighterdark text-center w-full truncate"
+                        title={tag.name}
+                      >
+                        {tag.name}
+                      </span>
                     </div>
                   </div>
                 ))}

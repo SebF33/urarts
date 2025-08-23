@@ -450,7 +450,7 @@ export default function Nav(props: Props) {
               <WomanIcon />
             </a>
             <a
-              href="/art/mimi" f-client-nav={false}
+              href="/art/mimi"
               id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
@@ -559,7 +559,7 @@ export default function Nav(props: Props) {
             </div>
             <div class={`w-[50px]`}>
               <a
-                href="/art/mimi" f-client-nav={false}
+                href="/art/mimi"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
               >

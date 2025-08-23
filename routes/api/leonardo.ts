@@ -109,7 +109,7 @@ export const handler = async (
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
         
         newArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
         });
         break;
   
@@ -132,7 +132,7 @@ export const handler = async (
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_public_domain_artists", { ns: "translation" })}</strong></h2>`;
         
         publicDomainArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" f-client-nav={false} class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `<a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
         });
         break;
   
@@ -210,7 +210,7 @@ export const handler = async (
 
           if (isAlone) {
             htmlContent = `<h2>${i18next.t("leonardo.art", { ns: "translation" })} "<strong>${artResults.name}</strong>" ${i18next.t("leonardo.from_artist", { ns: "translation" })} <strong style="color:${artistResult.color}">${artistResult.last_name}</strong>.</h2>`;
-            htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_arts", { ns: "translation" })} <a href="/art/${artistResult.slug}" f-client-nav={false} class="inline-block"><span class="underline">${i18next.t("leonardo.here", { ns: "translation" })}</span></a>.</p>`;
+            htmlContent += `<p class="text-[1rem] leading-none mt-3">${i18next.t("leonardo.discover_arts", { ns: "translation" })} <a href="/art/${artistResult.slug}" class="inline-block"><span class="underline">${i18next.t("leonardo.here", { ns: "translation" })}</span></a>.</p>`;
           }
         }
         break;

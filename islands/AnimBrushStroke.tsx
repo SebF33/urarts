@@ -1,3 +1,4 @@
+import { artistNameSignal, isForAloneArtistSignal } from "@utils/signals.ts";
 import { css } from "@twind/core";
 import { Fragment } from "preact";
 import { useEffect, useState } from "preact/hooks";
@@ -9,6 +10,7 @@ export default function AnimBrushStroke(
     font: string;
     secondaryColor: string;
     title: string;
+    type: string;
   },
 ) {
   const [showAnimBrushStroke, setShowAnimBrushStroke] = useState<boolean>(false);
@@ -55,7 +57,13 @@ export default function AnimBrushStroke(
                 css({color: `${props.secondaryColor}`})
               }`}
             >
-              {props.title}
+              {isForAloneArtistSignal.value && props.type === 'movement' ? (
+                <>
+                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`selon ${artistNameSignal.value}`}</span>
+                </>
+              ) : (
+                props.title
+              )}
             </h1>
           </div>
           <svg

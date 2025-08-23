@@ -42,6 +42,10 @@ export const handler = async (
   query = url.searchParams.get("type") || "";
   const type = query.length ? encodeURIComponent(query) : "";
 
+  // Contenu concernant un seul artiste
+  query = url.searchParams.get("aloneartistslug") || "";
+  const aloneArtistSlug = query.length ? encodeURIComponent(query) : "";
+
   // Œuvre identifiée
   query = url.searchParams.get("id") || "";
   const idFilter = query.length ? query : "";
@@ -152,6 +156,7 @@ export const handler = async (
       artQuery = artQuery
         .where("movement.slug", "=", slugFilter)
         .where("artist.slug", "not in", TALENTS)
+        .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
         .orderBy(({ fn }) => fn("lower", ["art.name"]))
@@ -169,7 +174,7 @@ export const handler = async (
               .where("t.slug", "=", slugFilter)
           )
         )
-        .where("artist.slug", "not in", TALENTS)
+        .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
         .orderBy(({ fn }) => fn("lower", ["art.name"]))

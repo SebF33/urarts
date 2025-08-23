@@ -113,7 +113,12 @@ export default function TagPage(props: PageProps<TagPageProps>) {
             </div>
           </div>
 
-          <CollectionSearch font={font} myslug={slug} type="tag" />
+          <CollectionSearch
+            key={`collection-tag-${slug}`}
+            font={font}
+            myslug={slug}
+            type="tag"
+          />
         </div>
       </main>
 

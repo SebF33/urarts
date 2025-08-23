@@ -1,13 +1,14 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head, Partial } from "$fresh/runtime.ts";
+import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
+import ArtistsPapers from "@islands/paper/ArtistsPapers.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
@@ -116,34 +117,25 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
         <div class="relative w-auto flex flex-col mx-auto">
           {/* Post-it : artistes */}
           {artists.length > 0 && (
-            <Partial name="artists-paper">
-              <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible">
-                {artists.map((artist) => (
-                  <div class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position} shadow-none`}>
-                    <div class="top-tape max-h-3"></div>
-                    <a
-                      href={`/art/${artist.slug}`}
-                      class="z-10 text-center text-lighterdark text-xl italic leading-5 underline select-none"
-                      draggable={draggable}
-                    >
-                      {artist.name}
-                    </a>
-                    <img class="w-14 ml-3 p-1" src={artist.avatar_url} alt={artist.name} />
-                  </div>
-                ))}
-              </div>
-            </Partial>
+            <ArtistsPapers
+              artists={artists}
+              draggable={draggable}
+            />
           )}
 
           <div class="mx-auto mt-8 z-10">
+            {/* Coup de pinceau titré */}
             <AnimBrushStroke
+              key={`brushstroke-movement-${slug}`}
               color={colorScheme[currentColorScheme].white}
               font={font}
               secondaryColor={colorScheme[currentColorScheme].lighterdark}
               title={movement}
+              type="movement"
             />
           </div>
 
+          {/* Description */}
           <div class="-mt-44">
             <div class="h-fit bg-lighterdark shadow-2xl">
               <div class="w-11/12 xl:w-3/6 mx-auto pt-48 text-center">
@@ -155,7 +147,13 @@ export default function MovementArtsPage(props: PageProps<MovementPageProps>) {
             </div>
           </div>
 
-          <CollectionSearch font={font} myslug={slug} type="movement" />
+          {/* Œuvres */}
+          <CollectionSearch
+            key={`collection-movement-${slug}`}
+            font={font}
+            myslug={slug}
+            type="movement"
+          />
         </div>
       </main>
 

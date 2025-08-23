@@ -2,7 +2,7 @@ import { ArtistQuote } from "@utils/types.d.ts";
 import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head, Partial } from "$fresh/runtime.ts";
+import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
@@ -11,6 +11,7 @@ import Avatar from "@islands/Avatar.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Copyright from "@islands/Copyright.tsx";
 import Footer from "@islands/footer/Footer.tsx";
+import MovementsPapers from "@islands/paper/MovementsPapers.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
@@ -188,25 +189,30 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
         <div class="relative w-auto flex flex-col mx-auto">
           {/* Post-it : mouvements */}
           {movements.length > 0 && (
-            <div class="invisible md:visible absolute mt-12 ml-16">
-              {movements.map((movement) => (
-                <div class={`paper appear-effect-fast-fadein min-w-[180px] min-h-8 mt-1 ${movement.position} font-${movement.font} shadow-none`}>
-                  <div class="top-tape max-h-3"></div>
-                  <a href={`/movement/${movement.movementSlug}`} class="z-10 px-6 text-lighterdark text-xl italic underline select-none" draggable={draggable}>
-                    {movement.movementName}
-                  </a>
-                </div>
-              ))}
-            </div>
+            <MovementsPapers
+              artistName={artist}
+              artistSlug={slug}
+              draggable={draggable}
+              movements={movements}
+            />
           )}
 
           <div class="mx-auto mt-8 z-10">
-            <AnimBrushStroke color={color} font="brush" secondaryColor={secondaryColor} title={artist} />
+            {/* Coup de pinceau titré */}
+            <AnimBrushStroke
+              key={`brushstroke-artist-${slug}`}
+              color={color}
+              font="brush"
+              secondaryColor={secondaryColor}
+              title={artist}
+              type="artist"
+            />
           </div>
 
           <div class="-mt-44">
             <div class="h-[38rem] md:h-96 bg-lighterdark shadow-2xl"></div>
             <div class="-mt-[27rem] md:-mt-[13.5rem] text-white">
+              {/* Description */}
               <div class="w-11/12 xl:w-[38rem] mx-auto text-center">
                 <p class="font-bold italic text-xl">{birthyear + deathyear}</p>
                 <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/icons/${nationality}.png`} alt={nationality} draggable={draggable} />
@@ -219,6 +225,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 ></p>
               </div>
 
+              {/* Site web */}
               {site && (
                 <div class="relative w-11/12 mt-3 sm:mt-2">
                   <div class="paper min-h-8 max-w-[240px] ml-auto z-10 shadow-none">
@@ -230,6 +237,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 </div>
               )}
 
+              {/* Avatar */}
               {avatar && (
                 <div class="-mt-12 xl:-mt-40 grid grid-cols-1 xl:grid-cols-3">
                   <div class="pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12">
@@ -240,16 +248,22 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             </div>
           </div>
 
+          {/* Citation */}
           {artistQuote && !queryParameters.alone && (
             <div class="w-full mx-auto mt-8 2xl:-mt-8 mb-4">
               <Quote data={artistQuote} delay={10} />
             </div>
           )}
 
+          {/* Œuvres sinon copyright */}
           {copyright !== 2 ? (
-            <Partial name="artist-collection">
-              <CollectionSearch ispersogallery={isPersoGallery} query={queryParameters} myslug={slug} type="artist" />
-            </Partial>
+            <CollectionSearch
+              key={`collection-artist-${slug}`}
+              ispersogallery={isPersoGallery}
+              query={queryParameters}
+              myslug={slug}
+              type="artist"
+            />
           ) : (
             <Copyright />
           )}

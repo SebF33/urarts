@@ -1,11 +1,20 @@
 import { ArtCollection } from "@utils/types.d.ts";
+import {
+  artistSlugSignal,
+  isForAloneArtistSignal,
+  languageSignal,
+} from "@utils/signals.ts";
 import { BG_STYLE } from "@utils/constants.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART, DELAY_REACH_ART } from "@utils/constants.ts";
+import {
+  DELAY_API_CALL,
+  DELAY_DEBOUNCE,
+  DELAY_LEONARDO_REACH_ART,
+  DELAY_REACH_ART,
+} from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
@@ -15,6 +24,7 @@ import { SearchInput } from "@components/SearchInput.tsx";
 
 
 type Arts = Array<ArtCollection>;
+
 export interface Props {
   font?: string;
   ispersogallery?: boolean;
@@ -28,15 +38,19 @@ export default function CollectionSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
-
-  const isPersoGallery = !!props.ispersogallery;
+  
+  const isPersoGallery: boolean = !!props.ispersogallery;
 
 
   // Appel à l'API "Collection"
   useEffect(() => {
+    // faire afficher seulement le contenu qui concerne un(e) artiste (si c'est le contexte)
+    let aloneArtistSlug = '';
+    if (isForAloneArtistSignal.value) aloneArtistSlug = artistSlugSignal.value;
+    
     let apiUrl;
     if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
-    else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}`;
+    else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}&aloneartistslug=${aloneArtistSlug}`;
 
     const timer = setTimeout(() => {
       ky.get(apiUrl)
@@ -47,7 +61,7 @@ export default function CollectionSearch(props: Props) {
     }, DELAY_API_CALL);
 
     return () => clearTimeout(timer);
-  }, [debouncedValue]);
+  }, [debouncedValue, artistSlugSignal.value]);
 
 
   // Atteindre l'œuvre

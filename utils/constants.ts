@@ -14,9 +14,10 @@ export const DELAY_LEONARDO_CALL = 250;
 export const DELAY_LEONARDO_FACT_TRIGGER = Math.floor(Math.random() * (18000 - 8000)) + 8000;
 export const DELAY_LEONARDO_FIRST_CALL = 3000;
 export const DELAY_LEONARDO_REACH_ART = 10;
-export const DELAY_MODAL_CLOSE = 500;
+export const DELAY_MODAL_CLOSE = 350;
 export const DELAY_MODAL_TRIGGER = 80;
 export const DELAY_REACH_ART = 1150;
+export const DELAY_REACH_ART_FROM_MODAL = 400;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
 

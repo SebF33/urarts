@@ -1,7 +1,13 @@
 import { Any } from "any";
-import { ART_IMG_WRAPPER, DELAY_DISPLAY, DELAY_MODAL_TRIGGER, NB_LOADING_ARTS } from "@utils/constants.ts";
+import {
+  ART_IMG_WRAPPER,
+  DELAY_DISPLAY,
+  DELAY_MODAL_TRIGGER,
+  NB_LOADING_ARTS,
+  TALENTS,
+} from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
-import { artModalOpenSignal } from "@utils/signals.ts";
+import { artModalOpenSignal, isClickableSignal } from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -49,7 +55,7 @@ export default function ArtsLayout(
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
   
   const draggable = false;
-  const isPersoGallery = !!props.ispersogallery;
+  const isPersoGallery: boolean = !!props.ispersogallery;
 
 
   // Rendu des œuvres d'art
@@ -119,16 +125,18 @@ export default function ArtsLayout(
             <p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         } else {
+          const isTalent: boolean = TALENTS.includes(p.artist_slug);
           const parts = [
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>`,
-            !isPersoGallery && `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong><a href="/movement/${p.movement_slug}" f-client-nav="false">${p.movement}</a></strong></p>`,
-            !isPersoGallery && `<p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}" f-client-nav="false">${p.last_name}</a></strong></p>`,
+            !isTalent && `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong>${p.movement}</strong></p>`,
+            !isTalent && `<p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>`,
             `<p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>`,
             `<p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`,
           ];
           content = parts.filter(Boolean).join("");
         }
 
+        // Création des infobulles pour chaque œuvre
         tippy(artElement, {
           allowHTML: true,
           content: content,
@@ -155,12 +163,16 @@ export default function ArtsLayout(
     };
   }, [props.arts, isIntersecting]);
 
-  
-  // Modal
+
+  // Clic sur une œuvre : ouverture de la modal
   const handleClick = (art: ArtCollection, panel: string, url: string) => {
+    // pas d'action si le clic n'est pas autorisé
+    if (!isClickableSignal.value) return;
+
     setSelectedArt(art);
     setSelectedPanel(panel);
     setSelectedUrl(url);
+
     setTimeout(() => artModalOpenSignal.value = true, DELAY_MODAL_TRIGGER);
   };
 

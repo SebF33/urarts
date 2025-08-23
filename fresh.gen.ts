@@ -60,6 +60,8 @@ import * as $livesearch_TalentsArtSideBar from "./islands/livesearch/TalentsArtS
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
 import * as $panel_WorldArtistsPanel from "./islands/panel/WorldArtistsPanel.tsx";
 import * as $panel_WorldArtsPanel from "./islands/panel/WorldArtsPanel.tsx";
+import * as $paper_ArtistsPapers from "./islands/paper/ArtistsPapers.tsx";
+import * as $paper_MovementsPapers from "./islands/paper/MovementsPapers.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -124,6 +126,8 @@ const manifest = {
     "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
     "./islands/panel/WorldArtistsPanel.tsx": $panel_WorldArtistsPanel,
     "./islands/panel/WorldArtsPanel.tsx": $panel_WorldArtsPanel,
+    "./islands/paper/ArtistsPapers.tsx": $paper_ArtistsPapers,
+    "./islands/paper/MovementsPapers.tsx": $paper_MovementsPapers,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
