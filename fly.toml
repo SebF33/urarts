@@ -4,9 +4,12 @@
 #
 
 app = "urarts"
-primary_region = "cdg"
+primary_region = "atl"
 kill_signal = "SIGINT"
 kill_timeout = "5s"
+
+[deploy]
+  strategy = "bluegreen"
 
 [experimental]
   cmd = ["start.sh"]
