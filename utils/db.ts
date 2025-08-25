@@ -45,6 +45,8 @@ interface ArtistTable {
   color: string; // Couleur primaire de l'artiste
   secondary_color: string; // Couleur secondaire de l'artiste
   site_web: string | null; // Lien vers le site internet de l'artiste
+  facebook: string | null; // Lien vers le Facebook de l'artiste
+  instagram: string | null; // Lien vers le Instagram de l'artiste
   info: string | null; // Informations sur l'artiste (fr)
   info_en: string | null; // Informations sur l'artiste (en)
   copyright: number; // Droit d'auteur (0: domaine public |1: autorisation |2: protégé)

@@ -63,9 +63,11 @@ export type ArtistRow = {
   birthyear: string;
   color: string;
   deathyear: string;
+  facebook: string | null;
   first_name: string | null;
   id: number;
   info: string;
+  instagram: string | null;
   last_name: string;
   nationality: string;
   signature: string | null;

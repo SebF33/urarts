@@ -1,5 +1,4 @@
 import { ArtistQuote } from "@utils/types.d.ts";
-import { css } from "@twind/core";
 import { Db } from "@utils/db.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
@@ -12,6 +11,7 @@ import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Copyright from "@islands/Copyright.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import MovementsPapers from "@islands/paper/MovementsPapers.tsx";
+import PersoFooter from "@islands/footer/PersoFooter.tsx";
 import Quote from "@islands/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
@@ -41,7 +41,9 @@ interface ArtistPageProps {
   copyright: number;
   deathyear: string;
   description: string;
+  facebook: string;
   info: string;
+  instagram: string;
   movements: Movement[];
   nationality: string;
   queryParameters: QueryParameters;
@@ -65,7 +67,8 @@ export const handler: Handlers<ArtistPageProps> = {
       .innerJoin("country", "artist.country_id", "country.id")
       .select([
         "first_name", "last_name",
-        "avatar_url", "color", "secondary_color", "site_web",
+        "avatar_url", "color", "secondary_color",
+        "site_web", "facebook", "instagram",
         "birthyear", "deathyear", "signature", "quote", "copyright", "slug",
       ])
       .$if(lng === 'fr', (query) => query.select("avatar_info"))
@@ -132,7 +135,9 @@ export const handler: Handlers<ArtistPageProps> = {
       copyright: artistDetails.copyright,
       deathyear: artistDetails.deathyear ? ` — ${artistDetails.deathyear}` : "",
       description,
+      facebook: artistDetails.facebook,
       info: artistDetails.info,
+      instagram: artistDetails.instagram,
       movements: movementLabels,
       nationality: artistDetails.nationality,
       queryParameters,
@@ -156,7 +161,9 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
     copyright,
     deathyear,
     description,
+    facebook,
     info,
+    instagram,
     movements,
     nationality,
     queryParameters,
@@ -230,9 +237,94 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 <div class="relative w-11/12 mt-3 sm:mt-2">
                   <div class="paper min-h-8 max-w-[240px] ml-auto z-10 shadow-none">
                     <div class="top-tape"></div>
-                    <a href={site} class="text-lighterdark text-base italic underline z-10 select-none" target="_blank" rel="noopener" draggable={draggable}>
+                    <a
+                      href={site}
+                      class="text-lighterdark text-base italic underline z-10 select-none"
+                      target="_blank"
+                      rel="noopener"
+                      draggable={draggable}
+                    >
                       {site}
                     </a>
+                  </div>
+
+                  {/* Réseaux sociaux */}
+                  <div class="flex gap-2 justify-end mt-2">
+                    {facebook && (
+                      <div class="paper w-9 h-9 flex items-center justify-center shadow-none">
+                        <div class="top-tape"></div>
+                        <a
+                          href={facebook}
+                          class="text-lighterdark"
+                          target="_blank"
+                          rel="noopener noreferrer me"
+                          draggable={draggable}
+                          title="Facebook"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M22.675 0h-21.35C.596 0 0 .596 0 1.325v21.351C0 23.405.596 24 
+                            1.325 24h11.495V14.708h-3.13v-3.622h3.13V8.413c0-3.1 
+                            1.893-4.788 4.659-4.788 1.325 0 2.463.099 
+                            2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 
+                            1.764v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.404 
+                            24 24 23.404 24 22.676V1.325C24 .596 23.404 
+                            0 22.675 0z" />
+                          </svg>
+                        </a>
+                      </div>
+                    )}
+                    {instagram && (
+                      <div class="paper w-9 h-9 flex items-center justify-center shadow-none">
+                        <div class="top-tape"></div>
+                        <a
+                          href={instagram}
+                          class="text-lighterdark"
+                          target="_blank"
+                          rel="noopener noreferrer me"
+                          draggable={draggable}
+                          title="Instagram"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-7 h-7"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 2.163c3.204 0 3.584.012 
+                            4.85.07 1.366.062 2.633.35 3.608 
+                            1.325.975.975 1.262 2.242 
+                            1.324 3.608.058 1.266.069 
+                            1.646.069 4.85s-.011 3.584-.069 
+                            4.85c-.062 1.366-.349 2.633-1.324 
+                            3.608-.975.975-2.242 1.262-3.608 
+                            1.324-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.062-2.633-.349-3.608-1.324-.975-.975-1.262-2.242-1.324-3.608C2.175 
+                            15.747 2.163 15.367 2.163 
+                            12s.012-3.584.07-4.85c.062-1.366.35-2.633 
+                            1.325-3.608.975-.975 2.242-1.262 
+                            3.608-1.324C8.416 2.175 8.796 2.163 
+                            12 2.163zm0 1.838c-3.155 0-3.522.012-4.766.069-1.02.047-1.577.216-1.944.363-.49.19-.84.417-1.209.786-.369.369-.596.719-.786 
+                            1.209-.147.367-.316.924-.363 
+                            1.944-.057 1.244-.069 1.611-.069 
+                            4.766s.012 3.522.069 4.766c.047 
+                            1.02.216 1.577.363 1.944.19.49.417.84.786 
+                            1.209.369.369.719.596 1.209.786.367.147.924.316 
+                            1.944.363 1.244.057 1.611.069 
+                            4.766.069s3.522-.012 4.766-.069c1.02-.047 
+                            1.577-.216 1.944-.363.49-.19.84-.417 
+                            1.209-.786.369-.369.596-.719.786-1.209.147-.367.316-.924.363-1.944.057-1.244.069-1.611.069-4.766s-.012-3.522-.069-4.766c-.047-1.02-.216-1.577-.363-1.944-.19-.49-.417-.84-.786-1.209-.369-.369-.719-.596-1.209-.786-.367-.147-.924-.316-1.944-.363-1.244-.057-1.611-.069-4.766-.069zm0 
+                            3.891a5.946 5.946 0 110 11.892 5.946 5.946 0 010-11.892zm0 
+                            9.811a3.865 3.865 0 100-7.73 3.865 3.865 0 000 
+                            7.73zm6.406-10.845a1.44 1.44 0 11-2.881 
+                            0 1.44 1.44 0 012.881 0z"/>
+                          </svg>
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -279,19 +371,16 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             pencilColor={secondaryColor}
           />
           <Footer color={color} />
-          </>
-        ) : (
-          <footer class={`relative bottom-0 w-full text-white z-50 ${css({"background-color": `${color}`})}`}>
-            <div class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}>
-              <div class={`mt-8 md:mt-0 md:order-1`}>
-                <p className="text-center text-lg md:text-xl font-bold">
-                  © {birthyear}–{new Date().getFullYear()} {artist}
-                </p>
-              </div>
-            </div>
-          </footer>
-        )
-      }
+        </>
+      ) : (
+        <PersoFooter
+          artist={artist}
+          birthyear={birthyear}
+          color={color}
+          facebook={facebook}
+          instagram={instagram}
+        />
+      )}
     </>
   );
 }

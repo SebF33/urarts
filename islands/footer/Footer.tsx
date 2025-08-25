@@ -22,7 +22,10 @@ export default function Footer({ color }: { color: string }) {
             <div class={`flex justify-center space-x-8 md:order-2`}>
               <a
                 href="https://www.linkedin.com/in/sébastien-flouriot-99aa75205"
-                class={`hover:text-gray-500`}
+                target="_blank"
+                rel="noopener noreferrer me"
+                class={`hover:opacity-80`}
+                aria-label="LinkedIn"
               >
                 <span class={`sr-only`}>LinkedIn</span>
                 <svg
@@ -37,7 +40,10 @@ export default function Footer({ color }: { color: string }) {
 
               <a
                 href="https://www.youtube.com/channel/UCjwYESom5l53m9kS_OOnVqw"
-                class={`hover:text-gray-500`}
+                target="_blank"
+                rel="noopener noreferrer me"
+                class={`hover:opacity-80`}
+                aria-label="YouTube"
               >
                 <span class={`sr-only`}>YouTube</span>
                 <svg
@@ -52,7 +58,10 @@ export default function Footer({ color }: { color: string }) {
 
               <a
                 href="https://github.com/SebF33"
-                class={`hover:text-gray-500`}
+                target="_blank"
+                rel="noopener noreferrer me"
+                class={`hover:opacity-80`}
+                aria-label="GitHub"
               >
                 <span class={`sr-only`}>GitHub</span>
                 <svg

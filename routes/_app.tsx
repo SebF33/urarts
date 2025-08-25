@@ -93,7 +93,7 @@ export default defineApp((_, ctx) => {
         <Partial name="body">
           {!isPersoGallery && <Nav url={ctx.url} />}
           <ctx.Component />
-          {!isPersoGallery && <ToBottomButton />}
+          <ToBottomButton />
           <ToTopButton />
         </Partial>
       </body>
