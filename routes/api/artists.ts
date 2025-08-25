@@ -1,8 +1,8 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { DisplayCopyrightedArtist, UrlBasePath } from "@/env.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
-import { UrlBasePath } from "@/env.ts";
 
 
 // API "Artistes"
@@ -65,6 +65,7 @@ export const handler = async (
       "avatar_url", "signature", "color", "site_web",
       "slug",
     ])
+    .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
     .$if(lng === 'fr', (qb) => qb.select("info"))
     .$if(lng === 'en', (qb) => qb.select("info_en as info"))
     .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))

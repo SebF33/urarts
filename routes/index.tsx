@@ -1,6 +1,7 @@
 import { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -36,6 +37,7 @@ export const handler: Handlers = {
         "avatar_url", "signature", "color", "site_web",
         "slug",
       ])
+      .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .$if(lng === 'fr', (qb) => qb.select("info"))
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))

@@ -1,6 +1,7 @@
 import { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -16,6 +17,10 @@ type Artists = Array<ArtistRow>;
 
 export const handler: Handlers = {
   async GET(_: Request, ctx: FreshContext) {
+    if (!DisplayCopyrightedArtist) {
+      return ctx.renderNotFound();
+    }
+
     const desc = i18next.t("meta.copyright.desc", { ns: "translation" });
     const title = i18next.t("meta.copyright.title", { ns: "translation" });
     const lng = i18next.language;
