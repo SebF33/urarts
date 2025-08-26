@@ -275,12 +275,12 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
         <div class="flex flex-wrap gap-6">
           {/* Section gauche : Image */}
-          <div class="flex-shrink-0 flex flex-col items-center md:items-start px-2 mt-5">
-            <div class="img-marble-engraved-wrapper max-w-[70vw] md:max-w-[30vw]">
+          <div class="flex-shrink-0 flex flex-col items-start md:items-start px-2 mt-5">
+            <div class="img-marble-engraved-wrapper max-w-[50vw] md:max-w-[30vw]">
               <img
                 src={url}
                 alt={art.name}
-                class="max-h-60 md:max-h-80"
+                class="max-h-40 md:max-h-80 object-contain"
                 draggable={draggable}
               />
             </div>
@@ -317,7 +317,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                   <img
                     src={art.avatar_url}
                     alt={(art.first_name ?? "") + " " + art.last_name}
-                    class="w-12 h-12 sm:w-14 sm:h-14 p-1 object-cover flex-none max-w-full"
+                    class="w-14 h-14 sm:w-16 sm:h-16 p-1 object-cover flex-none max-w-full"
                     draggable={draggable}
                   />
                 </div>
