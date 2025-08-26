@@ -1,6 +1,8 @@
 import { artistNameSignal, isForAloneArtistSignal } from "@utils/signals.ts";
 import { css } from "@twind/core";
 import { Fragment } from "preact";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { useEffect, useState } from "preact/hooks";
 
 
@@ -59,7 +61,7 @@ export default function AnimBrushStroke(
             >
               {isForAloneArtistSignal.value && props.type === 'movement' ? (
                 <>
-                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`selon ${artistNameSignal.value}`}</span>
+                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`${i18next.t("common.accordingto", { ns: "translation" })} ${artistNameSignal.value}`}</span>
                 </>
               ) : (
                 props.title

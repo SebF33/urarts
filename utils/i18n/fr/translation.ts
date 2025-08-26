@@ -21,6 +21,7 @@ const translation = {
     public_domain: "Domaine public",
   },
   common: {
+    accordingto: "selon",
     art: "œuvre",
     no_results: "Pas de résultats",
   },
