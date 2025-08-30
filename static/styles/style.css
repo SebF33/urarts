@@ -1065,6 +1065,10 @@ h1 {
     }
 }
 
+.art-modal-info p {
+    margin-bottom: 10px;
+}
+
 /* Galerie roulante
    - React Bits : https://www.reactbits.dev/components/rolling-gallery
 */

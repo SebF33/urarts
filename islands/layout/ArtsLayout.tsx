@@ -130,7 +130,7 @@ export default function ArtsLayout(
             `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>`,
             !isTalent && `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong>${p.movement}</strong></p>`,
             !isTalent && `<p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>`,
-            `<p style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</p>`,
+            `<div style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</div>`,
             `<p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`,
           ];
           content = parts.filter(Boolean).join("");
