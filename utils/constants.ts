@@ -140,6 +140,11 @@ export const TAGS: TagConst[] = [
     info_en: "Armenia offers an artistic heritage blending Christian influences, miniatures, and symbolic landscapes."
   },
   { 
+    name: "Art asiatique", name_en: "Asian Art", slug: "asian-art",
+    info: "L’art asiatique englobe des traditions variées, allant de la calligraphie et la peinture à l’architecture et la sculpture.",
+    info_en: "Asian art encompasses diverse traditions, ranging from calligraphy and painting to architecture and sculpture."
+  },
+  { 
     name: "Autoportrait", name_en: "Self-portrait", slug: "self-portrait",
     info: "L’autoportrait est une introspection de l’artiste, révélant son image, son rôle ou son état intérieur.",
     info_en: "The self-portrait is an introspection of the artist, revealing their image, role, or inner state."
@@ -158,6 +163,11 @@ export const TAGS: TagConst[] = [
     name: "Biélorussie", name_en: "Belarus", slug: "belarus",
     info: "La Biélorussie porte une tradition picturale imprégnée de folklore et de réalismes socialistes.",
     info_en: "Belarus carries a pictorial tradition influenced by folklore and socialist realism."
+  },
+  { 
+    name: "Brou de noix", name_en: "Walnut Ink", slug: "walnut-ink",
+    info: "Le brou de noix, obtenu à partir de coques de noix, est utilisé comme encre ou teinte naturelle dans l’art.",
+    info_en: "Walnut ink, made from walnut husks, is used as a natural dye or ink in art."
   },
   { 
     name: "Canada", name_en: "Canada", slug: "canada",
