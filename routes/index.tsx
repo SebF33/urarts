@@ -13,7 +13,7 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { ButtonLines } from "@components/Assets.tsx";
 import FamousArtSideBar from "@islands/livesearch/FamousArtSideBar.tsx";
 import Footer from "@islands/footer/Footer.tsx";
-import Quote from "@islands/Quote.tsx";
+import Quote from "@islands/paper/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 type Artists = Array<ArtistRow>;
