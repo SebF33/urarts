@@ -20,6 +20,7 @@ export type ArtCollection = {
   gap_3?: string;
   gap_4?: string;
   gap_5?: string;
+  height_cm: number | null;
   histocharacter: number;
   id: string;
   info: string;
@@ -34,6 +35,7 @@ export type ArtCollection = {
   url_3?: string;
   url_4?: string;
   url_5?: string;
+  width_cm: number | null;
 };
 
 export type ArtRow = {

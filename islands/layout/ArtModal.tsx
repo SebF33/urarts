@@ -30,6 +30,7 @@ type ArtModalProps = {
 
 
 export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalProps) {
+  const lng = i18next.language;
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
@@ -252,6 +253,31 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   }
 
 
+  // Formatage des dimensions (FR en cm, EN en inches)
+  const nfCM = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  const nfIN = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+
+  const formatDimensions = (w?: number | string, h?: number | string) => {
+    const toNum = (v: unknown) => (typeof v === "string" ? Number(v) : v) as number;
+    const ww = toNum(w);
+    const hh = toNum(h);
+    
+    if (!Number.isFinite(ww) || !Number.isFinite(hh)) {
+      return `${h} × ${w} ${lng === "fr" ? "cm" : "in"}`; // fallback brut si invalide
+    }
+    
+    if (lng === "fr") {
+      // convention FR : hauteur × largeur en cm
+      return `${nfCM.format(hh)} × ${nfCM.format(ww)} cm`;
+    } else {
+      // convention EN : width × height en inches (cm / 2.54)
+      const wIn = ww / 2.54;
+      const hIn = hh / 2.54;
+      return `${nfIN.format(wIn)} × ${nfIN.format(hIn)} in`;
+    }
+  };
+
+
   const modalLayout = (
     <div
       class={`fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 z-[99999]
@@ -299,11 +325,25 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
-            <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5 mb-4">{art.name + panelText(panel)}</h2>
+            <div class="flex items-center gap-1 md:gap-2 mb-4">
+              {/* Titre */}
+              <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5">
+                {art.name + panelText(panel)}
+              </h2>
+              {/* Dimensions */}
+              {art.width_cm != null && art.height_cm != null && (
+                <div class="paper paper-shadow min-h-12 min-w-[70px] inline-flex items-center px-2 py-1 z-10 transform rotate-6 rounded-md">
+                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1"></div>
+                  <span class="w-full text-md leading-4 text-center">
+                    {formatDimensions(art.width_cm, art.height_cm)}
+                  </span>
+                </div>
+              )}
+            </div>
 
             {/* Artiste et mouvement */}
             <div class="flex gap-4 m-auto md:m-2">
-              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3 overflow-hidden`}>
+              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3`}>
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
                 <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1">
                   <a
@@ -342,7 +382,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 {art.tags.map((tag, idx) => (
                   <div
                     key={idx}
-                    class={`paper paper-shadow overflow-hidden rounded-md transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px]`}
+                    class={`paper paper-shadow transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px] rounded-md`}
                   >
                     <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
                     <div class="flex flex-col items-center gap-1 px-2 py-1">

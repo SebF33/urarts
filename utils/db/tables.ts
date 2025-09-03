@@ -132,7 +132,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     )
     .execute();
 
-  // Table "Arts"
+  // Table "Œuvres d'art"
   await db.schema
     .createTable("art")
     .ifNotExists()
@@ -169,6 +169,8 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
           sql`"Description is not yet available for this artwork."`,
         ).notNull(),
     )
+    .addColumn("height_cm", "real")
+    .addColumn("width_cm", "real")
     .addColumn("famous_order", "integer")
     .addColumn(
       "geolocation",

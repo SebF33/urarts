@@ -90,6 +90,7 @@ export const handler = async (
           ELSE "custom_css"
         END
       `.as("custom_css"),
+      "height_cm", "width_cm",
       "color",
       "artist.slug as artist_slug",
       "copyright",
