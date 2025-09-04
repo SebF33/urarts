@@ -14,7 +14,7 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
-import Title from "@islands/Title.tsx";
+import Title from "../paper/Title.tsx";
 
 type Arts = Array<ArtCollection>;
 

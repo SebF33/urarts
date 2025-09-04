@@ -3,7 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { useLayoutEffect } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
-import Title from "@islands/Title.tsx";
+import Title from "./paper/Title.tsx";
 
 type Artists = Array<ArtistRow>;
 

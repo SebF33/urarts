@@ -15,7 +15,7 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
-import Title from "@islands/Title.tsx";
+import Title from "../paper/Title.tsx";
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {

@@ -5,8 +5,8 @@ import "@utils/i18n/config.ts";
 
 import Footer from "@islands/footer/Footer.tsx";
 import Mona from "@islands/Mona.tsx";
-import Note from "@islands/Note.tsx";
-import Title from "@islands/Title.tsx";
+import Note from "@islands/paper/Note.tsx";
+import Title from "@islands/paper/Title.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 

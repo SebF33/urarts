@@ -32,11 +32,9 @@ import * as $AnimBrushStroke from "./islands/AnimBrushStroke.tsx";
 import * as $Avatar from "./islands/Avatar.tsx";
 import * as $Mona from "./islands/Mona.tsx";
 import * as $MovementsList from "./islands/MovementsList.tsx";
-import * as $Note from "./islands/Note.tsx";
 import * as $Preview from "./islands/Preview.tsx";
 import * as $RollingGallery from "./islands/RollingGallery.tsx";
 import * as $TalentsList from "./islands/TalentsList.tsx";
-import * as $Title from "./islands/Title.tsx";
 import * as $ToBottomButton from "./islands/ToBottomButton.tsx";
 import * as $ToTopButton from "./islands/ToTopButton.tsx";
 import * as $WorldMap from "./islands/WorldMap.tsx";
@@ -62,8 +60,10 @@ import * as $panel_WorldArtsPanel from "./islands/panel/WorldArtsPanel.tsx";
 import * as $paper_ArtistsPapers from "./islands/paper/ArtistsPapers.tsx";
 import * as $paper_Copyright from "./islands/paper/Copyright.tsx";
 import * as $paper_MovementsPapers from "./islands/paper/MovementsPapers.tsx";
+import * as $paper_Note from "./islands/paper/Note.tsx";
 import * as $paper_Quote from "./islands/paper/Quote.tsx";
 import * as $paper_Signature from "./islands/paper/Signature.tsx";
+import * as $paper_Title from "./islands/paper/Title.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -100,11 +100,9 @@ const manifest = {
     "./islands/Avatar.tsx": $Avatar,
     "./islands/Mona.tsx": $Mona,
     "./islands/MovementsList.tsx": $MovementsList,
-    "./islands/Note.tsx": $Note,
     "./islands/Preview.tsx": $Preview,
     "./islands/RollingGallery.tsx": $RollingGallery,
     "./islands/TalentsList.tsx": $TalentsList,
-    "./islands/Title.tsx": $Title,
     "./islands/ToBottomButton.tsx": $ToBottomButton,
     "./islands/ToTopButton.tsx": $ToTopButton,
     "./islands/WorldMap.tsx": $WorldMap,
@@ -130,8 +128,10 @@ const manifest = {
     "./islands/paper/ArtistsPapers.tsx": $paper_ArtistsPapers,
     "./islands/paper/Copyright.tsx": $paper_Copyright,
     "./islands/paper/MovementsPapers.tsx": $paper_MovementsPapers,
+    "./islands/paper/Note.tsx": $paper_Note,
     "./islands/paper/Quote.tsx": $paper_Quote,
     "./islands/paper/Signature.tsx": $paper_Signature,
+    "./islands/paper/Title.tsx": $paper_Title,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
