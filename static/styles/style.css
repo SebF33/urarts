@@ -991,12 +991,10 @@ h1 {
 .art-modal-container {
     border-radius: 12px;
     border: 12px solid transparent;
-    background-clip: padding-box, border-box;
-    background-origin: border-box;
     box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.6),
-        0 0 12px rgba(0, 0, 0, 0.4),
-        inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+        inset 2px 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 0, 0, 0.25),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.4);
     transform: translateY(-16px);
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
@@ -1014,11 +1012,11 @@ h1 {
     display: block;
     max-width: 100%;
     padding: 8px;
-    background-color: var(--color-gray);
+    background-color: #9ba2a1;
     border-radius: 8px;
     box-shadow:
-        inset 1.5px 1.5px 2px rgba(0, 0, 0, 0.5),
-        inset -1.5px -1.5px 2px rgba(255, 255, 255, 0.7);
+        inset 1.5px 1.5px 2px rgba(0, 0, 0, 0.6),
+        inset -1.5px -1.5px 2px rgba(255, 255, 255, 0.6);
 }
 
 .img-marble-engraved-wrapper img {
@@ -1030,12 +1028,12 @@ h1 {
 
 .title-marble-engraved {
     font-family: serif;
-    color: var(--color-gray);
+    color: #8f9695;
     text-shadow:
-        1.5px 1.5px 2px rgba(255, 255, 255, 0.7),
-        -1.5px -1.5px 2px rgba(0, 0, 0, 0.5),
-        0.5px 0.5px 1px rgba(255, 255, 255, 0.6),
-        -0.5px -0.5px 1px rgba(0, 0, 0, 0.4);
+        1.5px 1.5px 2px rgba(255, 255, 255, 0.6),
+        -1.5px -1.5px 2px rgba(0, 0, 0, 0.6),
+        0.5px 0.5px 1px rgba(255, 255, 255, 0.5),
+        -0.5px -0.5px 1px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
 }
 

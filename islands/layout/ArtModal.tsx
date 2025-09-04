@@ -68,10 +68,10 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     return rawBgStyle
       ? {
           ...rawBgStyle,
-          background: rawBgStyle.background.replace("../textures/", basePath),
+          background: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), ${rawBgStyle.background.replace("../textures/", basePath)}`,
         }
       : {
-          background: `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), ${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
           backgroundSize: "480px",
         };
   }, [ispersogallery, art.movement_slug]);
