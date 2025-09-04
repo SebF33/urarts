@@ -325,14 +325,14 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
-            <div class="flex items-center gap-1 md:gap-2 mb-4">
+            <div class="flex items-center justify-center md:justify-start gap-1 md:gap-2 mb-4">
               {/* Titre */}
               <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5">
                 {art.name + panelText(panel)}
               </h2>
               {/* Dimensions */}
               {art.width_cm != null && art.height_cm != null && (
-                <div class="paper paper-shadow min-h-12 min-w-[70px] inline-flex items-center px-2 py-1 z-10 transform rotate-6 rounded-md">
+                <div class="paper paper-shadow min-h-12 min-w-[70px] inline-flex items-center px-2 py-1 z-10 transform rotate-12 rounded-md">
                   <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1"></div>
                   <span class="w-full text-md leading-4 text-center">
                     {formatDimensions(art.width_cm, art.height_cm)}
@@ -343,9 +343,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
             {/* Artiste et mouvement */}
             <div class="flex gap-4 m-auto md:m-2">
-              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] z-10 transform -rotate-3`}>
+              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}>
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
-                <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1">
+                <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1 z-10 select-none">
                   <a
                     onClick={(e) => handleLinkClick(e, `/art/${art.artist_slug}`)}
                     class="text-sm sm:text-base leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
@@ -363,11 +363,11 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 </div>
               </div>
               {!TALENTS.includes(art.artist_slug) && (
-                <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] z-10 transform rotate-6">
+                <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] transform rotate-6">
                   <div class="top-tape"></div>
                   <a
                     onClick={(e) => handleLinkClick(e, `/movement/${art.movement_slug}`)}
-                    class={`text-base italic leading-4 underline px-2 py-1 select-none`}
+                    class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
                     draggable={draggable}
                   >
                     {art.movement}
@@ -385,7 +385,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                     class={`paper paper-shadow transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px] rounded-md`}
                   >
                     <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
-                    <div class="flex flex-col items-center gap-1 px-2 py-1">
+                    <div class="flex flex-col items-center gap-1 px-2 py-1 z-10 select-none">
                       <a
                         onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
                         class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
