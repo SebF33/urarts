@@ -148,9 +148,9 @@ export default function ArtsSearch() {
       </div>
 
       {/* Entrée de recherche */}
-      <div class="paper paper-shadow max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
+      <div class="paper paper-shadow w-[60px] md:w-[80px] max-h-[24px] mx-auto mb-2 -translate-x-16">
         <div class="top-tape max-h-2.5"></div>
-        <h2 class={`text-lg font-medium text-lighterdark`}>
+        <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
           {i18next.t("paper.name", { ns: "translation" })}
         </h2>
       </div>

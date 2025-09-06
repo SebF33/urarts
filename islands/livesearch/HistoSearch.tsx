@@ -143,13 +143,13 @@ export default function HistoSearch(
           <div class="tape-section"></div>
         </div>
 
-        <div class="paper paper-shadow max-w-[64px] min-w-[64px] mx-auto mb-2 -translate-x-16">
+        {/* Entrée de recherche */}
+        <div class="paper paper-shadow w-[60px] md:w-[80px] mx-auto mb-2 -translate-x-16">
         <div class="top-tape max-h-2.5"></div>
-          <h2 class={`text-lg font-medium text-lighterdark`}>
+          <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
             {i18next.t("paper.name", { ns: "translation" })}
           </h2>
         </div>
-        
         <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
           <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
         </div>

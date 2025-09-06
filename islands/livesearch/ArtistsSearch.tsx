@@ -629,15 +629,15 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             />
           </button>
 
+          {/* Entrée de recherche */}
           <div class="absolute w-[80px] top-32 sm:top-5 left-5 sm:left-16 right-0 z-10">
-            <div class="paper paper-shadow max-w-[80px] min-w-[80px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
+            <div class="paper paper-shadow w-[60px] md:w-[80px] max-h-[24px] mx-auto mb-2">
               <div class="top-tape max-h-2.5"></div>
-              <h2 class="text-lg font-medium text-lighterdark">
+              <h2 class="text-md md:text-lg font-medium text-lighterdark">
                 {i18next.t("paper.name", { ns: "translation" })}
               </h2>
             </div>
           </div>
-
           <div class="brush-input-box absolute w-48 max-h-[68px] top-40 sm:top-12 left-0 right-0 mx-auto z-10">
             <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
           </div>

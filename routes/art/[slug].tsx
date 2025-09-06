@@ -245,7 +245,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 {/* Site web */}
                 {site && (
                   <>
-                    <div class="paper min-h-8 max-w-[240px] ml-auto z-10 shadow-none">
+                    <div class="paper min-h-8 max-w-[240px] ml-auto z-10">
                       <div class="top-tape"></div>
                       <a
                         href={site}
@@ -260,7 +260,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                     {/* Réseaux sociaux */}
                     <div class="flex gap-2 justify-end mt-2">
                       {facebook && (
-                        <div class="paper w-9 h-9 flex items-center justify-center shadow-none">
+                        <div class="paper w-9 h-9 flex items-center justify-center">
                           <div class="top-tape"></div>
                           <a
                             href={facebook}
@@ -288,7 +288,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                         </div>
                       )}
                       {instagram && (
-                        <div class="paper w-9 h-9 flex items-center justify-center shadow-none">
+                        <div class="paper w-9 h-9 flex items-center justify-center">
                           <div class="top-tape"></div>
                           <a
                             href={instagram}

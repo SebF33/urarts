@@ -45,7 +45,7 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
     <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible">
       {artists.map((artist) => (
         <div
-          class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position} shadow-none`}
+          class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position}`}
         >
           <div class="top-tape max-h-3"></div>
           <a

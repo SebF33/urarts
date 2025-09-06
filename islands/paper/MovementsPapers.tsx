@@ -53,7 +53,7 @@ export default function MovementsPapers(
       {movements.map((movement) => (
         <div
           key={movement.movementSlug}
-          class={`paper appear-effect-fast-fadein min-w-[180px] min-h-8 mt-1 ${movement.position} font-${movement.font} shadow-none`}
+          class={`paper appear-effect-fast-fadein min-w-[180px] min-h-8 mt-1 ${movement.position} font-${movement.font}`}
         >
           <div class="top-tape max-h-3"></div>
           <a
