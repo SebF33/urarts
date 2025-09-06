@@ -13,9 +13,9 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
-import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 import Title from "../paper/Title.tsx";
+import { WorldMapPaper } from "../paper/WorldMapPaper.tsx";
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {
@@ -177,7 +177,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             margin="mt-2 md:mt-5"
           />
           {/* Post-it : lien vers la carte du Monde */}
-          <PaperWorldMap />
+          <WorldMapPaper />
         </div>
 
         {/* Palette */}
@@ -630,7 +630,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
           </button>
 
           <div class="absolute w-[80px] top-32 sm:top-5 left-5 sm:left-16 right-0 z-10">
-            <div class="paper max-w-[80px] min-w-[80px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
+            <div class="paper paper-shadow max-w-[80px] min-w-[80px] max-h-[24px] mx-auto mb-2 sm:shadow-none">
               <div class="top-tape max-h-2.5"></div>
               <h2 class="text-lg font-medium text-lighterdark">
                 {i18next.t("paper.name", { ns: "translation" })}

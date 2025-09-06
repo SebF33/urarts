@@ -1,10 +1,10 @@
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
-export function PaperWorldMap() {
+export function WorldMapPaper() {
   const draggable = false;
   return (
-    <div class="paper w-28 md:w-44 mx-10 md:mr-2 rotate-[15deg] transform-gpu">
+    <div class="paper paper-shadow w-28 md:w-44 mx-10 md:mr-2 rotate-[15deg] transform-gpu">
       <div class="tape-section"></div>
       <a
         href="/worldmap"

@@ -9,9 +9,10 @@ import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
-import { PaperWorldMap } from "@components/PaperWorldMap.tsx";
 import Preview from "@islands/Preview.tsx";
 import Title from "./paper/Title.tsx";
+import { WorldMapPaper } from "./paper/WorldMapPaper.tsx";
+
 
 type Arts = Array<ArtCollection>;
 type Movements = Array<MovementRow>;
@@ -126,7 +127,7 @@ export default function MovementsList(
           margin="mt-2 mb-5 md:mt-5"
         />
         {/* Post-it : lien vers la carte du Monde */}
-        <PaperWorldMap />
+        <WorldMapPaper />
       </div>
 
       <div class="flex flex-wrap">

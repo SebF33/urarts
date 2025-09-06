@@ -67,7 +67,7 @@ export default function WorldMapPage(
         <div class={`p-4 max-w-7xl mx-auto -mb-32 px-4 sm:px-6 lg:px-8`}>
           {/* Titre de la page */}
           <div
-            class={`paper min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5 z-10`}
+            class={`paper paper-shadow min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5 z-10`}
           >
             <div class="tape-section"></div>
             <h1

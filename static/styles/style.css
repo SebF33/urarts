@@ -12,6 +12,7 @@
     --color-cyan: #6cbfbf;
     --color-gray: #b3b9b8;
     --color-white: #dadada;
+    --shadow: #6c777c;
     --shadow-size: 3px;
     --tape-edge-gray: #b7b49d;
     --tape-gray: #dbd8be;
@@ -660,7 +661,6 @@ h1 {
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom right, var(--color-gray), 20%, var(--transparent)), var(--color-white);
-    box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--color-gray);
 }
 
 .header-paper::after,
@@ -674,7 +674,7 @@ h1 {
 }
 
 .paper-shadow {
-    box-shadow: var(--shadow-size) var(--shadow-size) 2px #6c777c !important;
+    box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--shadow) !important;
 }
 
 .tape-section {
