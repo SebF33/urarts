@@ -7,6 +7,7 @@ import "@utils/i18n/config.ts";
 
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
+import TagHero from "@islands/hero/TagHero.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
@@ -63,8 +64,6 @@ export const handler: Handlers<TagPageProps> = {
 export default function TagPage(props: PageProps<TagPageProps>) {
   const { desc, font, info, tag, slug, title } = props.data;
 
-  const draggable = false;
-
   
   return (
     <>
@@ -83,36 +82,11 @@ export default function TagPage(props: PageProps<TagPageProps>) {
         class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
-          <div class="relative bg-lighterdark shadow-2xl">
-            <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-8">
-              <div class="p-4 sm:p-6">
-                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
-                  <div class="shrink-0 mx-auto md:mx-0">
-                    <img
-                      src={`/tags/${slug}.png`}
-                      alt={tag}
-                      class="block w-24 h-24 md:w-32 md:h-32 object-contain select-none"
-                      draggable={draggable}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div class="grow">
-                    <div class="inline-block">
-                      <h1 class="text-white text-3xl md:text-5xl font-bold leading-tight">
-                        {tag}
-                      </h1>
-                      <div class="mt-2 h-1 w-full bg-white rounded-full"></div>
-                    </div>
-                    <p
-                      class="mt-4 text-white/90 text-lg md:text-xl leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: info }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <TagHero
+            info={info}
+            myslug={slug}
+            tag={tag}
+          />
           <CollectionSearch
             key={`collection-tag-${slug}`}
             font={font}
