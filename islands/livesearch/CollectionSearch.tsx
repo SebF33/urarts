@@ -84,12 +84,18 @@ export default function CollectionSearch(props: Props) {
   }, [props.query]);
 
 
+  function slugToCamelCase(slug: string): string {
+    return slug.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+  }
+
+
   // Background pour la page d'une collection d'arts
   useLayoutEffect(() => {
     const body = document.querySelector("body");
     const main = document.querySelector<HTMLElement>('[data-name="collection"]');
-    const styleForSlug = BG_STYLE[props.myslug];
     const basePath = isPersoGallery ? "../../textures/" : "../textures/";
+    const camelSlug = slugToCamelCase(props.myslug);
+    const styleForSlug = BG_STYLE[camelSlug];
 
     if (body) {
       body.style.backgroundColor = colorScheme[currentColorScheme].gray;
