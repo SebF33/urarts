@@ -290,6 +290,11 @@ export const TAGS: TagConst[] = [
     info_en: "Mexico blends pre-Hispanic heritage and modern muralism with Rivera and Kahlo."
   },
   { 
+    name: "Monarchie", name_en: "Monarchy", slug: "monarchy",
+    info: "La monarchie inspire l’art par ses fastes, ses portraits officiels et ses symboles du pouvoir.",
+    info_en: "Monarchy inspires art through its splendor, official portraits, and symbols of power."
+  },
+  { 
     name: "Monde", name_en: "World", slug: "world",
     info: "Le monde comme sujet artistique illustre la diversité des cultures et paysages.",
     info_en: "The world as an artistic subject illustrates the diversity of cultures and landscapes."
