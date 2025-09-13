@@ -474,6 +474,10 @@ export const FAMOUS_ART_IMG_WRAPPER: Record<string, Any> = {
 };
 
 export const BG_STYLE: Record<string, { background: string; backgroundSize: string }> = {
+  abstract: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/abstract.png)`,
+    backgroundSize: "760px",
+  },
   abstractart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/abstractart.png)`,
     backgroundSize: "570px",
@@ -481,6 +485,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   academicart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/academicart.png)`,
     backgroundSize: "710px",
+  },
+  allegory: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/allegory.png)`,
+    backgroundSize: "760px",
   },
   americanrealism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/americanrealism.png)`,
@@ -490,6 +498,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/analyticalrealism.png)`,
     backgroundSize: "840px",
   },
+  animals: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/animals.png)`,
+    backgroundSize: "760px",
+  },
   artdeco: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/artdeco.png)`,
     backgroundSize: "900px",
@@ -497,6 +509,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   artnouveau: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/artnouveau.png)`,
     backgroundSize: "360px",
+  },
+  asianArt: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/asian-art.png)`,
+    backgroundSize: "760px",
   },
   baroque: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/baroque.png)`,
@@ -522,6 +538,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/dadaism.png)`,
     backgroundSize: "450px",
   },
+  death: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/death.png)`,
+    backgroundSize: "760px",
+  },
   earlyrenaissance: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/earlyrenaissance.png)`,
     backgroundSize: "720px",
@@ -533,6 +553,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   fauvism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/fauvism.png)`,
     backgroundSize: "480px",
+  },
+  flowers: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/flowers.png)`,
+    backgroundSize: "760px",
   },
   futurism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/futurism.png)`,
@@ -562,6 +586,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/kitsch.png)`,
     backgroundSize: "470px",
   },
+  love: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/love.png)`,
+    backgroundSize: "760px",
+  },
   magicalrealism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/magicalrealism.png)`,
     backgroundSize: "560px",
@@ -569,6 +597,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   mannerism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/mannerism.png)`,
     backgroundSize: "290px",
+  },
+  monarchy: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/monarchy.png)`,
+    backgroundSize: "760px",
   },
   naiveart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/naiveart.png)`,
@@ -626,6 +658,14 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/romanticism.png)`,
     backgroundSize: "460px",
   },
+  sea: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/sea.png)`,
+    backgroundSize: "760px",
+  },
+  stillLife: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/still-life.png)`,
+    backgroundSize: "760px",
+  },
   streetart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/streetart.png)`,
     backgroundSize: "650px",
@@ -653,5 +693,9 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   unclassified: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`,
     backgroundSize: "480px",
+  },
+  war: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/war.png)`,
+    backgroundSize: "760px",
   },
 };
