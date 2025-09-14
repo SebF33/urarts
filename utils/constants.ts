@@ -502,6 +502,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/animals.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  architecture: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/architecture.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   artdeco: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/artdeco.png)`,
     backgroundSize: "clamp(300px, 46.9vw, 900px)",
@@ -542,6 +546,14 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/death.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  drawing: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/drawing.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  dream: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/dream.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   earlyrenaissance: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/earlyrenaissance.png)`,
     backgroundSize: "clamp(300px, 37.5vw, 720px)",
@@ -550,9 +562,17 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionnism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
   },
+  fantasy: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/fantasy.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   fauvism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/fauvism.png)`,
     backgroundSize: "clamp(300px, 25.0vw, 480px)",
+  },
+  fire: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/fire.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   flowers: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/flowers.png)`,
@@ -566,9 +586,17 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/highrenaissance.png)`,
     backgroundSize: "clamp(300px, 39.1vw, 750px)",
   },
+  history: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/history.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   impressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/impressionnism.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
+  },
+  industry: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/industry.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   intimism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/intimism.png)`,
@@ -586,6 +614,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/kitsch.png)`,
     backgroundSize: "clamp(300px, 24.5vw, 470px)",
   },
+  landscape: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/landscape.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   love: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/love.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -602,9 +634,21 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/monarchy.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  mountains: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/mountains.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  music: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/music.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   naiveart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/naiveart.png)`,
     backgroundSize: "clamp(300px, 24.5vw, 470px)",
+  },
+  nature: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/nature.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   neoclassicism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/neoclassicism.png)`,
@@ -622,6 +666,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/northernrenaissance.png)`,
     backgroundSize: "clamp(300px, 45.8vw, 880px)",
   },
+  nude: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/nude.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   orientalism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/orientalism.png)`,
     backgroundSize: "clamp(300px, 29.2vw, 560px)",
@@ -629,6 +677,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   orphism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/orphism.png)`,
     backgroundSize: "clamp(300px, 30.2vw, 580px)",
+  },
+  portrait: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/portrait.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   postimpressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionnism.png)`,
@@ -650,6 +702,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/regionalism.png)`,
     backgroundSize: "clamp(300px, 37.5vw, 720px)",
   },
+  religion: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/religion.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   rococo: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/rococo.png)`,
     backgroundSize: "clamp(300px, 43.8vw, 840px)",
@@ -660,6 +716,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   },
   sea: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/sea.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  selfPortrait: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/self-portrait.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   stillLife: {
@@ -686,6 +746,14 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/synthetism.png)`,
     backgroundSize: "clamp(300px, 28.6vw, 550px)",
   },
+  transport: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/transport.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  trompeLOeil: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/trompe-l-oeil.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   ukiyoe: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/ukiyoe.png)`,
     backgroundSize: "clamp(300px, 21.9vw, 420px)",
@@ -694,8 +762,16 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`,
     backgroundSize: "clamp(300px, 25.0vw, 480px)",
   },
+  walnutInk: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/walnut-ink.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   war: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/war.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  weather: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/weather.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
 };
