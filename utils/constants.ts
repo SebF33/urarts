@@ -522,6 +522,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/baroque.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
   },
+  china: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/china.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   classicism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/classicism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
@@ -558,6 +562,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/earlyrenaissance.png)`,
     backgroundSize: "clamp(300px, 37.5vw, 720px)",
   },
+  egypt: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/egypt.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   expressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionnism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
@@ -576,6 +584,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   },
   flowers: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/flowers.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  france: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/france.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   futurism: {
@@ -714,6 +726,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/romanticism.png)`,
     backgroundSize: "clamp(300px, 24.0vw, 460px)",
   },
+  russia: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/russia.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   sea: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/sea.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -754,6 +770,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/trompe-l-oeil.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  uk: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/uk.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   ukiyoe: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/ukiyoe.png)`,
     backgroundSize: "clamp(300px, 21.9vw, 420px)",
@@ -761,6 +781,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   unclassified: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`,
     backgroundSize: "clamp(300px, 25.0vw, 480px)",
+  },
+  usa: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/usa.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   walnutInk: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/walnut-ink.png)`,
