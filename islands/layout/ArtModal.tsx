@@ -345,21 +345,23 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
             <div class="flex gap-4 m-auto md:m-2">
               <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}>
                 <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
-                <div class="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1 px-2 py-1 z-10 select-none">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-2 py-1 z-10 select-none">
+                  <div class="text-sm sm:text-base leading-4 select-none min-w-0 whitespace-normal break-keep">
+                    {(art.first_name ?? "") + " " + art.last_name}
+                  </div>
                   <a
                     onClick={(e) => handleLinkClick(e, `/art/${art.artist_slug}`)}
-                    class="text-sm sm:text-base leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
+                    class="m-1 shrink-0"
                     title={(art.first_name ?? "") + " " + art.last_name}
                     draggable={draggable}
                   >
-                    {(art.first_name ?? "") + " " + art.last_name}
+                    <img
+                      src={art.avatar_url}
+                      alt={(art.first_name ?? "") + " " + art.last_name}
+                      class="h-14 sm:h-16 max-w-full object-cover flex-none"
+                      draggable={draggable}
+                    />
                   </a>
-                  <img
-                    src={art.avatar_url}
-                    alt={(art.first_name ?? "") + " " + art.last_name}
-                    class="w-14 h-14 sm:w-16 sm:h-16 p-1 object-cover flex-none max-w-full"
-                    draggable={draggable}
-                  />
                 </div>
               </div>
               {!TALENTS.includes(art.artist_slug) && (
