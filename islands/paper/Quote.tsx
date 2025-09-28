@@ -108,7 +108,7 @@ export default function Quote(
             {props.data.signature &&
               (
                 <div
-                  class={`flex justify-end md:w-5/6 max-h-9 mt-3 lg:-mt-3 mr-4 mb-3`}
+                  class={`flex justify-end md:w-5/6 max-h-9 mt-2 mr-4 mb-3`}
                 >
                   <img
                     class={`max-w-[100px]`}

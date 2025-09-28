@@ -5,7 +5,7 @@ export default function Signature(
   
   return (
     <div
-      class={`paper paper-shadow w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible`}
+      class={`paper paper-shadow w-full max-w-[180px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible`}
     >
       <div class="top-tape"></div>
       <div class={`w-full m-2 z-10`}>

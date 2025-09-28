@@ -241,8 +241,8 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 ></p>
               </div>
 
-              <div class="relative min-h-[68px] w-11/12 mt-3 sm:mt-2 xl:-mt-2">
-                {/* Site web */}
+              {/* Site web */}
+              <div class={`${site ? 'min-h-[68px]' : ''} md:min-h-[68px] relative w-11/12 mt-3 sm:mt-2 xl:-mt-2`}>
                 {site && (
                   <>
                     <div class="paper min-h-8 max-w-[240px] ml-auto z-10">
@@ -350,7 +350,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             </div>
           </div>
 
-          <div class="flex justify-end min-h-[126px] w-full mx-auto mt-8 xl:-mt-16 2xl:-mt-24 mb-4">
+          <div class={`${artistQuote || signature ? 'min-h-[126px]' : ''} flex justify-end w-full mx-auto mt-8 xl:-mt-16 2xl:-mt-24 mb-4`}>
             {/* Citation avec signature */}
             {artistQuote && !queryParameters.alone && (
               <div class="inline-block mx-auto xl:mr-12">
