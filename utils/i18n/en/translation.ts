@@ -222,7 +222,7 @@ const translation = {
     discover: "Discover",
     no_artist: "No artists found.",
     no_artwork: "No artworks found.",
-    representations: "Representations",
+    representations: "Places represented",
   },
 } as const;
 

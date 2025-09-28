@@ -151,12 +151,12 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Autriche", name_en: "Austria", slug: "austria",
-    info: "L’Autriche a marqué l’art par le baroque, le romantisme et la Sécession viennoise avec Klimt et Schiele.",
+    info: "L’Autriche a marqué l’art par le Baroque, le Romantisme et la Sécession viennoise avec Klimt et Schiele.",
     info_en: "Austria shaped art through Baroque, Romanticism, and the Viennese Secession with Klimt and Schiele."
   },
   { 
     name: "Belgique", name_en: "Belgium", slug: "belgium",
-    info: "La Belgique est associée aux primitifs flamands, au symbolisme et au surréalisme de Magritte.",
+    info: "La Belgique est associée aux primitifs flamands, au Symbolisme et au Surréalisme de Magritte.",
     info_en: "Belgium is associated with Flemish Primitives, Symbolism, and Magritte’s Surrealism."
   },
   { 
@@ -171,8 +171,8 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Canada", name_en: "Canada", slug: "canada",
-    info: "Le Canada a inspiré des paysages grandioses et l’art autochtone au riche symbolisme.",
-    info_en: "Canada inspired grand landscapes and Indigenous art with rich symbolism."
+    info: "Le Canada a inspiré des paysages grandioses et l’art autochtone au riche Symbolisme.",
+    info_en: "Canada inspired grand landscapes and Indigenous art with rich Symbolism."
   },
   { 
     name: "Chine", name_en: "People's Republic of China", slug: "china",
@@ -211,7 +211,7 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Espagne", name_en: "Spain", slug: "spain",
-    info: "L’Espagne a marqué l’art avec Vélasquez, Goya, Picasso et le surréalisme de Dalí.",
+    info: "L’Espagne a marqué l’art avec Vélasquez, Goya, Picasso et le Surréalisme de Dalí.",
     info_en: "Spain influenced art with Velázquez, Goya, Picasso, and Dalí’s Surrealism."
   },
   { 
@@ -236,12 +236,12 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Finlande", name_en: "Finland", slug: "finland",
-    info: "La Finlande a produit un art marqué par la nature nordique et le symbolisme.",
+    info: "La Finlande a produit un art marqué par la nature nordique et le Symbolisme.",
     info_en: "Finland produced art marked by Nordic nature and Symbolism."
   },
   { 
     name: "France", name_en: "France", slug: "france",
-    info: "La France est un centre majeur de l’histoire de l’art, de l’impressionnisme au cubisme.",
+    info: "La France est un centre majeur de l’histoire de l’art, de l’Impressionnisme au Cubisme.",
     info_en: "France is a major center of art history, from Impressionism to Cubism."
   },
   { 
@@ -265,9 +265,19 @@ export const TAGS: TagConst[] = [
     info_en: "Hungary expresses art shaped by folklore and modern avant-garde."
   },
   { 
+    name: "Inde", name_en: "India", slug: "india",
+    info: "L’art de l’Inde s’étend des temples richement sculptés aux miniatures raffinées, imprégné de spiritualité hindoue, bouddhique et moghole.",
+    info_en: "Indian art ranges from richly carved temples to refined miniatures, infused with Hindu, Buddhist, and Mughal spirituality."
+  },
+  { 
     name: "Industrie", name_en: "Industry", slug: "industry",
     info: "L’industrie est représentée dans l’art moderne comme symbole de progrès ou d’aliénation.",
     info_en: "Industry is depicted in modern art as a symbol of progress or alienation."
+  },
+  { 
+    name: "Israël", name_en: "Israel", slug: "israel",
+    info: "L’art en Israël reflète un carrefour de traditions anciennes et d’expressions modernes, mêlant héritage biblique et création contemporaine.",
+    info_en: "Art in Israel reflects a crossroads of ancient traditions and modern expressions, blending biblical heritage with contemporary creation."
   },
   { 
     name: "Italie", name_en: "Italy", slug: "italy",
@@ -331,8 +341,8 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Norvège", name_en: "Norway", slug: "norway",
-    info: "La Norvège reflète dans l’art ses paysages nordiques et son symbolisme mystique.",
-    info_en: "Norway reflects in art its Nordic landscapes and mystical symbolism."
+    info: "La Norvège reflète dans l’art ses paysages nordiques et son Symbolisme mystique.",
+    info_en: "Norway reflects in art its Nordic landscapes and mystical Symbolism."
   },
   { 
     name: "Nu", name_en: "Nude", slug: "nude",
@@ -361,7 +371,7 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Portugal", name_en: "Portugal", slug: "portugal",
-    info: "Le Portugal exprime son art entre azulejos, baroque et modernité.",
+    info: "Le Portugal exprime son art entre azulejos, Baroque et modernité.",
     info_en: "Portugal expresses its art through azulejos, Baroque, and modernity."
   },
   { 
@@ -376,8 +386,8 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Russie", name_en: "Russian Federation", slug: "russia",
-    info: "La Russie est marquée par l’icône orthodoxe, l’avant-garde et le réalisme.",
-    info_en: "Russia is marked by Orthodox icons, the avant-garde, and realism."
+    info: "La Russie est marquée par l’icône orthodoxe, l’avant-garde et le Réalisme.",
+    info_en: "Russia is marked by Orthodox icons, the avant-garde, and Realism."
   },
   { 
     name: "Royaume-Uni", name_en: "United Kingdom", slug: "uk",
@@ -401,7 +411,7 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Tchécoslovaquie", name_en: "Czechoslovakia", slug: "czechoslovakia",
-    info: "La Tchécoslovaquie a développé un art entre cubisme, surréalisme et tradition populaire.",
+    info: "La Tchécoslovaquie a développé un art entre Cubisme, Surréalisme et tradition populaire.",
     info_en: "Czechoslovakia developed art between Cubism, Surrealism, and folk tradition."
   },
   { 
@@ -594,6 +604,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/futurism.png)`,
     backgroundSize: "clamp(300px, 29.7vw, 570px)",
   },
+  greece: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/greece.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   highrenaissance: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/highrenaissance.png)`,
     backgroundSize: "clamp(300px, 39.1vw, 750px)",
@@ -606,6 +620,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/impressionnism.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
   },
+  india: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/india.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   industry: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/industry.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -613,6 +631,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   intimism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/intimism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
+  },
+  israel: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/israel.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   italianrenaissance: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/italianrenaissance.png)`,
@@ -697,6 +719,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   postimpressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionnism.png)`,
     backgroundSize: "clamp(300px, 28.1vw, 540px)",
+  },
+  precisionism: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/precisionism.png)`,
+    backgroundSize: "clamp(300px, 52.1vw, 1000px)",
   },
   preraphaelitism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/preraphaelitism.png)`,
