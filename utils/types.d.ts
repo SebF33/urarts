@@ -1,6 +1,8 @@
 export type TagCollection = {
   id: number;
   name: string;
+  position: string;
+  rotation: number;
   slug: string;
 };
 
