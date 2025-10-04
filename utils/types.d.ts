@@ -73,6 +73,7 @@ export type ArtistRow = {
   info: string;
   instagram: string | null;
   last_name: string;
+  main_tags: string | null;
   nationality: string;
   signature: string | null;
   site_web: string | null;

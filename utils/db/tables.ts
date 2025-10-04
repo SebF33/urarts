@@ -61,6 +61,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
       "varchar(7)",
       (col) => col.defaultTo(sql`"#232a2d"`).notNull(),
     )
+    .addColumn("main_tags", "varchar")
     .addColumn("site_web", "varchar")
     .addColumn("facebook", "varchar")
     .addColumn("instagram", "varchar")

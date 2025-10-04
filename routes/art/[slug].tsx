@@ -74,6 +74,7 @@ export const handler: Handlers<ArtistPageProps> = {
       .select([
         "first_name", "last_name",
         "avatar_url", "color", "secondary_color",
+        "main_tags",
         "site_web", "facebook", "instagram",
         "birthyear", "deathyear", "signature", "quote", "copyright", "slug",
       ])
@@ -130,7 +131,7 @@ export const handler: Handlers<ArtistPageProps> = {
       };
     });
 
-    // Tags des œuvres de l'artiste
+    // Tags principaux des œuvres de l'artiste
     const artsTagsQuery = await db
       .selectFrom("tag")
       .innerJoin("art_tag", "tag.id", "art_tag.tag_id")
@@ -142,11 +143,32 @@ export const handler: Handlers<ArtistPageProps> = {
       .orderBy("tag.name")
       .execute();
 
-    const artsTags = artsTagsQuery.map((tag, index) => {
+    const mainTagsStr = artistDetails?.main_tags ?? "";
+    const mainTagSlugs = mainTagsStr
+      .split(",")
+      .map(s => s.trim().toLowerCase())
+      .filter(Boolean);
+
+    let filteredTags = artsTagsQuery;
+    if (mainTagSlugs.length > 0) {
+      const wanted = new Set(mainTagSlugs);
+
+      filteredTags = artsTagsQuery.filter(t =>
+        t?.slug && wanted.has(t.slug.toLowerCase())
+      );
+
+      const orderIndex = new Map(mainTagSlugs.map((slug, i) => [slug, i]));
+      filteredTags.sort((a, b) =>
+        (orderIndex.get(a.slug.toLowerCase()) ?? Infinity) -
+        (orderIndex.get(b.slug.toLowerCase()) ?? Infinity)
+      );
+    }
+
+    const artsTags = filteredTags.map((tag, index) => {
       const marginClasses = ["-ml-1", "ml-1", "-ml-1", "ml-1", "-ml-1", "ml-1"];
       const rotationDegrees = [-3, 3, -1, 2, -2, 6];
       const rotation = rotationDegrees[index % rotationDegrees.length];
-    
+
       return {
         ...tag,
         position: marginClasses[index % marginClasses.length],

@@ -44,6 +44,7 @@ interface ArtistTable {
   quote_en: string | null; // Citation de l'artiste (en)
   color: string; // Couleur primaire de l'artiste
   secondary_color: string; // Couleur secondaire de l'artiste
+  main_tags: string | null; // Tags principaux de l'artiste
   site_web: string | null; // Lien vers le site internet de l'artiste
   facebook: string | null; // Lien vers le Facebook de l'artiste
   instagram: string | null; // Lien vers le Instagram de l'artiste
