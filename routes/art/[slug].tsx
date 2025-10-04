@@ -379,6 +379,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                     artistName={artist}
                     artistSlug={slug}
                     draggable={draggable}
+                    ispersogallery={isPersoGallery}
                     tags={tags}
                   />
                 )}

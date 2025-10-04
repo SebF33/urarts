@@ -64,6 +64,8 @@ export const handler: Handlers<TagPageProps> = {
 export default function TagPage(props: PageProps<TagPageProps>) {
   const { desc, font, info, tag, slug, title } = props.data;
 
+  const isPersoGallery = props.url.pathname.endsWith("/gallery");
+
   
   return (
     <>
@@ -90,6 +92,7 @@ export default function TagPage(props: PageProps<TagPageProps>) {
           <CollectionSearch
             key={`collection-tag-${slug}`}
             font={font}
+            ispersogallery={isPersoGallery}
             myslug={slug}
             type="tag"
           />

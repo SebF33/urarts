@@ -11,15 +11,18 @@ interface Props {
   artistName: string;
   artistSlug: string;
   draggable?: boolean;
+  ispersogallery: boolean;
   tags: TagCollection[];
 }
 
 
 export default function TagsPapers(
-  { artistName, artistSlug, draggable, tags }: Props,
+  { artistName, artistSlug, draggable, ispersogallery, tags }: Props,
 ) {
 
   if (!tags?.length) return null;
+
+  const isPersoGallery: boolean = !!ispersogallery;
 
   const nbTagsByRow = 6;
   const rows = Math.ceil(tags.length / nbTagsByRow);
@@ -72,7 +75,7 @@ export default function TagsPapers(
                       <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
                       <div class="flex flex-col items-center gap-1 px-2 py-1 z-10 select-none">
                         <a
-                          href={`/tag/${tag.slug}`}
+                          href={`/tag/${tag.slug}${isPersoGallery ? "/gallery" : ""}`}
                           onClick={handleLinkClick}
                           class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
                           draggable={draggable}
