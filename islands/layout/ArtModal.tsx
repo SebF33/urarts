@@ -95,10 +95,18 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   // Ouverture de la modal
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 0);
+
+    const baseUrl = globalThis.location.href.replace(/#modal$/, "");
+    if (globalThis.location.hash !== "#modal") {
+      history.pushState({ modal: true }, "", baseUrl + "#modal");
+    } else {
+      history.replaceState({ modal: true }, "", baseUrl + "#modal");
+    }
+
     return () => clearTimeout(timer);
   }, []);
-  
-  
+
+
   // Désactiver le scroll à l'ouverture
   useEffect(() => {
     if (isVisible) {
@@ -114,7 +122,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     return () => {
       // Réactiver le scroll si fermeture
       document.body.style.paddingRight = "";
-      document.body.classList.remove("body-no-scroll");
+      document.body.classList.remove("no-scroll");
     };
   }, [isVisible]);
 
@@ -139,7 +147,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   }, [isVisible]);
 
 
-  // Fermeture de la modal avec Escape ou clic à l'extérieur
+  // Fermeture de la modal avec "Échap" ou sur clic à l'extérieur
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") handleClose();
@@ -161,6 +169,32 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       globalThis.removeEventListener("click", handleClickOutside);
     };
   }, [isVisible]);
+
+
+  // Fermeture de la modal avec "Retour"
+  useEffect(() => {
+    const onHashOrPop = () => {
+      if (isVisible && globalThis.location.hash !== "#modal") {
+        handleClose({ fromHistory: true });
+      }
+    };
+    addEventListener("hashchange", onHashOrPop);
+    addEventListener("popstate", onHashOrPop);
+    return () => {
+      removeEventListener("hashchange", onHashOrPop);
+      removeEventListener("popstate", onHashOrPop);
+    };
+  }, [isVisible]);
+
+
+  const handleClose = (opts?: { fromHistory?: boolean }) => {
+    if (!opts?.fromHistory && globalThis.location.hash === "#modal") {
+      history.back();
+      return;
+    }
+    setIsVisible(false);
+    setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
+  };
 
 
   // Clic sur un lien dans la modal
@@ -199,12 +233,6 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     setTimeout(() => {
       isClickableSignal.value = true;
     }, DELAY_REACH_ART_FROM_MODAL + 200);
-  };
-
-
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
   };
 
 
