@@ -9,7 +9,11 @@ type Quote = Array<ArtistQuote>;
 
 
 export default function Quote(
-  props: { readonly data: Quote; readonly delay: number },
+  props: {
+    readonly data: Quote;
+    readonly delay: number;
+    readonly small?: boolean;
+  },
 ) {
   const [display, setDisplay] = useState<boolean>(false);
   const quoteRef = useRef<HTMLDivElement>(null);
@@ -86,38 +90,49 @@ export default function Quote(
     }
   }, []);
 
-  
+
+  const paperClasses = `
+    paper paper-shadow w-full mx-auto text-lighterdark overflow-hidden sm:overflow-visible
+    appear-effect-y-14px transition-all duration-500 ease-in-out
+    ${props.small ? "max-w-[400px] p-2 text-sm" : "max-w-[700px] p-4 text-base"}
+  `;
+
+  const quoteTextClasses = `
+    text-center font-bold leading-6 mx-auto
+    ${props.small ? "text-lg" : "text-xl"}
+  `;
+
+  const signatureClasses = `
+    flex justify-end mt-2 mr-4 mb-3
+    ${props.small ? "max-h-7" : "max-h-9"}
+  `;
+
+
   return (
     <>
       {display && (
         <div
           ref={quoteRef}
           data-quote-id={props.data.id}
-          class={`paper paper-shadow w-full max-w-[700px] mx-auto text-lighterdark overflow-hidden sm:overflow-visible appear-effect-y-14px transition-all duration-500 ease-in-out`}
+          class={paperClasses}
         >
           <div class="top-tape"></div>
-          <div
-            class={`w-full mt-4 mx-1 z-10`}
-          >
-            <p
-              class={`text-center text-xl font-bold leading-6 mx-auto`}
-            >
-              “{props.data.quote}”<br></br>—{props.data.first_name}{" "}
+          <div class="w-full mt-4 mx-1 z-10">
+            <p class={quoteTextClasses}>
+              “{props.data.quote}”<br />—{props.data.first_name}{" "}
               {props.data.last_name}
             </p>
-            {props.data.signature &&
-              (
-                <div
-                  class={`flex justify-end md:w-5/6 max-h-9 mt-2 mr-4 mb-3`}
-                >
-                  <img
-                    class={`max-w-[100px]`}
-                    src={props.data.signature}
-                    alt={props.data.signature}
-                    draggable={draggable}
-                  />
-                </div>
-              )}
+
+            {props.data.signature && (
+              <div class={signatureClasses}>
+                <img
+                  class="max-w-[100px]"
+                  src={props.data.signature}
+                  alt={props.data.signature}
+                  draggable={draggable}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}

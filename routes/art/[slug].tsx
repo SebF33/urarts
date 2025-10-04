@@ -400,7 +400,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             {/* Post-it : citation avec signature */}
             {artistQuote && !queryParameters.alone && (
               <div class="inline-block mx-auto xl:mr-12">
-                <Quote data={artistQuote} delay={10} />
+                <Quote data={artistQuote} delay={10} small />
               </div>
             )}
             {/* Post-it : signature seule si pas de citation */}
