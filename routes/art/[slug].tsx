@@ -137,10 +137,13 @@ export const handler: Handlers<ArtistPageProps> = {
       .innerJoin("art_tag", "tag.id", "art_tag.tag_id")
       .innerJoin("art", "art.id", "art_tag.art_id")
       .innerJoin("artist", "artist.id", "art.owner_id")
-      .select(["tag.id", "tag.name", "tag.slug"])
+      .select(["tag.id", "tag.slug"])
+      .$if(lng === 'fr', (query) => query.select("tag.name"))
+      .$if(lng === 'en', (query) => query.select("tag.name_en as name"))
       .distinct()
       .where("artist.slug", "=", slug)
-      .orderBy("tag.name")
+      .$if(lng === 'fr', (query) => query.orderBy("tag.name"))
+      .$if(lng === 'en', (query) => query.orderBy("tag.name_en"))
       .execute();
 
     const mainTagsStr = artistDetails?.main_tags ?? "";
@@ -152,15 +155,12 @@ export const handler: Handlers<ArtistPageProps> = {
     let filteredTags = artsTagsQuery;
     if (mainTagSlugs.length > 0) {
       const wanted = new Set(mainTagSlugs);
-
       filteredTags = artsTagsQuery.filter(t =>
         t?.slug && wanted.has(t.slug.toLowerCase())
       );
 
-      const orderIndex = new Map(mainTagSlugs.map((slug, i) => [slug, i]));
       filteredTags.sort((a, b) =>
-        (orderIndex.get(a.slug.toLowerCase()) ?? Infinity) -
-        (orderIndex.get(b.slug.toLowerCase()) ?? Infinity)
+        a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
       );
     }
 
