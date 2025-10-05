@@ -8,7 +8,6 @@ import {
 } from "@utils/signals.ts";
 import {
   BG_STYLE,
-  DELAY_MODAL_CLOSE,
   DELAY_REACH_ART_FROM_MODAL,
   TALENTS,
 } from "@utils/constants.ts";
@@ -30,10 +29,12 @@ type ArtModalProps = {
 
 
 export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalProps) {
-  const lng = i18next.language;
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
+  const scrollYRef = useRef<number>(0);
+
+  const lng = i18next.language;
 
   const isPersoGallery = !!ispersogallery;
   const basePath = isPersoGallery ? "../../textures/" : "../textures/";
@@ -95,34 +96,67 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   // Ouverture de la modal
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 0);
-
-    const baseUrl = globalThis.location.href.replace(/#modal$/, "");
+  
     if (globalThis.location.hash !== "#modal") {
-      history.pushState({ modal: true }, "", baseUrl + "#modal");
-    } else {
-      history.replaceState({ modal: true }, "", baseUrl + "#modal");
+      globalThis.location.hash = "modal";
     }
-
-    return () => clearTimeout(timer);
+  
+    const onHash = () => {
+      if (globalThis.location.hash !== "#modal") {
+        handleClose({ fromHistory: true }); // fermer la modal
+      }
+    };
+    addEventListener("hashchange", onHash);
+  
+    return () => {
+      clearTimeout(timer);
+      removeEventListener("hashchange", onHash);
+      if (globalThis.location.hash === "#modal") {
+        history.back();
+      }
+    };
   }, []);
 
 
-  // Désactiver le scroll à l'ouverture
+  // Bloquer le défilement de la page à sa position actuelle à l'ouverture
   useEffect(() => {
     if (isVisible) {
-      // Évite le décalage dû à la scrollbar
+      document.body.classList.add("no-scroll");
+  
+      // désactiver la restauration auto native du navigateur
+      try { history.scrollRestoration = 'manual'; } catch {}
+  
+      // mémoriser la position actuelle
+      scrollYRef.current = globalThis.scrollY || globalThis.pageYOffset || 0;
+  
+      // éviter le décalage dû à largeur de la scrollbar
       const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.classList.add("no-scroll");
+  
+      // geler la page à la position courante
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.style.overscrollBehavior = 'contain';
     } else {
-      document.body.style.paddingRight = "";
       document.body.classList.remove("no-scroll");
     }
-
+  
     return () => {
-      // Réactiver le scroll si fermeture
-      document.body.style.paddingRight = "";
+      // réactiver le scroll si fermeture
       document.body.classList.remove("no-scroll");
+      document.body.style.paddingRight = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.scrollBehavior = '';
+      try { history.scrollRestoration = 'auto'; } catch {}
     };
   }, [isVisible]);
 
@@ -150,13 +184,10 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   // Fermeture de la modal avec "Échap" ou sur clic à l'extérieur
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") handleClose();
+      if (event.key === "Escape") handleClose(); // fermer la modal
     };
-
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        handleClose();
-      }
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) handleClose(); // fermer la modal
     };
 
     if (isVisible) {
@@ -171,29 +202,29 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   }, [isVisible]);
 
 
-  // Fermeture de la modal avec "Retour"
-  useEffect(() => {
-    const onHashOrPop = () => {
-      if (isVisible && globalThis.location.hash !== "#modal") {
-        handleClose({ fromHistory: true });
-      }
-    };
-    addEventListener("hashchange", onHashOrPop);
-    addEventListener("popstate", onHashOrPop);
-    return () => {
-      removeEventListener("hashchange", onHashOrPop);
-      removeEventListener("popstate", onHashOrPop);
-    };
-  }, [isVisible]);
-
-
   const handleClose = (opts?: { fromHistory?: boolean }) => {
     if (!opts?.fromHistory && globalThis.location.hash === "#modal") {
       history.back();
       return;
     }
+  
     setIsVisible(false);
-    setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
+    restoreScroll();
+    // à voir : bug d'affichage si délai de fermeture, donc pas d'animation
+    //setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
+    artModalOpenSignal.value = false
+  };
+
+
+  const restoreScroll = () => {
+    const y = scrollYRef.current || 0;
+  
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        globalThis.scrollTo(0, y);
+        requestAnimationFrame(() => globalThis.scrollTo(0, y));
+      });
+    });
   };
 
 
@@ -217,8 +248,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     // si c'est dans une page perso
     //const finalHref = isPersoGallery ? `${href}/gallery` : href;
 
-    // fermer la modal
-    handleClose();
+    handleClose(); // fermer la modal
 
     // pour préserver la navigation Fresh côté client
     setTimeout(() => {

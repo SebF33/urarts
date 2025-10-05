@@ -44,8 +44,10 @@ html {
     scrollbar-color: var(--color-lighterdark) var(--color-white);
 }
 
-.no-scroll {
-    overflow: hidden;
+body.no-scroll {
+    overflow: hidden !important;
+    touch-action: none !important;
+    overscroll-behavior: contain !important;
 }
 
 /* Curseurs */
