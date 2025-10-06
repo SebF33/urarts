@@ -256,7 +256,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
       <main
         id="page"
         data-name="collection"
-        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="flex-grow max-h-screen scrollable overflow-y-scroll custom-scrollbar"
       >
         <div class="relative w-auto flex flex-col mx-auto">
           {/* Post-it : mouvements */}
