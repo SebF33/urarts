@@ -388,6 +388,15 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
               <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5">
                 {art.name + panelText(panel)}
               </h2>
+              {/* Année */}
+              {art.year && (
+                <div class="paper paper-shadow min-h-12 min-w-[50px] inline-flex items-center p-1 z-10 transform -rotate-3 rounded-md">
+                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1"></div>
+                  <span class="w-full text-xl leading-4 text-center">
+                    {art.year}
+                  </span>
+                </div>
+              )}
               {/* Dimensions */}
               {art.width_cm != null && art.height_cm != null && (
                 <div class="paper paper-shadow min-h-12 min-w-[70px] inline-flex items-center px-2 py-1 z-10 transform rotate-12 rounded-md">

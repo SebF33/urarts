@@ -88,6 +88,7 @@ interface ArtTable {
   info_en: string; // Informations sur l'œuvre d'art (en)
   height_cm: number | null; // Hauteur de l'œuvre d'art en centimètres
   width_cm: number | null; // Largeur de l'œuvre d'art en centimètres
+  year: number | null; // Année de l'œuvre d'art
   famous_order: number | null; // Numéro d'ordre de célébrité
   geolocation: number; // Lieu géographique (0: non |1: oui)
   histocharacter: number; // Personnage historique (0: non |1: oui)

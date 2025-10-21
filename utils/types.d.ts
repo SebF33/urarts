@@ -38,6 +38,7 @@ export type ArtCollection = {
   url_4?: string;
   url_5?: string;
   width_cm: number | null;
+  year: number | null;
 };
 
 export type ArtRow = {
