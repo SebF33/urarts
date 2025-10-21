@@ -110,6 +110,11 @@ export const TAGS: TagConst[] = [
     info_en: "Abstract art explores shapes, colors, and lines without figurative representation, leaving room for emotion and interpretation."
   },
   { 
+    name: "Algeria", name_en: "Algérie", slug: "algeria",
+    info: "L’Algérie a inspiré l’art orientaliste avec ses paysages désertiques, ses scènes de rue et son patrimoine architectural unique.",
+    info_en: "Algeria inspired Orientalist art with its desert landscapes, street scenes, and unique architectural heritage.",    
+  },
+  { 
     name: "Allégorie", name_en: "Allegory", slug: "allegory",
     info: "L’allégorie utilise des figures et des symboles pour représenter des idées abstraites, morales ou philosophiques.",
     info_en: "Allegory uses figures and symbols to represent abstract, moral, or philosophical ideas."
@@ -275,6 +280,11 @@ export const TAGS: TagConst[] = [
     info_en: "Industry is depicted in modern art as a symbol of progress or alienation."
   },
   { 
+    name: "Interior", name_en: "Intérieur", slug: "interior",
+    info: "L’intérieur est un motif récurrent représentant la vie domestique, les objets familiers et l’intimité des espaces clos.",
+    info_en: "Interior scenes are a recurring theme depicting domestic life, familiar objects, and the intimacy of enclosed spaces.",    
+  },
+  { 
     name: "Israël", name_en: "Israel", slug: "israel",
     info: "L’art en Israël reflète un carrefour de traditions anciennes et d’expressions modernes, mêlant héritage biblique et création contemporaine.",
     info_en: "Art in Israel reflects a crossroads of ancient traditions and modern expressions, blending biblical heritage with contemporary creation."
@@ -365,6 +375,11 @@ export const TAGS: TagConst[] = [
     info_en: "Poland produced art rich in national traditions and modernity."
   },
   { 
+    name: "Polynésie française", name_en: "French Polynesia", slug: "french-polynesia",
+    info: "La Polynésie française a nourri l’imaginaire occidental, notamment à travers les œuvres de Gauguin et les représentations exotiques de ses îles.",
+    info_en: "French Polynesia has fueled Western imagination, notably through Gauguin’s works and exotic representations of its islands.",    
+  },
+  { 
     name: "Portrait", name_en: "Portrait", slug: "portrait",
     info: "Le portrait cherche à saisir l’apparence et la personnalité d’un individu.",
     info_en: "Portrait seeks to capture an individual’s appearance and personality."
@@ -393,6 +408,11 @@ export const TAGS: TagConst[] = [
     name: "Royaume-Uni", name_en: "United Kingdom", slug: "uk",
     info: "Le Royaume-Uni a donné Turner, les préraphaélites et l’art contemporain.",
     info_en: "The United Kingdom produced Turner, the Pre-Raphaelites, and contemporary art."
+  },
+  { 
+    name: "Science", name_en: "Science", slug: "science",
+    info: "La science, dans l’art, explore la connaissance, l’expérimentation, les technologies et la fascination pour l’univers.",
+    info_en: "Science in art explores knowledge, experimentation, technology, and fascination with the universe.",    
   },
   { 
     name: "Slovénie", name_en: "Slovenia", slug: "slovenia",
@@ -433,6 +453,11 @@ export const TAGS: TagConst[] = [
     name: "Ukraine", name_en: "Ukraine", slug: "ukraine",
     info: "L’Ukraine exprime un art influencé par les icônes, le folklore et l’avant-garde.",
     info_en: "Ukraine expresses art influenced by icons, folklore, and the avant-garde."
+  },
+  { 
+    name: "Urbain", name_en: "Urban", slug: "urban",
+    info: "Le thème urbain reflète la vie moderne, l’architecture des villes, les foules et l’évolution du paysage citadin.",
+    info_en: "The urban theme reflects modern life, city architecture, crowds, and the evolving urban landscape.",    
   },
   { 
     name: "Vietnam", name_en: "Vietnam", slug: "vietnam",
