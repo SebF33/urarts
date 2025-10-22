@@ -201,6 +201,7 @@ const translation = {
     famousart: "Some of the most famous masterpieces...",
     name: "Name(s):",
     talentsart: "Some artwork by talented artists...",
+    welcome: "Discover, explore and share the beauty of Art.",
     worldmap: "World map",
   },
   slider: {

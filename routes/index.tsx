@@ -15,6 +15,7 @@ import FamousArtSideBar from "@islands/livesearch/FamousArtSideBar.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/paper/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import { WelcomePaper } from "@islands/paper/WelcomePaper.tsx";
 
 type Artists = Array<ArtistRow>;
 type Quote = Array<ArtistQuote>;
@@ -134,6 +135,12 @@ export default function HomePage(
 
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
 
+        {/* Post-it : bienvenue */}
+        <div class="hidden 2xl:block absolute top-16 -left-16">
+          <WelcomePaper />
+        </div>
+
+        {/* Post-it : citation */}
         <div class="mx-auto -mt-[17.5vh] mb-24">
           <Quote data={artistQuote} delay={100} />
         </div>

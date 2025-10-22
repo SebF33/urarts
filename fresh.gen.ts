@@ -67,6 +67,7 @@ import * as $paper_Quote from "./islands/paper/Quote.tsx";
 import * as $paper_Signature from "./islands/paper/Signature.tsx";
 import * as $paper_TagsPapers from "./islands/paper/TagsPapers.tsx";
 import * as $paper_Title from "./islands/paper/Title.tsx";
+import * as $paper_WelcomePaper from "./islands/paper/WelcomePaper.tsx";
 import * as $paper_WorldMapPaper from "./islands/paper/WorldMapPaper.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -139,6 +140,7 @@ const manifest = {
     "./islands/paper/Signature.tsx": $paper_Signature,
     "./islands/paper/TagsPapers.tsx": $paper_TagsPapers,
     "./islands/paper/Title.tsx": $paper_Title,
+    "./islands/paper/WelcomePaper.tsx": $paper_WelcomePaper,
     "./islands/paper/WorldMapPaper.tsx": $paper_WorldMapPaper,
   },
   baseUrl: import.meta.url,

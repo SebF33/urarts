@@ -201,6 +201,7 @@ const translation = {
     famousart: "Quelques-uns des chefs-d’œuvre les plus célèbres...",
     name: "Nom(s) :",
     talentsart: "Quelques œuvres d’artistes talentueux...",
+    welcome: "Découvrez, explorez et partagez la beauté de l’Art.",
     worldmap: "Carte du Monde",
   },
   slider: {
