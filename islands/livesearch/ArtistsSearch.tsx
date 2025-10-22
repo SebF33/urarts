@@ -15,7 +15,6 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 import Title from "../paper/Title.tsx";
-import { WorldMapPaper } from "../paper/WorldMapPaper.tsx";
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {
@@ -176,8 +175,6 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
             margin="mt-2 md:mt-5"
           />
-          {/* Post-it : lien vers la carte du Monde */}
-          <WorldMapPaper />
         </div>
 
         {/* Palette */}

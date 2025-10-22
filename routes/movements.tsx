@@ -9,6 +9,7 @@ import { MovementRow } from "@utils/types.d.ts";
 import Footer from "@islands/footer/Footer.tsx";
 import MovementsList from "@islands/MovementsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
 type Movements = Array<MovementRow>;
 
@@ -77,9 +78,13 @@ export default function MovementsPage(
       <main
         id="page"
         data-name="movements"
-        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <MovementsList movements={movements} />
+        {/* Post-it : lien vers la carte du Monde */}
+        <div class="absolute top-1 right-0">
+          <WorldMapPaper />
+        </div>
       </main>
 
       <WaterDrop

@@ -14,7 +14,6 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@components/SearchInput.tsx";
 import Title from "../paper/Title.tsx";
-import { WorldMapPaper } from "../paper/WorldMapPaper.tsx";
 
 
 type Arts = Array<ArtCollection>;
@@ -143,8 +142,6 @@ export default function ArtsSearch() {
           dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
           margin="mt-2 mb-5 md:mt-5"
         />
-        {/* Post-it : lien vers la carte du Monde */}
-        <WorldMapPaper />
       </div>
 
       {/* Entrée de recherche */}

@@ -10,6 +10,7 @@ import { sql } from "kysely";
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
 
 export const handler: Handlers = {
@@ -63,9 +64,13 @@ export default function ArtistsPage(
       <main
         id="page"
         data-name="artists"
-        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <ArtistsSearch nationality={nationality} />
+        {/* Post-it : lien vers la carte du Monde */}
+        <div class="absolute top-1 right-0">
+          <WorldMapPaper />
+        </div>
       </main>
 
       <WaterDrop

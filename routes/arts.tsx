@@ -7,6 +7,7 @@ import "@utils/i18n/config.ts";
 import ArtsSearch from "@islands/livesearch/ArtsSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
 
 export const handler: Handlers = {
@@ -43,9 +44,13 @@ export default function ArtsPage(
       <main
         id="page"
         data-name="arts"
-        class="flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
         <ArtsSearch />
+        {/* Post-it : lien vers la carte du Monde */}
+        <div class="absolute top-1 right-0">
+          <WorldMapPaper />
+        </div>
       </main>
 
       <WaterDrop
