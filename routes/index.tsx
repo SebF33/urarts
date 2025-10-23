@@ -72,7 +72,7 @@ export const handler: Handlers = {
         "slug",
       ])
       .$if(lng === 'fr', (qb) => qb.select("quote"))
-      .$if(lng === 'en', (qb) => qb.select("quote_en as quote"))
+      .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN quote_en IS NOT NULL THEN quote_en ELSE quote END`.as("quote")))
       .where("quote", "is not", null)
       .orderBy(sql`random()`)
       .executeTakeFirst();

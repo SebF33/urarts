@@ -5,6 +5,7 @@ import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { sql } from "kysely";
 
 import AnimBrushStroke from "@islands/AnimBrushStroke.tsx";
 import Avatar from "@islands/Avatar.tsx";
@@ -86,7 +87,7 @@ export const handler: Handlers<ArtistPageProps> = {
       .$if(lng === 'fr', (query) => query.select("info"))
       .$if(lng === 'en', (query) => query.select("info_en as info"))
       .$if(lng === 'fr', (query) => query.select("quote"))
-      .$if(lng === 'en', (query) => query.select("quote_en as quote"))
+      .$if(lng === 'en', (query) => query.select(sql<string>`CASE WHEN quote_en IS NOT NULL THEN quote_en ELSE quote END`.as("quote")))
       .where("slug", "=", slug)
       .executeTakeFirst();
 
