@@ -69,9 +69,10 @@ export const handler: Handlers = {
         "first_name", "last_name",
         "avatar_url",
         "signature",
-        "quote",
         "slug",
       ])
+      .$if(lng === 'fr', (qb) => qb.select("quote"))
+      .$if(lng === 'en', (qb) => qb.select("quote_en as quote"))
       .where("quote", "is not", null)
       .orderBy(sql`random()`)
       .executeTakeFirst();

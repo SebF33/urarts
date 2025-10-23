@@ -76,14 +76,17 @@ export const handler: Handlers<ArtistPageProps> = {
         "avatar_url", "color", "secondary_color",
         "main_tags",
         "site_web", "facebook", "instagram",
-        "birthyear", "deathyear", "signature", "quote", "copyright", "slug",
+        "birthyear", "deathyear",
+        "signature", "copyright", "slug",
       ])
       .$if(lng === 'fr', (query) => query.select("avatar_info"))
       .$if(lng === 'en', (query) => query.select("avatar_info_en as avatar_info"))
-      .$if(lng === 'fr', (query) => query.select("info"))
-      .$if(lng === 'en', (query) => query.select("info_en as info"))
       .$if(lng === 'fr', (query) => query.select("country.name as nationality"))
       .$if(lng === 'en', (query) => query.select("country.name_en as nationality"))
+      .$if(lng === 'fr', (query) => query.select("info"))
+      .$if(lng === 'en', (query) => query.select("info_en as info"))
+      .$if(lng === 'fr', (query) => query.select("quote"))
+      .$if(lng === 'en', (query) => query.select("quote_en as quote"))
       .where("slug", "=", slug)
       .executeTakeFirst();
 
