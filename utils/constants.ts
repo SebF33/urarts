@@ -300,6 +300,11 @@ export const TAGS: TagConst[] = [
     info_en: "Japan offers a unique visual tradition between prints, calligraphy, and modernity."
   },
   { 
+    name: "Le temps", name_en: "Time", slug: "time",
+    info: "Le temps est un thème artistique majeur, symbolisé par les saisons, l’éphémère, les horloges ou le cycle de la vie.",
+    info_en: "Time is a major artistic theme, symbolized by seasons, ephemerality, clocks, or the cycle of life."
+  },
+  { 
     name: "Mer", name_en: "Sea", slug: "sea",
     info: "La mer inspire les artistes comme force naturelle, espace mythique ou décor poétique.",
     info_en: "The sea inspires artists as natural force, mythical space, or poetic setting."
@@ -436,8 +441,8 @@ export const TAGS: TagConst[] = [
   },
   { 
     name: "Temps", name_en: "Weather", slug: "weather",
-    info: "Le temps est représenté comme cycle, instant fugitif ou élément dramatique.",
-    info_en: "Weather is depicted as cycle, fleeting moment, or dramatic element."
+    info: "Le temps, dans l’art, incarne les forces de la nature — pluie, vent, nuages ou éclairs — et évoque les ambiances, les émotions ou les bouleversements.",
+    info_en: "Weather in art embodies natural forces — rain, wind, clouds, or lightning — and evokes moods, emotions, or dramatic shifts."
   },
   { 
     name: "Transport", name_en: "Transport", slug: "transport",
