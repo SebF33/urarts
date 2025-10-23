@@ -56,7 +56,6 @@ export const handler = async (
     )
     .select([
       "art.id",
-      "art.name as name",
       "first_name", "last_name",
       "gender",
       "avatar_url",
@@ -65,19 +64,39 @@ export const handler = async (
       "polyptych",
       "url",
     ])
+    .$if(lng === 'fr', (qb) => qb.select("art.name as name"))
+    .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
     .where("copyright", "!=", 2)
     .where("artist.slug", "not in", TALENTS)
-    .$if( ! random, (qb) => qb.where(
-      sql`(art.name LIKE ${"%" + name + "%"}
-      OR last_name LIKE ${"%" + name + "%"}
-      OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
-      OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"})`
-    ))
+    .$if(!random && lng === 'en', (qb) =>
+      qb.where(sql<string>`
+        (
+          art.name_en LIKE ${"%" + name + "%"}
+          OR art.name LIKE ${"%" + name + "%"}
+          OR last_name LIKE ${"%" + name + "%"}
+          OR ((art.name_en || ' ' || last_name) LIKE ${"%" + name + "%"})
+          OR ((art.name || ' ' || last_name) LIKE ${"%" + name + "%"})
+          OR ((last_name || ' ' || art.name_en) LIKE ${"%" + name + "%"})
+          OR ((last_name || ' ' || art.name) LIKE ${"%" + name + "%"})
+        )
+      `)
+    )
+    .$if( ! random && lng === 'fr', (qb) =>
+      qb.where(sql<string>`
+        (
+          art.name LIKE ${"%" + name + "%"}
+          OR last_name LIKE ${"%" + name + "%"}
+          OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
+          OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"}
+        )
+      `)
+    )
     .$if(geolocation, (qb) => qb.where("geolocation", "=", 1))
     .$if( !! tag, (qb) => qb.where(tagColumn, "=", tag))
-    .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["art.name"])))
+    .$if( ! random && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
+    .$if( ! random && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))      
     .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name"])))
     .$if(random, (qb) => qb.orderBy(sql`random()`))
     .limit(20)

@@ -118,7 +118,8 @@ export const handler = async (
     ])
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
-    .$if(isArtworks, (qb) => qb.select("art.name as name"))
+    .$if(isArtworks && lng === 'fr', (qb) => qb.select("art.name as name"))
+    .$if(isArtworks && lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
     .$if(isArtworks && lng === 'fr', (qb) => qb.select("art.info as info"))
     .$if(isArtworks && lng === 'en', (qb) => qb.select("art.info_en as info"))
     .$if(isHistocharacters, (qb) => qb.select("histocharactername as name"))
@@ -127,7 +128,15 @@ export const handler = async (
     .$if(isHistocharacters && lng === 'fr', (qb) => qb.select("histocharacterinfo as info"))
     .$if(isHistocharacters && lng === 'en', (qb) => qb.select("histocharacterinfo_en as info"))
     .where("copyright", "!=", 2)
-    .$if(isArtworks, (qb) => qb.where("art.name", "like", "%" + nameFilter + "%"))
+    .$if(isArtworks && lng === 'en', (qb) =>
+      qb.where((eb) =>
+        eb.or([
+          eb('art.name_en', 'like', `%${nameFilter}%`),
+          eb('art.name', 'like', `%${nameFilter}%`)
+        ])
+      )
+    )
+    .$if(isArtworks && lng === 'fr', (qb) => qb.where('art.name', 'like', `%${nameFilter}%`))
     .$if(isHistocharacters, (qb) => qb.where("histocharactername", "like", "%" + nameFilter + "%"))
     .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(idFilter)));
 
@@ -161,7 +170,8 @@ export const handler = async (
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
-        .orderBy(({ fn }) => fn("lower", ["art.name"]))
+        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
+        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))
         .limit(50)
       break;
 
@@ -179,7 +189,8 @@ export const handler = async (
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
-        .orderBy(({ fn }) => fn("lower", ["art.name"]))
+        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
+        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))
         .limit(50);
       break;
 

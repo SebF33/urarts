@@ -182,7 +182,9 @@ export const handler = async (
 
           const artResults = await db.selectFrom("artist")
             .innerJoin("art", "art.owner_id", "artist.id")
-            .select(["art.id as id", "art.name as name", "url", "url_2", "url_3", "url_4", "url_5"])
+            .select(["art.id as id", "url", "url_2", "url_3", "url_4", "url_5"])
+            .$if(lng === 'fr', (qb) => qb.select("art.name as name"))
+            .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
             .where("slug", "=", subpage)
             .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(pagectx)))
             .orderBy(sql`random()`)
@@ -296,9 +298,10 @@ export const handler = async (
             .select([
               "last_name", "color", "slug", "copyright",
               "art.id as id",
-              "art.name as name",
               "url", "url_2", "url_3", "url_4", "url_5"
             ])
+            .$if(lng === 'fr', (qb) => qb.select("art.name as name"))
+            .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
             .where("copyright", "!=", 2)
             .where("slug", "not in", TALENTS)
             .orderBy(sql`random()`)
