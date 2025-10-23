@@ -71,6 +71,7 @@ interface ArtTable {
   owner_id: number; // Artiste de l'œuvre
   movement_id: number; // Mouvement artistique de l'œuvre
   name: string; // Nom de l'œuvre d'art (fr)
+  name_en: string | null; // Nom de l'œuvre d'art (en)
   polyptych: number; // Nombre de panneaux
   frame: number; // Type d'encadrement (-1: atypique |0: street |1: canvas |2: cadre sans passe-partout |3: cadre avec passe-partout |4: cadre avec passe-partout sur photo)
   url: string; // Panneau central
