@@ -51,6 +51,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     )
     .addColumn("signature", "varchar")
     .addColumn("quote", "varchar")
+    .addColumn("quote_en", "varchar")
     .addColumn(
       "color",
       "varchar(7)",
@@ -141,6 +142,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("owner_id", "integer", (col) => col.notNull())
     .addColumn("movement_id", "integer", (col) => col.notNull())
     .addColumn("name", "varchar", (col) => col.notNull())
+    .addColumn("name_en", "varchar")
     .addColumn("polyptych", "integer", (col) => col.defaultTo(sql`1`).notNull())
     .addColumn("frame", "integer", (col) => col.defaultTo(sql`2`).notNull())
     .addColumn("url", "varchar", (col) => col.notNull())
