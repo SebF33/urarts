@@ -1,11 +1,97 @@
 // Anglais
 const translation = {
   about: {
+    legal:
+      `<h2 class="text-2xl font-semibold mb-4">📄 Legal Notice – Urarts.art</h2>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">1. Site Publisher</h3>
+        <p>
+          The website <strong>Urarts.art</strong> is published by Sébastien Flouriot,<br />
+          contact email address: sebastien.flouriot@urarts.art.
+        </p>
+        <p class="mt-2">
+          Publication manager: Sébastien Flouriot.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">2. Hosting Provider</h3>
+        <p>
+          The website <strong>Urarts.art</strong> is hosted by: Infomaniak.<br />
+          Website: https://www.infomaniak.com
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">3. Intellectual Property</h3>
+        <p>
+          The name <strong>“Urarts”</strong> is a registered trademark with the French National Institute of Industrial Property (INPI).
+        </p>
+        <p>
+          Any use, reproduction, imitation, or exploitation, in whole or in part, of this trademark, without prior written authorization from its owner, is strictly prohibited and constitutes an infringement within the meaning of Articles L.713-2 and following of the French Intellectual Property Code.
+        </p>
+        <p>
+          The website <strong>Urarts.art</strong>, its content (texts, graphics, logos, structure, source code, database, etc.) are protected by copyright law.
+        </p>
+        <p>
+          Any reproduction, representation, modification, or distribution, in whole or in part, without written authorization, is prohibited.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">4. Purpose of the Website</h3>
+        <p>
+          The website <strong>Urarts.art</strong> aims to promote, share, and educate about visual arts.
+        </p>
+        <p>
+          It allows users to view online exhibitions of artworks, discover artists, and access cultural and educational content.
+        </p>
+        <p>
+          The site does not provide an art sales service but is a cultural and educational platform dedicated to promoting artistic heritage.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">5. Personal Data Protection</h3>
+        <p>
+          Information collected by <strong>Urarts.art</strong> is processed in accordance with the General Data Protection Regulation (GDPR) and French legislation in force.
+        </p>
+        <p>
+          No personal data is shared with third parties without consent.  
+          You may exercise your right to access, rectify, or delete your data by writing to: sebastien.flouriot@urarts.art.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">6. Liability</h3>
+        <p>
+          The website <strong>Urarts.art</strong> strives to ensure the accuracy and regular updating of its content, but cannot be held responsible for any errors or omissions.
+        </p>
+        <p>
+          The publisher reserves the right to modify, suspend, or discontinue the site at any time.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">7. External Links</h3>
+        <p>
+          Hyperlinks may redirect users to other websites.<br />
+          <strong>Urarts.art</strong> has no control over these external resources and declines any responsibility regarding their content.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">8. Trademark Notice</h3>
+        <p>
+          <strong>Urarts®</strong> is a registered trademark with the INPI, operated through the website
+          <a
+            href="https://www.urarts.art"
+            class="underline hover:text-gray-700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://www.urarts.art
+          </a>.
+        </p>
+      </section>`,
     msg:
-      `<p class="mb-4 text-xl md:text-2xl leading-5">The <strong>Urarts</strong> site is created with passion for <strong>Art</strong> and <strong>Dev</strong>.</p>
-      <p class="mb-4 text-xl md:text-2xl leading-5">
+      `<p class="mb-4 text-lg md:text-xl leading-5">The <strong>Urarts</strong> site is created with passion for <strong>Art</strong> and <strong>Dev</strong>.</p>
+      <p class="mb-4 text-lg md:text-xl leading-5">
       <span class="font-bold underline">Means used</span>: TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Alpine.js, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
-      <p class="text-xl md:text-2xl leading-5">
+      <p class="mb-4 text-lg md:text-xl leading-5">
       <span class="font-bold underline">Copyright Policy</span>: Urarts shows public domain artwork and attempts to obtain permission for copyrighted ones.
       The purpose of this site is to use these historical works for informational and educational purposes.
       Visuals are low resolution images not suitable for commercial use.

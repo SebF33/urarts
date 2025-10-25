@@ -3,7 +3,8 @@ import "@utils/i18n/config.ts";
 import { Language } from "@utils/i18n/i18next.d.ts";
 import { languageSignal } from "@utils/signals.ts";
 
-export default function Note() {
+
+export default function AboutNotePaper() {
   const draggable = false;
 
   // Langue
@@ -13,35 +14,37 @@ export default function Note() {
       languageSignal.value = lng;
       setTimeout(() => { globalThis.location.reload(); }, 100);
     }
-  };
+  }
+
 
   return (
-    <div class="paper max-w-[700px] mx-auto mt-12 md:mt-2 mb-2">
+    <div class="paper max-w-[500px] mx-6 mt-6 mb-2 scale-[0.9] md:scale-[0.85] xl:scale-[0.8]">
       <div class="tape-section"></div>
-      <div class="flex flex-col w-full p-6 font-medium">
-        <div class="flex items-center mb-4 z-10 select-none">
-          <p class="text-xl leading-6 md:text-2xl">
-            {i18next.t("leonardo.lng", { ns: "translation" })}{" "}
+      <div class="flex flex-col w-full p-4 font-medium text-sm md:text-base">
+        {/* En-tête langue */}
+        <div class="flex items-center mb-3 select-none">
+          <p class="text-lg md:text-xl">
+            {i18next.t("leonardo.lng", { ns: "translation" })}
+            {" "}
           </p>
-          <div class="appear-effect-very-fast-fadein inline-flex items-center space-x-2 ml-3">
+          <div class="inline-flex items-center space-x-2 ml-2">
             <button
               onClick={() => handleLanguage("en")}
-              class="inline-block flex items-center focus:outline-none"
+              class="focus:outline-none"
             >
               <img
-                class="w-7 md:w-9 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)"
+                class="w-9 hover:scale-110 transition-transform duration-50"
                 src="/icons/Royaume-Uni.png"
                 alt="en"
                 draggable={draggable}
               />
             </button>
-            {" "}
             <button
               onClick={() => handleLanguage("fr")}
-              class="inline-block flex items-center focus:outline-none"
+              class="focus:outline-none"
             >
               <img
-                class="w-7 md:w-9 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)"
+                class="w-9 hover:scale-110 transition-transform duration-50"
                 src="/icons/France.png"
                 alt="fr"
                 draggable={draggable}
@@ -49,16 +52,20 @@ export default function Note() {
             </button>
           </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}/>
+        {/* Contenu texte */}
+        <div
+          dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}
+        />
+        {/* Logo Deno */}
         <a
           href="https://fresh.deno.dev"
-          class="appear-effect-very-fast-fadein inline-block ml-auto z-10"
+          class="inline-block ml-auto mt-4"
           draggable={draggable}
           target="_blank"
           rel="noopener"
         >
           <img
-            class="w-32"
+            class="w-24 md:w-28"
             src="/deno-plush.svg"
             alt="deno-plush"
             draggable={draggable}

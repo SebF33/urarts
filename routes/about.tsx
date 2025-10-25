@@ -3,9 +3,10 @@ import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
+import AboutNotePaper from "@islands/paper/AboutNotePaper.tsx";
 import Footer from "@islands/footer/Footer.tsx";
+import LegalNotePaper from "@islands/paper/LegalNotePaper.tsx";
 import Mona from "@islands/Mona.tsx";
-import Note from "@islands/paper/Note.tsx";
 import Title from "@islands/paper/Title.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
@@ -60,14 +61,26 @@ export default function AboutPage(
         data-name="about"
         class="mona-page flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
       >
-        <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8 mb-48">
+        <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
           <Title
             name="about"
-            dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
-            margin="mt-2 mb-6 md:mt-5"
+            dimension="min-h-[30px] max-w-[122px] md:min-h-[60px] md:max-w-[230px]"
+            margin="mt-2 md:mt-5"
           />
-          <Note />
-          <Mona />
+        </div>
+        <div class="relative flex justify-center items-start mb-24 flex-wrap 2xl:flex-nowrap">
+          {/* Note à propos */}
+          <div class="2xl:absolute 2xl:left-1/2 2xl:-translate-x-[150%] 2xl:top-[20%] mt-2 2xl:-mt-20">
+            <AboutNotePaper />
+          </div>
+          {/* Mona Lisa */}
+          <div class="z-10 -mt-24">
+            <Mona />
+          </div>
+          {/* Note mentions légales */}
+          <div class="2xl:absolute 2xl:left-1/2 2xl:translate-x-[46%] 2xl:top-[25%] mt-2 2xl:-mt-44">
+            <LegalNotePaper />
+          </div>
         </div>
       </main>
 

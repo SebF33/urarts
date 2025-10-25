@@ -1,11 +1,97 @@
 // Français
 const translation = {
   about: {
+    legal:
+      `<h2 class="text-2xl font-semibold mb-4">📄 Mentions légales – Urarts.art</h2>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">1. Éditeur du site</h3>
+        <p>
+          Le site <strong>Urarts.art</strong> est édité par Sébastien Flouriot,<br />
+          adresse e-mail de contact : sebastien.flouriot@urarts.art.
+        </p>
+        <p class="mt-2">
+          Responsable de la publication : Sébastien Flouriot.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">2. Hébergeur</h3>
+        <p>
+          Le site <strong>Urarts.art</strong> est hébergé par : Infomaniak.<br />
+          Site web : https://www.infomaniak.com
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">3. Propriété intellectuelle</h3>
+        <p>
+          Le nom <strong>“Urarts”</strong> est une marque déposée auprès de l’Institut National de la Propriété Industrielle (INPI).
+        </p>
+        <p>
+          Toute utilisation, reproduction, imitation ou exploitation, totale ou partielle, de cette marque, sans autorisation préalable et écrite de son titulaire, est strictement interdite et constitue une contrefaçon au sens des articles L.713-2 et suivants du Code de la propriété intellectuelle.
+        </p>
+        <p>
+          Le site <strong>Urarts.art</strong>, son contenu (textes, graphismes, logos, structure, codes informatiques, base de données, etc.) sont protégés par le droit d’auteur.
+        </p>
+        <p>
+          Toute reproduction, représentation, modification ou diffusion, en tout ou partie, sans autorisation écrite, est interdite.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">4. Objet du site</h3>
+        <p>
+          Le site <strong>Urarts.art</strong> a pour vocation de favoriser la diffusion, la mise en valeur et l’éducation autour des arts visuels.
+        </p>
+        <p>
+          Il permet la consultation d’œuvres d’art exposées en ligne, la découverte d’artistes, ainsi que la publication de contenus culturels et pédagogiques.
+        </p>
+        <p>
+          Le site ne constitue pas un service de vente d’œuvres d’art mais une plateforme culturelle et éducative dédiée à la promotion du patrimoine artistique.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">5. Protection des données personnelles</h3>
+        <p>
+          Les informations collectées par <strong>Urarts.art</strong> sont traitées conformément au Règlement Général sur la Protection des Données (RGPD) et à la législation française en vigueur.
+        </p>
+        <p>
+          Aucune donnée personnelle n’est transmise à des tiers sans consentement.  
+          Tu peux exercer ton droit d’accès, de rectification ou de suppression de tes données en écrivant à : sebastien.flouriot@urarts.art.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">6. Responsabilité</h3>
+        <p>
+          Le site <strong>Urarts.art</strong> s’efforce d’assurer l’exactitude et la mise à jour de ses contenus, mais ne saurait être tenu responsable des erreurs ou omissions.
+        </p>
+        <p>
+          L’éditeur se réserve le droit de modifier, suspendre ou interrompre le site à tout moment.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">7. Liens externes</h3>
+        <p>
+          Des liens hypertextes peuvent rediriger vers d’autres sites.<br />
+          <strong>Urarts.art</strong> n’exerce aucun contrôle sur ces ressources externes et décline toute responsabilité quant à leur contenu.
+        </p>
+      </section>
+      <section>
+        <h3 class="font-semibold text-lg mb-2">8. Mention de la marque</h3>
+        <p>
+          <strong>Urarts®</strong> est une marque déposée auprès de l’INPI, exploitée via le site
+          <a
+            href="https://www.urarts.art"
+            class="underline hover:text-gray-700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://www.urarts.art
+          </a>.
+        </p>
+      </section>`,
     msg:
-      `<p class="mb-4 text-xl md:text-2xl leading-5">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
-      <p class="mb-4 text-xl md:text-2xl leading-5">
+      `<p class="mb-4 text-lg md:text-xl leading-5">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
+      <p class="mb-4 text-lg md:text-xl leading-5">
       <span class="font-bold underline">Moyens utilisés</span> : TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Alpine.js, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
-      <p class="text-xl md:text-2xl leading-5">
+      <p class="mb-4 text-lg md:text-xl leading-5">
       <span class="font-bold underline">Politique de droit d’auteur</span> : Urarts montre des œuvres d’art du domaine public et tente d’obtenir l’autorisation pour celles protégées par le droit d’auteur.
       Le but de ce site est d’utiliser ces œuvres historiques à des fins d’information et d’éducation.
       Les visuels sont des images à faible résolution non adaptées à un usage commercial.

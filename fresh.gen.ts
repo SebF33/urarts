@@ -60,10 +60,11 @@ import * as $livesearch_TalentsArtSideBar from "./islands/livesearch/TalentsArtS
 import * as $livesearch_WomenSearch from "./islands/livesearch/WomenSearch.tsx";
 import * as $panel_WorldArtistsPanel from "./islands/panel/WorldArtistsPanel.tsx";
 import * as $panel_WorldArtsPanel from "./islands/panel/WorldArtsPanel.tsx";
+import * as $paper_AboutNotePaper from "./islands/paper/AboutNotePaper.tsx";
 import * as $paper_ArtistsPapers from "./islands/paper/ArtistsPapers.tsx";
 import * as $paper_Copyright from "./islands/paper/Copyright.tsx";
+import * as $paper_LegalNotePaper from "./islands/paper/LegalNotePaper.tsx";
 import * as $paper_MovementsPapers from "./islands/paper/MovementsPapers.tsx";
-import * as $paper_Note from "./islands/paper/Note.tsx";
 import * as $paper_Quote from "./islands/paper/Quote.tsx";
 import * as $paper_Signature from "./islands/paper/Signature.tsx";
 import * as $paper_TagsPapers from "./islands/paper/TagsPapers.tsx";
@@ -134,10 +135,11 @@ const manifest = {
     "./islands/livesearch/WomenSearch.tsx": $livesearch_WomenSearch,
     "./islands/panel/WorldArtistsPanel.tsx": $panel_WorldArtistsPanel,
     "./islands/panel/WorldArtsPanel.tsx": $panel_WorldArtsPanel,
+    "./islands/paper/AboutNotePaper.tsx": $paper_AboutNotePaper,
     "./islands/paper/ArtistsPapers.tsx": $paper_ArtistsPapers,
     "./islands/paper/Copyright.tsx": $paper_Copyright,
+    "./islands/paper/LegalNotePaper.tsx": $paper_LegalNotePaper,
     "./islands/paper/MovementsPapers.tsx": $paper_MovementsPapers,
-    "./islands/paper/Note.tsx": $paper_Note,
     "./islands/paper/Quote.tsx": $paper_Quote,
     "./islands/paper/Signature.tsx": $paper_Signature,
     "./islands/paper/TagsPapers.tsx": $paper_TagsPapers,
