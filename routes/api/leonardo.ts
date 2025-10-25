@@ -105,14 +105,24 @@ export const handler = async (
           avatar_url: p.avatar_url,
           slug: p.slug,
         }));
-  
+
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_artists", { ns: "translation" })}</strong></h2>`;
-        
+
         newArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `
+            <a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-flex flex-col items-center align-top mt-3 mx-2 text-center" draggable="${draggable}">
+              <div class="h-[80px] flex items-center justify-center">
+                <img class="w-[80px]" src="${p.avatar_url}" alt="${p.last_name}" draggable="${draggable}"/>
+              </div>
+              <div class="paper w-[72px] h-[28px] mx-auto mt-1 flex-shrink-0">
+                <div class="top-tape max-h-2"></div>
+                <p class="text-sm font-medium text-lighterdark break-words leading-[0.8em] p-1">${p.last_name}</p>
+              </div>
+            </a>
+          `;
         });
         break;
-  
+
       case "home":
         const currentYear = new Date().getFullYear();
 
@@ -132,7 +142,17 @@ export const handler = async (
         htmlContent = `<h2><strong>${i18next.t("leonardo.new_public_domain_artists", { ns: "translation" })}</strong></h2>`;
         
         publicDomainArtists.forEach((p) => {
-          htmlContent += `<a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-block mt-3 mx-2" title=${p.last_name} draggable="${draggable}"><img src="${p.avatar_url}" alt="${p.last_name}" style="max-width:80px" draggable="${draggable}"/></a>`;
+          htmlContent += `
+            <a href="/art/${p.slug}" class="appear-effect-very-fast-fadein inline-flex flex-col items-center align-top mt-3 mx-2 text-center" draggable="${draggable}">
+              <div class="h-[80px] flex items-center justify-center">
+                <img class="w-[80px]" src="${p.avatar_url}" alt="${p.last_name}" draggable="${draggable}"/>
+              </div>
+              <div class="paper w-[72px] h-[28px] mx-auto mt-1 flex-shrink-0">
+                <div class="top-tape max-h-2"></div>
+                <p class="text-sm font-medium text-lighterdark break-words leading-[0.8em] p-1">${p.last_name}</p>
+              </div>
+            </a>
+          `;
         });
         break;
   
