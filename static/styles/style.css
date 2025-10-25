@@ -544,6 +544,16 @@ h1 {
     border-image: url(../textures/brush-input-box.png) 19 round;
 }
 
+.brush-input-box input::placeholder {
+    font-style: italic;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.brush-input-box input:focus::placeholder {
+    opacity: 0.4;
+}
+
 /* Ombres */
 .famous-art-shadow {
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) drop-shadow(0 4px 4px rgba(0, 0, 0, 0.16)) drop-shadow(0 8px 8px rgba(0, 0, 0, 0.20));

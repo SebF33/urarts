@@ -2,6 +2,7 @@ import { Any } from "any";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { TagConst } from "@utils/types.d.ts";
 
+
 // Constantes globales
 export const DEFAULT_LNG = "en";
 export const DELAY_API_CALL = 150;
@@ -21,6 +22,7 @@ export const DELAY_REACH_ART_FROM_MODAL = 400;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
 
+
 export const INDICATORS_MOVEMENTS: string[] = [
   "artdeco",
   "baroque",
@@ -30,6 +32,7 @@ export const INDICATORS_MOVEMENTS: string[] = [
   "italianrenaissance",
   "surrealism",
 ];
+
 
 export const NATIONALITIES: string[] = [
   "Allemagne",
@@ -92,6 +95,7 @@ export const NATIONALITIES: string[] = [
   "Vietnam",
 ];
 
+
 export const NB_LOADING_ARTS = 5;
 export const NB_LOADING_ARTISTS = 10;
 
@@ -102,6 +106,53 @@ export const URL_GT = "https://www.googletagmanager.com";
 export const URL_URARTS_ART = "https://www.urarts.art";
 export const URL_URARTS_DEV = "https://urarts.fly.dev";
 export const URL_URARTS_FR = "https://www.urarts.fr";
+
+
+export const PLACEHOLDERS_BY_TYPE: Record<string, string[]> = {
+  artistssearch: [
+    "Claude Monet...",
+    "de Vinci...",
+    "Rembrandt...",
+    "Rosa Bonheur...",
+    "Vincent van Gogh...",
+  ],
+  artssearch: [
+    "L'atelier...",
+    "La bataille...",
+    "Le jardin...",
+    "Rose...",
+    "Vénus...",
+  ],
+  collectionsearch: [
+    "Allégorie...",
+    "Fille...",
+    "Fleurs...",
+    "Nature morte...",
+    "Portrait...",
+  ],
+  famousartsidebar: [
+    "La Cène...",
+    "La Joconde...",
+    "La Nuit étoilée...",
+    "Le Baiser...",
+    "Les Ménines...",
+  ],
+  histosearch: [
+    "Charles...",
+    "George...",
+    "Jean-Jacques Rousseau...",
+    "Louis...",
+    "Napoléon...",
+  ],
+  talentsartsidebar: [
+    "Bouddha...",
+    "Famille...",
+    "Mélancolie...",
+    "Réflexion...",
+    "Un port...",
+  ],
+};
+
 
 export const TAGS: TagConst[] = [
   { 
@@ -512,6 +563,7 @@ export const FAMOUS_ART_IMG_WRAPPER: Record<string, Any> = {
     height: "100%",
   },
 };
+
 
 export const BG_STYLE: Record<string, { background: string; backgroundSize: string }> = {
   abstract: {

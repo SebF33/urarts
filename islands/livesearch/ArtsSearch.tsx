@@ -12,8 +12,8 @@ import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";
-import { SearchInput } from "@components/SearchInput.tsx";
-import Title from "../paper/Title.tsx";
+import { SearchInput } from "@islands/input/SearchInput.tsx";
+import Title from "@islands/paper/Title.tsx";
 
 
 type Arts = Array<ArtCollection>;
@@ -152,7 +152,11 @@ export default function ArtsSearch() {
         </h2>
       </div>
       <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
-        <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+        <SearchInput
+          type="artssearch"
+          value={searchTerm}
+          onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
+        />
       </div>
 
       <div class={`flex flex-wrap`}>

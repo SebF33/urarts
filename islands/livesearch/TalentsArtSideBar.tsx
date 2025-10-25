@@ -13,7 +13,7 @@ import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
-import { SearchInput } from "@components/SearchInput.tsx";
+import { SearchInput } from "@islands/input/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
@@ -128,7 +128,11 @@ export default function TalentsArtSideBar() {
             </div>
             <div class="mt-5 px-4">
               <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
-                <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+                <SearchInput
+                  type="talentsartsidebar"
+                  value={searchTerm}
+                  onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
+                />
               </div>
             </div>
           </div>

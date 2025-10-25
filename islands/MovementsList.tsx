@@ -10,7 +10,7 @@ import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";
-import Title from "./paper/Title.tsx";
+import Title from "@islands/paper/Title.tsx";
 
 
 type Arts = Array<ArtCollection>;

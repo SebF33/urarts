@@ -46,6 +46,7 @@ import * as $footer_PersoFooter from "./islands/footer/PersoFooter.tsx";
 import * as $footer_WaterDrop from "./islands/footer/WaterDrop.tsx";
 import * as $header_Nav from "./islands/header/Nav.tsx";
 import * as $hero_TagHero from "./islands/hero/TagHero.tsx";
+import * as $input_SearchInput from "./islands/input/SearchInput.tsx";
 import * as $layout_ArtModal from "./islands/layout/ArtModal.tsx";
 import * as $layout_ArtistsLayout from "./islands/layout/ArtistsLayout.tsx";
 import * as $layout_ArtsLayout from "./islands/layout/ArtsLayout.tsx";
@@ -119,6 +120,7 @@ const manifest = {
     "./islands/footer/WaterDrop.tsx": $footer_WaterDrop,
     "./islands/header/Nav.tsx": $header_Nav,
     "./islands/hero/TagHero.tsx": $hero_TagHero,
+    "./islands/input/SearchInput.tsx": $input_SearchInput,
     "./islands/layout/ArtModal.tsx": $layout_ArtModal,
     "./islands/layout/ArtistsLayout.tsx": $layout_ArtistsLayout,
     "./islands/layout/ArtsLayout.tsx": $layout_ArtsLayout,

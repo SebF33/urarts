@@ -13,8 +13,8 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
-import { SearchInput } from "@components/SearchInput.tsx";
-import Title from "../paper/Title.tsx";
+import { SearchInput } from "@islands/input/SearchInput.tsx";
+import Title from "@islands/paper/Title.tsx";
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {
@@ -636,7 +636,11 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             </div>
           </div>
           <div class="brush-input-box absolute w-48 max-h-[68px] top-40 sm:top-12 left-0 right-0 mx-auto z-10">
-            <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+            <SearchInput
+              type="artistssearch"
+              value={searchTerm}
+              onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
+            />
           </div>
         </div>
       </div>

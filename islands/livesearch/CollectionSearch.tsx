@@ -20,7 +20,7 @@ import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
-import { SearchInput } from "@components/SearchInput.tsx";
+import { SearchInput } from "@islands/input/SearchInput.tsx";
 
 
 type Arts = Array<ArtCollection>;
@@ -132,7 +132,11 @@ export default function CollectionSearch(props: Props) {
             </h2>
           </div>
           <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
-            <SearchInput value={searchTerm} onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)} />
+            <SearchInput
+              type="collectionsearch"
+              value={searchTerm}
+              onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
+            />
           </div>
         </div>
       )}
