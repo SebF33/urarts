@@ -44,7 +44,7 @@ export default function ArtsPage(
       <main
         id="page"
         data-name="arts"
-        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar overflow-hidden"
       >
         <ArtsSearch />
         {/* Post-it : lien vers la carte du Monde */}

@@ -64,7 +64,7 @@ export default function ArtistsPage(
       <main
         id="page"
         data-name="artists"
-        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar overflow-hidden"
       >
         <ArtistsSearch nationality={nationality} />
         {/* Post-it : lien vers la carte du Monde */}

@@ -78,7 +78,7 @@ export default function MovementsPage(
       <main
         id="page"
         data-name="movements"
-        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar"
+        class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar overflow-hidden"
       >
         <MovementsList movements={movements} />
         {/* Post-it : lien vers la carte du Monde */}
