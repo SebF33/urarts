@@ -61,6 +61,17 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     const svgEl = svgRef.current;
     if (!svgEl) return;
 
+    const isTouchDevice = () => {
+      return (
+        'ontouchstart' in globalThis ||
+        navigator.maxTouchPoints > 0 ||
+        globalThis.matchMedia("(pointer: coarse)").matches
+      );
+    };
+
+    // pas d'infobulles sur mobile/tactile
+    if (isTouchDevice()) return;
+
     // basées sur le centroïde de chaque path
     svgEl.querySelectorAll("path").forEach((path) => {
       tippy(path, {
