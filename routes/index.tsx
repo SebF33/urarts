@@ -38,12 +38,12 @@ export const handler: Handlers = {
         "avatar_url", "signature", "color", "site_web",
         "slug",
       ])
-      .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .$if(lng === 'fr', (qb) => qb.select("info"))
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
       .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
       .where("slug", "not in", TALENTS)
+      .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .orderBy(sql`random()`)
       .limit(4)
       .execute();
@@ -74,6 +74,7 @@ export const handler: Handlers = {
       .$if(lng === 'fr', (qb) => qb.select("quote"))
       .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN quote_en IS NOT NULL THEN quote_en ELSE quote END`.as("quote")))
       .where("quote", "is not", null)
+      .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .orderBy(sql`random()`)
       .executeTakeFirst();
 
