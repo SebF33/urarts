@@ -112,8 +112,16 @@ export const PLACEHOLDERS_BY_TYPE: Record<string, string[]> = {
   artistssearch: [
     "Claude Monet...",
     "de Vinci...",
+    "Edvard Munch...",
+    "Hokusai...",
+    "Klimt...",
+    "Michel-Ange...",
+    "Mondrian...",
     "Rembrandt...",
     "Rosa Bonheur...",
+    "Rubens...",
+    "Vermeer...",
+    "Vigée Le Brun...",
     "Vincent van Gogh...",
   ],
   artssearch: [
@@ -140,9 +148,11 @@ export const PLACEHOLDERS_BY_TYPE: Record<string, string[]> = {
   histosearch: [
     "Charles...",
     "George...",
-    "Jean-Jacques Rousseau...",
+    "Henri...",
+    "Jacques...",
     "Louis...",
     "Napoléon...",
+    "Rousseau...",
   ],
   talentsartsidebar: [
     "Bouddha...",
