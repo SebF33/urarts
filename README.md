@@ -72,6 +72,7 @@ Déployer :
 Ouvrir dans le navigateur :
 `flyctl open`
 
+<p align="center">© 2022-2025 Urarts — Tous droits réservés.</p>
 
 <p align="right">
   <img align="right" width="200" src="https://raw.githubusercontent.com/sebf33/urarts/master/.github/my-dino.png" />
