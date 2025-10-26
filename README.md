@@ -72,6 +72,8 @@ Déployer :
 Ouvrir dans le navigateur :
 `flyctl open`
 
+
+## :copyright: Copyright
 <p align="center">© 2022-2025 Urarts — Tous droits réservés.</p>
 
 <p align="right">
