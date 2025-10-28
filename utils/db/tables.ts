@@ -254,6 +254,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     )
     .addColumn("msg", "varchar", (col) => col.notNull())
     .addColumn("msg_en", "varchar", (col) => col.notNull())
+    .addColumn("url", "varchar")
     .addColumn(
       "modified_at",
       "timestamp",

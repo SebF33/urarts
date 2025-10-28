@@ -103,18 +103,19 @@ interface ArtTable {
 
 interface TopicTable {
   id: Generated<number>;
-  name: string; //
-  name_en: string; //
+  name: string;
+  name_en: string;
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 
 interface FactTable {
   id: Generated<number>;
-  topic_slug: string; //
-  target_slug: string; //
-  msg: string; //
-  msg_en: string; //
+  topic_slug: string;
+  target_slug: string;
+  msg: string;
+  msg_en: string;
+  url: string | null;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

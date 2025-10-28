@@ -160,6 +160,7 @@ export const handler = async (
         const factResult = await db.selectFrom("fact")
         .$if(lng === 'fr', (qb) => qb.select("msg"))
         .$if(lng === 'en', (qb) => qb.select("msg_en as msg"))
+        .select("url")
         .where("topic_slug", "=", page)
         .$if(subpage !== "undefined", (qb) => qb.where("target_slug", "=", subpage))
         .orderBy(sql`random()`)
@@ -168,6 +169,10 @@ export const handler = async (
         if (factResult) {
           htmlContent = `<h2><strong>${i18next.t("leonardo.fact", { ns: "translation" })}</strong></h2>`;
           htmlContent += `<p class="text-[1rem] leading-none mt-1" style="max-width:400px">${factResult.msg}</p>`;
+          
+          if (factResult.url) {
+            htmlContent += `<div class="mt-2"><img src="${factResult.url}" alt="fact image" class="max-w-[150px] block"></div>`;
+          }
         }
         else {
           return Promise.resolve(
