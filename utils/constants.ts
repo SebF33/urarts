@@ -426,6 +426,11 @@ export const TAGS: TagConst[] = [
     info_en: "The nude represents the human body, idealized or naturalistic, a central theme in art."
   },
   { 
+    name: "Or", name_en: "Gold", slug: "gold",
+    info: "L’or, symbole de richesse et de lumière, est utilisé dans l’art pour sa brillance et sa valeur spirituelle. Les feuilles d’or ornent icônes, manuscrits et peintures, ajoutant une dimension sacrée ou somptueuse aux œuvres.",
+    info_en: "Gold, symbol of wealth and light, is used in art for its brilliance and spiritual value. Gold leaf adorns icons, manuscripts, and paintings, adding a sacred or sumptuous dimension to artworks."
+  },
+  { 
     name: "Pays-Bas", name_en: "Netherlands", slug: "netherlands",
     info: "Les Pays-Bas brillent par l’âge d’or de la peinture flamande et hollandaise.",
     info_en: "The Netherlands shine through the Golden Age of Flemish and Dutch painting."
