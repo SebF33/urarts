@@ -1,6 +1,7 @@
 import { ArtCollection, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { normalizeText } from "@utils/db/common.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
 import { UrlBasePath } from "@/env.ts";
@@ -30,11 +31,14 @@ export const handler = async (
   query = url.searchParams.get("lng") || "";
   const lng = query.length ? encodeURIComponent(query) : DEFAULT_LNG;
 
+  // Œuvre seule
   const isAlone = url.searchParams.has("alone");
   const isNotAlone = url.searchParams.has("notalone");
 
+  // Noms
   query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
+  const normalizedNameFilter = normalizeText(nameFilter);
 
   query = url.searchParams.get("slug") || "";
   const slugFilter = query.length ? encodeURIComponent(query) : "";
@@ -131,13 +135,13 @@ export const handler = async (
     .$if(isArtworks && lng === 'en', (qb) =>
       qb.where((eb) =>
         eb.or([
-          eb('art.name_en', 'like', `%${nameFilter}%`),
-          eb('art.name', 'like', `%${nameFilter}%`)
+          eb('art.name_en_normalized', 'like', `%${normalizedNameFilter}%`),
+          eb('art.name_normalized', 'like', `%${normalizedNameFilter}%`)
         ])
       )
     )
-    .$if(isArtworks && lng === 'fr', (qb) => qb.where('art.name', 'like', `%${nameFilter}%`))
-    .$if(isHistocharacters, (qb) => qb.where("histocharactername", "like", "%" + nameFilter + "%"))
+    .$if(isArtworks && lng === 'fr', (qb) => qb.where('art.name_normalized', 'like', `%${normalizedNameFilter}%`))
+    .$if(isHistocharacters, (qb) => qb.where("histocharactername_normalized", "like", "%" + normalizedNameFilter + "%"))
     .$if(isAlone, (qb) => qb.where("art.id", "=", parseInt(idFilter)));
 
   switch (type) {
@@ -160,7 +164,7 @@ export const handler = async (
           qb.where(
             sql`((histocharacterbirthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (histocharacterdeathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
           ))
-        .orderBy(({ fn }) => fn("lower", ["histocharactername"]))
+        .orderBy(({ fn }) => fn("lower", ["histocharactername_normalized"]))
       break;
 
     case "movement":
@@ -170,8 +174,8 @@ export const handler = async (
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
-        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
-        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))
+        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
+        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))
         .limit(50)
       break;
 
@@ -189,8 +193,8 @@ export const handler = async (
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
         .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
         .orderBy(sql`random()`)
-        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
-        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))
+        .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
+        .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))
         .limit(50);
       break;
 

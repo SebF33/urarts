@@ -1,6 +1,7 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { DisplayCopyrightedArtist, UrlBasePath } from "@/env.ts";
+import { normalizeText } from "@utils/db/common.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
 
@@ -38,6 +39,7 @@ export const handler = async (
   // Noms
   query = url.searchParams.get("name") || "";
   const nameFilter = query.length ? query : "";
+  const normalizedNameFilter = normalizeText(nameFilter);
 
   // Nationalité
   query = url.searchParams.get("nationality") || "";
@@ -54,6 +56,7 @@ export const handler = async (
   const years = yearsFilter.split(",", 2);
   const beginFilter = years[0];
   const endFilter = years[1];
+
 
   const db = Db.getInstance();
   const results = await db.selectFrom("artist")
@@ -80,16 +83,18 @@ export const handler = async (
     .$if(isWorld, (qb) => qb.where("country.name", "like", "%"))
     .where("slug", "not in", TALENTS)
     .where(
-      sql`(first_name LIKE ${"%" + nameFilter + "%"}
-      OR last_name LIKE ${"%" + nameFilter + "%"}
-      OR (first_name || ' ' || last_name) LIKE ${"%" + nameFilter + "%"}
-      OR (last_name || ' ' || first_name) LIKE ${"%" + nameFilter + "%"})`
-    )    
-    .orderBy(({ fn }) => fn("lower", ["last_name"]))
-    .orderBy(({ fn }) => fn("lower", ["first_name"]))
+      sql`(
+        first_name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+        OR last_name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+        OR (first_name_normalized || ' ' || last_name_normalized) LIKE ${"%" + normalizedNameFilter + "%"}
+        OR (last_name_normalized || ' ' || first_name_normalized) LIKE ${"%" + normalizedNameFilter + "%"}
+      )`
+    )
+    .orderBy(({ fn }) => fn("lower", ["last_name_normalized"]))
+    .orderBy(({ fn }) => fn("lower", ["first_name_normalized"]))
     .execute();
 
-  
+
   return Promise.resolve(
     new Response(JSON.stringify(results), {
       headers: {

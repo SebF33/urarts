@@ -33,7 +33,9 @@ interface ArtistTable {
   id: Generated<number>;
   country_id: number; // Pays d'origine de l'artiste
   first_name: string | null; // Prénom de l'artiste
+  first_name_normalized: string | null;
   last_name: string; // Nom ou surnom de l'artiste
+  last_name_normalized: string | null;
   gender: "Femme" | "Homme" | "Autre"; // Genre de l'artiste
   birthyear: string; // Année de naissance de l'artiste
   deathyear: string; // Année de décès de l'artiste ("": non renseignée)
@@ -72,7 +74,9 @@ interface ArtTable {
   owner_id: number; // Artiste de l'œuvre
   movement_id: number; // Mouvement artistique de l'œuvre
   name: string; // Nom de l'œuvre d'art (fr)
+  name_normalized: string | null;
   name_en: string | null; // Nom de l'œuvre d'art (en)
+  name_en_normalized: string | null;
   polyptych: number; // Nombre de panneaux
   frame: number; // Type d'encadrement (-1: atypique |0: street |1: canvas |2: cadre sans passe-partout |3: cadre avec passe-partout |4: cadre avec passe-partout sur photo)
   url: string; // Panneau central
@@ -95,6 +99,7 @@ interface ArtTable {
   geolocation: number; // Lieu géographique (0: non |1: oui)
   histocharacter: number; // Personnage historique (0: non |1: oui)
   histocharactername: string | null; // Nom du personnage historique
+  histocharactername_normalized: string | null;
   histocharacterbirthyear: number | null; // Année de naissance du personnage historique
   histocharacterdeathyear: number | null; // Année de décès du personnage historique
   histocharacterinfo: string | null; // Informations sur le personnage historique (fr)

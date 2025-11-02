@@ -1,5 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { normalizeText } from "@utils/db/common.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
 import { UrlBasePath } from "@/env.ts";
@@ -31,7 +32,8 @@ export const handler = async (
 
   // Noms
   query = url.searchParams.get("name") || "";
-  const name = query.length ? query : "";
+  const nameFilter = query.length ? query : "";
+  const normalizedNameFilter = normalizeText(nameFilter);
 
   // Tag
   query = url.searchParams.get("tag") || "";
@@ -73,36 +75,36 @@ export const handler = async (
     .$if(!random && lng === 'en', (qb) =>
       qb.where(sql<string>`
         (
-          art.name_en LIKE ${"%" + name + "%"}
-          OR art.name LIKE ${"%" + name + "%"}
-          OR last_name LIKE ${"%" + name + "%"}
-          OR ((art.name_en || ' ' || last_name) LIKE ${"%" + name + "%"})
-          OR ((art.name || ' ' || last_name) LIKE ${"%" + name + "%"})
-          OR ((last_name || ' ' || art.name_en) LIKE ${"%" + name + "%"})
-          OR ((last_name || ' ' || art.name) LIKE ${"%" + name + "%"})
+          art.name_en_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+          OR art.name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+          OR last_name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+          OR ((art.name_en_normalized || ' ' || last_name_normalized) LIKE ${"%" + normalizedNameFilter + "%"})
+          OR ((art.name_normalized || ' ' || last_name_normalized) LIKE ${"%" + normalizedNameFilter + "%"})
+          OR ((last_name_normalized || ' ' || art.name_en_normalized) LIKE ${"%" + normalizedNameFilter + "%"})
+          OR ((last_name_normalized || ' ' || art.name_normalized) LIKE ${"%" + normalizedNameFilter + "%"})
         )
       `)
     )
     .$if( ! random && lng === 'fr', (qb) =>
       qb.where(sql<string>`
         (
-          art.name LIKE ${"%" + name + "%"}
-          OR last_name LIKE ${"%" + name + "%"}
-          OR (art.name || ' ' || last_name) LIKE ${"%" + name + "%"}
-          OR (last_name || ' ' || art.name) LIKE ${"%" + name + "%"}
+          art.name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+          OR last_name_normalized LIKE ${"%" + normalizedNameFilter + "%"}
+          OR (art.name_normalized || ' ' || last_name_normalized) LIKE ${"%" + normalizedNameFilter + "%"}
+          OR (last_name_normalized || ' ' || art.name_normalized) LIKE ${"%" + normalizedNameFilter + "%"}
         )
       `)
     )
     .$if(geolocation, (qb) => qb.where("geolocation", "=", 1))
     .$if( !! tag, (qb) => qb.where(tagColumn, "=", tag))
-    .$if( ! random && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en, art.name)`])))
-    .$if( ! random && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name'])))      
-    .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name"])))
+    .$if( ! random && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
+    .$if( ! random && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))      
+    .$if( ! random, (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name_normalized"])))
     .$if(random, (qb) => qb.orderBy(sql`random()`))
     .limit(20)
     .execute();
 
-  
+
   return Promise.resolve(
     new Response(JSON.stringify(results), {
       headers: {

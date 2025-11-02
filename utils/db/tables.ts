@@ -24,7 +24,9 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("country_id", "integer", (col) => col.notNull())
     .addColumn("first_name", "varchar")
+    .addColumn("first_name_normalized", "varchar")
     .addColumn("last_name", "varchar", (col) => col.notNull())
+    .addColumn("last_name_normalized", "varchar")
     .addColumn("gender", "varchar", (col) => col.notNull())
     .addColumn("birthyear", "varchar(4)", (col) => col.notNull())
     .addColumn(
@@ -142,7 +144,9 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("owner_id", "integer", (col) => col.notNull())
     .addColumn("movement_id", "integer", (col) => col.notNull())
     .addColumn("name", "varchar", (col) => col.notNull())
+    .addColumn("name_normalized", "varchar")
     .addColumn("name_en", "varchar")
+    .addColumn("name_en_normalized", "varchar")
     .addColumn("polyptych", "integer", (col) => col.defaultTo(sql`1`).notNull())
     .addColumn("frame", "integer", (col) => col.defaultTo(sql`2`).notNull())
     .addColumn("url", "varchar", (col) => col.notNull())
@@ -187,6 +191,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
       (col) => col.defaultTo(sql`0`).notNull(),
     )
     .addColumn("histocharactername", "varchar")
+    .addColumn("histocharactername_normalized", "varchar")
     .addColumn("histocharacterbirthyear", "integer")
     .addColumn("histocharacterdeathyear", "integer")
     .addColumn(
