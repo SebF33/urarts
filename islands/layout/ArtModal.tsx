@@ -453,28 +453,26 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                     key={idx}
                     class={`paper paper-shadow transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px] rounded-md`}
                   >
-                    <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
-                    <div class="flex flex-col items-center gap-1 px-2 py-1 z-10 select-none">
-                      <a
-                        onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
-                        class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
+                    <a
+                      onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
+                      class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
+                      draggable={draggable}
+                    >
+                      <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
+                      <img
+                        src={`/icons/${tag.name}.png`}
+                        alt={tag.name}
+                        title={tag.name}
+                        class="w-8"
                         draggable={draggable}
-                      >
-                        <img
-                          src={`/icons/${tag.name}.png`}
-                          alt={tag.name}
-                          title={tag.name}
-                          class="w-8"
-                          draggable={draggable}
-                        />
-                      </a>
+                      />
                       <span
                         class="block text-[11px] sm:text-xs leading-4 text-lighterdark text-center w-full truncate"
                         title={tag.name}
                       >
                         {tag.name}
                       </span>
-                    </div>
+                    </a>
                   </div>
                 ))}
               </div>
