@@ -1,18 +1,24 @@
 import { ArtCollection, ArtRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_REACH_HREF } from "@utils/constants.ts";
+import {
+  DELAY_API_CALL,
+  DELAY_DEBOUNCE,
+  DELAY_REACH_HREF,
+  TAGS,
+} from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
-import { languageSignal } from "@utils/signals.ts";
+import { isForAloneArtistSignal, languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
+import TagsPapers from "@/islands/paper/TagsPapers.tsx";
 import Title from "@islands/paper/Title.tsx";
 
 
@@ -25,6 +31,10 @@ export default function ArtsSearch() {
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+
+  const draggable = false;
+
+  isForAloneArtistSignal.value = false;
 
 
   // Aperçu
@@ -144,8 +154,25 @@ export default function ArtsSearch() {
         />
       </div>
 
+      {/* Post-it : tous les tags (seulement de type standard) */}
+      <div class="relative w-full mx-auto hidden xl:block mt-8 z-10">
+        <TagsPapers
+          animated={false}
+          draggable={draggable}
+          maxWidthPx={1800}
+          nbTagsByRow={19}
+          tags={TAGS
+            .filter(tag => tag.type === 0)
+            .map((tag, index) => ({
+              ...tag,
+              rotation: ((index % 7) - 3) * 5,
+              position: index % 2 === 0 ? "rotate-2" : "-rotate-2",
+            }))}
+        />
+      </div>
+
       {/* Entrée de recherche */}
-      <div class="paper paper-shadow w-[60px] md:w-[80px] max-h-[24px] mx-auto mb-2 -translate-x-16">
+      <div class="paper paper-shadow w-[60px] md:w-[80px] max-h-[24px] mx-auto xl:mt-40 mb-2 -translate-x-16">
         <div class="top-tape max-h-2.5"></div>
         <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
           {i18next.t("paper.name", { ns: "translation" })}
@@ -207,9 +234,9 @@ export default function ArtsSearch() {
             </ul>
           )}
 
+          {/* Aperçu d'une œuvre */}
           <Preview image={hoveredImageUrl} />
       </div>
-
     </div>
   );
 }
