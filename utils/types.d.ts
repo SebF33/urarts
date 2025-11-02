@@ -93,5 +93,6 @@ export type TagConst = {
   name_en: string;
   info: string;
   info_en: string;
+  type: number;
   slug: string;
 };

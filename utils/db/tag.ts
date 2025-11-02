@@ -11,6 +11,7 @@ export async function upTag(db: Kysely<DbSchema>): Promise<void> {
         name_en: tag.name_en,
         info: tag.info,
         info_en: tag.info_en,
+        type: tag.type,
         slug: tag.slug,
       })
       .execute();

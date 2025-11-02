@@ -285,6 +285,11 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
           sql`"The description is to be made for this tag."`,
         ).notNull(),
     )
+    .addColumn(
+      "type",
+      "integer",
+      (col) => col.defaultTo(sql`0`).notNull(),
+    )
     .addColumn("slug", "varchar", (col) => col.notNull().unique())
     .addColumn(
       "modified_at",

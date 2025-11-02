@@ -24,6 +24,7 @@ interface TagTable {
   name_en: string; // Nom du tag (en)
   info: string; // Informations sur le tag (fr)
   info_en: string; // Informations sur le tag (en)
+  type: number; // Type de tag (0: standard |1: géographique |2: spécifique)
   slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }

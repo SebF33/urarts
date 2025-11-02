@@ -8,23 +8,30 @@ import { TagCollection } from "@utils/types.d.ts";
 
 
 interface Props {
-  artistName: string;
-  artistSlug: string;
-  draggable?: boolean;
-  ispersogallery: boolean;
   tags: TagCollection[];
+  animated?: boolean;
+  artistName?: string;
+  artistSlug?: string;
+  draggable?: boolean;
+  ispersogallery?: boolean;
+  maxWidthPx?: number;
+  nbTagsByRow?: number;
 }
 
 
-export default function TagsPapers(
-  { artistName, artistSlug, draggable, ispersogallery, tags }: Props,
-) {
-
+export default function TagsPapers({
+  tags,
+  animated = true,
+  artistName,
+  artistSlug,
+  draggable,
+  ispersogallery,
+  maxWidthPx = 880,
+  nbTagsByRow = 6,
+}: Props) {
   if (!tags?.length) return null;
 
   const isPersoGallery: boolean = !!ispersogallery;
-
-  const nbTagsByRow = 6;
   const rows = Math.ceil(tags.length / nbTagsByRow);
 
 
@@ -37,9 +44,11 @@ export default function TagsPapers(
     if (!href) return;
 
     // on précise que c'est pour du contenu concernant seulement un(e) artiste
-    isForAloneArtistSignal.value = true;
-    artistNameSignal.value = artistName;
-    artistSlugSignal.value = artistSlug;
+    if (artistName && artistSlug) {
+      isForAloneArtistSignal.value = true;
+      artistNameSignal.value = artistName;
+      artistSlugSignal.value = artistSlug;
+    }
 
     // pour le délai au clic tout en préservant la navigation Fresh côté client
     setTimeout(() => {
@@ -53,7 +62,10 @@ export default function TagsPapers(
 
 
   return (
-    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-full xl:max-w-[880px] z-20 pointer-events-none">
+    <div
+      class="absolute -top-4 left-1/2 -translate-x-1/2 w-full z-20 pointer-events-none"
+      style={{ maxWidth: `${maxWidthPx}px` }}
+    >
       <div class="flex flex-col gap-1 items-center">
         {Array.from({ length: rows }).map((_, rowIndex) => {
           const rowTags = tags.slice(rowIndex * nbTagsByRow, (rowIndex + 1) * nbTagsByRow);
@@ -61,40 +73,40 @@ export default function TagsPapers(
             <div key={rowIndex} class="flex flex-wrap justify-center gap-2">
               {rowTags.map((tag, tagIndex) => {
                 const delay = (rowIndex * nbTagsByRow + tagIndex) * 100;
+                const baseClass = "pointer-events-auto";
+                const appearClass = animated ? "appear-effect-fadeindrop" : "";
 
                 return (
                   <div
                     key={tag.slug}
-                    class="appear-effect-fadeindrop pointer-events-auto"
-                    style={{ animationDelay: `${delay}ms` }}
+                    class={`${baseClass} ${appearClass}`}
+                    style={animated ? { animationDelay: `${delay}ms` } : undefined}
                   >
                     <div
                       class={`paper paper-shadow max-w-[44vw] sm:max-w-[220px] rounded-md ${tag.position ?? ""}`}
                       style={{ transform: `rotate(${tag.rotation}deg)` }}
                     >
-                      <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
-                      <div class="flex flex-col items-center gap-1 px-2 py-1 z-10 select-none">
-                        <a
-                          href={`/tag/${tag.slug}${isPersoGallery ? "/gallery" : ""}`}
-                          onClick={handleLinkClick}
-                          class="text-xs sm:text-sm leading-4 underline select-none min-w-0 break-words whitespace-normal [hyphens:auto]"
+                      <a
+                        href={`/tag/${tag.slug}${isPersoGallery ? "/gallery" : ""}`}
+                        onClick={handleLinkClick}
+                        class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
+                        draggable={draggable}
+                      >
+                        <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
+                        <img
+                          src={`/icons/${tag.name}.png`}
+                          alt={tag.name}
+                          title={tag.name}
+                          class="w-8"
                           draggable={draggable}
-                        >
-                          <img
-                            src={`/icons/${tag.name}.png`}
-                            alt={tag.name}
-                            title={tag.name}
-                            class="w-8"
-                            draggable={draggable}
-                          />
-                        </a>
+                        />
                         <span
                           class="block text-[11px] sm:text-xs leading-4 text-lighterdark text-center w-full truncate"
                           title={tag.name}
                         >
                           {tag.name}
                         </span>
-                      </div>
+                      </a>
                     </div>
                   </div>
                 );
