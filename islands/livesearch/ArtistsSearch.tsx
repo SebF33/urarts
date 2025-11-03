@@ -3,7 +3,7 @@ import { artistsYearsSignal, languageSignal, nationalitySignal } from "@utils/si
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DELAY_DEBOUNCE } from "@utils/constants.ts";
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
@@ -15,6 +15,73 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 import Title from "@islands/paper/Title.tsx";
+
+
+// Groupes de drapeaux et traductions
+const FLAG_GROUPS = {
+  1: ["France", "Espagne", "Portugal", "Italie", "Pays-Bas", "Belgique", "Pologne", "Allemagne", "Autriche", "Hongrie"],
+  2: ["Suisse", "Finlande", "Norvège", "Suède", "Danemark", "Tchécoslovaquie", "Ukraine", "Arménie", "Biélorussie", "Russie"],
+  3: ["Japon", "Vietnam", "Chine", "Grèce", "Royaume-Uni", "Colombie", "Mexique", "États-Unis d'Amérique", "Canada"],
+};
+
+const COUNTRY_TRANSLATIONS = {
+  fr: {},
+  en: {
+    "France": "France",
+    "Espagne": "Spain",
+    "Portugal": "Portugal",
+    "Italie": "Italy",
+    "Pays-Bas": "Netherlands",
+    "Belgique": "Belgium",
+    "Pologne": "Poland",
+    "Allemagne": "Germany",
+    "Autriche": "Austria",
+    "Hongrie": "Hungary",
+    "Suisse": "Switzerland",
+    "Finlande": "Finland",
+    "Norvège": "Norway",
+    "Suède": "Sweden",
+    "Danemark": "Denmark",
+    "Tchécoslovaquie": "Czechoslovakia",
+    "Ukraine": "Ukraine",
+    "Arménie": "Armenia",
+    "Biélorussie": "Belarus",
+    "Russie": "Russian Federation",
+    "Japon": "Japan",
+    "Vietnam": "Vietnam",
+    "Chine": "People's Republic of China",
+    "Grèce": "Greece",
+    "Royaume-Uni": "United Kingdom",
+    "Colombie": "Colombia",
+    "Mexique": "Mexico",
+    "États-Unis d'Amérique": "United States of America",
+    "Canada": "Canada",
+  },
+};
+
+
+// Bouton de drapeau
+function FlagButton({ name, className = "", flagClass, draggable = false }: {
+  name: string;
+  className?: string;
+  flagClass: string;
+  draggable?: boolean;
+}) {
+  return (
+    <button
+      onClick={() => (nationalitySignal.value = name)}
+      class={`absolute flex items-center focus:outline-none ${className}`}
+    >
+      <img
+        class={flagClass}
+        src={`/icons/${name}.png`}
+        alt={name}
+        title={name}
+        draggable={draggable}
+      />
+    </button>
+  );
+}
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {
@@ -40,8 +107,28 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   const flagClasses3 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags3 ? "fade-enter-active" : "fade-exit-active"}`;
   const moreClasses = `w-8 ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
   const worldFlagClasses = `${width12} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
+  const flagPositions = [
+    "-top-12 right-16 sm:-top-10 sm:right-20",
+    "-top-8 right-8 sm:-top-4 sm:right-11",
+    "-top-2 right-3 sm:top-3 sm:right-5",
+    "top-5 right-1 sm:top-11 sm:right-2",
+    "top-12 right-4 sm:top-20 sm:right-5",
+    "-bottom-24 right-14 sm:top-32 sm:left-56",
+    `absolute flex items-center sm:left-44 focus:outline-none ${css({
+      bottom: "calc(-6.6rem)",
+      right: "5.8rem",
+      "@media screen(sm)": { top: "9.2rem" },
+    })}`,
+    `absolute flex items-center right-32 sm:left-32 focus:outline-none ${css({
+      bottom: "calc(-6.6rem)",
+      "@media screen(sm)": { top: "9.6rem" },
+    })}`,
+    "-bottom-24 left-11 sm:-bottom-40 sm:left-20",
+    "-bottom-20 left-3 sm:-bottom-36 sm:left-8",
+  ];
 
 
+  // Clic sur le bouton +
   const handleMoreClick = (event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
@@ -182,448 +269,36 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
           <div class={`absolute w-full -top-16`}>
             <PaintPalette />
           </div>
+
+          {/* Bouton Monde */}
           <button
-            onClick={() => {nationalitySignal.value = "Monde"}}
-            class={`absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none`}
+            onClick={() => (nationalitySignal.value = "Monde")}
+            class="absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none"
           >
-            <img
-              class={worldFlagClasses}
-              src="/icons/Monde.png"
-              alt="Monde"
-              title="Monde"
-              draggable={draggable}
-            />
+            <img class={worldFlagClasses} src="/icons/Monde.png" alt="Monde" title="Monde" draggable={draggable} />
           </button>
-          {flags === 1 &&
-            (
-              <Fragment>
-                <button
-                  onClick={() => {nationalitySignal.value = "France"}}
-                  class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/France.png"
-                    alt="France"
-                    title="France"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Espagne"}}
-                  class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Espagne.png"
-                    alt="Espagne"
-                    title="Espagne"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Portugal"}}
-                  class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Portugal.png"
-                    alt="Portugal"
-                    title="Portugal"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Italie"}}
-                  class={`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Italie.png"
-                    alt="Italie"
-                    title="Italie"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Pays-Bas"}}
-                  class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Pays-Bas.png"
-                    alt="Pays-Bas"
-                    title="Pays-Bas"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Belgique"}}
-                  class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Belgique.png"
-                    alt="Belgique"
-                    title="Belgique"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Pologne"}}
-                  class={`absolute flex items-center sm:left-44 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "right": "5.8rem",
-                        "@media screen(sm)": {
-                          "top": "9.2rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Pologne.png"
-                    alt="Pologne"
-                    title="Pologne"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Allemagne"}}
-                  class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "@media screen(sm)": {
-                          "top": "9.6rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Allemagne.png"
-                    alt="Allemagne"
-                    title="Allemagne"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Autriche"}}
-                  class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Autriche.png"
-                    alt="Autriche"
-                    title="Autriche"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Hongrie"}}
-                  class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses1}
-                    src="/icons/Hongrie.png"
-                    alt="Hongrie"
-                    title="Hongrie"
-                    draggable={draggable}
-                  />
-                </button>
-              </Fragment>
-            )}
-          {flags === 2 &&
-            (
-              <Fragment>
-                <button
-                  onClick={() => {nationalitySignal.value = "Suisse"}}
-                  class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Suisse.png"
-                    alt="Suisse"
-                    title="Suisse"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Finlande"}}
-                  class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Finlande.png"
-                    alt="Finlande"
-                    title="Finlande"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Norvège"}}
-                  class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Norvège.png"
-                    alt="Norvège"
-                    title="Norvège"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Suède"}}
-                  class={`absolute flex items-center top-5 right-1 sm:top-11 sm:right-2 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Suède.png"
-                    alt="Suède"
-                    title="Suède"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Danemark"}}
-                  class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Danemark.png"
-                    alt="Danemark"
-                    title="Danemark"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Tchécoslovaquie"}}
-                  class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Tchécoslovaquie.png"
-                    alt="Tchécoslovaquie"
-                    title="Tchécoslovaquie"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Ukraine"}}
-                  class={`absolute flex items-center sm:left-44 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "right": "5.8rem",
-                        "@media screen(sm)": {
-                          "top": "9.2rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Ukraine.png"
-                    alt="Ukraine"
-                    title="Ukraine"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Arménie"}}
-                  class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "@media screen(sm)": {
-                          "top": "9.6rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Arménie.png"
-                    alt="Arménie"
-                    title="Arménie"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Biélorussie"}}
-                  class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Biélorussie.png"
-                    alt="Biélorussie"
-                    title="Biélorussie"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Russie"}}
-                  class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses2}
-                    src="/icons/Russie.png"
-                    alt="Russie"
-                    title="Russie"
-                    draggable={draggable}
-                  />
-                </button>
-              </Fragment>
-            )}
-          {flags === 3 &&
-            (
-              <Fragment>
-                <button
-                  onClick={() => {nationalitySignal.value = "Japon"}}
-                  class={`absolute flex items-center -top-12 right-16 sm:-top-10 sm:right-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Japon.png"
-                    alt="Japon"
-                    title="Japon"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Vietnam"}}
-                  class={`absolute flex items-center -top-8 right-8 sm:-top-4 sm:right-11 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Vietnam.png"
-                    alt="Vietnam"
-                    title="Vietnam"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Chine"}}
-                  class={`absolute flex items-center -top-2 right-3 sm:top-3 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Chine.png"
-                    alt="Chine"
-                    title="Chine"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Grèce"}}
-                  class={`absolute flex items-center top-12 right-4 sm:top-20 sm:right-5 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Grèce.png"
-                    alt="Grèce"
-                    title="Grèce"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Royaume-Uni"}}
-                  class={`absolute flex items-center -bottom-24 right-14 sm:top-32 sm:left-56 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Royaume-Uni.png"
-                    alt="Royaume-Uni"
-                    title="Royaume-Uni"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Colombie"}}
-                  class={`absolute flex items-center sm:left-44 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "right": "5.8rem",
-                        "@media screen(sm)": {
-                          "top": "9.2rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Colombie.png"
-                    alt="Colombie"
-                    title="Colombie"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Mexique"}}
-                  class={`absolute flex items-center right-32 sm:left-32 focus:outline-none ${
-                    css(
-                      {
-                        "bottom": "calc(-6.6rem)",
-                        "@media screen(sm)": {
-                          "top": "9.6rem",
-                        },
-                      },
-                    )
-                  }`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Mexique.png"
-                    alt="Mexique"
-                    title="Mexique"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "États-Unis d'Amérique"}}
-                  class={`absolute flex items-center -bottom-24 left-11 sm:-bottom-40 sm:left-20 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/États-Unis d'Amérique.png"
-                    alt="États-Unis d'Amérique"
-                    title="États-Unis d'Amérique"
-                    draggable={draggable}
-                  />
-                </button>
-                <button
-                  onClick={() => {nationalitySignal.value = "Canada"}}
-                  class={`absolute flex items-center -bottom-20 left-3 sm:-bottom-36 sm:left-8 focus:outline-none`}
-                >
-                  <img
-                    class={flagClasses3}
-                    src="/icons/Canada.png"
-                    alt="Canada"
-                    title="Canada"
-                    draggable={draggable}
-                  />
-                </button>
-              </Fragment>
-            )}
+
+          {/* Boutons pays */}
+          {FLAG_GROUPS[flags as 1 | 2 | 3]?.map((country, i) => {
+            const translated = (COUNTRY_TRANSLATIONS[languageSignal.value as "en" | "fr"] as Record<string, string>)?.[country] || country;
+            const flagClass = flags === 1 ? flagClasses1 : flags === 2 ? flagClasses2 : flagClasses3;
+            return (
+              <FlagButton
+                key={country}
+                name={translated}
+                className={flagPositions[i] || ""}
+                flagClass={flagClass}
+                draggable={draggable}
+              />
+            );
+          })}
+
+          {/* Bouton + */}
           <button
             onClick={handleMoreClick}
-            class={`absolute flex items-center -top-4 right-28 sm:-top-4 sm:right-36 focus:outline-none`}
+            class="absolute flex items-center -top-4 right-28 sm:-top-4 sm:right-36 focus:outline-none"
           >
-            <img
-              class={moreClasses}
-              src="/symbols/add.png"
-              alt="add-symbol"
-              draggable={draggable}
-            />
+            <img class={moreClasses} src="/symbols/add.png" alt="add-symbol" draggable={draggable} />
           </button>
 
           {/* Entrée de recherche */}
@@ -645,12 +320,14 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
         </div>
       </div>
 
+      {/* Slider */}
       <div
         id="slider"
         class={`max-w-3xl mt-[290px] mb-[40px] sm:mt-[200px] sm:mb-[8px] mx-[15%] sm:mx-[20%] md:mx-[25%] lg:mx-[30%]`}
       >
       </div>
 
+      {/* Artistes */}
       <ArtistsLayout
         artists={searchResults}
         flag={nationalitySignal.value}
