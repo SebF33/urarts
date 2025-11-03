@@ -54,6 +54,8 @@ export const NATIONALITIES: string[] = [
   "Danemark",
   "Denmark",
   "Espagne",
+  "Estonia",
+  "Estonie",
   "États-Unis d'Amérique",
   "Finland",
   "Finlande",
@@ -301,6 +303,12 @@ export const TAGS: TagConst[] = [
     name: "Espagne", name_en: "Spain", slug: "spain",
     info: "L’Espagne a marqué l’art avec Vélasquez, Goya, Picasso et le Surréalisme de Dalí.",
     info_en: "Spain influenced art with Velázquez, Goya, Picasso, and Dalí’s Surrealism.",
+    type: 1
+  },
+  {
+    name: "Estonie", name_en: "Estonia", slug: "estonia",
+    info: "L’Estonie possède une scène artistique marquée par le folklore, l’art textile et les influences nordiques et soviétiques.",
+    info_en: "Estonia has an art scene shaped by folklore, textile arts, and both Nordic and Soviet influences.",
     type: 1
   },
   { 
