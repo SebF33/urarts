@@ -259,7 +259,8 @@ export const handler = async (
         const countryResult = await db.selectFrom("country")
         .$if(lng === 'fr', (qb) => qb.select("name"))
         .$if(lng === 'en', (qb) => qb.select("name_en as name"))
-        .where("name", "=", pagectx[2])
+        .$if(lng === 'fr', (qb) => qb.where("name", "=", pagectx[2]))
+        .$if(lng === 'en', (qb) => qb.where("name_en", "=", pagectx[2]))
         .executeTakeFirst();
 
         htmlContent += `<p class="text-[1rem] leading-none mt-1">${i18next.t("leonardo.search_among", { ns: "translation" })} <strong>${totalArtistCountResult}</strong> ${i18next.t("leonardo.artists_available", { ns: "translation" })}...</p>`;
