@@ -675,6 +675,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/academicart.png)`,
     backgroundSize: "clamp(300px, 37.0vw, 710px)",
   },
+  algeria: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/algeria.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   allegory: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/allegory.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -755,6 +759,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/egypt.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  estonia: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/estonia.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   expressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionnism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
@@ -777,6 +785,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   },
   france: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/france.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  frenchPolynesia: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/french-polynesia.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   futurism: {
