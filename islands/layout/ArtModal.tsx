@@ -346,7 +346,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       {/* Modal */}
       <div
         ref={modalRef}
-        class={`art-modal-container relative max-w-[90vw] md:max-w-[50vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""} ${isPersoGallery ? "no-links" : ""}`}
+        class={`art-modal-container relative max-w-[calc(100vw-48px)] md:max-w-[60vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""} ${isPersoGallery ? "no-links" : ""}`}
         style={resolvedBgStyle}
       >
         <button
