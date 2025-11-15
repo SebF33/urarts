@@ -147,7 +147,12 @@ export const handler = async (
   switch (type) {
     case "artist":
       artQuery = artQuery
-        .where("artist.slug", "=", slugFilter);
+        .where("artist.slug", "=", slugFilter)
+        // tri sur selon l'année de l'œuvre (plus récente d'abord)
+        .orderBy("art.year", "desc")
+        // puis tri selon le nom normalisé de l'œuvre
+        .$if(lng === 'fr', qb => qb.orderBy('art.name_normalized', 'asc'))
+        .$if(lng === 'en', qb => qb.orderBy('art.name_en_normalized', 'asc'));
       break;
 
     case "famousart":
