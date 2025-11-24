@@ -711,6 +711,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/asian-art.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  austria: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/austria.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   baroque: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/baroque.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
