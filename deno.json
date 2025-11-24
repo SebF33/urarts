@@ -7,7 +7,7 @@
     "migrate": "deno run -A utils/db_migration.ts",
     "migrate_down": "deno run -A utils/db_migration.ts --down",
     "migrate_up": "deno run -A utils/db_migration.ts --up",
-    "preview": "deno run -A main.ts",
+    "serve": "deno run -A main.ts",
     "start": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run --watch=static/,routes/ main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
@@ -27,7 +27,7 @@
     "i18next-browser-languagedetector": "npm:i18next-browser-languagedetector@8.0.4",
     "iso-3166-1": "npm:iso-3166-1@2.1.1",
     "ky": "https://esm.sh/ky@v1.7.5",
-    "kysely": "https://esm.sh/kysely@0.27.6",
+    "kysely": "https://esm.sh/kysely@0.28.8",
     "motion": "https://esm.sh/v135/framer-motion@12.4.7?external=react,react-dom&target=es2022",
     "preact": "https://esm.sh/preact@10.26.3",
     "preact/": "https://esm.sh/preact@10.26.3/",
