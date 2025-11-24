@@ -4,7 +4,7 @@
 #
 
 app = "urarts"
-primary_region = "atl"
+primary_region = "cdg"
 kill_signal = "SIGINT"
 kill_timeout = "5s"
 
