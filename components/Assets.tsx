@@ -5107,6 +5107,47 @@ export function PaintPalette() {
   );
 }
 
+export function PencilLine() {
+  return (
+    <svg
+      class="absolute left-0 right-0 top-1/2 -translate-y-1/2 w-full h-10 pointer-events-none z-0"
+      viewBox="0 0 100 30"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0 15 C 8 5, 20 25, 32 12 S 55 5, 68 18 S 90 28, 100 15"
+        fill="none"
+        stroke="#141b1e"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="1.4 1.1"
+        opacity="0.9"
+      />
+      <path
+        d="M0 16 C 10 8, 25 22, 38 10 S 60 7, 72 20 S 92 25, 100 17"
+        fill="none"
+        stroke="#141b1e"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="1 1.6"
+        opacity="0.65"
+      />
+      <path
+        d="M0 14 C 12 12, 22 18, 34 13 S 58 10, 70 22 S 88 20, 100 14"
+        fill="none"
+        stroke="#141b1e"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="0.5 1.4"
+        opacity="0.5"
+      />
+    </svg>
+  );
+}
+
 export function StatIcon() {
   return (
     <svg

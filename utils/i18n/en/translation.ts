@@ -110,6 +110,7 @@ const translation = {
     accordingto: "according to",
     art: "artwork",
     no_results: "No results",
+    without_year: "Without year",
   },
   currentLng: "en",
   error: {

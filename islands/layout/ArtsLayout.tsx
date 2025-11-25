@@ -17,6 +17,7 @@ import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
 
 import ArtModal from "@islands/layout/ArtModal.tsx";
+import { PencilLine } from "@components/Assets.tsx";
 import RollingGallery from "@islands/RollingGallery.tsx";
 
 
@@ -177,6 +178,22 @@ export default function ArtsLayout(
   };
 
 
+  // Regroupement des œuvres par année
+  const artsByYear = (displayedArts ?? []).reduce((acc, art) => {
+    const year = art.year ?? i18next.t("common.without_year", { ns: "translation" });
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(art);
+    return acc;
+  }, {} as Record<string, typeof displayedArts[number][]>);
+
+  const sortedYears = Object.keys(artsByYear).sort((a, b) => {
+    const na = Number(a);
+    const nb = Number(b);
+    if (Number.isNaN(na) || Number.isNaN(nb)) return a.localeCompare(b);
+    return nb - na; // années décroissantes
+  });
+
+
   return (
     <>
       <div className="appear-effect-fast-fadein flex flex-col mx-auto mt-4 max-w-[600px] items-center justify-center">
@@ -192,244 +209,269 @@ export default function ArtsLayout(
         ) : null}
       </div>
       <div class="flex flex-wrap mx-auto md:mx-10 mb-48">
+        
         {/* Liste des œuvres d'art */}
-        {displayedArts && displayedArts.length > 0 ? (
-          displayedArts.map((p, index) => (
-            <div
-              key={index + 1}
-              class={`art-container flex flex-col mx-auto`}
-            >
-              <div
-                id={p.id}
-                class={`art-wrap-${p.polyptych} ${p.custom_css}`}
+        {displayedArts && displayedArts.length > 0
+          ? (
+            sortedYears.map((year) => (
+              <section
+                key={year}
+                class="year-group w-full col-span-full my-6 md:my-10"
               >
-                {p.polyptych > 3 &&
-                  (
-                    <div
-                      onClick={() => handleClick(p, '4', p.url_4)}
-                      class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
-                      style={{
-                        ...ART_IMG_WRAPPER.wrap,
-                        ...(p.frame === 2 || p.frame === 4 ? {
-                          border: `solid 1.8vmin ${p.color}`,
-                          borderBottomColor: adjustColorBrightness(p.color, 50),
-                          borderLeftColor: p.color,
-                          borderRightColor: p.color,
-                          borderTopColor: adjustColorBrightness(p.color, -20),
-                        } : {})
-                      }}
-                    >
-                      <img
-                        style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                        src="/textures/placeholder_150.png"
-                        alt="placeholder_150"
-                      />
-                      <img
-                        onLoad={handleImageOnLoad}
-                        class={`max-w-full ${p.gap_4}`}
-                        style={{
-                          ...imageOnLoadStyle.fullSize,
-                          ...(p.frame === 2 || p.frame === 4 ? {
-                            border: 'solid 2px',
-                            borderBottomColor: adjustColorBrightness(p.color, 50),
-                            borderLeftColor: adjustColorBrightness(p.color, -20),
-                            borderRightColor: adjustColorBrightness(p.color, -20),
-                            borderTopColor: adjustColorBrightness(p.color, -40),
-                          } : {})
-                        }}
-                        src={p.url_4}
-                        alt={p.name + "_4"}
-                        draggable={draggable}
-                      />
-                    </div>
-                  )}
-                {p.polyptych > 1 &&
-                  (
-                    <div
-                      onClick={() => handleClick(p, '2', p.url_2)}
-                      class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
-                      style={{
-                        ...ART_IMG_WRAPPER.wrap,
-                        ...(p.frame === 2 || p.frame === 4 ? {
-                          border: `solid 1.8vmin ${p.color}`,
-                          borderBottomColor: adjustColorBrightness(p.color, 50),
-                          borderLeftColor: p.color,
-                          borderRightColor: p.color,
-                          borderTopColor: adjustColorBrightness(p.color, -20),
-                        } : {})
-                      }}
-                    >
-                      <img
-                        style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                        src="/textures/placeholder_150.png"
-                        alt="placeholder_150"
-                      />
-                      <img
-                        onLoad={handleImageOnLoad}
-                        class={`max-w-full ${p.gap_2}`}
-                        style={{
-                          ...imageOnLoadStyle.fullSize,
-                          ...(p.frame === 2 || p.frame === 4 ? {
-                            border: 'solid 2px',
-                            borderBottomColor: adjustColorBrightness(p.color, 50),
-                            borderLeftColor: adjustColorBrightness(p.color, -20),
-                            borderRightColor: adjustColorBrightness(p.color, -20),
-                            borderTopColor: adjustColorBrightness(p.color, -40),
-                          } : {})
-                        }}
-                        src={p.url_2}
-                        alt={p.name + "_2"}
-                        draggable={draggable}
-                      />
-                    </div>
-                  )}
-                <div
-                  onClick={() => handleClick(p, '1', p.url)}
-                  data-artist-id={p.id}
-                  class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
-                  style={{
-                    ...ART_IMG_WRAPPER.wrap,
-                    ...(p.frame === 2 || p.frame === 4 ? {
-                      border: `solid 1.8vmin ${p.color}`,
-                      borderBottomColor: adjustColorBrightness(p.color, 50),
-                      borderLeftColor: p.color,
-                      borderRightColor: p.color,
-                      borderTopColor: adjustColorBrightness(p.color, -20),
-                    } : {})
-                  }}
-                >
-                  {(p.frame === 0 || p.frame > 2) &&
-                    (
-                      <p
-                        id="name"
-                        class={`text-lighterdark font-${p.font ?? props.font}`}
-                      >
-                        {p.name}
-                      </p>
-                    )}
-                  <img
-                    style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                    src="/textures/placeholder_150.png"
-                    alt="placeholder_150"
-                  />
-                  <img
-                    onLoad={handleImageOnLoad}
-                    class={`max-w-full ${p.gap_1}`}
-                    style={{
-                      ...imageOnLoadStyle.fullSize,
-                      ...(p.frame === 2 || p.frame === 4 ? {
-                        border: 'solid 2px',
-                        borderBottomColor: adjustColorBrightness(p.color, 50),
-                        borderLeftColor: adjustColorBrightness(p.color, -20),
-                        borderRightColor: adjustColorBrightness(p.color, -20),
-                        borderTopColor: adjustColorBrightness(p.color, -40),
-                      } : {})
-                    }}
-                    src={p.url}
-                    alt={p.name}
-                    draggable={draggable}
-                  />
-                </div>
-                {p.polyptych > 2 &&
-                  (
-                    <div
-                      onClick={() => handleClick(p, '3', p.url_3)}
-                      class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
-                      style={{
-                        ...ART_IMG_WRAPPER.wrap,
-                        ...(p.frame === 2 || p.frame === 4 ? {
-                          border: `solid 1.8vmin ${p.color}`,
-                          borderBottomColor: adjustColorBrightness(p.color, 50),
-                          borderLeftColor: p.color,
-                          borderRightColor: p.color,
-                          borderTopColor: adjustColorBrightness(p.color, -20),
-                        } : {})
-                      }}
-                    >
-                      <img
-                        style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                        src="/textures/placeholder_150.png"
-                        alt="placeholder_150"
-                      />
-                      <img
-                        onLoad={handleImageOnLoad}
-                        class={`max-w-full ${p.gap_3}`}
-                        style={{
-                          ...imageOnLoadStyle.fullSize,
-                          ...(p.frame === 2 || p.frame === 4 ? {
-                            border: 'solid 2px',
-                            borderBottomColor: adjustColorBrightness(p.color, 50),
-                            borderLeftColor: adjustColorBrightness(p.color, -20),
-                            borderRightColor: adjustColorBrightness(p.color, -20),
-                            borderTopColor: adjustColorBrightness(p.color, -40),
-                          } : {})
-                        }}
-                        src={p.url_3}
-                        alt={p.name + "_3"}
-                        draggable={draggable}
-                      />
-                    </div>
-                  )}
-                {p.polyptych === 5 &&
-                  (
-                    <div
-                      onClick={() => handleClick(p, '5', p.url_5)}
-                      class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
-                      style={{
-                        ...ART_IMG_WRAPPER.wrap,
-                        ...(p.frame === 2 || p.frame === 4 ? {
-                          border: `solid 1.8vmin ${p.color}`,
-                          borderBottomColor: adjustColorBrightness(p.color, 50),
-                          borderLeftColor: p.color,
-                          borderRightColor: p.color,
-                          borderTopColor: adjustColorBrightness(p.color, -20),
-                        } : {})
-                      }}
-                    >
-                      <img
-                        style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
-                        src="/textures/placeholder_150.png"
-                        alt="placeholder_150"
-                      />
-                      <img
-                        onLoad={handleImageOnLoad}
-                        class={`max-w-full ${p.gap_5}`}
-                        style={{
-                          ...imageOnLoadStyle.fullSize,
-                          ...(p.frame === 2 || p.frame === 4 ? {
-                            border: 'solid 2px',
-                            borderBottomColor: adjustColorBrightness(p.color, 50),
-                            borderLeftColor: adjustColorBrightness(p.color, -20),
-                            borderRightColor: adjustColorBrightness(p.color, -20),
-                            borderTopColor: adjustColorBrightness(p.color, -40),
-                          } : {})
-                        }}
-                        src={p.url_5}
-                        alt={p.name + "_5"}
-                        draggable={draggable}
-                      />
-                    </div>
-                  )}
-              </div>
-              {(p.frame !== 0 && p.frame < 3) &&
-                (
-                  <div class="frame-label flex mx-3">
-                    <div
-                      class={`paper paper-shadow transform-gpu appear-effect-very-fast-fadein min-h-[30px] md:min-h-[40px] min-w-[180px] mx-auto`}
-                    >
+                <div class="relative w-full mt-4 md:mt-10 flex items-center justify-center">
+                  {/* Trait crayonné */}
+                  <PencilLine />
+
+                  {/* Année des œuvres */}
+                  <div class="relative flex justify-center z-10">
+                    <div class="paper paper-shadow px-4 py-1 md:px-6 md:py-2 min-w-[120px] text-center">
                       <div class="top-tape"></div>
-                      <p
-                        id="name"
-                        class={`px-3 text-lighterdark font-${p.font ?? props.font} leading-none`}
-                      >
-                        {p.name}
+                      <p class="text-xl md:text-2xl font-semibold tracking-wide">
+                        {year}
                       </p>
                     </div>
                   </div>
-                )}
-            </div>
-          ))
-        ) : ( // Pas de résultats
+                </div>
+
+                {/* Œuvres pour cette année */}
+                <div class="flex flex-wrap justify-center">
+                  {artsByYear[year].map((p, index) => (
+                    <div
+                      key={index + 1}
+                      class={`art-container flex flex-col mx-auto`}
+                    >
+                      <div
+                        id={p.id}
+                        class={`art-wrap-${p.polyptych} ${p.custom_css}`}
+                      >
+                        {p.polyptych > 3 &&
+                          (
+                            <div
+                              onClick={() => handleClick(p, '4', p.url_4)}
+                              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
+                              style={{
+                                ...ART_IMG_WRAPPER.wrap,
+                                ...(p.frame === 2 || p.frame === 4 ? {
+                                  border: `solid 1.8vmin ${p.color}`,
+                                  borderBottomColor: adjustColorBrightness(p.color, 50),
+                                  borderLeftColor: p.color,
+                                  borderRightColor: p.color,
+                                  borderTopColor: adjustColorBrightness(p.color, -20),
+                                } : {})
+                              }}
+                            >
+                              <img
+                                style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                src="/textures/placeholder_150.png"
+                                alt="placeholder_150"
+                              />
+                              <img
+                                onLoad={handleImageOnLoad}
+                                class={`max-w-full ${p.gap_4}`}
+                                style={{
+                                  ...imageOnLoadStyle.fullSize,
+                                  ...(p.frame === 2 || p.frame === 4 ? {
+                                    border: 'solid 2px',
+                                    borderBottomColor: adjustColorBrightness(p.color, 50),
+                                    borderLeftColor: adjustColorBrightness(p.color, -20),
+                                    borderRightColor: adjustColorBrightness(p.color, -20),
+                                    borderTopColor: adjustColorBrightness(p.color, -40),
+                                  } : {})
+                                }}
+                                src={p.url_4}
+                                alt={p.name + "_4"}
+                                draggable={draggable}
+                              />
+                            </div>
+                          )}
+                        {p.polyptych > 1 &&
+                          (
+                            <div
+                              onClick={() => handleClick(p, '2', p.url_2)}
+                              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
+                              style={{
+                                ...ART_IMG_WRAPPER.wrap,
+                                ...(p.frame === 2 || p.frame === 4 ? {
+                                  border: `solid 1.8vmin ${p.color}`,
+                                  borderBottomColor: adjustColorBrightness(p.color, 50),
+                                  borderLeftColor: p.color,
+                                  borderRightColor: p.color,
+                                  borderTopColor: adjustColorBrightness(p.color, -20),
+                                } : {})
+                              }}
+                            >
+                              <img
+                                style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                src="/textures/placeholder_150.png"
+                                alt="placeholder_150"
+                              />
+                              <img
+                                onLoad={handleImageOnLoad}
+                                class={`max-w-full ${p.gap_2}`}
+                                style={{
+                                  ...imageOnLoadStyle.fullSize,
+                                  ...(p.frame === 2 || p.frame === 4 ? {
+                                    border: 'solid 2px',
+                                    borderBottomColor: adjustColorBrightness(p.color, 50),
+                                    borderLeftColor: adjustColorBrightness(p.color, -20),
+                                    borderRightColor: adjustColorBrightness(p.color, -20),
+                                    borderTopColor: adjustColorBrightness(p.color, -40),
+                                  } : {})
+                                }}
+                                src={p.url_2}
+                                alt={p.name + "_2"}
+                                draggable={draggable}
+                              />
+                            </div>
+                          )}
+                        <div
+                          onClick={() => handleClick(p, '1', p.url)}
+                          data-artist-id={p.id}
+                          class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
+                          style={{
+                            ...ART_IMG_WRAPPER.wrap,
+                            ...(p.frame === 2 || p.frame === 4 ? {
+                              border: `solid 1.8vmin ${p.color}`,
+                              borderBottomColor: adjustColorBrightness(p.color, 50),
+                              borderLeftColor: p.color,
+                              borderRightColor: p.color,
+                              borderTopColor: adjustColorBrightness(p.color, -20),
+                            } : {})
+                          }}
+                        >
+                          {(p.frame === 0 || p.frame > 2) &&
+                            (
+                              <p
+                                id="name"
+                                class={`text-lighterdark font-${p.font ?? props.font}`}
+                              >
+                                {p.name}
+                              </p>
+                            )}
+                          <img
+                            style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                            src="/textures/placeholder_150.png"
+                            alt="placeholder_150"
+                          />
+                          <img
+                            onLoad={handleImageOnLoad}
+                            class={`max-w-full ${p.gap_1}`}
+                            style={{
+                              ...imageOnLoadStyle.fullSize,
+                              ...(p.frame === 2 || p.frame === 4 ? {
+                                border: 'solid 2px',
+                                borderBottomColor: adjustColorBrightness(p.color, 50),
+                                borderLeftColor: adjustColorBrightness(p.color, -20),
+                                borderRightColor: adjustColorBrightness(p.color, -20),
+                                borderTopColor: adjustColorBrightness(p.color, -40),
+                              } : {})
+                            }}
+                            src={p.url}
+                            alt={p.name}
+                            draggable={draggable}
+                          />
+                        </div>
+                        {p.polyptych > 2 &&
+                          (
+                            <div
+                              onClick={() => handleClick(p, '3', p.url_3)}
+                              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
+                              style={{
+                                ...ART_IMG_WRAPPER.wrap,
+                                ...(p.frame === 2 || p.frame === 4 ? {
+                                  border: `solid 1.8vmin ${p.color}`,
+                                  borderBottomColor: adjustColorBrightness(p.color, 50),
+                                  borderLeftColor: p.color,
+                                  borderRightColor: p.color,
+                                  borderTopColor: adjustColorBrightness(p.color, -20),
+                                } : {})
+                              }}
+                            >
+                              <img
+                                style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                src="/textures/placeholder_150.png"
+                                alt="placeholder_150"
+                              />
+                              <img
+                                onLoad={handleImageOnLoad}
+                                class={`max-w-full ${p.gap_3}`}
+                                style={{
+                                  ...imageOnLoadStyle.fullSize,
+                                  ...(p.frame === 2 || p.frame === 4 ? {
+                                    border: 'solid 2px',
+                                    borderBottomColor: adjustColorBrightness(p.color, 50),
+                                    borderLeftColor: adjustColorBrightness(p.color, -20),
+                                    borderRightColor: adjustColorBrightness(p.color, -20),
+                                    borderTopColor: adjustColorBrightness(p.color, -40),
+                                  } : {})
+                                }}
+                                src={p.url_3}
+                                alt={p.name + "_3"}
+                                draggable={draggable}
+                              />
+                            </div>
+                          )}
+                        {p.polyptych === 5 &&
+                          (
+                            <div
+                              onClick={() => handleClick(p, '5', p.url_5)}
+                              class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
+                              style={{
+                                ...ART_IMG_WRAPPER.wrap,
+                                ...(p.frame === 2 || p.frame === 4 ? {
+                                  border: `solid 1.8vmin ${p.color}`,
+                                  borderBottomColor: adjustColorBrightness(p.color, 50),
+                                  borderLeftColor: p.color,
+                                  borderRightColor: p.color,
+                                  borderTopColor: adjustColorBrightness(p.color, -20),
+                                } : {})
+                              }}
+                            >
+                              <img
+                                style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                src="/textures/placeholder_150.png"
+                                alt="placeholder_150"
+                              />
+                              <img
+                                onLoad={handleImageOnLoad}
+                                class={`max-w-full ${p.gap_5}`}
+                                style={{
+                                  ...imageOnLoadStyle.fullSize,
+                                  ...(p.frame === 2 || p.frame === 4 ? {
+                                    border: 'solid 2px',
+                                    borderBottomColor: adjustColorBrightness(p.color, 50),
+                                    borderLeftColor: adjustColorBrightness(p.color, -20),
+                                    borderRightColor: adjustColorBrightness(p.color, -20),
+                                    borderTopColor: adjustColorBrightness(p.color, -40),
+                                  } : {})
+                                }}
+                                src={p.url_5}
+                                alt={p.name + "_5"}
+                                draggable={draggable}
+                              />
+                            </div>
+                          )}
+                      </div>
+                      {(p.frame !== 0 && p.frame < 3) && (
+                        <div class="frame-label flex mx-3">
+                          <div class="paper paper-shadow transform-gpu appear-effect-very-fast-fadein min-h-[30px] md:min-h-[40px] min-w-[180px] mx-auto">
+                            <div class="top-tape"></div>
+                            <p
+                              id="name"
+                              class={`px-3 text-lighterdark font-${p.font ?? props.font} leading-none`}
+                            >
+                              {p.name}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ))
+          )
+          : ( // Pas de résultats
           <div class="paper paper-shadow transform-gpu appear-effect-fast-fadein min-h-[70px] max-w-[360px] mx-auto my-2">
             <div class="tape-section"></div>
             <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
