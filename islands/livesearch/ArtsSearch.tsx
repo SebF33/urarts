@@ -220,7 +220,7 @@ export default function ArtsSearch() {
               {searchResults.length === 0 && searchTerm !== "" &&
                 (
                   <li class="appear-effect-list-fadein mx-2 my-4">
-                    <div class="paper min-h-[70px] max-w-[360px]">
+                    <div class="paper paper-shadow min-h-[70px] max-w-[360px]">
                       <div class="tape-section"></div>
                       <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
                         {i18next.t("common.no_results", { ns: "translation" })} {" =>"}
