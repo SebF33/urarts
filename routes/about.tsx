@@ -74,7 +74,7 @@ export default function AboutPage(
             <AboutNotePaper />
           </div>
           {/* Mona Lisa */}
-          <div class="z-10 -mt-24">
+          <div class="-mt-12 md:-mt-24 z-10">
             <Mona />
           </div>
           {/* Note mentions légales */}

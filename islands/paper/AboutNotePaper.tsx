@@ -22,29 +22,22 @@ export default function AboutNotePaper() {
       <div class="tape-section"></div>
       <div class="flex flex-col w-full p-4 font-medium text-sm md:text-base">
         {/* En-tête langue */}
-        <div class="flex items-center mb-3 select-none">
-          <p class="text-lg md:text-xl">
+        <div class="flex flex-wrap items-center mb-3 select-none z-10">
+          <p class="text-lg md:text-xl mr-2">
             {i18next.t("leonardo.lng", { ns: "translation" })}
-            {" "}
           </p>
-          <div class="inline-flex items-center space-x-2 ml-2">
-            <button
-              onClick={() => handleLanguage("en")}
-              class="focus:outline-none"
-            >
+          <div class="inline-flex items-center space-x-2">
+            <button onClick={() => handleLanguage("en")} class="focus:outline-none">
               <img
-                class="w-9 hover:scale-110 transition-transform duration-50"
+                class="w-9 hover:scale-110 transition-transform duration-50 align-middle"
                 src="/icons/Royaume-Uni.png"
                 alt="en"
                 draggable={draggable}
               />
             </button>
-            <button
-              onClick={() => handleLanguage("fr")}
-              class="focus:outline-none"
-            >
+            <button onClick={() => handleLanguage("fr")} class="focus:outline-none">
               <img
-                class="w-9 hover:scale-110 transition-transform duration-50"
+                class="w-9 hover:scale-110 transition-transform duration-50 align-middle"
                 src="/icons/France.png"
                 alt="fr"
                 draggable={draggable}
@@ -54,6 +47,7 @@ export default function AboutNotePaper() {
         </div>
         {/* Contenu texte */}
         <div
+          class="z-10"
           dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}
         />
         {/* Logo Deno */}
