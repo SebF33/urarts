@@ -12,5 +12,6 @@ export const nationalitySignal = signal<string>("France");
 
 // Pour établir le contexte d'un contenu qui concerne seulement un(e) artiste
 export const isForAloneArtistSignal = signal<boolean>(false);
+export const artistAvatarSignal = signal<string>("");
 export const artistNameSignal = signal<string>("");
 export const artistSlugSignal = signal<string>("");

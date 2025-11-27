@@ -2,6 +2,7 @@ import { artistNameSignal, isForAloneArtistSignal } from "@utils/signals.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
+import BackToTheArtistPaper from "@islands/paper/BackToTheArtistPaper.tsx";
 
 interface Props {
   info: string;
@@ -33,7 +34,7 @@ export default function TagHero({ info, myslug, tag }: Props) {
                   {tag}
                   {isForAloneArtistSignal.value && (
                     <span class="text-[1rem] sm:text-[1.2rem] italic text-white/80">
-                      {`${i18next.t("common.accordingto", { ns: "translation" })} ${artistNameSignal.value}`}
+                      {`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}
                     </span>
                   )}
                 </h1>
@@ -45,6 +46,11 @@ export default function TagHero({ info, myslug, tag }: Props) {
               />
             </div>
           </div>
+
+          {/* Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste */}
+          {isForAloneArtistSignal.value && (
+            <BackToTheArtistPaper />
+          )}
         </div>
       </div>
     </div>

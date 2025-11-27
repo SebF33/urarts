@@ -266,6 +266,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
           {/* Post-it : mouvements */}
           {movements.length > 0 && (
             <MovementsPapers
+              artistAvatar={avatar}
               artistName={artist}
               artistSlug={slug}
               draggable={draggable}
@@ -402,6 +403,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
               <div class="relative w-full xl:max-w-[880px] mx-auto z-10 hidden xl:block">
                 {tags && tags.length > 0 && (
                   <TagsPapers
+                    artistAvatar={avatar}
                     artistName={artist}
                     artistSlug={slug}
                     draggable={draggable}

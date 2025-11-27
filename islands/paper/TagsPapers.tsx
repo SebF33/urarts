@@ -1,4 +1,5 @@
 import {
+  artistAvatarSignal,
   artistNameSignal,
   artistSlugSignal,
   isForAloneArtistSignal,
@@ -10,6 +11,7 @@ import { TagCollection } from "@utils/types.d.ts";
 interface Props {
   tags: TagCollection[];
   animated?: boolean;
+  artistAvatar?: string;
   artistName?: string;
   artistSlug?: string;
   draggable?: boolean;
@@ -22,6 +24,7 @@ interface Props {
 export default function TagsPapers({
   tags,
   animated = true,
+  artistAvatar,
   artistName,
   artistSlug,
   draggable,
@@ -44,8 +47,9 @@ export default function TagsPapers({
     if (!href) return;
 
     // on précise que c'est pour du contenu concernant seulement un(e) artiste
-    if (artistName && artistSlug) {
+    if (artistAvatar && artistName && artistSlug) {
       isForAloneArtistSignal.value = true;
+      artistAvatarSignal.value = artistAvatar;
       artistNameSignal.value = artistName;
       artistSlugSignal.value = artistSlug;
     }

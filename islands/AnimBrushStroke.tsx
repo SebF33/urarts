@@ -61,7 +61,7 @@ export default function AnimBrushStroke(
             >
               {isForAloneArtistSignal.value && props.type === 'movement' ? (
                 <>
-                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`${i18next.t("common.accordingto", { ns: "translation" })} ${artistNameSignal.value}`}</span>
+                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}</span>
                 </>
               ) : (
                 props.title

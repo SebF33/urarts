@@ -107,8 +107,9 @@ const translation = {
     public_domain: "Domaine public",
   },
   common: {
-    accordingto: "selon",
+    according_to: "selon",
     art: "œuvre",
+    back_to_the_artist: "Retour à l'artiste",
     no_results: "Pas de résultats",
     without_year: "Sans année",
   },

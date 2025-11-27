@@ -1,4 +1,5 @@
 import {
+  artistAvatarSignal,
   artistNameSignal,
   artistSlugSignal,
   isForAloneArtistSignal,
@@ -13,6 +14,7 @@ interface Movement {
 };
 
 interface Props {
+  artistAvatar: string;
   artistName: string;
   artistSlug: string;
   draggable?: boolean;
@@ -21,7 +23,7 @@ interface Props {
 
 
 export default function MovementsPapers(
-  { artistName, artistSlug, draggable, movements }: Props,
+  { artistAvatar, artistName, artistSlug, draggable, movements }: Props,
 ) {
 
   // Clic sur un lien "mouvement"
@@ -34,6 +36,7 @@ export default function MovementsPapers(
 
     // on précise que c'est pour du contenu concernant seulement un(e) artiste
     isForAloneArtistSignal.value = true;
+    artistAvatarSignal.value = artistAvatar;
     artistNameSignal.value = artistName;
     artistSlugSignal.value = artistSlug;
 

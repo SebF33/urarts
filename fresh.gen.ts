@@ -62,6 +62,7 @@ import * as $panel_WorldArtistsPanel from "./islands/panel/WorldArtistsPanel.tsx
 import * as $panel_WorldArtsPanel from "./islands/panel/WorldArtsPanel.tsx";
 import * as $paper_AboutNotePaper from "./islands/paper/AboutNotePaper.tsx";
 import * as $paper_ArtistsPapers from "./islands/paper/ArtistsPapers.tsx";
+import * as $paper_BackToTheArtistPaper from "./islands/paper/BackToTheArtistPaper.tsx";
 import * as $paper_Copyright from "./islands/paper/Copyright.tsx";
 import * as $paper_LegalNotePaper from "./islands/paper/LegalNotePaper.tsx";
 import * as $paper_MovementsPapers from "./islands/paper/MovementsPapers.tsx";
@@ -137,6 +138,7 @@ const manifest = {
     "./islands/panel/WorldArtsPanel.tsx": $panel_WorldArtsPanel,
     "./islands/paper/AboutNotePaper.tsx": $paper_AboutNotePaper,
     "./islands/paper/ArtistsPapers.tsx": $paper_ArtistsPapers,
+    "./islands/paper/BackToTheArtistPaper.tsx": $paper_BackToTheArtistPaper,
     "./islands/paper/Copyright.tsx": $paper_Copyright,
     "./islands/paper/LegalNotePaper.tsx": $paper_LegalNotePaper,
     "./islands/paper/MovementsPapers.tsx": $paper_MovementsPapers,

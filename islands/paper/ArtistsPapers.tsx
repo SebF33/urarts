@@ -1,6 +1,8 @@
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 import { isForAloneArtistSignal } from "@utils/signals.ts";
 
+import BackToTheArtistPaper from "@islands/paper/BackToTheArtistPaper.tsx";
+
 interface Artist {
   name: string;
   slug: string;
@@ -35,9 +37,13 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
   }
 
 
-  // ne rien afficher si on est sur du contenu concernant seulement un(e) artiste
+  // Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste
   if (isForAloneArtistSignal.value) {
-    return null;
+    return (
+      <div class="invisible lg:visible absolute ml-8">
+        <BackToTheArtistPaper />
+      </div>
+    );
   }
 
 

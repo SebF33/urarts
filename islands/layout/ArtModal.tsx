@@ -1,5 +1,6 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import {
+  artistAvatarSignal,
   artistNameSignal,
   artistSlugSignal,
   artModalOpenSignal,
@@ -242,9 +243,10 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
     // on précise que c'est pour du contenu concernant seulement un(e) artiste
     isForAloneArtistSignal.value = true;
-    artistNameSignal.value = art.last_name;
+    artistAvatarSignal.value = art.avatar_url;
+    artistNameSignal.value = art.first_name ? `${art.first_name} ${art.last_name}` : art.last_name;
     artistSlugSignal.value = art.artist_slug;
-    
+
     // si c'est dans une page perso
     //const finalHref = isPersoGallery ? `${href}/gallery` : href;
 
