@@ -40,12 +40,12 @@ export default function AnimBrushStroke(
 
   return (
     <div
-      class={`h-[144px]`}
+      class={`h-[108px] md:h-[144px]`}
     >
       {showAnimBrushStroke && (
         <Fragment>
           <div
-            class={`font-${props.font} mx-auto text-center relative inline-block p-12 overflow-hidden ${
+            class={`h-[90px] md:h-[126px] font-${props.font} mx-auto text-center relative inline-block px-12 py-8 md:py-12 overflow-hidden ${
               css({
                 background: `${props.color}`,
                 position: "relative",
@@ -55,13 +55,13 @@ export default function AnimBrushStroke(
             }`}
           >
             <h1
-              class={`inline-block text-[1.6rem] sm:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${showH1 ? 'show' : ''} ${
+              class={`inline-block text-[1.6rem] md:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${showH1 ? 'show' : ''} ${
                 css({color: `${props.secondaryColor}`})
               }`}
             >
               {isForAloneArtistSignal.value && props.type === 'movement' ? (
                 <>
-                  {props.title} <span class="text-[1rem] sm:text-[1.2rem] italic"><br />{`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}</span>
+                  {props.title} <span class="text-[1rem] md:text-[1.2rem] italic"><br />{`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}</span>
                 </>
               ) : (
                 props.title
