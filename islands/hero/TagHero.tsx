@@ -16,9 +16,16 @@ export default function TagHero({ info, myslug, tag }: Props) {
 
   return (
     <div class="relative bg-lighterdark shadow-2xl">
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      {/* Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste */}
+      {isForAloneArtistSignal.value && (
+        <div class="absolute ml-4 md:ml-7">
+          <BackToTheArtistPaper />
+        </div>
+      )}
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div class="p-4 sm:p-6">
           <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+            {/* Image du tag */}
             <div class="shrink-0 mx-auto md:mx-0">
               <img
                 src={`/tags/${myslug}.png`}
@@ -29,6 +36,7 @@ export default function TagHero({ info, myslug, tag }: Props) {
               />
             </div>
             <div class="grow">
+              {/* Titre du tag */}
               <div class="inline-block">
                 <h1 class="text-white text-3xl md:text-5xl font-bold leading-tight flex items-center flex-wrap gap-2">
                   {tag}
@@ -40,17 +48,13 @@ export default function TagHero({ info, myslug, tag }: Props) {
                 </h1>
                 <div class="mt-2 h-1 bg-white rounded-full w-full"></div>
               </div>
+              {/* Description du tag */}
               <p
                 class="mt-4 text-white/90 text-lg md:text-xl leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: info }}
               />
             </div>
           </div>
-
-          {/* Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste */}
-          {isForAloneArtistSignal.value && (
-            <BackToTheArtistPaper />
-          )}
         </div>
       </div>
     </div>

@@ -5111,8 +5111,8 @@ export function PencilArrow() {
   return (
     <svg
       viewBox="0 0 110.8 105.4"
-      width="50px"
-      height="50px"
+      width="34px"
+      height="34px"
     >
       <g>
         <path
