@@ -40,7 +40,7 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
   // Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste
   if (isForAloneArtistSignal.value) {
     return (
-      <div class="absolute ml-4 md:ml-7">
+      <div class="absolute z-20 ml-4 md:ml-7">
         <BackToTheArtistPaper />
       </div>
     );

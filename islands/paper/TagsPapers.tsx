@@ -93,6 +93,8 @@ export default function TagsPapers({
                       <a
                         href={`/tag/${tag.slug}${isPersoGallery ? "/gallery" : ""}`}
                         onClick={handleLinkClick}
+                        title={tag.name}
+                        aria-label={tag.name}
                         class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
                         draggable={draggable}
                       >
@@ -100,7 +102,6 @@ export default function TagsPapers({
                         <img
                           src={`/icons/${tag.name}.png`}
                           alt={tag.name}
-                          title={tag.name}
                           class="w-8"
                           draggable={draggable}
                         />

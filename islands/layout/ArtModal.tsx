@@ -412,27 +412,30 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
             {/* Artiste et mouvement */}
             <div class="flex gap-4 m-auto md:m-2">
-              <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}>
-                <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
-                <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-2 py-1 z-10 select-none">
-                  <div class="text-sm sm:text-base leading-4 select-none min-w-0 whitespace-normal break-keep">
-                    {(art.first_name ?? "") + " " + art.last_name}
+              <a
+                onClick={(e) => handleLinkClick(e, `/art/${art.artist_slug}`)}
+                title={(art.first_name ?? "") + " " + art.last_name}
+                aria-label={(art.first_name ?? "") + " " + art.last_name}
+                class="block"
+                draggable={draggable}
+              >
+                <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}>
+                  <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
+                  <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-2 py-1 z-10 select-none">
+                    <div class="text-sm sm:text-base leading-4 select-none min-w-0 whitespace-normal break-keep">
+                      {(art.first_name ?? "") + " " + art.last_name}
+                    </div>
+                    <div class="m-1 shrink-0">
+                      <img
+                        src={art.avatar_url}
+                        alt={(art.first_name ?? "") + " " + art.last_name}
+                        class="h-14 sm:h-16 max-w-full object-cover flex-none"
+                        draggable={draggable}
+                      />
+                    </div>
                   </div>
-                  <a
-                    onClick={(e) => handleLinkClick(e, `/art/${art.artist_slug}`)}
-                    class="m-1 shrink-0"
-                    title={(art.first_name ?? "") + " " + art.last_name}
-                    draggable={draggable}
-                  >
-                    <img
-                      src={art.avatar_url}
-                      alt={(art.first_name ?? "") + " " + art.last_name}
-                      class="h-14 sm:h-16 max-w-full object-cover flex-none"
-                      draggable={draggable}
-                    />
-                  </a>
                 </div>
-              </div>
+              </a>
               {!TALENTS.includes(art.artist_slug) && (
                 <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] transform rotate-6">
                   <div class="top-tape"></div>
@@ -457,6 +460,8 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                   >
                     <a
                       onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
+                      title={tag.name}
+                      aria-label={tag.name}
                       class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
                       draggable={draggable}
                     >
@@ -464,7 +469,6 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                       <img
                         src={`/icons/${tag.name}.png`}
                         alt={tag.name}
-                        title={tag.name}
                         class="w-8"
                         draggable={draggable}
                       />

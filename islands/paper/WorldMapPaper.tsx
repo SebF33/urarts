@@ -8,14 +8,14 @@ export function WorldMapPaper() {
       <div class="tape-section"></div>
       <a
         href="/worldmap"
+        title={i18next.t("paper.worldmap", { ns: "translation" })}
+        aria-label={i18next.t("paper.worldmap", { ns: "translation" })}
         class="block w-full h-full"
         draggable={draggable}
-        aria-label={i18next.t("paper.worldmap", { ns: "translation" })}
       >
         <img
           src="/worldmap.png"
           alt={i18next.t("paper.worldmap", { ns: "translation" })}
-          title={i18next.t("paper.worldmap", { ns: "translation" })}
           class="w-full h-full object-cover"
           draggable={draggable}
         />
