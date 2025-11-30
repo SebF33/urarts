@@ -45,7 +45,7 @@ export default function AnimBrushStroke(
       {showAnimBrushStroke && (
         <Fragment>
           <div
-            class={`h-[90px] md:h-[126px] font-${props.font} mx-auto text-center relative inline-block px-12 py-8 md:py-12 overflow-hidden ${
+            class={`h-[90px] md:h-[126px] font-${props.font} mx-auto text-center relative inline-block px-12 py-6 md:py-12 overflow-hidden ${
               css({
                 background: `${props.color}`,
                 position: "relative",
