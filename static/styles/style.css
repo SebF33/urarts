@@ -55,20 +55,25 @@ body.no-scroll {
 body,
 .art-modal-container.no-links a,
 .art-modal-container.no-links a * {
-    cursor: url(/cursors/cursor-auto.png), auto !important;
+    cursor: url(/cursors/cursor-auto.png) 6 3, auto !important;
 }
 
 .cursor-grab,
 .noUi-handle,
-.noUi-handle:hover,
 .rolling-gallery-track {
-    cursor: url(/cursors/cursor-grab.png), grab !important;
+    cursor: url(/cursors/cursor-grab.png) 16 18, grab !important;
+}
+
+.cursor-grab:active,
+.noUi-handle:active,
+.rolling-gallery-track:active {
+    cursor: url(/cursors/cursor-grab.png) 16 18, grabbing !important;
 }
 
 .cursor-help,
 #U-Icon,
 #Urarts {
-    cursor: url(/cursors/cursor-help.png), help !important;
+    cursor: url(/cursors/cursor-help.png) 16 12, help !important;
 }
 
 .cursor-pointer,
@@ -77,12 +82,12 @@ button:hover,
 canvas,
 .eye,
 .noUi-connects {
-    cursor: url(/cursors/cursor-pointer.png), pointer !important;
+    cursor: url(/cursors/cursor-pointer.png) 6 3, pointer !important;
 }
 
 .cursor-text,
 input {
-    cursor: url(/cursors/cursor-text.png), text !important;
+    cursor: url(/cursors/cursor-text.png) 16 8, text !important;
 }
 
 /* Fonts */
