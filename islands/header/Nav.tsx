@@ -161,8 +161,9 @@ export default function Nav(props: Props) {
 
   // Appel à l'API "Leonardo"
   const fetchLeonardoData = async (params: Record<string, Any>, signal: AbortSignal) => {
-    const leonardoContent = document.querySelector("#leonardoContent");
-  
+    const leonardoContent = document.querySelector("#leonardoContent") as HTMLElement | null;
+    if (!leonardoContent) return;
+
     try {
       const response = await ky.get(`${UrlBasePath}/api/leonardo`, {
         searchParams: params,
@@ -179,9 +180,9 @@ export default function Nav(props: Props) {
         leonardoContent.innerHTML = leonardoResponse;
       }
     
-    } catch (error) {
+    } catch (error: Any) {
       if (error.name !== 'AbortError' && leonardoContent)  leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
-      if (leonardoContent)  leonardoContent.innerHTML = '...';
+      if (leonardoContent)  leonardoContent.textContent  = '...';
     }
   };
 
