@@ -1,3 +1,5 @@
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { useEffect, useState } from "preact/hooks";
 
 import { UrartsPencilTip } from "@components/Assets.tsx";
@@ -34,8 +36,10 @@ export default function ToBottomButton() {
         class={`fixed left-2 bottom-2 md:left-4 md:bottom-4 flex items-center justify-center p-2 bg-cyan text-white border-none rounded-full shadow-md cursor-pointer z-[9999] ${
           showButton ? "opacity-100" : "opacity-0 pointer-events-none"
         } transition-opacity duration-300 ease-in-out`}
+        aria-label={`${i18next.t("meta.scroll_to_bottom", { ns: "translation" })}`}
       >
-        <UrartsPencilTip />
+        <span class="sr-only">${i18next.t("meta.scroll_to_bottom", { ns: "translation" })}</span>
+        <UrartsPencilTip aria-hidden="true" />
       </button>
     </>
   );

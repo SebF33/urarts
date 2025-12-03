@@ -250,6 +250,8 @@ const translation = {
       desc: "Les principaux mouvements artistiques.",
       title: "Urarts - Mouvements",
     },
+    scroll_to_bottom: "Faire défiler vers le bas",
+    scroll_to_top: "Faire défiler vers le haut",
     talents: {
       desc: "Les talents.",
       title: "Urarts - Talents",

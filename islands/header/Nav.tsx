@@ -438,32 +438,36 @@ export default function Nav(props: Props) {
               id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
             >
-              <HistoIcon />
+              <HistoIcon aria-hidden="true" />
             </a>
             <a
               href="/women"
               id="desktopWomanAnchor"
               class={desktopWomanAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.women", { ns: "translation" })}`}
             >
-              <WomanIcon />
+              <WomanIcon aria-hidden="true" />
             </a>
             <a
               href="/art/mimi"
               id="desktopHeartAnchor"
               class={desktopHeartAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.mimi", { ns: "translation" })}`}
             >
-              <HeartIcon />
+              <HeartIcon aria-hidden="true" />
             </a>
             <a
               href="/indicators"
               id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
             >
-              <StatIcon />
+              <StatIcon aria-hidden="true" />
             </a>
             <a
               href="/api/arts" f-client-nav={false}
@@ -472,21 +476,23 @@ export default function Nav(props: Props) {
               rel="noopener"
               class={desktopApiAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
             >
-              <ApiIcon />
+              <ApiIcon aria-hidden="true" />
             </a>
             <a
               href="/about"
               id="desktopInterrogationAnchor"
               class={desktopInterrogationAnchor}
               draggable={draggable}
+              aria-label={`${i18next.t("nav.about", { ns: "translation" })}`}
             >
-              <InterrogationIcon />
+              <InterrogationIcon aria-hidden="true" />
             </a>
           </div>
           <div class={`md:hidden flex items-center`}>
             <button class={`mobile-menu-button z-[60] text-white hover:text-lighterdark focus:outline-none`}>
-              <ButtonLines />
+              <ButtonLines aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -544,8 +550,9 @@ export default function Nav(props: Props) {
                 href="/histocharacters"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
               >
-                <HistoIcon />
+                <HistoIcon aria-hidden="true" />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -553,8 +560,9 @@ export default function Nav(props: Props) {
                 href="/women"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.women", { ns: "translation" })}`}
               >
-                <WomanIcon />
+                <WomanIcon aria-hidden="true" />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -562,8 +570,9 @@ export default function Nav(props: Props) {
                 href="/art/mimi"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.mimi", { ns: "translation" })}`}
               >
-                <HeartIcon />
+                <HeartIcon aria-hidden="true" />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -571,8 +580,9 @@ export default function Nav(props: Props) {
                 href="/indicators"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
               >
-                <StatIcon />
+                <StatIcon aria-hidden="true" />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -581,8 +591,9 @@ export default function Nav(props: Props) {
                 target="_blank"
                 rel="noopener"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
               >
-                <ApiIcon />
+                <ApiIcon aria-hidden="true" />
               </a>
             </div>
             <div class={`w-[50px]`}>
@@ -590,8 +601,9 @@ export default function Nav(props: Props) {
                 href="/about"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
+                aria-label={`${i18next.t("nav.about", { ns: "translation" })}`}
               >
-                <InterrogationIcon />
+                <InterrogationIcon aria-hidden="true" />
               </a>
             </div>
           </li>

@@ -250,6 +250,8 @@ const translation = {
       desc: "The main artistic movements.",
       title: "Urarts - Movements",
     },
+    scroll_to_bottom: "Scroll to bottom",
+    scroll_to_top: "Scroll to top",
     talents: {
       desc: "The talents.",
       title: "Urarts - Talents",
