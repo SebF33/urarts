@@ -743,6 +743,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/dadaism.png)`,
     backgroundSize: "clamp(300px, 23.4vw, 450px)",
   },
+  dance: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/dance.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   death: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/death.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -823,6 +827,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/industry.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  interior: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/interior.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   intimism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/intimism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
@@ -869,6 +877,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   },
   music: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/music.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
+  mythology: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/mythology.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   naiveart: {
@@ -951,6 +963,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/russia.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  science: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/science.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   sea: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/sea.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -1002,6 +1018,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   unclassified: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`,
     backgroundSize: "clamp(300px, 25.0vw, 480px)",
+  },
+  urban: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/urban.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   usa: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/usa.png)`,
