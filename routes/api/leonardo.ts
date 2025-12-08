@@ -305,7 +305,7 @@ export const handler = async (
           </p>
         `;
 
-        htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.click", { ns: "translation" })} <span x-on:click="toggleNavTheme" class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</span> ${i18next.t("leonardo.nav_theme", { ns: "translation" })}</p>`;
+        htmlContent += `<p class="text-[1rem] leading-none mb-2">${i18next.t("leonardo.click", { ns: "translation" })} <span role="button" tabindex="0" data-toggle-nav-theme class="font-bold underline cursor-pointer">${i18next.t("leonardo.here", { ns: "translation" })}</span> ${i18next.t("leonardo.nav_theme", { ns: "translation" })}</p>`;
         htmlContent += i18next.t("leonardo.page_home_msg", { ns: "translation" });
         htmlContent += `
           <p class="text-[1rem] leading-none mb-2">

@@ -103,7 +103,8 @@ export default function TalentsPage(
         class="flex-grow"
       >
         <button
-          x-on:click="openTalentsArt = true"
+          data-open-section="talents-art"
+          data-open-value="true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
           <span class="sr-only">Ouvrir</span>
           <ButtonLines />

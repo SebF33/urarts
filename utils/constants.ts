@@ -5,6 +5,7 @@ import { TagConst } from "@utils/types.d.ts";
 
 // Constantes globales
 export const DEFAULT_LNG = "en";
+export const DEFAULT_NAV_THEME = "header-paper";
 export const DELAY_API_CALL = 150;
 export const DELAY_CHART_REACH_HREF = 400;
 export const DELAY_DEBOUNCE = 300;
@@ -21,6 +22,8 @@ export const DELAY_REACH_ART = 1150;
 export const DELAY_REACH_ART_FROM_MODAL = 400;
 export const DELAY_REACH_HREF = 200;
 export const DELAY_TOOLTIP_TRIGGER = 200;
+export const NAV_THEME_KEY = "navTheme";
+export const SECONDARY_NAV_THEME = "wave-colors";
 
 
 export const INDICATORS_MOVEMENTS: string[] = [

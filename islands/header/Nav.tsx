@@ -1,7 +1,14 @@
 import { Any } from "any";
 import { artistsYearsSignal, histocharactersYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { css } from "@twind/core";
-import { DELAY_LEONARDO_CALL, DELAY_LEONARDO_FACT_TRIGGER, DELAY_LEONARDO_FIRST_CALL } from "@utils/constants.ts";
+import {
+  DEFAULT_NAV_THEME,
+  DELAY_LEONARDO_CALL,
+  DELAY_LEONARDO_FACT_TRIGGER,
+  DELAY_LEONARDO_FIRST_CALL,
+  NAV_THEME_KEY,
+  SECONDARY_NAV_THEME,
+} from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -333,16 +340,16 @@ export default function Nav(props: Props) {
     const btn = document.querySelector<HTMLElement>("button.mobile-menu-button");
     const menu = document.querySelector<HTMLElement>(".mobile-menu");
     const nav = document.querySelector<HTMLElement>("nav");
-    const navTheme = localStorage.getItem("_x_navTheme");
+    const navTheme = localStorage.getItem(NAV_THEME_KEY);
 
     // Appliquer le thème à la 1ère génération de la page
-    if (navTheme === '"wave-colors"') {
-      nav?.classList.remove("header-paper");
-      nav?.classList.add("wave-colors");
+    if (navTheme === SECONDARY_NAV_THEME) {
+      nav?.classList.remove(DEFAULT_NAV_THEME);
+      nav?.classList.add(SECONDARY_NAV_THEME);
     } else {
-      nav?.classList.remove("wave-colors");
-      nav?.classList.add("header-paper");
-      localStorage.setItem('_x_navTheme', '"header-paper"');
+      nav?.classList.remove(SECONDARY_NAV_THEME);
+      nav?.classList.add(DEFAULT_NAV_THEME);
+      localStorage.setItem(NAV_THEME_KEY, DEFAULT_NAV_THEME);
     }
 
     // Boutons
@@ -374,8 +381,11 @@ export default function Nav(props: Props) {
   return (
     <nav
       id="Urarts-Nav"
-      x-bind:class="{ 'header-paper': navTheme === 'header-paper', 'wave-colors': navTheme === 'wave-colors' }"
-      class={`flex flex-wrap text-white z-50 shadow-lg ${css({"text-shadow": "2px 4px 3px rgba(0,0,0,0.3)"})}`}
+      class={`
+        flex flex-wrap text-white z-50 shadow-lg
+        nav-theme [body[data-nav-theme='header-paper']_&]:header-paper [body[data-nav-theme='wave-colors']_&]:wave-colors
+        ${css({"text-shadow": "2px 4px 3px rgba(0,0,0,0.3)"})}
+      `}
     >
       <div class={`max-w-7xl w-full mx-auto px-4 z-[60]`}>
         <div class={`flex justify-between`}>

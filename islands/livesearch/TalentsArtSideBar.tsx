@@ -99,29 +99,23 @@ export default function TalentsArtSideBar() {
 
   return (
     <section
-      x-show="openTalentsArt"
-      x-transition:enter="transition-opacity ease-out duration-300"
-      x-transition:enter-start="opacity-0"
-      x-transition:enter-end="opacity-100"
-      x-transition:leave="transition-opacity ease-in duration-300"
-      x-transition:leave-start="opacity-100"
-      x-transition:leave-end="opacity-0"
+      data-section-panel="talents-art"
+      data-open="true"
+      data-transition="fade"
       class="absolute right-0 max-h-screen min-h-screen max-w-full hidden 2xl:flex bg-opacity-75 transition-opacity z-40 overflow-hidden mask-94-96"
     >
       <div
-        x-show="openTalentsArt"
-        x-transition:enter="transition-transform ease-out duration-300"
-        x-transition:enter-start="transform translate-x-full"
-        x-transition:enter-end="transform translate-x-0"
-        x-transition:leave="transition-transform ease-in duration-300"
-        x-transition:leave-start="transform translate-x-0"
-        x-transition:leave-end="transform translate-x-full"
-        class="max-w-md"
+        data-section-panel="talents-art"
+        data-open="true"
+        data-transition="slide-x"
+        class="max-w-md transform translate-x-0"
       >
         <div class="h-full flex flex-col text-lighterdark bg-gradient-to-r from-transparent via-black/30 to-transparent backdrop-blur-md shadow-2xl rounded-lg ring-1 ring-white/10">
           <div class="w-[282px] mt-16">
             <div
-              x-on:click="openTalentsArt = false"
+              role="button"
+              data-open-section="talents-art"
+              data-open-value="false"
               class="paper paper-shadow cursor-pointer">
               <span class="sr-only">Fermer</span>
               <h1 class="p-2 text-2xl font-semibold text-center leading-none z-10 select-none">{i18next.t("paper.talentsart", { ns: "translation" })}</h1>
@@ -142,18 +136,14 @@ export default function TalentsArtSideBar() {
                 searchResults.map((p) => (
                   <div class="max-w-[220px] flex mx-auto p-1 first:mt-4">
                     <a
-                      x-on:mouseover="isHovered = true"
-                      x-on:mouseout="isHovered = false"
-                      x-data="{ isHovered: false }"
                       href={"/art/" + p.artist_slug + "?alone&id=" + p.id}
                       onClick={handleClick}
-                      class="cursor-pointer"
+                      class="cursor-pointer group"
                       draggable={draggable}
                     >
                       <div
                         data-art-id={p.id}
-                        x-bind:class="{ 'transform-gpu transition-transform duration-100 transform scale-[1.03]': isHovered }"
-                        class="famous-art-shadow"
+                        class="famous-art-shadow transition-transform transform-gpu duration-100 group-hover:scale-[1.03]"
                         style={FAMOUS_ART_IMG_WRAPPER.wrap}
                       >
                         <img

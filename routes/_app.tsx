@@ -70,9 +70,8 @@ export default defineApp((_, ctx) => {
         />
 
         {/* CSS & JS */}
+        <script defer type="module" src={asset("/styles/app/state.js")}></script>
         <script defer type="module" src={asset("/styles/event/zoom-block.js")}></script>
-        <script defer src={asset("/styles/lib/alpine-persist3.13.5.min.js")}></script>
-        <script defer src={asset("/styles/lib/alpine3.13.5.min.js")}></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
         <link href={asset("/styles/style.css")} rel="stylesheet" />
         <link href={asset("/styles/lib/nouislider.min.css")} rel="stylesheet" />
@@ -82,13 +81,10 @@ export default defineApp((_, ctx) => {
 
       <body
         f-client-nav
-        x-data="{
-          navTheme: $persist(localStorage.getItem('navTheme')),
-          openFamousArt: true,
-          openTalentsArt: true,
-          toggleNavTheme: function() { this.navTheme = (this.navTheme !== 'wave-colors') ? 'wave-colors' : 'header-paper'; }
-        }"
-        class={`flex flex-col min-h-screen font-brush`}
+        data-nav-theme="header-paper"
+        data-open-famous-art="true"
+        data-open-talents-art="true"
+        class="flex flex-col min-h-screen font-brush"
       >
         <Partial name="body">
           {!isPersoGallery && <Nav url={ctx.url} />}
