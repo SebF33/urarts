@@ -71,7 +71,6 @@ body,
 }
 
 .cursor-help,
-#U-Icon,
 #Urarts {
     cursor: url(/cursors/cursor-help.png) 16 12, help !important;
 }

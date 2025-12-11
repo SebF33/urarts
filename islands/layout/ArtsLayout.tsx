@@ -220,7 +220,7 @@ export default function ArtsLayout(
               >
                 <div class="relative w-full mt-4 md:mt-10 flex items-center justify-center">
                   {/* Trait crayonné */}
-                  <PencilLine />
+                  <PencilLine aria-hidden="true" />
 
                   {/* Année des œuvres */}
                   <div class="relative flex justify-center z-10">

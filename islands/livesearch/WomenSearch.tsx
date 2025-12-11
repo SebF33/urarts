@@ -65,7 +65,7 @@ export default function WomenSearch() {
             {i18next.t("title.women", { ns: "translation" })}
           </h1>
           <div class={`w-6/12 m-2`}>
-            <WomanLogo />
+            <WomanLogo aria-hidden="true" />
           </div>
           <div class="tape-section"></div>
         </div>

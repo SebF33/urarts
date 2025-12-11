@@ -54,9 +54,9 @@ export function WorldArtistsPanel(
             <button
               onClick={onClose}
               className="p-2 text-lighterdark hover:text-red focus:outline-none"
-              aria-label="Fermer"
+              aria-label="Fermer le panel"
             >
-              <ButtonCross />
+              <ButtonCross aria-hidden="true" />
             </button>
           </div>
 

@@ -396,6 +396,7 @@ export default function Nav(props: Props) {
                 onClick={handleUrartsClick}
                 class={`relative z-[60] flex items-center`}
                 draggable={draggable}
+                aria-label="Leonardo"
               >
                 <img
                   class={`block h-10 w-10`}
@@ -410,6 +411,7 @@ export default function Nav(props: Props) {
                 href="/"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
+                aria-label={`${i18next.t("nav.home", { ns: "translation" })}`}
               >
                 {i18next.t("nav.home", { ns: "translation" })}
               </a>
@@ -417,6 +419,7 @@ export default function Nav(props: Props) {
                 href="/artists"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
+                aria-label={`${i18next.t("nav.artists", { ns: "translation" })}`}
               >
                 {i18next.t("nav.artists", { ns: "translation" })}
               </a>
@@ -424,6 +427,7 @@ export default function Nav(props: Props) {
                 href="/arts"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
+                aria-label={`${i18next.t("nav.arts", { ns: "translation" })}`}
               >
                 {i18next.t("nav.arts", { ns: "translation" })}
               </a>
@@ -431,6 +435,7 @@ export default function Nav(props: Props) {
                 href="/movements"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
+                aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
               >
                 {i18next.t("nav.movements", { ns: "translation" })}
               </a>
@@ -438,6 +443,7 @@ export default function Nav(props: Props) {
                 href="/talents"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
+                aria-label={`${i18next.t("nav.talents", { ns: "translation" })}`}
               >
                 {i18next.t("nav.talents", { ns: "translation" })}
               </a>
@@ -515,6 +521,7 @@ export default function Nav(props: Props) {
               href="/"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
+              aria-label={`${i18next.t("nav.home", { ns: "translation" })}`}
             >
               <span class={`px-2`}>{i18next.t("nav.home", { ns: "translation" })}</span>
             </a>
@@ -524,6 +531,7 @@ export default function Nav(props: Props) {
               href="/artists"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
+              aria-label={`${i18next.t("nav.artists", { ns: "translation" })}`}
             >
               <span class={`px-2`}>{i18next.t("nav.artists", { ns: "translation" })}</span>
             </a>
@@ -533,6 +541,7 @@ export default function Nav(props: Props) {
               href="/arts"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
+              aria-label={`${i18next.t("nav.arts", { ns: "translation" })}`}
             >
               <span class={`px-2`}>{i18next.t("nav.arts", { ns: "translation" })}</span>
             </a>
@@ -542,6 +551,7 @@ export default function Nav(props: Props) {
               href="/movements"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
+              aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
             >
               <span class={`px-2`}>{i18next.t("nav.movements", { ns: "translation" })}</span>
             </a>
@@ -551,6 +561,7 @@ export default function Nav(props: Props) {
               href="/talents"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
+              aria-label={`${i18next.t("nav.talents", { ns: "translation" })}`}
             >
               <span class={`px-2`}>{i18next.t("nav.talents", { ns: "translation" })}</span>
             </a>

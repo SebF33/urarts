@@ -354,9 +354,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
         <button
           onClick={handleClose}
           class="absolute top-2.5 right-2.5 text-lighterdark hover:text-red focus:outline-none"
-          aria-label="Fermer"
+          aria-label="Fermer la modal"
         >
-          <ButtonCross />
+          <ButtonCross aria-hidden="true" />
         </button>
 
         <div class="flex flex-wrap gap-6">

@@ -132,8 +132,8 @@ export default function HomePage(
           data-open-section="famous-art"
           data-open-value="true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
-          <span class="sr-only">Ouvrir</span>
-          <ButtonLines />
+          <span class="sr-only">Ouvrir la section des œuvres célèbres</span>
+          <ButtonLines aria-hidden="true" />
         </button>
 
         <ArtistsLayout artists={artists} flag="home" grid={grid} />

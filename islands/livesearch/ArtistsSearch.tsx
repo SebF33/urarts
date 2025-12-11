@@ -267,7 +267,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
         {/* Palette */}
         <div class={`relative w-60 sm:w-80 mx-auto mt-24 md:-mt-6 mb-24`}>
           <div class={`absolute w-full -top-16`}>
-            <PaintPalette />
+            <PaintPalette aria-hidden="true" />
           </div>
 
           {/* Bouton Monde */}

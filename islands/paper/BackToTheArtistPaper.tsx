@@ -42,7 +42,7 @@ export default function BackToTheArtistPaper() {
         <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
         <div class="relative flex items-center justify-center gap-x-4 px-4 py-2 select-none">
           <div class="absolute top-0 left-0 transform translate-x-8 translate-y-3 invisible md:visible z-10">
-            <PencilArrow />
+            <PencilArrow aria-hidden="true" />
           </div>
           <div class="shrink-0 ml-0 md:ml-20 z-10">
             <img

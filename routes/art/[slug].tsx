@@ -326,15 +326,15 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                     <a
                       href={facebook}
                       title="Facebook"
-                      aria-label="Facebook"
                       class="text-lighterdark"
                       target="_blank"
                       rel="noopener noreferrer"
                       draggable={draggable}
+                      aria-label="Facebook"
                     >
                       <div class="paper w-9 h-9 flex items-center justify-center">
                         <div class="top-tape"></div>
-                        <FacebookIcon />
+                        <FacebookIcon aria-hidden="true" />
                       </div>
                     </a>
                   )}
@@ -342,15 +342,15 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                     <a
                       href={instagram}
                       title="Instagram"
-                      aria-label="Instagram"
                       class="text-lighterdark"
                       target="_blank"
                       rel="noopener noreferrer"
                       draggable={draggable}
+                      aria-label="Instagram"
                     >
                       <div class="paper w-9 h-9 flex items-center justify-center">
                         <div class="top-tape"></div>
-                        <InstagramIcon />
+                        <InstagramIcon aria-hidden="true" />
                       </div>
                     </a>
                   )}
