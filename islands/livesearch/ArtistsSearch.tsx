@@ -50,7 +50,7 @@ const COUNTRY_TRANSLATIONS = {
     "Japon": "Japan",
     "Vietnam": "Vietnam",
     "Chine": "People's Republic of China",
-    "Turquie": "Turkey",
+    "Turquie": "Türkiye",
     "Grèce": "Greece",
     "Royaume-Uni": "United Kingdom",
     "Colombie": "Colombia",
