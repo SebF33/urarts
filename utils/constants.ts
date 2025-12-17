@@ -103,7 +103,7 @@ export const NATIONALITIES: string[] = [
 ];
 
 
-export const NB_LOADING_ARTS = 5;
+export const NB_LOADING_ARTS = 4;
 export const NB_LOADING_ARTISTS = 10;
 
 export const TALENTS: string[] = ["albert", "mimi"];
