@@ -21,7 +21,7 @@ import Title from "@islands/paper/Title.tsx";
 const FLAG_GROUPS = {
   1: ["France", "Espagne", "Portugal", "Italie", "Pays-Bas", "Belgique", "Pologne", "Allemagne", "Autriche", "Hongrie"],
   2: ["Suisse", "Finlande", "Norvège", "Suède", "Danemark", "Tchécoslovaquie", "Ukraine", "Arménie", "Biélorussie", "Russie"],
-  3: ["Japon", "Vietnam", "Chine", "Grèce", "Royaume-Uni", "Colombie", "Mexique", "États-Unis d'Amérique", "Canada"],
+  3: ["Japon", "Vietnam", "Chine", "Turquie", "Grèce", "Royaume-Uni", "Colombie", "Mexique", "États-Unis d'Amérique", "Canada"],
 };
 
 const COUNTRY_TRANSLATIONS = {
@@ -50,6 +50,7 @@ const COUNTRY_TRANSLATIONS = {
     "Japon": "Japan",
     "Vietnam": "Vietnam",
     "Chine": "People's Republic of China",
+    "Turquie": "Turkey",
     "Grèce": "Greece",
     "Royaume-Uni": "United Kingdom",
     "Colombie": "Colombia",

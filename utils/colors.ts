@@ -77,6 +77,8 @@ export const worldColors = [
   "#005BBB", // Sweden (bleu suédois)
   "#FF0000", // Switzerland (rouge)
   "#FFFFFF", // Tchécoslovaquie (blanc)
+  "#E30A17", // Turkey (rouge turc)
+  "#E30A17", // Turquie (rouge turc)
   "#0057B8", // Ukraine (bleu ukrainien)
   "#012169", // United Kingdom (bleu Union Jack)
   "#B22234", // United States of America (Old Glory Red)

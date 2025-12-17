@@ -94,6 +94,8 @@ export const NATIONALITIES: string[] = [
   "Sweden",
   "Switzerland",
   "Tchécoslovaquie",
+  "Turkey",
+  "Turquie",
   "Ukraine",
   "United Kingdom",
   "United States of America",
@@ -602,6 +604,12 @@ export const TAGS: TagConst[] = [
     info_en: "Trompe-l’œil plays on visual illusion to trick the viewer.",
     type: 0
   },
+  { 
+    name: "Turquie", name_en: "Turkey", slug: "turkey",
+    info: "La Turquie incarne un carrefour culturel entre Orient et Occident, avec un art riche mêlant traditions ottomanes, calligraphie et modernité.",
+    info_en: "Turkey embodies a cultural crossroads between East and West, with rich art blending Ottoman traditions, calligraphy, and modernity.",
+    type: 1
+  },  
   { 
     name: "Ukraine", name_en: "Ukraine", slug: "ukraine",
     info: "L’Ukraine exprime un art influencé par les icônes, le folklore et l’avant-garde.",
