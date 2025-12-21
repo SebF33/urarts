@@ -102,10 +102,7 @@ export default function Quote(
     ${props.small ? "text-lg" : "text-xl"}
   `;
 
-  const signatureClasses = `
-    flex justify-end mt-2 mr-4 mb-3
-    ${props.small ? "max-h-7" : "max-h-9"}
-  `;
+  const signatureClasses = "flex justify-end mt-2 mr-4 mb-3";
 
 
   return (
