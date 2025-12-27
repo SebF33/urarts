@@ -18,8 +18,11 @@ export async function insertArtTags(
   const tagRows = await db.selectFrom("tag").select(["id", "slug"]).execute();
   const tagMap = new Map(tagRows.map((tag) => [tag.slug, tag.id]));
 
+  // filtrer les tags vides
+  const validTagSlugs = tagSlugs.filter(slug => slug.trim() !== "");
+
   // insertion des tags d'une œuvre
-  for (const slug of tagSlugs) {
+  for (const slug of validTagSlugs) {
     const tagId = tagMap.get(slug);
     if (!tagId) {
       throw new Error(`Tag non trouvé : ${slug}`);
