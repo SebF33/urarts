@@ -29,15 +29,17 @@ export default function Doughnut(
     plugins: {
       legend: {
         labels: {
+          color: `${colorScheme[currentColorScheme].lighterdark}`,
           font: { size: 13 }
         },
-        position: "top",
+        position: "top"
       },
       title: {
+        color: `${colorScheme[currentColorScheme].lighterdark}`,
         display: true,
         font: { size: 21 },
         fullSize: false,
-        text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" }),
+        text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" })
       },
       tooltip: {
         bodyFont: { size: 16 },

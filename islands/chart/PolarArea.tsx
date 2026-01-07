@@ -29,15 +29,17 @@ export default function PolarArea(
     plugins: {
       legend: {
         labels: {
+          color: `${colorScheme[currentColorScheme].lighterdark}`,
           font: { size: 13 }
         },
-        position: "top",
+        position: "top"
       },
       title: {
+        color: `${colorScheme[currentColorScheme].lighterdark}`,
         display: true,
         font: { size: 21 },
         fullSize: false,
-        text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" }),
+        text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" })
       },
       tooltip: {
         bodyFont: { size: 16 },
