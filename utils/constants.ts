@@ -30,7 +30,7 @@ export const INDICATORS_MOVEMENTS: string[] = [
   "artdeco",
   "baroque",
   "cubism",
-  "impressionnism",
+  "impressionism",
   "realism",
   "italianrenaissance",
   "surrealism",
