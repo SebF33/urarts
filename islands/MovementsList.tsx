@@ -96,7 +96,7 @@ export default function MovementsList(
     const main = document.querySelector<HTMLElement>('[data-name="movements"]');
 
     if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
     }
 
     if (main) {

@@ -241,7 +241,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
     const main = document.querySelector<HTMLElement>('[data-name="artists"]');
 
     if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
     }
 
     if (main) {

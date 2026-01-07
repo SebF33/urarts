@@ -17,6 +17,7 @@
     --tape-edge-gray: #b7b49d;
     --tape-gray: #dbd8be;
     --transparent: rgba(213, 224, 249, 0);
+    --darkestgray: #8e9493;
     --water: #e0f7fa;
 }
 
@@ -143,7 +144,7 @@ input {
 }
 
 body {
-    background: var(--color-white);
+    background: var(--color-gray);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -987,18 +988,6 @@ h1 {
     right: 0;
     bottom: 0;
     background: linear-gradient(to top, var(--water) 90%, transparent 100%);
-    mask-image: inherit;
-    -webkit-mask-image: inherit;
-}
-
-.mask-footer-white::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to top, var(--color-white) 90%, transparent 100%);
     mask-image: inherit;
     -webkit-mask-image: inherit;
 }

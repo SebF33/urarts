@@ -20,7 +20,7 @@ const waveTank = new WaveTank();
 
 
 export default function WaterDrop({
-  backgroundColor = 'white',
+  backgroundColor = 'gray',
   color,
   isDropy,
   pencilColor,

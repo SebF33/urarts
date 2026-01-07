@@ -22,7 +22,7 @@ export default function TalentsList(
     const main = document.querySelector<HTMLElement>('[data-name="talents"]');
 
     if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
     }
 
     if (main) {

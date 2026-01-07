@@ -1,9 +1,8 @@
 import { Any } from "any";
 import { ArtistQuote } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import tippy from "tippyjs";
-import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 type Quote = Array<ArtistQuote>;
 
@@ -71,24 +70,6 @@ export default function Quote(
       });
     }
   }, [display, props.data.id]);
-
-
-  // Background pour la page d'accueil
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="home"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/gray)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "466px";
-    }
-  }, []);
 
 
   const paperClasses = `

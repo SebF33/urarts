@@ -123,7 +123,7 @@ export default function Doughnut(
     const main = document.querySelector<HTMLElement>('[data-name="indicators"]');
 
     if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].white;
+      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
     }
 
     if (main) {

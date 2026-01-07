@@ -16,6 +16,7 @@ export const colorScheme = {
 export const currentColorScheme = "everblush";
 
 export const extraColors = {
+  darkestgray: "#8e9493",
   water: "#e0f7fa",
 };
 
