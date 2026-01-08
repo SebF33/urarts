@@ -58,11 +58,11 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
           aria-label={artist.name}
         >
           <div class="top-tape max-h-3" id={`artist-name-${artist.slug}`}></div>
-          <div class="text-lighterdark text-xl italic leading-5 select-none z-10">
+          <div class="text-lighterdark text-xl text-center italic leading-5 select-none z-10">
             {artist.name}
           </div>
           <img
-            class="w-14 ml-3 p-1"
+            class="w-14 text-center ml-3 p-1"
             src={artist.avatar_url}
             alt={artist.name}
           />

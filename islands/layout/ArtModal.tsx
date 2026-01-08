@@ -437,16 +437,17 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 </div>
               </a>
               {!TALENTS.includes(art.artist_slug) && (
-                <div class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] transform rotate-6">
+                <a
+                  onClick={(e) => handleLinkClick(e, `/movement/${art.movement_slug}`)}
+                  class="paper paper-shadow max-h-8 min-h-8 min-w-[100px] transform rotate-6"
+                  draggable={draggable}
+                  aria-label={art.movement}
+                >
                   <div class="top-tape"></div>
-                  <a
-                    onClick={(e) => handleLinkClick(e, `/movement/${art.movement_slug}`)}
-                    class={`text-base italic leading-4 underline px-2 py-1 z-10 select-none`}
-                    draggable={draggable}
-                  >
+                  <div class="text-base italic leading-4 px-2 py-1 select-none z-10">
                     {art.movement}
-                  </a>
-                </div>
+                  </div>
+                </a>
               )}
             </div>
 
