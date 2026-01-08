@@ -50,24 +50,23 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
   return (
     <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible">
       {artists.map((artist) => (
-        <div
+        <a
+          href={`/art/${artist.slug}`}
+          onClick={handleLinkClick}
           class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position}`}
+          draggable={draggable}
+          aria-label={artist.name}
         >
-          <div class="top-tape max-h-3"></div>
-          <a
-            href={`/art/${artist.slug}`}
-            onClick={handleLinkClick}
-            class="z-10 text-center text-lighterdark text-xl italic leading-5 underline select-none"
-            draggable={draggable}
-          >
+          <div class="top-tape max-h-3" id={`artist-name-${artist.slug}`}></div>
+          <div class="text-lighterdark text-xl italic leading-5 select-none z-10">
             {artist.name}
-          </a>
+          </div>
           <img
             class="w-14 ml-3 p-1"
             src={artist.avatar_url}
             alt={artist.name}
           />
-        </div>
+        </a>
       ))}
     </div>
   );
