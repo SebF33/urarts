@@ -102,9 +102,8 @@ export function WorldArtistsPanel(
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: "vertical",
                       }}
-                    >
-                      {a.info}
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: a.info }}
+                    />
                   )}
                 </div>
                 <a
