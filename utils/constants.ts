@@ -934,6 +934,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/portrait.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  portugal: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/portugal.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   postimpressionnism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionnism.png)`,
     backgroundSize: "clamp(300px, 28.1vw, 540px)",
