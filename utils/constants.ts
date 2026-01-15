@@ -990,6 +990,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/self-portrait.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
+  spain: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/spain.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   stillLife: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/still-life.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
