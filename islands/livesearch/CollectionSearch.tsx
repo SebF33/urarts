@@ -66,10 +66,12 @@ export default function CollectionSearch(props: Props) {
 
   // Atteindre l'œuvre
   useLayoutEffect(() => {
-    let delay;
-    props.query?.fromLeonardo ? delay = DELAY_LEONARDO_REACH_ART : delay = DELAY_REACH_ART;
+    if (props.query?.alone) return;
 
     if (props.query?.id !== "") {
+      let delay;
+      props.query?.fromLeonardo ? delay = DELAY_LEONARDO_REACH_ART : delay = DELAY_REACH_ART;
+
       setTimeout(() => {
         const target: HTMLElement | null = document.getElementById(`${props.query?.id}`);
         if (target) {
