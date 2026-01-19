@@ -10,8 +10,11 @@ export const isClickableSignal = signal<boolean>(true);
 export const languageSignal = signal<string>(i18next.language);
 export const nationalitySignal = signal<string>("France");
 
-// Pour établir le contexte d'un contenu qui concerne seulement un(e) artiste
+// Pour établir le contexte d'un contenu qui concerne un(e) seul(e) artiste
 export const isForAloneArtistSignal = signal<boolean>(false);
 export const artistAvatarSignal = signal<string>("");
 export const artistNameSignal = signal<string>("");
 export const artistSlugSignal = signal<string>("");
+
+// Pour établir le contexte d'un contenu qui concerne une seule œuvre
+export const isForAloneArtworkSignal = signal<boolean>(false);

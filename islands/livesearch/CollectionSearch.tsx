@@ -2,6 +2,7 @@ import { ArtCollection } from "@utils/types.d.ts";
 import {
   artistSlugSignal,
   isForAloneArtistSignal,
+  isForAloneArtworkSignal,
   languageSignal,
 } from "@utils/signals.ts";
 import { BG_STYLE } from "@utils/constants.ts";
@@ -39,17 +40,21 @@ export default function CollectionSearch(props: Props) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
   
+  // Contexte
   const isPersoGallery: boolean = !!props.ispersogallery;
+  isForAloneArtworkSignal.value = !!props.query?.alone;
 
 
   // Appel à l'API "Collection"
   useEffect(() => {
-    // faire afficher seulement le contenu qui concerne un(e) artiste (si c'est le contexte)
     let aloneArtistSlug = '';
+    // si c'est dans le contexte qui concerne uniquement un(e) artiste
     if (isForAloneArtistSignal.value) aloneArtistSlug = artistSlugSignal.value;
     
     let apiUrl;
-    if (props.query?.alone) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
+    // faire afficher le contenu qui concerne uniquement une œuvre (si c'est le contexte)
+    if (isForAloneArtworkSignal.value) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
+    // ou faire afficher le contenu d'une collection d'œuvres (selon le contexte)
     else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}&aloneartistslug=${aloneArtistSlug}`;
 
     const timer = setTimeout(() => {
@@ -61,12 +66,12 @@ export default function CollectionSearch(props: Props) {
     }, DELAY_API_CALL);
 
     return () => clearTimeout(timer);
-  }, [debouncedValue, artistSlugSignal.value]);
+  }, [debouncedValue, artistSlugSignal.value, isForAloneArtworkSignal.value]);
 
 
   // Atteindre l'œuvre
   useLayoutEffect(() => {
-    if (props.query?.alone) return;
+    if (isForAloneArtworkSignal.value) return;
 
     if (props.query?.id !== "") {
       let delay;
