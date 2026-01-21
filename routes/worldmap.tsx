@@ -29,7 +29,7 @@ export const handler: Handlers = {
       .execute();
 
     const artsTagsCountries = tagRows.map((r) => r.name);
-
+    //console.log(artsTagsCountries);
     return ctx.render({
       artsTagsCountries,
       desc,

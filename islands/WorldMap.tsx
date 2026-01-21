@@ -39,6 +39,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [lastClickTime, setLastClickTime] = useState(0);
+  const capitalCacheRef = useRef<Map<string, string>>(new Map());
 
   const TOP_OFFSET = 0; // si besoin : décalage vertical de la carte
   const WIDTH_COEF = 1; // si besoin : largeur de la carte
@@ -56,7 +57,13 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
   }, []);
 
 
-  // Infobulles
+  // Infobulles de la carte du Monde
+  //
+  // - afficher une infobulle au survol d'un pays (desktop uniquement)
+  // - éviter toute infobulle sur mobile / tactile
+  // - positionner l'infobulle sur le centroïde du pays (et non sur la souris)
+  // - charger la capitale à la demande (lazy loading)
+  // - mettre en cache les capitales (1 requête max par pays)
   useEffect(() => {
     const svgEl = svgRef.current;
     if (!svgEl) return;
@@ -69,14 +76,121 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       );
     };
 
-    // pas d'infobulles sur mobile/tactile
     if (isTouchDevice()) return;
 
-    // basées sur le centroïde de chaque path
+    const labelCapital = lng === "fr" ? "Capitale" : "Capital";
+
+    const escapeHtml = (s: string) =>
+      s.replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+  
+    const renderContent = (countryName: string, capital?: string) => {
+      const safeName = escapeHtml(countryName);
+      const safeCapital = escapeHtml(capital ?? "…");
+      return `
+        <div style="line-height:1.1">
+          <div style="font-size:17px;font-weight:500">${safeName}</div>
+          <div style="font-size:14px;opacity:.9;margin-top:4px">${labelCapital} : ${safeCapital}</div>
+        </div>
+      `;
+    };
+
+    // récupérer les capitales (REST Countries) avec mise en cache
+    const TRANSLATION_PICK_INDEX: Partial<Record<string, number>> = {
+      // clé = `${alpha2}:${lng}`
+      "FR:fr": 2,
+      "FR:en": 2,
+    };
+
+    type RestCountry = { cca2?: string; capital?: string[]; };
+    const pickCapital = (item: RestCountry | undefined | null) => item?.capital?.[0] ?? null;
+
+    const getCapital = async (
+      alpha2: string,
+      countryName: string,
+      lng: "fr" | "en",
+    ): Promise<string | null> => {
+      if (!alpha2) return null;
+
+      // cache par pays + langue
+      const cacheKey = `${alpha2}:${lng}`;
+      const cached = capitalCacheRef.current.get(cacheKey);
+      if (cached) return cached;
+
+      try {
+        // essai : /translation/{countryName} (peut renvoyer plusieurs résultats)
+        if (countryName?.trim()) {
+          const resT = await fetch(`https://restcountries.com/v3.1/translation/${encodeURIComponent(countryName.trim())}?fields=cca2,capital`);
+
+          if (resT.ok) {
+            const dataT = await resT.json();
+            const arr: RestCountry[] = Array.isArray(dataT) ? dataT : [dataT];
+
+            // si un index est défini pour ce pays/langue
+            const pickKey = `${alpha2}:${lng}`;
+            const forcedIndex = TRANSLATION_PICK_INDEX[pickKey];
+
+            if (typeof forcedIndex === "number") {
+              const itemForced = arr[forcedIndex];
+              const capForced = pickCapital(itemForced);
+              if (capForced) {
+                capitalCacheRef.current.set(cacheKey, capForced);
+                return capForced;
+              }
+              // si index invalide ou pas de capitale -> on continue avec les fallbacks
+            }
+
+            // fallback : prendre l'item qui matche cca2
+            const exact = arr.find((x) =>
+              (x.cca2 ?? "").toUpperCase() === alpha2.toUpperCase()
+            );
+            const capExact = pickCapital(exact);
+            if (capExact) {
+              capitalCacheRef.current.set(cacheKey, capExact);
+              return capExact;
+            }
+
+            // fallback : premier item ayant une capitale
+            const firstWithCap = arr.find((x) => x.capital?.length);
+            const capAny = pickCapital(firstWithCap);
+            if (capAny) {
+              capitalCacheRef.current.set(cacheKey, capAny);
+              return capAny;
+            }
+          }
+        }
+
+        // fallback : /alpha/{alpha2}
+        const res = await fetch(`https://restcountries.com/v3.1/alpha/${encodeURIComponent(alpha2)}?fields=capital`);
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        const item = Array.isArray(data) ? data[0] : data;
+        const cap = item?.capital?.[0] as string | undefined;
+
+        if (cap) {
+          capitalCacheRef.current.set(cacheKey, cap);
+          return cap;
+        }
+
+        return null;
+      } catch {
+        return null;
+      }
+    };
+
+    // éviter de recréer des infobulles à l'infini -> on détruit celles existantes avant de recréer
+    const instances: Any[] = [];
+
+    // infobulles basées sur le centroïde de chaque path
     svgEl.querySelectorAll("path").forEach((path) => {
-      tippy(path, {
+      const instance = tippy(path, {
         arrow: true,
-        content: path.getAttribute("data-tippy-content") || "",
+        allowHTML: true,
+        content: renderContent(path.getAttribute("data-tippy-content") || "", "…"),
         offset: [0, 8],
         placement: "top",
         popperOptions: { strategy: "fixed" },
@@ -103,9 +217,27 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
             right: screenPt.x,
           };
         },
+        onShow: async (t) => {
+          const countryName = path.getAttribute("data-tippy-content") || "";
+          const alpha2 = path.getAttribute("data-alpha2") || "";
+
+          // afficher le placeholder au cas où le contenu a changé
+          t.setContent(renderContent(countryName, "…"));
+
+          const cap = await getCapital(alpha2, countryName, lng as "fr" | "en");
+
+          // l'infobulle peut avoir été fermée entre-temps
+          if (!t.state.isVisible) return;
+
+          t.setContent(renderContent(countryName, cap ?? "—"));
+        },
       });
+
+      instances.push(instance);
     });
-  }, [countries]);
+
+    return () => { instances.forEach((i) => i?.destroy?.()); };
+  }, [countries, lng]);
 
 
   // Background pour la page de la carte du Monde
@@ -143,7 +275,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       ro.disconnect();
     };
   }, []);
-  
+
   const internalWidth  = containerSize.width / WIDTH_COEF;
   const internalHeight = containerSize.height;
 
@@ -218,7 +350,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     }
   };
 
-  
+
   // Fermeture des panels
   const closeAllPanels = () => {
     setSelectedArtistsCountry(null);
@@ -299,6 +431,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
               filter="url(#brush)"
               class={cursorClass}
               data-tippy-content={name}
+              data-alpha2={alpha2 || ""} 
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
               onClick={() => isActive && handleCountryClick(name)}

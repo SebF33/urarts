@@ -110,6 +110,7 @@ export const TALENTS: string[] = ["albert", "mimi"];
 
 export const URL_GA = "*.google-analytics.com";
 export const URL_GT = "https://www.googletagmanager.com";
+export const URL_RC = "https://restcountries.com";
 export const URL_URARTS_ART = "https://www.urarts.art";
 export const URL_URARTS_DEV = "https://urarts.fly.dev";
 export const URL_URARTS_FR = "https://www.urarts.fr";
@@ -745,6 +746,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   conceptualart: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/conceptualart.png)`,
     backgroundSize: "clamp(300px, 20.8vw, 400px)",
+  },
+  croatia: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/croatia.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   cubism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/cubism.png)`,
