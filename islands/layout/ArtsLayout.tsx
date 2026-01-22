@@ -7,7 +7,11 @@ import {
   TALENTS,
 } from "@utils/constants.ts";
 import { ArtCollection } from "@utils/types.d.ts";
-import { artModalOpenSignal, isClickableSignal } from "@utils/signals.ts";
+import {
+  artModalOpenSignal,
+  isClickableSignal,
+  isForAloneArtworkSignal,
+} from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -218,18 +222,51 @@ export default function ArtsLayout(
                 key={year}
                 class="year-group w-full col-span-full my-6 md:my-10"
               >
-                <div class="relative w-full mt-4 md:mt-10 flex items-center justify-center">
+                <div
+                  class={`relative w-full ${!isForAloneArtworkSignal.value ? "mt-4 md:mt-10" : ""}`}
+                >
                   {/* Trait crayonné */}
-                  <PencilLine aria-hidden="true" />
-
-                  {/* Année des œuvres */}
-                  <div class="relative flex justify-center z-10">
-                    <div class="paper paper-shadow px-4 py-1 md:px-6 md:py-2 min-w-[120px] text-center">
-                      <div class="top-tape"></div>
-                      <p class="text-xl md:text-2xl font-semibold tracking-wide">
-                        {year}
-                      </p>
-                    </div>
+                  <div class="absolute inset-x-0 top-1/2 -translate-y-1/2">
+                    <PencilLine aria-hidden="true" />
+                  </div>
+                  <div class="relative flex items-center justify-center gap-6">
+                    {/* Nom de l'artiste */}
+                    {isForAloneArtworkSignal.value && (
+                      <div class="relative transform -rotate-6 z-10">
+                        <div class="paper paper-shadow p-3 min-w-[80px] text-center">
+                          <div class="top-tape"></div>
+                          <p class="text-sm sm:text-xl md:text-2xl font-semibold leading-tight">
+                            {artsByYear[year][0]?.first_name}{" "}
+                            {artsByYear[year][0]?.last_name}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {/* Année des œuvres */}
+                    {!isForAloneArtworkSignal.value && (
+                      <div class="relative z-10">
+                        <div class="paper paper-shadow px-4 py-1 md:px-6 md:py-2 min-w-[120px] text-center">
+                          <div class="top-tape"></div>
+                          <p class="text-xl md:text-2xl font-semibold tracking-wide">
+                            {year}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    {/* Avatar de l'artiste */}
+                    {isForAloneArtworkSignal.value && (
+                      <div class="relative transform rotate-4 z-10">
+                        <div class="paper paper-shadow p-2">
+                          <div class="top-tape"></div>
+                          <img
+                            src={artsByYear[year][0]?.avatar_url}
+                            alt={`${artsByYear[year][0]?.first_name} ${artsByYear[year][0]?.last_name}`}
+                            class="h-16 w-16 sm:h-24 sm:w-24 md:h-36 md:w-36 rounded-full object-cover z-10"
+                            draggable={false}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
