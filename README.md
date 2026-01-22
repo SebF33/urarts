@@ -38,6 +38,8 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 - [noUiSlider](https://refreshless.com/nouislider)
 - [D3.js](https://d3js.org/d3-geo)
 - [i18next](https://www.i18next.com/overview/getting-started)
+- [i18n-iso-countries](https://github.com/michaelwittig/node-i18n-iso-countries)
+- [REST Countries](https://restcountries.com)
 - [Fly.io](https://fly.io/docs/getting-started/deno)
 
 
