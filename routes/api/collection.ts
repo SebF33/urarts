@@ -33,7 +33,6 @@ export const handler = async (
 
   // Œuvre seule
   const isAlone = url.searchParams.has("alone");
-  const isNotAlone = url.searchParams.has("notalone");
 
   // Noms
   query = url.searchParams.get("name") || "";
@@ -151,13 +150,14 @@ export const handler = async (
         // tri sur selon l'année de l'œuvre (plus récente d'abord)
         .orderBy("art.year", "desc")
         // puis tri selon le nom normalisé de l'œuvre
-        .$if(lng === 'fr', qb => qb.orderBy('art.name_normalized', 'asc'))
-        .$if(lng === 'en', qb => qb.orderBy('art.name_en_normalized', 'asc'));
+        .$if(lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
+        .$if(lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))
       break;
 
     case "famousart":
       artQuery = artQuery
         .where("art.famous_order", "is not", null)
+        // sélection aléatoire
         .orderBy(sql`random()`)
         .limit(10)
       break;
@@ -169,6 +169,7 @@ export const handler = async (
           qb.where(
             sql`((histocharacterbirthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (histocharacterdeathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
           ))
+        // tri selon le nom normalisé du personnage historique
         .orderBy(({ fn }) => fn("lower", ["histocharactername_normalized"]))
       break;
 
@@ -177,8 +178,11 @@ export const handler = async (
         .where("movement.slug", "=", slugFilter)
         .where("artist.slug", "not in", TALENTS)
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
-        .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
+        // sélection aléatoire
         .orderBy(sql`random()`)
+        // puis tri sur selon l'année de l'œuvre (plus récente d'abord)
+        .orderBy("art.year", "desc")
+        // puis tri selon le nom normalisé de l'œuvre
         .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
         .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))
         .limit(50)
@@ -196,8 +200,11 @@ export const handler = async (
           )
         )
         .$if(aloneArtistSlug !== '', (qb) => qb.where("artist.slug", "=", aloneArtistSlug))
-        .$if(isNotAlone, (qb) => qb.orderBy(sql`random()`))
+        // sélection aléatoire
         .orderBy(sql`random()`)
+        // puis tri sur selon l'année de l'œuvre (plus récente d'abord)
+        .orderBy("art.year", "desc")
+        // puis tri selon le nom normalisé de l'œuvre
         .$if(isArtworks && lng === 'en', (qb) => qb.orderBy(({ fn }) => fn('lower', [sql`COALESCE(art.name_en_normalized, art.name_normalized)`])))
         .$if(isArtworks && lng === 'fr', (qb) => qb.orderBy(({ fn }) => fn('lower', ['art.name_normalized'])))
         .limit(50);
@@ -206,6 +213,7 @@ export const handler = async (
     case "talentsart":
       artQuery = artQuery
         .where("artist.slug", "in", TALENTS)
+        // sélection aléatoire
         .orderBy(sql`random()`)
         .limit(10)
       break;

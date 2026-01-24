@@ -61,7 +61,7 @@ export default function MovementsList(
 
       async function fetchPreview() {
         try {
-          const response = await ky.get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}&notalone`).json<Arts>();
+          const response = await ky.get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}`).json<Arts>();
   
           if (response && response.length > 0) {
             const art = response[0];
