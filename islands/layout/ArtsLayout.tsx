@@ -63,8 +63,7 @@ export default function ArtsLayout(
   const isPersoGallery: boolean = !!props.ispersogallery;
 
 
-  // Rendu des œuvres d'art
-  const displayedArts = display ? props.arts.slice(0, displayedArtIndex + NB_LOADING_ARTS) : [];
+  // Rendu des œuvres pour la galerie roulante
   const galleryImages = useMemo(() => {
     return props.arts
       .slice()
@@ -78,6 +77,70 @@ export default function ArtsLayout(
   }, [props.arts]);
 
 
+  /**
+   * Normalisation du rendu des œuvres pour le layout :
+   * - groupement par année
+   * - tri descendant
+   */
+  const normalized = useMemo(() => {
+    const byYear = (props.arts ?? []).reduce((acc, art) => {
+      const year = art.year ?? i18next.t("common.without_year", { ns: "translation" });
+      (acc[year] ??= []).push(art);
+      return acc;
+    }, {} as Record<string, ArtCollection[]>);
+
+    const years = Object.keys(byYear).sort((a, b) => {
+      const na = Number(a);
+      const nb = Number(b);
+
+      const aIsNum = !Number.isNaN(na);
+      const bIsNum = !Number.isNaN(nb);
+
+      // années numériques d'abord, décroissantes
+      if (aIsNum && bIsNum) return nb - na;
+      if (aIsNum && !bIsNum) return -1;
+      if (!aIsNum && bIsNum) return 1;
+
+      // non numériques en dernier ("Sans année")
+      return a.localeCompare(b);
+    });
+
+    const flat = years.flatMap((y) => byYear[y]);
+
+    return { byYear, years, flat };
+  }, [props.arts, i18next.language]);
+
+
+  // Fenêtrage (IntersectionObserver) sur la liste déjà ordonnée
+  const displayedArts = useMemo(() => {
+    if (!display) return [];
+    return normalized.flat.slice(0, displayedArtIndex + NB_LOADING_ARTS);
+  }, [display, displayedArtIndex, normalized.flat]);
+
+
+  // Reconstituer "displayedByYear" + "sortedYears" sans refaire un reduce global (on s'appuie sur "normalized.years" / "normalized.byYear")
+  const displayedIds = useMemo(() => {
+    return new Set(displayedArts.map((a) => a.id));
+  }, [displayedArts]);
+
+  const displayedByYear = useMemo(() => {
+    const out: Record<string, ArtCollection[]> = {};
+
+    for (const y of normalized.years) {
+      const arr = normalized.byYear[y];
+      const visible = arr.filter((a) => displayedIds.has(a.id));
+      if (visible.length) out[y] = visible;
+    }
+
+    return out;
+  }, [normalized.byYear, normalized.years, displayedIds]);
+
+  const sortedYears = useMemo(() => {
+    // déjà triées dans "normalized", on garde uniquement celles visibles
+    return normalized.years.filter((y) => displayedByYear[y]?.length);
+  }, [normalized.years, displayedByYear]);
+
+
   // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
@@ -88,16 +151,17 @@ export default function ArtsLayout(
   // Chargement à la fin de la liste
   useEffect(() => {
     if (isIntersecting) {
-      if (displayedArtIndex + NB_LOADING_ARTS < props.arts.length) { // Vérifier s'il reste des éléments à afficher
-        setDisplayedArtIndex(displayedArtIndex + NB_LOADING_ARTS); // Mettre à jour pour afficher les prochains
+      // vérifier s'il reste des éléments à afficher
+      if (displayedArtIndex + NB_LOADING_ARTS < normalized.flat.length) {
+        // mettre à jour pour afficher les prochains
+        setDisplayedArtIndex(displayedArtIndex + NB_LOADING_ARTS);
       }
     }
-  }, [isIntersecting]);
+  }, [isIntersecting, displayedArtIndex, normalized.flat.length]);
 
 
   // Infobulles
   useEffect(() => {
-
     const isTouchDevice = () => {
       return (
         'ontouchstart' in globalThis || 
@@ -106,12 +170,12 @@ export default function ArtsLayout(
       );
     };
 
-    // Détruire seulement les instances qui ne sont pas visibles
+    // détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
       if (!instance.state.isVisible) { instance.destroy(); }
     });
 
-    // Mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
+    // mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
     setTippyInstances((prevInstances) => prevInstances.filter((instance) => instance.state.isVisible));
 
     displayedArts.forEach((p) => {
@@ -141,7 +205,7 @@ export default function ArtsLayout(
           content = parts.filter(Boolean).join("");
         }
 
-        // Création des infobulles pour chaque œuvre
+        // création d'une infobulle pour chaque œuvre
         tippy(artElement, {
           allowHTML: true,
           content: content,
@@ -163,10 +227,10 @@ export default function ArtsLayout(
     });
 
     return () => {
-      // Nettoyer les listeners et instances pour éviter les fuites mémoire
+      // nettoyer les listeners et instances pour éviter les fuites mémoire
       tippyInstances.forEach((instance) => instance.destroy());
     };
-  }, [props.arts, isIntersecting]);
+  }, [displayedArts, props.type]);
 
 
   // Clic sur une œuvre : ouverture de la modal
@@ -180,22 +244,6 @@ export default function ArtsLayout(
 
     setTimeout(() => artModalOpenSignal.value = true, DELAY_MODAL_TRIGGER);
   };
-
-
-  // Regroupement des œuvres par année
-  const artsByYear = (displayedArts ?? []).reduce((acc, art) => {
-    const year = art.year ?? i18next.t("common.without_year", { ns: "translation" });
-    if (!acc[year]) acc[year] = [];
-    acc[year].push(art);
-    return acc;
-  }, {} as Record<string, typeof displayedArts[number][]>);
-
-  const sortedYears = Object.keys(artsByYear).sort((a, b) => {
-    const na = Number(a);
-    const nb = Number(b);
-    if (Number.isNaN(na) || Number.isNaN(nb)) return a.localeCompare(b);
-    return nb - na; // années décroissantes
-  });
 
 
   return (
@@ -214,7 +262,7 @@ export default function ArtsLayout(
       </div>
       <div class="flex flex-wrap mx-auto md:mx-10 mb-48">
         
-        {/* Liste des œuvres d'art */}
+        {/* Liste des œuvres */}
         {displayedArts && displayedArts.length > 0
           ? (
             sortedYears.map((year) => (
@@ -236,8 +284,8 @@ export default function ArtsLayout(
                         <div class="paper paper-shadow p-3 min-w-[80px] text-center">
                           <div class="top-tape"></div>
                           <p class="text-sm sm:text-xl md:text-2xl font-semibold leading-tight">
-                            {artsByYear[year][0]?.first_name}{" "}
-                            {artsByYear[year][0]?.last_name}
+                            {displayedByYear[year][0]?.first_name}{" "}
+                            {displayedByYear[year][0]?.last_name}
                           </p>
                         </div>
                       </div>
@@ -259,8 +307,8 @@ export default function ArtsLayout(
                         <div class="paper paper-shadow p-2">
                           <div class="top-tape"></div>
                           <img
-                            src={artsByYear[year][0]?.avatar_url}
-                            alt={`${artsByYear[year][0]?.first_name} ${artsByYear[year][0]?.last_name}`}
+                            src={displayedByYear[year][0]?.avatar_url}
+                            alt={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
                             class="h-16 w-16 sm:h-24 sm:w-24 md:h-36 md:w-36 rounded-full object-cover z-10"
                             draggable={false}
                           />
@@ -270,10 +318,10 @@ export default function ArtsLayout(
                   </div>
                 </div>
 
-                {/* Œuvres pour cette année */}
+                {/* Œuvres pour l'année */}
                 <div class="flex flex-wrap justify-center">
-                  {artsByYear[year].map((p, index) => {
-                    const isLastItemOfLastYear = year === sortedYears[sortedYears.length - 1] && index === artsByYear[year].length - 1;
+                  {displayedByYear[year].map((p, index) => {
+                    const isLastItemOfLastYear = year === sortedYears[sortedYears.length - 1] && index === displayedByYear[year].length - 1;
                     return (
                       <div
                         key={index + 1}
