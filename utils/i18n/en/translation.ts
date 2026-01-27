@@ -134,7 +134,7 @@ const translation = {
     artists_available: "artists available",
     artists_displayed: "Artists displayed",
     arts_available: "artwork available",
-    arts_currently_available: "artwork are currently available.",
+    arts_currently_available: "artwork(s) currently available.",
     between_the_year: "between the year",
     and_year: "and year",
     characters_displayed_between: "Characters displayed between the year",
@@ -199,6 +199,7 @@ const translation = {
     redirect:
       `<p class="text-[1rem] leading-none">Please redirect to <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> to take full advantage of my features.</p>`,
     search_among: "Do your search among",
+    tag: "La thématique sur",
     unclassified_arts: "<h2>Here are the unclassified artwork.</h2>",
     warning: "My work began in French, the English translation is in progress.",
     welcome: `<h2>Hello and welcome to <strong>Urarts</strong>...</h2>`,

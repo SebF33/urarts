@@ -425,6 +425,27 @@ export const handler = async (
         break;
 
       
+      case "tag":
+        if (subpage !== "undefined") {
+          const countArtResults = await db.selectFrom("art")
+            .innerJoin("art_tag", "art.id", "art_tag.art_id")
+            .innerJoin("tag", "art_tag.tag_id", "tag.id")
+            .innerJoin("artist", "art.owner_id", "artist.id")
+            .select([count("art.id").as("number"), "tag.slug"])
+            .$if(lng === 'fr', (qb) => qb.select("tag.name as tag_name"))
+            .$if(lng === 'en', (qb) => qb.select("tag.name_en as tag_name"))
+            .where("tag.slug", "=", subpage)
+            .where("copyright", "!=", 2)
+            .executeTakeFirst();
+          
+          if (countArtResults) {
+            htmlContent = `<h2>${i18next.t("leonardo.tag", { ns: "translation" })} "<strong>${countArtResults.tag_name}</strong>".</h2>`;
+            htmlContent += `<p class="text-[1rem] leading-none mt-3"><strong>${countArtResults.number}</strong> ${i18next.t("leonardo.arts_currently_available", { ns: "translation" })}</p>`;
+          }
+        }
+        break;
+
+      
       case "talents":
         htmlContent = i18next.t("leonardo.page_talents", { ns: "translation" });
 
