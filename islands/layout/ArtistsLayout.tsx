@@ -2,6 +2,7 @@ import { Any } from "any";
 import { ARTIST_IMG_WRAPPER, DELAY_DISPLAY, DELAY_REACH_HREF, NB_LOADING_ARTISTS } from "@utils/constants.ts";
 import { ArtistRow } from "@utils/types.d.ts";
 import { css } from "@twind/core";
+import { delayedClientNavigation } from "@utils/navigation.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
@@ -114,25 +115,6 @@ export default function ArtistsLayout(
   }, [display, props.artists, isIntersecting]);
 
 
-  // Clic sur le lien "avatar de l'artiste"
-  function handleLinkClick(event: MouseEvent) {
-    event.preventDefault();
-    
-    const target = event.currentTarget as HTMLAnchorElement;
-    const href = target.getAttribute("href");
-    if (!href) return;
-
-    // pour le délai au clic tout en préservant la navigation Fresh côté client
-    setTimeout(() => {
-      const link = document.createElement("a");
-      link.href = href;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, DELAY_REACH_HREF);
-  }
-
-
   return (
     <div
       id="data-flag"
@@ -208,7 +190,7 @@ export default function ArtistsLayout(
                   >
                     <a
                       href={"/art/" + p.slug}
-                      onClick={handleLinkClick}
+                      onClick={delayedClientNavigation}
                       draggable={draggable}
                       class={`group flex justify-center text-center relative overflow-hidden z-20 cursor-pointer ${
                         css(

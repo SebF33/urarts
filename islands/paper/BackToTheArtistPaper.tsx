@@ -3,7 +3,7 @@ import {
   artistNameSignal,
   artistSlugSignal,
 } from "@utils/signals.ts";
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
+import { delayedClientNavigation } from "@utils/navigation.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
@@ -15,24 +15,10 @@ export default function BackToTheArtistPaper() {
   const draggable = false;
 
 
-  // Clic sur le lien de retour à la page de l'artiste
-  const handleLinkClick = (event: MouseEvent, href: string) => {
-    event.preventDefault();
-
-    // pour préserver la navigation Fresh côté client
-    setTimeout(() => {
-      const link = document.createElement("a");
-      link.href = href;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, DELAY_REACH_HREF);
-  };
-
-
   return (
     <a
-      onClick={(e) => handleLinkClick(e, `/art/${artistSlugSignal.value}`)}
+      href={`/art/${artistSlugSignal.value}`}
+      onClick={delayedClientNavigation}
       title={`${i18next.t("common.back_to_the_artist", { ns: "translation" })} ${artistNameSignal.value}`}
       aria-label={`${i18next.t("common.back_to_the_artist", { ns: "translation" })} ${artistNameSignal.value}`}
       class="block"

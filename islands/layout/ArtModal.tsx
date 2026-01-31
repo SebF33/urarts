@@ -252,7 +252,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
     handleClose(); // fermer la modal
 
-    // pour préserver la navigation Fresh côté client
+    // pour le délai au clic tout en préservant la navigation Fresh côté client
     setTimeout(() => {
       const link = document.createElement("a");
       link.href = href;

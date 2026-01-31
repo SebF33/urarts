@@ -1,4 +1,4 @@
-import { DELAY_REACH_HREF } from "@utils/constants.ts";
+import { delayedClientNavigation } from "@utils/navigation.ts";
 import { isForAloneArtistSignal } from "@utils/signals.ts";
 
 import BackToTheArtistPaper from "@islands/paper/BackToTheArtistPaper.tsx";
@@ -18,25 +18,6 @@ interface Props {
 
 export default function ArtistsPapers({ artists, draggable }: Props) {
 
-  // Clic sur un lien "artiste"
-  function handleLinkClick(event: MouseEvent) {
-    event.preventDefault();
-
-    const target = event.currentTarget as HTMLAnchorElement;
-    const href = target.getAttribute("href");
-    if (!href) return;
-
-    // pour le délai au clic tout en préservant la navigation Fresh côté client
-    setTimeout(() => {
-      const link = document.createElement("a");
-      link.href = href;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, DELAY_REACH_HREF);
-  }
-
-
   // Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste
   if (isForAloneArtistSignal.value) {
     return (
@@ -52,7 +33,7 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
       {artists.map((artist) => (
         <a
           href={`/art/${artist.slug}`}
-          onClick={handleLinkClick}
+          onClick={delayedClientNavigation}
           class={`paper appear-effect-fast-fadein max-w-[180px] min-w-[180px] min-h-8 ${artist.position}`}
           draggable={draggable}
           aria-label={artist.name}

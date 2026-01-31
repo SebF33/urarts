@@ -13,6 +13,7 @@ import {
   isForAloneArtworkSignal,
 } from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { delayedClientNavigation } from "@utils/navigation.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
@@ -303,17 +304,21 @@ export default function ArtsLayout(
                     )}
                     {/* Avatar de l'artiste */}
                     {isForAloneArtworkSignal.value && (
-                      <div class="relative transform rotate-4 z-10">
-                        <div class="paper paper-shadow p-2">
-                          <div class="top-tape"></div>
-                          <img
-                            src={displayedByYear[year][0]?.avatar_url}
-                            alt={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
-                            class="h-16 w-16 sm:h-24 sm:w-24 md:h-36 md:w-36 rounded-full object-cover z-10"
-                            draggable={false}
-                          />
-                        </div>
-                      </div>
+                      <a
+                        href={`/art/${displayedByYear[year][0]?.artist_slug}`}
+                        onClick={delayedClientNavigation}
+                        class="paper paper-shadow max-w-[180px] min-h-8 p-2 relative transform rotate-4 z-10"
+                        draggable={false}
+                        aria-label={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
+                      >
+                        <div class="top-tape max-h-3"></div>
+                        <img
+                          src={displayedByYear[year][0]?.avatar_url}
+                          alt={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
+                          class="h-16 w-16 sm:h-24 sm:w-24 md:h-36 md:w-36 rounded-full object-cover z-10"
+                          draggable={false}
+                        />
+                      </a>
                     )}
                   </div>
                 </div>
