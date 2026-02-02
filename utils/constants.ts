@@ -831,8 +831,8 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/history.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
-  impressionnism: {
-    background: `${colorScheme[currentColorScheme].gray} url(../textures/impressionnism.png)`,
+  impressionism: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/impressionism.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
   },
   india: {
@@ -911,8 +911,8 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/neoclassicism.png)`,
     backgroundSize: "clamp(300px, 40.1vw, 770px)",
   },
-  neoimpressionnism: {
-    background: `${colorScheme[currentColorScheme].gray} url(../textures/neoimpressionnism.png)`,
+  neoimpressionism: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/neoimpressionism.png)`,
     backgroundSize: "clamp(300px, 29.7vw, 570px)",
   },
   neoplasticism: {
@@ -943,8 +943,8 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/portugal.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
-  postimpressionnism: {
-    background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionnism.png)`,
+  postimpressionism: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/postimpressionism.png)`,
     backgroundSize: "clamp(300px, 28.1vw, 540px)",
   },
   precisionism: {
