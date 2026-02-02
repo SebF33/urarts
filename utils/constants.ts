@@ -787,8 +787,8 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/estonia.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
-  expressionnism: {
-    background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionnism.png)`,
+  expressionism: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/expressionism.png)`,
     backgroundSize: "clamp(300px, 31.8vw, 610px)",
   },
   fantasy: {
