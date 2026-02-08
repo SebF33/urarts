@@ -264,6 +264,12 @@ export const TAGS: TagConst[] = [
     type: 1
   },
   { 
+    name: "Caricature", name_en: "Caricature", slug: "caricature",
+    info: "La caricature est une représentation satirique et exagérée, souvent utilisée pour critiquer ou faire rire, en accentuant certains traits physiques ou psychologiques.",
+    info_en: "Caricature is a satirical and exaggerated depiction, often used to criticize or amuse by emphasizing physical or psychological traits.",
+    type: 0
+  },
+  { 
     name: "Chine", name_en: "People's Republic of China", slug: "china",
     info: "La Chine possède une tradition artistique millénaire faite de calligraphie, peinture et symboles philosophiques.",
     info_en: "China has a millennia-old artistic tradition of calligraphy, painting, and philosophical symbols.",
@@ -730,6 +736,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   baroque: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/baroque.png)`,
     backgroundSize: "clamp(300px, 31.3vw, 600px)",
+  },
+  caricature: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/caricature.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   china: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/china.png)`,
