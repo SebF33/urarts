@@ -1039,8 +1039,7 @@ h1 {
 }
 
 .img-marble-engraved-wrapper {
-    display: block;
-    max-width: 100%;
+    display: inline-block;
     padding: 8px;
     background-color: #9ba2a1;
     border-radius: 8px;
@@ -1051,9 +1050,8 @@ h1 {
 
 .img-marble-engraved-wrapper img {
     display: block;
-    width: 100%;
+    width: auto;
     height: auto;
-    object-fit: contain;
 }
 
 .title-marble-engraved {

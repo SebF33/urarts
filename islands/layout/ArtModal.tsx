@@ -366,7 +366,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
               <img
                 src={url}
                 alt={art.name}
-                class="max-h-40 md:max-h-80 object-contain"
+                class="max-h-40 md:max-h-80"
                 draggable={draggable}
               />
             </div>
