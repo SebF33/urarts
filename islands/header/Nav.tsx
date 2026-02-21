@@ -14,15 +14,18 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { Language } from "@utils/i18n/i18next.d.ts";
+import { skipNextLeonardoAnimation, waitForTransitionEnd } from "@utils/helpers.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import { ApiIcon, ButtonLines, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
 
+
 export interface Props {
   readonly url: URL;
 }
+
 
 export default function Nav(props: Props) {
   // CSS
@@ -89,6 +92,7 @@ export default function Nav(props: Props) {
           eye.addEventListener("mouseover", () => eyeshut.style.height = "100%");
           eye.addEventListener("mouseout",  () => eyeshut.style.height = "0%");
           eye.addEventListener("click",     () => {
+            skipNextLeonardoAnimation("#leonardoContent"); // éviter flicker lors de la fermeture
             instance.hide();
             localStorage.setItem("leonardo", "inactive");
             setLeonardoActiveContent(false);
@@ -166,34 +170,101 @@ export default function Nav(props: Props) {
   }, []);
 
 
-  // Appel à l'API "Leonardo"
+  // Appel à l'API "Leonardo" avec effet de transition
   const fetchLeonardoData = async (params: Record<string, Any>, signal: AbortSignal) => {
     const leonardoContent = document.querySelector("#leonardoContent") as HTMLElement | null;
     if (!leonardoContent) return;
 
     try {
-      const response = await ky.get(`${UrlBasePath}/api/leonardo`, {
-        searchParams: params,
-        signal,
-      });
+      const response = await ky.get(`${UrlBasePath}/api/leonardo`, { searchParams: params, signal });
       const leonardoResponse = await response.text();
-  
-      // Contenu
+
+      // si nouveau contenu pour Leonardo
       if (leonardoContent && leonardoResponse !== "no_change") {
-        // Nettoyage des images déjà présentes
+        // première insertion directement et marquer comme initialisé
+        const isInitialized = leonardoContent.dataset.initialized === "true";
+        if (!isInitialized) {
+          // nettoyage des images déjà présentes
+          const imgs = leonardoContent.querySelectorAll("img");
+          imgs.forEach(i => i.remove());
+          // injection directe du contenu sans animation
+          leonardoContent.innerHTML = leonardoResponse;
+          leonardoContent.dataset.initialized = "true";
+          // nettoyage des styles d'animation
+          leonardoContent.style.opacity = "";
+          leonardoContent.style.transform = "";
+          leonardoContent.style.filter = "";
+          return;
+        }
+
+        // vérifier si on doit sauter l'animation
+        const skipAnim = leonardoContent.dataset.skipAnimation === "true";
+        if (skipAnim) {
+          // nettoyage du flag pour les mises à jour suivantes
+          delete leonardoContent.dataset.skipAnimation;
+          // nettoyage des images déjà présentes
+          const images = leonardoContent.querySelectorAll("img");
+          images.forEach((img) => img.remove());
+          // injection directe du contenu sans animation
+          leonardoContent.innerHTML = leonardoResponse;
+          // nettoyage des classes / styles d'animation
+          leonardoContent.classList.remove("leonardo--prepare", "leonardo--enter", "leonardo-pulse");
+          leonardoContent.style.opacity = "";
+          leonardoContent.style.transform = "";
+          leonardoContent.style.filter = "";
+          return;
+        }
+
+        // cloner l'ancien contenu pour animer sa sortie
+        const oldClone = leonardoContent.cloneNode(true) as HTMLElement;
+        oldClone.id = "leonardoContentClone";
+        const rect = leonardoContent.getBoundingClientRect();
+        oldClone.style.position = "fixed";
+        oldClone.style.left = `${rect.left}px`;
+        oldClone.style.top = `${rect.top}px`;
+        oldClone.style.width = `${rect.width}px`;
+        oldClone.style.height = `${rect.height}px`;
+        oldClone.style.margin = "0";
+        oldClone.style.pointerEvents = "none";
+        oldClone.style.boxSizing = "border-box";
+        oldClone.style.zIndex = "9998";
+        oldClone.classList.add("leonardo-clone--init");
+        document.body.appendChild(oldClone);
+        // état de départ
+        leonardoContent.classList.add("leonardo--prepare");
+        // nettoyage des images déjà présentes
         const images = leonardoContent.querySelectorAll("img");
         images.forEach((img) => img.remove());
-
+        // forcer le reflow
+        void leonardoContent.offsetHeight;
+        // démarrer l'animation de sortie
+        requestAnimationFrame(() => { oldClone.classList.add("leonardo-clone--exit"); });
+        // attendre la fin de la transition
+        await waitForTransitionEnd(oldClone, 300);
+        // fin de l'animation de sortie
+        oldClone.remove();
+        // injection du contenu
         leonardoContent.innerHTML = leonardoResponse;
+        // forcer le reflow puis déclencher l'animation d'entrée
+        void leonardoContent.offsetWidth;
+        leonardoContent.classList.remove("leonardo--prepare");
+        leonardoContent.classList.add("leonardo--enter");
+        // attendre la fin de l'animation d'entrée
+        await waitForTransitionEnd(leonardoContent, 800);
+        // nettoyage des classes d'animation
+        leonardoContent.classList.remove("leonardo--enter");
       }
-    
     } catch (error: Any) {
-      if (error.name !== 'AbortError' && leonardoContent)  leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
-      if (leonardoContent)  leonardoContent.textContent  = '...';
+      // gestion des erreurs
+      if (error.name !== 'AbortError' && leonardoContent)
+        leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
+      if (leonardoContent)
+        leonardoContent.textContent = "...";
     }
   };
 
 
+  // Gestion des appels à l'API "Leonardo"
   useEffect(() => {
     if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
     
@@ -254,6 +325,7 @@ export default function Nav(props: Props) {
     const isVisible = instance.state.isVisible;
     
     if (isVisible) {
+      skipNextLeonardoAnimation("#leonardoContent"); // éviter flicker lors de la fermeture
       instance.hide();
       localStorage.setItem('leonardo', 'inactive');
       setLeonardoActiveContent(false);

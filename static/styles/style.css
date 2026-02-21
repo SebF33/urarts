@@ -21,15 +21,28 @@
     --water: #e0f7fa;
 }
 
+
+/* Body */
+body {
+    background: var(--color-gray);
+    -webkit-tap-highlight-color: transparent;
+}
+
 main {
     min-height: calc(100vh + 64px);
     margin-bottom: -64px;
 }
 
+h1 {
+    color: var(--color-lighterdark);
+}
+
+
 /* Surlignage de texte */
 ::selection {
     background-color: var(--color-cyan);
 }
+
 
 /* Scrollbars */
 ::-webkit-scrollbar {
@@ -50,6 +63,7 @@ body.no-scroll {
     touch-action: none !important;
     overscroll-behavior: contain !important;
 }
+
 
 /* Curseurs */
 .cursor-auto,
@@ -89,6 +103,7 @@ canvas,
 input {
     cursor: url(/cursors/cursor-text.png) 16 8, text !important;
 }
+
 
 /* Fonts */
 @font-face {
@@ -136,21 +151,16 @@ input {
     font-family: Five Boroughs Handwriting;
 }
 
-/* Twind v1 workaround */
+
+/* fix : Twind v1 workaround */
 @media (max-width: 440px) {
     .grid-cols-1 {
         grid-template-columns: repeat(1, minmax(0px, 1fr)) !important;
     }
 }
 
-body {
-    background: var(--color-gray);
-    -webkit-tap-highlight-color: transparent;
-}
+/*****************************/
 
-h1 {
-    color: var(--color-lighterdark);
-}
 
 /* Overlay */
 .overlay-transition {
@@ -161,6 +171,7 @@ h1 {
 .overlay-transition.visible {
     opacity: 1;
 }
+
 
 /* Cadre des artistes */
 .artist-frame {
@@ -206,6 +217,7 @@ h1 {
     }
 }
 
+
 /* Tippy.js */
 .tippy-box[data-theme~='leonardo'] {
     background-color: var(--color-dark);
@@ -228,6 +240,7 @@ h1 {
 .tippy-box[data-theme~='urarts'] .tippy-arrow::after {
     border-color: var(--color-dark) !important;
 }
+
 
 /* Conteneurs des œuvres */
 @media (min-width: 1024px) and (max-width: 1920px) {
@@ -256,6 +269,7 @@ h1 {
         flex: 0 0 60%;
     }
 }
+
 
 /* Cadres ou filtres des œuvres */
 .art-frame {
@@ -415,7 +429,7 @@ h1 {
     margin-left: 0.6vw;
 }
 
-/* fix basses résolutions */
+/* fix : basses résolutions */
 .art-frame-type-2.art-polyptych-3 img {
     /* supprimer la marge du bas.. */
     /* ("min-height" et non "height" pour Safari) */
@@ -454,6 +468,7 @@ h1 {
 .art-wrap-5 .art-frame img {
     align-self: center;
 }
+
 
 /* Vagues de couleurs Bleu & Magenta
    - Gradient : https://colorzilla.com/gradient-editor/#67b0e8+0,c47fd5+90,c47fd5+90,c47fd5+100
@@ -507,6 +522,7 @@ h1 {
     }
 }
 
+
 /* Charts */
 .charts {
     -webkit-flex-direction: column;
@@ -519,6 +535,7 @@ h1 {
         flex-direction: row;
     }
 }
+
 
 /* Palette */
 #PaintPalette .st0 {
@@ -543,6 +560,7 @@ h1 {
     fill: #dbab8d;
 }
 
+
 /* Input */
 .brush-input-box {
     border-width: 18px 18px 18px 18px;
@@ -559,6 +577,7 @@ h1 {
     opacity: 0.4;
 }
 
+
 /* Ombres */
 .famous-art-shadow {
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) drop-shadow(0 4px 4px rgba(0, 0, 0, 0.16)) drop-shadow(0 8px 8px rgba(0, 0, 0, 0.20));
@@ -568,6 +587,7 @@ h1 {
 #PaintPalette {
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
+
 
 /* Transition d'opacité */
 .fade {
@@ -582,6 +602,7 @@ h1 {
 .fade-exit-active {
     opacity: 0;
 }
+
 
 /* Effets d'apparition */
 .appear-effect-x-3px {
@@ -681,6 +702,7 @@ h1 {
     }
 }
 
+
 /* Papiers & adhésifs
    - CodePen : https://codepen.io/aitchiss/pen/QWKmPqx
 */
@@ -779,6 +801,7 @@ h1 {
     bottom: 0;
 }
 
+
 /* Leonardo */
 #leonardoAvatar {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
@@ -848,7 +871,48 @@ h1 {
     }
 }
 
-/* Yeux Mona Lisa */
+#leonardoContent {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition: none;
+    will-change: opacity, transform, filter;
+}
+
+#leonardoContent.leonardo--prepare {
+    opacity: 0;
+    transform: translateX(-6px);
+    filter: blur(2px);
+    transition: none;
+}
+
+#leonardoContent.leonardo--enter {
+    transition:
+        opacity 620ms cubic-bezier(.22, .9, .3, 1),
+        transform 620ms cubic-bezier(.22, .9, .3, 1),
+        filter 620ms;
+}
+
+#leonardoContentClone.leonardo-clone--init {
+    transition: none;
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+    will-change: opacity, transform, filter;
+    pointer-events: none;
+}
+
+#leonardoContentClone.leonardo-clone--exit {
+    transition:
+        opacity 160ms cubic-bezier(.33, .8, .4, 1),
+        transform 160ms cubic-bezier(.33, .8, .4, 1);
+    transform: translateX(-6px);
+    opacity: 0;
+    filter: blur(0.5px);
+}
+
+
+/* Mona Lisa */
 .mona-eye {
     background: transparent;
     display: inline-block;
@@ -875,6 +939,7 @@ h1 {
     border: 3px solid #593417;
     border-radius: 50%;
 }
+
 
 /* Aperçu avec effet d'apparition liquide
    - CodePen : https://codepen.io/iamryanyu/pen/GXpyLQ
@@ -954,6 +1019,7 @@ h1 {
     }
 }
 
+
 /* Masques de transparence */
 .mask-50 {
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
@@ -1000,6 +1066,7 @@ h1 {
     -webkit-mask-image: inherit;
 }
 
+
 /* Brush stroke */
 @keyframes expand {
     0% {
@@ -1016,6 +1083,7 @@ h1 {
     height: 100%;
     animation: expand 7s cubic-bezier(0.5, 0, 0.5, 1) forwards;
 }
+
 
 /* Modal d'une œuvre d'art */
 .art-modal-container {
@@ -1095,6 +1163,7 @@ h1 {
     margin-bottom: 10px;
 }
 
+
 /* Galerie roulante
    - React Bits : https://www.reactbits.dev/components/rolling-gallery
 */
@@ -1170,6 +1239,7 @@ h1 {
         width: 140px;
     }
 }
+
 
 /* SVG : Pas d'indicateurs visuels */
 svg path:focus {
