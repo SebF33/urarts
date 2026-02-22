@@ -1,6 +1,11 @@
 import { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_LEONARDO_REACH_ART } from "@utils/constants.ts";
+import {
+  DEFAULT_HISTOCHARACTERS_YEARS,
+  DELAY_API_CALL,
+  DELAY_DEBOUNCE,
+  DELAY_LEONARDO_REACH_ART,
+} from "@utils/constants.ts";
 import { histocharactersYearsSignal, languageSignal } from "@utils/signals.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -28,7 +33,7 @@ export default function HistoSearch(
   // Slider
   useEffect(() => {
     // Valeur à l'initialisation
-    let value = [300, 2100];
+    let value = DEFAULT_HISTOCHARACTERS_YEARS;
     if (histocharactersYearsSignal.value.length !== 0 && (histocharactersYearsSignal.value[0] !== value[0] || histocharactersYearsSignal.value[1] !== value[1]))  value = histocharactersYearsSignal.value;
 
     // Création du slider

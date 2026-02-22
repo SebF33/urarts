@@ -2,7 +2,7 @@ import { ArtistRow } from "@utils/types.d.ts";
 import { artistsYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { DELAY_API_CALL, DELAY_DEBOUNCE } from "@utils/constants.ts";
+import { DELAY_API_CALL, DEFAULT_ARTISTS_YEARS, DELAY_DEBOUNCE } from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -157,7 +157,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   // Slider
   useEffect(() => {
     // Valeur à l'initialisation
-    let value = [1900, 2000];
+    let value = DEFAULT_ARTISTS_YEARS;
     if (artistsYearsSignal.value.length !== 0 && (artistsYearsSignal.value[0] !== value[0] || artistsYearsSignal.value[1] !== value[1]))  value = artistsYearsSignal.value;
 
     // Nationalité et années définies si paramètre "nationality" dans l'URL

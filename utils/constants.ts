@@ -4,6 +4,8 @@ import { TagConst } from "@utils/types.d.ts";
 
 
 // Constantes globales
+export const DEFAULT_ARTISTS_YEARS = [1900, 2000];
+export const DEFAULT_HISTOCHARACTERS_YEARS = [300, 2100];
 export const DEFAULT_LNG = "en";
 export const DEFAULT_NAV_THEME = "header-paper";
 export const DELAY_API_CALL = 150;
