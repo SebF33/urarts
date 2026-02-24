@@ -3,6 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { defineApp } from "$fresh/server.ts";
 import { UrlBasePath } from "@/env.ts";
 
+import GeolocationConsent from "@islands/GeolocationConsent.tsx";
 import Nav from "@islands/header/Nav.tsx";
 import ToBottomButton from "@islands/ToBottomButton.tsx";
 import ToTopButton from "@islands/ToTopButton.tsx";
@@ -89,6 +90,7 @@ export default defineApp((_, ctx) => {
         <Partial name="body">
           {!isPersoGallery && <Nav url={ctx.url} />}
           <ctx.Component />
+          <GeolocationConsent />
           <ToBottomButton />
           <ToTopButton />
         </Partial>
