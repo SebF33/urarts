@@ -14,6 +14,7 @@ interface ArtistPanelProps {
   readonly onClose: () => void;
 }
 
+
 export function WorldArtistsPanel(
   { country, artists, onClose }: ArtistPanelProps,
 ) {
@@ -54,7 +55,7 @@ export function WorldArtistsPanel(
             <button
               onClick={onClose}
               className="p-2 text-lighterdark hover:text-red focus:outline-none"
-              aria-label="Fermer le panel"
+              aria-label={`${i18next.t("meta.close_panel", { ns: "translation" })}`}
             >
               <ButtonCross aria-hidden="true" />
             </button>

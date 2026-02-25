@@ -124,6 +124,16 @@ const translation = {
       title: "Erreur 500 !",
     },
   },
+  geoConsent: {
+    accept: "Accepter",
+    decline: "Refuser",
+    footer:
+      "Vous pourrez changer d’avis plus tard dans les paramètres / confidentialité.",
+    msg:
+      "Pour améliorer les suggestions locales et la pertinence des statistiques, nous pouvons récupérer votre position approximative et l’envoyer à Google Analytics. Acceptez-vous l’envoi de votre position ?",
+    sending: "Envoi...",
+    title: "Autoriser la géolocalisation ?",
+  },
   indicator: {
     doughnut_title: "artistes disponibles par nationalité",
     polararea_title: "œuvres d’art disponibles par mouvement",
@@ -201,7 +211,8 @@ const translation = {
     search_among: "Faites votre recherche parmi",
     tag: "Œuvres autour de la thématique",
     unclassified_arts: "<h2>Voici les œuvres non classées.</h2>",
-    warning: "Mes travaux ont commencé en français, la traduction anglaise est en cours.",
+    warning:
+      "Mes travaux ont commencé en français, la traduction anglaise est en cours.",
     welcome: `<h2>Bonjour et bienvenue sur <strong>Urarts</strong>...</h2>`,
   },
   logo: {
@@ -219,6 +230,7 @@ const translation = {
       desc: "À propos de Urarts...",
       title: "Urarts - À propos",
     },
+    accept_geo_consent: "Accepter la géolocalisation",
     artists: {
       desc: "Les meilleurs artistes au monde.",
       title: "Urarts - Artistes",
@@ -227,6 +239,8 @@ const translation = {
       desc: "Toutes les plus belles œuvres d’art au monde.",
       title: "Urarts - Œuvres",
     },
+    close_modal: "Fermer la modal",
+    close_panel: "Fermer le panel",
     copyright: {
       desc: "Artistes sous copyright.",
       title: "Urarts - Copyright",
@@ -235,6 +249,7 @@ const translation = {
       desc: "Les plus belles œuvres de",
       title: "- Collection",
     },
+    decline_geo_consent: "Refuser la géolocalisation",
     histocharacters: {
       desc: "Les personnages historiques.",
       title: "Urarts - Personnages historiques",

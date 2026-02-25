@@ -14,6 +14,7 @@ interface ArtPanelProps {
   readonly onClose: () => void;
 }
 
+
 export function WorldArtsPanel({ country, artworks, onClose }: ArtPanelProps) {
   const draggable = false;
   const theme = colorScheme[currentColorScheme];
@@ -52,7 +53,7 @@ export function WorldArtsPanel({ country, artworks, onClose }: ArtPanelProps) {
             <button
               onClick={onClose}
               className="p-2 text-lighterdark hover:text-red focus:outline-none"
-              aria-label="Fermer le panel"
+              aria-label={`${i18next.t("meta.close_panel", { ns: "translation" })}`}
             >
               <ButtonCross aria-hidden="true" />
             </button>

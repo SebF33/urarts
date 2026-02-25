@@ -354,7 +354,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
         <button
           onClick={handleClose}
           class="absolute top-2.5 right-2.5 text-lighterdark hover:text-red focus:outline-none"
-          aria-label="Fermer la modal"
+          aria-label={`${i18next.t("meta.close_modal", { ns: "translation" })}`}
         >
           <ButtonCross aria-hidden="true" />
         </button>

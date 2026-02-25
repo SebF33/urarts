@@ -1,4 +1,6 @@
 import { Any } from "any";
+import i18next from "i18next";
+import "@utils/i18n/config.ts";
 import { useEffect, useState } from "preact/hooks";
 
 const COOKIE_NAME = "geo_consent"; // valeurs : "yes", "no"
@@ -144,14 +146,11 @@ export default function GeolocationConsent() {
 
           <div class="flex-1">
             <h3 class="font-semibold text-lg" style={{ color: "#dadada" }}>
-              Autoriser la géolocalisation ?
+              {i18next.t("geoConsent.title", { ns: "translation" })}
             </h3>
 
             <p class="mt-2 text-sm" style={{ color: "#b3b9b8" }}>
-              Pour améliorer les suggestions locales et la pertinence des
-              statistiques, nous pouvons récupérer votre position approximative
-              et l’envoyer à Google Analytics. Acceptez-vous l’envoi de votre
-              position ?
+              {i18next.t("geoConsent.msg", { ns: "translation" })}
             </p>
 
             {error && (
@@ -172,6 +171,7 @@ export default function GeolocationConsent() {
                 onClick={handleAccept}
                 disabled={sending}
                 class="px-4 py-2 rounded-lg font-medium transition"
+                aria-label={`${i18next.t("meta.accept_geo_consent", { ns: "translation" })}`}
                 style={{
                   background: sending ? "rgba(103,176,232,0.55)" : "#67b0e8",
                   color: "#141b1e",
@@ -179,26 +179,25 @@ export default function GeolocationConsent() {
                   opacity: sending ? 0.85 : 1,
                 }}
               >
-                {sending ? "Envoi..." : "Accepter"}
+                {sending ? i18next.t("geoConsent.sending", { ns: "translation" }) : i18next.t("geoConsent.accept", { ns: "translation" })}
               </button>
 
               <button
                 onClick={handleDecline}
                 class="mt-2 sm:mt-0 px-4 py-2 rounded-lg font-medium transition"
-                aria-label="Refuser la géolocalisation"
+                aria-label={`${i18next.t("meta.decline_geo_consent", { ns: "translation" })}`}
                 style={{
                   background: "#141b1e",
                   color: "#dadada",
                   border: "1px solid rgba(179, 185, 184, 0.28)",
                 }}
               >
-                Refuser
+                {i18next.t("geoConsent.decline", { ns: "translation" })}
               </button>
             </div>
 
             <p class="mt-3 text-xs" style={{ color: "#dadada" }}>
-              Vous pourrez changer d’avis plus tard dans les paramètres /
-              confidentialité.
+              {i18next.t("geoConsent.footer", { ns: "translation" })}
             </p>
           </div>
         </div>

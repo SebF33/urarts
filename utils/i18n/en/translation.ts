@@ -124,6 +124,15 @@ const translation = {
       title: "Error 500!",
     },
   },
+  geoConsent: {
+    accept: "Accept",
+    decline: "Decline",
+    footer: "You can change your mind later in the settings / privacy.",
+    msg:
+      "To improve local suggestions and the relevance of statistics, we can collect your approximate location and send it to Google Analytics. Do you agree to the sending of your location?",
+    sending: "Sending...",
+    title: "Allow geolocation?",
+  },
   indicator: {
     doughnut_title: "artists available by nationality",
     polararea_title: "arts available by movement",
@@ -219,6 +228,7 @@ const translation = {
       desc: "About Urarts...",
       title: "Urarts - About",
     },
+    accept_geo_consent: "Accept geolocation",
     artists: {
       desc: "The best artists in the world.",
       title: "Urarts - Artists",
@@ -227,6 +237,8 @@ const translation = {
       desc: "All the most beautiful works of art in the world.",
       title: "Urarts - Artworks",
     },
+    close_modal: "Close the modal",
+    close_panel: "Close the panel",
     copyright: {
       desc: "Artists under copyright.",
       title: "Urarts - Copyright",
@@ -235,6 +247,7 @@ const translation = {
       desc: "The most beautiful works of",
       title: "- Collection",
     },
+    decline_geo_consent: "Decline geolocation",
     histocharacters: {
       desc: "Historical characters.",
       title: "Urarts - Historical Characters",
