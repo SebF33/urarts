@@ -6,7 +6,11 @@ import {
   DELAY_DEBOUNCE,
   DELAY_LEONARDO_REACH_ART,
 } from "@utils/constants.ts";
-import { histocharactersYearsSignal, languageSignal } from "@utils/signals.ts";
+import {
+  histocharactersYearsSignal,
+  isForAloneArtworkSignal,
+  languageSignal,
+} from "@utils/signals.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
@@ -27,7 +31,9 @@ export default function HistoSearch(
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
 
+  // Contexte
   const type = "histocharacters";
+  isForAloneArtworkSignal.value = false;
 
 
   // Slider
