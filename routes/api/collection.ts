@@ -1,6 +1,7 @@
 import { ArtCollection, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { normalizeText } from "@utils/db/common.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
@@ -130,7 +131,7 @@ export const handler = async (
     .$if(isHistocharacters, (qb) => qb.select("histocharacterdeathyear as deathyear"))
     .$if(isHistocharacters && lng === 'fr', (qb) => qb.select("histocharacterinfo as info"))
     .$if(isHistocharacters && lng === 'en', (qb) => qb.select("histocharacterinfo_en as info"))
-    .where("copyright", "!=", 2)
+    .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
     .$if(isArtworks && lng === 'en', (qb) =>
       qb.where((eb) =>
         eb.or([

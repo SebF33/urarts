@@ -1,5 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS, URL_URARTS_DEV } from "@utils/constants.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { RouteContext } from "$fresh/server.ts";
@@ -96,6 +97,7 @@ export const handler = async (
         const newArtistsResult = await db.selectFrom("artist")
         .select(["last_name", "avatar_url", "slug"])
         .where("slug", "not in", TALENTS)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .orderBy("id", "desc")
         .limit(6)
         .execute();
@@ -129,6 +131,7 @@ export const handler = async (
         const publicDomainArtistsResult = await db.selectFrom("artist")
         .select(["last_name", "avatar_url", "slug"])
         .where("slug", "not in", TALENTS)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .where(sql`${currentYear} - CAST(deathyear AS INTEGER) = 71`)
         .orderBy(sql`random()`)
         .execute();
@@ -250,6 +253,7 @@ export const handler = async (
           .selectFrom("artist")
           .select([count("id").as("artist_count")])
           .where("slug", "not in", TALENTS)
+          .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
           .execute();
 
         const totalArtistCountResult: number[] = totalArtistQuery.map((item) =>
@@ -283,7 +287,7 @@ export const handler = async (
           .innerJoin("artist", "art.owner_id", "artist.id")
           .select([count("art.id").as("art_count")])
           .where("slug", "not in", TALENTS)
-          .where("copyright", "!=", 2)
+          .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
           .execute();
 
         const totalArtCountResult: number[] = totalArtQuery.map((item) => parseFloat(item.art_count));
@@ -328,8 +332,8 @@ export const handler = async (
             ])
             .$if(lng === 'fr', (qb) => qb.select("art.name as name"))
             .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
-            .where("copyright", "!=", 2)
             .where("slug", "not in", TALENTS)
+            .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
             .orderBy(sql`random()`)
             .executeTakeFirst();
 
@@ -353,8 +357,8 @@ export const handler = async (
 
           const histocharacterResults = await db.selectFrom("art")
             .innerJoin("artist", "art.owner_id", "artist.id")
-            .select(["art.id as id", "histocharactername as name", "url"])
-            .where("copyright", "!=", 2)
+            .select(["art.id as id", "histocharactername as name", "url"])            
+            .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
             .where("histocharacter", "=", 1)
             .where(sql`((histocharacterbirthyear BETWEEN ${pagectx[0]} AND ${pagectx[1]}) OR (histocharacterdeathyear BETWEEN ${pagectx[0]} AND ${pagectx[1]}))`)
             .orderBy(sql`random()`)
@@ -388,6 +392,7 @@ export const handler = async (
             .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement_name"))
             .where("movement.slug", "=", subpage)
             .where("artist.slug", "not in", TALENTS)
+            .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
             .orderBy(sql`random()`)
             .executeTakeFirst();
 
@@ -397,7 +402,7 @@ export const handler = async (
             .select([count("art.id").as("number")])
             .where("movement.slug", "=", subpage)
             .where("artist.slug", "not in", TALENTS)
-            .where("copyright", "!=", 2)
+            .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
             .executeTakeFirst();
 
           if (subpage !== "unclassified") htmlContent = `<h2>${i18next.t("leonardo.movement", { ns: "translation" })} "<strong>${movementResults.movement_name}</strong>".</h2>`;
@@ -435,7 +440,7 @@ export const handler = async (
             .$if(lng === 'fr', (qb) => qb.select("tag.name as tag_name"))
             .$if(lng === 'en', (qb) => qb.select("tag.name_en as tag_name"))
             .where("tag.slug", "=", subpage)
-            .where("copyright", "!=", 2)
+            .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
             .executeTakeFirst();
           
           if (countArtResults) {
@@ -468,6 +473,7 @@ export const handler = async (
           .select(["last_name", "avatar_url", "color", "slug"])
           .where("gender", "=", "Femme")
           .where("artist.slug", "not in", TALENTS)
+          .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
           .orderBy(sql`random()`)
           .executeTakeFirst();
 

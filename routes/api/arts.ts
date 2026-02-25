@@ -1,5 +1,6 @@
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { normalizeText } from "@utils/db/common.ts";
 import { RouteContext } from "$fresh/server.ts";
 import { sql } from "kysely";
@@ -70,8 +71,8 @@ export const handler = async (
     .$if(lng === 'en', (qb) => qb.select(sql<string>`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`.as("name")))
     .$if(lng === 'fr', (qb) => qb.select("movement.name as movement"))
     .$if(lng === 'en', (qb) => qb.select("movement.name_en as movement"))
-    .where("copyright", "!=", 2)
     .where("artist.slug", "not in", TALENTS)
+    .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
     .$if(!random && lng === 'en', (qb) =>
       qb.where(sql<string>`
         (

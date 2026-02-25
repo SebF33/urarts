@@ -1,5 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -60,6 +61,7 @@ export const handler: Handlers<MovementPageProps> = {
       .distinct()
       .where("movement.slug", "=", movementDetails.slug)
       .where("artist.slug", "not in", TALENTS)
+      .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .orderBy(sql`random()`)
       .limit(7)
       .execute();

@@ -1,5 +1,6 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { DisplayCopyrightedArtist } from "@/env.ts";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import i18next from "i18next";
@@ -42,6 +43,7 @@ export const handler: Handlers = {
           count("artist.id").as("artist_count"),
         ]))
         .where("slug", "not in", TALENTS)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .groupBy("nationality_group")
         .execute(),
 
@@ -51,6 +53,7 @@ export const handler: Handlers = {
           count("id").as("artist_count"),
         ])
         .where("slug", "not in", TALENTS)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .execute(),
 
       db
@@ -72,7 +75,7 @@ export const handler: Handlers = {
           count("art.id").as("art_count"),
         ]))
         .where("artist.slug", "not in", TALENTS)
-        .where("copyright", "!=", 2)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .groupBy("movement_group")
         .execute(),
 
@@ -81,7 +84,7 @@ export const handler: Handlers = {
         .innerJoin("artist", "art.owner_id", "artist.id")
         .select([count("art.id").as("art_count")])
         .where("artist.slug", "not in", TALENTS)
-        .where("copyright", "!=", 2)
+        .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .execute(),
     ]);
 
