@@ -301,10 +301,10 @@ export const handler = async (
         htmlContent += `
           <p class="text-[1.18rem] leading-none mb-2">${i18next.t("leonardo.lng", { ns: "translation" })} &nbsp;
             <button onclick="handleLanguage('en')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Royaume-Uni.png" alt="en" draggable=false/>
+              <img class="w-6 transform-gpu will-change-transform transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Royaume-Uni.png" alt="en" draggable=false/>
             </button>
             <button onclick="handleLanguage('fr')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-              <img class="w-6 transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/France.png" alt="fr" draggable=false/>
+              <img class="w-6 transform-gpu will-change-transform transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/France.png" alt="fr" draggable=false/>
             </button>
           </p>
         `;
@@ -315,7 +315,7 @@ export const handler = async (
           <p class="text-[1rem] leading-none mb-2">
             ${i18next.t("leonardo.or_click", { ns: "translation" })} 
             <a href="/worldmap" class="appear-effect-very-fast-fadein inline-block align-middle" draggable=false>
-              <img class="w-10 h-auto inline-block transform-gpu transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Monde.png" alt="world" draggable=false/>
+              <img class="w-10 h-auto inline-block transform-gpu will-change-transform transition-all duration-50 ease-in-out hover:(transform scale-110)" src="/icons/Monde.png" alt="world" draggable=false/>
             </a> 
             ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}
           </p>

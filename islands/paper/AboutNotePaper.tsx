@@ -29,7 +29,7 @@ export default function AboutNotePaper() {
           <div class="inline-flex items-center space-x-2">
             <button onClick={() => handleLanguage("en")} class="focus:outline-none">
               <img
-                class="w-9 hover:scale-110 transition-transform duration-50 align-middle"
+                class="w-9 align-middle transform-gpu will-change-transform hover:scale-110 transition-transform duration-50"
                 src="/icons/Royaume-Uni.png"
                 alt="en"
                 draggable={draggable}
@@ -37,7 +37,7 @@ export default function AboutNotePaper() {
             </button>
             <button onClick={() => handleLanguage("fr")} class="focus:outline-none">
               <img
-                class="w-9 hover:scale-110 transition-transform duration-50 align-middle"
+                class="w-9 align-middle transform-gpu will-change-transform hover:scale-110 transition-transform duration-50"
                 src="/icons/France.png"
                 alt="fr"
                 draggable={draggable}

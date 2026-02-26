@@ -98,8 +98,8 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   const blur = "blur(0)";
   const draggable = false;
   const grid = "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 my-20 p-4";
-  const scale105 = "transform-gpu transition-all duration-150 ease-in-out hover:(transform scale-105)";
-  const scale110 = "transform-gpu transition-all duration-300 ease-in-out hover:(transform scale-110)";
+  const scale105 = "transform-gpu will-change-transform transition-all duration-150 ease-in-out hover:(transform scale-105)";
+  const scale110 = "transform-gpu will-change-transform transition-all duration-300 ease-in-out hover:(transform scale-110)";
   const shadow = "drop-shadow(0.01rem 0.01rem 0.04rem rgba(0, 0, 0, 0.5))";
   const width8 = "w-8 sm:w-10";
   const width12 = "w-12 sm:w-16";
