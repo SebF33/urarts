@@ -172,6 +172,7 @@ export default function Nav(props: Props) {
 
   // Appel à l'API "Leonardo" avec effet de transition
   const fetchLeonardoData = async (params: Record<string, Any>, signal: AbortSignal) => {
+
     const leonardoContent = document.querySelector("#leonardoContent") as HTMLElement | null;
     if (!leonardoContent) return;
 
@@ -181,12 +182,13 @@ export default function Nav(props: Props) {
 
       // si nouveau contenu pour Leonardo
       if (leonardoContent && leonardoResponse !== "no_change") {
+        // nettoyage des images déjà présentes
+        const imgs = leonardoContent.querySelectorAll("img");
+        imgs.forEach(i => i.remove());
+
         // première insertion directement et marquer comme initialisé
         const isInitialized = leonardoContent.dataset.initialized === "true";
         if (!isInitialized) {
-          // nettoyage des images déjà présentes
-          const imgs = leonardoContent.querySelectorAll("img");
-          imgs.forEach(i => i.remove());
           // injection directe du contenu sans animation
           leonardoContent.innerHTML = leonardoResponse;
           leonardoContent.dataset.initialized = "true";
@@ -202,9 +204,6 @@ export default function Nav(props: Props) {
         if (skipAnim) {
           // nettoyage du flag pour les mises à jour suivantes
           delete leonardoContent.dataset.skipAnimation;
-          // nettoyage des images déjà présentes
-          const images = leonardoContent.querySelectorAll("img");
-          images.forEach((img) => img.remove());
           // injection directe du contenu sans animation
           leonardoContent.innerHTML = leonardoResponse;
           // nettoyage des classes / styles d'animation
@@ -232,9 +231,6 @@ export default function Nav(props: Props) {
         document.body.appendChild(oldClone);
         // état de départ
         leonardoContent.classList.add("leonardo--prepare");
-        // nettoyage des images déjà présentes
-        const images = leonardoContent.querySelectorAll("img");
-        images.forEach((img) => img.remove());
         // forcer le reflow
         void leonardoContent.offsetHeight;
         // démarrer l'animation de sortie
