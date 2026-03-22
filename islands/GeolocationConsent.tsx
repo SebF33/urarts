@@ -145,9 +145,9 @@ export default function GeolocationConsent() {
           </div>
 
           <div class="flex-1">
-            <h3 class="font-semibold text-lg" style={{ color: "#dadada" }}>
+            <p class="font-semibold text-lg" style={{ color: "#dadada" }}>
               {i18next.t("geoConsent.title", { ns: "translation" })}
-            </h3>
+            </p>
 
             <p class="mt-2 text-sm" style={{ color: "#b3b9b8" }}>
               {i18next.t("geoConsent.msg", { ns: "translation" })}
