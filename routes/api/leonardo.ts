@@ -116,7 +116,7 @@ export const handler = async (
               <div class="h-[80px] flex items-center justify-center">
                 <img class="w-[80px]" src="${p.avatar_url}" alt="${p.last_name}" draggable="${draggable}"/>
               </div>
-              <div class="paper w-[72px] h-[28px] mx-auto mt-1 flex-shrink-0">
+              <div class="paper w-[72px] h-[28px] mx-auto -mt-1 flex-shrink-0">
                 <div class="top-tape max-h-2"></div>
                 <p class="text-sm font-medium text-lighterdark break-words leading-[0.8em] p-1">${p.last_name}</p>
               </div>
@@ -150,7 +150,7 @@ export const handler = async (
               <div class="h-[80px] flex items-center justify-center">
                 <img class="w-[80px]" src="${p.avatar_url}" alt="${p.last_name}" draggable="${draggable}"/>
               </div>
-              <div class="paper w-[72px] h-[28px] mx-auto mt-1 flex-shrink-0">
+              <div class="paper w-[72px] h-[28px] mx-auto -mt-1 flex-shrink-0">
                 <div class="top-tape max-h-2"></div>
                 <p class="text-sm font-medium text-lighterdark break-words leading-[0.8em] p-1">${p.last_name}</p>
               </div>
