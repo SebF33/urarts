@@ -49,6 +49,8 @@ export const NATIONALITIES: string[] = [
   "Belgique",
   "Belgium",
   "Biélorussie",
+  "Bulgaria",
+  "Bulgarie",
   "Canada",
   "Chine",
   "Colombia",

@@ -31,6 +31,8 @@ export const worldColors = [
   "#000000", // Belgique (noir)
   "#000000", // Belgium (noir)
   "#00662E", // Biélorussie (vert)
+  "#00966E", // Bulgaria (vert bulgare)
+  "#00966E", // Bulgarie (vert bulgare)
   "#FF0000", // Canada (rouge)
   "#DE2910", // Chine (rouge chinois)
   "#FCD116", // Colombia (jaune)
