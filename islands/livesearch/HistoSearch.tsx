@@ -1,5 +1,4 @@
 import { ArtCollection } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import {
   DEFAULT_HISTOCHARACTERS_YEARS,
   DELAY_API_CALL,
@@ -17,9 +16,11 @@ import ky from "ky";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
+
 
 type Arts = Array<ArtCollection>;
 
@@ -122,21 +123,7 @@ export default function HistoSearch(
 
 
   // Background pour la page des personnages historiques
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="histocharacters"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/white)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "346px";
-    }
-  }, []);
+  usePageBackground("histocharacters");
 
 
   return (

@@ -1,6 +1,5 @@
 import { ArtistRow } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { useLayoutEffect } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Title from "@islands/paper/Title.tsx";
@@ -17,21 +16,7 @@ export default function TalentsList(
 
   
   // Background pour la page des talents
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="talents"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/gray_half)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "420px";
-    }
-  }, []);
+  usePageBackground("talents");
 
 
   return (

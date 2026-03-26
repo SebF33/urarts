@@ -1,3 +1,10 @@
+
+import {
+  applyPageBackground,
+  getTextureBasePath,
+  resetPageBackground,
+  resolveCollectionBackground,
+} from "@utils/background.ts";
 import { ArtCollection } from "@utils/types.d.ts";
 import {
   artistSlugSignal,
@@ -5,7 +12,6 @@ import {
   isForAloneArtworkSignal,
   languageSignal,
 } from "@utils/signals.ts";
-import { BG_STYLE } from "@utils/constants.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import {
   DELAY_API_CALL,
@@ -15,6 +21,7 @@ import {
 } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { isTouchDevice, slugToCamelCase } from "@utils/helpers.ts";
 import ky from "ky";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
@@ -91,38 +98,31 @@ export default function CollectionSearch(props: Props) {
   }, [props.query]);
 
 
-  function slugToCamelCase(slug: string): string {
-    return slug.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
-  }
-
-
-  // Background pour la page d'une collection d'arts
+  // Background pour la page d'une collection d'œuvres
   useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="collection"]');
-    const basePath = isPersoGallery ? "../../textures/" : "../textures/";
-    const camelSlug = slugToCamelCase(props.myslug);
-    const styleForSlug = BG_STYLE[camelSlug];
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
+    const isTouch = isTouchDevice();
   
-    if (main && styleForSlug) {
-      // Défini dans BG_STYLE
-      const { background, backgroundSize } = styleForSlug;
-      main.style.background = background.replace("../textures/", basePath);
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = backgroundSize;
-    } else if (main) {
-      // Fallback si non défini dans BG_STYLE
-      main.style.background = `${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "480px";
-    }
-  }, []);
+    const config = isTouch
+      ? {
+          bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+          mainSelector: '[data-name="collection"]',
+          removeMainBackground: true,
+        }
+      : {
+          bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+          mainSelector: '[data-name="collection"]',
+          mainStyle: resolveCollectionBackground(
+            slugToCamelCase(props.myslug),
+            getTextureBasePath(isPersoGallery)
+          ),
+        };
+  
+    applyPageBackground(config);
+  
+    return () => {
+      resetPageBackground(config);
+    };
+  }, [isPersoGallery, props.myslug]);
 
 
   return (

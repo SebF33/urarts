@@ -1,8 +1,8 @@
 import { css } from "@twind/core";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { useLayoutEffect } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
+
 
 export default function ErrorLayout(
   props: {
@@ -24,22 +24,10 @@ export default function ErrorLayout(
     title = i18next.t("error.server.title", { ns: "translation" });
   }
 
+
   // Background pour les pages d'erreur
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="error"]');
+  usePageBackground("error");
 
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/white)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "3400px";
-    }
-  }, []);
 
   return (
     <>

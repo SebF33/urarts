@@ -1,6 +1,6 @@
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
-import { useEffect, useLayoutEffect } from "preact/hooks";
+import { useEffect } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 
 export default function Mona() {
@@ -30,21 +30,7 @@ export default function Mona() {
 
 
   // Background pour la page à propos
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="about"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/white)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "2400px";
-    }
-  }, []);
+  usePageBackground("about");
 
 
   return (

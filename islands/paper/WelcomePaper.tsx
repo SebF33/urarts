@@ -1,27 +1,12 @@
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { useLayoutEffect } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 
 export function WelcomePaper() {
 
   // Background pour la page d'accueil
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="home"]');
-  
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-  
-    if (main) {
-      main.style.background = `url(/background/gray)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "466px";
-    }
-  }, []);
+  usePageBackground("home");
 
 
   return (

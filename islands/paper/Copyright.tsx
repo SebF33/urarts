@@ -1,4 +1,8 @@
-
+import {
+  applyPageBackground,
+  resetPageBackground,
+  resolveCopyrightBackground,
+} from "@utils/background.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -7,21 +11,19 @@ import { useLayoutEffect } from "preact/hooks";
 
 export default function Copyright() {
 
-  // Background pour la page d'une collection d'arts sous copyright
+  // Background pour la page d'une collection d'œuvres sous copyright
   useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="collection"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `${colorScheme[currentColorScheme].gray} url(../textures/default.png)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "480px";
-    }
+    const config = {
+      bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+      mainSelector: '[data-name="collection"]',
+      mainStyle: resolveCopyrightBackground("../textures/"),
+    };
+  
+    applyPageBackground(config);
+  
+    return () => {
+      resetPageBackground(config);
+    };
   }, []);
 
 

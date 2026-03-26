@@ -1,6 +1,5 @@
 import { ArtistRow } from "@utils/types.d.ts";
 import { artistsYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { css } from "@twind/core";
 import { DELAY_API_CALL, DEFAULT_ARTISTS_YEARS, DELAY_DEBOUNCE } from "@utils/constants.ts";
 import { h } from "preact";
@@ -9,7 +8,8 @@ import "@utils/i18n/config.ts";
 import ky from "ky";
 import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
-import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
@@ -236,21 +236,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
 
   // Background pour la page des artistes
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="artists"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/gray)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "3400px";
-    }
-  }, []);
+  usePageBackground("artists");
 
 
   return (

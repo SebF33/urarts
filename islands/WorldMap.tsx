@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { ArtistRow, ArtRow } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme, extraColors, tagColorsEN, tagColorsFR, worldColors } from "@utils/colors.ts";
+import { colorScheme, currentColorScheme, tagColorsEN, tagColorsFR, worldColors } from "@utils/colors.ts";
 import { createPortal } from "react-dom";
 import { DELAY_DEBOUNCE, NATIONALITIES } from "@utils/constants.ts";
 import { feature } from "topojson-client";
@@ -12,10 +12,12 @@ import iso from "iso-3166-1";
 import isoCountries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json" with { type: "json" };
 import fr from "i18n-iso-countries/langs/fr.json" with { type: "json" };
+import { isTouchDevice } from "@utils/helpers.ts";
 import ky from "ky";
 import tippy, { hideAll } from "tippyjs"
 import { UrlBasePath } from "@/env.ts";
-import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 import worldData from "world-atlas/countries-110m.json" with { type: "json" };
 
 import { WorldArtistsPanel } from "./panel/WorldArtistsPanel.tsx";
@@ -68,15 +70,8 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     const svgEl = svgRef.current;
     if (!svgEl) return;
 
-    const isTouchDevice = () => {
-      return (
-        'ontouchstart' in globalThis ||
-        navigator.maxTouchPoints > 0 ||
-        globalThis.matchMedia("(pointer: coarse)").matches
-      );
-    };
-
-    if (isTouchDevice()) return;
+    const isTouch = isTouchDevice();
+    if (isTouch) return;
 
     const labelCapital = lng === "fr" ? "Capitale" : "Capital";
 
@@ -241,21 +236,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
 
 
   // Background pour la page de la carte du Monde
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="worldmap"]');
-    if (body) {
-      body.style.backgroundColor = extraColors.water;
-    }
-    if (main) {
-      [
-        "background",
-        "background-attachment",
-        "background-position",
-        "background-size",
-      ].forEach((prop) => main.style.removeProperty(prop));
-    }
-  }, []);
+  usePageBackground("worldmap");
 
 
   // Dimensions pour projection

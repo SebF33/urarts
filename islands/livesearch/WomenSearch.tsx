@@ -1,12 +1,12 @@
 import { ArtistRow } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_API_CALL } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { languageSignal } from "@utils/signals.ts";
 import { UrlBasePath } from "@/env.ts";
-import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { WomanLogo } from "@components/Assets.tsx";
@@ -35,21 +35,7 @@ export default function WomenSearch() {
 
 
   // Background pour la page des femmes artistes
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="women"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/white)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "3400px";
-    }
-  }, []);
+  usePageBackground("women");
 
 
   return (

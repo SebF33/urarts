@@ -3,7 +3,8 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { DELAY_CHART_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
+import { usePageBackground } from "@utils/background.ts";
 
 
 export default function Doughnut(
@@ -120,21 +121,7 @@ export default function Doughnut(
   
 
   // Background pour la page des indicateurs
-  useLayoutEffect(() => {
-    const body = document.querySelector("body");
-    const main = document.querySelector<HTMLElement>('[data-name="indicators"]');
-
-    if (body) {
-      body.style.backgroundColor = colorScheme[currentColorScheme].gray;
-    }
-
-    if (main) {
-      main.style.background = `url(/background/gray)`;
-      main.style.backgroundAttachment = "local";
-      main.style.backgroundPosition = "center";
-      main.style.backgroundSize = "2800px";
-    }
-  }, []);
+  usePageBackground("indicators");
 
 
   return <canvas ref={canvasRef} class="mb-8"></canvas>;

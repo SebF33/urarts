@@ -7,15 +7,11 @@ import {
   isClickableSignal,
   isForAloneArtistSignal,
 } from "@utils/signals.ts";
-import {
-  BG_STYLE,
-  DELAY_REACH_ART_FROM_MODAL,
-  TALENTS,
-} from "@utils/constants.ts";
-import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { DELAY_REACH_ART_FROM_MODAL, TALENTS } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
+import { resolveArtModalBackground } from "@utils/background.ts";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 import { ButtonCross } from "@components/Assets.tsx";
@@ -65,18 +61,8 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
   // Background de la modal
   const resolvedBgStyle = useMemo(() => {
-    const rawBgStyle = BG_STYLE[art.movement_slug];
-    
-    return rawBgStyle
-      ? {
-          ...rawBgStyle,
-          background: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), ${rawBgStyle.background.replace("../textures/", basePath)}`,
-        }
-      : {
-          background: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), ${colorScheme[currentColorScheme].gray} url(${basePath}default.png)`,
-          backgroundSize: "480px",
-        };
-  }, [ispersogallery, art.movement_slug]);
+    return resolveArtModalBackground(art.movement_slug, basePath);
+  }, [art.movement_slug, basePath]);
 
 
   // Créer un conteneur de portail dans le body
