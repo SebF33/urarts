@@ -1,4 +1,4 @@
-import { adjustColorBrightness } from "@utils/helpers.ts";
+import { adjustColorBrightness, isTouchDevice } from "@utils/helpers.ts";
 import { Any } from "any";
 import {
   ART_IMG_WRAPPER,
@@ -151,13 +151,7 @@ export default function ArtsLayout(
 
   // Infobulles
   useEffect(() => {
-    const isTouchDevice = () => {
-      return (
-        'ontouchstart' in globalThis || 
-        navigator.maxTouchPoints > 0 || 
-        globalThis.matchMedia("(pointer: coarse)").matches
-      );
-    };
+    const isTouch = isTouchDevice();
 
     // détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
@@ -201,7 +195,7 @@ export default function ArtsLayout(
           interactive: true,
           placement: "bottom",
           theme: "urarts",
-          trigger: isTouchDevice() ? "manual" : "mouseenter focus",
+          trigger: isTouch ? "manual" : "mouseenter focus",
           zIndex: 30,
           onCreate(instance: Any) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);

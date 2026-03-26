@@ -12,6 +12,23 @@ export function adjustColorBrightness(hex: string, amount: number): string {
   return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, "0")}`;
 }
 
+
+/**
+ * Détecte si l'appareil est tactile (mobile / tablette)
+ * basé sur plusieurs heuristiques :
+ * - présence de l'événement ontouchstart
+ * - nombre de points de contact (navigator.maxTouchPoints)
+ * - type de pointeur coarse (écran tactile)
+ */
+export function isTouchDevice(): boolean {
+  return (
+    "ontouchstart" in globalThis ||
+    navigator.maxTouchPoints > 0 ||
+    globalThis.matchMedia("(pointer: coarse)").matches
+  );
+}
+
+
 /**
  * Demande de sauter la prochaine animation du contenu Leonardo
  * (utilisé quand l'utilisateur ferme la popup pour éviter un flicker)
@@ -21,6 +38,17 @@ export function skipNextLeonardoAnimation(selector = "#leonardoContent") {
   if (!el) return;
   el.dataset.skipAnimation = "true";
 }
+
+
+/**
+ * Convertit un slug (kebab-case) en camelCase
+ * en supprimant les tirets et en mettant en majuscule la lettre suivante
+ * (ex: "post-impressionism" → "postImpressionism")
+ */
+export function slugToCamelCase(slug: string): string {
+  return slug.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+}
+
 
 /**
  * Attend la fin d'une transition CSS
