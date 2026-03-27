@@ -176,7 +176,7 @@ export default function ArtsSearch() {
         {/* Liste des arts */}
         {searchResults &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 p-2 mask-50`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 mx-auto p-7 mask-50`}>
               {searchResults.map((item, index) => (
                 <li class={`appear-effect-list-fadein mx-2 my-4`} key={index}>
                   <a
