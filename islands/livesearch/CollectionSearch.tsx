@@ -1,11 +1,10 @@
-
 import {
   applyPageBackground,
   getTextureBasePath,
   resetPageBackground,
   resolveCollectionBackground,
 } from "@utils/background.ts";
-import { ArtCollection } from "@utils/types.d.ts";
+import { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artistSlugSignal,
   isForAloneArtistSignal,
@@ -33,47 +32,121 @@ import { SearchInput } from "@islands/input/SearchInput.tsx";
 
 type Arts = Array<ArtCollection>;
 
-export interface Props {
-  font?: string;
-  ispersogallery?: boolean;
-  myslug: string;
-  query?: object;
-  type: string;
+interface CollectionSearchProps {
+  readonly font?: string;
+  readonly ispersogallery?: boolean;
+  readonly myslug?: string;
+  readonly query: {
+    readonly alone?: boolean;
+    readonly id?: string | number;
+  };
+  readonly type?: string;
 }
 
 
-export default function CollectionSearch(props: Props) {
-  const [searchResults, setSearchResults] = useState<Arts[]>([]);
+export default function CollectionSearch(props: CollectionSearchProps) {
+  const [searchResults, setSearchResults] = useState<Arts>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
+  const [navigationArts, setNavigationArts] = useState<Arts>([]);
+  const [currentArtworkId, setCurrentArtworkId] = useState<string | number | undefined>(props.query?.id);
+  const [previousArtworkId, setPreviousArtworkId] = useState<string | number | null>(null);
+  const [nextArtworkId, setNextArtworkId] = useState<string | number | null>(null);
+  const [artNavigationDirection, setArtNavigationDirection] = useState<ArtNavigationDirection>(null);
   
   // Contexte
   const isPersoGallery: boolean = !!props.ispersogallery;
   isForAloneArtworkSignal.value = !!props.query?.alone;
 
 
-  // Appel à l'API "Collection"
+  /**
+   * Appels à l'API "Collection"
+   *
+   * Chargement des données de la collection dans deux cas :
+   *
+   * 1) Mode "collection" (dans le contexte classique)
+   *    → charge une liste filtrée d'œuvres (searchResults)
+   *
+   * 2) Mode "navigation" (dans le contexte d'un contenu qui concerne une seule œuvre)
+   *    → charge la liste complète de navigation (navigationArts),
+   *      puis en extrait l'œuvre courante pour alimenter les résultats de recherche (searchResults)
+   */
   useEffect(() => {
-    let aloneArtistSlug = '';
-    // si c'est dans le contexte qui concerne uniquement un(e) artiste
-    if (isForAloneArtistSignal.value) aloneArtistSlug = artistSlugSignal.value;
-    
-    let apiUrl;
-    // faire afficher le contenu qui concerne uniquement une œuvre (si c'est le contexte)
-    if (isForAloneArtworkSignal.value) apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&alone&id=${props.query.id}`;
-    // ou faire afficher le contenu d'une collection d'œuvres (selon le contexte)
-    else apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${props.type}&slug=${props.myslug}&name=${debouncedValue}&aloneartistslug=${aloneArtistSlug}`;
+    // si c'est aussi dans le contexte qui concerne un(e) seul(e) artiste
+    const aloneArtistSlug = isForAloneArtistSignal.value ? artistSlugSignal.value : "";
+
+    const apiUrl =
+      `${UrlBasePath}/api/collection?lng=${languageSignal.value}` +
+      `&type=${props.type}` +
+      `&slug=${props.myslug}` +
+      `&name=${debouncedValue}` +
+      `&aloneartistslug=${aloneArtistSlug}`;
 
     const timer = setTimeout(() => {
       ky.get(apiUrl)
-        .json<Arts[]>()
+        .json<Arts>()
         .then((response) => {
-          setSearchResults(response);
+          if (isForAloneArtworkSignal.value) {
+            setNavigationArts(response);
+            const currentArtwork = response.find((art) => String(art.id) === String(currentArtworkId));
+            setSearchResults(currentArtwork ? [currentArtwork] : []);
+          } else {
+            setSearchResults(response);
+            setNavigationArts([]);
+          }
+        })
+        .catch((error) => {
+          console.error("Collection API error:", error);
         });
     }, DELAY_API_CALL);
 
     return () => clearTimeout(timer);
-  }, [debouncedValue, artistSlugSignal.value, isForAloneArtworkSignal.value]);
+  }, [debouncedValue, currentArtworkId, artistSlugSignal.value, isForAloneArtworkSignal.value]);
+
+
+  // Navigation des œuvres (précédente/suivante)
+  // (dans le contexte d'un contenu qui concerne une seule œuvre)
+  useEffect(() => {
+    if (!isForAloneArtworkSignal.value || currentArtworkId == null || navigationArts.length === 0) {
+      setPreviousArtworkId(null);
+      setNextArtworkId(null);
+      return;
+    }
+
+    const currentIndex = navigationArts.findIndex(
+      (art) => String(art.id) === String(currentArtworkId),
+    );
+
+    if (currentIndex === -1) {
+      setPreviousArtworkId(null);
+      setNextArtworkId(null);
+      return;
+    }
+
+    const prev = navigationArts[currentIndex - 1] ?? null;
+    const next = navigationArts[currentIndex + 1] ?? null;
+
+    setPreviousArtworkId(prev?.id ?? null);
+    setNextArtworkId(next?.id ?? null);
+  }, [currentArtworkId, navigationArts]);
+
+  useEffect(() => {
+    setCurrentArtworkId(props.query?.id);
+  }, [props.query?.id]);
+
+  const goToPreviousArtwork = () => {
+    if (previousArtworkId != null) {
+      setArtNavigationDirection("prev");
+      setCurrentArtworkId(previousArtworkId);
+    }
+  };
+
+  const goToNextArtwork = () => {
+    if (nextArtworkId != null) {
+      setArtNavigationDirection("next");
+      setCurrentArtworkId(nextArtworkId);
+    }
+  };
 
 
   // Atteindre l'œuvre
@@ -152,6 +225,11 @@ export default function CollectionSearch(props: Props) {
         arts={searchResults}
         font={props.font}
         ispersogallery={isPersoGallery}
+        hasPreviousArtwork={previousArtworkId != null}
+        hasNextArtwork={nextArtworkId != null}
+        onPreviousArtwork={goToPreviousArtwork}
+        onNextArtwork={goToNextArtwork}
+        artNavigationDirection={artNavigationDirection}
       />
     </div>
   );

@@ -7,7 +7,7 @@ import {
   NB_LOADING_ARTS,
   TALENTS,
 } from "@utils/constants.ts";
-import { ArtCollection } from "@utils/types.d.ts";
+import { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artModalOpenSignal,
   isClickableSignal,
@@ -18,20 +18,27 @@ import { delayedClientNavigation } from "@utils/navigation.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
 
+import { ArrowPaperButton } from "@components/ArrowPaperButton.tsx";
 import ArtModal from "@islands/layout/ArtModal.tsx";
 import { PencilLine } from "@components/Assets.tsx";
 import RollingGallery from "@islands/RollingGallery.tsx";
 
 
 type Arts = Array<ArtCollection>;
+
 interface ArtsLayoutProps {
   readonly arts: Arts;
+  readonly artNavigationDirection?: ArtNavigationDirection;
   readonly font?: string;
+  readonly hasNextArtwork?: boolean;
+  readonly hasPreviousArtwork?: boolean;
   readonly ispersogallery?: boolean;
+  readonly onNextArtwork?: () => void;
+  readonly onPreviousArtwork?: () => void;
   readonly type?: string;
 }
 
@@ -47,9 +54,13 @@ export default function ArtsLayout(
   const [selectedPanel, setSelectedPanel] = useState<string>("");
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
-  
-  const draggable = false;
+  const [artTransitionClass, setArtTransitionClass] = useState<string>("");
+  const previousSingleArtworkIdRef = useRef<string | number | null>(null);
+
+  // Contexte
   const isPersoGallery: boolean = !!props.ispersogallery;
+
+  const draggable = false;
 
 
   // Rendu des œuvres pour la galerie roulante
@@ -216,6 +227,52 @@ export default function ArtsLayout(
   }, [displayedArts, props.type]);
 
 
+  // Transition de défilement des œuvres
+  // (dans le contexte d'un contenu qui concerne une seule œuvre)
+  const currentSingleArtworkId = useMemo(() => {
+    if (!isForAloneArtworkSignal.value || displayedArts.length !== 1) return null;
+    return displayedArts[0]?.id ?? null;
+  }, [displayedArts]);
+
+  useEffect(() => {
+    if (!isForAloneArtworkSignal.value) return;
+    if (!props.artNavigationDirection) return;
+    if (currentSingleArtworkId == null) return;
+
+    // première œuvre affichée : pas d'animation
+    if (previousSingleArtworkIdRef.current == null) {
+      previousSingleArtworkIdRef.current = currentSingleArtworkId;
+      return;
+    }
+
+    // si l'œuvre affichée n'a pas changé, ne pas relancer l'animation
+    if (previousSingleArtworkIdRef.current === currentSingleArtworkId) return;
+
+    previousSingleArtworkIdRef.current = currentSingleArtworkId;
+
+    const nextClass =
+      props.artNavigationDirection === "next"
+        ? "art-slide-in-from-right"
+        : "art-slide-in-from-left";
+
+    // reset propre pour rejouer l'animation sans clignotement
+    setArtTransitionClass("");
+
+    const raf = requestAnimationFrame(() => {
+      setArtTransitionClass(nextClass);
+    });
+
+    const timer = setTimeout(() => {
+      setArtTransitionClass("");
+    }, 550);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(timer);
+    };
+  }, [currentSingleArtworkId, props.artNavigationDirection]);
+
+
   // Clic sur une œuvre : ouverture de la modal
   const handleClick = (art: ArtCollection, panel: string, url: string) => {
     // pas d'action si le clic n'est pas autorisé
@@ -263,7 +320,7 @@ export default function ArtsLayout(
                   <div class="relative flex items-center justify-center gap-6">
                     {/* Nom de l'artiste */}
                     {isForAloneArtworkSignal.value && (
-                      <div class="relative transform -rotate-6 z-10">
+                      <div class="relative transform -rotate-6">
                         <div class="paper paper-shadow p-3 min-w-[80px] text-center">
                           <div class="top-tape"></div>
                           <p class="text-sm sm:text-xl md:text-2xl font-semibold leading-tight">
@@ -289,7 +346,7 @@ export default function ArtsLayout(
                       <a
                         href={`/art/${displayedByYear[year][0]?.artist_slug}`}
                         onClick={delayedClientNavigation}
-                        class="paper paper-shadow max-w-[180px] min-h-8 p-2 relative transform rotate-4 z-10"
+                        class="paper paper-shadow max-w-[180px] min-h-8 p-2 relative transform rotate-4"
                         draggable={false}
                         aria-label={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
                       >
@@ -309,7 +366,8 @@ export default function ArtsLayout(
                 <div class="flex flex-wrap justify-center">
                   {displayedByYear[year].map((p, index) => {
                     const isLastItemOfLastYear = year === sortedYears[sortedYears.length - 1] && index === displayedByYear[year].length - 1;
-                    return (
+
+                    const artContent = (
                       <div
                         key={index + 1}
                         class={`art-container flex flex-col mx-auto`}
@@ -540,11 +598,35 @@ export default function ArtsLayout(
                           </div>
                         )}
                         {/* Référence à la fin de la liste */}
-                        {isLastItemOfLastYear && (
-                          <div ref={endRef} />
-                        )}
+                        {isLastItemOfLastYear && <div ref={endRef} />}
                       </div>
                     );
+
+                    return isForAloneArtworkSignal.value
+                    ? (
+                      <div
+                        key={String(p.id)}
+                        class="w-full flex items-center justify-center gap-4 md:gap-8"
+                      >
+                        {/* Bouton œuvre précédente */}
+                        <ArrowPaperButton
+                          direction="left"
+                          disabled={!props.hasPreviousArtwork}
+                          onClick={props.onPreviousArtwork}
+                        />
+                        {/* Œuvre seule */}
+                        <div class={`art-transition-shell ${artTransitionClass}`}>
+                          {artContent}
+                        </div>
+                        {/* Bouton œuvre suivante */}
+                        <ArrowPaperButton
+                          direction="right"
+                          disabled={!props.hasNextArtwork}
+                          onClick={props.onNextArtwork}
+                        />
+                      </div>
+                    )
+                    : artContent;
                   })}
                 </div>
               </section>

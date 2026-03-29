@@ -41,6 +41,8 @@ export type ArtCollection = {
   year: number | null;
 };
 
+export type ArtNavigationDirection = "prev" | "next" | null;
+
 export type ArtRow = {
   avatar_url: string;
   first_name: string | null;

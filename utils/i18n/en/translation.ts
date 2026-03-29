@@ -138,7 +138,7 @@ const translation = {
     polararea_title: "arts available by movement",
   },
   leonardo: {
-    art: "Here is the artwork",
+    art: "You clicked on the artwork",
     artist: "Here is the artist",
     artists_available: "artists available",
     artists_displayed: "Artists displayed",
@@ -150,7 +150,6 @@ const translation = {
     click: "Click",
     discover: "Discover",
     discover_artist: "Discover the artist",
-    discover_arts: "Discover other artwork by the same artist",
     error: "Leonardo API error.",
     fact: "Did you know?",
     for: "for",
@@ -207,6 +206,7 @@ const translation = {
       `<p class="text-[1rem] leading-none mt-3">Click on the countries to travel through the Art of each culture.</p>`,
     redirect:
       `<p class="text-[1rem] leading-none">Please redirect to <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> to take full advantage of my features.</p>`,
+    scroll_arts: "Scroll through the artist’s works by clicking on the arrows.",
     search_among: "Do your search among",
     tag: "Artworks related to the theme",
     unclassified_arts: "<h2>Here are the unclassified artwork.</h2>",
@@ -264,6 +264,8 @@ const translation = {
       desc: "The main artistic movements.",
       title: "Urarts - Movements",
     },
+    next_artwork: "Next artwork",
+    previous_artwork: "Previous artwork",
     scroll_to_bottom: "Scroll to bottom",
     scroll_to_top: "Scroll to top",
     talents: {

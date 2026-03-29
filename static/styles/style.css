@@ -152,14 +152,20 @@ input {
 }
 
 
+/* Boutons */
+@layer base {
+    button.paper {
+        background-color: revert !important;
+    }
+}
+
+
 /* fix : Twind v1 workaround */
 @media (max-width: 440px) {
     .grid-cols-1 {
         grid-template-columns: repeat(1, minmax(0px, 1fr)) !important;
     }
 }
-
-/*****************************/
 
 
 /* Overlay */
@@ -243,6 +249,61 @@ input {
 
 
 /* Conteneurs des œuvres */
+.art-transition-shell {
+    will-change: transform, opacity, filter;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.art-slide-in-from-right {
+    animation: artSlideInFromRight 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.art-slide-in-from-left {
+    animation: artSlideInFromLeft 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes artSlideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(90px) scale(0.96) rotate(1deg);
+        filter: blur(3px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(-8px) scale(1.01) rotate(0deg);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes artSlideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-90px) scale(0.96) rotate(-1deg);
+        filter: blur(3px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(8px) scale(1.01) rotate(0deg);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+        filter: blur(0);
+    }
+}
+
 @media (min-width: 1024px) and (max-width: 1920px) {
 
     /* flex : flex-grow | flex-shrink | flex-basis */
@@ -273,6 +334,7 @@ input {
 
 /* Cadres ou filtres des œuvres */
 .art-frame {
+    will-change: transform;
     box-sizing: border-box;
     display: inline-block;
     position: relative;
@@ -438,8 +500,7 @@ input {
     /* ..sans déformation de l'image */
     object-fit: cover;
 }
-
-/**************************/
+/****************************/
 
 .art-polyptych-5 {
     margin-right: 0.3vw;
