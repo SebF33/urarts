@@ -1,10 +1,10 @@
 import { CompiledQuery, DatabaseConnection, Driver, QueryResult } from "kysely";
-import { DB as SqliteDatabase, QueryParameterSet } from "sqlite";
+import { DatabaseSync, type SQLInputValue } from "node:sqlite";
 
 export class SqliteDriver implements Driver {
   readonly #connectionMutex = new ConnectionMutex();
 
-  #db?: SqliteDatabase;
+  #db?: DatabaseSync;
   #connection?: DatabaseConnection;
 
   path?: string;
@@ -14,7 +14,7 @@ export class SqliteDriver implements Driver {
   }
 
   init(): Promise<void> {
-    this.#db = new SqliteDatabase(this.path);
+    this.#db = new DatabaseSync(this.path!);
     this.#connection = new SqliteConnection(this.#db);
     return Promise.resolve();
   }
@@ -48,29 +48,35 @@ export class SqliteDriver implements Driver {
 }
 
 class SqliteConnection implements DatabaseConnection {
-  readonly #db: SqliteDatabase;
+  readonly #db: DatabaseSync;
 
-  constructor(db: SqliteDatabase) {
+  constructor(db: DatabaseSync) {
     this.#db = db;
   }
 
   executeQuery<O>(compiledQuery: CompiledQuery): Promise<QueryResult<O>> {
     const { sql, parameters } = compiledQuery;
-    const stmt = this.#db.prepareQuery(sql);
+    const stmt = this.#db.prepare(sql);
 
     return Promise.resolve({
-      rows: stmt.allEntries(parameters as QueryParameterSet) as unknown as O[],
+      rows: stmt.all(...toSqliteParams(parameters)) as unknown as O[],
     });
   }
 
-  async *streamQuery<O>(compiledQuery: CompiledQuery): AsyncGenerator<O, void, unknown> {
+  async *streamQuery<O>(
+    compiledQuery: CompiledQuery,
+  ): AsyncGenerator<O, void, unknown> {
     const { sql, parameters } = compiledQuery;
-    const stmt = this.#db.prepareQuery(sql);
+    const stmt = this.#db.prepare(sql);
 
-    for (const row of stmt.iterEntries(parameters as QueryParameterSet)) {
+    for (const row of stmt.iterate(...toSqliteParams(parameters))) {
       yield row as unknown as O;
     }
   }
+}
+
+function toSqliteParams(parameters: readonly unknown[]): SQLInputValue[] {
+  return parameters as SQLInputValue[];
 }
 
 class ConnectionMutex {
