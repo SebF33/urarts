@@ -3,14 +3,17 @@ import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { useEffect, useState } from "preact/hooks";
 
+
 const COOKIE_NAME = "geo_consent"; // valeurs : "yes", "no"
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 an
+
 
 function setCookie(name: string, value: string, maxAgeSec: number) {
   document.cookie = `${name}=${
     encodeURIComponent(value)
   };max-age=${maxAgeSec};path=/;SameSite=Strict;Secure`;
 }
+
 
 function getCookie(name: string) {
   const m = document.cookie.match(
@@ -19,11 +22,13 @@ function getCookie(name: string) {
   return m ? decodeURIComponent(m[2]) : null;
 }
 
+
 export default function GeolocationConsent() {
   const [consent, setConsent] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const c = getCookie(COOKIE_NAME);
@@ -35,11 +40,13 @@ export default function GeolocationConsent() {
     }
   }, []);
 
+
   const handleDecline = () => {
     setCookie(COOKIE_NAME, "no", COOKIE_MAX_AGE);
     setConsent("no");
     setVisible(false);
   };
+
 
   const handleAccept = async () => {
     setSending(true);
@@ -105,15 +112,17 @@ export default function GeolocationConsent() {
     }
   };
 
+
   // ne rien afficher si l'utilisateur a déjà répondu
   if (consent === "yes" || consent === "no") return null;
 
   if (!visible) return null;
 
+
   return (
     <div
       aria-live="polite"
-      class="fixed inset-0 bg-black bg-opacity-70 flex items-end md:items-center justify-center z-[99999] pointer-events-none"
+      class="fixed inset-0 bg-black/70 flex items-end md:items-center justify-center z-[99999] pointer-events-none"
     >
       <div
         role="dialog"
@@ -171,7 +180,9 @@ export default function GeolocationConsent() {
                 onClick={handleAccept}
                 disabled={sending}
                 class="px-4 py-2 rounded-lg font-medium transition"
-                aria-label={`${i18next.t("meta.accept_geo_consent", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("meta.accept_geo_consent", { ns: "translation" })
+                }`}
                 style={{
                   background: sending ? "rgba(103,176,232,0.55)" : "#67b0e8",
                   color: "#141b1e",
@@ -179,13 +190,17 @@ export default function GeolocationConsent() {
                   opacity: sending ? 0.85 : 1,
                 }}
               >
-                {sending ? i18next.t("geoConsent.sending", { ns: "translation" }) : i18next.t("geoConsent.accept", { ns: "translation" })}
+                {sending
+                  ? i18next.t("geoConsent.sending", { ns: "translation" })
+                  : i18next.t("geoConsent.accept", { ns: "translation" })}
               </button>
 
               <button
                 onClick={handleDecline}
                 class="mt-2 sm:mt-0 px-4 py-2 rounded-lg font-medium transition"
-                aria-label={`${i18next.t("meta.decline_geo_consent", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("meta.decline_geo_consent", { ns: "translation" })
+                }`}
                 style={{
                   background: "#141b1e",
                   color: "#dadada",

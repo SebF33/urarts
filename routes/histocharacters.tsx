@@ -1,26 +1,30 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { PageProps } from "fresh";
 
 import Footer from "@islands/footer/Footer.tsx";
 import HistoSearch from "@islands/livesearch/HistoSearch.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
-export const handler: Handlers = {
-  GET(req: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  GET(ctx) {
+    const url = ctx.url;
+
     const desc = i18next.t("meta.histocharacters.desc", { ns: "translation" });
     const title = i18next.t("meta.histocharacters.title", { ns: "translation" });
-    const url = new URL(req.url);
 
     let query: string | null = null;
     query = url.searchParams.get("id") || "";
 
-    return ctx.render({ desc, query, title });
+    return {
+      data: { desc, query, title }
+    };
   },
-};
+});
 
 
 export default function HistoCharactersPage(
@@ -32,7 +36,6 @@ export default function HistoCharactersPage(
 ) {
 
   const { desc, query, title } = props.data;
-
 
   return (
     <>

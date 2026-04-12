@@ -11,9 +11,7 @@ import { PencilArrow } from "@components/Assets.tsx";
 
 
 export default function BackToTheArtistPaper() {
-
   const draggable = false;
-
 
   return (
     <a
@@ -41,5 +39,5 @@ export default function BackToTheArtistPaper() {
         </div>
       </div>
     </a>
-  );  
+  );
 }

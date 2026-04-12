@@ -1,4 +1,4 @@
-import { ArtCollection } from "@utils/types.d.ts";
+import type { ArtCollection } from "@utils/types.d.ts";
 import {
   artistAvatarSignal,
   artistNameSignal,
@@ -25,7 +25,9 @@ type ArtModalProps = {
 };
 
 
-export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalProps) {
+export default function ArtModal(
+  { art, ispersogallery, panel, url }: ArtModalProps,
+) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
@@ -33,15 +35,24 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
   const lng = i18next.language;
 
+  // Contexte
   const isPersoGallery = !!ispersogallery;
   const basePath = isPersoGallery ? "../../textures/" : "../textures/";
 
-  const draggable = false;
-  const rotationClasses: string[] = ['rotate-3', '-rotate-6', 'rotate-2', '-rotate-2', 'rotate-1', '-rotate-3'];
 
-  // Style pour page perso
-  const LinksDisablerStyle = (
-    isPersoGallery ? (
+  // CSS
+  const draggable = false;
+  const rotationClasses: string[] = [
+    "rotate-3",
+    "-rotate-6",
+    "rotate-2",
+    "-rotate-2",
+    "rotate-1",
+    "-rotate-3",
+  ];
+
+  const LinksDisablerStyle = isPersoGallery
+    ? (
       <style>
         {`
           .art-modal-container.no-links a {
@@ -55,8 +66,8 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
           }
         `}
       </style>
-    ) : null
-  );
+    )
+    : null;
 
 
   // Background de la modal
@@ -83,18 +94,18 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   // Ouverture de la modal
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 0);
-  
+
     if (globalThis.location.hash !== "#modal") {
       globalThis.location.hash = "modal";
     }
-  
+
     const onHash = () => {
       if (globalThis.location.hash !== "#modal") {
         handleClose({ fromHistory: true }); // fermer la modal
       }
     };
     addEventListener("hashchange", onHash);
-  
+
     return () => {
       clearTimeout(timer);
       removeEventListener("hashchange", onHash);
@@ -109,41 +120,46 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   useEffect(() => {
     if (isVisible) {
       document.body.classList.add("no-scroll");
-  
+
       // désactiver la restauration auto native du navigateur
-      try { history.scrollRestoration = 'manual'; } catch {}
-  
+      try {
+        history.scrollRestoration = "manual";
+      } catch {}
+
       // mémoriser la position actuelle
       scrollYRef.current = globalThis.scrollY || globalThis.pageYOffset || 0;
-  
+
       // éviter le décalage dû à largeur de la scrollbar
-      const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth = globalThis.innerWidth -
+        document.documentElement.clientWidth;
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-  
+
       // geler la page à la position courante
-      document.documentElement.style.scrollBehavior = 'auto';
-      document.body.style.position = 'fixed';
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollYRef.current}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-      document.body.style.overscrollBehavior = 'contain';
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      document.body.style.overscrollBehavior = "contain";
     } else {
       document.body.classList.remove("no-scroll");
     }
-  
+
     return () => {
       // réactiver le scroll si fermeture
       document.body.classList.remove("no-scroll");
-      document.body.style.paddingRight = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      document.body.style.overscrollBehavior = '';
-      document.documentElement.style.scrollBehavior = '';
-      try { history.scrollRestoration = 'auto'; } catch {}
+      document.body.style.paddingRight = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overscrollBehavior = "";
+      document.documentElement.style.scrollBehavior = "";
+      try {
+        history.scrollRestoration = "auto";
+      } catch {}
     };
   }, [isVisible]);
 
@@ -151,7 +167,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   // Annuler les clics dans la barre de navigation
   useEffect(() => {
     const navElement = document.getElementById("Urarts-Nav");
-  
+
     if (navElement) {
       if (isVisible) {
         navElement.classList.add("pointer-events-none");
@@ -159,7 +175,7 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
         navElement.classList.remove("pointer-events-none");
       }
     }
-  
+
     return () => {
       if (navElement) {
         navElement.classList.remove("pointer-events-none");
@@ -174,7 +190,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       if (event.key === "Escape") handleClose(); // fermer la modal
     };
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) handleClose(); // fermer la modal
+      if (
+        modalRef.current && !modalRef.current.contains(event.target as Node)
+      ) handleClose(); // fermer la modal
     };
 
     if (isVisible) {
@@ -188,24 +206,22 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     };
   }, [isVisible]);
 
-
   const handleClose = (opts?: { fromHistory?: boolean }) => {
     if (!opts?.fromHistory && globalThis.location.hash === "#modal") {
       history.back();
       return;
     }
-  
+
     setIsVisible(false);
     restoreScroll();
     // à voir : bug d'affichage si délai de fermeture, donc pas d'animation
     //setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
-    artModalOpenSignal.value = false
+    artModalOpenSignal.value = false;
   };
-
 
   const restoreScroll = () => {
     const y = scrollYRef.current || 0;
-  
+
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         globalThis.scrollTo(0, y);
@@ -230,7 +246,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
     // on précise que c'est pour du contenu concernant seulement un(e) artiste
     isForAloneArtistSignal.value = true;
     artistAvatarSignal.value = art.avatar_url;
-    artistNameSignal.value = art.first_name ? `${art.first_name} ${art.last_name}` : art.last_name;
+    artistNameSignal.value = art.first_name
+      ? `${art.first_name} ${art.last_name}`
+      : art.last_name;
     artistSlugSignal.value = art.artist_slug;
 
     // si c'est dans une page perso
@@ -283,18 +301,18 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
 
   // Panneau
   function panelText(panel: string) {
-    let txt = '';
+    let txt = "";
 
-    if (panel === '2') {
+    if (panel === "2") {
       txt = ` ${i18next.t("modal.panel_left", { ns: "translation" })}`;
-    } else if (panel === '3') {
+    } else if (panel === "3") {
       txt = ` ${i18next.t("modal.panel_right", { ns: "translation" })}`;
-    } else if (panel === '4') {
+    } else if (panel === "4") {
       txt = ` ${i18next.t("modal.panel_far_left", { ns: "translation" })}`;
-    } else if (panel === '5') {
+    } else if (panel === "5") {
       txt = ` ${i18next.t("modal.panel_far_right", { ns: "translation" })}`;
     }
-  
+
     return txt;
   }
 
@@ -304,14 +322,15 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   const nfIN = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
 
   const formatDimensions = (w?: number | string, h?: number | string) => {
-    const toNum = (v: unknown) => (typeof v === "string" ? Number(v) : v) as number;
+    const toNum = (v: unknown) =>
+      (typeof v === "string" ? Number(v) : v) as number;
     const ww = toNum(w);
     const hh = toNum(h);
-    
+
     if (!Number.isFinite(ww) || !Number.isFinite(hh)) {
       return `${h} × ${w} ${lng === "fr" ? "cm" : "in"}`; // fallback brut si invalide
     }
-    
+
     if (lng === "fr") {
       // convention FR : hauteur × largeur en cm
       return `${nfCM.format(hh)} × ${nfCM.format(ww)} cm`;
@@ -324,9 +343,10 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
   };
 
 
+  // Modal
   const modalLayout = (
     <div
-      class={`fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 z-[99999]
+      class={`fixed inset-0 bg-black/70 flex items-center justify-center p-2 z-[99999]
       overlay-transition ${isVisible ? "visible" : ""}`}
     >
       {LinksDisablerStyle}
@@ -334,7 +354,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
       {/* Modal */}
       <div
         ref={modalRef}
-        class={`art-modal-container relative max-w-[calc(100vw-48px)] md:max-w-[60vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${isVisible ? "visible" : ""} ${isPersoGallery ? "no-links" : ""}`}
+        class={`art-modal-container relative max-w-[calc(100vw-48px)] md:max-w-[60vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${
+          isVisible ? "visible" : ""
+        } ${isPersoGallery ? "no-links" : ""}`}
         style={resolvedBgStyle}
       >
         <button
@@ -356,30 +378,37 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 draggable={draggable}
               />
             </div>
-            {art.copyright === 0 ? (
-              <div class="flex items-center">
-                <s class="text-base inline">©</s>
-                <span class="text-base inline ml-1">{i18next.t("arts.public_domain", { ns: "translation" })}</span>
-              </div>
-            ) : (
-              <div class="flex items-center">
-                <span class="text-base inline">©</span>
-                <span class="text-base inline ml-1">{art.first_name ?? ""} {art.last_name}</span>
-              </div>
-            )}
+            {art.copyright === 0
+              ? (
+                <div class="flex items-center">
+                  <s class="text-base inline">©</s>
+                  <span class="text-base inline ml-1">
+                    {i18next.t("arts.public_domain", { ns: "translation" })}
+                  </span>
+                </div>
+              )
+              : (
+                <div class="flex items-center">
+                  <span class="text-base inline">©</span>
+                  <span class="text-base inline ml-1">
+                    {art.first_name ?? ""} {art.last_name}
+                  </span>
+                </div>
+              )}
           </div>
 
           {/* Section droite : Détails */}
           <div class="flex flex-col justify-start text-center md:text-left flex-grow w-full md:w-auto">
             <div class="flex items-center justify-center md:justify-start gap-1 md:gap-2 mb-4">
               {/* Titre */}
-              <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-5">
+              <h2 class="title-marble-engraved text-xl md:text-2xl font-bold leading-7">
                 {art.name + panelText(panel)}
               </h2>
               {/* Année */}
               {art.year && (
                 <div class="paper paper-shadow min-h-12 min-w-[50px] inline-flex items-center p-1 z-10 transform -rotate-3 rounded-md">
-                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1"></div>
+                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1">
+                  </div>
                   <span class="w-full text-xl leading-4 text-center">
                     {art.year}
                   </span>
@@ -388,7 +417,8 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
               {/* Dimensions */}
               {art.width_cm != null && art.height_cm != null && (
                 <div class="paper paper-shadow min-h-12 min-w-[70px] inline-flex items-center px-2 py-1 z-10 transform rotate-12 rounded-md">
-                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1"></div>
+                  <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1">
+                  </div>
                   <span class="w-full text-md leading-4 text-center">
                     {formatDimensions(art.width_cm, art.height_cm)}
                   </span>
@@ -405,7 +435,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 class="block"
                 draggable={draggable}
               >
-                <div class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}>
+                <div
+                  class={`paper paper-shadow min-h-8 min-w-[100px] max-w-[90vw] sm:max-w-[320px] transform -rotate-3`}
+                >
                   <div class="top-tape h-4 max-h-4 min-h-4 max-w-[90%]"></div>
                   <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-2 py-1 z-10 select-none">
                     <div class="text-sm sm:text-base leading-4 select-none min-w-0 whitespace-normal break-keep">
@@ -443,7 +475,9 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                 {art.tags.map((tag, idx) => (
                   <div
                     key={idx}
-                    class={`paper paper-shadow transform ${rotationClasses[idx % rotationClasses.length]} max-w-[44vw] sm:max-w-[220px] rounded-md`}
+                    class={`paper paper-shadow transform ${
+                      rotationClasses[idx % rotationClasses.length]
+                    } max-w-[44vw] sm:max-w-[220px] rounded-md`}
                   >
                     <a
                       onClick={(e) => handleLinkClick(e, `/tag/${tag.slug}`)}
@@ -452,7 +486,8 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
                       class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
                       draggable={draggable}
                     >
-                      <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
+                      <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2">
+                      </div>
                       <img
                         src={`/icons/${tag.name}.png`}
                         alt={tag.name}
@@ -476,8 +511,10 @@ export default function ArtModal({ art, ispersogallery, panel, url }: ArtModalPr
         {/* Section bas : Description */}
         <div class="relative mt-6 pt-4 text-center md:text-left">
           <div class="drawline-animation"></div>
-          <h3 class="text-lg font-semibold">{i18next.t("modal.description", { ns: "translation" })}</h3>
-          <div class="paper paper-shadow w-[90%] md:w-[80%] min-h-[60px] mx-auto mb-4">
+          <h3 class="text-lg font-semibold">
+            {i18next.t("modal.description", { ns: "translation" })}
+          </h3>
+          <div class="paper paper-shadow relative w-[90%] md:w-[80%] min-h-[60px] mx-auto mb-4">
             <div class="tape-section"></div>
             <div
               class="art-modal-info text-lg text-justify leading-4 p-4 z-10 select-none"

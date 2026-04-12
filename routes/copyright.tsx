@@ -1,9 +1,10 @@
-import { ArtistRow } from "@utils/types.d.ts";
+import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
+import { HttpError, PageProps } from "fresh";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { TALENTS } from "@utils/constants.ts";
@@ -12,13 +13,14 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
+
 type Artists = Array<ArtistRow>;
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     if (!DisplayCopyrightedArtist) {
-      return ctx.renderNotFound();
+      throw new HttpError(404);
     }
 
     const desc = i18next.t("meta.copyright.desc", { ns: "translation" });
@@ -64,9 +66,11 @@ export const handler: Handlers = {
     const grid =
       "grid gap-4 sm:gap-10 grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    return ctx.render({ artists, desc, grid, title });
+    return {
+      data: { artists, desc, grid, title }
+    };
   },
-};
+});
 
 
 export default function CopyrightPage(
@@ -79,7 +83,6 @@ export default function CopyrightPage(
 ) {
 
   const { artists, desc, grid, title } = props.data;
-
 
   return (
     <>

@@ -1,6 +1,10 @@
 import { Any } from "any";
-import { artistsYearsSignal, histocharactersYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
-import { css } from "@twind/core";
+import {
+  artistsYearsSignal,
+  histocharactersYearsSignal,
+  languageSignal,
+  nationalitySignal,
+} from "@utils/signals.ts";
 import {
   DEFAULT_NAV_THEME,
   DELAY_LEONARDO_CALL,
@@ -9,17 +13,27 @@ import {
   NAV_THEME_KEY,
   SECONDARY_NAV_THEME,
 } from "@utils/constants.ts";
-import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
 import { Language } from "@utils/i18n/i18next.d.ts";
-import { skipNextLeonardoAnimation, waitForTransitionEnd } from "@utils/helpers.ts";
+import {
+  skipNextLeonardoAnimation,
+  waitForTransitionEnd,
+} from "@utils/helpers.ts";
 import tippy from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
-import { ApiIcon, ButtonLines, HeartIcon, HistoIcon, InterrogationIcon, StatIcon, WomanIcon } from "@components/Assets.tsx";
+import {
+  ApiIcon,
+  ButtonLines,
+  HeartIcon,
+  HistoIcon,
+  InterrogationIcon,
+  StatIcon,
+  WomanIcon,
+} from "@components/Assets.tsx";
 
 
 export interface Props {
@@ -30,15 +44,14 @@ export interface Props {
 export default function Nav(props: Props) {
   // CSS
   const draggable = false;
-  const desktopCurrent = "data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark";
-  const desktopHover = "hover:text-lighterdark transition duration-300";
-  const desktopPrimaryAnchor = `py-4 px-2 text-lg font-medium ${desktopHover} ${desktopCurrent}`;
-  const desktopHistoAnchor = `py-3 -mr-1 ${desktopHover} ${desktopCurrent}`;
-  const desktopWomanAnchor = `py-3 ${desktopHover} ${desktopCurrent}`;
-  const desktopHeartAnchor = `py-4 mt-1 ${desktopHover} ${desktopCurrent}`;
-  const desktopStatAnchor = desktopHeartAnchor;
-  const desktopApiAnchor = desktopStatAnchor;
-  const desktopInterrogationAnchor = `py-4 ${desktopHover} ${desktopCurrent}`;
+  const desktopCurrent = "data-[current]:text-lighterdark data-[current]:after:scale-x-100";
+  const desktopIconBase = "relative h-16 w-12 shrink-0 items-center justify-center text-white after:absolute after:bottom-0 after:left-1/2 after:h-1 after:w-12 after:-translate-x-1/2 after:scale-x-0 after:bg-lighterdark after:transition-transform after:duration-200";  const desktopPrimaryAnchor = `py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300 data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark`;
+  const desktopHistoAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
+  const desktopWomanAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
+  const desktopHeartAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
+  const desktopStatAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
+  const desktopApiAnchor = `hidden lg:inline-flex ${desktopIconBase} ${desktopCurrent}`;
+  const desktopInterrogationAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const mobileCurrent = "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
   const mobileHover = "hover:bg-lighterdark transition duration-300";
   const mobilePrimaryAnchor = `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
@@ -47,13 +60,14 @@ export default function Nav(props: Props) {
 
   // Leonardo
   const [leonardoActiveContent, setLeonardoActiveContent] = useState<boolean>();
-  const leonardoStatus = localStorage.getItem('leonardo');
+  const leonardoStatus = localStorage.getItem("leonardo");
+
 
   // Activation/désactivation de Leonardo
   useEffect(() => {
     const ref = document.querySelector<HTMLAnchorElement>("#U-Icon");
     if (!ref) return;
-    
+
     let shutInterval: number;
     let mousemoveHandler: (e: MouseEvent) => void;
 
@@ -64,9 +78,9 @@ export default function Nav(props: Props) {
       duration: [600, 300],
       content:
         `<img id="leonardoAvatar" class="absolute top-[-0.5rem] left-[-2rem] max-w-[95px] min-w-[95px]" src="/textures/leonardo.png" alt="Leonardo" loading="lazy" draggable=${draggable}/>
-        <div class="absolute top-[-0.6rem] left-[-2.0rem]"><div class="eye left-eye"><div class="eyeshut"><span></span></div><div class="eyeball left-eyeball"></div></div></div>
-        <div class="absolute top-[-0.57rem] left-[-0.60rem]"><div class="eye right-eye"><div class="eyeshut"><span></span></div><div class="eyeball right-eyeball"></div></div></div>
-        <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-5 select-none">...</div>`,
+        <div class="absolute top-[-0.6rem] left-[-2.0rem]"><div class="eye left-eye"><div class="eyeshut"><div></div></div><div class="eyeball left-eyeball"></div></div></div>
+        <div class="absolute top-[-0.57rem] left-[-0.60rem]"><div class="eye right-eye"><div class="eyeshut"><div></div></div><div class="eyeball right-eyeball"></div></div></div>
+        <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-7 select-none">...</div>`,
       hideOnClick: "false",
       interactive: true,
       maxWidth: 900,
@@ -81,17 +95,22 @@ export default function Nav(props: Props) {
         const tooltipEl = instance.popper;
 
         // yeux de Leonardo
-        const eyes = Array.from(tooltipEl.querySelectorAll<HTMLElement>(".eye"));
+        const eyes = Array.from(
+          tooltipEl.querySelectorAll<HTMLElement>(".eye"),
+        );
         const maxShutDelay = 7000;
         const minShutDelay = 1000;
 
         // événements hover & click sur chaque œil
         eyes.forEach((eye) => {
-          const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+          const eyeshut = eye.querySelector<HTMLElement>(".eyeshut div");
           if (!eyeshut) return;
-          eye.addEventListener("mouseover", () => eyeshut.style.height = "100%");
-          eye.addEventListener("mouseout",  () => eyeshut.style.height = "0%");
-          eye.addEventListener("click",     () => {
+          eye.addEventListener(
+            "mouseover",
+            () => eyeshut.style.height = "100%",
+          );
+          eye.addEventListener("mouseout", () => eyeshut.style.height = "0%");
+          eye.addEventListener("click", () => {
             skipNextLeonardoAnimation("#leonardoContent"); // éviter flicker lors de la fermeture
             instance.hide();
             localStorage.setItem("leonardo", "inactive");
@@ -101,13 +120,16 @@ export default function Nav(props: Props) {
 
         // animation de clignement aléatoire
         function animateEyeShut() {
-          const delay = Math.random() * (maxShutDelay - minShutDelay) + minShutDelay;
+          const delay = Math.random() * (maxShutDelay - minShutDelay) +
+            minShutDelay;
           eyes.forEach((eye) => {
-            const eyeshut = eye.querySelector<HTMLElement>(".eyeshut span");
+            const eyeshut = eye.querySelector<HTMLElement>(".eyeshut div");
             if (!eyeshut) return;
             setTimeout(() => {
               eyeshut.style.height = "100%";
-              setTimeout(() => { eyeshut.style.height = "0%"; }, 200);
+              setTimeout(() => {
+                eyeshut.style.height = "0%";
+              }, 200);
             }, delay);
           });
         }
@@ -125,13 +147,16 @@ export default function Nav(props: Props) {
             if (!eyeball) return;
             // centre de l'œil
             const rect = eye.getBoundingClientRect();
-            const cx = rect.left + rect.width  / 2;
-            const cy = rect.top  + rect.height / 2;
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
             // delta vers le pointeur
             const dx = e.clientX - cx;
             const dy = e.clientY - cy;
             // décalage horizontal
-            const x = Math.max(-strengthX, Math.min(strengthX, dx / (globalThis.innerWidth  / 2) * strengthX));
+            const x = Math.max(
+              -strengthX,
+              Math.min(strengthX, dx / (globalThis.innerWidth / 2) * strengthX),
+            );
             // décalage vertical, avec limite adaptée selon la direction
             const yRaw = dy / (globalThis.innerHeight / 2);
             let y: number;
@@ -141,7 +166,8 @@ export default function Nav(props: Props) {
               y = Math.max(0, Math.min(strengthYDown, yRaw * strengthYDown));
             }
             // centrage de base + offset
-            eyeball.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+            eyeball.style.transform =
+              `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
           });
         };
         document.addEventListener("mousemove", mousemoveHandler);
@@ -151,18 +177,18 @@ export default function Nav(props: Props) {
       onHide() {
         clearInterval(shutInterval);
         document.removeEventListener("mousemove", mousemoveHandler);
-      }
+      },
     });
 
     // retarde l'apparition au chargement de la page
     const firstShowTimer = setTimeout(() => {
-      if (localStorage.getItem('leonardo') !== 'inactive') {
+      if (localStorage.getItem("leonardo") !== "inactive") {
         leonardoTooltip.show();
         setLeonardoActiveContent(true);
       }
     }, DELAY_LEONARDO_FIRST_CALL);
 
-    if (leonardoStatus === 'inactive') { leonardoTooltip.hide(); }
+    if (leonardoStatus === "inactive") leonardoTooltip.hide();
 
     return () => {
       clearTimeout(firstShowTimer);
@@ -171,20 +197,27 @@ export default function Nav(props: Props) {
 
 
   // Appel à l'API "Leonardo" avec effet de transition
-  const fetchLeonardoData = async (params: Record<string, Any>, signal: AbortSignal) => {
-
-    const leonardoContent = document.querySelector("#leonardoContent") as HTMLElement | null;
+  const fetchLeonardoData = async (
+    params: Record<string, Any>,
+    signal: AbortSignal,
+  ) => {
+    const leonardoContent = document.querySelector("#leonardoContent") as
+      | HTMLElement
+      | null;
     if (!leonardoContent) return;
 
     try {
-      const response = await ky.get(`${UrlBasePath}/api/leonardo`, { searchParams: params, signal });
+      const response = await ky.get(`${UrlBasePath}/api/leonardo`, {
+        searchParams: params,
+        signal,
+      });
       const leonardoResponse = await response.text();
 
       // si nouveau contenu pour Leonardo
       if (leonardoContent && leonardoResponse !== "no_change") {
         // nettoyage des images déjà présentes
         const imgs = leonardoContent.querySelectorAll("img");
-        imgs.forEach(i => i.remove());
+        imgs.forEach((i) => i.remove());
 
         // première insertion directement et marquer comme initialisé
         const isInitialized = leonardoContent.dataset.initialized === "true";
@@ -207,7 +240,11 @@ export default function Nav(props: Props) {
           // injection directe du contenu sans animation
           leonardoContent.innerHTML = leonardoResponse;
           // nettoyage des classes / styles d'animation
-          leonardoContent.classList.remove("leonardo--prepare", "leonardo--enter", "leonardo-pulse");
+          leonardoContent.classList.remove(
+            "leonardo--prepare",
+            "leonardo--enter",
+            "leonardo-pulse",
+          );
           leonardoContent.style.opacity = "";
           leonardoContent.style.transform = "";
           leonardoContent.style.filter = "";
@@ -234,7 +271,9 @@ export default function Nav(props: Props) {
         // forcer le reflow
         void leonardoContent.offsetHeight;
         // démarrer l'animation de sortie
-        requestAnimationFrame(() => { oldClone.classList.add("leonardo-clone--exit"); });
+        requestAnimationFrame(() => {
+          oldClone.classList.add("leonardo-clone--exit");
+        });
         // attendre la fin de la transition
         await waitForTransitionEnd(oldClone, 300);
         // fin de l'animation de sortie
@@ -252,47 +291,66 @@ export default function Nav(props: Props) {
       }
     } catch (error: Any) {
       // gestion des erreurs
-      if (error.name !== 'AbortError' && leonardoContent)
-        leonardoContent.innerHTML = i18next.t("leonardo.error", { ns: "translation" });
-      if (leonardoContent)
+      if (error.name !== "AbortError" && leonardoContent) {
+        leonardoContent.innerHTML = i18next.t("leonardo.error", {ns: "translation"});
+      }
+      if (leonardoContent) {
         leonardoContent.textContent = "...";
+      }
     }
   };
 
 
   // Gestion des appels à l'API "Leonardo"
   useEffect(() => {
-    if (leonardoActiveContent === false || leonardoStatus === 'inactive') return;
-    
+    if (leonardoActiveContent === false || leonardoStatus === "inactive") {
+      return;
+    }
+
     // Paramètres pour la requête
     const url = new URL(props.url);
     const pageName = url.pathname.split("/")[1];
     const subpageSlug = url.pathname.split("/")[2];
 
-    const ctxArray = (pageName !== "artists" && pageName !== "histocharacters" && url.searchParams.has("id"))
-      ? [url.searchParams.get("id"), url.searchParams.has("alone") ? "alone" : ""]
-      : (pageName === "artists") 
-        ? [artistsYearsSignal.value[0], artistsYearsSignal.value[1], nationalitySignal.value] 
-        : (pageName === "histocharacters") 
-          ? [histocharactersYearsSignal.value[0], histocharactersYearsSignal.value[1], nationalitySignal.value] 
-          : []; 
-    
+    const ctxArray =
+      (pageName !== "artists" && pageName !== "histocharacters" &&
+          url.searchParams.has("id"))
+        ? [
+          url.searchParams.get("id"),
+          url.searchParams.has("alone") ? "alone" : "",
+        ]
+        : (pageName === "artists")
+        ? [
+          artistsYearsSignal.value[0],
+          artistsYearsSignal.value[1],
+          nationalitySignal.value,
+        ]
+        : (pageName === "histocharacters")
+        ? [
+          histocharactersYearsSignal.value[0],
+          histocharactersYearsSignal.value[1],
+          nationalitySignal.value,
+        ]
+        : [];
+
     const ctx = JSON.stringify(ctxArray.join("_"));
-    
+
     // Gérer l'annulation des requêtes
     const controller = new AbortController();
-  
+
     // Appel initial
     const firstTimer = setTimeout(() => {
       fetchLeonardoData({
         lng: languageSignal.value,
-        welcome: url.searchParams.get("fresh-partial") !== "true" ? "true" : "false",
+        welcome: url.searchParams.get("fresh-partial") !== "true"
+          ? "true"
+          : "false",
         page: pageName,
         subpage: subpageSlug,
         pagectx: ctx,
       }, controller.signal);
     }, DELAY_LEONARDO_CALL);
-  
+
     // Deuxième appel (pour l'anecdote)
     const secondTimer = setTimeout(() => {
       fetchLeonardoData({
@@ -303,101 +361,76 @@ export default function Nav(props: Props) {
         fact: "true",
       }, controller.signal);
     }, DELAY_LEONARDO_CALL + DELAY_LEONARDO_FACT_TRIGGER);
-    
+
     // Nettoyer les délais et annuler les requêtes lorsque les dépendances changent ou le composant est démonté
     return () => {
       clearTimeout(firstTimer);
       clearTimeout(secondTimer);
       controller.abort();
     };
+  }, [
+    props.url,
+    leonardoActiveContent,
+    nationalitySignal.value,
+    artistsYearsSignal.value,
+    histocharactersYearsSignal.value,
+  ]);
 
-  }, [props.url, leonardoActiveContent, nationalitySignal.value, artistsYearsSignal.value, histocharactersYearsSignal.value]);
-  
 
   // Visibilité Leonardo
-  function handleUrartsClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
+  function handleUrartsClick(
+    event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
+  ) {
     const ref = event.currentTarget as HTMLAnchorElement;
     const instance = ref._tippy;
     const isVisible = instance.state.isVisible;
-    
+
     if (isVisible) {
       skipNextLeonardoAnimation("#leonardoContent"); // éviter flicker lors de la fermeture
       instance.hide();
-      localStorage.setItem('leonardo', 'inactive');
+      localStorage.setItem("leonardo", "inactive");
       setLeonardoActiveContent(false);
     } else {
       setLeonardoActiveContent(true);
-      localStorage.setItem('leonardo', 'active');
+      localStorage.setItem("leonardo", "active");
       setTimeout(() => {
         instance.show();
-    }, DELAY_LEONARDO_CALL);
+      }, DELAY_LEONARDO_CALL);
     }
   }
 
 
   // Infobulles
   useEffect(() => {
-    const desktopHistoAnchor = document.querySelector<HTMLElement>("#desktopHistoAnchor");
-    const desktopWomanAnchor = document.querySelector<HTMLElement>("#desktopWomanAnchor");
-    const desktopHeartAnchor = document.querySelector<HTMLElement>("#desktopHeartAnchor");
-    const desktopStatAnchor = document.querySelector<HTMLElement>("#desktopStatAnchor");
-    const desktopApiAnchor = document.querySelector<HTMLElement>("#desktopApiAnchor");
-    const desktopInterrogationAnchor = document.querySelector<HTMLElement>("#desktopInterrogationAnchor");
+    const ids = [
+      ["#desktopHistoAnchor", i18next.t("nav.histocharacters", { ns: "translation" })],
+      ["#desktopWomanAnchor", i18next.t("nav.women", { ns: "translation" })],
+      ["#desktopHeartAnchor", i18next.t("nav.mimi", { ns: "translation" })],
+      ["#desktopStatAnchor", i18next.t("nav.indicators", { ns: "translation" })],
+      ["#desktopApiAnchor", i18next.t("nav.api", { ns: "translation" })],
+      ["#desktopInterrogationAnchor", i18next.t("nav.about", { ns: "translation" })],
+    ] as const;
 
-    if (desktopHistoAnchor) {
-      tippy(desktopHistoAnchor, {
+    const instances: Any[] = [];
+
+    ids.forEach(([selector, label]) => {
+      const el = document.querySelector<HTMLElement>(selector);
+      if (!el) return;
+
+      const instance = tippy(el, {
         allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.histocharacters", { ns: "translation" })}</p>`,
-        interactive: true,
+        content: `<p class="text-[1rem]">${label}</p>`,
+        interactive: false,
         placement: "bottom",
         theme: "urarts",
       });
-    }
-    if (desktopWomanAnchor) {
-      tippy(desktopWomanAnchor, {
-        allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.women", { ns: "translation" })}</p>`,
-        interactive: true,
-        placement: "bottom",
-        theme: "urarts",
-      });
-    }
-    if (desktopHeartAnchor) {
-      tippy(desktopHeartAnchor, {
-        allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.mimi", { ns: "translation" })}</p>`,
-        interactive: true,
-        placement: "bottom",
-        theme: "urarts",
-      });
-    }
-    if (desktopStatAnchor) {
-      tippy(desktopStatAnchor, {
-        allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.indicators", { ns: "translation" })}</p>`,
-        interactive: true,
-        placement: "bottom",
-        theme: "urarts",
-      });
-    }
-    if (desktopApiAnchor) {
-      tippy(desktopApiAnchor, {
-        allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.api", { ns: "translation" })}</p>`,
-        interactive: true,
-        placement: "bottom",
-        theme: "urarts",
-      });
-    }
-    if (desktopInterrogationAnchor) {
-      tippy(desktopInterrogationAnchor, {
-        allowHTML: true,
-        content: `<p class="text-[1rem]">${i18next.t("nav.about", { ns: "translation" })}</p>`,
-        interactive: true,
-        placement: "bottom",
-        theme: "urarts",
-      });
-    }
+
+      instances.push(instance);
+    });
+
+    return () => {
+      instances.forEach((instance) => instance.destroy());
+    };
   }, []);
 
 
@@ -435,30 +468,32 @@ export default function Nav(props: Props) {
     });
   }, []);
 
-  
+
   // Langue
-  (globalThis as Any).handleLanguage = function(lng: Language) {
+  (globalThis as Any).handleLanguage = function (lng: Language) {
     if (languageSignal.value !== lng) {
       i18next.changeLanguage(lng);
       languageSignal.value = lng;
-      setTimeout(() => { globalThis.location.reload(); }, 100);
+      setTimeout(() => {
+        globalThis.location.reload();
+      }, 100);
     }
-  }
+  };
 
 
   return (
     <nav
       id="Urarts-Nav"
-      class={`
+      class="
         flex flex-wrap text-white z-50 shadow-lg
         nav-theme [body[data-nav-theme='header-paper']_&]:header-paper [body[data-nav-theme='wave-colors']_&]:wave-colors
-        ${css({"text-shadow": "2px 4px 3px rgba(0,0,0,0.3)"})}
-      `}
+        [text-shadow:2px_4px_3px_rgba(0,0,0,0.3)]
+     "
     >
       <div class={`max-w-7xl w-full mx-auto px-4 z-[60]`}>
         <div class={`flex justify-between`}>
           <div class={`flex space-x-7`}>
-            <div class={`py-3 px-2 select-none`}>
+            <div class={`py-3 px-2 shrink-0 select-none`}>
               <a
                 id="U-Icon"
                 onClick={handleUrartsClick}
@@ -487,7 +522,9 @@ export default function Nav(props: Props) {
                 href="/artists"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${i18next.t("nav.artists", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("nav.artists", { ns: "translation" })
+                }`}
               >
                 {i18next.t("nav.artists", { ns: "translation" })}
               </a>
@@ -503,7 +540,9 @@ export default function Nav(props: Props) {
                 href="/movements"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("nav.movements", { ns: "translation" })
+                }`}
               >
                 {i18next.t("nav.movements", { ns: "translation" })}
               </a>
@@ -511,21 +550,27 @@ export default function Nav(props: Props) {
                 href="/talents"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${i18next.t("nav.talents", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("nav.talents", { ns: "translation" })
+                }`}
               >
                 {i18next.t("nav.talents", { ns: "translation" })}
               </a>
             </div>
           </div>
-          <div class={`hidden md:flex items-center space-x-3`}>
+          <div class={`hidden md:flex items-center`}>
             <a
               href="/histocharacters"
               id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
-              aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
+              aria-label={`${
+                i18next.t("nav.histocharacters", { ns: "translation" })
+              }`}
             >
-              <HistoIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center translate-y-[1px]">
+                <HistoIcon aria-hidden="true" />
+              </span>
             </a>
             <a
               href="/women"
@@ -534,7 +579,9 @@ export default function Nav(props: Props) {
               draggable={draggable}
               aria-label={`${i18next.t("nav.women", { ns: "translation" })}`}
             >
-              <WomanIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center">
+                <WomanIcon aria-hidden="true" />
+              </span>
             </a>
             <a
               href="/art/mimi"
@@ -543,19 +590,26 @@ export default function Nav(props: Props) {
               draggable={draggable}
               aria-label={`${i18next.t("nav.mimi", { ns: "translation" })}`}
             >
-              <HeartIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center">
+                <HeartIcon aria-hidden="true" />
+              </span>
             </a>
             <a
               href="/indicators"
               id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
-              aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
+              aria-label={`${
+                i18next.t("nav.indicators", { ns: "translation" })
+              }`}
             >
-              <StatIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center">
+                <StatIcon aria-hidden="true" />
+              </span>
             </a>
             <a
-              href="/api/arts" f-client-nav={false}
+              href="/api/arts"
+              f-client-nav={false}
               id="desktopApiAnchor"
               target="_blank"
               rel="noopener"
@@ -563,7 +617,9 @@ export default function Nav(props: Props) {
               draggable={draggable}
               aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
             >
-              <ApiIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center translate-y-[1px]">
+                <ApiIcon aria-hidden="true" />
+              </span>
             </a>
             <a
               href="/about"
@@ -572,11 +628,15 @@ export default function Nav(props: Props) {
               draggable={draggable}
               aria-label={`${i18next.t("nav.about", { ns: "translation" })}`}
             >
-              <InterrogationIcon aria-hidden="true" />
+              <span class="inline-flex items-center justify-center">
+                <InterrogationIcon aria-hidden="true" />
+              </span>
             </a>
           </div>
           <div class={`md:hidden flex items-center`}>
-            <button class={`mobile-menu-button z-[60] text-white hover:text-lighterdark focus:outline-none`}>
+            <button
+              class={`mobile-menu-button z-[60] text-white hover:text-lighterdark focus:outline-none`}
+            >
               <ButtonLines aria-hidden="true" />
             </button>
           </div>
@@ -591,7 +651,9 @@ export default function Nav(props: Props) {
               class={mobilePrimaryAnchor}
               aria-label={`${i18next.t("nav.home", { ns: "translation" })}`}
             >
-              <span class={`px-2`}>{i18next.t("nav.home", { ns: "translation" })}</span>
+              <span class={`px-2`}>
+                {i18next.t("nav.home", { ns: "translation" })}
+              </span>
             </a>
           </li>
           <li>
@@ -601,7 +663,9 @@ export default function Nav(props: Props) {
               class={mobilePrimaryAnchor}
               aria-label={`${i18next.t("nav.artists", { ns: "translation" })}`}
             >
-              <span class={`px-2`}>{i18next.t("nav.artists", { ns: "translation" })}</span>
+              <span class={`px-2`}>
+                {i18next.t("nav.artists", { ns: "translation" })}
+              </span>
             </a>
           </li>
           <li>
@@ -611,7 +675,9 @@ export default function Nav(props: Props) {
               class={mobilePrimaryAnchor}
               aria-label={`${i18next.t("nav.arts", { ns: "translation" })}`}
             >
-              <span class={`px-2`}>{i18next.t("nav.arts", { ns: "translation" })}</span>
+              <span class={`px-2`}>
+                {i18next.t("nav.arts", { ns: "translation" })}
+              </span>
             </a>
           </li>
           <li>
@@ -619,9 +685,13 @@ export default function Nav(props: Props) {
               href="/movements"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
-              aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
+              aria-label={`${
+                i18next.t("nav.movements", { ns: "translation" })
+              }`}
             >
-              <span class={`px-2`}>{i18next.t("nav.movements", { ns: "translation" })}</span>
+              <span class={`px-2`}>
+                {i18next.t("nav.movements", { ns: "translation" })}
+              </span>
             </a>
           </li>
           <li>
@@ -631,7 +701,9 @@ export default function Nav(props: Props) {
               class={mobilePrimaryAnchor}
               aria-label={`${i18next.t("nav.talents", { ns: "translation" })}`}
             >
-              <span class={`px-2`}>{i18next.t("nav.talents", { ns: "translation" })}</span>
+              <span class={`px-2`}>
+                {i18next.t("nav.talents", { ns: "translation" })}
+              </span>
             </a>
           </li>
           <li class={`flex`}>
@@ -640,7 +712,9 @@ export default function Nav(props: Props) {
                 href="/histocharacters"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
-                aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("nav.histocharacters", { ns: "translation" })
+                }`}
               >
                 <HistoIcon aria-hidden="true" />
               </a>
@@ -670,14 +744,17 @@ export default function Nav(props: Props) {
                 href="/indicators"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
-                aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
+                aria-label={`${
+                  i18next.t("nav.indicators", { ns: "translation" })
+                }`}
               >
                 <StatIcon aria-hidden="true" />
               </a>
             </div>
-            <div class={`w-[50px]`}>
+            <div class={`hidden w-[50px]`}>
               <a
-                href="/api/arts" f-client-nav={false}
+                href="/api/arts"
+                f-client-nav={false}
                 target="_blank"
                 rel="noopener"
                 class={mobileSecondaryAnchor}

@@ -4,7 +4,7 @@ import {
   resetPageBackground,
   resolveCollectionBackground,
 } from "@utils/background.ts";
-import { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
+import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artistSlugSignal,
   isForAloneArtistSignal,
@@ -49,11 +49,19 @@ export default function CollectionSearch(props: CollectionSearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
   const [navigationArts, setNavigationArts] = useState<Arts>([]);
-  const [currentArtworkId, setCurrentArtworkId] = useState<string | number | undefined>(props.query?.id);
-  const [previousArtworkId, setPreviousArtworkId] = useState<string | number | null>(null);
-  const [nextArtworkId, setNextArtworkId] = useState<string | number | null>(null);
-  const [artNavigationDirection, setArtNavigationDirection] = useState<ArtNavigationDirection>(null);
-  
+  const [currentArtworkId, setCurrentArtworkId] = useState<
+    string | number | undefined
+  >(props.query?.id);
+  const [previousArtworkId, setPreviousArtworkId] = useState<
+    string | number | null
+  >(null);
+  const [nextArtworkId, setNextArtworkId] = useState<string | number | null>(
+    null,
+  );
+  const [artNavigationDirection, setArtNavigationDirection] = useState<
+    ArtNavigationDirection
+  >(null);
+
   // Contexte
   const isPersoGallery: boolean = !!props.ispersogallery;
   isForAloneArtworkSignal.value = !!props.query?.alone;
@@ -73,10 +81,11 @@ export default function CollectionSearch(props: CollectionSearchProps) {
    */
   useEffect(() => {
     // si c'est aussi dans le contexte qui concerne un(e) seul(e) artiste
-    const aloneArtistSlug = isForAloneArtistSignal.value ? artistSlugSignal.value : "";
+    const aloneArtistSlug = isForAloneArtistSignal.value
+      ? artistSlugSignal.value
+      : "";
 
-    const apiUrl =
-      `${UrlBasePath}/api/collection?lng=${languageSignal.value}` +
+    const apiUrl = `${UrlBasePath}/api/collection?lng=${languageSignal.value}` +
       `&type=${props.type}` +
       `&slug=${props.myslug}` +
       `&name=${debouncedValue}` +
@@ -88,7 +97,9 @@ export default function CollectionSearch(props: CollectionSearchProps) {
         .then((response) => {
           if (isForAloneArtworkSignal.value) {
             setNavigationArts(response);
-            const currentArtwork = response.find((art) => String(art.id) === String(currentArtworkId));
+            const currentArtwork = response.find((art) =>
+              String(art.id) === String(currentArtworkId)
+            );
             setSearchResults(currentArtwork ? [currentArtwork] : []);
           } else {
             setSearchResults(response);
@@ -101,13 +112,21 @@ export default function CollectionSearch(props: CollectionSearchProps) {
     }, DELAY_API_CALL);
 
     return () => clearTimeout(timer);
-  }, [debouncedValue, currentArtworkId, artistSlugSignal.value, isForAloneArtworkSignal.value]);
+  }, [
+    debouncedValue,
+    currentArtworkId,
+    artistSlugSignal.value,
+    isForAloneArtworkSignal.value,
+  ]);
 
 
   // Navigation des œuvres (précédente/suivante)
   // (dans le contexte d'un contenu qui concerne une seule œuvre)
   useEffect(() => {
-    if (!isForAloneArtworkSignal.value || currentArtworkId == null || navigationArts.length === 0) {
+    if (
+      !isForAloneArtworkSignal.value || currentArtworkId == null ||
+      navigationArts.length === 0
+    ) {
       setPreviousArtworkId(null);
       setNextArtworkId(null);
       return;
@@ -155,10 +174,14 @@ export default function CollectionSearch(props: CollectionSearchProps) {
 
     if (props.query?.id !== "") {
       let delay;
-      props.query?.fromLeonardo ? delay = DELAY_LEONARDO_REACH_ART : delay = DELAY_REACH_ART;
+      props.query?.fromLeonardo
+        ? delay = DELAY_LEONARDO_REACH_ART
+        : delay = DELAY_REACH_ART;
 
       setTimeout(() => {
-        const target: HTMLElement | null = document.getElementById(`${props.query?.id}`);
+        const target: HTMLElement | null = document.getElementById(
+          `${props.query?.id}`,
+        );
         if (target) {
           target.scrollIntoView({
             behavior: "smooth",
@@ -174,24 +197,24 @@ export default function CollectionSearch(props: CollectionSearchProps) {
   // Background pour la page d'une collection d'œuvres
   useLayoutEffect(() => {
     const isTouch = isTouchDevice();
-  
+
     const config = isTouch
       ? {
-          bodyBackgroundColor: colorScheme[currentColorScheme].gray,
-          mainSelector: '[data-name="collection"]',
-          removeMainBackground: true,
-        }
+        bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+        mainSelector: '[data-name="collection"]',
+        removeMainBackground: true,
+      }
       : {
-          bodyBackgroundColor: colorScheme[currentColorScheme].gray,
-          mainSelector: '[data-name="collection"]',
-          mainStyle: resolveCollectionBackground(
-            slugToCamelCase(props.myslug),
-            getTextureBasePath(isPersoGallery)
-          ),
-        };
-  
+        bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+        mainSelector: '[data-name="collection"]',
+        mainStyle: resolveCollectionBackground(
+          slugToCamelCase(props.myslug),
+          getTextureBasePath(isPersoGallery),
+        ),
+      };
+
     applyPageBackground(config);
-  
+
     return () => {
       resetPageBackground(config);
     };
@@ -200,26 +223,27 @@ export default function CollectionSearch(props: CollectionSearchProps) {
 
   return (
     <div class={`flex-grow`}>
-    
-    {!props.query?.alone &&
-      (
-        <div class={`max-w-7xl mx-auto p-4 sm:px-6 lg:px-8`}>
-          {/* Entrée de recherche */}
-          <div class="paper paper-shadow w-[60px] md:w-[80px] mx-auto mb-2 -translate-x-16">
-          <div class="top-tape max-h-2.5"></div>
-            <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
-              {i18next.t("paper.name", { ns: "translation" })}
-            </h2>
+      {!props.query?.alone &&
+        (
+          <div class={`max-w-7xl mx-auto p-4 sm:px-6 lg:px-8`}>
+            {/* Entrée de recherche */}
+            <div class="paper paper-shadow w-[60px] md:w-[80px] mx-auto mb-2 -translate-x-16">
+              <div class="top-tape max-h-2.5"></div>
+              <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
+                {i18next.t("paper.name", { ns: "translation" })}
+              </h2>
+            </div>
+            <div
+              class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}
+            >
+              <SearchInput
+                type="collectionsearch"
+                value={searchTerm}
+                onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
+              />
+            </div>
           </div>
-          <div class={`brush-input-box relative w-48 max-h-[68px] mx-auto mb-4`}>
-            <SearchInput
-              type="collectionsearch"
-              value={searchTerm}
-              onInput={(e) => setSearchTerm((e.currentTarget as HTMLInputElement).value)}
-            />
-          </div>
-        </div>
-      )}
+        )}
 
       <ArtsLayout
         arts={searchResults}

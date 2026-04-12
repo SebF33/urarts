@@ -4,6 +4,7 @@ import "@utils/i18n/config.ts";
 
 import BackToTheArtistPaper from "@islands/paper/BackToTheArtistPaper.tsx";
 
+
 interface Props {
   info: string;
   myslug: string;
@@ -38,11 +39,13 @@ export default function TagHero({ info, myslug, tag }: Props) {
             <div class="grow">
               {/* Titre du tag */}
               <div class="inline-block">
-                <h1 class="text-white text-3xl md:text-5xl font-bold leading-tight flex items-center flex-wrap gap-2">
+                <h1 class="text-white! text-3xl md:text-5xl font-bold leading-tight flex items-center flex-wrap gap-2">
                   {tag}
                   {isForAloneArtistSignal.value && (
                     <span class="text-[1rem] sm:text-[1.2rem] italic text-white/80">
-                      {`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}
+                      {`${
+                        i18next.t("common.according_to", { ns: "translation" })
+                      } ${artistNameSignal.value}`}
                     </span>
                   )}
                 </h1>

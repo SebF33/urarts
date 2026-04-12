@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
+
 export function WorldMapPaper() {
   const draggable = false;
   return (

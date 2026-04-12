@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "motion";
-import { ArtistRow } from "@utils/types.d.ts";
+import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
@@ -18,8 +17,11 @@ interface ArtistPanelProps {
 export function WorldArtistsPanel(
   { country, artists, onClose }: ArtistPanelProps,
 ) {
+
+  // CSS
   const draggable = false;
   const theme = colorScheme[currentColorScheme];
+
 
   return (
     <AnimatePresence>
@@ -42,20 +44,23 @@ export function WorldArtistsPanel(
                 src={`/icons/${country}.png`}
                 alt={country}
                 title={country}
-                className={`w-6 h-4 mr-2 object-cover ${css({"filter": "drop-shadow(0.03rem 0.03rem 0.08rem rgba(0, 0, 0, 0.5))"})}`}
+                className="w-6 h-4 mr-2 object-cover [filter:drop-shadow(0.03rem_0.03rem_0.08rem_rgba(0,0,0,0.5))]"
                 draggable={false}
               />
               <h2
                 className="text-2xl font-bold leading-6"
                 style={{ color: theme.dark }}
               >
-                {i18next.t("worldmap.artists", { ns: "translation" })} — {country}
+                {i18next.t("worldmap.artists", { ns: "translation" })} —{" "}
+                {country}
               </h2>
             </div>
             <button
               onClick={onClose}
               className="p-2 text-lighterdark hover:text-red focus:outline-none"
-              aria-label={`${i18next.t("meta.close_panel", { ns: "translation" })}`}
+              aria-label={`${
+                i18next.t("meta.close_panel", { ns: "translation" })
+              }`}
             >
               <ButtonCross aria-hidden="true" />
             </button>
@@ -77,7 +82,7 @@ export function WorldArtistsPanel(
                 }}
                 whileHover={{
                   boxShadow: `0 4px 8px ${theme.lighterdark}`,
-                  transition: { duration: 0.1 }
+                  transition: { duration: 0.1 },
                 }}
               >
                 <div

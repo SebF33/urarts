@@ -1,26 +1,28 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { MovementRow } from "@utils/types.d.ts";
+import type { MovementRow } from "@utils/types.d.ts";
+import { PageProps } from "fresh";
 
 import Footer from "@islands/footer/Footer.tsx";
 import MovementsList from "@islands/MovementsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
+
 type Movements = Array<MovementRow>;
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     const desc = i18next.t("meta.movements.desc", { ns: "translation" });
     const title = i18next.t("meta.movements.title", { ns: "translation" });
     const lng = i18next.language;
-    
+
     const db = Db.getInstance();
     const { count } = db.fn;
 
@@ -49,9 +51,11 @@ export const handler: Handlers = {
       art_count: String(p.art_count),
     }));
 
-    return ctx.render({ desc, movements, title });
+    return {
+      data: { desc, movements, title }
+    };
   },
-};
+});
 
 
 export default function MovementsPage(
@@ -64,7 +68,6 @@ export default function MovementsPage(
 
   const { desc, movements, title } = props.data;
 
-  
   return (
     <>
       <Head>

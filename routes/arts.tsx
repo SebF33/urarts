@@ -1,8 +1,9 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { PageProps } from "fresh";
 
 import ArtsSearch from "@islands/livesearch/ArtsSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
@@ -10,14 +11,16 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
 
-export const handler: Handlers = {
-  GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  GET(_ctx) {
     const desc = i18next.t("meta.arts.desc", { ns: "translation" });
     const title = i18next.t("meta.arts.title", { ns: "translation" });
 
-    return ctx.render({ desc, title });
+    return {
+      data: { desc, title }
+    };
   },
-};
+});
 
 
 export default function ArtsPage(
@@ -29,7 +32,6 @@ export default function ArtsPage(
 
   const { desc, title } = props.data;
 
-  
   return (
     <>
       <Head>

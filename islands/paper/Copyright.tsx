@@ -18,9 +18,9 @@ export default function Copyright() {
       mainSelector: '[data-name="collection"]',
       mainStyle: resolveCopyrightBackground("../textures/"),
     };
-  
+
     applyPageBackground(config);
-  
+
     return () => {
       resetPageBackground(config);
     };
@@ -32,7 +32,7 @@ export default function Copyright() {
       <div class="max-w-2xl mx-auto py-10 px-6 mt-5">
         <div class="paper paper-shadow max-w-[600px] m-4">
           <div class="tape-section"></div>
-          <p class="text-2xl md:text-3xl font-extrabold text-center text-lighterdark leading-5 p-4 z-10">
+          <p class="text-2xl md:text-3xl font-extrabold text-center text-lighterdark leading-7 p-4 z-10">
             <span class="text-7xl md:text-8xl">©</span>
             <br />
             {i18next.t("paper.copyright", { ns: "translation" })}

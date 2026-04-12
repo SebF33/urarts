@@ -3,10 +3,12 @@ import "@utils/i18n/config.ts";
 import tippy from "tippyjs";
 import { useEffect } from "preact/hooks";
 
+
 export default function Avatar(
   props: { copyright: number; info: string; name: string; url: string },
 ) {
   const draggable = false;
+
 
   // Infobulle
   useEffect(() => {
@@ -15,7 +17,8 @@ export default function Avatar(
 
     if (avatar) {
       copyright = props.copyright === 0
-        ? '<s style="font-size:1.3em">©</s> ' + i18next.t("arts.public_domain", { ns: "translation" })
+        ? '<s style="font-size:1.3em">©</s> ' +
+          i18next.t("arts.public_domain", { ns: "translation" })
         : '<span style="font-size:1.3em">©</span> ' + props.name;
 
       tippy(avatar, {
@@ -29,6 +32,7 @@ export default function Avatar(
       });
     }
   }, []);
+
 
   return (
     <div

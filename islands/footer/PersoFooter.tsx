@@ -1,4 +1,3 @@
-import { css } from "@twind/core";
 import { DELAY_DISPLAY_FOOTER } from "@utils/constants.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -17,6 +16,7 @@ export default function PersoFooter(
 ) {
   const [display, setDisplay] = useState<boolean>(false);
 
+
   // Délai d'affichage initial
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -30,15 +30,10 @@ export default function PersoFooter(
     <>
       {display && (
         <footer
-          class={`relative bottom-0 w-full text-white z-50 ${
-            css({
-              "background-color": `${color}`,
-            })
-          }`}
+          class="relative bottom-0 w-full text-white z-50"
+          style={{ backgroundColor: color }}
         >
-          <div
-            class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}
-          >
+          <div class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}>
             <div class={`flex justify-center space-x-8 md:order-2`}>
               {facebook && (
                 <a

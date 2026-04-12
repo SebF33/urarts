@@ -25,44 +25,49 @@ export default function Doughnut(
   defaults.font.family = "Caveat Brush";
   const options = {
     layout: {
-      padding: { bottom: 16 }
+      padding: { bottom: 16 },
     },
     plugins: {
       legend: {
         labels: {
           color: `${colorScheme[currentColorScheme].lighterdark}`,
-          font: { size: 13 }
+          font: { size: 13 },
         },
-        position: "top"
+        position: "top",
       },
       title: {
         color: `${colorScheme[currentColorScheme].lighterdark}`,
         display: true,
         font: { size: 21 },
         fullSize: false,
-        text: props.totalArtistCountResult + " " + i18next.t("indicator.doughnut_title", { ns: "translation" })
+        text: props.totalArtistCountResult + " " +
+          i18next.t("indicator.doughnut_title", { ns: "translation" }),
       },
       tooltip: {
         bodyFont: { size: 16 },
-        titleFont: { size: 16 }
+        titleFont: { size: 16 },
       },
     },
     onClick: (event: MouseEvent) => {
       if (chartInstanceRef.current) {
         const elements = chartInstanceRef.current.getElementsAtEventForMode(
           event,
-          'nearest',
+          "nearest",
           { intersect: true },
-          false
+          false,
         );
 
         if (elements.length > 0) {
-          const customDataValue = chartInstanceRef.current.data.datasets[elements[0].datasetIndex].customData[elements[0].index];
-          const href = '/artists?nationality=' + customDataValue;
-          setTimeout(() => { window.location.href = href; }, DELAY_CHART_REACH_HREF);
+          const customDataValue =
+            chartInstanceRef.current.data.datasets[elements[0].datasetIndex]
+              .customData[elements[0].index];
+          const href = "/artists?nationality=" + customDataValue;
+          setTimeout(() => {
+            window.location.href = href;
+          }, DELAY_CHART_REACH_HREF);
         }
       }
-    }
+    },
   };
 
 
@@ -70,8 +75,8 @@ export default function Doughnut(
     if (!canvasRef.current) return;
 
     let backgroundColor: string[] = [];
-  
-    if (lng === 'en') {
+
+    if (lng === "en") {
       backgroundColor = [
         `${colorScheme[currentColorScheme].yellow}`,
         `${colorScheme[currentColorScheme].blue}`,
@@ -79,9 +84,9 @@ export default function Doughnut(
         `${colorScheme[currentColorScheme].green}`,
         `${colorScheme[currentColorScheme].gray}`,
         `${colorScheme[currentColorScheme].red}`,
-      ]
+      ];
     }
-    if (lng === 'fr') {
+    if (lng === "fr") {
       backgroundColor = [
         `${colorScheme[currentColorScheme].lighterdark}`,
         `${colorScheme[currentColorScheme].gray}`,
@@ -89,7 +94,7 @@ export default function Doughnut(
         `${colorScheme[currentColorScheme].red}`,
         `${colorScheme[currentColorScheme].blue}`,
         `${colorScheme[currentColorScheme].green}`,
-      ]
+      ];
     }
 
     Chart.register(...registerables);
@@ -106,7 +111,7 @@ export default function Doughnut(
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
             hoverOffset: 12,
-          }
+          },
         ],
       },
     });
@@ -118,7 +123,7 @@ export default function Doughnut(
       }
     };
   }, [lng]);
-  
+
 
   // Background pour la page des indicateurs
   usePageBackground("indicators");

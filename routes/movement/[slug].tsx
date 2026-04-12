@@ -1,8 +1,9 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
+import { HttpError, PageProps } from "fresh";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { sql } from "kysely";
@@ -13,6 +14,7 @@ import ArtistsPapers from "@islands/paper/ArtistsPapers.tsx";
 import CollectionSearch from "@islands/livesearch/CollectionSearch.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
 
 interface Artist {
   avatar_url: string;
@@ -32,10 +34,11 @@ interface MovementPageProps {
 }
 
 
-export const handler: Handlers<MovementPageProps> = {
-  async GET(_: Request, ctx: FreshContext) {
-    const lng = i18next.language;
+export const handler = define.handlers({
+  async GET(ctx) {
     const { slug } = ctx.params;
+
+    const lng = i18next.language;
 
     const db = Db.getInstance();
 
@@ -50,7 +53,7 @@ export const handler: Handlers<MovementPageProps> = {
       .executeTakeFirst();
 
     if (!movementDetails) {
-      return ctx.renderNotFound();
+      throw new HttpError(404);
     }
 
     const artistQuery = await db
@@ -81,17 +84,20 @@ export const handler: Handlers<MovementPageProps> = {
     const desc = `${movement}.`;
     const title = `${movement} ${i18next.t("meta.collection.title", { ns: "translation" })}`;
 
-    return ctx.render({
-      artists,
-      desc,
-      font: movementDetails.font,
-      info: movementDetails.info,
-      movement,
-      slug: movementDetails.slug,
-      title,
-    });
+    // rendu
+    return {
+      data: {
+        artists,
+        desc,
+        font: movementDetails.font,
+        info: movementDetails.info,
+        movement,
+        slug: movementDetails.slug,
+        title
+      },
+    };
   },
-};
+});
 
 
 export default function MovementArtsPage(props: PageProps<MovementPageProps>) {

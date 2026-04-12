@@ -1,12 +1,10 @@
-import { ArtCollection, ArtRow } from "@utils/types.d.ts";
-import { css } from "@twind/core";
+import type { ArtCollection, ArtRow } from "@utils/types.d.ts";
 import {
   DELAY_API_CALL,
   DELAY_DEBOUNCE,
   DELAY_REACH_HREF,
   TAGS,
 } from "@utils/constants.ts";
-import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
@@ -30,10 +28,11 @@ export default function ArtsSearch() {
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
   const draggable = false;
 
+  // Contexte
   isForAloneArtistSignal.value = false;
 
 
@@ -41,11 +40,18 @@ export default function ArtsSearch() {
   useEffect(() => {
     async function fetchInitialPreview() {
       try {
-        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
+        const response = await ky.get(
+          `${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`,
+        ).json<ArtRow[]>();
 
         if (response && response.length > 0) {
           const firstArt = response[0];
-          getPreviewImageUrl(firstArt.id.toString(), firstArt.name, firstArt.slug, firstArt.url);
+          getPreviewImageUrl(
+            firstArt.id.toString(),
+            firstArt.name,
+            firstArt.slug,
+            firstArt.url,
+          );
         }
       } catch (error) {
         console.error("Error", error);
@@ -55,12 +61,12 @@ export default function ArtsSearch() {
     fetchInitialPreview();
   }, []);
 
-
   useEffect(() => {
     const previews = document.querySelectorAll(".preview");
-    previews.forEach(preview => { preview.classList.add("is-active"); });
+    previews.forEach((preview) => {
+      preview.classList.add("is-active");
+    });
   }, [hoveredImageUrl]);
-
 
   const handleMouseEnter = (id: number, slug: string) => {
     if (hoverTimeout !== null) {
@@ -71,11 +77,12 @@ export default function ArtsSearch() {
     setHoveredImageUrl(null);
 
     const timeoutId = setTimeout(() => {
-
       async function fetchPreview() {
         try {
-          const response = await ky.get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`).json<Arts>();
-  
+          const response = await ky.get(
+            `${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`,
+          ).json<Arts>();
+
           if (response && response.length > 0) {
             const art = response[0];
             getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
@@ -84,29 +91,34 @@ export default function ArtsSearch() {
           console.error("Error", error);
         }
       }
-  
-      fetchPreview();
 
+      fetchPreview();
     }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
   };
 
-
-  function getPreviewImageUrl(id: string, name: string, slug: string, url: string) {
+  function getPreviewImageUrl(
+    id: string,
+    name: string,
+    slug: string,
+    url: string,
+  ) {
     const hoveredImageUrl = {
       id: id,
       name: name,
       slug: slug,
-      url: url
-    }
+      url: url,
+    };
     setHoveredImageUrl(hoveredImageUrl);
   }
-  
+
 
   // Appel à l'API "Œuvres d'art"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`)
+      ky.get(
+        `${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`,
+      )
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);
@@ -125,7 +137,9 @@ export default function ArtsSearch() {
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+    setTimeout(() => {
+      window.location.href = href;
+    }, DELAY_REACH_HREF);
   }
 
 
@@ -148,7 +162,7 @@ export default function ArtsSearch() {
           maxWidthPx={1800}
           nbTagsByRow={19}
           tags={TAGS
-            .filter(tag => tag.type === 0)
+            .filter((tag) => tag.type === 0)
             .map((tag, index) => ({
               ...tag,
               rotation: ((index % 7) - 3) * 5,
@@ -192,9 +206,8 @@ export default function ArtsSearch() {
                         {" "}({item.last_name})
                       </span>
                       <span
-                        class={`absolute -bottom-2 left-0 w-0 h-1 transition-all group-hover:w-full ${
-                          css({"background": item.color})
-                        }`}
+                        class="absolute -bottom-2 left-0 w-0 h-1 transition-all group-hover:w-full"
+                        style={{ background: item.color }}
                       >
                       </span>
                     </p>
@@ -209,7 +222,9 @@ export default function ArtsSearch() {
                     <div class="paper paper-shadow min-h-[70px] max-w-[360px]">
                       <div class="tape-section"></div>
                       <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
-                        {i18next.t("common.no_results", { ns: "translation" })} {" =>"}
+                        {i18next.t("common.no_results", { ns: "translation" })}
+                        {" "}
+                        {" =>"}
                         <br />
                         {"«"} {searchTerm} {"»"}
                       </p>
@@ -220,8 +235,8 @@ export default function ArtsSearch() {
             </ul>
           )}
 
-          {/* Aperçu d'une œuvre */}
-          <Preview image={hoveredImageUrl} />
+        {/* Aperçu d'une œuvre */}
+        <Preview image={hoveredImageUrl} />
       </div>
     </div>
   );

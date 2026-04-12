@@ -1,20 +1,26 @@
 import { Any } from "any";
-import { ArtistRow, ArtRow } from "@utils/types.d.ts";
-import { colorScheme, currentColorScheme, tagColorsEN, tagColorsFR, worldColors } from "@utils/colors.ts";
+import type { ArtistRow, ArtRow } from "@utils/types.d.ts";
+import {
+  colorScheme,
+  currentColorScheme,
+  tagColorsEN,
+  tagColorsFR,
+  worldColors,
+} from "@utils/colors.ts";
 import { createPortal } from "react-dom";
 import { DELAY_DEBOUNCE, NATIONALITIES } from "@utils/constants.ts";
 import { feature } from "topojson-client";
 import { geoMercator, geoPath } from "d3-geo";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { IS_BROWSER } from "$fresh/runtime.ts"; // typeof document !== "undefined"
+import { IS_BROWSER } from "fresh/runtime"; // typeof document !== "undefined"
 import iso from "iso-3166-1";
-import isoCountries from "i18n-iso-countries";
+import isoCountries from "i18n-iso-countries/index.js";
 import en from "i18n-iso-countries/langs/en.json" with { type: "json" };
 import fr from "i18n-iso-countries/langs/fr.json" with { type: "json" };
 import { isTouchDevice } from "@utils/helpers.ts";
 import ky from "ky";
-import tippy, { hideAll } from "tippyjs"
+import tippy, { hideAll } from "tippyjs";
 import { UrlBasePath } from "@/env.ts";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { usePageBackground } from "@utils/background.ts";
@@ -27,7 +33,9 @@ isoCountries.registerLocale(en);
 isoCountries.registerLocale(fr);
 
 
-export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCountries: string[] }) {
+export default function WorldMap(
+  { artsTagsCountries }: { readonly artsTagsCountries: string[] },
+) {
   const lng = i18next.language;
   const [artists, setArtists] = useState<ArtistRow[]>([]);
   const [arts, setArts] = useState<ArtRow[]>([]);
@@ -49,7 +57,10 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
 
   // Convertir TopoJSON en GeoJSON
   useEffect(() => {
-    const geo = feature(worldData as Any, (worldData as Any).objects.countries) as Any;
+    const geo = feature(
+      worldData as Any,
+      (worldData as Any).objects.countries,
+    ) as Any;
     // sans l'Antarctique
     const filtered = geo.features.filter((f: Any) => {
       const alpha2 = iso.whereNumeric(String(f.id))?.alpha2;
@@ -81,7 +92,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-  
+
     const renderContent = (countryName: string, capital?: string) => {
       const safeName = escapeHtml(countryName);
       const safeCapital = escapeHtml(capital ?? "…");
@@ -100,8 +111,9 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       "FR:en": 2,
     };
 
-    type RestCountry = { cca2?: string; capital?: string[]; };
-    const pickCapital = (item: RestCountry | undefined | null) => item?.capital?.[0] ?? null;
+    type RestCountry = { cca2?: string; capital?: string[] };
+    const pickCapital = (item: RestCountry | undefined | null) =>
+      item?.capital?.[0] ?? null;
 
     const getCapital = async (
       alpha2: string,
@@ -118,7 +130,11 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       try {
         // essai : /translation/{countryName} (peut renvoyer plusieurs résultats)
         if (countryName?.trim()) {
-          const resT = await fetch(`https://restcountries.com/v3.1/translation/${encodeURIComponent(countryName.trim())}?fields=cca2,capital`);
+          const resT = await fetch(
+            `https://restcountries.com/v3.1/translation/${
+              encodeURIComponent(countryName.trim())
+            }?fields=cca2,capital`,
+          );
 
           if (resT.ok) {
             const dataT = await resT.json();
@@ -159,7 +175,11 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         }
 
         // fallback : /alpha/{alpha2}
-        const res = await fetch(`https://restcountries.com/v3.1/alpha/${encodeURIComponent(alpha2)}?fields=capital`);
+        const res = await fetch(
+          `https://restcountries.com/v3.1/alpha/${
+            encodeURIComponent(alpha2)
+          }?fields=capital`,
+        );
         if (!res.ok) return null;
 
         const data = await res.json();
@@ -185,7 +205,10 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       const instance = tippy(path, {
         arrow: true,
         allowHTML: true,
-        content: renderContent(path.getAttribute("data-tippy-content") || "", "…"),
+        content: renderContent(
+          path.getAttribute("data-tippy-content") || "",
+          "…",
+        ),
         offset: [0, 8],
         placement: "top",
         popperOptions: { strategy: "fixed" },
@@ -231,7 +254,9 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
       instances.push(instance);
     });
 
-    return () => { instances.forEach((i) => i?.destroy?.()); };
+    return () => {
+      instances.forEach((i) => i?.destroy?.());
+    };
   }, [countries, lng]);
 
 
@@ -257,12 +282,14 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     };
   }, []);
 
-  const internalWidth  = containerSize.width / WIDTH_COEF;
+  const internalWidth = containerSize.width / WIDTH_COEF;
   const internalHeight = containerSize.height;
 
 
   // Couleur pour chaque pays
-  const allCountries = Array.from(new Set([...NATIONALITIES, ...artsTagsCountries]))
+  const allCountries = Array.from(
+    new Set([...NATIONALITIES, ...artsTagsCountries]),
+  );
   //console.log(allCountries);
   const tagColors = lng === "fr" ? tagColorsFR : tagColorsEN;
   const allColors = [...worldColors, ...tagColors];
@@ -313,13 +340,16 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
     setSelectedArtsCountry(null);
     setArtists([]);
     setArts([]);
- 
+
     setLoading(true);
 
     try {
       const [artistsResp, artsResp] = await Promise.all([
-        ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: name } }).json<ArtistRow[]>(),
-        ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`).json<ArtRow[]>(),
+        ky.get(`${UrlBasePath}/api/artists`, {
+          searchParams: { lng, nationality: name },
+        }).json<ArtistRow[]>(),
+        ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`)
+          .json<ArtRow[]>(),
       ]);
 
       setArtists(artistsResp);
@@ -396,7 +426,8 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
             ? isoCountries.getName(alpha2, lng) || c.properties.name
             : c.properties.name;
           // pays actifs
-          const isActive = artsTagsCountries.includes(name) || NATIONALITIES.includes(name);
+          const isActive = artsTagsCountries.includes(name) ||
+            NATIONALITIES.includes(name);
           const fillColor = isActive ? colorMap[name] : "url(#brushPattern)";
           const cursorClass = isActive ? "cursor-pointer" : "cursor-auto";
           // centroïde pour infobulle
@@ -412,7 +443,7 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
               filter="url(#brush)"
               class={cursorClass}
               data-tippy-content={name}
-              data-alpha2={alpha2 || ""} 
+              data-alpha2={alpha2 || ""}
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
               onClick={() => isActive && handleCountryClick(name)}
@@ -426,7 +457,9 @@ export default function WorldMap({ artsTagsCountries }: { readonly artsTagsCount
         createPortal(
           (selectedArtistsCountry || selectedArtsCountry) && (
             <div
-              className={`fixed inset-0 bg-black bg-opacity-70 z-[99999] overlay-transition ${isOverlayVisible ? "visible" : ""}`}
+              className={`fixed inset-0 bg-black/70 z-[99999] overlay-transition ${
+                isOverlayVisible ? "visible" : ""
+              }`}
               onClick={closeAllPanels}
             />
           ),

@@ -1,5 +1,4 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { css } from "@twind/core";
 import { DELAY_DISPLAY_FOOTER } from "@utils/constants.ts";
 import { useEffect, useState } from "preact/hooks";
 
@@ -7,9 +6,12 @@ import { useEffect, useState } from "preact/hooks";
 export default function Footer({ color }: { color: string }) {
   const [display, setDisplay] = useState<boolean>(false);
 
+
   // Délai d'affichage initial
   useEffect(() => {
-    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY_FOOTER);
+    const timeoutId = setTimeout(() => {
+      setDisplay(true);
+    }, DELAY_DISPLAY_FOOTER);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -17,7 +19,10 @@ export default function Footer({ color }: { color: string }) {
   return (
     <>
       {display && (
-        <footer class={`relative bottom-0 w-full text-white z-50 ${css({"background-color": `${color}`})}`}>
+        <footer
+          class="relative bottom-0 w-full text-white z-50"
+          style={{ backgroundColor: color }}
+        >
           <div class={`max-w-7xl mx-auto py-7 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8`}>
             <div class={`flex justify-center space-x-8 md:order-2`}>
               <a

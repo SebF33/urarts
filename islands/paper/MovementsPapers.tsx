@@ -6,12 +6,13 @@ import {
 } from "@utils/signals.ts";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
 
+
 interface Movement {
   movementSlug: string;
   movementName: string;
   position: string;
   font: string;
-};
+}
 
 interface Props {
   artistAvatar: string;
@@ -25,7 +26,6 @@ interface Props {
 export default function MovementsPapers(
   { artistAvatar, artistName, artistSlug, draggable, movements }: Props,
 ) {
-
   // Clic sur un lien "mouvement"
   function handleLinkClick(event: MouseEvent) {
     event.preventDefault();

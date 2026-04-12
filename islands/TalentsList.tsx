@@ -1,8 +1,9 @@
-import { ArtistRow } from "@utils/types.d.ts";
+import type { ArtistRow } from "@utils/types.d.ts";
 import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Title from "@islands/paper/Title.tsx";
+
 
 type Artists = Array<ArtistRow>;
 
@@ -10,11 +11,10 @@ type Artists = Array<ArtistRow>;
 export default function TalentsList(
   props: { readonly artists: Artists },
 ) {
-
   const grid =
     "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mt-6 mb-2 md:mb-20 p-4";
 
-  
+
   // Background pour la page des talents
   usePageBackground("talents");
 

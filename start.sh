@@ -2,4 +2,5 @@
 set -ex
 
 deno task migrate
-deno task serve
+deno task build
+deno task start

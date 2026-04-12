@@ -1,10 +1,11 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { NATIONALITIES } from "@utils/constants.ts";
+import { PageProps } from "fresh";
 import { sql } from "kysely";
 
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
@@ -13,11 +14,12 @@ import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
 
 
-export const handler: Handlers = {
-  async GET(req: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(ctx) {
+    const url = ctx.url;
+
     const desc = i18next.t("meta.artists.desc", { ns: "translation" });
     const title = i18next.t("meta.artists.title", { ns: "translation" });
-    const url = new URL(req.url);
 
     let nationality: string = url.searchParams.get("nationality") || "";
 
@@ -34,9 +36,11 @@ export const handler: Handlers = {
       }
     }
 
-    return ctx.render({ desc, nationality, title });
+    return {
+      data: { desc, nationality, title }
+    };
   },
-};
+});
 
 
 export default function ArtistsPage(
@@ -49,7 +53,6 @@ export default function ArtistsPage(
 
   const { desc, nationality, title } = props.data;
 
-  
   return (
     <>
       <Head>

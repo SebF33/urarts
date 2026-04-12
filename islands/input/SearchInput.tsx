@@ -14,6 +14,7 @@ export function SearchInput(
   const [displayText, setDisplayText] = useState("");
   const [targetText, setTargetText] = useState("");
 
+
   useEffect(() => {
     // aléatoire au départ
     const pickRandom = () => {
@@ -76,7 +77,7 @@ export function SearchInput(
         }}
         maxlength={12}
         placeholder={displayText}
-        class="w-full rounded text-lg outline-none py-0.5 px-3 placeholder-gray-400 transition-all duration-300 focus:placeholder-gray-300"
+        class="w-full bg-realwhite rounded text-lg outline-none py-0.5 px-3 placeholder-gray-400 focus:placeholder-gray-300 transition-all duration-300"
       />
     </div>
   );

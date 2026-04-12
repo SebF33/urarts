@@ -3,7 +3,6 @@
 // Modifié par Sébastien Flouriot le 22/02/2025
 
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
-import { h } from "preact";
 import { motion, useAnimation, useMotionValue, useTransform } from "motion";
 import { useEffect, useRef, useState } from "preact/hooks";
 
@@ -27,6 +26,7 @@ export default function RollingGallery(
   const innerWidth = 768;
   const [isScreenSizeSm, setIsScreenSizeSm] = useState(globalThis.innerWidth <= innerWidth);
 
+  // Contexte
   const isPersoGallery: boolean = !!props.ispersogallery;
 
   const autoplayRef = useRef();
@@ -62,7 +62,7 @@ export default function RollingGallery(
     return `rotate3d(0, 1, 0, ${value}deg)`;
   });
 
-  
+
   useEffect(() => {
     if (props.autoplay) {
       autoplayRef.current = setInterval(() => {
@@ -87,7 +87,7 @@ export default function RollingGallery(
     return () => globalThis.removeEventListener("resize", handleResize);
   }, []);
 
-  
+
   const handleMouseEnter = () => {
     if (props.autoplay && props.pauseOnHover) {
       clearInterval(autoplayRef.current);
@@ -145,20 +145,26 @@ export default function RollingGallery(
               class="rolling-gallery-item"
               style={{
                 width: `${faceWidth}px`,
-                transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`}}
+                transform: `rotateY(${
+                  i * (360 / faceCount)
+                }deg) translateZ(${radius}px)`,
+              }}
             >
               <a
-                href={`/art/${p.artist_slug}${isPersoGallery ? "/gallery" : ""}?alone&id=${p.id}`}
+                href={`/art/${p.artist_slug}${
+                  isPersoGallery ? "/gallery" : ""
+                }?alone&id=${p.id}`}
                 onClick={handleClick}
                 class="cursor-pointer"
                 draggable={draggable}
               >
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   src={p.url}
-                  class={
-                    "rolling-gallery-img transform-gpu will-change-transform" +
-                    (props.type === "histocharacters" ? " rolling-gallery-histocharacters-img" : "")
-                  }
+                  class={"rolling-gallery-img transform-gpu will-change-transform" +
+                    (props.type === "histocharacters"
+                      ? " rolling-gallery-histocharacters-img"
+                      : "")}
                   alt="Urarts"
                   draggable={draggable}
                 />

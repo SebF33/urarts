@@ -1,10 +1,11 @@
-import { ArtistRow } from "@utils/types.d.ts";
+import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { PageProps } from "fresh";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
@@ -14,11 +15,12 @@ import TalentsArtSideBar from "@islands/livesearch/TalentsArtSideBar.tsx";
 import TalentsList from "@islands/TalentsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
+
 type Artists = Array<ArtistRow>;
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     const desc = i18next.t("meta.talents.desc", { ns: "translation" });
     const title = i18next.t("meta.talents.title", { ns: "translation" });
     const lng = i18next.language;
@@ -69,9 +71,11 @@ export const handler: Handlers = {
     ];
     const color = colors[randomColorsIndex];
 
-    return ctx.render({ artists, color, desc, title });
+    return {
+      data: { artists, color, desc, title }
+    };
   },
-};
+});
 
 
 export default function TalentsPage(
@@ -84,7 +88,6 @@ export default function TalentsPage(
 ) {
 
   const { artists, color, desc, title } = props.data;
-  
 
   return (
     <>

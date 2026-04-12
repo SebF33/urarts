@@ -1,8 +1,9 @@
-import { ArtistQuote, TagCollection } from "@utils/types.d.ts";
+import type { ArtistQuote, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
+import { HttpError, PageProps } from "fresh";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { sql } from "kysely";
@@ -21,8 +22,6 @@ import TagsPapers from "@/islands/paper/TagsPapers.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
-type Quote = Array<ArtistQuote>;
-
 interface Movement {
   font: string;
   movementName: string;
@@ -38,7 +37,7 @@ interface QueryParameters {
 
 interface ArtistPageProps {
   artist: string;
-  artistQuote: Quote | null;
+  artistQuote: ArtistQuote | null;
   avatar: string;
   avatarInfo: string;
   birthyear: string;
@@ -61,15 +60,16 @@ interface ArtistPageProps {
 }
 
 
-export const handler: Handlers<ArtistPageProps> = {
-  async GET(req: Request, ctx: FreshContext) {
-    const lng = i18next.language;
+export const handler = define.handlers({
+  async GET(ctx) {
     const { slug } = ctx.params;
-    const url = new URL(req.url);
+    const url = ctx.url;
+
+    const lng = i18next.language;
 
     const db = Db.getInstance();
 
-    // Détails de l'artiste
+    // détails de l'artiste
     const artistDetails = await db
       .selectFrom("artist")
       .innerJoin("country", "artist.country_id", "country.id")
@@ -93,15 +93,15 @@ export const handler: Handlers<ArtistPageProps> = {
       .executeTakeFirst();
 
     if (!artistDetails) {
-      return ctx.renderNotFound();
+      throw new HttpError(404);
     }
 
-    // Pas de rendu si copyright
+    // pas de rendu si copyright
     if (!DisplayCopyrightedArtist && artistDetails.copyright === 2) {
-      return ctx.renderNotFound();
+      throw new HttpError(404);
     }
 
-    // Paramètres de l'URL
+    // paramètres de l'URL
     const searchParams = url.searchParams;
     const queryParameters: QueryParameters = {
       alone: searchParams.has("alone"),
@@ -109,7 +109,7 @@ export const handler: Handlers<ArtistPageProps> = {
       id: searchParams.get("id") || "",
     };
 
-    // Mouvements de l'artiste
+    // mouvements de l'artiste
     const movementQuery = await db
       .selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
@@ -136,7 +136,7 @@ export const handler: Handlers<ArtistPageProps> = {
       };
     });
 
-    // Tags principaux des œuvres de l'artiste
+    // tags principaux des œuvres de l'artiste
     const artsTagsQuery = await db
       .selectFrom("tag")
       .innerJoin("art_tag", "tag.id", "art_tag.tag_id")
@@ -181,41 +181,47 @@ export const handler: Handlers<ArtistPageProps> = {
       };
     });
 
-    // Nom et description de l'artiste
+    // nom et description de l'artiste
     const artist = artistDetails.first_name ? `${artistDetails.first_name} ${artistDetails.last_name}` : artistDetails.last_name;
     const description = `${i18next.t("meta.collection.desc", { ns: "translation" })} ${artist}.`;
 
-    // Rendu
-    return ctx.render({
-      artist,
-      artistQuote: artistDetails.quote ? {
-        first_name: artistDetails.first_name,
-        last_name: artistDetails.last_name,
-        signature: artistDetails.signature,
-        quote: artistDetails.quote,
-      } : null,
-      avatar: artistDetails.avatar_url,
-      avatarInfo: artistDetails.avatar_info,
-      birthyear: artistDetails.birthyear,
-      color: artistDetails.color,
-      copyright: artistDetails.copyright,
-      deathyear: artistDetails.deathyear ? ` — ${artistDetails.deathyear}` : "",
-      description,
-      facebook: artistDetails.facebook,
-      info: artistDetails.info,
-      instagram: artistDetails.instagram,
-      movements: movementLabels,
-      nationality: artistDetails.nationality,
-      queryParameters,
-      signature: artistDetails.signature ? artistDetails.signature : null,
-      secondaryColor: artistDetails.secondary_color,
-      site: artistDetails.site_web,
-      slug: artistDetails.slug,
-      tags: artsTags,
-      title: `${artist} ${i18next.t("meta.collection.title", { ns: "translation" })}`,
-    });
+    // rendu
+    return {
+      data: {
+        artist,
+        artistQuote: artistDetails.quote
+          ? {
+            first_name: artistDetails.first_name,
+            last_name: artistDetails.last_name,
+            signature: artistDetails.signature,
+            quote: artistDetails.quote,
+          }
+          : null,
+        avatar: artistDetails.avatar_url,
+        avatarInfo: artistDetails.avatar_info,
+        birthyear: artistDetails.birthyear,
+        color: artistDetails.color,
+        copyright: artistDetails.copyright,
+        deathyear: artistDetails.deathyear
+          ? ` — ${artistDetails.deathyear}`
+          : "",
+        description,
+        facebook: artistDetails.facebook,
+        info: artistDetails.info,
+        instagram: artistDetails.instagram,
+        movements: movementLabels,
+        nationality: artistDetails.nationality,
+        queryParameters,
+        signature: artistDetails.signature ? artistDetails.signature : null,
+        secondaryColor: artistDetails.secondary_color,
+        site: artistDetails.site_web,
+        slug: artistDetails.slug,
+        tags: artsTags,
+        title: `${artist} ${i18next.t("meta.collection.title", { ns: "translation" })}`
+      },
+    };
   },
-};
+});
 
 
 export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
@@ -243,8 +249,10 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
     title,
   } = props.data;
 
-  const draggable = false;
+  // Contexte
   const isPersoGallery = props.url.pathname.endsWith("/gallery");
+
+  const draggable = false;
 
 
   return (
@@ -309,7 +317,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 <div class="md:min-h-[68px] relative w-11/12 mt-3 sm:mt-2 xl:-mt-2 mx-auto flex flex-col xl:flex-row xl:items-start xl:justify-between gap-4 xl:gap-6">
                   {/* Post-it : site web */}
                   {site && (
-                    <div class="paper min-h-8 ml-auto z-10">
+                    <div class="paper relative min-h-8 ml-auto z-10">
                       <div class="top-tape"></div>
                       <a
                         href={site}
@@ -335,7 +343,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                         draggable={draggable}
                         aria-label="Facebook"
                       >
-                        <div class="paper w-9 h-9 flex items-center justify-center">
+                        <div class="paper relative w-9 h-9 flex items-center justify-center">
                           <div class="top-tape"></div>
                           <FacebookIcon aria-hidden="true" />
                         </div>
@@ -351,7 +359,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                         draggable={draggable}
                         aria-label="Instagram"
                       >
-                        <div class="paper w-9 h-9 flex items-center justify-center">
+                        <div class="paper relative w-9 h-9 flex items-center justify-center">
                           <div class="top-tape"></div>
                           <InstagramIcon aria-hidden="true" />
                         </div>

@@ -1,8 +1,8 @@
 import { ART_IMG_WRAPPER, DELAY_REACH_HREF } from "@utils/constants.ts";
-import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
+
 
 interface PreviewProps {
   id: string;
@@ -22,13 +22,15 @@ export default function Preview(
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+    setTimeout(() => {
+      window.location.href = href;
+    }, DELAY_REACH_HREF);
   }
 
 
   return (
     <div class="preview-frame relative my-16 mx-auto lg:mr-0">
-      <div class="paper paper-shadow absolute top-7 right-2 min-w-[110px] font-brush text-xl rotate-[20deg] transform-gpu z-10">
+      <div class="paper paper-shadow absolute top-7 right-2 max-w-[110px] min-w-[110px] text-xl rotate-20 transform-gpu z-10">
         <div class="top-tape max-h-2"></div>
         {i18next.t("arts.preview", { ns: "translation" })}
       </div>

@@ -7,7 +7,7 @@ import {
   NB_LOADING_ARTS,
   TALENTS,
 } from "@utils/constants.ts";
-import { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
+import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artModalOpenSignal,
   isClickableSignal,
@@ -48,8 +48,8 @@ export default function ArtsLayout(
 ) {
   const [display, setDisplay] = useState<boolean>(false);
   const [displayedArtIndex, setDisplayedArtIndex] = useState<number>(0);
-  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
-  const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }) // Seuil d'intersection des éléments
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
+  const { isIntersecting, ref: endRef } = useIntersectionObserver({threshold: 0.9}); // Seuil d'intersection des éléments
   const [selectedArt, setSelectedArt] = useState<ArtCollection | null>(null);
   const [selectedPanel, setSelectedPanel] = useState<string>("");
   const [selectedUrl, setSelectedUrl] = useState<string>("");
@@ -69,10 +69,10 @@ export default function ArtsLayout(
       .slice()
       .sort(() => Math.random() - 0.5)
       .slice(0, 10)
-      .map(item => ({
+      .map((item) => ({
         artist_slug: item.artist_slug,
         id: item.id,
-        url: item.url
+        url: item.url,
       }));
   }, [props.arts]);
 
@@ -84,7 +84,8 @@ export default function ArtsLayout(
    */
   const normalized = useMemo(() => {
     const byYear = (props.arts ?? []).reduce((acc, art) => {
-      const year = art.year ?? i18next.t("common.without_year", { ns: "translation" });
+      const year = art.year ??
+        i18next.t("common.without_year", { ns: "translation" });
       (acc[year] ??= []).push(art);
       return acc;
     }, {} as Record<string, ArtCollection[]>);
@@ -143,7 +144,9 @@ export default function ArtsLayout(
 
   // Délai d'affichage initial
   useEffect(() => {
-    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
+    const timeoutId = setTimeout(() => {
+      setDisplay(true);
+    }, DELAY_DISPLAY);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -166,33 +169,51 @@ export default function ArtsLayout(
 
     // détruire seulement les instances qui ne sont pas visibles
     tippyInstances.forEach((instance) => {
-      if (!instance.state.isVisible) { instance.destroy(); }
+      if (!instance.state.isVisible) instance.destroy();
     });
 
     // mettre à jour la liste des instances en supprimant celles qui ne sont pas visibles
-    setTippyInstances((prevInstances) => prevInstances.filter((instance) => instance.state.isVisible));
+    setTippyInstances((prevInstances) =>
+      prevInstances.filter((instance) => instance.state.isVisible)
+    );
 
     displayedArts.forEach((p) => {
       let content;
       let copyright;
-      const artElement: HTMLElement | null = document.querySelector(`[data-artist-id="${p.id}"]`);
+      const artElement: HTMLElement | null = document.querySelector(
+        `[data-artist-id="${p.id}"]`,
+      );
 
       if (artElement) {
-        copyright = p.copyright === 0 ? '<s style="font-size:1.3em">©</s> ' + i18next.t("arts.public_domain", { ns: "translation" }) : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
+        copyright = p.copyright === 0
+          ? '<s style="font-size:1.3em">©</s> ' +
+            i18next.t("arts.public_domain", { ns: "translation" })
+          : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") +
+            " " + p.last_name;
 
         if (props.type === "histocharacters") {
           content =
-            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${
+              colorScheme[currentColorScheme].gray
+            }"><strong>${p.name}</strong></p>
             <p style="margin-top:2px;font-size:1.1em;font-style:italic;line-height:1">${p.birthyear} — ${p.deathyear}</p>
-            <p style="margin-top:6px;line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
+            <p style="margin-top:6px;line-height:1">${
+              i18next.t("artists.artist", { ns: "translation" })
+            } <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>
             <div style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</div>
             <p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`;
         } else {
           const isTalent: boolean = TALENTS.includes(p.artist_slug);
           const parts = [
-            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>`,
-            !isTalent && `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong>${p.movement}</strong></p>`,
-            !isTalent && `<p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>`,
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${
+              colorScheme[currentColorScheme].gray
+            }"><strong>${p.name}</strong></p>`,
+            !isTalent &&
+            `<p style="margin-top:10px;font-size:1.1em;line-height:1"><strong>${p.movement}</strong></p>`,
+            !isTalent &&
+            `<p style="line-height:1">${
+              i18next.t("artists.artist", { ns: "translation" })
+            } <strong style="color:${p.color}"><a href="/art/${p.artist_slug}">${p.last_name}</a></strong></p>`,
             `<div style="min-width:180px;margin-top:8px;text-justify:auto;line-height:1.1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${p.info}</div>`,
             `<p style="margin-top:2px;font-size:1.2em;line-height:1;text-align:end">${copyright}</p>`,
           ];
@@ -230,7 +251,9 @@ export default function ArtsLayout(
   // Transition de défilement des œuvres
   // (dans le contexte d'un contenu qui concerne une seule œuvre)
   const currentSingleArtworkId = useMemo(() => {
-    if (!isForAloneArtworkSignal.value || displayedArts.length !== 1) return null;
+    if (!isForAloneArtworkSignal.value || displayedArts.length !== 1) {
+      return null;
+    }
     return displayedArts[0]?.id ?? null;
   }, [displayedArts]);
 
@@ -250,10 +273,9 @@ export default function ArtsLayout(
 
     previousSingleArtworkIdRef.current = currentSingleArtworkId;
 
-    const nextClass =
-      props.artNavigationDirection === "next"
-        ? "art-slide-in-from-right"
-        : "art-slide-in-from-left";
+    const nextClass = props.artNavigationDirection === "next"
+      ? "art-slide-in-from-right"
+      : "art-slide-in-from-left";
 
     // reset propre pour rejouer l'animation sans clignotement
     setArtTransitionClass("");
@@ -290,18 +312,19 @@ export default function ArtsLayout(
     <>
       <div className="appear-effect-fast-fadein flex flex-col mx-auto mt-4 max-w-[600px] items-center justify-center">
         {/* Galerie roulante */}
-        {galleryImages && galleryImages.length > 9 ? (
-          <RollingGallery
-            autoplay={true}
-            images={galleryImages}
-            ispersogallery={isPersoGallery}
-            pauseOnHover={true}
-            type={props.type}
-          />
-        ) : null}
+        {galleryImages && galleryImages.length > 9
+          ? (
+            <RollingGallery
+              autoplay={true}
+              images={galleryImages}
+              ispersogallery={isPersoGallery}
+              pauseOnHover={true}
+              type={props.type}
+            />
+          )
+          : null}
       </div>
       <div class="flex flex-wrap mx-auto md:mx-10 mb-48">
-        
         {/* Liste des œuvres */}
         {displayedArts && displayedArts.length > 0
           ? (
@@ -311,7 +334,9 @@ export default function ArtsLayout(
                 class="year-group w-full col-span-full my-6 md:my-10"
               >
                 <div
-                  class={`relative w-full ${!isForAloneArtworkSignal.value ? "mt-4 md:mt-10" : ""}`}
+                  class={`relative w-full ${
+                    !isForAloneArtworkSignal.value ? "mt-4 md:mt-10" : ""
+                  }`}
                 >
                   {/* Trait crayonné */}
                   <div class="absolute inset-x-0 top-1/2 -translate-y-1/2">
@@ -365,7 +390,9 @@ export default function ArtsLayout(
                 {/* Œuvres pour l'année */}
                 <div class="flex flex-wrap justify-center">
                   {displayedByYear[year].map((p, index) => {
-                    const isLastItemOfLastYear = year === sortedYears[sortedYears.length - 1] && index === displayedByYear[year].length - 1;
+                    const isLastItemOfLastYear =
+                      year === sortedYears[sortedYears.length - 1] &&
+                      index === displayedByYear[year].length - 1;
 
                     const artContent = (
                       <div
@@ -379,21 +406,32 @@ export default function ArtsLayout(
                           {p.polyptych > 3 &&
                             (
                               <div
-                                onClick={() => handleClick(p, '4', p.url_4)}
+                                onClick={() => handleClick(p, "4", p.url_4)}
                                 class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                                 style={{
                                   ...ART_IMG_WRAPPER.wrap,
-                                  ...(p.frame === 2 || p.frame === 4 ? {
-                                    border: `solid 1.8vmin ${p.color}`,
-                                    borderBottomColor: adjustColorBrightness(p.color, 50),
-                                    borderLeftColor: p.color,
-                                    borderRightColor: p.color,
-                                    borderTopColor: adjustColorBrightness(p.color, -20),
-                                  } : {})
+                                  ...(p.frame === 2 || p.frame === 4
+                                    ? {
+                                      border: `solid 1.8vmin ${p.color}`,
+                                      borderBottomColor: adjustColorBrightness(
+                                        p.color,
+                                        50,
+                                      ),
+                                      borderLeftColor: p.color,
+                                      borderRightColor: p.color,
+                                      borderTopColor: adjustColorBrightness(
+                                        p.color,
+                                        -20,
+                                      ),
+                                    }
+                                    : {}),
                                 }}
                               >
                                 <img
-                                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                  style={{
+                                    ...ART_IMG_WRAPPER.image,
+                                    ...imageOnLoadStyle.thumbnail,
+                                  }}
                                   src="/textures/placeholder_150.png"
                                   alt="placeholder_150"
                                 />
@@ -402,13 +440,25 @@ export default function ArtsLayout(
                                   class={`max-w-full ${p.gap_4}`}
                                   style={{
                                     ...imageOnLoadStyle.fullSize,
-                                    ...(p.frame === 2 || p.frame === 4 ? {
-                                      border: 'solid 2px',
-                                      borderBottomColor: adjustColorBrightness(p.color, 50),
-                                      borderLeftColor: adjustColorBrightness(p.color, -20),
-                                      borderRightColor: adjustColorBrightness(p.color, -20),
-                                      borderTopColor: adjustColorBrightness(p.color, -40),
-                                    } : {})
+                                    ...(p.frame === 2 || p.frame === 4
+                                      ? {
+                                        border: "solid 2px",
+                                        borderBottomColor:
+                                          adjustColorBrightness(p.color, 50),
+                                        borderLeftColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderRightColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderTopColor: adjustColorBrightness(
+                                          p.color,
+                                          -40,
+                                        ),
+                                      }
+                                      : {}),
                                   }}
                                   src={p.url_4}
                                   alt={p.name + "_4"}
@@ -419,21 +469,32 @@ export default function ArtsLayout(
                           {p.polyptych > 1 &&
                             (
                               <div
-                                onClick={() => handleClick(p, '2', p.url_2)}
+                                onClick={() => handleClick(p, "2", p.url_2)}
                                 class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                                 style={{
                                   ...ART_IMG_WRAPPER.wrap,
-                                  ...(p.frame === 2 || p.frame === 4 ? {
-                                    border: `solid 1.8vmin ${p.color}`,
-                                    borderBottomColor: adjustColorBrightness(p.color, 50),
-                                    borderLeftColor: p.color,
-                                    borderRightColor: p.color,
-                                    borderTopColor: adjustColorBrightness(p.color, -20),
-                                  } : {})
+                                  ...(p.frame === 2 || p.frame === 4
+                                    ? {
+                                      border: `solid 1.8vmin ${p.color}`,
+                                      borderBottomColor: adjustColorBrightness(
+                                        p.color,
+                                        50,
+                                      ),
+                                      borderLeftColor: p.color,
+                                      borderRightColor: p.color,
+                                      borderTopColor: adjustColorBrightness(
+                                        p.color,
+                                        -20,
+                                      ),
+                                    }
+                                    : {}),
                                 }}
                               >
                                 <img
-                                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                  style={{
+                                    ...ART_IMG_WRAPPER.image,
+                                    ...imageOnLoadStyle.thumbnail,
+                                  }}
                                   src="/textures/placeholder_150.png"
                                   alt="placeholder_150"
                                 />
@@ -442,13 +503,25 @@ export default function ArtsLayout(
                                   class={`max-w-full ${p.gap_2}`}
                                   style={{
                                     ...imageOnLoadStyle.fullSize,
-                                    ...(p.frame === 2 || p.frame === 4 ? {
-                                      border: 'solid 2px',
-                                      borderBottomColor: adjustColorBrightness(p.color, 50),
-                                      borderLeftColor: adjustColorBrightness(p.color, -20),
-                                      borderRightColor: adjustColorBrightness(p.color, -20),
-                                      borderTopColor: adjustColorBrightness(p.color, -40),
-                                    } : {})
+                                    ...(p.frame === 2 || p.frame === 4
+                                      ? {
+                                        border: "solid 2px",
+                                        borderBottomColor:
+                                          adjustColorBrightness(p.color, 50),
+                                        borderLeftColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderRightColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderTopColor: adjustColorBrightness(
+                                          p.color,
+                                          -40,
+                                        ),
+                                      }
+                                      : {}),
                                   }}
                                   src={p.url_2}
                                   alt={p.name + "_2"}
@@ -457,31 +530,45 @@ export default function ArtsLayout(
                               </div>
                             )}
                           <div
-                            onClick={() => handleClick(p, '1', p.url)}
+                            onClick={() =>
+                              handleClick(p, "1", p.url)}
                             data-artist-id={p.id}
                             class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                             style={{
                               ...ART_IMG_WRAPPER.wrap,
-                              ...(p.frame === 2 || p.frame === 4 ? {
-                                border: `solid 1.8vmin ${p.color}`,
-                                borderBottomColor: adjustColorBrightness(p.color, 50),
-                                borderLeftColor: p.color,
-                                borderRightColor: p.color,
-                                borderTopColor: adjustColorBrightness(p.color, -20),
-                              } : {})
+                              ...(p.frame === 2 || p.frame === 4
+                                ? {
+                                  border: `solid 1.8vmin ${p.color}`,
+                                  borderBottomColor: adjustColorBrightness(
+                                    p.color,
+                                    50,
+                                  ),
+                                  borderLeftColor: p.color,
+                                  borderRightColor: p.color,
+                                  borderTopColor: adjustColorBrightness(
+                                    p.color,
+                                    -20,
+                                  ),
+                                }
+                                : {}),
                             }}
                           >
                             {(p.frame === 0 || p.frame > 2) &&
                               (
                                 <p
                                   id="name"
-                                  class={`text-lighterdark font-${p.font ?? props.font}`}
+                                  class={`text-lighterdark font-${
+                                    p.font ?? props.font
+                                  }`}
                                 >
                                   {p.name}
                                 </p>
                               )}
                             <img
-                              style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                              style={{
+                                ...ART_IMG_WRAPPER.image,
+                                ...imageOnLoadStyle.thumbnail,
+                              }}
                               src="/textures/placeholder_150.png"
                               alt="placeholder_150"
                             />
@@ -490,13 +577,27 @@ export default function ArtsLayout(
                               class={`max-w-full ${p.gap_1}`}
                               style={{
                                 ...imageOnLoadStyle.fullSize,
-                                ...(p.frame === 2 || p.frame === 4 ? {
-                                  border: 'solid 2px',
-                                  borderBottomColor: adjustColorBrightness(p.color, 50),
-                                  borderLeftColor: adjustColorBrightness(p.color, -20),
-                                  borderRightColor: adjustColorBrightness(p.color, -20),
-                                  borderTopColor: adjustColorBrightness(p.color, -40),
-                                } : {})
+                                ...(p.frame === 2 || p.frame === 4
+                                  ? {
+                                    border: "solid 2px",
+                                    borderBottomColor: adjustColorBrightness(
+                                      p.color,
+                                      50,
+                                    ),
+                                    borderLeftColor: adjustColorBrightness(
+                                      p.color,
+                                      -20,
+                                    ),
+                                    borderRightColor: adjustColorBrightness(
+                                      p.color,
+                                      -20,
+                                    ),
+                                    borderTopColor: adjustColorBrightness(
+                                      p.color,
+                                      -40,
+                                    ),
+                                  }
+                                  : {}),
                               }}
                               src={p.url}
                               alt={p.name}
@@ -506,21 +607,32 @@ export default function ArtsLayout(
                           {p.polyptych > 2 &&
                             (
                               <div
-                                onClick={() => handleClick(p, '3', p.url_3)}
+                                onClick={() => handleClick(p, "3", p.url_3)}
                                 class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                                 style={{
                                   ...ART_IMG_WRAPPER.wrap,
-                                  ...(p.frame === 2 || p.frame === 4 ? {
-                                    border: `solid 1.8vmin ${p.color}`,
-                                    borderBottomColor: adjustColorBrightness(p.color, 50),
-                                    borderLeftColor: p.color,
-                                    borderRightColor: p.color,
-                                    borderTopColor: adjustColorBrightness(p.color, -20),
-                                  } : {})
+                                  ...(p.frame === 2 || p.frame === 4
+                                    ? {
+                                      border: `solid 1.8vmin ${p.color}`,
+                                      borderBottomColor: adjustColorBrightness(
+                                        p.color,
+                                        50,
+                                      ),
+                                      borderLeftColor: p.color,
+                                      borderRightColor: p.color,
+                                      borderTopColor: adjustColorBrightness(
+                                        p.color,
+                                        -20,
+                                      ),
+                                    }
+                                    : {}),
                                 }}
                               >
                                 <img
-                                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                  style={{
+                                    ...ART_IMG_WRAPPER.image,
+                                    ...imageOnLoadStyle.thumbnail,
+                                  }}
                                   src="/textures/placeholder_150.png"
                                   alt="placeholder_150"
                                 />
@@ -529,13 +641,25 @@ export default function ArtsLayout(
                                   class={`max-w-full ${p.gap_3}`}
                                   style={{
                                     ...imageOnLoadStyle.fullSize,
-                                    ...(p.frame === 2 || p.frame === 4 ? {
-                                      border: 'solid 2px',
-                                      borderBottomColor: adjustColorBrightness(p.color, 50),
-                                      borderLeftColor: adjustColorBrightness(p.color, -20),
-                                      borderRightColor: adjustColorBrightness(p.color, -20),
-                                      borderTopColor: adjustColorBrightness(p.color, -40),
-                                    } : {})
+                                    ...(p.frame === 2 || p.frame === 4
+                                      ? {
+                                        border: "solid 2px",
+                                        borderBottomColor:
+                                          adjustColorBrightness(p.color, 50),
+                                        borderLeftColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderRightColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderTopColor: adjustColorBrightness(
+                                          p.color,
+                                          -40,
+                                        ),
+                                      }
+                                      : {}),
                                   }}
                                   src={p.url_3}
                                   alt={p.name + "_3"}
@@ -546,21 +670,32 @@ export default function ArtsLayout(
                           {p.polyptych === 5 &&
                             (
                               <div
-                                onClick={() => handleClick(p, '5', p.url_5)}
+                                onClick={() => handleClick(p, "5", p.url_5)}
                                 class={`art-frame art-frame-type-${p.frame} art-polyptych-${p.polyptych} cursor-pointer`}
                                 style={{
                                   ...ART_IMG_WRAPPER.wrap,
-                                  ...(p.frame === 2 || p.frame === 4 ? {
-                                    border: `solid 1.8vmin ${p.color}`,
-                                    borderBottomColor: adjustColorBrightness(p.color, 50),
-                                    borderLeftColor: p.color,
-                                    borderRightColor: p.color,
-                                    borderTopColor: adjustColorBrightness(p.color, -20),
-                                  } : {})
+                                  ...(p.frame === 2 || p.frame === 4
+                                    ? {
+                                      border: `solid 1.8vmin ${p.color}`,
+                                      borderBottomColor: adjustColorBrightness(
+                                        p.color,
+                                        50,
+                                      ),
+                                      borderLeftColor: p.color,
+                                      borderRightColor: p.color,
+                                      borderTopColor: adjustColorBrightness(
+                                        p.color,
+                                        -20,
+                                      ),
+                                    }
+                                    : {}),
                                 }}
                               >
                                 <img
-                                  style={{ ...ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                                  style={{
+                                    ...ART_IMG_WRAPPER.image,
+                                    ...imageOnLoadStyle.thumbnail,
+                                  }}
                                   src="/textures/placeholder_150.png"
                                   alt="placeholder_150"
                                 />
@@ -569,13 +704,25 @@ export default function ArtsLayout(
                                   class={`max-w-full ${p.gap_5}`}
                                   style={{
                                     ...imageOnLoadStyle.fullSize,
-                                    ...(p.frame === 2 || p.frame === 4 ? {
-                                      border: 'solid 2px',
-                                      borderBottomColor: adjustColorBrightness(p.color, 50),
-                                      borderLeftColor: adjustColorBrightness(p.color, -20),
-                                      borderRightColor: adjustColorBrightness(p.color, -20),
-                                      borderTopColor: adjustColorBrightness(p.color, -40),
-                                    } : {})
+                                    ...(p.frame === 2 || p.frame === 4
+                                      ? {
+                                        border: "solid 2px",
+                                        borderBottomColor:
+                                          adjustColorBrightness(p.color, 50),
+                                        borderLeftColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderRightColor: adjustColorBrightness(
+                                          p.color,
+                                          -20,
+                                        ),
+                                        borderTopColor: adjustColorBrightness(
+                                          p.color,
+                                          -40,
+                                        ),
+                                      }
+                                      : {}),
                                   }}
                                   src={p.url_5}
                                   alt={p.name + "_5"}
@@ -590,7 +737,9 @@ export default function ArtsLayout(
                               <div class="top-tape"></div>
                               <p
                                 id="name"
-                                class={`px-3 text-lighterdark font-${p.font ?? props.font} leading-none`}
+                                class={`px-3 text-lighterdark font-${
+                                  p.font ?? props.font
+                                } leading-none`}
                               >
                                 {p.name}
                               </p>
@@ -603,44 +752,46 @@ export default function ArtsLayout(
                     );
 
                     return isForAloneArtworkSignal.value
-                    ? (
-                      <div
-                        key={String(p.id)}
-                        class="w-full flex items-center justify-center gap-4 md:gap-8"
-                      >
-                        {/* Bouton œuvre précédente */}
-                        <ArrowPaperButton
-                          direction="left"
-                          disabled={!props.hasPreviousArtwork}
-                          onClick={props.onPreviousArtwork}
-                        />
-                        {/* Œuvre seule */}
-                        <div class={`art-transition-shell ${artTransitionClass}`}>
-                          {artContent}
+                      ? (
+                        <div
+                          key={String(p.id)}
+                          class="w-full flex items-center justify-center gap-4 md:gap-8"
+                        >
+                          {/* Bouton œuvre précédente */}
+                          <ArrowPaperButton
+                            direction="left"
+                            disabled={!props.hasPreviousArtwork}
+                            onClick={props.onPreviousArtwork}
+                          />
+                          {/* Œuvre seule */}
+                          <div
+                            class={`art-transition-shell ${artTransitionClass}`}
+                          >
+                            {artContent}
+                          </div>
+                          {/* Bouton œuvre suivante */}
+                          <ArrowPaperButton
+                            direction="right"
+                            disabled={!props.hasNextArtwork}
+                            onClick={props.onNextArtwork}
+                          />
                         </div>
-                        {/* Bouton œuvre suivante */}
-                        <ArrowPaperButton
-                          direction="right"
-                          disabled={!props.hasNextArtwork}
-                          onClick={props.onNextArtwork}
-                        />
-                      </div>
-                    )
-                    : artContent;
+                      )
+                      : artContent;
                   })}
                 </div>
               </section>
             ))
           )
           : ( // Pas de résultats
-          <div class="paper paper-shadow transform-gpu appear-effect-fast-fadein min-h-[70px] max-w-[360px] mx-auto my-2">
-            <div class="tape-section"></div>
-            <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
-              {i18next.t("common.no_results", { ns: "translation" })}
-            </p>
-            <div class="tape-section"></div>
-          </div>
-        )}
+            <div class="paper paper-shadow transform-gpu appear-effect-fast-fadein min-h-[70px] max-w-[360px] mx-auto my-2">
+              <div class="tape-section"></div>
+              <p class="text-2xl md:text-3xl font-medium text-center leading-none break-words p-2">
+                {i18next.t("common.no_results", { ns: "translation" })}
+              </p>
+              <div class="tape-section"></div>
+            </div>
+          )}
 
         {/* Modal */}
         {artModalOpenSignal.value && (

@@ -21,5 +21,7 @@ TO_DO_LIST.md
 /utils/db/fact.ts
 /utils/db/movement.ts
 /utils/db/topic.ts
-# Fresh build directory
+# Fresh
 _fresh/
+fresh/
+node_modules/

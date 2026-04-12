@@ -1,11 +1,13 @@
-import { Handlers } from "$fresh/server.ts";
+import { define } from "@/utils.ts";
 
-export const handler: Handlers = {
+
+export const handler = define.handlers({
   GET(_ctx) {
     const bg = new BackgroundContext();
     return bg.render();
   },
-};
+});
+
 
 export class BackgroundContext {
   generate() {

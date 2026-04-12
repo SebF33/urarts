@@ -20,7 +20,7 @@ const waveTank = new WaveTank();
 
 
 export default function WaterDrop({
-  backgroundColor = 'gray',
+  backgroundColor = "gray",
   color,
   isDropy,
   pencilColor,
@@ -88,7 +88,9 @@ export default function WaterDrop({
     const dropPosition = Math.round(
       ((widthRef.current / 2 - 65) / widthRef.current) * 100,
     );
-    if (waveTank.springs[dropPosition] !== undefined) waveTank.springs[dropPosition].p = -50;
+    if (waveTank.springs[dropPosition] !== undefined) {
+      waveTank.springs[dropPosition].p = -50;
+    }
   }
 
   useEffect(() => {
@@ -118,7 +120,9 @@ export default function WaterDrop({
 
   // Délai d'affichage initial
   useEffect(() => {
-    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY_WATERDROP);
+    const timeoutId = setTimeout(() => {
+      setDisplay(true);
+    }, DELAY_DISPLAY_WATERDROP);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -132,11 +136,15 @@ export default function WaterDrop({
         interactive: true,
         offset: [0, -20],
         placement: "top",
-        popperOptions: { strategy: "fixed", modifiers: [{ name: 'flip', enabled: false }] },
+        popperOptions: {
+          strategy: "fixed",
+          modifiers: [{ name: "flip", enabled: false }],
+        },
         theme: "urarts",
       });
     }
   }, [display]);
+
 
   return (
     <>

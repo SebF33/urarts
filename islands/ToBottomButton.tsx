@@ -8,7 +8,7 @@ import { UrartsPencilTip } from "@components/Assets.tsx";
 export default function ToBottomButton() {
   const [showButton, setShowButton] = useState<boolean>(true);
 
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setShowButton(globalThis.scrollY < 100);
@@ -38,7 +38,9 @@ export default function ToBottomButton() {
         } transition-opacity duration-300 ease-in-out`}
         aria-label={`${i18next.t("meta.scroll_to_bottom", { ns: "translation" })}`}
       >
-        <span class="sr-only">${i18next.t("meta.scroll_to_bottom", { ns: "translation" })}</span>
+        <span class="sr-only">
+          ${i18next.t("meta.scroll_to_bottom", { ns: "translation" })}
+        </span>
         <UrartsPencilTip aria-hidden="true" />
       </button>
     </>

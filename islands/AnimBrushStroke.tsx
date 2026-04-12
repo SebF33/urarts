@@ -1,5 +1,4 @@
 import { artistNameSignal, isForAloneArtistSignal } from "@utils/signals.ts";
-import { css } from "@twind/core";
 import { Fragment } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -18,10 +17,11 @@ export default function AnimBrushStroke(
   const [showAnimBrushStroke, setShowAnimBrushStroke] = useState<boolean>(false);
   const [showH1, setShowH1] = useState<boolean>(false);
 
+
   // Délai d'affichage initial
   useEffect(() => {
     let delay = 480;
-    if (props.secondaryColor === '#232a2d') delay = 400;
+    if (props.secondaryColor === "#232a2d") delay = 400;
 
     const timeoutAnimBrushStroke = setTimeout(() => {
       setShowAnimBrushStroke(true);
@@ -45,32 +45,37 @@ export default function AnimBrushStroke(
       {showAnimBrushStroke && (
         <Fragment>
           <div
-            class={`h-[90px] md:h-[126px] font-${props.font} mx-auto text-center relative inline-block px-12 py-6 md:py-12 overflow-hidden ${
-              css({
-                background: `${props.color}`,
-                position: "relative",
-                "z-index": "-1",
-                "clip-path": "url(#clip)",
-              })
-            }`}
+            class={`h-[90px] md:h-[126px] font-${props.font} mx-auto text-center relative inline-block px-12 py-6 md:py-12 overflow-hidden z-[-1] [clip-path:url(#clip)]`}
+            style={{ background: props.color }}
           >
             <h1
-              class={`inline-block text-[1.6rem] md:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${showH1 ? 'show' : ''} ${
-                css({color: `${props.secondaryColor}`})
+              class={`inline-block text-[1.6rem] md:text-[2rem] leading-[1.6rem] italic appear-effect-x-3px ${
+                showH1 ? "show" : ""
               }`}
+              style={{ color: props.secondaryColor }}
             >
-              {isForAloneArtistSignal.value && props.type === 'movement' ? (
-                <>
-                  {props.title} <span class="text-[1rem] md:text-[1.2rem] italic"><br />{`${i18next.t("common.according_to", { ns: "translation" })} ${artistNameSignal.value}`}</span>
-                </>
-              ) : (
-                props.title
-              )}
+              {isForAloneArtistSignal.value && props.type === "movement"
+                ? (
+                  <>
+                    {props.title}{" "}
+                    <span class="text-[1rem] md:text-[1.2rem] italic">
+                      <br />
+                      {`${
+                        i18next.t("common.according_to", { ns: "translation" })
+                      } ${artistNameSignal.value}`}
+                    </span>
+                  </>
+                )
+                : (
+                  props.title
+                )}
             </h1>
           </div>
           <svg
             id="BrushStroke"
-            width="100" height="100" viewBox="0 0 100 100"
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
             class="overflow-hidden"
             xmlns="http://www.w3.org/2000/svg"
           >

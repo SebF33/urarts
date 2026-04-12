@@ -1,4 +1,4 @@
-import { ArtCollection } from "@utils/types.d.ts";
+import type { ArtCollection } from "@utils/types.d.ts";
 import {
   DEFAULT_HISTOCHARACTERS_YEARS,
   DELAY_API_CALL,
@@ -30,7 +30,7 @@ export default function HistoSearch(
 ) {
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
   // Contexte
   const type = "histocharacters";
@@ -39,13 +39,28 @@ export default function HistoSearch(
 
   // Slider
   useEffect(() => {
-    // Valeur à l'initialisation
+    // valeur à l'initialisation
     let value = DEFAULT_HISTOCHARACTERS_YEARS;
-    if (histocharactersYearsSignal.value.length !== 0 && (histocharactersYearsSignal.value[0] !== value[0] || histocharactersYearsSignal.value[1] !== value[1]))  value = histocharactersYearsSignal.value;
+    if (
+      histocharactersYearsSignal.value.length !== 0 &&
+      (histocharactersYearsSignal.value[0] !== value[0] ||
+        histocharactersYearsSignal.value[1] !== value[1])
+    ) value = histocharactersYearsSignal.value;
 
-    // Création du slider
+    // création du slider
     const slider: HTMLElement | null = document.getElementById("slider");
-    const valuesForSlider = [300,500,700,900,1100,1300,1500,1700,1900,2100];
+    const valuesForSlider = [
+      300,
+      500,
+      700,
+      900,
+      1100,
+      1300,
+      1500,
+      1700,
+      1900,
+      2100,
+    ];
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -68,18 +83,24 @@ export default function HistoSearch(
 
     //slider?.noUiSlider.set(["300", "2100"]);
 
-    // Extrémités du slider
-    const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
+    // extrémités du slider
+    const valuesLarge: HTMLCollectionOf<Element> = document
+      .getElementsByClassName("noUi-value-large");
     for (let i = 0; i < valuesLarge.length; i++) {
-      valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
+      valuesLarge[i].textContent =
+        i18next.t("slider.value_large", { ns: "translation" }) +
+        valuesLarge[i].textContent;
     }
 
-    // Mise à jour du slider
+    // mise à jour du slider
     let debounceTimer;
     slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        if (histocharactersYearsSignal.value[0] !== slider.noUiSlider.get()[0] || histocharactersYearsSignal.value[1] !== slider.noUiSlider.get()[1])  histocharactersYearsSignal.value = slider.noUiSlider.get();
+        if (
+          histocharactersYearsSignal.value[0] !== slider.noUiSlider.get()[0] ||
+          histocharactersYearsSignal.value[1] !== slider.noUiSlider.get()[1]
+        ) histocharactersYearsSignal.value = slider.noUiSlider.get();
       }, DELAY_DEBOUNCE);
     });
 
@@ -93,7 +114,9 @@ export default function HistoSearch(
   useEffect(() => {
     if (histocharactersYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${histocharactersYearsSignal.value}`)
+        ky.get(
+          `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${histocharactersYearsSignal.value}`,
+        )
           .json<Arts[]>()
           .then((response) => {
             setSearchResults(response);
@@ -109,7 +132,9 @@ export default function HistoSearch(
   useLayoutEffect(() => {
     if (props.id !== "") {
       setTimeout(() => {
-        const target: HTMLElement | null = document.getElementById(`${props.id}`);
+        const target: HTMLElement | null = document.getElementById(
+          `${props.id}`,
+        );
         if (target) {
           target.scrollIntoView({
             behavior: "smooth",
@@ -132,10 +157,12 @@ export default function HistoSearch(
         class={`p-4 max-w-7xl mx-auto mb-8 sm:mb-16 px-4 sm:px-6 lg:px-8`}
       >
         <div
-          class={`paper paper-shadow min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5`}
+          class={`paper paper-shadow relative min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5`}
         >
           <div class="tape-section"></div>
-          <h1 class={`text-2xl md:text-4xl leading-none font-medium text-center mb-2`}>
+          <h1
+            class={`text-2xl md:text-4xl leading-none font-medium text-center mb-2`}
+          >
             {i18next.t("title.histocharacters", { ns: "translation" })}
           </h1>
           <div class="tape-section"></div>
@@ -143,7 +170,7 @@ export default function HistoSearch(
 
         {/* Entrée de recherche */}
         <div class="paper paper-shadow w-[60px] md:w-[80px] mx-auto mb-2 -translate-x-16">
-        <div class="top-tape max-h-2.5"></div>
+          <div class="top-tape max-h-2.5"></div>
           <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
             {i18next.t("paper.name", { ns: "translation" })}
           </h2>

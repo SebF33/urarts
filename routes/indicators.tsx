@@ -1,11 +1,12 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { INDICATORS_MOVEMENTS, TALENTS } from "@utils/constants.ts";
+import { PageProps } from "fresh";
 import { sql } from "kysely";
 
 import Doughnut from "@islands/chart/Doughnut.tsx";
@@ -15,8 +16,8 @@ import Title from "@islands/paper/Title.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     const desc = i18next.t("meta.indicators.desc", { ns: "translation" });
     const title = i18next.t("meta.indicators.title", { ns: "translation" });
     const lng = i18next.language;
@@ -98,20 +99,23 @@ export const handler: Handlers = {
     const movementValueResult: string[] = movementQuery.map((item) => item.movement_value);
     const totalArtCountResult: number[] = totalArtQuery.map((item) => parseFloat(item.art_count));
     
-    return ctx.render({
-      artistCountResult,
-      artistNationalityResult,
-      artistNationalityValueResult,
-      desc,
-      movementCountResult,
-      movementNameResult,
-      movementValueResult,
-      title,
-      totalArtCountResult,
-      totalArtistCountResult,
-    });
+
+    return {
+      data: {
+        artistCountResult,
+        artistNationalityResult,
+        artistNationalityValueResult,
+        desc,
+        movementCountResult,
+        movementNameResult,
+        movementValueResult,
+        title,
+        totalArtCountResult,
+        totalArtistCountResult
+      }
+    };
   },
-};
+});
 
 
 export default function IndicatorsPage(
@@ -141,7 +145,6 @@ export default function IndicatorsPage(
     totalArtCountResult,
     totalArtistCountResult,
   } = props.data;
-  
 
   return (
     <>

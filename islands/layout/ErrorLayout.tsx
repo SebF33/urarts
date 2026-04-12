@@ -1,17 +1,15 @@
-import { css } from "@twind/core";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { usePageBackground } from "@utils/background.ts";
 
 
-export default function ErrorLayout(
-  props: {
-    firstDigit: string;
-    secondDigit: string;
-    thirdDigit: string;
-    msg: string;
-  },
-) {
+export default function ErrorLayout(props: {
+  firstDigit: string;
+  secondDigit: string;
+  thirdDigit: string;
+  msg: string;
+}) {
+
   let msg = "";
   let title = "";
 
@@ -19,6 +17,7 @@ export default function ErrorLayout(
     msg = i18next.t("error.notfound.msg", { ns: "translation" }) + " " + props.msg;
     title = i18next.t("error.notfound.title", { ns: "translation" });
   }
+
   if (props.firstDigit === "5") {
     msg = i18next.t("error.server.msg", { ns: "translation" }) + " " + props.msg;
     title = i18next.t("error.server.title", { ns: "translation" });
@@ -29,188 +28,39 @@ export default function ErrorLayout(
   usePageBackground("error");
 
 
+  // CSS
+  const frame =
+    "relative pb-[120%] bg-black shadow-[0_10px_7px_-5px_rgba(0,0,0,0.3)]";
+
+  const inner =
+    "absolute inset-[3.0303%_2.5%] bg-realwhite shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]";
+
+  const content =
+    "group flex justify-center text-center overflow-hidden z-20 absolute inset-[16.129%_13.158%]";
+
+  const overlay =
+    "after:content-[''] after:block after:absolute after:top-0 after:w-full after:h-full after:shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]";
+
+
   return (
     <>
-      <div class={`max-w-5xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12`}>
-        <div
-          class={`grid gap-1 sm:gap-2 md:gap-3 lg:gap-4 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14`}
-        >
-          <div
-            class={`${
-              css(
-                {
-                  "position": "relative",
-                  "padding-bottom": "120%",
-                  "background": "black",
-                  "box-shadow": "0 10px 7px -5px rgba(0, 0, 0, 0.3)",
-                },
-              )
-            }`}
-          >
-            <div
-              class={`${
-                css(
-                  {
-                    "position": "absolute",
-                    "background": "white",
-                    "top": "3.0303%",
-                    "bottom": "3.0303%",
-                    "left": "2.5%",
-                    "right": "2.5%",
-                    "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                  },
-                )
-              }`}
-            >
-              <div
-                class={`group flex justify-center text-center relative overflow-hidden z-20 ${
-                  css(
-                    {
-                      "position": "absolute",
-                      "top": "16.129%",
-                      "bottom": "16.129%",
-                      "left": "13.158%",
-                      "right": "13.158%",
-                      "&::after": {
-                        content: "",
-                        "display": "block",
-                        "position": "absolute",
-                        "top": "0",
-                        "width": "100%",
-                        "height": "100%",
-                        "box-shadow":
-                          "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                      },
-                    },
-                  )
-                }`}
-              >
-                <img
-                  class={`w-full object-cover`}
-                  src={`/errors/${props.firstDigit}.jpg`}
-                  alt={props.firstDigit}
-                />
+      <div class="max-w-5xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12">
+        <div class="grid gap-1 sm:gap-2 md:gap-3 lg:gap-4 grid-cols-3 pt-10 pb-10 lg:pt-20 lg:pb-14">
+          {[props.firstDigit, props.secondDigit, props.thirdDigit].map((
+            digit,
+          ) => (
+            <div class={frame}>
+              <div class={inner}>
+                <div class={`${content} ${overlay}`}>
+                  <img
+                    class="w-full object-cover"
+                    src={`/errors/${digit}.jpg`}
+                    alt={digit}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div
-            class={`${
-              css(
-                {
-                  "position": "relative",
-                  "padding-bottom": "120%",
-                  "background": "black",
-                  "box-shadow": "0 10px 7px -5px rgba(0, 0, 0, 0.3)",
-                },
-              )
-            }`}
-          >
-            <div
-              class={`${
-                css(
-                  {
-                    "position": "absolute",
-                    "background": "white",
-                    "top": "3.0303%",
-                    "bottom": "3.0303%",
-                    "left": "2.5%",
-                    "right": "2.5%",
-                    "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                  },
-                )
-              }`}
-            >
-              <div
-                class={`group flex justify-center text-center relative overflow-hidden z-20 ${
-                  css(
-                    {
-                      "position": "absolute",
-                      "top": "16.129%",
-                      "bottom": "16.129%",
-                      "left": "13.158%",
-                      "right": "13.158%",
-                      "&::after": {
-                        content: "",
-                        "display": "block",
-                        "position": "absolute",
-                        "top": "0",
-                        "width": "100%",
-                        "height": "100%",
-                        "box-shadow":
-                          "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                      },
-                    },
-                  )
-                }`}
-              >
-                <img
-                  class={`w-full object-cover`}
-                  src={`/errors/${props.secondDigit}.jpg`}
-                  alt={props.secondDigit}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div
-            class={`${
-              css(
-                {
-                  "position": "relative",
-                  "padding-bottom": "120%",
-                  "background": "black",
-                  "box-shadow": "0 10px 7px -5px rgba(0, 0, 0, 0.3)",
-                },
-              )
-            }`}
-          >
-            <div
-              class={`${
-                css(
-                  {
-                    "position": "absolute",
-                    "background": "white",
-                    "top": "3.0303%",
-                    "bottom": "3.0303%",
-                    "left": "2.5%",
-                    "right": "2.5%",
-                    "box-shadow": "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                  },
-                )
-              }`}
-            >
-              <div
-                class={`group flex justify-center text-center relative overflow-hidden z-20 ${
-                  css(
-                    {
-                      "position": "absolute",
-                      "top": "16.129%",
-                      "bottom": "16.129%",
-                      "left": "13.158%",
-                      "right": "13.158%",
-                      "&::after": {
-                        content: "",
-                        "display": "block",
-                        "position": "absolute",
-                        "top": "0",
-                        "width": "100%",
-                        "height": "100%",
-                        "box-shadow":
-                          "0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset",
-                      },
-                    },
-                  )
-                }`}
-              >
-                <img
-                  class={`w-full object-cover`}
-                  src={`/errors/${props.thirdDigit}.jpg`}
-                  alt={props.thirdDigit}
-                />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

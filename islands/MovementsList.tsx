@@ -1,6 +1,5 @@
-import { ArtCollection, ArtRow, MovementRow } from "@utils/types.d.ts";
+import type { ArtCollection, ArtRow, MovementRow } from "@utils/types.d.ts";
 import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
-import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
@@ -23,16 +22,23 @@ export default function MovementsList(
   const [hoveredImageUrl, setHoveredImageUrl] = useState<object | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
 
-  
+
   // Aperçu
   useEffect(() => {
     async function fetchInitialPreview() {
       try {
-        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
+        const response = await ky.get(
+          `${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`,
+        ).json<ArtRow[]>();
 
         if (response && response.length > 0) {
           const firstArt = response[0];
-          getPreviewImageUrl(firstArt.id.toString(), firstArt.name, firstArt.slug, firstArt.url);
+          getPreviewImageUrl(
+            firstArt.id.toString(),
+            firstArt.name,
+            firstArt.slug,
+            firstArt.url,
+          );
         }
       } catch (error) {
         console.error("Error", error);
@@ -42,27 +48,28 @@ export default function MovementsList(
     fetchInitialPreview();
   }, []);
 
-
   useEffect(() => {
     const previews = document.querySelectorAll(".preview");
-    previews.forEach(preview => { preview.classList.add("is-active"); });
+    previews.forEach((preview) => {
+      preview.classList.add("is-active");
+    });
   }, [hoveredImageUrl]);
-
 
   const handleMouseEnter = (slug: string) => {
     if (hoverTimeout !== null) {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
     }
-    
+
     setHoveredImageUrl(null);
 
     const timeoutId = setTimeout(() => {
-
       async function fetchPreview() {
         try {
-          const response = await ky.get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}`).json<Arts>();
-  
+          const response = await ky.get(
+            `${UrlBasePath}/api/collection?type=movement&slug=${slug}`,
+          ).json<Arts>();
+
           if (response && response.length > 0) {
             const art = response[0];
             getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
@@ -71,21 +78,24 @@ export default function MovementsList(
           console.error("Error", error);
         }
       }
-  
-      fetchPreview();
 
+      fetchPreview();
     }, DELAY_API_CALL);
     setHoverTimeout(timeoutId);
   };
 
-
-  function getPreviewImageUrl(id: string, name: string, slug: string, url: string) {
+  function getPreviewImageUrl(
+    id: string,
+    name: string,
+    slug: string,
+    url: string,
+  ) {
     const hoveredImageUrl = {
       id: id,
       name: name,
       slug: slug,
-      url: url
-    }
+      url: url,
+    };
     setHoveredImageUrl(hoveredImageUrl);
   }
 
@@ -98,7 +108,9 @@ export default function MovementsList(
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const href = (event.currentTarget as HTMLAnchorElement).href;
-    setTimeout(() => { window.location.href = href; }, DELAY_REACH_HREF);
+    setTimeout(() => {
+      window.location.href = href;
+    }, DELAY_REACH_HREF);
   }
 
 
@@ -124,13 +136,17 @@ export default function MovementsList(
                     href={"/movement/" + item.slug}
                     class="cursor-pointer"
                     onClick={handleClick}
-                    onMouseEnter={() => handleMouseEnter(item.slug)}
-                    onPointerEnter={() => handleMouseEnter(item.slug)}
+                    onMouseEnter={() =>
+                      handleMouseEnter(item.slug)}
+                    onPointerEnter={() =>
+                      handleMouseEnter(item.slug)}
                   >
                     <p class={`relative group text-xl leading-none`}>
                       <span>{item.name}</span>
                       <span class={`italic text-[1.05rem]`}>
-                        {" "}({item.art_count}{" "}{i18next.t("common.art", { ns: "translation" })}{item.art_count === "1" ? "" : "s"})
+                        {" "}({item.art_count}{" "}
+                        {i18next.t("common.art", { ns: "translation" })}
+                        {item.art_count === "1" ? "" : "s"})
                       </span>
                       <span
                         class={`absolute -bottom-2 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}
@@ -143,7 +159,7 @@ export default function MovementsList(
             </ul>
           )}
 
-          <Preview image={hoveredImageUrl} />
+        <Preview image={hoveredImageUrl} />
       </div>
     </div>
   );

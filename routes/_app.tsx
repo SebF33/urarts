@@ -1,6 +1,6 @@
-import { asset, Partial } from "$fresh/runtime.ts";
+import { asset, Partial } from "fresh/runtime";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { defineApp } from "$fresh/server.ts";
+import { define } from "@/utils.ts";
 import { UrlBasePath } from "@/env.ts";
 
 import GeolocationConsent from "@islands/GeolocationConsent.tsx";
@@ -8,7 +8,9 @@ import Nav from "@islands/header/Nav.tsx";
 import ToBottomButton from "@islands/ToBottomButton.tsx";
 import ToTopButton from "@islands/ToTopButton.tsx";
 
-export default defineApp((_, ctx) => {
+
+export default define.page((ctx) => {
+  // Contexte
   const isPersoGallery = ctx.url.pathname.endsWith("/gallery");
 
   return (
@@ -74,7 +76,6 @@ export default defineApp((_, ctx) => {
         <script defer type="module" src={asset("/styles/app/state.js")}></script>
         <script defer type="module" src={asset("/styles/event/zoom-block.js")}></script>
         <link href={asset("/styles/lib/tippy6.3.7.css")} rel="stylesheet" />
-        <link href={asset("/styles/style.css")} rel="stylesheet" />
         <link href={asset("/styles/lib/nouislider.min.css")} rel="stylesheet" />
         <link href={asset("/styles/nouislider.css")} rel="stylesheet" />
         <script src={asset("/styles/lib/nouislider.min.js")}></script>
@@ -82,6 +83,7 @@ export default defineApp((_, ctx) => {
 
       <body
         f-client-nav
+        f-view-transition
         data-nav-theme="header-paper"
         data-open-famous-art="true"
         data-open-talents-art="true"

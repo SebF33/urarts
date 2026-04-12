@@ -7,17 +7,19 @@ import {
   URL_URARTS_ART,
   URL_URARTS_DEV,
 } from "@utils/constants.ts";
-import { FreshContext } from "$fresh/server.ts";
+import { define } from "@/utils.ts";
 import i18next from "i18next";
 
 
-export async function handler(req: Request, ctx: FreshContext) {
-  const url = new URL(req.url);
+export const handler = define.middleware(async (ctx) => {
+  const req = ctx.req;
+  const url = ctx.url;
+
   const cookies = getCookies(req.headers);
   const domain = url.hostname;
+
   let lng: string | null = cookies.i18next;
   //let lng: string | null = url.searchParams.get("lng") || cookies.i18next;
-
 
   // aucune langue n'est spécifiée
   if (!lng) {
@@ -31,13 +33,12 @@ export async function handler(req: Request, ctx: FreshContext) {
         .map((lang) => lang.split(";")[0].trim())
         .map((lang) => lang.split("-")[0]);
       const browserLang = languages.length > 0 ? languages[0] : null;
-      
+
       if (browserLang && ["en", "fr"].includes(browserLang)) {
         lng = browserLang;
       }
     }
   }
-
 
   // définir la langue dans i18next
   await i18next.changeLanguage(lng);
@@ -89,4 +90,4 @@ export async function handler(req: Request, ctx: FreshContext) {
   setCookie(response.headers, cookie);
 
   return response;
-}
+});

@@ -3,6 +3,7 @@ import { isForAloneArtistSignal } from "@utils/signals.ts";
 
 import BackToTheArtistPaper from "@islands/paper/BackToTheArtistPaper.tsx";
 
+
 interface Artist {
   name: string;
   slug: string;
@@ -39,7 +40,7 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
           aria-label={artist.name}
         >
           <div class="top-tape max-h-3" id={`artist-name-${artist.slug}`}></div>
-          <div class="text-lighterdark text-xl text-center italic leading-5 select-none z-10">
+          <div class="text-lighterdark text-xl text-center italic leading-7 select-none z-10">
             {artist.name}
           </div>
           <img

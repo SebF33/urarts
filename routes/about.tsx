@@ -1,5 +1,6 @@
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
+import { PageProps } from "fresh";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
@@ -11,8 +12,8 @@ import Title from "@islands/paper/Title.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 
 
-export const handler: Handlers = {
-  GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  GET(_ctx) {
     const desc = i18next.t("meta.about.desc", { ns: "translation" });
     const title = i18next.t("meta.about.title", { ns: "translation" });
 
@@ -29,9 +30,11 @@ export const handler: Handlers = {
     ];
     const color = colors[randomColorsIndex];
 
-    return ctx.render({ color, desc, title });
+    return {
+      data: { color, desc, title }
+    };
   },
-};
+});
 
 
 export default function AboutPage(
@@ -43,7 +46,6 @@ export default function AboutPage(
 ) {
 
   const { color, desc, title } = props.data;
-
 
   return (
     <>

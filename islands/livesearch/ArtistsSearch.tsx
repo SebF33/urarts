@@ -1,7 +1,14 @@
-import { ArtistRow } from "@utils/types.d.ts";
-import { artistsYearsSignal, languageSignal, nationalitySignal } from "@utils/signals.ts";
-import { css } from "@twind/core";
-import { DELAY_API_CALL, DEFAULT_ARTISTS_YEARS, DELAY_DEBOUNCE } from "@utils/constants.ts";
+import type { ArtistRow } from "@utils/types.d.ts";
+import {
+  artistsYearsSignal,
+  languageSignal,
+  nationalitySignal,
+} from "@utils/signals.ts";
+import {
+  DEFAULT_ARTISTS_YEARS,
+  DELAY_API_CALL,
+  DELAY_DEBOUNCE,
+} from "@utils/constants.ts";
 import { h } from "preact";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -19,9 +26,42 @@ import Title from "@islands/paper/Title.tsx";
 
 // Groupes de drapeaux et traductions
 const FLAG_GROUPS = {
-  1: ["Portugal", "Espagne", "France", "Belgique", "Pays-Bas", "Allemagne", "Autriche", "Pologne", "Hongrie", "Italie"],
-  2: ["Suisse", "Suède", "Norvège", "Finlande", "Danemark", "Ukraine", "Biélorussie", "Russie", "Arménie", "Tchécoslovaquie"],
-  3: ["Grèce", "Turquie", "Chine", "Vietnam", "Japon", "Royaume-Uni", "Colombie", "Mexique", "États-Unis d'Amérique", "Canada"]
+  1: [
+    "Portugal",
+    "Espagne",
+    "France",
+    "Belgique",
+    "Pays-Bas",
+    "Allemagne",
+    "Autriche",
+    "Pologne",
+    "Hongrie",
+    "Italie",
+  ],
+  2: [
+    "Suisse",
+    "Suède",
+    "Norvège",
+    "Finlande",
+    "Danemark",
+    "Ukraine",
+    "Biélorussie",
+    "Russie",
+    "Arménie",
+    "Tchécoslovaquie",
+  ],
+  3: [
+    "Grèce",
+    "Turquie",
+    "Chine",
+    "Vietnam",
+    "Japon",
+    "Royaume-Uni",
+    "Colombie",
+    "Mexique",
+    "États-Unis d'Amérique",
+    "Canada",
+  ],
 };
 
 const COUNTRY_TRANSLATIONS = {
@@ -68,6 +108,7 @@ function FlagButton({ name, className = "", flagClass, draggable = false }: {
   flagClass: string;
   draggable?: boolean;
 }) {
+
   return (
     <button
       onClick={() => (nationalitySignal.value = name)}
@@ -92,22 +133,22 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   const [showFlags1, setShowFlags1] = useState(true);
   const [showFlags2, setShowFlags2] = useState(true);
   const [showFlags3, setShowFlags3] = useState(true);
-  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
+
 
   // CSS
-  const blur = "blur(0)";
   const draggable = false;
   const grid = "grid gap-4 sm:gap-5 grid-cols-1 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 my-20 p-4";
-  const scale105 = "transform-gpu will-change-transform transition-all duration-150 ease-in-out hover:(transform scale-105)";
-  const scale110 = "transform-gpu will-change-transform transition-all duration-300 ease-in-out hover:(transform scale-110)";
-  const shadow = "drop-shadow(0.01rem 0.01rem 0.04rem rgba(0, 0, 0, 0.5))";
+  const scale105 = "transform-gpu will-change-transform transition-all duration-150 ease-in-out hover:scale-105";
+  const scale110 = "transform-gpu will-change-transform transition-all duration-300 ease-in-out hover:scale-110";
   const width8 = "w-8 sm:w-10";
   const width12 = "w-12 sm:w-16";
-  const flagClasses1 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags1 ? "fade-enter-active" : "fade-exit-active"}`;
-  const flagClasses2 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags2 ? "fade-enter-active" : "fade-exit-active"}`;
-  const flagClasses3 = `${width8} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale110} fade ${showFlags3 ? "fade-enter-active" : "fade-exit-active"}`;
-  const moreClasses = `w-8 ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
-  const worldFlagClasses = `${width12} ${css({ "filter": shadow, "backdrop-filter": blur })} ${scale105}`;
+  const flagFx = "[filter:drop-shadow(0.01rem_0.01rem_0.04rem_rgba(0,0,0,0.5))] [backdrop-filter:blur(0)]";
+  const flagClasses1 = `${width8} ${flagFx} ${scale110} fade ${showFlags1 ? "fade-enter-active" : "fade-exit-active"}`;
+  const flagClasses2 = `${width8} ${flagFx} ${scale110} fade ${showFlags2 ? "fade-enter-active" : "fade-exit-active"}`;
+  const flagClasses3 = `${width8} ${flagFx} ${scale110} fade ${showFlags3 ? "fade-enter-active" : "fade-exit-active"}`;
+  const moreClasses = `w-8 ${flagFx} ${scale105}`;
+  const worldFlagClasses = `${width12} ${flagFx} ${scale105}`;
   const flagPositions = [
     "-top-12 right-16 sm:-top-10 sm:right-20",
     "-top-8 right-8 sm:-top-4 sm:right-11",
@@ -115,22 +156,17 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
     "top-5 right-1 sm:top-11 sm:right-2",
     "top-12 right-4 sm:top-20 sm:right-5",
     "-bottom-24 right-14 sm:top-32 sm:left-56",
-    `absolute flex items-center sm:left-44 focus:outline-none ${css({
-      bottom: "calc(-6.6rem)",
-      right: "5.8rem",
-      "@media screen(sm)": { top: "9.2rem" },
-    })}`,
-    `absolute flex items-center right-32 sm:left-32 focus:outline-none ${css({
-      bottom: "calc(-6.6rem)",
-      "@media screen(sm)": { top: "9.6rem" },
-    })}`,
+    "absolute flex items-center sm:left-44 focus:outline-none bottom-[calc(-6.6rem)] right-[5.8rem] sm:top-[9.2rem]",
+    "absolute flex items-center right-32 sm:left-32 focus:outline-none bottom-[calc(-6.6rem)] sm:top-[9.6rem]",
     "-bottom-24 left-11 sm:-bottom-40 sm:left-20",
     "-bottom-20 left-3 sm:-bottom-36 sm:left-8",
   ];
 
 
   // Clic sur le bouton +
-  const handleMoreClick = (event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) => {
+  const handleMoreClick = (
+    event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
+  ) => {
     event.preventDefault();
 
     const link = event.currentTarget;
@@ -156,19 +192,23 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
   // Slider
   useEffect(() => {
-    // Valeur à l'initialisation
+    // valeur à l'initialisation
     let value = DEFAULT_ARTISTS_YEARS;
-    if (artistsYearsSignal.value.length !== 0 && (artistsYearsSignal.value[0] !== value[0] || artistsYearsSignal.value[1] !== value[1]))  value = artistsYearsSignal.value;
+    if (
+      artistsYearsSignal.value.length !== 0 &&
+      (artistsYearsSignal.value[0] !== value[0] ||
+        artistsYearsSignal.value[1] !== value[1])
+    ) value = artistsYearsSignal.value;
 
-    // Nationalité et années définies si paramètre "nationality" dans l'URL
+    // nationalité et années définies si paramètre "nationality" dans l'URL
     if (props.nationality !== "") {
       nationalitySignal.value = props.nationality;
       value = [1400, 2100];
     }
 
-    // Création du slider
+    // création du slider
     const slider: HTMLElement | null = document.getElementById("slider");
-    const valuesForSlider = [1400,1500,1600,1700,1800,1900,2000,2100];
+    const valuesForSlider = [1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100];
     const format = {
       to: function (value) {
         return valuesForSlider[Math.round(value)];
@@ -191,18 +231,24 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
     //slider?.noUiSlider.set(["1900", "2000"]);
 
-    // Extrémités du slider
-    const valuesLarge: HTMLCollectionOf<Element> = document.getElementsByClassName("noUi-value-large");
+    // extrémités du slider
+    const valuesLarge: HTMLCollectionOf<Element> = document
+      .getElementsByClassName("noUi-value-large");
     for (let i = 0; i < valuesLarge.length; i++) {
-      valuesLarge[i].textContent = i18next.t("slider.value_large", { ns: "translation" }) + valuesLarge[i].textContent;
+      valuesLarge[i].textContent =
+        i18next.t("slider.value_large", { ns: "translation" }) +
+        valuesLarge[i].textContent;
     }
 
-    // Mise à jour du slider
+    // mise à jour du slider
     let debounceTimer;
     slider?.noUiSlider.on("update", () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        if (artistsYearsSignal.value[0] !== slider.noUiSlider.get()[0] || artistsYearsSignal.value[1] !== slider.noUiSlider.get()[1])  artistsYearsSignal.value = slider.noUiSlider.get();
+        if (
+          artistsYearsSignal.value[0] !== slider.noUiSlider.get()[0] ||
+          artistsYearsSignal.value[1] !== slider.noUiSlider.get()[1]
+        ) artistsYearsSignal.value = slider.noUiSlider.get();
       }, DELAY_DEBOUNCE);
     });
 
@@ -223,7 +269,9 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   useEffect(() => {
     if (artistsYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`)
+        ky.get(
+          `${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`,
+        )
           .json<ArtistRow[]>()
           .then((response) => {
             setSearchResults(response);
@@ -262,13 +310,25 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             onClick={() => (nationalitySignal.value = "Monde")}
             class="absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none"
           >
-            <img class={worldFlagClasses} src="/icons/Monde.png" alt="Monde" title="Monde" draggable={draggable} />
+            <img
+              class={worldFlagClasses}
+              src="/icons/Monde.png"
+              alt="Monde"
+              title="Monde"
+              draggable={draggable}
+            />
           </button>
 
           {/* Boutons pays */}
           {FLAG_GROUPS[flags as 1 | 2 | 3]?.map((country, i) => {
-            const translated = (COUNTRY_TRANSLATIONS[languageSignal.value as "en" | "fr"] as Record<string, string>)?.[country] || country;
-            const flagClass = flags === 1 ? flagClasses1 : flags === 2 ? flagClasses2 : flagClasses3;
+            const translated = (COUNTRY_TRANSLATIONS[
+              languageSignal.value as "en" | "fr"
+            ] as Record<string, string>)?.[country] || country;
+            const flagClass = flags === 1
+              ? flagClasses1
+              : flags === 2
+              ? flagClasses2
+              : flagClasses3;
             return (
               <FlagButton
                 key={country}
@@ -285,7 +345,12 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             onClick={handleMoreClick}
             class="absolute flex items-center -top-4 right-28 sm:-top-4 sm:right-36 focus:outline-none"
           >
-            <img class={moreClasses} src="/symbols/add.png" alt="add-symbol" draggable={draggable} />
+            <img
+              class={moreClasses}
+              src="/symbols/add.png"
+              alt="add-symbol"
+              draggable={draggable}
+            />
           </button>
 
           {/* Entrée de recherche */}

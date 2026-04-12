@@ -1,17 +1,18 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { PageProps } from "fresh";
 
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import WorldMap from "@islands/WorldMap.tsx";
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     const desc = i18next.t("meta.worldmap.desc", { ns: "translation" });
     const title = i18next.t("meta.worldmap.title", { ns: "translation" });
     const lng = i18next.language;
@@ -30,13 +31,12 @@ export const handler: Handlers = {
 
     const artsTagsCountries = tagRows.map((r) => r.name);
     //console.log(artsTagsCountries);
-    return ctx.render({
-      artsTagsCountries,
-      desc,
-      title,
-    });
+
+    return {
+      data: { artsTagsCountries, desc, title }
+    };
   },
-};
+});
 
 
 export default function WorldMapPage(
@@ -46,6 +46,7 @@ export default function WorldMapPage(
     title: string;
   }>,
 ) {
+
   const { artsTagsCountries, desc, title } = props.data;
 
   return (
@@ -67,7 +68,7 @@ export default function WorldMapPage(
         <div class={`p-4 max-w-7xl mx-auto -mb-32 px-4 sm:px-6 lg:px-8`}>
           {/* Titre de la page */}
           <div
-            class={`paper paper-shadow min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5 z-10`}
+            class={`paper paper-shadow relative min-h-[30px] max-w-[125px] md:min-h-[60px] md:max-w-[250px] mt-2 mb-5 md:mt-5 z-10`}
           >
             <div class="tape-section"></div>
             <h1

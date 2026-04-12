@@ -1,6 +1,6 @@
 import { Any } from "any";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { TagConst } from "@utils/types.d.ts";
+import type { TagConst } from "@utils/types.d.ts";
 
 
 // Constantes globales

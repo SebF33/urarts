@@ -24,55 +24,60 @@ export default function PolarArea(
   defaults.font.family = "Caveat Brush";
   const options = {
     layout: {
-      padding: { bottom: 16 }
+      padding: { bottom: 16 },
     },
     plugins: {
       legend: {
         labels: {
           color: `${colorScheme[currentColorScheme].lighterdark}`,
-          font: { size: 13 }
+          font: { size: 13 },
         },
-        position: "top"
+        position: "top",
       },
       title: {
         color: `${colorScheme[currentColorScheme].lighterdark}`,
         display: true,
         font: { size: 21 },
         fullSize: false,
-        text: props.totalArtCountResult + " " + i18next.t("indicator.polararea_title", { ns: "translation" })
+        text: props.totalArtCountResult + " " +
+          i18next.t("indicator.polararea_title", { ns: "translation" }),
       },
       tooltip: {
         bodyFont: { size: 16 },
-        titleFont: { size: 16 }
+        titleFont: { size: 16 },
       },
     },
     onClick: (event: MouseEvent) => {
       if (chartInstanceRef.current) {
         const elements = chartInstanceRef.current.getElementsAtEventForMode(
           event,
-          'nearest',
+          "nearest",
           { intersect: true },
-          false
+          false,
         );
 
         if (elements.length > 0) {
-          const customDataValue = chartInstanceRef.current.data.datasets[elements[0].datasetIndex].customData[elements[0].index];
+          const customDataValue =
+            chartInstanceRef.current.data.datasets[elements[0].datasetIndex]
+              .customData[elements[0].index];
           let href;
-          if (customDataValue === 'movements')  href = '/' + customDataValue;
-          else  href = '/movement/' + customDataValue;
-          setTimeout(() => { window.location.href = href; }, DELAY_CHART_REACH_HREF);
+          if (customDataValue === "movements") href = "/" + customDataValue;
+          else href = "/movement/" + customDataValue;
+          setTimeout(() => {
+            window.location.href = href;
+          }, DELAY_CHART_REACH_HREF);
         }
       }
-    }
+    },
   };
-  
+
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    
+
     let backgroundColor: string[] = [];
-  
-    if (lng === 'en') {
+
+    if (lng === "en") {
       backgroundColor = [
         `${colorScheme[currentColorScheme].lighterdark}`,
         `${colorScheme[currentColorScheme].red}`,
@@ -82,9 +87,9 @@ export default function PolarArea(
         `${colorScheme[currentColorScheme].gray}`,
         `${colorScheme[currentColorScheme].magenta}`,
         `${colorScheme[currentColorScheme].cyan}`,
-      ]
+      ];
     }
-    if (lng === 'fr') {
+    if (lng === "fr") {
       backgroundColor = [
         `${colorScheme[currentColorScheme].lighterdark}`,
         `${colorScheme[currentColorScheme].gray}`,
@@ -94,7 +99,7 @@ export default function PolarArea(
         `${colorScheme[currentColorScheme].blue}`,
         `${colorScheme[currentColorScheme].magenta}`,
         `${colorScheme[currentColorScheme].cyan}`,
-      ]
+      ];
     }
 
     Chart.register(...registerables);
@@ -111,7 +116,7 @@ export default function PolarArea(
             borderColor: `${colorScheme[currentColorScheme].white}`,
             customData: props.valueResult,
             hoverOffset: 2,
-          }
+          },
         ],
       },
     });

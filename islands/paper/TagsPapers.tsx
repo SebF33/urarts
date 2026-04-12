@@ -5,7 +5,7 @@ import {
   isForAloneArtistSignal,
 } from "@utils/signals.ts";
 import { DELAY_REACH_HREF } from "@utils/constants.ts";
-import { TagCollection } from "@utils/types.d.ts";
+import type { TagCollection } from "@utils/types.d.ts";
 
 
 interface Props {
@@ -33,9 +33,10 @@ export default function TagsPapers({
   nbTagsByRow = 6,
 }: Props) {
   if (!tags?.length) return null;
-
-  const isPersoGallery: boolean = !!ispersogallery;
   const rows = Math.ceil(tags.length / nbTagsByRow);
+
+  // Contexte
+  const isPersoGallery: boolean = !!ispersogallery;
 
 
   // Clic sur un lien "tag"
@@ -72,7 +73,10 @@ export default function TagsPapers({
     >
       <div class="flex flex-col gap-1 items-center">
         {Array.from({ length: rows }).map((_, rowIndex) => {
-          const rowTags = tags.slice(rowIndex * nbTagsByRow, (rowIndex + 1) * nbTagsByRow);
+          const rowTags = tags.slice(
+            rowIndex * nbTagsByRow,
+            (rowIndex + 1) * nbTagsByRow,
+          );
           return (
             <div key={rowIndex} class="flex flex-wrap justify-center gap-2">
               {rowTags.map((tag, tagIndex) => {
@@ -84,21 +88,28 @@ export default function TagsPapers({
                   <div
                     key={tag.slug}
                     class={`${baseClass} ${appearClass}`}
-                    style={animated ? { animationDelay: `${delay}ms` } : undefined}
+                    style={animated
+                      ? { animationDelay: `${delay}ms` }
+                      : undefined}
                   >
                     <div
-                      class={`paper paper-shadow max-w-[44vw] sm:max-w-[220px] rounded-md ${tag.position ?? ""}`}
+                      class={`paper paper-shadow max-w-[44vw] sm:max-w-[220px] rounded-md ${
+                        tag.position ?? ""
+                      }`}
                       style={{ transform: `rotate(${tag.rotation}deg)` }}
                     >
                       <a
-                        href={`/tag/${tag.slug}${isPersoGallery ? "/gallery" : ""}`}
+                        href={`/tag/${tag.slug}${
+                          isPersoGallery ? "/gallery" : ""
+                        }`}
                         onClick={handleLinkClick}
                         title={tag.name}
                         aria-label={tag.name}
                         class="block flex flex-col items-center gap-1 px-2 py-1 z-10 select-none text-xs sm:text-sm leading-4 min-w-0 break-words whitespace-normal [hyphens:auto]"
                         draggable={draggable}
                       >
-                        <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2"></div>
+                        <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2">
+                        </div>
                         <img
                           src={`/icons/${tag.name}.png`}
                           alt={tag.name}

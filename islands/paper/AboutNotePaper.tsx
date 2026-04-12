@@ -12,7 +12,9 @@ export default function AboutNotePaper() {
     if (languageSignal.value !== lng) {
       i18next.changeLanguage(lng);
       languageSignal.value = lng;
-      setTimeout(() => { globalThis.location.reload(); }, 100);
+      setTimeout(() => {
+        globalThis.location.reload();
+      }, 100);
     }
   }
 
@@ -27,17 +29,23 @@ export default function AboutNotePaper() {
             {i18next.t("leonardo.lng", { ns: "translation" })}
           </p>
           <div class="inline-flex items-center space-x-2">
-            <button onClick={() => handleLanguage("en")} class="focus:outline-none">
+            <button
+              onClick={() => handleLanguage("en")}
+              class="focus:outline-none"
+            >
               <img
-                class="w-9 align-middle transform-gpu will-change-transform hover:scale-110 transition-transform duration-50"
+                class="w-9 align-middle"
                 src="/icons/Royaume-Uni.png"
                 alt="en"
                 draggable={draggable}
               />
             </button>
-            <button onClick={() => handleLanguage("fr")} class="focus:outline-none">
+            <button
+              onClick={() => handleLanguage("fr")}
+              class="focus:outline-none"
+            >
               <img
-                class="w-9 align-middle transform-gpu will-change-transform hover:scale-110 transition-transform duration-50"
+                class="w-9 align-middle"
                 src="/icons/France.png"
                 alt="fr"
                 draggable={draggable}
@@ -48,7 +56,9 @@ export default function AboutNotePaper() {
         {/* Contenu texte */}
         <div
           class="z-10"
-          dangerouslySetInnerHTML={{ __html: i18next.t("about.msg", { ns: "translation" }) }}
+          dangerouslySetInnerHTML={{
+            __html: i18next.t("about.msg", { ns: "translation" }),
+          }}
         />
         {/* Logo Deno */}
         <a

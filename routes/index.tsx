@@ -1,11 +1,12 @@
-import { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
+import type { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
+import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
+import { PageProps } from "fresh";
 import { sql } from "kysely";
 import { TALENTS } from "@utils/constants.ts";
 
@@ -17,12 +18,12 @@ import Quote from "@islands/paper/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WelcomePaper } from "@islands/paper/WelcomePaper.tsx";
 
+
 type Artists = Array<ArtistRow>;
-type Quote = Array<ArtistQuote>;
 
 
-export const handler: Handlers = {
-  async GET(_: Request, ctx: FreshContext) {
+export const handler = define.handlers({
+  async GET(_ctx) {
     const desc = i18next.t("meta.home.desc", { ns: "translation" });
     const title = i18next.t("meta.home.title", { ns: "translation" });
     const lng = i18next.language;
@@ -63,7 +64,7 @@ export const handler: Handlers = {
       slug: p.slug,
     }));
 
-    const artistQuote = await db.selectFrom("artist")
+    const artistQuoteQuery = await db.selectFrom("artist")
       .select([
         "id",
         "first_name", "last_name",
@@ -77,6 +78,18 @@ export const handler: Handlers = {
       .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
       .orderBy(sql`random()`)
       .executeTakeFirst();
+
+    const artistQuote = artistQuoteQuery
+    ? {
+        id: artistQuoteQuery.id,
+        first_name: artistQuoteQuery.first_name,
+        last_name: artistQuoteQuery.last_name,
+        avatar_url: artistQuoteQuery.avatar_url,
+        signature: artistQuoteQuery.signature,
+        slug: artistQuoteQuery.slug,
+        quote: artistQuoteQuery.quote,
+      }
+    : undefined;
 
     const randomColorsIndex = Math.floor(Math.random() * 7);
     const colors = [
@@ -93,14 +106,16 @@ export const handler: Handlers = {
     const grid =
       "grid gap-4 sm:gap-10 grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:px-8 2xl:px-20 pt-10 pb-10 lg:pt-20 lg:pb-14";
 
-    return ctx.render({ artistQuote, artists, color, desc, grid, title });
+    return {
+      data: { artistQuote, artists, color, desc, grid, title }
+    };
   },
-};
+});
 
 
 export default function HomePage(
   props: PageProps<{
-    artistQuote: Quote;
+    artistQuote: ArtistQuote;
     artists: Artists;
     color: string;
     desc: string;
@@ -111,7 +126,6 @@ export default function HomePage(
 
   const { artistQuote, artists, color, desc, grid, title } = props.data;
 
-  
   return (
     <>
       <Head>
@@ -126,7 +140,7 @@ export default function HomePage(
       <main
         id="page"
         data-name="home"
-        class="flex-grow xl:-mb-[35vh]"
+        class="flex-grow xl:-mb-[35vh]!"
       >
         <button
           data-open-section="famous-art"

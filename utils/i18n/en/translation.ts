@@ -88,10 +88,10 @@ const translation = {
         </p>
       </section>`,
     msg:
-      `<p class="mb-4 text-lg md:text-xl leading-5">The <strong>Urarts</strong> site is created with passion for <strong>Art</strong> and <strong>Dev</strong>.</p>
-      <p class="mb-4 text-lg md:text-xl leading-5">
+      `<p class="mb-4 text-lg md:text-xl leading-7">The <strong>Urarts</strong> site is created with passion for <strong>Art</strong> and <strong>Dev</strong>.</p>
+      <p class="mb-4 text-lg md:text-xl leading-7">
       <span class="font-bold underline">Means used</span>: TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
-      <p class="mb-4 text-lg md:text-xl leading-5">
+      <p class="mb-4 text-lg md:text-xl leading-7">
       <span class="font-bold underline">Copyright Policy</span>: Urarts shows public domain artwork and attempts to obtain permission for copyrighted ones.
       The purpose of this site is to use these historical works for informational and educational purposes.
       Visuals are low resolution images not suitable for commercial use.

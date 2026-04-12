@@ -9,7 +9,10 @@ export function ArrowPaperButton(
     readonly onClick?: () => void;
   },
 ) {
+
+  // CSS
   const rotateClass = props.direction === "left" ? "-rotate-3" : "rotate-3";
+
 
   return (
     <button

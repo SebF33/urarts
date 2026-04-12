@@ -1,7 +1,8 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
+import { define } from "@/utils.ts";
+import { HttpError, PageProps } from "fresh";
+import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
@@ -22,10 +23,11 @@ interface TagPageProps {
 }
 
 
-export const handler: Handlers<TagPageProps> = {
-  async GET(_: Request, ctx: FreshContext) {
-    const lng = i18next.language;
+export const handler = define.handlers({
+  async GET(ctx) {
     const { slug } = ctx.params;
+
+    const lng = i18next.language;
 
     const db = Db.getInstance();
 
@@ -40,7 +42,7 @@ export const handler: Handlers<TagPageProps> = {
       .executeTakeFirst();
 
     if (!tagDetails) {
-      return ctx.renderNotFound();
+      throw new HttpError(404);
     }
 
     const tag = tagDetails.name;
@@ -49,24 +51,28 @@ export const handler: Handlers<TagPageProps> = {
       i18next.t("meta.collection.title", { ns: "translation" })
     }`;
 
-    return ctx.render({
-      desc,
-      font: "brush",
-      info: tagDetails.info,
-      slug: tagDetails.slug,
-      tag,
-      title,
-    });
+    // rendu
+    return {
+      data: {
+        desc,
+        font: "brush",
+        info: tagDetails.info,
+        slug: tagDetails.slug,
+        tag,
+        title,
+      },
+    };
   },
-};
+});
 
 
 export default function TagPage(props: PageProps<TagPageProps>) {
   const { desc, font, info, tag, slug, title } = props.data;
 
+  // Contexte
   const isPersoGallery = props.url.pathname.endsWith("/gallery");
 
-  
+
   return (
     <>
       <Head>

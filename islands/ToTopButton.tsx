@@ -12,7 +12,9 @@ export default function ToTopButton() {
   useEffect(() => {
     const handleScroll = () => {
       const globalScrolled = globalThis.scrollY > 100;
-      const scrollableElement = document.querySelector<HTMLElement>(".scrollable");
+      const scrollableElement = document.querySelector<HTMLElement>(
+        ".scrollable",
+      );
       const elementScrolled = scrollableElement
         ? scrollableElement.scrollTop > 36
         : false;
@@ -22,7 +24,9 @@ export default function ToTopButton() {
 
     globalThis.addEventListener("scroll", handleScroll);
 
-    const scrollableElement = document.querySelector<HTMLElement>(".scrollable");
+    const scrollableElement = document.querySelector<HTMLElement>(
+      ".scrollable",
+    );
     if (scrollableElement) {
       scrollableElement.addEventListener("scroll", handleScroll);
     }
@@ -38,8 +42,8 @@ export default function ToTopButton() {
 
   const scrollToTop = () => {
     globalThis.scrollTo({ top: 0, behavior: "smooth" });
-    
-    const target: HTMLElement | null = document.querySelector('.scrollable');
+
+    const target: HTMLElement | null = document.querySelector(".scrollable");
     if (target) {
       target.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -55,7 +59,9 @@ export default function ToTopButton() {
         } transition-opacity duration-300 ease-in-out`}
         aria-label={`${i18next.t("meta.scroll_to_top", { ns: "translation" })}`}
       >
-        <span class="sr-only">${i18next.t("meta.scroll_to_top", { ns: "translation" })}</span>
+        <span class="sr-only">
+          ${i18next.t("meta.scroll_to_top", { ns: "translation" })}
+        </span>
         <UrartsTrimBrush aria-hidden="true" />
       </button>
     </>

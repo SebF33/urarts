@@ -1,9 +1,9 @@
-import { css } from "@twind/core";
 import { useEffect } from "preact/hooks";
 import { usePageBackground } from "@utils/background.ts";
 
 
 export default function Mona() {
+
   useEffect(() => {
     // Yeux Mona Lisa
     const monaPage = document.querySelector<HTMLElement>(".mona-page");
@@ -24,8 +24,8 @@ export default function Mona() {
           monaRightEyeball.style.left = x;
           monaRightEyeball.style.top = y;
         }
+      };
     }
-    };
   }, []);
 
 
@@ -36,16 +36,9 @@ export default function Mona() {
   return (
     <div class="flex flex-col md:flex-row mx-auto">
       <div class="art-wrap-1 hidden md:flex">
-        <div class={`art-frame art-frame-type-2 art-polyptych-1 cursor-auto ${
-            css(
-              {
-                "border": "solid 1.8vmin",
-                "border-color": "rgb(225, 207, 187) rgb(245, 227, 207) rgb(255, 255, 255)",
-              },
-            )
-          }`}
-        >
-          <img loading="lazy"
+        <div class="art-frame art-frame-type-2 art-polyptych-1 cursor-auto border-[1.8vmin] border-solid [border-color:rgb(225,207,187)_rgb(245,227,207)_rgb(255,255,255)]">
+          <img
+            loading="lazy"
             src="/monalisa.jpg"
             alt="Mona Lisa"
             class="max-w-full min-w-[449px]"
@@ -63,16 +56,9 @@ export default function Mona() {
         </div>
       </div>
       <div class="art-wrap-1 flex md:hidden">
-        <div class={`art-frame art-frame-type-2 art-polyptych-1 cursor-auto ${
-            css(
-              {
-                "border": "solid 1.8vmin",
-                "border-color": "rgb(225, 207, 187) rgb(245, 227, 207) rgb(255, 255, 255)",
-              },
-            )
-          }`}
-        >
-          <img loading="lazy"
+        <div class="art-frame art-frame-type-2 art-polyptych-1 cursor-auto border-[1.8vmin] border-solid [border-color:rgb(225,207,187)_rgb(245,227,207)_rgb(255,255,255)]">
+          <img
+            loading="lazy"
             src="arts/devinci/La Joconde.jpg"
             alt="Mona Lisa"
             class="max-w-[200px]"

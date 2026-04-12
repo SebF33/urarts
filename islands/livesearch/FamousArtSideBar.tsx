@@ -1,8 +1,14 @@
 import { Any } from "any";
-import { ArtCollection } from "@utils/types.d.ts";
+import type { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { DELAY_API_CALL, DELAY_DEBOUNCE, DELAY_DISPLAY, DELAY_REACH_HREF, DELAY_TOOLTIP_TRIGGER, FAMOUS_ART_IMG_WRAPPER } from "@utils/constants.ts";
-import { h } from "preact";
+import {
+  DELAY_API_CALL,
+  DELAY_DEBOUNCE,
+  DELAY_DISPLAY,
+  DELAY_REACH_HREF,
+  DELAY_TOOLTIP_TRIGGER,
+  FAMOUS_ART_IMG_WRAPPER,
+} from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import ky from "ky";
@@ -15,16 +21,17 @@ import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 
+
 type Arts = Array<ArtCollection>;
 
 
 export default function FamousArtSideBar() {
   const [display, setDisplay] = useState<boolean>(false);
-  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad()
+  const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
-  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE)
+  const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
   const draggable = false;
   const type = "famousart";
@@ -32,7 +39,9 @@ export default function FamousArtSideBar() {
 
   // Délai d'affichage initial
   useEffect(() => {
-    const timeoutId = setTimeout(() => { setDisplay(true); }, DELAY_DISPLAY);
+    const timeoutId = setTimeout(() => {
+      setDisplay(true);
+    }, DELAY_DISPLAY);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -40,7 +49,9 @@ export default function FamousArtSideBar() {
   // Appel à l'API "Collection"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`)
+      ky.get(
+        `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`,
+      )
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
@@ -53,18 +64,26 @@ export default function FamousArtSideBar() {
 
   // Infobulles
   useEffect(() => {
-    tippyInstances.forEach((instance) => { instance.destroy(); });
+    tippyInstances.forEach((instance) => {
+      instance.destroy();
+    });
     setTippyInstances([]);
 
     searchResults.forEach((p) => {
-      const artElement: HTMLElement | null = document.querySelector(`[data-art-id="${p.id}"]`);
+      const artElement: HTMLElement | null = document.querySelector(
+        `[data-art-id="${p.id}"]`,
+      );
 
       if (artElement) {
         tippy(artElement, {
           allowHTML: true,
           content:
-            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${colorScheme[currentColorScheme].gray}"><strong>${p.name}</strong></p>
-            <p style="line-height:1">${i18next.t("artists.artist", { ns: "translation" })} <strong style="color:${p.color}">${p.last_name}</strong></p>`,
+            `<p style="margin-top:2px;font-size:1.4em;line-height:1;color:${
+              colorScheme[currentColorScheme].gray
+            }"><strong>${p.name}</strong></p>
+            <p style="line-height:1">${
+              i18next.t("artists.artist", { ns: "translation" })
+            } <strong style="color:${p.color}">${p.last_name}</strong></p>`,
           delay: DELAY_TOOLTIP_TRIGGER,
           interactive: true,
           placement: "bottom",
@@ -116,9 +135,12 @@ export default function FamousArtSideBar() {
               role="button"
               data-open-section="famous-art"
               data-open-value="false"
-              class="paper paper-shadow cursor-pointer">
+              class="paper paper-shadow relative cursor-pointer"
+            >
               <span class="sr-only">Fermer</span>
-              <h2 class="p-2 text-2xl font-semibold text-center leading-none z-10 select-none">{i18next.t("paper.famousart", { ns: "translation" })}</h2>
+              <h2 class="p-2 text-2xl font-semibold text-center leading-none z-10 select-none">
+                {i18next.t("paper.famousart", { ns: "translation" })}
+              </h2>
             </div>
             <div class="mt-5 px-4">
               <div class="brush-input-box relative w-48 max-h-[68px] mx-auto mb-4">
@@ -147,7 +169,10 @@ export default function FamousArtSideBar() {
                         style={FAMOUS_ART_IMG_WRAPPER.wrap}
                       >
                         <img
-                          style={{ ...FAMOUS_ART_IMG_WRAPPER.image, ...imageOnLoadStyle.thumbnail }}
+                          style={{
+                            ...FAMOUS_ART_IMG_WRAPPER.image,
+                            ...imageOnLoadStyle.thumbnail,
+                          }}
                           src="/textures/placeholder_150.png"
                           alt="placeholder_150"
                         />
@@ -161,8 +186,7 @@ export default function FamousArtSideBar() {
                       </div>
                     </a>
                   </div>
-                ))
-              }
+                ))}
             </div>
           </div>
         </div>
