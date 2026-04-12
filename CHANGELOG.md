@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2026-04-13]
+
+### Nouveautés
+- TK : Migration vers Fresh 2 (abandon de Twind au profit de Tailwind 4).
+
 ## [2026-03-29]
 
 ### Nouveautés

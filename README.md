@@ -22,15 +22,16 @@ Afficher des collections d’œuvres d’art par artiste et rendre les ressource
 
 **Langage :** TypeScript.
 
-[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Kysely](/.github/Kysely.png)](https://kysely.dev) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Twind](/.github/Twind.png)](https://twind.style) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Motion](/.github/Motion.png)](https://motion.dev) [![Tippy.js](/.github/Tippy.js.png)](https://atomiks.github.io/tippyjs) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![D3.js](/.github/D3.js.png)](https://d3js.org) [![i18next](/.github/i18next.png)](https://www.i18next.com) [![Fly.io](/.github/Fly.io.png)](https://fly.io)
+[![Deno](/.github/Deno.png)](https://deno.land) [![Fresh](/.github/Fresh.png)](https://fresh.deno.dev) [![SQLite](/.github/SQLite.png)](https://www.sqlite.org/index.html) [![Kysely](/.github/Kysely.png)](https://kysely.dev) [![Ky](/.github/Ky.png)](https://github.com/sindresorhus/ky) [![Vite](/.github/Vite.png)](https://vitejs.dev) [![Tailwind CSS](/.github/Tailwind_CSS.png)](https://tailwindcss.com) [![Everblush](/.github/Everblush.png)](https://everblush.github.io) [![Motion](/.github/Motion.png)](https://motion.dev) [![Tippy.js](/.github/Tippy.js.png)](https://atomiks.github.io/tippyjs) [![Chart.js](/.github/Chart.js.png)](https://www.chartjs.org) [![D3.js](/.github/D3.js.png)](https://d3js.org) [![i18next](/.github/i18next.png)](https://www.i18next.com) [![Fly.io](/.github/Fly.io.png)](https://fly.io)
 
 :toolbox: **Technologies :**
 - [Deno 2](https://deno.land/manual)
-- [Fresh](https://fresh.deno.dev/docs/introduction)
+- [Fresh 2](https://fresh.deno.dev/docs/introduction)
 - [SQLite](https://github.com/dyedgreen/deno-sqlite)
 - [Kysely](https://kysely-org.github.io/kysely)
 - [Ky](https://github.com/sindresorhus/ky)
-- [Twind](https://twind.style/installation)
+- [Vite](https://vitejs.dev/guide)
+- [Tailwind CSS 4](https://tailwindcss.com/docs/guides/vite)
 - [Everblush](https://github.com/Everblush/everblush)
 - [Motion](https://motion.dev/docs)
 - [Tippy.js](https://atomiks.github.io/tippyjs/v6/getting-started)
