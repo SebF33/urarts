@@ -28,6 +28,6 @@ COPY --from=bin /deno /bin/deno
 WORKDIR /deno-dir
 COPY . .
 
+# Deno
 ENTRYPOINT ["/bin/deno"]
-#CMD ["cache", "--reload", "https://deno.land/std/examples/echo_server.ts"]
 CMD ["run", "--allow-net", "https://deno.land/std/examples/echo_server.ts"]

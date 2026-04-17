@@ -1,7 +1,11 @@
 #!/bin/sh
 set -ex
 
+echo "Starting container..."
+echo "PORT=$PORT"
+
+echo "Running migrations..."
 deno task migrate
-#deno task cache
-deno task build
+
+echo "Starting Fresh app..."
 deno task start
