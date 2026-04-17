@@ -64,7 +64,7 @@ export default function ErrorLayout(props: {
         </div>
       </div>
 
-      <div class="paper max-w-[500px] mx-auto mb-6 text-lighterdark overflow-hidden sm:overflow-visible">
+      <div class="paper paper-shadow relative max-w-[500px] mx-auto mb-6 text-lighterdark overflow-hidden sm:overflow-visible">
         <div class="top-tape"></div>
         <div class="w-full my-5 mx-1">
           <h2 class="text-center text-4xl font-bold">{title}</h2>
