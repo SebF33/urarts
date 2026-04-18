@@ -16,6 +16,7 @@ import { upArtistArt13 } from "@utils/db/artist_art/artist_art_13.ts";
 import { upArtistArt14 } from "@utils/db/artist_art/artist_art_14.ts";
 import { upArtistArt15 } from "@utils/db/artist_art/artist_art_15.ts";
 import { upArtistArt16 } from "@utils/db/artist_art/artist_art_16.ts";
+import { upArtistArt17 } from "@utils/db/artist_art/artist_art_17.ts";
 import { upCountry } from "@utils/db/country.ts";
 import { upFact } from "@utils/db/fact.ts";
 import { upMovement } from "@utils/db/movement.ts";
@@ -62,6 +63,7 @@ async function run() {
     await upArtistArt14(db);
     await upArtistArt15(db);
     await upArtistArt16(db);
+    await upArtistArt17(db);
   } else if (args.includes("--down")) {
     await down(db);
   } else {
@@ -88,6 +90,7 @@ async function run() {
     await upArtistArt14(db);
     await upArtistArt15(db);
     await upArtistArt16(db);
+    await upArtistArt17(db);
   }
 }
 
