@@ -382,10 +382,10 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                   )}
                 </div>
 
-                {/* Avatar */}
+                {/* Avatar de l'artiste */}
                 {avatar && (
                   <div class="-mt-12 md:-mt-24 xl:-mt-48 grid grid-cols-1 xl:grid-cols-3">
-                    <div class="pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12">
+                    <div class="pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12 text-center">
                       <Avatar copyright={copyright} info={avatarInfo} name={artist} url={avatar} />
                     </div>
                   </div>

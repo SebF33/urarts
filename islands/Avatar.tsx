@@ -37,11 +37,12 @@ export default function Avatar(
   return (
     <div
       id="Avatar"
-      class={`relative p-6 w-60 mx-auto text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
+      class={`relative inline-block p-6 mx-auto max-w-60 text-center bg-lighterdark rounded-b-xl overflow-hidden shadow-2xl`}
     >
       <img
         src={props.url}
         alt={props.name}
+        class="block w-full h-auto"
         draggable={draggable}
       />
     </div>
