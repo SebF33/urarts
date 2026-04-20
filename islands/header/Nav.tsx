@@ -42,17 +42,19 @@ export interface Props {
 
 
 export default function Nav(props: Props) {
+
   // CSS
   const draggable = false;
-  const desktopCurrent = "data-[current]:text-lighterdark data-[current]:after:scale-x-100";
-  const desktopIconBase = "relative h-16 w-12 shrink-0 items-center justify-center text-white after:absolute after:bottom-0 after:left-1/2 after:h-1 after:w-12 after:-translate-x-1/2 after:scale-x-0 after:bg-lighterdark after:transition-transform after:duration-200";  const desktopPrimaryAnchor = `py-4 px-2 text-lg font-medium hover:text-lighterdark transition duration-300 data-[current]:text-lighterdark data-[current]:border-b-4 data-[current]:border-lighterdark`;
+  const desktopCurrent = "aria-[current=page]:text-lighterdark aria-[current=page]:after:scale-x-100 after:absolute after:-bottom-1 after:left-1/2 after:h-1 after:w-full after:-translate-x-1/2 after:scale-x-0 after:bg-lighterdark after:transition-transform after:duration-200";
+  const desktopIconBase = "relative h-16 w-12 shrink-0 items-center justify-center text-white";
+  const desktopPrimaryAnchor = `relative py-4 px-2 text-lg font-medium text-white hover:text-lighterdark transition duration-300 ${desktopCurrent}`;
   const desktopHistoAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const desktopWomanAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const desktopHeartAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const desktopStatAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const desktopApiAnchor = `hidden lg:inline-flex ${desktopIconBase} ${desktopCurrent}`;
   const desktopInterrogationAnchor = `inline-flex ${desktopIconBase} ${desktopCurrent}`;
-  const mobileCurrent = "data-[current]:active data-[current]:text-white data-[current]:bg-lighterdark data-[current]:font-semibold";
+  const mobileCurrent = "aria-[current=page]:active aria-[current=page]:text-white aria-[current=page]:bg-lighterdark aria-[current=page]:font-semibold";
   const mobileHover = "hover:bg-lighterdark transition duration-300";
   const mobilePrimaryAnchor = `h-[60px] flex flex-col justify-center text-lg ${mobileHover} ${mobileCurrent}`;
   const mobileSecondaryAnchor = `h-[60px] flex flex-col items-center justify-center px-1 py-3 text-lg ${mobileHover} ${mobileCurrent}`;
@@ -522,9 +524,7 @@ export default function Nav(props: Props) {
                 href="/artists"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${
-                  i18next.t("nav.artists", { ns: "translation" })
-                }`}
+                aria-label={`${i18next.t("nav.artists", { ns: "translation" })}`}
               >
                 {i18next.t("nav.artists", { ns: "translation" })}
               </a>
@@ -540,9 +540,7 @@ export default function Nav(props: Props) {
                 href="/movements"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${
-                  i18next.t("nav.movements", { ns: "translation" })
-                }`}
+                aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
               >
                 {i18next.t("nav.movements", { ns: "translation" })}
               </a>
@@ -550,9 +548,7 @@ export default function Nav(props: Props) {
                 href="/talents"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
-                aria-label={`${
-                  i18next.t("nav.talents", { ns: "translation" })
-                }`}
+                aria-label={`${i18next.t("nav.talents", { ns: "translation" })}`}
               >
                 {i18next.t("nav.talents", { ns: "translation" })}
               </a>
@@ -564,9 +560,7 @@ export default function Nav(props: Props) {
               id="desktopHistoAnchor"
               class={desktopHistoAnchor}
               draggable={draggable}
-              aria-label={`${
-                i18next.t("nav.histocharacters", { ns: "translation" })
-              }`}
+              aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
             >
               <span class="inline-flex items-center justify-center translate-y-[1px]">
                 <HistoIcon aria-hidden="true" />
@@ -599,9 +593,7 @@ export default function Nav(props: Props) {
               id="desktopStatAnchor"
               class={desktopStatAnchor}
               draggable={draggable}
-              aria-label={`${
-                i18next.t("nav.indicators", { ns: "translation" })
-              }`}
+              aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
             >
               <span class="inline-flex items-center justify-center">
                 <StatIcon aria-hidden="true" />
@@ -685,9 +677,7 @@ export default function Nav(props: Props) {
               href="/movements"
               id="mobile-anchor"
               class={mobilePrimaryAnchor}
-              aria-label={`${
-                i18next.t("nav.movements", { ns: "translation" })
-              }`}
+              aria-label={`${i18next.t("nav.movements", { ns: "translation" })}`}
             >
               <span class={`px-2`}>
                 {i18next.t("nav.movements", { ns: "translation" })}
@@ -712,9 +702,7 @@ export default function Nav(props: Props) {
                 href="/histocharacters"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
-                aria-label={`${
-                  i18next.t("nav.histocharacters", { ns: "translation" })
-                }`}
+                aria-label={`${i18next.t("nav.histocharacters", { ns: "translation" })}`}
               >
                 <HistoIcon aria-hidden="true" />
               </a>
@@ -744,9 +732,7 @@ export default function Nav(props: Props) {
                 href="/indicators"
                 id="mobile-anchor"
                 class={mobileSecondaryAnchor}
-                aria-label={`${
-                  i18next.t("nav.indicators", { ns: "translation" })
-                }`}
+                aria-label={`${i18next.t("nav.indicators", { ns: "translation" })}`}
               >
                 <StatIcon aria-hidden="true" />
               </a>
