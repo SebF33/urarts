@@ -755,26 +755,30 @@ export default function ArtsLayout(
                       ? (
                         <div
                           key={String(p.id)}
-                          class="w-full flex items-center justify-center gap-4 md:gap-8"
+                          class="relative w-full flex items-center justify-center px-12 md:px-20"
                         >
-                          {/* Bouton œuvre précédente */}
-                          <ArrowPaperButton
-                            direction="left"
-                            disabled={!props.hasPreviousArtwork}
-                            onClick={props.onPreviousArtwork}
-                          />
-                          {/* Œuvre seule */}
-                          <div
-                            class={`art-transition-shell ${artTransitionClass}`}
-                          >
-                            {artContent}
+                          <div class="fixed left-1 md:left-4 top-[50vh] -translate-y-1/2 z-20">
+                            {/* Bouton œuvre précédente */}
+                            <ArrowPaperButton
+                              direction="left"
+                              disabled={!props.hasPreviousArtwork}
+                              onClick={props.onPreviousArtwork}
+                            />
                           </div>
-                          {/* Bouton œuvre suivante */}
-                          <ArrowPaperButton
-                            direction="right"
-                            disabled={!props.hasNextArtwork}
-                            onClick={props.onNextArtwork}
-                          />
+                          {/* Œuvre seule */}
+                          <div class="art-transition-shell max-w-full flex justify-center">
+                            <div class={artTransitionClass}>
+                              {artContent}
+                            </div>
+                          </div>
+                          <div class="fixed right-1 md:right-4 top-[50vh] -translate-y-1/2 z-20">
+                            {/* Bouton œuvre suivante */}
+                            <ArrowPaperButton
+                              direction="right"
+                              disabled={!props.hasNextArtwork}
+                              onClick={props.onNextArtwork}
+                            />
+                          </div>
                         </div>
                       )
                       : artContent;
