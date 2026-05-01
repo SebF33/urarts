@@ -1,12 +1,5 @@
 import { Cookie, getCookies, setCookie } from "cookie";
-import {
-  DEFAULT_LNG,
-  URL_GA,
-  URL_GT,
-  URL_RC,
-  URL_URARTS_ART,
-  URL_URARTS_DEV,
-} from "@utils/constants.ts";
+import { DEFAULT_LNG } from "@utils/constants.ts";
 import { define } from "@/utils.ts";
 import i18next from "i18next";
 
@@ -72,10 +65,6 @@ export const handler = define.middleware(async (ctx) => {
   response.headers.set("X-Frame-Options", "SAMEORIGIN");
   response.headers.set("X-XSS-Protection", "1; mode=block");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set(
-    "Content-Security-Policy",
-    `default-src 'self'; script-src 'self' ${URL_GA} ${URL_GT} 'unsafe-inline' 'unsafe-eval' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'; style-src 'self' 'unsafe-inline'; child-src 'self'; img-src 'self' ${URL_GA} data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}; media-src 'self' data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}; connect-src 'self' ${URL_URARTS_ART} ${URL_URARTS_DEV} ${URL_GA} ${URL_GT} ${URL_RC}; font-src 'self'; worker-src 'self'; frame-src 'self'; frame-ancestors 'self';`,
-  );
 
   // mettre à jour le cookie
   const cookie: Cookie = {
