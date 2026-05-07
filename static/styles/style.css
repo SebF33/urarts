@@ -67,7 +67,12 @@ body.no-scroll {
 
 /* Curseurs */
 .cursor-auto,
+html,
 body,
+::view-transition,
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root),
 .art-modal-container.no-links a,
 .art-modal-container.no-links a * {
     cursor: url(/cursors/cursor-auto.png) 6 3, auto !important;
