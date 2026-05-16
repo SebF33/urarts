@@ -3,7 +3,6 @@ import { Any } from "any";
 import {
   ART_IMG_WRAPPER,
   DELAY_DISPLAY,
-  DELAY_MODAL_TRIGGER,
   NB_LOADING_ARTS,
   TALENTS,
 } from "@utils/constants.ts";
@@ -23,7 +22,7 @@ import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
 
 import { ArrowPaperButton } from "@components/ArrowPaperButton.tsx";
-import ArtModal from "@islands/layout/ArtModal.tsx";
+import ArtModal from "@islands/modal/ArtModal.tsx";
 import { PencilLine } from "@components/Assets.tsx";
 import RollingGallery from "@islands/RollingGallery.tsx";
 
@@ -186,7 +185,7 @@ export default function ArtsLayout(
 
       if (artElement) {
         copyright = p.copyright === 0
-          ? '<s style="font-size:1.3em">©</s> ' +
+          ? '<s style="font-size:1.3em">⊘</s> ' +
             i18next.t("arts.public_domain", { ns: "translation" })
           : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") +
             " " + p.last_name;
@@ -304,7 +303,7 @@ export default function ArtsLayout(
     setSelectedPanel(panel);
     setSelectedUrl(url);
 
-    setTimeout(() => artModalOpenSignal.value = true, DELAY_MODAL_TRIGGER);
+    artModalOpenSignal.value = true;
   };
 
 
@@ -758,7 +757,7 @@ export default function ArtsLayout(
                           class="relative w-full flex items-center justify-center px-12 md:px-20"
                         >
                           <div class="fixed left-1 md:left-4 top-[50vh] -translate-y-1/2 z-20">
-                            {/* Bouton œuvre précédente */}
+                            {/* Bouton : œuvre précédente */}
                             <ArrowPaperButton
                               direction="left"
                               disabled={!props.hasPreviousArtwork}
@@ -772,7 +771,7 @@ export default function ArtsLayout(
                             </div>
                           </div>
                           <div class="fixed right-1 md:right-4 top-[50vh] -translate-y-1/2 z-20">
-                            {/* Bouton œuvre suivante */}
+                            {/* Bouton : œuvre suivante */}
                             <ArrowPaperButton
                               direction="right"
                               disabled={!props.hasNextArtwork}
@@ -797,13 +796,19 @@ export default function ArtsLayout(
             </div>
           )}
 
-        {/* Modal */}
-        {artModalOpenSignal.value && (
+        {/* Modal de l'œuvre */}
+        {selectedArt && (
           <ArtModal
             art={selectedArt}
             ispersogallery={isPersoGallery}
             panel={selectedPanel}
             url={selectedUrl}
+            onClose={() => {
+              setSelectedArt(null);
+              setSelectedPanel("");
+              setSelectedUrl("");
+              artModalOpenSignal.value = false;
+            }}
           />
         )}
       </div>

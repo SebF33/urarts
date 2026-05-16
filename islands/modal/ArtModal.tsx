@@ -8,6 +8,7 @@ import {
   isForAloneArtistSignal,
 } from "@utils/signals.ts";
 import { DELAY_REACH_ART_FROM_MODAL, TALENTS } from "@utils/constants.ts";
+import { formatDimensions } from "@utils/helpers.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { render } from "preact";
@@ -22,22 +23,42 @@ type ArtModalProps = {
   readonly ispersogallery?: boolean;
   readonly panel: string;
   readonly url: string;
+  readonly onClose: () => void;
 };
 
 
 export default function ArtModal(
-  { art, ispersogallery, panel, url }: ArtModalProps,
+  { art, ispersogallery, panel, url, onClose }: ArtModalProps,
 ) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
   const scrollYRef = useRef<number>(0);
 
-  const lng = i18next.language;
-
   // Contexte
+  const lng = i18next.language;
   const isPersoGallery = !!ispersogallery;
   const basePath = isPersoGallery ? "../../textures/" : "../textures/";
+
+  // Nettoyage
+  const cleanupModalGlobals = () => {
+    document.body.classList.remove("no-scroll");
+    document.body.style.paddingRight = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    document.body.style.overscrollBehavior = "";
+    document.documentElement.style.scrollBehavior = "";
+  
+    const nav = document.getElementById("Urarts-Nav");
+    nav?.classList.remove("pointer-events-none");
+  
+    try {
+      history.scrollRestoration = "auto";
+    } catch {}
+  };
 
 
   // CSS
@@ -95,28 +116,16 @@ export default function ArtModal(
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 0);
 
-    if (globalThis.location.hash !== "#modal") {
-      globalThis.location.hash = "modal";
-    }
-
-    const onHash = () => {
-      if (globalThis.location.hash !== "#modal") {
-        handleClose({ fromHistory: true }); // fermer la modal
-      }
-    };
-    addEventListener("hashchange", onHash);
+    artModalOpenSignal.value = true;
 
     return () => {
       clearTimeout(timer);
-      removeEventListener("hashchange", onHash);
-      if (globalThis.location.hash === "#modal") {
-        history.back();
-      }
+      cleanupModalGlobals();
     };
   }, []);
 
 
-  // Bloquer le défilement de la page à sa position actuelle à l'ouverture
+  // Gel du scroll
   useEffect(() => {
     if (isVisible) {
       document.body.classList.add("no-scroll");
@@ -164,7 +173,7 @@ export default function ArtModal(
   }, [isVisible]);
 
 
-  // Annuler les clics dans la barre de navigation
+  // Désactiver la barre de navigation
   useEffect(() => {
     const navElement = document.getElementById("Urarts-Nav");
 
@@ -184,15 +193,16 @@ export default function ArtModal(
   }, [isVisible]);
 
 
-  // Fermeture de la modal avec "Échap" ou sur clic à l'extérieur
+  // Fermeture de la modal
+  // avec "Échap" ou sur clic à l'extérieur
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") handleClose(); // fermer la modal
+      if (event.key === "Escape") handleClose();
     };
     const handleClickOutside = (event: MouseEvent) => {
       if (
         modalRef.current && !modalRef.current.contains(event.target as Node)
-      ) handleClose(); // fermer la modal
+      ) handleClose();
     };
 
     if (isVisible) {
@@ -206,17 +216,12 @@ export default function ArtModal(
     };
   }, [isVisible]);
 
-  const handleClose = (opts?: { fromHistory?: boolean }) => {
-    if (!opts?.fromHistory && globalThis.location.hash === "#modal") {
-      history.back();
-      return;
-    }
-
+  const handleClose = () => {
     setIsVisible(false);
     restoreScroll();
-    // à voir : bug d'affichage si délai de fermeture, donc pas d'animation
-    //setTimeout(() => (artModalOpenSignal.value = false), DELAY_MODAL_CLOSE);
+    cleanupModalGlobals();
     artModalOpenSignal.value = false;
+    onClose();
   };
 
   const restoreScroll = () => {
@@ -254,7 +259,8 @@ export default function ArtModal(
     // si c'est dans une page perso
     //const finalHref = isPersoGallery ? `${href}/gallery` : href;
 
-    handleClose(); // fermer la modal
+    // fermer la modal
+    handleClose();
 
     // pour le délai au clic tout en préservant la navigation Fresh côté client
     setTimeout(() => {
@@ -317,32 +323,6 @@ export default function ArtModal(
   }
 
 
-  // Formatage des dimensions (FR en cm, EN en inches)
-  const nfCM = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
-  const nfIN = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
-
-  const formatDimensions = (w?: number | string, h?: number | string) => {
-    const toNum = (v: unknown) =>
-      (typeof v === "string" ? Number(v) : v) as number;
-    const ww = toNum(w);
-    const hh = toNum(h);
-
-    if (!Number.isFinite(ww) || !Number.isFinite(hh)) {
-      return `${h} × ${w} ${lng === "fr" ? "cm" : "in"}`; // fallback brut si invalide
-    }
-
-    if (lng === "fr") {
-      // convention FR : hauteur × largeur en cm
-      return `${nfCM.format(hh)} × ${nfCM.format(ww)} cm`;
-    } else {
-      // convention EN : width × height en inches (cm / 2.54)
-      const wIn = ww / 2.54;
-      const hIn = hh / 2.54;
-      return `${nfIN.format(wIn)} × ${nfIN.format(hIn)} in`;
-    }
-  };
-
-
   // Modal
   const modalLayout = (
     <div
@@ -351,7 +331,6 @@ export default function ArtModal(
     >
       {LinksDisablerStyle}
 
-      {/* Modal */}
       <div
         ref={modalRef}
         class={`art-modal-container relative max-w-[calc(100vw-48px)] md:max-w-[60vw] w-full max-h-[80vh] mx-auto p-4 bg-gray overflow-y-auto custom-scrollbar ${
@@ -359,10 +338,12 @@ export default function ArtModal(
         } ${isPersoGallery ? "no-links" : ""}`}
         style={resolvedBgStyle}
       >
+        {/* Bouton : fermer */}
         <button
+          type="button"
           onClick={handleClose}
           class="absolute top-2.5 right-2.5 text-lighterdark hover:text-red focus:outline-none"
-          aria-label={`${i18next.t("meta.close_modal", { ns: "translation" })}`}
+          aria-label={i18next.t("meta.close_modal", { ns: "translation" })}
         >
           <ButtonCross aria-hidden="true" />
         </button>
@@ -381,7 +362,7 @@ export default function ArtModal(
             {art.copyright === 0
               ? (
                 <div class="flex items-center">
-                  <s class="text-base inline">©</s>
+                  <s class="text-base inline">⊘</s>
                   <span class="text-base inline ml-1">
                     {i18next.t("arts.public_domain", { ns: "translation" })}
                   </span>
@@ -420,7 +401,7 @@ export default function ArtModal(
                   <div class="top-tape h-2 min-h-2 max-h-2 max-w-[70%] -mb-1">
                   </div>
                   <span class="w-full text-md leading-4 text-center">
-                    {formatDimensions(art.width_cm, art.height_cm)}
+                    {formatDimensions(lng, art.width_cm, art.height_cm)}
                   </span>
                 </div>
               )}
