@@ -17,7 +17,7 @@ export default function Avatar(
 
     if (avatar) {
       copyright = props.copyright === 0
-        ? '<s style="font-size:1.3em">©</s> ' +
+        ? '<s style="font-size:1.3em">⊘</s> ' +
           i18next.t("arts.public_domain", { ns: "translation" })
         : '<span style="font-size:1.3em">©</span> ' + props.name;
 

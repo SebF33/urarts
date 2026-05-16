@@ -40,9 +40,7 @@ export default function ArtsSearch() {
   useEffect(() => {
     async function fetchInitialPreview() {
       try {
-        const response = await ky.get(
-          `${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`,
-        ).json<ArtRow[]>();
+        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
 
         if (response && response.length > 0) {
           const firstArt = response[0];
@@ -54,7 +52,7 @@ export default function ArtsSearch() {
           );
         }
       } catch (error) {
-        console.error("Error", error);
+        console.error("Preview error:", error);
       }
     }
 
@@ -79,16 +77,14 @@ export default function ArtsSearch() {
     const timeoutId = setTimeout(() => {
       async function fetchPreview() {
         try {
-          const response = await ky.get(
-            `${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`,
-          ).json<Arts>();
+          const response = await ky.get(`${UrlBasePath}/api/collection?type=artist&slug=${slug}&id=${id}&alone`).json<Arts>();
 
           if (response && response.length > 0) {
             const art = response[0];
             getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
           }
         } catch (error) {
-          console.error("Error", error);
+          console.error("Preview error:", error);
         }
       }
 
@@ -116,9 +112,7 @@ export default function ArtsSearch() {
   // Appel à l'API "Œuvres d'art"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`,
-      )
+      ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);

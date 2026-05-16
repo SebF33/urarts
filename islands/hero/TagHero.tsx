@@ -17,7 +17,7 @@ export default function TagHero({ info, myslug, tag }: Props) {
 
   return (
     <div class="relative bg-lighterdark shadow-2xl">
-      {/* Bouton "Retour à l'artiste" si on est sur du contenu concernant seulement un(e) artiste */}
+      {/* Bouton : retour à l'artiste */}
       {isForAloneArtistSignal.value && (
         <div class="absolute z-20 ml-4 md:ml-7">
           <BackToTheArtistPaper />

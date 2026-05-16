@@ -345,17 +345,16 @@ export default function WorldMap(
 
     try {
       const [artistsResp, artsResp] = await Promise.all([
-        ky.get(`${UrlBasePath}/api/artists`, {
-          searchParams: { lng, nationality: name },
-        }).json<ArtistRow[]>(),
-        ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`)
-          .json<ArtRow[]>(),
+        ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: name } }).json<ArtistRow[]>(),
+        ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`).json<ArtRow[]>()
       ]);
 
       setArtists(artistsResp);
       setArts(artsResp);
       setSelectedArtistsCountry(name);
       setSelectedArtsCountry(name);
+    } catch (error) {
+      console.error("World map panels error:", error);
     } finally {
       setLoading(false);
     }

@@ -51,9 +51,7 @@ export default function TalentsArtSideBar() {
   // Appel à l'API "Collection"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`,
-      )
+      ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`)
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);

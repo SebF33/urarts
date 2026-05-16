@@ -27,9 +27,7 @@ export default function MovementsList(
   useEffect(() => {
     async function fetchInitialPreview() {
       try {
-        const response = await ky.get(
-          `${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`,
-        ).json<ArtRow[]>();
+        const response = await ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&random`).json<ArtRow[]>();
 
         if (response && response.length > 0) {
           const firstArt = response[0];
@@ -41,7 +39,7 @@ export default function MovementsList(
           );
         }
       } catch (error) {
-        console.error("Error", error);
+        console.error("Preview error:", error);
       }
     }
 
@@ -66,16 +64,14 @@ export default function MovementsList(
     const timeoutId = setTimeout(() => {
       async function fetchPreview() {
         try {
-          const response = await ky.get(
-            `${UrlBasePath}/api/collection?type=movement&slug=${slug}`,
-          ).json<Arts>();
+          const response = await ky.get(`${UrlBasePath}/api/collection?type=movement&slug=${slug}`).json<Arts>();
 
           if (response && response.length > 0) {
             const art = response[0];
             getPreviewImageUrl(art.id, art.name, art.artist_slug, art.url);
           }
         } catch (error) {
-          console.error("Error", error);
+          console.error("Preview error:", error);
         }
       }
 

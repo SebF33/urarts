@@ -269,9 +269,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   useEffect(() => {
     if (artistsYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(
-          `${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`,
-        )
+        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`)
           .json<ArtistRow[]>()
           .then((response) => {
             setSearchResults(response);
@@ -305,8 +303,9 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             <PaintPalette aria-hidden="true" />
           </div>
 
-          {/* Bouton Monde */}
+          {/* Bouton : Monde entier */}
           <button
+            type="button"
             onClick={() => (nationalitySignal.value = "Monde")}
             class="absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none"
           >
@@ -319,7 +318,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             />
           </button>
 
-          {/* Boutons pays */}
+          {/* Boutons : pays */}
           {FLAG_GROUPS[flags as 1 | 2 | 3]?.map((country, i) => {
             const translated = (COUNTRY_TRANSLATIONS[
               languageSignal.value as "en" | "fr"
@@ -340,8 +339,9 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             );
           })}
 
-          {/* Bouton + */}
+          {/* Bouton : + */}
           <button
+            type="button"
             onClick={handleMoreClick}
             class="absolute flex items-center -top-4 right-28 sm:-top-4 sm:right-36 focus:outline-none"
           >

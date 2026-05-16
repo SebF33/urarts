@@ -18,6 +18,7 @@ import { UrlBasePath } from "@/env.ts";
 import { useDebounce } from "@utils/hooks/useDebounce.ts";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
+import { usePageBackground } from "@utils/background.ts";
 
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 
@@ -49,9 +50,7 @@ export default function FamousArtSideBar() {
   // Appel à l'API "Collection"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`,
-      )
+      ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}`)
         .json<Arts[]>()
         .then((response) => {
           setSearchResults(response);
@@ -105,6 +104,10 @@ export default function FamousArtSideBar() {
       tippyInstances.forEach((instance) => instance.destroy());
     };
   }, [searchResults]);
+
+
+  // Background pour la page d'accueil
+  usePageBackground("home");
 
 
   function handleClick(event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>) {

@@ -57,7 +57,7 @@ export default function Quote(
         allowHTML: true,
         content:
           `<a data-anchor-id=${props.data?.id} href="/art/${props.data?.slug}" draggable="${draggable}">
-          <img src="${props.data?.avatar_url}" alt="${props.data?.last_name}" style="max-width:90px" draggable="${draggable}"/>
+          <img src="${props.data?.avatar_url}" alt="${props.data?.last_name}" style="max-width:90px;border-radius:8px" draggable="${draggable}"/>
           </a>`,
         delay: DELAY_TOOLTIP_TRIGGER,
         interactive: true,

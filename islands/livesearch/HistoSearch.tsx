@@ -114,9 +114,7 @@ export default function HistoSearch(
   useEffect(() => {
     if (histocharactersYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(
-          `${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${histocharactersYearsSignal.value}`,
-        )
+        ky.get(`${UrlBasePath}/api/collection?lng=${languageSignal.value}&type=${type}&name=${debouncedValue}&years=${histocharactersYearsSignal.value}`)
           .json<Arts[]>()
           .then((response) => {
             setSearchResults(response);

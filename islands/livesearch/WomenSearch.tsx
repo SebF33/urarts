@@ -27,9 +27,7 @@ export default function WomenSearch() {
   // Appel à l'API "Artistes"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(
-        `${UrlBasePath}/api/artists?lng=${languageSignal.value}&gender=${gender}`,
-      )
+      ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&gender=${gender}`)
         .json<ArtistRow[]>()
         .then((response) => {
           setSearchResults(response);
