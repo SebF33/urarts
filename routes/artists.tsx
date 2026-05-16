@@ -9,6 +9,7 @@ import { PageProps } from "fresh";
 import { sql } from "kysely";
 
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
+import { DiscoverPaper } from "@islands/paper/DiscoverPaper.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
@@ -69,7 +70,14 @@ export default function ArtistsPage(
         data-name="artists"
         class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar overflow-hidden"
       >
+        {/* Post-it : découverte de l'Art */}
+        <div class="hidden 2xl:block absolute top-0 -left-16">
+          <DiscoverPaper />
+        </div>
+
+        {/* Recherche : artistes */}
         <ArtistsSearch nationality={nationality} />
+
         {/* Post-it : lien vers la carte du Monde */}
         <div class="absolute top-1 right-0">
           <WorldMapPaper />

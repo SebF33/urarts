@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2026-05-16]
+
+### Nouveautés
+- Ajout d'une fenêtre de découverte de l'Art (au clic du papier "Urarts.art").
+
 ## [2026-04-13]
 
 ### Nouveautés

@@ -8,6 +8,7 @@ import "@utils/i18n/config.ts";
 import type { MovementRow } from "@utils/types.d.ts";
 import { PageProps } from "fresh";
 
+import { DiscoverPaper } from "@islands/paper/DiscoverPaper.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import MovementsList from "@islands/MovementsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
@@ -84,7 +85,14 @@ export default function MovementsPage(
         data-name="movements"
         class="relative flex-grow xl:max-h-screen scrollable xl:overflow-y-scroll custom-scrollbar overflow-hidden"
       >
+        {/* Post-it : découverte de l'Art */}
+        <div class="hidden 2xl:block absolute top-0 -left-16">
+          <DiscoverPaper />
+        </div>
+
+        {/* Liste : mouvements artistiques */}
         <MovementsList movements={movements} />
+
         {/* Post-it : lien vers la carte du Monde */}
         <div class="absolute top-1 right-0">
           <WorldMapPaper />

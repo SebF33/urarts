@@ -90,7 +90,7 @@ const translation = {
     msg:
       `<p class="mb-4 text-lg md:text-xl leading-7">Le site <strong>Urarts</strong> est réalisé avec passion pour l’<strong>Art</strong> et le <strong>Dév</strong>.</p>
       <p class="mb-4 text-lg md:text-xl leading-7">
-      <span class="font-bold underline">Moyens utilisés</span> : TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
+      <span class="font-bold underline">Moyens utilisés</span> : TypeScript, Deno, Fresh, Kysely, Ky, Tailwind CSS, Everblush, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
       <p class="mb-4 text-lg md:text-xl leading-7">
       <span class="font-bold underline">Politique de droit d’auteur</span> : Urarts montre des œuvres d’art du domaine public et tente d’obtenir l’autorisation pour celles protégées par le droit d’auteur.
       Le but de ce site est d’utiliser ces œuvres historiques à des fins d’information et d’éducation.
@@ -110,6 +110,7 @@ const translation = {
     according_to: "selon",
     art: "œuvre",
     back_to_the_artist: "Retour à l'artiste",
+    loading: "Chargement...",
     no_results: "Pas de résultats",
     without_year: "Sans année",
   },
@@ -207,7 +208,8 @@ const translation = {
       `<p class="text-[1rem] leading-none mt-3">Cliquez sur les pays pour voyager à travers l’Art de chaque culture.</p>`,
     redirect:
       `<p class="text-[1rem] leading-none">Veuillez vous rediriger sur <a href="https://www.urarts.art" class="bold underline cursor-pointer">https://www.urarts.art</a> pour profiter pleinement de mes fonctionnalités.</p>`,
-    scroll_arts: "Faites défiler les œuvres de l’artiste en cliquant sur les flêches.",
+    scroll_arts:
+      "Faites défiler les œuvres de l’artiste en cliquant sur les flêches.",
     search_among: "Faites votre recherche parmi",
     tag: "Œuvres autour de la thématique",
     unclassified_arts: "<h2>Voici les œuvres non classées.</h2>",
@@ -284,11 +286,17 @@ const translation = {
     },
   },
   modal: {
+    copy_artist_link: "Copier le lien de l'artiste",
     description: "Description :",
+    navigation: "Navigation entre les œuvres",
+    next: "Suivant",
     panel_far_left: "(Panneau tout à gauche)",
     panel_far_right: "(Panneau tout à droite)",
     panel_left: "(Panneau à gauche)",
     panel_right: "(Panneau à droite)",
+    previous: "Précédent",
+    reveal_hint: "cliquer pour révéler",
+    see_artist_artworks: "Voir toutes ses œuvres →",
   },
   nav: {
     about: "À propos de Urarts...",
@@ -306,10 +314,10 @@ const translation = {
   paper: {
     copyright:
       "Les œuvres de l’artiste ne sont pas encore disponibles pour des raisons de droit d’auteur.",
+    discover: "Découvrez, explorez et partagez la beauté de l’Art.",
     famousart: "Quelques-uns des chefs-d’œuvre les plus célèbres...",
     name: "Nom(s) :",
     talentsart: "Quelques œuvres d’artistes talentueux...",
-    welcome: "Découvrez, explorez et partagez la beauté de l’Art.",
     worldmap: "Carte du Monde",
   },
   slider: {

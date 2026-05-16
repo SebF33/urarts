@@ -12,11 +12,11 @@ import { TALENTS } from "@utils/constants.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { ButtonLines } from "@components/Assets.tsx";
+import { DiscoverPaper } from "@islands/paper/DiscoverPaper.tsx";
 import FamousArtSideBar from "@islands/livesearch/FamousArtSideBar.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/paper/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
-import { WelcomePaper } from "@islands/paper/WelcomePaper.tsx";
 
 
 type Artists = Array<ArtistRow>;
@@ -142,7 +142,9 @@ export default function HomePage(
         data-name="home"
         class="flex-grow xl:-mb-[35vh]!"
       >
+        {/* Bouton : ouvrir la section des œuvres célèbres */}
         <button
+          type="button"
           data-open-section="famous-art"
           data-open-value="true"
           class="absolute top-20 right-3 p-2 gap-1 hidden 2xl:flex justify-center items-center bg-lighterdark text-sm text-white rounded-md">
@@ -150,19 +152,21 @@ export default function HomePage(
           <ButtonLines aria-hidden="true" />
         </button>
 
+        {/* Disposition de 4 artistes */}
         <ArtistsLayout artists={artists} flag="home" grid={grid} />
 
-        {/* Post-it : bienvenue */}
+        {/* Post-it : découverte de l'Art */}
         <div class="hidden 2xl:block absolute top-16 -left-16">
-          <WelcomePaper />
+          <DiscoverPaper />
         </div>
 
-        {/* Post-it : citation */}
+        {/* Post-it : citation d'un artiste */}
         <div class="mx-auto -mt-[17.5vh] mb-24">
           <Quote data={artistQuote} delay={100} />
         </div>
       </main>
 
+      {/* Section des œuvres célèbres */}
       <FamousArtSideBar />
 
       <WaterDrop

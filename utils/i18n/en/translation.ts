@@ -90,7 +90,7 @@ const translation = {
     msg:
       `<p class="mb-4 text-lg md:text-xl leading-7">The <strong>Urarts</strong> site is created with passion for <strong>Art</strong> and <strong>Dev</strong>.</p>
       <p class="mb-4 text-lg md:text-xl leading-7">
-      <span class="font-bold underline">Means used</span>: TypeScript, Deno, Fresh, Kysely, Ky, Twind, Everblush, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
+      <span class="font-bold underline">Means used</span>: TypeScript, Deno, Fresh, Kysely, Ky, Tailwind CSS, Everblush, Motion, Tippy.js, Chart.js, noUiSlider, Fly.io, Illustrator, Photoshop.</p>
       <p class="mb-4 text-lg md:text-xl leading-7">
       <span class="font-bold underline">Copyright Policy</span>: Urarts shows public domain artwork and attempts to obtain permission for copyrighted ones.
       The purpose of this site is to use these historical works for informational and educational purposes.
@@ -110,6 +110,7 @@ const translation = {
     according_to: "according to",
     art: "artwork",
     back_to_the_artist: "Back to the artist",
+    loading: "Loading...",
     no_results: "No results",
     without_year: "Without year",
   },
@@ -282,11 +283,17 @@ const translation = {
     },
   },
   modal: {
+    copy_artist_link: "Copy artist link",
     description: "Description:",
+    navigation: "Navigation between artworks",
+    next: "Next",
     panel_far_left: "(Panel on the far left)",
     panel_far_right: "(Panel on the far right)",
     panel_left: "(Panel on the left)",
     panel_right: "(Panel on the right)",
+    previous: "Previous",
+    reveal_hint: "click to reveal",
+    see_artist_artworks: "See all his artworks →",
   },
   nav: {
     about: "About Urarts...",
@@ -304,10 +311,10 @@ const translation = {
   paper: {
     copyright:
       "The artist’s artwork is not yet available for copyright reasons.",
+    discover: "Discover, explore and share the beauty of Art.",
     famousart: "Some of the most famous masterpieces...",
     name: "Name(s):",
     talentsart: "Some artwork by talented artists...",
-    welcome: "Discover, explore and share the beauty of Art.",
     worldmap: "World map",
   },
   slider: {

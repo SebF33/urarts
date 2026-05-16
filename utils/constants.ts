@@ -28,6 +28,18 @@ export const NAV_THEME_KEY = "navTheme";
 export const SECONDARY_NAV_THEME = "wave-colors";
 
 
+export const DISCOVER_BANNER_ARTS: string[] = [
+  "/arts/devinci/La Joconde.jpg",
+  "/arts/hokusai/La Grande Vague de Kanagawa.jpg",
+  "/arts/klimt/Le Baiser.jpg",
+  "/arts/monet/Les Nymphéas.jpg",
+  "/arts/renoir/Bal du moulin de la Galette.jpg",
+  "/arts/turner/Le Dernier Voyage du Téméraire.jpg",
+  "/arts/vangogh/La Nuit étoilée.jpg",
+  "/arts/vermeer/La Jeune Fille à la perle.jpg",
+];
+
+
 export const INDICATORS_MOVEMENTS: string[] = [
   "artdeco",
   "baroque",
