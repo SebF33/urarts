@@ -961,6 +961,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/neoplasticism.png)`,
     backgroundSize: "clamp(300px, 52.1vw, 1000px)",
   },
+  netherlands: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/netherlands.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   northernrenaissance: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/northernrenaissance.png)`,
     backgroundSize: "clamp(300px, 45.8vw, 880px)",
