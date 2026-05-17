@@ -5,7 +5,7 @@ import "@utils/i18n/config.ts";
 import ky from "ky";
 import { shuffleArray } from "@utils/helpers.ts";
 import { UrlBasePath } from "@/env.ts";
-import { useState } from "preact/hooks";
+import { useMemo, useState } from "preact/hooks";
 
 import DiscoverModal from "@islands/modal/DiscoverModal.tsx";
 
@@ -16,7 +16,12 @@ export function DiscoverPaper() {
   const [isLoading, setIsLoading] = useState(false);
 
   const lng = i18next.language;
-  const randomizedBannerArts = shuffleArray(DISCOVER_BANNER_ARTS);
+
+  // Ordre aléatoire des 8 images de la bannière
+  const randomizedBannerArts = useMemo(
+    () => shuffleArray(DISCOVER_BANNER_ARTS).slice(0, 8),
+    [],
+  );
 
 
   // Ouverture de la modal
@@ -47,8 +52,7 @@ export function DiscoverPaper() {
         class="paper paper-shadow relative w-60 md:w-80 mx-10 md:mr-2 -rotate-[12deg] text-center cursor-pointer overflow-visible"
         aria-label={i18next.t("paper.discover", { ns: "translation" })}
       >
-        <div class="tape-section"></div>
-        <div class="p-3 md:p-4 text-[0.8rem] md:text-[0.9rem] leading-snug text-dark">
+        <div class="p-3 text-[0.8rem] md:text-[0.9rem] leading-snug text-dark">
           <h1 class="font-bold text-base md:text-xl -mt-1 ml-10">
             Urarts.art
           </h1>
@@ -58,7 +62,7 @@ export function DiscoverPaper() {
               : i18next.t("paper.discover", { ns: "translation" })}
           </p>
           {/* Bannière */}
-          <div class="mt-1 relative z-20">
+          <div class="relative mt-1 z-20">
             <div class="discover-paper-art-banner" aria-hidden="true">
               <div class="discover-paper-art-track">
                 {randomizedBannerArts.map((src) => (
