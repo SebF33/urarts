@@ -811,12 +811,6 @@ input {
     box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--shadow) !important;
 }
 
-.tape-section {
-    position: absolute;
-    width: 100%;
-    pointer-events: none;
-}
-
 .top-tape {
     position: absolute;
     top: -5px;
@@ -826,6 +820,35 @@ input {
     border-right: 1px dotted var(--tape-edge-gray);
     border-left: 1px dotted var(--tape-edge-gray);
     opacity: 0.5;
+}
+
+.side-tape {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2vmin;
+    min-width: 8px;
+    max-width: 13px;
+    height: calc(110% - 14px);
+    background-color: var(--tape-gray);
+    border-top: 1px dotted var(--tape-edge-gray);
+    border-bottom: 1px dotted var(--tape-edge-gray);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.side-tape-left {
+    left: -5px;
+}
+
+.side-tape-right {
+    right: -5px;
+}
+
+.tape-section {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
 }
 
 .tape-section:first-of-type {

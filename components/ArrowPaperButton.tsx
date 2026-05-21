@@ -12,6 +12,7 @@ export function ArrowPaperButton(
 
   // CSS
   const rotateClass = props.direction === "left" ? "-rotate-3" : "rotate-3";
+  const tapeClass = props.direction === "left" ? "side-tape side-tape-left" : "side-tape side-tape-right";
 
 
   return (
@@ -19,7 +20,11 @@ export function ArrowPaperButton(
       type="button"
       onClick={props.disabled ? undefined : props.onClick}
       disabled={props.disabled}
-      class={`paper paper-shadow relative min-w-[56px] h-[72px] md:min-w-[72px] md:h-[92px] p-2 flex items-center justify-center ${rotateClass} ${
+      class={`paper paper-shadow relative
+        min-w-[42px] h-[54px]
+        sm:min-w-[48px] sm:h-[62px]
+        md:min-w-[58px] md:h-[76px]
+        p-2 flex items-center justify-center ${rotateClass} ${
         props.disabled ? "invisible pointer-events-none" : "cursor-pointer"
       }`}
       aria-label={props.direction === "left"
@@ -28,11 +33,10 @@ export function ArrowPaperButton(
       aria-hidden={props.disabled ? "true" : "false"}
       tabIndex={props.disabled ? -1 : 0}
     >
-      <div class="top-tape max-h-3"></div>
-
+      <div class={tapeClass}></div>
       <svg
         viewBox="0 0 64 64"
-        class="w-9 h-9 md:w-11 md:h-11 text-lighterdark"
+        class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-lighterdark"
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
