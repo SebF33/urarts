@@ -118,26 +118,31 @@ input {
 @font-face {
     font-family: Caveat Brush;
     src: url(/fonts/CaveatBrush.ttf) format("truetype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Five Boroughs Handwriting;
     src: url(/fonts/FiveBoroughsHandwriting.otf) format("opentype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Kashima Brush;
     src: url(/fonts/Kashima.otf) format("opentype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Morris Initials Two;
     src: url(/fonts/MorrisInitialsTwo.ttf) format("truetype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Renaissance Garden;
     src: url(/fonts/RenaissanceGarden.otf) format("opentype");
+    font-display: swap;
 }
 
 .font-brush {
