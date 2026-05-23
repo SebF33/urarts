@@ -271,7 +271,10 @@ export class BackgroundContext {
 
   render() {
     return new Response(this.generate(), {
-      headers: { "Content-Type": "image/svg+xml" },
+      headers: {
+        "Content-Type": "image/svg+xml",
+        "Cache-Control": "public, max-age=31536000, immutable",
+      },
     });
   }
 }
