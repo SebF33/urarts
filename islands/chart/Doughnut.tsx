@@ -58,12 +58,10 @@ export default function Doughnut(
         );
 
         if (elements.length > 0) {
-          const customDataValue =
-            chartInstanceRef.current.data.datasets[elements[0].datasetIndex]
-              .customData[elements[0].index];
+          const customDataValue = chartInstanceRef.current.data.datasets[elements[0].datasetIndex].customData[elements[0].index];
           const href = "/artists?nationality=" + customDataValue;
           setTimeout(() => {
-            window.location.href = href;
+            globalThis.location.href = href;
           }, DELAY_CHART_REACH_HREF);
         }
       }

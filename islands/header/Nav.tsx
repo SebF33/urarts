@@ -3,7 +3,7 @@ import {
   artistsYearsSignal,
   histocharactersYearsSignal,
   languageSignal,
-  nationalitySignal,
+  nationalitySlugSignal,
 } from "@utils/signals.ts";
 import {
   DEFAULT_NAV_THEME,
@@ -325,13 +325,13 @@ export default function Nav(props: Props) {
         ? [
           artistsYearsSignal.value[0],
           artistsYearsSignal.value[1],
-          nationalitySignal.value,
+          nationalitySlugSignal.value,
         ]
         : (pageName === "histocharacters")
         ? [
           histocharactersYearsSignal.value[0],
           histocharactersYearsSignal.value[1],
-          nationalitySignal.value,
+          nationalitySlugSignal.value,
         ]
         : [];
 
@@ -373,7 +373,7 @@ export default function Nav(props: Props) {
   }, [
     props.url,
     leonardoActiveContent,
-    nationalitySignal.value,
+    nationalitySlugSignal.value,
     artistsYearsSignal.value,
     histocharactersYearsSignal.value,
   ]);

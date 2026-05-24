@@ -15,6 +15,7 @@ interface CountryTable {
   id: Generated<number>;
   name: string; // Nom du pays (fr)
   name_en: string; // Nom du pays (en)
+  slug: string;
   modified_at: ColumnType<Date, string | undefined, never>;
 }
 

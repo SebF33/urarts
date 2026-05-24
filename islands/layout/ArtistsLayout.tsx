@@ -207,11 +207,11 @@ export default function ArtistsLayout(
                 )}
                 <ul class={`artist-side z-20`}>
                   <a
-                    href={"/artists?nationality=" + p.nationality}
+                    href={"/artists?nationality=" + p.nationality_slug}
                     class={`w-7`}
                   >
                     <img
-                      src={"/icons/" + p.nationality + ".png"}
+                      src={"/icons/" + p.nationality_slug + ".png"}
                       alt="flag-symbol"
                       class="[filter:drop-shadow(0.03rem_0.03rem_0.08rem_rgba(0,0,0,0.5))]"
                       draggable={draggable}

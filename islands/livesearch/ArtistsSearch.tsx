@@ -2,7 +2,7 @@ import type { ArtistRow } from "@utils/types.d.ts";
 import {
   artistsYearsSignal,
   languageSignal,
-  nationalitySignal,
+  nationalitySlugSignal,
 } from "@utils/signals.ts";
 import {
   DEFAULT_ARTISTS_YEARS,
@@ -27,45 +27,76 @@ import Title from "@islands/paper/Title.tsx";
 // Groupes de drapeaux et traductions
 const FLAG_GROUPS = {
   1: [
-    "Portugal",
-    "Espagne",
-    "France",
-    "Belgique",
-    "Pays-Bas",
-    "Allemagne",
-    "Autriche",
-    "Pologne",
-    "Hongrie",
-    "Italie",
+    { slug: "portugal", label: "Portugal" },
+    { slug: "spain", label: "Espagne" },
+    { slug: "france", label: "France" },
+    { slug: "belgium", label: "Belgique" },
+    { slug: "netherlands", label: "Pays-Bas" },
+    { slug: "germany", label: "Allemagne" },
+    { slug: "austria", label: "Autriche" },
+    { slug: "poland", label: "Pologne" },
+    { slug: "hungary", label: "Hongrie" },
+    { slug: "italy", label: "Italie" },
   ],
   2: [
-    "Suisse",
-    "Suède",
-    "Norvège",
-    "Finlande",
-    "Danemark",
-    "Ukraine",
-    "Biélorussie",
-    "Russie",
-    "Arménie",
-    "Tchécoslovaquie",
+    { slug: "switzerland", label: "Suisse" },
+    { slug: "sweden", label: "Suède" },
+    { slug: "norway", label: "Norvège" },
+    { slug: "finland", label: "Finlande" },
+    { slug: "denmark", label: "Danemark" },
+    { slug: "ukraine", label: "Ukraine" },
+    { slug: "belarus", label: "Biélorussie" },
+    { slug: "russia", label: "Russie" },
+    { slug: "armenia", label: "Arménie" },
+    { slug: "czechoslovakia", label: "Tchécoslovaquie" },
   ],
   3: [
-    "Grèce",
-    "Turquie",
-    "Chine",
-    "Vietnam",
-    "Japon",
-    "Royaume-Uni",
-    "Colombie",
-    "Mexique",
-    "États-Unis d'Amérique",
-    "Canada",
+    { slug: "greece", label: "Grèce" },
+    { slug: "turkey", label: "Turquie" },
+    { slug: "china", label: "Chine" },
+    { slug: "vietnam", label: "Vietnam" },
+    { slug: "japan", label: "Japon" },
+    { slug: "uk", label: "Royaume-Uni" },
+    { slug: "colombia", label: "Colombie" },
+    { slug: "mexico", label: "Mexique" },
+    { slug: "usa", label: "États-Unis d'Amérique" },
+    { slug: "canada", label: "Canada" },
   ],
 };
 
-const COUNTRY_TRANSLATIONS = {
-  fr: {},
+const COUNTRY_TRANSLATIONS: Record<"fr" | "en", Record<string, string>> = {
+  fr: {
+    "Portugal": "Portugal",
+    "Espagne": "Espagne",
+    "France": "France",
+    "Belgique": "Belgique",
+    "Pays-Bas": "Pays-Bas",
+    "Allemagne": "Allemagne",
+    "Autriche": "Autriche",
+    "Pologne": "Pologne",
+    "Hongrie": "Hongrie",
+    "Italie": "Italie",
+    "Suisse": "Suisse",
+    "Suède": "Suède",
+    "Norvège": "Norvège",
+    "Finlande": "Finlande",
+    "Danemark": "Danemark",
+    "Ukraine": "Ukraine",
+    "Biélorussie": "Biélorussie",
+    "Russie": "Russie",
+    "Arménie": "Arménie",
+    "Tchécoslovaquie": "Tchécoslovaquie",
+    "Grèce": "Grèce",
+    "Turquie": "Turquie",
+    "Chine": "Chine",
+    "Vietnam": "Vietnam",
+    "Japon": "Japon",
+    "Royaume-Uni": "Royaume-Uni",
+    "Colombie": "Colombie",
+    "Mexique": "Mexique",
+    "États-Unis d'Amérique": "États-Unis d'Amérique",
+    "Canada": "Canada",
+  },
   en: {
     "Portugal": "Portugal",
     "Espagne": "Spain",
@@ -102,8 +133,9 @@ const COUNTRY_TRANSLATIONS = {
 
 
 // Bouton de drapeau
-function FlagButton({ name, className = "", flagClass, draggable = false }: {
-  name: string;
+function FlagButton({ slug, title, className = "", flagClass, draggable = false }: {
+  slug: string;
+  title: string;
   className?: string;
   flagClass: string;
   draggable?: boolean;
@@ -111,14 +143,15 @@ function FlagButton({ name, className = "", flagClass, draggable = false }: {
 
   return (
     <button
-      onClick={() => (nationalitySignal.value = name)}
+      type="button"
+      onClick={() => (nationalitySlugSignal.value = slug)}
       class={`absolute flex items-center focus:outline-none ${className}`}
     >
       <img
         class={flagClass}
-        src={`/icons/${name}.png`}
-        alt={name}
-        title={name}
+        src={`/icons/${slug}.png`}
+        alt={title}
+        title={title}
         draggable={draggable}
       />
     </button>
@@ -202,7 +235,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
     // nationalité et années définies si paramètre "nationality" dans l'URL
     if (props.nationality !== "") {
-      nationalitySignal.value = props.nationality;
+      nationalitySlugSignal.value = props.nationality;
       value = [1400, 2100];
     }
 
@@ -269,7 +302,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
   useEffect(() => {
     if (artistsYearsSignal.value.length > 0) {
       const timer = setTimeout(() => {
-        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`)
+        ky.get(`${UrlBasePath}/api/artists?lng=${languageSignal.value}&nationality=${nationalitySlugSignal.value}&name=${debouncedValue}&years=${artistsYearsSignal.value}`)
           .json<ArtistRow[]>()
           .then((response) => {
             setSearchResults(response);
@@ -278,7 +311,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
       return () => clearTimeout(timer);
     }
-  }, [nationalitySignal.value, debouncedValue, artistsYearsSignal.value]);
+  }, [nationalitySlugSignal.value, debouncedValue, artistsYearsSignal.value]);
 
 
   // Background pour la page des artistes
@@ -306,23 +339,21 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
           {/* Bouton : Monde entier */}
           <button
             type="button"
-            onClick={() => (nationalitySignal.value = "Monde")}
+            onClick={() => (nationalitySlugSignal.value = "world")}
             class="absolute flex items-center -top-14 left-20 sm:-top-14 sm:left-24 focus:outline-none select-none"
           >
             <img
               class={worldFlagClasses}
-              src="/icons/Monde.png"
-              alt="Monde"
-              title="Monde"
+              src="/icons/world.png"
+              alt="World"
+              title={`${i18next.t("meta.world", { ns: "translation" })}`}
               draggable={draggable}
             />
           </button>
 
           {/* Boutons : pays */}
           {FLAG_GROUPS[flags as 1 | 2 | 3]?.map((country, i) => {
-            const translated = (COUNTRY_TRANSLATIONS[
-              languageSignal.value as "en" | "fr"
-            ] as Record<string, string>)?.[country] || country;
+            const translated = COUNTRY_TRANSLATIONS[languageSignal.value as "en" | "fr"]?.[country.label] || country.label;
             const flagClass = flags === 1
               ? flagClasses1
               : flags === 2
@@ -330,8 +361,9 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
               : flagClasses3;
             return (
               <FlagButton
-                key={country}
-                name={translated}
+                key={country.slug}
+                slug={country.slug}
+                title={translated}
                 className={flagPositions[i] || ""}
                 flagClass={flagClass}
                 draggable={draggable}
@@ -382,7 +414,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
       {/* Artistes */}
       <ArtistsLayout
         artists={searchResults}
-        flag={nationalitySignal.value}
+        flag={nationalitySlugSignal.value}
         grid={grid}
       />
     </>

@@ -35,7 +35,7 @@ export default function AboutNotePaper() {
             >
               <img
                 class="w-9 align-middle"
-                src="/icons/Royaume-Uni.png"
+                src="/icons/uk.png"
                 alt="en"
                 draggable={draggable}
               />
@@ -46,7 +46,7 @@ export default function AboutNotePaper() {
             >
               <img
                 class="w-9 align-middle"
-                src="/icons/France.png"
+                src="/icons/france.png"
                 alt="fr"
                 draggable={draggable}
               />

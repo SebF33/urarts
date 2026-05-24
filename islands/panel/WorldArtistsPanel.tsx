@@ -9,13 +9,14 @@ import { ButtonCross } from "@components/Assets.tsx";
 
 interface ArtistPanelProps {
   readonly country: string;
+  readonly slug: string;
   readonly artists: ArtistRow[];
   readonly onClose: () => void;
 }
 
 
 export function WorldArtistsPanel(
-  { country, artists, onClose }: ArtistPanelProps,
+  { country, slug, artists, onClose }: ArtistPanelProps,
 ) {
 
   // CSS
@@ -41,9 +42,8 @@ export function WorldArtistsPanel(
           >
             <div className="flex items-center">
               <img
-                src={`/icons/${country}.png`}
+                src={`/icons/${slug}.png`}
                 alt={country}
-                title={country}
                 className="w-6 h-4 mr-2 object-cover [filter:drop-shadow(0.03rem_0.03rem_0.08rem_rgba(0,0,0,0.5))]"
                 draggable={false}
               />

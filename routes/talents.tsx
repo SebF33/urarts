@@ -34,13 +34,14 @@ export const handler = define.handlers({
         "first_name", "last_name",
         "birthyear", "deathyear",
         "avatar_url", "signature", "color", "site_web",
-        "slug",
+        "artist.slug",
+        "country.slug as nationality_slug",
       ])
       .$if(lng === 'fr', (qb) => qb.select("info"))
       .$if(lng === 'en', (qb) => qb.select("info_en as info"))
       .$if(lng === 'fr', (qb) => qb.select("country.name as nationality"))
       .$if(lng === 'en', (qb) => qb.select("country.name_en as nationality"))
-      .where("slug", "in", TALENTS)
+      .where("artist.slug", "in", TALENTS)
       .orderBy(sql`random()`)
       .execute();
 
@@ -49,6 +50,7 @@ export const handler = define.handlers({
       first_name: p.first_name,
       last_name: p.last_name,
       nationality: p.nationality,
+      nationality_slug: p.nationality_slug,
       birthyear: p.birthyear,
       deathyear: p.deathyear,
       avatar_url: p.avatar_url,

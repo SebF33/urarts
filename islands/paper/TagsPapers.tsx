@@ -111,7 +111,7 @@ export default function TagsPapers({
                         <div class="top-tape h-4 min-h-4 max-h-4 max-w-[85%] -mb-2">
                         </div>
                         <img
-                          src={`/icons/${tag.name}.png`}
+                          src={`/icons/${tag.slug}.png`}
                           alt={tag.name}
                           class="w-8"
                           draggable={draggable}

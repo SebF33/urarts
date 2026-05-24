@@ -44,10 +44,10 @@ export const handler = define.handlers({
 
     // Nationalité
     query = url.searchParams.get("nationality") || "";
-    const nationalityFilter = query.length ? query : "Monde";
+    const nationalityFilter = query.length ? query : "world";
     let isCountry = false;
     let isWorld = false;
-    nationalityFilter === "Monde" ? isWorld = true : isCountry = true;
+    nationalityFilter === "world" ? isWorld = true : isCountry = true;
 
     // Période
     query = url.searchParams.get("years") || "";
@@ -72,7 +72,8 @@ export const handler = define.handlers({
         "signature",
         "color",
         "site_web",
-        "slug",
+        "artist.slug",
+        "country.slug as nationality_slug",
       ])
       .$if(
         !DisplayCopyrightedArtist,
@@ -87,16 +88,9 @@ export const handler = define.handlers({
         qb.where(
           sql`((birthyear BETWEEN ${beginFilter} AND ${endFilter}) OR (deathyear BETWEEN ${beginFilter} AND ${endFilter}))`,
         ))
-      .$if(
-        isCountry && lng === "fr",
-        (qb) => qb.where("country.name", "=", nationalityFilter),
-      )
-      .$if(
-        isCountry && lng === "en",
-        (qb) => qb.where("country.name_en", "=", nationalityFilter),
-      )
+      .$if(isCountry, (qb) => qb.where("country.slug", "=", nationalityFilter))
       .$if(isWorld, (qb) => qb.where("country.name", "like", "%"))
-      .where("slug", "not in", TALENTS)
+      .where("artist.slug", "not in", TALENTS)
       .where(
         sql`(
           first_name_normalized LIKE ${"%" + normalizedNameFilter + "%"}

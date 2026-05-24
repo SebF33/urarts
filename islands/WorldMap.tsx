@@ -8,7 +8,7 @@ import {
   worldColors,
 } from "@utils/colors.ts";
 import { createPortal } from "react-dom";
-import { DELAY_DEBOUNCE, NATIONALITIES } from "@utils/constants.ts";
+import { DELAY_DEBOUNCE, NATIONALITIES_LABELS } from "@utils/constants.ts";
 import { feature } from "topojson-client";
 import { geoMercator, geoPath } from "d3-geo";
 import i18next from "i18next";
@@ -33,6 +33,48 @@ isoCountries.registerLocale(en);
 isoCountries.registerLocale(fr);
 
 
+const COUNTRY_ALPHA2_TO_SLUG: Record<string, string> = {
+  AM: "armenia",
+  AT: "austria",
+  BE: "belgium",
+  BG: "bulgaria",
+  BY: "belarus",
+  CA: "canada",
+  CH: "switzerland",
+  CN: "china",
+  CO: "colombia",
+  CZ: "czechoslovakia",
+  DE: "germany",
+  DK: "denmark",
+  DZ: "algeria",
+  EE: "estonia",
+  EG: "egypt",
+  ES: "spain",
+  FI: "finland",
+  FR: "france",
+  GB: "uk",
+  GR: "greece",
+  HR: "croatia",
+  HU: "hungary",
+  IL: "israel",
+  IN: "india",
+  IT: "italy",
+  JP: "japan",
+  MX: "mexico",
+  NL: "netherlands",
+  NO: "norway",
+  PL: "poland",
+  PT: "portugal",
+  RU: "russia",
+  SE: "sweden",
+  SI: "slovenia",
+  TR: "turkey",
+  UA: "ukraine",
+  US: "usa",
+  VN: "vietnam",
+};
+
+
 export default function WorldMap(
   { artsTagsCountries }: { readonly artsTagsCountries: string[] },
 ) {
@@ -45,6 +87,7 @@ export default function WorldMap(
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedArtistsCountry, setSelectedArtistsCountry] = useState<string | null>(null);
   const [selectedArtsCountry, setSelectedArtsCountry] = useState<string | null>(null);
+  const [selectedCountrySlug, setSelectedCountrySlug] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
@@ -288,7 +331,7 @@ export default function WorldMap(
 
   // Couleur pour chaque pays
   const allCountries = Array.from(
-    new Set([...NATIONALITIES, ...artsTagsCountries]),
+    new Set([...NATIONALITIES_LABELS, ...artsTagsCountries]),
   );
   //console.log(allCountries);
   const tagColors = lng === "fr" ? tagColorsFR : tagColorsEN;
@@ -326,7 +369,7 @@ export default function WorldMap(
 
 
   // Ouverture des panels au click d'un pays
-  const handleCountryClick = async (name: string) => {
+  const handleCountryClick = async (name: string, slug: string) => {
     // anti-spam
     const now = Date.now();
     if (now - lastClickTime < DELAY_DEBOUNCE) return;
@@ -345,7 +388,7 @@ export default function WorldMap(
 
     try {
       const [artistsResp, artsResp] = await Promise.all([
-        ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: name } }).json<ArtistRow[]>(),
+        ky.get(`${UrlBasePath}/api/artists`, { searchParams: { lng, nationality: slug } }).json<ArtistRow[]>(),
         ky.get(`${UrlBasePath}/api/arts?lng=${lng}&tag=${name}&geolocation`).json<ArtRow[]>()
       ]);
 
@@ -353,6 +396,7 @@ export default function WorldMap(
       setArts(artsResp);
       setSelectedArtistsCountry(name);
       setSelectedArtsCountry(name);
+      setSelectedCountrySlug(slug);
     } catch (error) {
       console.error("World map panels error:", error);
     } finally {
@@ -365,6 +409,7 @@ export default function WorldMap(
   const closeAllPanels = () => {
     setSelectedArtistsCountry(null);
     setSelectedArtsCountry(null);
+    setSelectedCountrySlug(null);
   };
 
 
@@ -419,14 +464,13 @@ export default function WorldMap(
           </pattern>
         </defs>
         {countries.map((c) => {
-          // noms de pays selon la langue
           const alpha2 = iso.whereNumeric(String(c.id))?.alpha2;
-          const name = alpha2
-            ? isoCountries.getName(alpha2, lng) || c.properties.name
-            : c.properties.name;
+          // slugs de pays
+          const slug = alpha2 ? COUNTRY_ALPHA2_TO_SLUG[alpha2] || "" : "";
+          // noms de pays selon la langue
+          const name = alpha2 ? isoCountries.getName(alpha2, lng) || c.properties.name : c.properties.name;
           // pays actifs
-          const isActive = artsTagsCountries.includes(name) ||
-            NATIONALITIES.includes(name);
+          const isActive = artsTagsCountries.includes(name) || NATIONALITIES_LABELS.includes(name);
           const fillColor = isActive ? colorMap[name] : "url(#brushPattern)";
           const cursorClass = isActive ? "cursor-pointer" : "cursor-auto";
           // centroïde pour infobulle
@@ -445,7 +489,7 @@ export default function WorldMap(
               data-alpha2={alpha2 || ""}
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
-              onClick={() => isActive && handleCountryClick(name)}
+              onClick={() => isActive && handleCountryClick(name, slug)}
             />
           );
         })}
@@ -469,6 +513,7 @@ export default function WorldMap(
       {!loading && (
         <WorldArtistsPanel
           country={selectedArtistsCountry}
+          slug={selectedCountrySlug}
           artists={artists}
           onClose={() => setSelectedArtistsCountry(null)}
         />
@@ -478,6 +523,7 @@ export default function WorldMap(
       {!loading && (
         <WorldArtsPanel
           country={selectedArtsCountry}
+          slug={selectedCountrySlug}
           artworks={arts}
           onClose={() => setSelectedArtsCountry(null)}
         />

@@ -78,6 +78,7 @@ export type ArtistRow = {
   last_name: string;
   main_tags: string | null;
   nationality: string;
+  nationality_slug: string;
   signature: string | null;
   site_web: string | null;
   slug: string;

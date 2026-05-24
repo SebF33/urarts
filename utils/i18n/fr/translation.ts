@@ -280,6 +280,7 @@ const translation = {
       desc: "Les femmes artistes.",
       title: "Urarts - Femmes artistes",
     },
+    world: "Monde",
     worldmap: {
       desc: "La carte du Monde.",
       title: "Urarts - Carte du Monde",

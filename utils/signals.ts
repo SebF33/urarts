@@ -12,7 +12,7 @@ export const artModalOpenSignal = signal<boolean>(false);
 export const histocharactersYearsSignal = signal<number[]>(DEFAULT_HISTOCHARACTERS_YEARS);
 export const isClickableSignal = signal<boolean>(true);
 export const languageSignal = signal<string>(i18next.language);
-export const nationalitySignal = signal<string>("France");
+export const nationalitySlugSignal = signal<string>("france");
 
 // Pour établir le contexte d'un contenu qui concerne un(e) seul(e) artiste
 export const isForAloneArtistSignal = signal<boolean>(false);

@@ -321,8 +321,7 @@ export const handler = define.handlers({
           const countryResult = await db.selectFrom("country")
             .$if(lng === "fr", (qb) => qb.select("name"))
             .$if(lng === "en", (qb) => qb.select("name_en as name"))
-            .$if(lng === "fr", (qb) => qb.where("name", "=", pagectx[2]))
-            .$if(lng === "en", (qb) => qb.where("name_en", "=", pagectx[2]))
+            .where("slug", "=", pagectx[2])
             .executeTakeFirst();
 
           htmlContent += `<p class="text-[1rem] leading-none mt-1">${
@@ -357,7 +356,7 @@ export const handler = define.handlers({
               i18next.t("leonardo.and_year", { ns: "translation" })
             } <strong>${
               pagectx[1]
-            }</strong> &nbsp; <span class="inline-block"><img src="/icons/Monde.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
+            }</strong> &nbsp; <span class="inline-block"><img src="/icons/world.png" class="appear-effect-very-fast-fadein h-6 inline-block align-top" alt="World" draggable=${draggable}/></span></p>`;
           }
           break;
 
@@ -395,10 +394,10 @@ export const handler = define.handlers({
             i18next.t("leonardo.lng", { ns: "translation" })
           } &nbsp;
               <button onclick="handleLanguage('en')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-                <img class="w-6" src="/icons/Royaume-Uni.png" alt="en" draggable=false/>
+                <img class="w-6" src="/icons/uk.png" alt="en" draggable=false/>
               </button>
               <button onclick="handleLanguage('fr')" class="appear-effect-very-fast-fadein inline-block flex items-center focus:outline-none">
-                <img class="w-6" src="/icons/France.png" alt="fr" draggable=false/>
+                <img class="w-6" src="/icons/france.png" alt="fr" draggable=false/>
               </button>
             </p>
           `;
@@ -415,7 +414,7 @@ export const handler = define.handlers({
             <p class="text-[1rem] leading-none mb-2">
               ${i18next.t("leonardo.or_click", { ns: "translation" })} 
               <a href="/worldmap" class="appear-effect-very-fast-fadein inline-block align-middle" draggable=false>
-                <img class="w-10 h-auto inline-block" src="/icons/Monde.png" alt="world" draggable=false/>
+                <img class="w-10 h-auto inline-block" src="/icons/world.png" alt="World" draggable=false/>
               </a> 
               ${i18next.t("leonardo.nav_worldmap", { ns: "translation" })}
             </p>

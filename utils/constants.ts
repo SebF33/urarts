@@ -67,7 +67,7 @@ export const INDICATORS_MOVEMENTS: string[] = [
 ];
 
 
-export const NATIONALITIES: string[] = [
+export const NATIONALITIES_LABELS: string[] = [
   "Allemagne",
   "Armenia",
   "Arménie",
@@ -132,6 +132,45 @@ export const NATIONALITIES: string[] = [
   "United Kingdom",
   "United States of America",
   "Vietnam",
+];
+
+
+export const NATIONALITIES_SLUGS: string[] = [
+  "armenia",
+  "austria",
+  "belarus",
+  "belgium",
+  "bulgaria",
+  "canada",
+  "china",
+  "colombia",
+  "croatia",
+  "czechoslovakia",
+  "denmark",
+  "estonia",
+  "finland",
+  "france",
+  "germany",
+  "greece",
+  "hungary",
+  "italy",
+  "japan",
+  "mexico",
+  "netherlands",
+  "norway",
+  "poland",
+  "portugal",
+  "russia",
+  "slovenia",
+  "spain",
+  "sweden",
+  "switzerland",
+  "turkey",
+  "uk",
+  "ukraine",
+  "usa",
+  "vietnam",
+  "world",
 ];
 
 

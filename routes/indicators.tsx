@@ -29,21 +29,43 @@ export const handler = define.handlers({
       db
         .selectFrom("artist")
         .innerJoin("country", "artist.country_id", "country.id")
-        .$if(lng === 'fr', (qb) => qb.select([
+        .$if(lng === "fr", (qb) => qb.select([
           "country.name as nationality",
-          "country.name as nationality_value",
-          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Autres' END as nationality_group`,
-          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
+          sql`
+            CASE
+              WHEN country_id IN (1,2,4,6,8)
+              THEN country.slug
+              ELSE 'world'
+            END
+          `.as("nationality_value"),
+          sql`
+            CASE
+              WHEN country_id IN (1,2,4,6,8)
+              THEN country.name
+              ELSE 'Autres'
+            END
+          `.as("nationality_group"),
           count("artist.id").as("artist_count"),
         ]))
-        .$if(lng === 'en', (qb) => qb.select([
+        .$if(lng === "en", (qb) => qb.select([
           "country.name_en as nationality",
-          "country.name as nationality_value",
-          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name_en ELSE 'Others' END as nationality_group`,
-          sql`CASE WHEN country_id IN (1,2,4,6,8) THEN country.name ELSE 'Monde' END as nationality_value`,
+          sql`
+            CASE
+              WHEN country_id IN (1,2,4,6,8)
+              THEN country.slug
+              ELSE 'world'
+            END
+          `.as("nationality_value"),
+          sql`
+            CASE
+              WHEN country_id IN (1,2,4,6,8)
+              THEN country.name_en
+              ELSE 'Others'
+            END
+          `.as("nationality_group"),
           count("artist.id").as("artist_count"),
         ]))
-        .where("slug", "not in", TALENTS)
+        .where("artist.slug", "not in", TALENTS)
         .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .groupBy("nationality_group")
         .execute(),
@@ -53,7 +75,7 @@ export const handler = define.handlers({
         .select([
           count("id").as("artist_count"),
         ])
-        .where("slug", "not in", TALENTS)
+        .where("artist.slug", "not in", TALENTS)
         .$if(!DisplayCopyrightedArtist, (qb) => qb.where("artist.copyright", "!=", 2))
         .execute(),
 

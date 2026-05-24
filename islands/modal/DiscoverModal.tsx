@@ -374,7 +374,7 @@ export default function DiscoverModal(
                   aria-label={tag.name}
                 >
                   <img
-                    src={`/icons/${tag.name}.png`}
+                    src={`/icons/${tag.slug}.png`}
                     alt={tag.name}
                     draggable={false}
                     onError={(e) => {(e.target as HTMLImageElement).style.display = "none";}}

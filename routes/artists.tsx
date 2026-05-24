@@ -1,12 +1,10 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { Db } from "@utils/db.ts";
 import { define } from "@/utils.ts";
 import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import { NATIONALITIES } from "@utils/constants.ts";
+import { NATIONALITIES_SLUGS } from "@utils/constants.ts";
 import { PageProps } from "fresh";
-import { sql } from "kysely";
 
 import ArtistsSearch from "@islands/livesearch/ArtistsSearch.tsx";
 import { DiscoverPaper } from "@islands/paper/DiscoverPaper.tsx";
@@ -25,15 +23,9 @@ export const handler = define.handlers({
     let nationality: string = url.searchParams.get("nationality") || "";
 
     if (nationality !== "") {
-      // Contrôle nationalités définies
-      NATIONALITIES.includes(nationality) ? nationality : nationality = "Monde";
-
-      if (nationality !== "Monde") {
-        const db = Db.getInstance();
-        const result = await db.selectFrom("country").select("name")
-          .where(sql`(name = ${nationality} OR name_en = ${nationality})`)
-          .executeTakeFirst();
-        nationality = result.name;
+      // contrôle des slugs de nationalité autorisés
+      if (!NATIONALITIES_SLUGS.includes(nationality)) {
+        nationality = "world";
       }
     }
 

@@ -50,6 +50,7 @@ interface ArtistPageProps {
   instagram: string;
   movements: Movement[];
   nationality: string;
+  nationality_slug: string;
   queryParameters: QueryParameters;
   secondaryColor: string;
   signature: string | null;
@@ -79,7 +80,8 @@ export const handler = define.handlers({
         "main_tags",
         "site_web", "facebook", "instagram",
         "birthyear", "deathyear",
-        "signature", "copyright", "slug",
+        "signature", "copyright",
+        "artist.slug", "country.slug as nationality_slug",
       ])
       .$if(lng === 'fr', (query) => query.select("avatar_info"))
       .$if(lng === 'en', (query) => query.select("avatar_info_en as avatar_info"))
@@ -89,7 +91,7 @@ export const handler = define.handlers({
       .$if(lng === 'en', (query) => query.select("info_en as info"))
       .$if(lng === 'fr', (query) => query.select("quote"))
       .$if(lng === 'en', (query) => query.select(sql<string>`CASE WHEN quote_en IS NOT NULL THEN quote_en ELSE quote END`.as("quote")))
-      .where("slug", "=", slug)
+      .where("artist.slug", "=", slug)
       .executeTakeFirst();
 
     if (!artistDetails) {
@@ -211,6 +213,7 @@ export const handler = define.handlers({
         instagram: artistDetails.instagram,
         movements: movementLabels,
         nationality: artistDetails.nationality,
+        nationality_slug: artistDetails.nationality_slug,
         queryParameters,
         signature: artistDetails.signature ? artistDetails.signature : null,
         secondaryColor: artistDetails.secondary_color,
@@ -240,6 +243,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
     instagram,
     movements,
     nationality,
+    nationality_slug,
     queryParameters,
     secondaryColor,
     signature,
@@ -304,7 +308,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                 {/* Description */}
                 <div class="w-11/12 xl:w-[38rem] mx-auto text-center">
                   <p class="font-bold italic text-xl">{birthyear + deathyear}</p>
-                  <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/icons/${nationality}.png`} alt={nationality} draggable={draggable} />
+                  <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/icons/${nationality_slug}.png`} alt={nationality} draggable={draggable} />
                   <p class="font-bold text-lg mb-2">
                     {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                   </p>

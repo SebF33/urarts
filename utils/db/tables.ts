@@ -10,6 +10,7 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
     .addColumn("id", "integer", (col) => col.autoIncrement().primaryKey())
     .addColumn("name", "varchar", (col) => col.notNull().unique())
     .addColumn("name_en", "varchar", (col) => col.notNull().unique())
+    .addColumn("slug", "varchar", (col) => col.notNull().unique())
     .addColumn(
       "modified_at",
       "timestamp",
