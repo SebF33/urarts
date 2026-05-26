@@ -305,7 +305,7 @@ export default function DiscoverModal(
         </div>
 
         {/* Section droite : infos */}
-        <div class={`dm-info-side ${slideClass}`}>
+        <div class={`dm-info-side custom-scrollbar ${slideClass}`}>
           {/* Mouvement */}
           <span class="dm-movement-badge">
             {art.movement.toUpperCase()}

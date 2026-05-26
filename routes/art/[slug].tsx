@@ -313,7 +313,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
                     {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
                   </p>
                   <p
-                    class="relative text-white/90 text-[1.1rem] text-justify leading-[1.12rem] select-none z-10"
+                    class="relative text-white/90 text-[0.85rem] sm:text-[0.95rem] md:text-[1.1rem] text-justify leading-[1.12rem] select-none z-10"
                     dangerouslySetInnerHTML={{ __html: info }}
                   ></p>
                 </div>
