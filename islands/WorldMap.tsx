@@ -334,12 +334,9 @@ export default function WorldMap(
     new Set([...NATIONALITIES_LABELS, ...artsTagsCountries]),
   );
   //console.log(allCountries);
-  const tagColors = lng === "fr" ? tagColorsFR : tagColorsEN;
-  const allColors = [...worldColors, ...tagColors];
-  //console.log(allColors);
   const colorMap: Record<string, string> = {};
   allCountries.forEach((name, i) => {
-    colorMap[name] = allColors[i % allColors.length];
+    colorMap[name] = worldColors[i % worldColors.length];
   });
 
 

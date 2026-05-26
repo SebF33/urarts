@@ -68,6 +68,8 @@ export const INDICATORS_MOVEMENTS: string[] = [
 
 
 export const NATIONALITIES_LABELS: string[] = [
+  "Algeria",
+  "Algérie",
   "Allemagne",
   "Armenia",
   "Arménie",
@@ -88,6 +90,8 @@ export const NATIONALITIES_LABELS: string[] = [
   "Czechoslovakia",
   "Danemark",
   "Denmark",
+  "Egypt",
+  "Égypte",
   "Espagne",
   "Estonia",
   "Estonie",
@@ -100,6 +104,10 @@ export const NATIONALITIES_LABELS: string[] = [
   "Greece",
   "Hongrie",
   "Hungary",
+  "Inde",
+  "India",
+  "Israel",
+  "Israël",
   "Italie",
   "Italy",
   "Japan",
@@ -251,7 +259,7 @@ export const TAGS: TagConst[] = [
     type: 0
   },
   { 
-    name: "Algeria", name_en: "Algérie", slug: "algeria",
+    name: "Algérie", name_en: "Algeria", slug: "algeria",
     info: "L’Algérie a inspiré l’art orientaliste avec ses paysages désertiques, ses scènes de rue et son patrimoine architectural unique.",
     info_en: "Algeria inspired Orientalist art with its desert landscapes, street scenes, and unique architectural heritage.",
     type: 1
