@@ -36,7 +36,7 @@ interface CollectionSearchProps {
   readonly font?: string;
   readonly ispersogallery?: boolean;
   readonly myslug?: string;
-  readonly query: {
+  readonly query?: {
     readonly alone?: boolean;
     readonly id?: string | number;
   };
