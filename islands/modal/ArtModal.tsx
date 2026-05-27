@@ -498,7 +498,7 @@ export default function ArtModal(
           <div class="paper paper-shadow relative w-[90%] md:w-[80%] min-h-[60px] mx-auto mb-4">
             <div class="tape-section"></div>
             <div
-              class="art-modal-info text-lg text-justify leading-4 p-4 z-10 select-none"
+              class="art-modal-info text-[0.85rem] sm:text-[0.95rem] md:text-lg text-justify leading-4 p-4 z-10 select-none"
               dangerouslySetInnerHTML={{ __html: art.info }}
             >
             </div>

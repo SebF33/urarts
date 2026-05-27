@@ -32,8 +32,11 @@ export function WorldArtistsPanel(
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
           transition={{ type: "spring", stiffness: 280, damping: 30 }}
-          className="fixed bottom-0 left-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-h-[80vh] z-[999999] rounded-t-2xl shadow-lg overflow-y-auto custom-scrollbar"
-          style={{ backgroundColor: theme.white }}
+          className="fixed bottom-0 left-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-h-[80vh] z-[999999] rounded-t-2xl overflow-y-auto custom-scrollbar"
+          style={{
+            backgroundColor: theme.white,
+            boxShadow: "0 -2px 8px rgba(0,0,0,0.95)",
+          }}
         >
           {/* Header */}
           <div
@@ -82,7 +85,7 @@ export function WorldArtistsPanel(
                 }}
                 whileHover={{
                   boxShadow: `0 4px 8px ${theme.lighterdark}`,
-                  transition: { duration: 0.1 },
+                  transition: { duration: 0.05 },
                 }}
               >
                 <div
