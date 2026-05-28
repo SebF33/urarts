@@ -362,9 +362,8 @@ export default function ArtModal(
             {art.copyright === 0
               ? (
                 <div class="flex items-center">
-                  <s class="text-base inline">⊘</s>
-                  <span class="text-base inline ml-1">
-                    {i18next.t("arts.public_domain", { ns: "translation" })}
+                  <span class="text-base inline">
+                    ⊘ {i18next.t("arts.public_domain", { ns: "translation" })}
                   </span>
                 </div>
               )

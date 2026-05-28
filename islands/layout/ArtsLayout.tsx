@@ -185,10 +185,8 @@ export default function ArtsLayout(
 
       if (artElement) {
         copyright = p.copyright === 0
-          ? '<s style="font-size:1.3em">⊘</s> ' +
-            i18next.t("arts.public_domain", { ns: "translation" })
-          : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") +
-            " " + p.last_name;
+          ? `⊘ ${i18next.t("arts.public_domain", { ns: "translation" })}`
+          : '<span style="font-size:1.3em">©</span> ' + (p.first_name ?? "") + " " + p.last_name;
 
         if (props.type === "histocharacters") {
           content =
