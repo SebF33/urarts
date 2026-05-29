@@ -514,6 +514,7 @@ export default function Nav(props: Props) {
             <div class={`hidden md:flex items-center space-x-4 select-none`}>
               <a
                 href="/"
+                id="home"
                 class={desktopPrimaryAnchor}
                 draggable={draggable}
                 aria-label={`${i18next.t("nav.home", { ns: "translation" })}`}
