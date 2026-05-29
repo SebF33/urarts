@@ -186,6 +186,10 @@ export async function upTables(db: Kysely<DbSchema>): Promise<void> {
       "integer",
       (col) => col.defaultTo(sql`0`).notNull(),
     )
+    .addColumn("geolocationname", "varchar")
+    .addColumn("geolocationname_normalized", "varchar")
+    .addColumn("geolocationname_en", "varchar")
+    .addColumn("geolocationname_en_normalized", "varchar")
     .addColumn(
       "histocharacter",
       "integer",

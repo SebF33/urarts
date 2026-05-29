@@ -48,6 +48,7 @@ export const handler = define.handlers({
     // Lieux géographiques
     const geolocation = url.searchParams.has("geolocation");
 
+
     const db = Db.getInstance();
     const results = await db.selectFrom("art")
       .innerJoin("artist", "art.owner_id", "artist.id")
@@ -67,15 +68,49 @@ export const handler = define.handlers({
         "polyptych",
         "url",
       ])
-      .$if(lng === "fr", (qb) => qb.select("art.name as name"))
+      // cas standard : nom de l'œuvre
       .$if(
-        lng === "en",
+        !geolocation && lng === "fr",
+        (qb) => qb.select("art.name as name"),
+      )
+      .$if(
+        !geolocation && lng === "en",
         (qb) =>
           qb.select(
-            sql<
-              string
-            >`CASE WHEN art.name_en IS NOT NULL THEN art.name_en ELSE art.name END`
-              .as("name"),
+            sql<string>`
+              CASE
+                WHEN art.name_en IS NOT NULL
+                THEN art.name_en
+                ELSE art.name
+              END
+            `.as("name"),
+          ),
+      )
+      // cas du lieu géographique : nom du lieu
+      .$if(
+        geolocation && lng === "fr",
+        (qb) =>
+          qb.select(
+            sql<string>`
+              CASE
+                WHEN art.geolocationname IS NOT NULL AND art.geolocationname != ''
+                THEN art.geolocationname
+                ELSE art.name
+              END
+            `.as("name"),
+          ),
+      )
+      .$if(
+        geolocation && lng === "en",
+        (qb) =>
+          qb.select(
+            sql<string>`
+              CASE
+                WHEN art.geolocationname_en IS NOT NULL AND art.geolocationname_en != ''
+                THEN art.geolocationname_en
+                ELSE COALESCE(art.name_en, art.name)
+              END
+            `.as("name"),
           ),
       )
       .$if(lng === "fr", (qb) => qb.select("movement.name as movement"))

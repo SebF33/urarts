@@ -98,6 +98,10 @@ interface ArtTable {
   year: number | null; // Année de l'œuvre d'art
   famous_order: number | null; // Numéro d'ordre de célébrité
   geolocation: number; // Lieu géographique (0: non |1: oui)
+  geolocationname: string | null; // Nom du lieu géographique
+  geolocationname_normalized: string | null;
+  geolocationname_en: string | null; // Nom du lieu géographique (en)
+  geolocationname_en_normalized: string | null;
   histocharacter: number; // Personnage historique (0: non |1: oui)
   histocharactername: string | null; // Nom du personnage historique
   histocharactername_normalized: string | null;
