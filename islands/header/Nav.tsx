@@ -1,4 +1,3 @@
-import { Any } from "any";
 import {
   artistsYearsSignal,
   histocharactersYearsSignal,
@@ -35,6 +34,15 @@ import {
   WomanIcon,
 } from "@components/Assets.tsx";
 
+import type { Any } from "any";
+import type { Instance } from "tippyjs";
+import type { TargetedMouseEvent } from "preact";
+
+
+type TippyButtonElement = HTMLButtonElement & {
+  _tippy: Instance;
+};
+
 
 export interface Props {
   readonly url: URL;
@@ -67,7 +75,7 @@ export default function Nav(props: Props) {
 
   // Activation/désactivation de Leonardo
   useEffect(() => {
-    const ref = document.querySelector<HTMLAnchorElement>("#U-Icon");
+    const ref = document.querySelector<HTMLButtonElement>("#U-Icon");
     if (!ref) return;
 
     let shutInterval: number;
@@ -381,9 +389,9 @@ export default function Nav(props: Props) {
 
   // Visibilité Leonardo
   function handleUrartsClick(
-    event: h.JSX.TargetedMouseEvent<HTMLAnchorElement>,
+    event: TargetedMouseEvent<HTMLButtonElement>,
   ) {
-    const ref = event.currentTarget as HTMLAnchorElement;
+    const ref = event.currentTarget as TippyButtonElement;
     const instance = ref._tippy;
     const isVisible = instance.state.isVisible;
 
@@ -496,8 +504,9 @@ export default function Nav(props: Props) {
         <div class={`flex justify-between`}>
           <div class={`flex space-x-7`}>
             <div class={`py-3 px-2 shrink-0 select-none`}>
-              <a
+              <button
                 id="U-Icon"
+                type="button"
                 onClick={handleUrartsClick}
                 class={`relative z-[60] flex items-center`}
                 draggable={draggable}
@@ -509,7 +518,7 @@ export default function Nav(props: Props) {
                   alt="U"
                   draggable={draggable}
                 />
-              </a>
+              </button>
             </div>
             <div class={`hidden md:flex items-center space-x-4 select-none`}>
               <a
