@@ -948,6 +948,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/italianrenaissance.png)`,
     backgroundSize: "clamp(300px, 40.6vw, 780px)",
   },
+  italy: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/italy.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   japonism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/japonism.png)`,
     backgroundSize: "clamp(300px, 44.3vw, 850px)",
