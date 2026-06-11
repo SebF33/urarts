@@ -1,6 +1,7 @@
 .dockerignore
 deno.lock
 desktop.ini
+env.ts
 TO_DO_LIST.md
 /data/urarts_data.db
 /islands/Counter.tsx
