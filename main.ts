@@ -3,7 +3,6 @@ import { type State } from "./utils.ts";
 import {
   URL_GA,
   URL_GT,
-  URL_RC,
   URL_URARTS_ART,
   URL_URARTS_DEV,
 } from "@utils/constants.ts";
@@ -53,7 +52,7 @@ app.use(csp({
     `child-src 'self'`,
     `img-src 'self' ${URL_GA} data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}`,
     `media-src 'self' data: blob: ${URL_URARTS_ART} ${URL_URARTS_DEV}`,
-    `connect-src 'self' ${URL_URARTS_ART} ${URL_URARTS_DEV} ${URL_GA} ${URL_GT} ${URL_RC}`,
+    `connect-src 'self' ${URL_URARTS_ART} ${URL_URARTS_DEV} ${URL_GA} ${URL_GT}`,
     `font-src 'self'`,
     `worker-src 'self'`,
     `frame-src 'self'`,

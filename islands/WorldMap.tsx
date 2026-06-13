@@ -1,14 +1,15 @@
-import { Any } from "any";
-import type { ArtistRow, ArtRow } from "@utils/types.d.ts";
 import {
   colorScheme,
   currentColorScheme,
-  tagColorsEN,
-  tagColorsFR,
   worldColors,
 } from "@utils/colors.ts";
 import { createPortal } from "react-dom";
-import { DELAY_DEBOUNCE, NATIONALITIES_LABELS } from "@utils/constants.ts";
+import {
+  COUNTRY_ALPHA2_TO_SLUG,
+  COUNTRY_CAPITALS,
+  DELAY_DEBOUNCE,
+  NATIONALITIES_LABELS,
+} from "@utils/constants.ts";
 import { feature } from "topojson-client";
 import { geoMercator, geoPath } from "d3-geo";
 import i18next from "i18next";
@@ -29,56 +30,16 @@ import worldData from "world-atlas/countries-110m.json" with { type: "json" };
 import { WorldArtistsPanel } from "./panel/WorldArtistsPanel.tsx";
 import { WorldArtsPanel } from "./panel/WorldArtsPanel.tsx";
 
+import type { Any } from "any";
+import type { ArtistRow, ArtRow } from "@utils/types.d.ts";
+
 isoCountries.registerLocale(en);
 isoCountries.registerLocale(fr);
-
-
-const COUNTRY_ALPHA2_TO_SLUG: Record<string, string> = {
-  AM: "armenia",
-  AT: "austria",
-  BE: "belgium",
-  BG: "bulgaria",
-  BY: "belarus",
-  CA: "canada",
-  CH: "switzerland",
-  CN: "china",
-  CO: "colombia",
-  CZ: "czechoslovakia",
-  DE: "germany",
-  DK: "denmark",
-  DZ: "algeria",
-  EE: "estonia",
-  EG: "egypt",
-  ES: "spain",
-  FI: "finland",
-  FR: "france",
-  GB: "uk",
-  GR: "greece",
-  HR: "croatia",
-  HU: "hungary",
-  IL: "israel",
-  IN: "india",
-  IT: "italy",
-  JP: "japan",
-  MX: "mexico",
-  NL: "netherlands",
-  NO: "norway",
-  PL: "poland",
-  PT: "portugal",
-  RU: "russia",
-  SE: "sweden",
-  SI: "slovenia",
-  TR: "turkey",
-  UA: "ukraine",
-  US: "usa",
-  VN: "vietnam",
-};
 
 
 export default function WorldMap(
   { artsTagsCountries }: { readonly artsTagsCountries: string[] },
 ) {
-  const lng = i18next.language;
   const [artists, setArtists] = useState<ArtistRow[]>([]);
   const [arts, setArts] = useState<ArtRow[]>([]);
   const [countries, setCountries] = useState<Any[]>([]);
@@ -92,8 +53,11 @@ export default function WorldMap(
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [lastClickTime, setLastClickTime] = useState(0);
-  const capitalCacheRef = useRef<Map<string, string>>(new Map());
 
+  // Contexte
+  const lng = i18next.language;
+
+  // Position de la carte du Monde
   const TOP_OFFSET = 0; // si besoin : décalage vertical de la carte
   const WIDTH_COEF = 1; // si besoin : largeur de la carte
 
@@ -118,8 +82,7 @@ export default function WorldMap(
   // - afficher une infobulle au survol d'un pays (desktop uniquement)
   // - éviter toute infobulle sur mobile / tactile
   // - positionner l'infobulle sur le centroïde du pays (et non sur la souris)
-  // - charger la capitale à la demande (lazy loading)
-  // - mettre en cache les capitales (1 requête max par pays)
+  // - lire la capitale depuis la constante COUNTRY_CAPITALS
   useEffect(() => {
     const svgEl = svgRef.current;
     if (!svgEl) return;
@@ -138,7 +101,7 @@ export default function WorldMap(
 
     const renderContent = (countryName: string, capital?: string) => {
       const safeName = escapeHtml(countryName);
-      const safeCapital = escapeHtml(capital ?? "…");
+      const safeCapital = escapeHtml(capital ?? "—");
       return `
         <div style="line-height:1.1">
           <div style="font-size:17px;font-weight:500">${safeName}</div>
@@ -147,157 +110,59 @@ export default function WorldMap(
       `;
     };
 
-    // récupérer les capitales (REST Countries) avec mise en cache
-    const TRANSLATION_PICK_INDEX: Partial<Record<string, number>> = {
-      // clé = `${alpha2}:${lng}`
-      "FR:fr": 2,
-      "FR:en": 2,
-    };
-
-    type RestCountry = { cca2?: string; capital?: string[] };
-    const pickCapital = (item: RestCountry | undefined | null) =>
-      item?.capital?.[0] ?? null;
-
-    const getCapital = async (
-      alpha2: string,
-      countryName: string,
-      lng: "fr" | "en",
-    ): Promise<string | null> => {
-      if (!alpha2) return null;
-
-      // cache par pays + langue
-      const cacheKey = `${alpha2}:${lng}`;
-      const cached = capitalCacheRef.current.get(cacheKey);
-      if (cached) return cached;
-
-      try {
-        // essai : /translation/{countryName} (peut renvoyer plusieurs résultats)
-        if (countryName?.trim()) {
-          const resT = await fetch(
-            `https://restcountries.com/v3.1/translation/${
-              encodeURIComponent(countryName.trim())
-            }?fields=cca2,capital`,
-          );
-
-          if (resT.ok) {
-            const dataT = await resT.json();
-            const arr: RestCountry[] = Array.isArray(dataT) ? dataT : [dataT];
-
-            // si un index est défini pour ce pays/langue
-            const pickKey = `${alpha2}:${lng}`;
-            const forcedIndex = TRANSLATION_PICK_INDEX[pickKey];
-
-            if (typeof forcedIndex === "number") {
-              const itemForced = arr[forcedIndex];
-              const capForced = pickCapital(itemForced);
-              if (capForced) {
-                capitalCacheRef.current.set(cacheKey, capForced);
-                return capForced;
-              }
-              // si index invalide ou pas de capitale -> on continue avec les fallbacks
-            }
-
-            // fallback : prendre l'item qui matche cca2
-            const exact = arr.find((x) =>
-              (x.cca2 ?? "").toUpperCase() === alpha2.toUpperCase()
-            );
-            const capExact = pickCapital(exact);
-            if (capExact) {
-              capitalCacheRef.current.set(cacheKey, capExact);
-              return capExact;
-            }
-
-            // fallback : premier item ayant une capitale
-            const firstWithCap = arr.find((x) => x.capital?.length);
-            const capAny = pickCapital(firstWithCap);
-            if (capAny) {
-              capitalCacheRef.current.set(cacheKey, capAny);
-              return capAny;
-            }
-          }
-        }
-
-        // fallback : /alpha/{alpha2}
-        const res = await fetch(
-          `https://restcountries.com/v3.1/alpha/${
-            encodeURIComponent(alpha2)
-          }?fields=capital`,
-        );
-        if (!res.ok) return null;
-
-        const data = await res.json();
-        const item = Array.isArray(data) ? data[0] : data;
-        const cap = item?.capital?.[0] as string | undefined;
-
-        if (cap) {
-          capitalCacheRef.current.set(cacheKey, cap);
-          return cap;
-        }
-
-        return null;
-      } catch {
-        return null;
-      }
-    };
-
     // éviter de recréer des infobulles à l'infini -> on détruit celles existantes avant de recréer
     const instances: Any[] = [];
 
-    // infobulles basées sur le centroïde de chaque path
-    svgEl.querySelectorAll("path").forEach((path) => {
-      const instance = tippy(path, {
-        arrow: true,
-        allowHTML: true,
-        content: renderContent(
-          path.getAttribute("data-tippy-content") || "",
-          "…",
-        ),
-        offset: [0, 8],
-        placement: "top",
-        popperOptions: { strategy: "fixed" },
-        theme: "urarts",
-        getReferenceClientRect: () => {
-          const cx = parseFloat(path.getAttribute("data-centroid-x") || "0");
-          const cy = parseFloat(path.getAttribute("data-centroid-y") || "0");
-          const pt = svgEl.createSVGPoint();
-          pt.x = cx;
-          pt.y = cy;
-          const ctm = svgEl.getScreenCTM();
-          if (!ctm) {
-            return path.getBoundingClientRect();
-          }
-          const screenPt = pt.matrixTransform(ctm);
-          return {
-            width: 0,
-            height: 0,
-            x: screenPt.x,
-            y: screenPt.y,
-            top: screenPt.y,
-            bottom: screenPt.y,
-            left: screenPt.x,
-            right: screenPt.x,
-          };
-        },
-        onShow: async (t) => {
-          const countryName = path.getAttribute("data-tippy-content") || "";
-          const alpha2 = path.getAttribute("data-alpha2") || "";
+    let frame: number;
+    frame = requestAnimationFrame(() => {
+      // infobulles basées sur le centroïde de chaque path
+      svgEl.querySelectorAll("path").forEach((path) => {
+        const countryName = path.getAttribute("data-country-name") || "";
+        const alpha2 = path.getAttribute("data-alpha2") || "";
 
-          // afficher le placeholder au cas où le contenu a changé
-          t.setContent(renderContent(countryName, "…"));
+        const capitalEntry = alpha2 ? COUNTRY_CAPITALS[alpha2] : undefined;
+        const capital = capitalEntry
+          ? (capitalEntry[lng as "en" | "fr"] || capitalEntry.en || "—")
+          : "—";
 
-          const cap = await getCapital(alpha2, countryName, lng as "fr" | "en");
+        const instance = tippy(path, {
+          arrow: true,
+          allowHTML: true,
+          content: renderContent(countryName, capital),
+          offset: [0, 8],
+          placement: "top",
+          popperOptions: { strategy: "fixed" },
+          theme: "urarts",
+          getReferenceClientRect: () => {
+            const cx = parseFloat(path.getAttribute("data-centroid-x") || "0");
+            const cy = parseFloat(path.getAttribute("data-centroid-y") || "0");
+            const pt = svgEl.createSVGPoint();
+            pt.x = cx;
+            pt.y = cy;
+            const ctm = svgEl.getScreenCTM();
+            if (!ctm) {
+              return path.getBoundingClientRect();
+            }
+            const screenPt = pt.matrixTransform(ctm);
+            return {
+              width: 0,
+              height: 0,
+              x: screenPt.x,
+              y: screenPt.y,
+              top: screenPt.y,
+              bottom: screenPt.y,
+              left: screenPt.x,
+              right: screenPt.x,
+            };
+          },
+        });
 
-          // l'infobulle peut avoir été fermée entre-temps
-          if (!t.state.isVisible) return;
-
-          t.setContent(renderContent(countryName, cap ?? "—"));
-        },
+        instances.push(instance);
       });
-
-      instances.push(instance);
     });
 
     return () => {
+      cancelAnimationFrame(frame);
       instances.forEach((i) => i?.destroy?.());
     };
   }, [countries, lng]);
@@ -482,7 +347,7 @@ export default function WorldMap(
               strokeWidth={0.5}
               filter="url(#brush)"
               class={cursorClass}
-              data-tippy-content={name}
+              data-country-name={name}
               data-alpha2={alpha2 || ""}
               data-centroid-x={cx.toString()}
               data-centroid-y={cy.toString()}
