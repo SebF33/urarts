@@ -7,6 +7,7 @@ import {
   URL_URARTS_DEV,
 } from "@utils/constants.ts";
 
+
 export const app = new App<State>();
 
 const isDev = Deno.env.get("DENO_ENV") === "development";
@@ -16,6 +17,18 @@ const allowedOrigins = [
   URL_URARTS_DEV,
   ...(isDev ? ["http://127.0.0.1:5173", "http://localhost:8000"] : []),
 ];
+
+
+// Redirection d'URL : urarts.fly.dev -> urarts.art
+app.use(async (ctx) => {
+  if (ctx.url.hostname === "urarts.fly.dev") {
+    const newUrl = new URL(ctx.url);
+    newUrl.hostname = "urarts.art";
+    newUrl.protocol = "https:";
+    return Response.redirect(newUrl, 307);
+  }
+  return await ctx.next();
+});
 
 // Fichiers statiques
 app.use(staticFiles());

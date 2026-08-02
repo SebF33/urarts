@@ -52,19 +52,14 @@ export const handler = define.middleware(async (ctx) => {
   const response = await ctx.next();
 
   // en-têtes de sécurité
-  response.headers.set(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains; preload;",
-  );
-  response.headers.set(
-    "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=()",
-  );
-  response.headers.set("X-Content-Type-Options", "nosniff");
-  response.headers.set("X-DNS-Prefetch-Control", "on");
-  response.headers.set("X-Frame-Options", "SAMEORIGIN");
-  response.headers.set("X-XSS-Protection", "1; mode=block");
-  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  const headers = new Headers(response.headers);
+  headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload;");
+  headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  headers.set("X-Content-Type-Options", "nosniff");
+  headers.set("X-DNS-Prefetch-Control", "on");
+  headers.set("X-Frame-Options", "SAMEORIGIN");
+  headers.set("X-XSS-Protection", "1; mode=block");
+  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
   // mettre à jour le cookie
   const cookie: Cookie = {
@@ -76,7 +71,11 @@ export const handler = define.middleware(async (ctx) => {
     secure: true,
     httpOnly: true,
   };
-  setCookie(response.headers, cookie);
+  setCookie(headers, cookie);
 
-  return response;
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 });
