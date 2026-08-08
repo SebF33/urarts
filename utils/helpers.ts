@@ -12,6 +12,7 @@ export function adjustColorBrightness(hex: string, amount: number): string {
   return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, "0")}`;
 }
 
+
 /**
  * Formate des dimensions (FR en cm, EN en inches)
  */
@@ -43,12 +44,81 @@ export const formatDimensions = (
   }
 };
 
+
+/**
+ * Ajuste une couleur de premier plan (foreground) vers le noir ou le blanc
+ * jusqu'à atteindre un ratio de contraste minimal par rapport au fond
+ *
+ * @param background Couleur de fond (HEX)
+ * @param foreground Couleur souhaitée à l'origine (HEX)
+ * @param minRatio   Ratio minimal exigé :
+ *                   - 3:1 pour les éléments graphiques/composants d'interface (RGAA 3.2 / WCAG 1.4.11)
+ *                   - 4.5:1 pour du texte normal (RGAA 3.3 / WCAG 1.4.3)
+ * @param step       Granularité de l'ajustement (0-1, plus petit = plus précis)
+ */
+export function getAccessibleColor(
+  background: string,
+  foreground: string,
+  minRatio = 3,
+  step = 0.02,
+): string {
+  if (getContrastRatio(background, foreground) >= minRatio) {
+    return foreground;
+  }
+
+  const bgLum = relativeLuminance(hexToRgb(background));
+  // fond clair -> on assombrit le premier plan ; fond sombre -> on l'éclaircit
+  const target: [number, number, number] = bgLum > 0.5
+    ? [0, 0, 0]
+    : [255, 255, 255];
+  const [fr, fg, fb] = hexToRgb(foreground);
+  const [tr, tg, tb] = target;
+
+  let mixed = foreground;
+  for (let t = step; t <= 1; t += step) {
+    const r = fr + (tr - fr) * t;
+    const g = fg + (tg - fg) * t;
+    const b = fb + (tb - fb) * t;
+    mixed = rgbToHex(r, g, b);
+    if (getContrastRatio(background, mixed) >= minRatio) break;
+  }
+
+  return mixed;
+}
+
+
+/**
+ * Ratio de contraste entre deux couleurs (1 à 21)
+ */
+export function getContrastRatio(color1: string, color2: string): number {
+  const lum1 = relativeLuminance(hexToRgb(color1));
+  const lum2 = relativeLuminance(hexToRgb(color2));
+  const lighter = Math.max(lum1, lum2);
+  const darker = Math.min(lum1, lum2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+
+/**
+ * Convertit une couleur hexadécimale (#RRGGBB ou #RGB) en composantes RGB
+ */
+function hexToRgb(hex: string): [number, number, number] {
+  let h = hex.replace("#", "");
+  if (h.length === 3) {
+    h = h.split("").map((c) => c + c).join("");
+  }
+  const num = Number.parseInt(h, 16);
+  return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+}
+
+
 /**
  * Donne les initiales à partir du prénom et du nom
  */
 export function initials(first: string | undefined, last: string): string {
   return ((first?.[0] ?? "") + (last?.[0] ?? "")).toUpperCase();
 }
+
 
 /**
  * Détecte si l'appareil est tactile (mobile / tablette)
@@ -64,6 +134,35 @@ export function isTouchDevice(): boolean {
     globalThis.matchMedia("(pointer: coarse)").matches
   );
 }
+
+
+/**
+ * Luminance relative d'une couleur (WCAG 2.x)
+ * https://www.w3.org/WAI/GL/wiki/Relative_luminance
+ */
+function relativeLuminance([r, g, b]: [number, number, number]): number {
+  const [rs, gs, bs] = [r, g, b].map((c) => {
+    const cs = c / 255;
+    return cs <= 0.03928 ? cs / 12.92 : Math.pow((cs + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+
+/**
+ * Convertit des composantes RGB en couleur hexadécimale (#RRGGBB)
+ */
+function rgbToHex(r: number, g: number, b: number): string {
+  return (
+    "#" +
+    [r, g, b]
+      .map((c) =>
+        Math.max(0, Math.min(255, Math.round(c))).toString(16).padStart(2, "0")
+      )
+      .join("")
+  );
+}
+
 
 /**
  * Mélange aléatoirement les éléments d'un tableau
@@ -82,6 +181,7 @@ export function shuffleArray<T>(array: T[]): T[] {
   return copy;
 }
 
+
 /**
  * Demande de sauter la prochaine animation du contenu Leonardo
  * (utilisé quand l'utilisateur ferme la popup pour éviter un flicker)
@@ -92,6 +192,7 @@ export function skipNextLeonardoAnimation(selector = "#leonardoContent") {
   el.dataset.skipAnimation = "true";
 }
 
+
 /**
  * Convertit un slug (kebab-case) en camelCase
  * en supprimant les tirets et en mettant en majuscule la lettre suivante
@@ -100,6 +201,7 @@ export function skipNextLeonardoAnimation(selector = "#leonardoContent") {
 export function slugToCamelCase(slug: string): string {
   return slug.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
 }
+
 
 /**
  * Attend la fin d'une transition CSS
