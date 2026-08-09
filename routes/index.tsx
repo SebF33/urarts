@@ -1,4 +1,3 @@
-import type { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { define } from "@/utils.ts";
@@ -17,6 +16,8 @@ import FamousArtSideBar from "@islands/livesearch/FamousArtSideBar.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import Quote from "@islands/paper/Quote.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
+import type { ArtistQuote, ArtistRow } from "@utils/types.d.ts";
 
 
 type Artists = Array<ArtistRow>;

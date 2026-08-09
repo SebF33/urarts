@@ -1,4 +1,3 @@
-import type { ArtCollection, ArtRow } from "@utils/types.d.ts";
 import {
   DELAY_API_CALL,
   DELAY_DEBOUNCE,
@@ -18,6 +17,8 @@ import Preview from "@islands/Preview.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 import TagsPapers from "@/islands/paper/TagsPapers.tsx";
 import Title from "@islands/paper/Title.tsx";
+
+import type { ArtCollection, ArtRow } from "@utils/types.d.ts";
 
 
 type Arts = Array<ArtCollection>;

@@ -315,7 +315,7 @@ export const handler = define.handlers({
             .execute();
 
           const totalArtistCountResult: number[] = totalArtistQuery.map((item) =>
-            parseFloat(item.artist_count)
+            Number.parseFloat(item.artist_count)
           );
 
           const countryResult = await db.selectFrom("country")
@@ -375,7 +375,7 @@ export const handler = define.handlers({
             .execute();
 
           const totalArtCountResult: number[] = totalArtQuery.map((item) =>
-            parseFloat(item.art_count)
+            Number.parseFloat(item.art_count)
           );
 
           htmlContent += `<p class="text-[1rem] leading-none mt-1">${
@@ -616,7 +616,7 @@ export const handler = define.handlers({
 
           const totalMovementCountResult: number[] = totalMovementQuery.map((
             item,
-          ) => parseFloat(item.movement_count));
+          ) => Number.parseFloat(item.movement_count));
 
           htmlContent += `<p class="text-[1rem] leading-none mt-1">${
             i18next.t("leonardo.search_among", { ns: "translation" })

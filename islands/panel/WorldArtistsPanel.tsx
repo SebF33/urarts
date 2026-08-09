@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from "motion";
-import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 
 import { ButtonCross } from "@components/Assets.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 interface ArtistPanelProps {

@@ -1,7 +1,8 @@
-import { Any } from "any";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
 import { useEffect, useState } from "preact/hooks";
+
+import type { Any } from "any";
 
 
 const COOKIE_NAME = "geo_consent"; // valeurs : "yes", "no"

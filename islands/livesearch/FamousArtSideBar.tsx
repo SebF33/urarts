@@ -1,5 +1,3 @@
-import { Any } from "any";
-import type { ArtCollection } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import {
   DELAY_API_CALL,
@@ -22,6 +20,9 @@ import { usePageBackground } from "@utils/background.ts";
 
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 
+import type { ArtCollection } from "@utils/types.d.ts";
+import type { Instance } from "tippyjs";
+
 
 type Arts = Array<ArtCollection>;
 
@@ -31,7 +32,7 @@ export default function FamousArtSideBar() {
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
   const [searchResults, setSearchResults] = useState<Arts[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  const [tippyInstances, setTippyInstances] = useState<Instance[]>([]);
   const debouncedValue = useDebounce<string>(searchTerm, DELAY_DEBOUNCE);
 
   const draggable = false;
@@ -87,10 +88,10 @@ export default function FamousArtSideBar() {
           interactive: true,
           placement: "bottom",
           theme: "urarts",
-          onCreate(instance: Any) {
+          onCreate(instance: Instance) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
-          onDestroy(instance: Any) {
+          onDestroy(instance: Instance) {
             setTippyInstances((prevInstances) =>
               prevInstances.filter((i) => i !== instance)
             );

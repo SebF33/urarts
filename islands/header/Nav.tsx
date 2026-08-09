@@ -43,8 +43,7 @@ type TippyButtonElement = HTMLButtonElement & {
   _tippy: Instance;
 };
 
-
-export interface Props {
+interface Props {
   readonly url: URL;
 }
 
@@ -78,7 +77,7 @@ export default function Nav(props: Props) {
     const ref = document.querySelector<HTMLButtonElement>("#U-Icon");
     if (!ref) return;
 
-    let shutInterval: number;
+    let shutInterval: ReturnType<typeof setInterval>;
     let mousemoveHandler: (e: MouseEvent) => void;
 
     const leonardoTooltip = tippy(ref, {
@@ -91,7 +90,7 @@ export default function Nav(props: Props) {
         <div class="absolute top-[-0.6rem] left-[-2.0rem]"><div class="eye left-eye"><div class="eyeshut"><div></div></div><div class="eyeball left-eyeball"></div></div></div>
         <div class="absolute top-[-0.57rem] left-[-0.60rem]"><div class="eye right-eye"><div class="eyeshut"><div></div></div><div class="eyeball right-eyeball"></div></div></div>
         <div id="leonardoContent" class="flex-col pl-16 pb-1 text-xl leading-7 select-none">...</div>`,
-      hideOnClick: "false",
+      hideOnClick: false,
       interactive: true,
       maxWidth: 900,
       offset: [-220, 12],

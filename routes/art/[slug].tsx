@@ -1,4 +1,3 @@
-import type { ArtistQuote, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { define } from "@/utils.ts";
 import { DisplayCopyrightedArtist } from "@/env.ts";
@@ -20,6 +19,8 @@ import Quote from "@islands/paper/Quote.tsx";
 import Signature from "@islands/paper/Signature.tsx";
 import TagsPapers from "@/islands/paper/TagsPapers.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
+import type { ArtistQuote, TagCollection } from "@utils/types.d.ts";
 
 
 interface Movement {

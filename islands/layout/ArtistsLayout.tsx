@@ -1,10 +1,8 @@
-import { Any } from "any";
 import {
   ARTIST_IMG_WRAPPER,
   DELAY_DISPLAY,
   NB_LOADING_ARTISTS,
 } from "@utils/constants.ts";
-import type { ArtistRow } from "@utils/types.d.ts";
 import { delayedClientNavigation } from "@utils/navigation.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -12,6 +10,9 @@ import tippy from "tippyjs";
 import { useEffect, useState } from "preact/hooks";
 import { useImageOnLoad } from "@utils/hooks/useImageOnLoad.ts";
 import { useIntersectionObserver } from "@utils/hooks/useIntersectionObserver.ts";
+
+import type { ArtistRow } from "@utils/types.d.ts";
+import type { Instance } from "tippyjs";
 
 
 type Artists = Array<ArtistRow>;
@@ -29,7 +30,7 @@ export default function ArtistsLayout(
   const { handleImageOnLoad, imageOnLoadStyle } = useImageOnLoad();
   const { isIntersecting, ref: endRef } = useIntersectionObserver({ threshold: 0.9 }); // Seuil d'intersection des éléments
   const [showPlaceholder, setShowPlaceholder] = useState<boolean>(false);
-  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  const [tippyInstances, setTippyInstances] = useState<Instance[]>([]);
 
   // Rendu des artistes
   const displayedArtists = display
@@ -91,10 +92,10 @@ export default function ArtistsLayout(
         placement: "bottom",
         theme: "urarts",
         zIndex: 30,
-        onCreate(instance: Any) {
+        onCreate(instance: Instance) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);
         },
-        onDestroy(instance: Any) {
+        onDestroy(instance: Instance) {
           setTippyInstances((prevInstances) =>
             prevInstances.filter((i) => i !== instance)
           );
@@ -103,9 +104,7 @@ export default function ArtistsLayout(
     }
 
     displayedArtists.forEach((p) => {
-      const artistElement: HTMLElement | null = document.querySelector(
-        `[data-artist-id="${p.id}"]`,
-      );
+      const artistElement: HTMLElement | null = document.querySelector(`[data-artist-id="${p.id}"]`);
 
       if (artistElement) {
         tippy(artistElement, {
@@ -121,10 +120,10 @@ export default function ArtistsLayout(
           placement: "bottom",
           theme: "urarts",
           zIndex: 30,
-          onCreate(instance: Any) {
+          onCreate(instance: Instance) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
-          onDestroy(instance: Any) {
+          onDestroy(instance: Instance) {
             setTippyInstances((prevInstances) =>
               prevInstances.filter((i) => i !== instance)
             );

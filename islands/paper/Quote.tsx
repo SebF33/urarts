@@ -1,8 +1,9 @@
-import { Any } from "any";
-import type { ArtistQuote } from "@utils/types.d.ts";
 import { DELAY_TOOLTIP_TRIGGER } from "@utils/constants.ts";
 import tippy from "tippyjs";
 import { useEffect, useRef, useState } from "preact/hooks";
+
+import type { ArtistQuote } from "@utils/types.d.ts";
+import type { Instance } from "tippyjs";
 
 
 export default function Quote(
@@ -14,7 +15,7 @@ export default function Quote(
 ) {
   const [display, setDisplay] = useState<boolean>(false);
   const quoteRef = useRef<HTMLDivElement>(null);
-  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  const [tippyInstances, setTippyInstances] = useState<Instance[]>([]);
 
   // CSS
   const draggable = false;
@@ -64,14 +65,14 @@ export default function Quote(
         placement: "top",
         popperOptions: { strategy: "fixed", modifiers: [{ name: 'flip', enabled: false }] },
         theme: "urarts",
-        onCreate(instance: Any) {
+        onCreate(instance: Instance) {
           setTippyInstances((prevInstances) => [...prevInstances, instance]);
           const anchor = instance.popper.querySelector(`[data-anchor-id="${props.data?.id}"]`) as HTMLElement;
           anchor.addEventListener("click", (_event: MouseEvent) => {
             instance.destroy();
           });
         },
-        onDestroy(instance: Any) {
+        onDestroy(instance: Instance) {
           setTippyInstances((prevInstances) =>
             prevInstances.filter((i) => i !== instance)
           );

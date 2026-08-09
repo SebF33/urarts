@@ -5,7 +5,6 @@ import { DisplayCopyrightedArtist } from "@/env.ts";
 import { Head } from "fresh/runtime";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
-import type { MovementRow } from "@utils/types.d.ts";
 import { PageProps } from "fresh";
 
 import { DiscoverPaper } from "@islands/paper/DiscoverPaper.tsx";
@@ -13,6 +12,8 @@ import Footer from "@islands/footer/Footer.tsx";
 import MovementsList from "@islands/MovementsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
 import { WorldMapPaper } from "@islands/paper/WorldMapPaper.tsx";
+
+import type { MovementRow } from "@utils/types.d.ts";
 
 
 type Movements = Array<MovementRow>;

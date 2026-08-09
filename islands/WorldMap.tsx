@@ -32,6 +32,7 @@ import { WorldArtsPanel } from "./panel/WorldArtsPanel.tsx";
 
 import type { Any } from "any";
 import type { ArtistRow, ArtRow } from "@utils/types.d.ts";
+import type { Instance } from "tippyjs";
 
 isoCountries.registerLocale(en);
 isoCountries.registerLocale(fr);
@@ -111,10 +112,9 @@ export default function WorldMap(
     };
 
     // éviter de recréer des infobulles à l'infini -> on détruit celles existantes avant de recréer
-    const instances: Any[] = [];
+    const instances: Instance[] = [];
 
-    let frame: number;
-    frame = requestAnimationFrame(() => {
+    const frame = requestAnimationFrame(() => {
       // infobulles basées sur le centroïde de chaque path
       svgEl.querySelectorAll("path").forEach((path) => {
         const countryName = path.getAttribute("data-country-name") || "";
@@ -134,8 +134,8 @@ export default function WorldMap(
           popperOptions: { strategy: "fixed" },
           theme: "urarts",
           getReferenceClientRect: () => {
-            const cx = parseFloat(path.getAttribute("data-centroid-x") || "0");
-            const cy = parseFloat(path.getAttribute("data-centroid-y") || "0");
+            const cx = Number.parseFloat(path.getAttribute("data-centroid-x") || "0");
+            const cy = Number.parseFloat(path.getAttribute("data-centroid-y") || "0");
             const pt = svgEl.createSVGPoint();
             pt.x = cx;
             pt.y = cy;
@@ -144,16 +144,12 @@ export default function WorldMap(
               return path.getBoundingClientRect();
             }
             const screenPt = pt.matrixTransform(ctm);
-            return {
-              width: 0,
-              height: 0,
+            return DOMRect.fromRect({
               x: screenPt.x,
               y: screenPt.y,
-              top: screenPt.y,
-              bottom: screenPt.y,
-              left: screenPt.x,
-              right: screenPt.x,
-            };
+              width: 0,
+              height: 0,
+            });
           },
         });
 

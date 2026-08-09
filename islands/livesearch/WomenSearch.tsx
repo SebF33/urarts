@@ -1,4 +1,3 @@
-import type { ArtistRow } from "@utils/types.d.ts";
 import { DELAY_API_CALL } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -10,6 +9,8 @@ import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { WomanLogo } from "@components/Assets.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 export default function WomenSearch() {

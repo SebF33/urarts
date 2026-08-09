@@ -1,4 +1,3 @@
-import type { ArtCollection } from "@utils/types.d.ts";
 import {
   DEFAULT_HISTOCHARACTERS_YEARS,
   DELAY_API_CALL,
@@ -20,6 +19,8 @@ import { usePageBackground } from "@utils/background.ts";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
+
+import type { ArtCollection } from "@utils/types.d.ts";
 
 
 type Arts = Array<ArtCollection>;

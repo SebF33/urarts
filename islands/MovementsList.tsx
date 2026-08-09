@@ -1,4 +1,3 @@
-import type { ArtCollection, ArtRow, MovementRow } from "@utils/types.d.ts";
 import { DELAY_API_CALL, DELAY_REACH_HREF } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -10,6 +9,8 @@ import { usePageBackground } from "@utils/background.ts";
 
 import Preview from "@islands/Preview.tsx";
 import Title from "@islands/paper/Title.tsx";
+
+import type { ArtCollection, ArtRow, MovementRow } from "@utils/types.d.ts";
 
 
 type Arts = Array<ArtCollection>;

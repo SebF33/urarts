@@ -1,4 +1,3 @@
-import type { ArtCollection } from "@utils/types.d.ts";
 import {
   artistAvatarSignal,
   artistNameSignal,
@@ -15,6 +14,8 @@ import { render } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { ButtonCross } from "@components/Assets.tsx";
+
+import type { ArtCollection } from "@utils/types.d.ts";
 
 
 type DiscoverModalProps = {

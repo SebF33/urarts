@@ -111,15 +111,15 @@ export const handler = define.handlers({
         .execute(),
     ]);
 
-    const artistCountResult: number[] = artistQuery.map((item) => parseFloat(item.artist_count));
+    const artistCountResult: number[] = artistQuery.map((item) => Number.parseFloat(item.artist_count));
     const artistNationalityResult: string[] = artistQuery.map((item) => item.nationality_group);
     const artistNationalityValueResult: string[] = artistQuery.map((item) => item.nationality_value);
-    const totalArtistCountResult: number[] = totalArtistQuery.map((item) => parseFloat(item.artist_count));
+    const totalArtistCountResult: number[] = totalArtistQuery.map((item) => Number.parseFloat(item.artist_count));
     
-    const movementCountResult: number[] = movementQuery.map((item) => parseFloat(item.art_count));
+    const movementCountResult: number[] = movementQuery.map((item) => Number.parseFloat(item.art_count));
     const movementNameResult: string[] = movementQuery.map((item) => item.movement_group);
     const movementValueResult: string[] = movementQuery.map((item) => item.movement_value);
-    const totalArtCountResult: number[] = totalArtQuery.map((item) => parseFloat(item.art_count));
+    const totalArtCountResult: number[] = totalArtQuery.map((item) => Number.parseFloat(item.art_count));
     
 
     return {

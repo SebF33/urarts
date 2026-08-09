@@ -1,8 +1,9 @@
-import type { ArtistRow } from "@utils/types.d.ts";
 import { usePageBackground } from "@utils/background.ts";
 
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Title from "@islands/paper/Title.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 type Artists = Array<ArtistRow>;

@@ -1,4 +1,3 @@
-import type { ArtCollection, TagCollection } from "@utils/types.d.ts";
 import { Db } from "@utils/db.ts";
 import { DEFAULT_LNG, TALENTS } from "@utils/constants.ts";
 import { define } from "@/utils.ts";
@@ -7,6 +6,8 @@ import { HttpError } from "fresh";
 import { normalizeText } from "@utils/db/common.ts";
 import { sql } from "kysely";
 import { UrlBasePath } from "@/env.ts";
+
+import type { ArtCollection, TagCollection } from "@utils/types.d.ts";
 
 
 // API "Collection"

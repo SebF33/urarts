@@ -1,4 +1,3 @@
-import type { ArtCollection } from "@utils/types.d.ts";
 import { DISCOVER_BANNER_ARTS } from "@utils/constants.ts";
 import i18next from "i18next";
 import "@utils/i18n/config.ts";
@@ -8,6 +7,8 @@ import { UrlBasePath } from "@/env.ts";
 import { useMemo, useState } from "preact/hooks";
 
 import DiscoverModal from "@islands/modal/DiscoverModal.tsx";
+
+import type { ArtCollection } from "@utils/types.d.ts";
 
 
 export function DiscoverPaper() {

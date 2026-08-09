@@ -1,4 +1,3 @@
-import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { define } from "@/utils.ts";
@@ -12,6 +11,8 @@ import { TALENTS } from "@utils/constants.ts";
 import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import Footer from "@islands/footer/Footer.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 type Artists = Array<ArtistRow>;

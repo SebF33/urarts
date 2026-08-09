@@ -1,4 +1,3 @@
-import type { ArtistRow } from "@utils/types.d.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { Db } from "@utils/db.ts";
 import { define } from "@/utils.ts";
@@ -14,6 +13,8 @@ import Footer from "@islands/footer/Footer.tsx";
 import TalentsArtSideBar from "@islands/livesearch/TalentsArtSideBar.tsx";
 import TalentsList from "@islands/TalentsList.tsx";
 import WaterDrop from "@islands/footer/WaterDrop.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 type Artists = Array<ArtistRow>;

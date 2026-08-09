@@ -1,12 +1,10 @@
 import { adjustColorBrightness, isTouchDevice } from "@utils/helpers.ts";
-import { Any } from "any";
 import {
   ART_IMG_WRAPPER,
   DELAY_DISPLAY,
   NB_LOADING_ARTS,
   TALENTS,
 } from "@utils/constants.ts";
-import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artModalOpenSignal,
   isClickableSignal,
@@ -25,6 +23,9 @@ import { ArrowPaperButton } from "@components/ArrowPaperButton.tsx";
 import ArtModal from "@islands/modal/ArtModal.tsx";
 import { PencilLine } from "@components/Assets.tsx";
 import RollingGallery from "@islands/RollingGallery.tsx";
+
+import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
+import type { Instance } from "tippyjs";
 
 
 type Arts = Array<ArtCollection>;
@@ -52,7 +53,7 @@ export default function ArtsLayout(
   const [selectedArt, setSelectedArt] = useState<ArtCollection | null>(null);
   const [selectedPanel, setSelectedPanel] = useState<string>("");
   const [selectedUrl, setSelectedUrl] = useState<string>("");
-  const [tippyInstances, setTippyInstances] = useState<Any[]>([]);
+  const [tippyInstances, setTippyInstances] = useState<Instance[]>([]);
   const [artTransitionClass, setArtTransitionClass] = useState<string>("");
   const previousSingleArtworkIdRef = useRef<string | number | null>(null);
 
@@ -226,10 +227,10 @@ export default function ArtsLayout(
           theme: "urarts",
           trigger: isTouch ? "manual" : "mouseenter focus",
           zIndex: 30,
-          onCreate(instance: Any) {
+          onCreate(instance: Instance) {
             setTippyInstances((prevInstances) => [...prevInstances, instance]);
           },
-          onDestroy(instance: Any) {
+          onDestroy(instance: Instance) {
             setTippyInstances((prevInstances) =>
               prevInstances.filter((i) => i !== instance)
             );

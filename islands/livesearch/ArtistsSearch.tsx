@@ -1,4 +1,3 @@
-import type { ArtistRow } from "@utils/types.d.ts";
 import {
   artistsYearsSignal,
   languageSignal,
@@ -22,6 +21,8 @@ import ArtistsLayout from "@islands/layout/ArtistsLayout.tsx";
 import { PaintPalette } from "@components/Assets.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
 import Title from "@islands/paper/Title.tsx";
+
+import type { ArtistRow } from "@utils/types.d.ts";
 
 
 // Groupes de drapeaux et traductions

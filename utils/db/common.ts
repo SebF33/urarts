@@ -1,11 +1,11 @@
-import { Any } from "any";
 import { Db, DbSchema } from "@utils/db.ts";
 import { Kysely } from "kysely";
+
+import type { Any } from "any";
 
 
 // InnerHTML
 export const pageInfoStyle = 'style="font-weight:600; text-decoration-line:underline"';
-
 
 
 // Fonction utilitaire : insérer en base les tags d'une œuvre
@@ -32,7 +32,6 @@ export async function insertArtTags(
 }
 
 
-
 // Fonction utilitaire : normaliser un texte
 export function normalizeText(str: string): string {
   return str
@@ -42,14 +41,13 @@ export function normalizeText(str: string): string {
 }
 
 
-
 // Fonction utilitaire : insérer en base avec normalisation des champs dont le nom contient "name"
 export function insertNormalized<T extends Record<string, Any>>(
   db: Kysely<DbSchema>,      // base à utiliser
   table: keyof DbSchema,     // table cible
   values: T,                 // valeurs à insérer
 ) {
-  const normValues = { ...values };
+  const normValues: Record<string, Any> = { ...values };
 
   for (const key of Object.keys(values)) {
     if (key.toLowerCase().includes("name")) {
@@ -61,5 +59,5 @@ export function insertNormalized<T extends Record<string, Any>>(
   }
 
   // insertion des noms normalisés
-  return db.insertInto(table).values(normValues);
+  return db.insertInto(table).values(normValues as Any);
 }

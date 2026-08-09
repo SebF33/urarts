@@ -1,5 +1,6 @@
-import { Any } from "any";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+
+import type { Any } from "any";
 import type { TagConst } from "@utils/types.d.ts";
 
 

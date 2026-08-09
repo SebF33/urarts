@@ -4,7 +4,6 @@ import {
   resetPageBackground,
   resolveCollectionBackground,
 } from "@utils/background.ts";
-import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 import {
   artistSlugSignal,
   isForAloneArtistSignal,
@@ -28,6 +27,8 @@ import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 
 import ArtsLayout from "@islands/layout/ArtsLayout.tsx";
 import { SearchInput } from "@islands/input/SearchInput.tsx";
+
+import type { ArtCollection, ArtNavigationDirection } from "@utils/types.d.ts";
 
 
 type Arts = Array<ArtCollection>;
