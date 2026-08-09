@@ -343,7 +343,13 @@ export default function ArtsLayout(
                   <div class="relative flex items-center justify-center gap-6">
                     {/* Nom de l'artiste */}
                     {isForAloneArtworkSignal.value && (
-                      <div class="relative transform -rotate-6">
+                      <a
+                        href={`/art/${displayedByYear[year][0]?.artist_slug}`}
+                        onClick={delayedClientNavigation}
+                        class="relative transform -rotate-6"
+                        draggable={false}
+                        aria-label={`${displayedByYear[year][0]?.first_name} ${displayedByYear[year][0]?.last_name}`}
+                      >
                         <div class="paper paper-shadow p-3 min-w-[80px] text-center">
                           <div class="top-tape"></div>
                           <p class="text-sm sm:text-xl md:text-2xl font-semibold leading-tight">
@@ -351,7 +357,7 @@ export default function ArtsLayout(
                             {displayedByYear[year][0]?.last_name}
                           </p>
                         </div>
-                      </div>
+                      </a>
                     )}
                     {/* Année des œuvres */}
                     {!isForAloneArtworkSignal.value && (
