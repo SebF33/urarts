@@ -70,7 +70,7 @@ export function DiscoverPaper() {
                   <img
                     key={src}
                     src={src}
-                    alt={src}
+                    alt=""
                     draggable={false}
                   />
                 ))}
