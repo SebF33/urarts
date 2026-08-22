@@ -52,7 +52,7 @@ export default function MovementsPapers(
 
 
   return (
-    <div class="invisible md:visible absolute mt-12 ml-16">
+    <div class="invisible md:visible absolute mt-12 ml-16 z-20">
       {movements.map((movement) => (
         <a
           key={movement.movementSlug}

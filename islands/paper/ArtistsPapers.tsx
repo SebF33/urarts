@@ -30,7 +30,7 @@ export default function ArtistsPapers({ artists, draggable }: Props) {
 
 
   return (
-    <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible">
+    <div class="invisible xl:visible absolute max-w-0 xl:max-w-full mt-12 ml-16 overflow-hidden xl:overflow-visible z-20">
       {artists.map((artist) => (
         <a
           href={`/art/${artist.slug}`}

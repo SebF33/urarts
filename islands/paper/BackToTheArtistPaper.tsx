@@ -28,7 +28,7 @@ export default function BackToTheArtistPaper() {
           <div class="absolute top-0 left-0 transform translate-x-8 translate-y-3 invisible md:visible z-10">
             <PencilArrow aria-hidden="true" />
           </div>
-          <div class="shrink-0 ml-0 md:ml-20 z-10">
+          <div class="shrink-0 ml-0 md:ml-20 z-20">
             <img
               src={artistAvatarSignal.value}
               alt={artistNameSignal.value}
