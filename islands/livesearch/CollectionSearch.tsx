@@ -228,10 +228,10 @@ export default function CollectionSearch(props: CollectionSearchProps) {
         (
           <div class={`max-w-7xl mx-auto p-4 sm:px-6 lg:px-8`}>
             {/* Entrée de recherche */}
-            <div class="paper paper-shadow w-[60px] md:w-[80px] mx-auto mb-2 -translate-x-16">
+            <div class="paper paper-shadow w-[90px] mx-auto mb-2 -translate-x-16">
               <div class="top-tape max-h-2.5"></div>
               <h2 class={`text-md md:text-lg font-medium text-lighterdark`}>
-                {i18next.t("paper.name", { ns: "translation" })}
+                {i18next.t("paper.arts", { ns: "translation" })}
               </h2>
             </div>
             <div

@@ -302,129 +302,133 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             </div>
           )}
 
-          {!queryParameters.alone && (
-            <div class="-mt-44">
-              <div class="h-[38rem] md:h-96 bg-lighterdark shadow-2xl"></div>
-              <div class="-mt-[27rem] md:-mt-[13.5rem] text-white">
-                {/* Description */}
-                <div class="w-11/12 xl:w-[38rem] mx-auto text-center">
-                  <p class="font-bold italic text-xl">{birthyear + deathyear}</p>
-                  <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/icons/${nationality_slug}.png`} alt={nationality} draggable={draggable} />
-                  <p class="font-bold text-lg mb-2">
-                    {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
-                  </p>
-                  <p
-                    class="relative text-white/90 text-[0.85rem] sm:text-[0.95rem] md:text-[1.1rem] text-justify leading-[1.12rem] select-none z-10"
-                    dangerouslySetInnerHTML={{ __html: info }}
-                  ></p>
-                </div>
+          <div class="relative">
+            {!queryParameters.alone && (
+              <div class="-mt-44">
+                <div class="h-[38rem] md:h-96 bg-lighterdark shadow-2xl"></div>
+                <div class="-mt-[27rem] md:-mt-[13.5rem] text-white">
+                  {/* Description */}
+                  <div class="w-11/12 xl:w-[38rem] mx-auto text-center">
+                    <p class="font-bold italic text-xl">{birthyear + deathyear}</p>
+                    <img class="appear-effect-very-fast-fadein inline-block w-12 mt-1" src={`/icons/${nationality_slug}.png`} alt={nationality} draggable={draggable} />
+                    <p class="font-bold text-lg mb-2">
+                      {i18next.t("artists.nationality", { ns: "translation" }) + " " + nationality}
+                    </p>
+                    <p
+                      class="relative xl:min-h-[108px] text-white/90 text-[0.85rem] sm:text-[0.95rem] md:text-[1.1rem] text-justify leading-[1.12rem] select-none z-10"
+                      dangerouslySetInnerHTML={{ __html: info }}
+                    ></p>
+                  </div>
 
-                <div class="md:min-h-[68px] relative w-11/12 mt-3 sm:mt-2 xl:-mt-2 mx-auto flex flex-col xl:flex-row xl:items-start xl:justify-between gap-4 xl:gap-6">
-                  {/* Post-it : site web */}
-                  {site && (
-                    <div class="paper relative min-h-8 ml-auto z-10">
-                      <div class="top-tape"></div>
-                      <a
-                        href={site}
-                        class="text-lighterdark text-base italic underline z-10 select-none px-1 block"
-                        target="_blank"
-                        rel="noopener"
-                        draggable={draggable}
-                      >
-                        {site}
-                      </a>
-                    </div>
-                  )}
-
-                  {/* Post-it : réseaux sociaux */}
-                  <div class="flex gap-2 mt-3 justify-end xl:justify-end">
-                    {facebook && (
-                      <a
-                        href={facebook}
-                        title="Facebook"
-                        class="text-lighterdark"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        draggable={draggable}
-                        aria-label="Facebook"
-                      >
-                        <div class="paper relative w-9 h-9 flex items-center justify-center">
-                          <div class="top-tape"></div>
-                          <FacebookIcon aria-hidden="true" />
-                        </div>
-                      </a>
+                  <div class="md:min-h-[68px] relative w-11/12 mt-3 sm:mt-2 xl:-mt-10 mx-auto flex flex-col xl:flex-row xl:items-start xl:justify-between gap-4 xl:gap-6">
+                    {/* Post-it : site web */}
+                    {site && (
+                      <div class="paper relative min-h-8 ml-auto z-10">
+                        <div class="top-tape"></div>
+                        <a
+                          href={site}
+                          class="text-lighterdark text-base italic underline z-10 select-none px-1 block"
+                          target="_blank"
+                          rel="noopener"
+                          draggable={draggable}
+                        >
+                          {site}
+                        </a>
+                      </div>
                     )}
-                    {instagram && (
-                      <a
-                        href={instagram}
-                        title="Instagram"
-                        class="text-lighterdark"
-                        target="_blank"
-                        rel="noopener noreferrer"
+
+                    {/* Post-it : réseaux sociaux */}
+                    <div class="flex gap-2 mt-3 justify-end xl:justify-end">
+                      {facebook && (
+                        <a
+                          href={facebook}
+                          title="Facebook"
+                          class="text-lighterdark"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          draggable={draggable}
+                          aria-label="Facebook"
+                        >
+                          <div class="paper relative w-9 h-9 flex items-center justify-center">
+                            <div class="top-tape"></div>
+                            <FacebookIcon aria-hidden="true" />
+                          </div>
+                        </a>
+                      )}
+                      {instagram && (
+                        <a
+                          href={instagram}
+                          title="Instagram"
+                          class="text-lighterdark"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          draggable={draggable}
+                          aria-label="Instagram"
+                        >
+                          <div class="paper relative w-9 h-9 flex items-center justify-center">
+                            <div class="top-tape"></div>
+                            <InstagramIcon aria-hidden="true" />
+                          </div>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Post-it : tags */}
+                  <div class="relative w-full xl:max-w-[880px] mx-auto z-10 hidden xl:block">
+                    {tags && tags.length > 0 && (
+                      <TagsPapers
+                        artistAvatar={avatar}
+                        artistName={artist}
+                        artistSlug={slug}
                         draggable={draggable}
-                        aria-label="Instagram"
-                      >
-                        <div class="paper relative w-9 h-9 flex items-center justify-center">
-                          <div class="top-tape"></div>
-                          <InstagramIcon aria-hidden="true" />
-                        </div>
-                      </a>
+                        ispersogallery={isPersoGallery}
+                        tags={tags}
+                      />
                     )}
                   </div>
-                </div>
 
-                {/* Post-it : tags */}
-                <div class="relative w-full xl:max-w-[880px] mx-auto z-10 hidden xl:block">
-                  {tags && tags.length > 0 && (
-                    <TagsPapers
-                      artistAvatar={avatar}
-                      artistName={artist}
-                      artistSlug={slug}
-                      draggable={draggable}
-                      ispersogallery={isPersoGallery}
-                      tags={tags}
-                    />
+                  {/* Avatar de l'artiste */}
+                  {avatar && (
+                    <div class="-mt-12 md:-mt-24 xl:-mt-48 grid grid-cols-1 xl:grid-cols-3">
+                      <div class="pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12 text-center">
+                        <Avatar copyright={copyright} info={avatarInfo} name={artist} url={avatar} />
+                      </div>
+                    </div>
                   )}
                 </div>
+              </div>
+            )}
 
-                {/* Avatar de l'artiste */}
-                {avatar && (
-                  <div class="-mt-12 md:-mt-24 xl:-mt-48 grid grid-cols-1 xl:grid-cols-3">
-                    <div class="pt-16 sm:pt-12 md:pt-10 sm:pl-12 sm:pr-12 text-center">
-                      <Avatar copyright={copyright} info={avatarInfo} name={artist} url={avatar} />
-                    </div>
+            {!queryParameters.alone && (
+              <div class={`xl:absolute ${artistQuote || signature ? 'min-h-[126px]' : 'min-h-auto'} flex justify-end w-full mx-auto mt-8 xl:-mt-16 2xl:-mt-24 mb-4`}>
+                {/* Post-it : citation avec signature */}
+                {artistQuote && (
+                  <div class="inline-block mx-auto xl:mr-12">
+                    <Quote data={artistQuote} delay={10} small />
+                  </div>
+                )}
+                {/* Post-it : signature seule si pas de citation */}
+                {!artistQuote && signature && (
+                  <div class="inline-block mx-auto xl:mr-32">
+                    <Signature data={signature} />
                   </div>
                 )}
               </div>
-            </div>
-          )}
-
-          {!queryParameters.alone && (
-            <div class={`${artistQuote || signature ? 'min-h-[126px]' : ''} flex justify-end w-full mx-auto mt-8 xl:-mt-16 2xl:-mt-24 mb-4`}>
-              {/* Post-it : citation avec signature */}
-              {artistQuote && (
-                <div class="inline-block mx-auto xl:mr-12">
-                  <Quote data={artistQuote} delay={10} small />
-                </div>
-              )}
-              {/* Post-it : signature seule si pas de citation */}
-              {!artistQuote && signature && (
-                <div class="inline-block mx-auto xl:mr-32">
-                  <Signature data={signature} />
-                </div>
-              )}
-            </div>
-          )}
+            )}
+          </div>
 
           {/* Œuvres sinon copyright */}
           {copyright !== 2 ? (
-            <CollectionSearch
-              key={`collection-artist-${slug}`}
-              ispersogallery={isPersoGallery}
-              query={queryParameters}
-              myslug={slug}
-              type="artist"
-            />
+            <div class={`flex-grow ${tags && tags.length > 0 ? "" : "xl:-mt-30"}`}>
+              <CollectionSearch
+                key={`collection-artist-${slug}`}
+                ispersogallery={isPersoGallery}
+                query={queryParameters}
+                myslug={slug}
+                type="artist"
+              />
+            </div>
           ) : (
             <Copyright />
           )}
