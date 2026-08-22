@@ -401,7 +401,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
             )}
 
             {!queryParameters.alone && (
-              <div class={`xl:absolute ${artistQuote || signature ? 'min-h-[126px]' : 'min-h-auto'} flex justify-end w-full mx-auto mt-8 xl:-mt-16 2xl:-mt-24 mb-4`}>
+              <div class={`xl:absolute ${artistQuote || signature ? 'min-h-[126px]' : 'min-h-auto'} flex justify-end w-full mx-auto mt-8 xl:-mt-24 mb-4`}>
                 {/* Post-it : citation avec signature */}
                 {artistQuote && (
                   <div class="inline-block mx-auto xl:mr-12">
@@ -420,7 +420,7 @@ export default function ArtistArtPage(props: PageProps<ArtistPageProps>) {
 
           {/* Œuvres sinon copyright */}
           {copyright !== 2 ? (
-            <div class={`flex-grow ${tags && tags.length > 0 ? "" : "xl:-mt-30"}`}>
+            <div class={`flex-grow ${queryParameters.alone || (tags && tags.length > 0) ? "" : "xl:-mt-30"}`}>
               <CollectionSearch
                 key={`collection-artist-${slug}`}
                 ispersogallery={isPersoGallery}

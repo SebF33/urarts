@@ -331,11 +331,7 @@ export default function ArtsLayout(
                 key={year}
                 class="year-group w-full col-span-full my-6 md:my-10"
               >
-                <div
-                  class={`relative w-full ${
-                    !isForAloneArtworkSignal.value ? "mt-4 md:mt-10" : ""
-                  }`}
-                >
+                <div class={`relative w-full ${!isForAloneArtworkSignal.value ? "mt-4 md:mt-10" : ""}`}>
                   {/* Trait crayonné */}
                   <div class="absolute inset-x-0 top-1/2 -translate-y-1/2">
                     <PencilLine aria-hidden="true" />
