@@ -310,7 +310,7 @@ const translation = {
     women: "Women artists.",
   },
   paper: {
-    arts: "Artwork(s) :",
+    arts: "Artwork(s):",
     copyright:
       "The artist’s artwork is not yet available for copyright reasons.",
     discover: "Discover, explore and share the beauty of Art.",
