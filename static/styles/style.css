@@ -785,6 +785,60 @@ a[aria-current="page"]:not(#home) {
     }
 }
 
+.disappear-effect-very-fast-fadeout {
+    animation: very-fast-fadeOut 0.02s ease-in forwards;
+}
+
+@keyframes very-fast-fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.paint-enter {
+    animation: paint-in 1200ms ease-out forwards;
+}
+
+@keyframes paint-in {
+    0% {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        filter: blur(3px);
+    }
+
+    60% {
+        opacity: 1;
+        filter: blur(0.5px);
+    }
+
+    100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        filter: blur(0);
+    }
+}
+
+.write-in-char {
+    opacity: 0;
+    animation: write-in-char 200ms ease-out forwards;
+}
+
+@keyframes write-in-char {
+    0% {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /* Papiers & adhésifs
    - CodePen : https://codepen.io/aitchiss/pen/QWKmPqx

@@ -133,6 +133,66 @@ const COUNTRY_TRANSLATIONS: Record<"fr" | "en", Record<string, string>> = {
 };
 
 
+// Liste des pays pour celui sélectionné
+const ALL_COUNTRIES = [ ...FLAG_GROUPS[1], ...FLAG_GROUPS[2], ...FLAG_GROUPS[3] ];
+
+function getCurrentCountry(slug: string, lng: "en" | "fr") {
+  if (slug === "world" || slug === "") {
+    return { slug: "world", label: i18next.t("meta.world", { ns: "translation" }) };
+  }
+
+  const country = ALL_COUNTRIES.find((c) => c.slug === slug);
+  if (!country) {
+    return { slug: "world", label: i18next.t("meta.world", { ns: "translation" }) };
+  }
+
+  return {
+    slug: country.slug,
+    label: COUNTRY_TRANSLATIONS[lng]?.[country.label] || country.label,
+  };
+}
+
+
+// Nom du pays avec effet d'écriture progressive
+const ENTER_TOTAL_MS = 1200;
+const CHAR_ENTER_DURATION_MS = 200;
+const EXIT_DURATION_MS = 20; // doit correspondre à disappear-effect-very-fast-fadeout
+
+function AnimatedCountryLabel(
+  { text, isExiting }: { text: string; isExiting: boolean },
+) {
+  if (isExiting) {
+    return (
+      <p
+        class="text-md md:text-xl font-extrabold text-center px-2 truncate w-full disappear-effect-very-fast-fadeout"
+        title={text}
+      >
+        {text}
+      </p>
+    );
+  }
+
+  const chars = text.split("");
+  const delayStep = chars.length > 1
+    ? Math.max(0, (ENTER_TOTAL_MS - CHAR_ENTER_DURATION_MS) / (chars.length - 1))
+    : 0;
+
+  return (
+    <p class="text-md md:text-xl font-extrabold text-center px-2 w-full overflow-hidden" title={text}>
+      {chars.map((char, i) => (
+        <span
+          key={i}
+          class="inline-block write-in-char"
+          style={{ animationDelay: `${i * delayStep}ms` }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+
 // Bouton de drapeau
 function FlagButton({ slug, title, className = "", flagClass, draggable = false }: {
   slug: string;
@@ -161,6 +221,9 @@ function FlagButton({ slug, title, className = "", flagClass, draggable = false 
 
 
 export default function ArtistsSearch(props: { readonly nationality: string }) {
+  const currentCountry = getCurrentCountry(nationalitySlugSignal.value, languageSignal.value as "en" | "fr");
+  const [displayedCountry, setDisplayedCountry] = useState(currentCountry);
+  const [isExiting, setIsExiting] = useState(false);
   const [flags, setFlags] = useState(1);
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -222,6 +285,20 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
       link.style.pointerEvents = "";
     }, 280);
   };
+
+
+  // Pays actuellement sélectionné
+  useEffect(() => {
+    if (currentCountry.slug === displayedCountry.slug) return;
+
+    setIsExiting(true);
+    const timer = setTimeout(() => {
+      setDisplayedCountry(currentCountry);
+      setIsExiting(false);
+    }, EXIT_DURATION_MS); // = 20, synchronisé avec disappear-effect-very-fast-fadeout
+
+    return () => clearTimeout(timer);
+  }, [currentCountry.slug]);
 
 
   // Slider
@@ -323,12 +400,37 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
     <>
       <div class="max-w-7xl mx-auto p-4 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-start md:mb-16">
-          {/* Titre de la page */}
-          <Title
-            name="artists"
-            dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
-            margin="mt-2 md:mt-5"
-          />
+          <div class="relative">
+            {/* Titre de la page */}
+            <Title
+              name="artists"
+              dimension="min-h-[30px] md:min-h-[60px] w-[115px] md:w-[230px]"
+              margin="mt-2 md:mt-5"
+            />
+
+            <div class="absolute -left-[30px] md:left-[60px] right-0 top-[50px] md:top-[90px] flex flex-col items-center">
+              {/* Nom du pays sélectionné */}
+              <div class="paper paper-shadow w-40 md:w-50 h-7 -mt-1 md:mt-6 ml-24 md:-ml-12 flex items-center justify-center -rotate-12 z-2">
+                <div class="top-tape h-2! max-w-[85%] -top-1!"></div>
+                <AnimatedCountryLabel
+                  key={`label-${displayedCountry.slug}`}
+                  text={displayedCountry.label}
+                  isExiting={isExiting}
+                />
+              </div>
+              {/* Drapeau du pays sélectionné */}
+              <div class="paper paper-shadow relative w-24 h-18 mt-2 md:-mt-2 ml-16 md:ml-32 flex items-center justify-center rotate-6">
+                <div class="top-tape h-3! max-w-[85%] -top-1!"></div>
+                <img
+                  key={`flag-${displayedCountry.slug}`}
+                  class={`w-18 h-18 object-contain ${isExiting ? "disappear-effect-very-fast-fadeout" : "paint-enter"}`}
+                  src={`/icons/${displayedCountry.slug}.png`}
+                  alt={displayedCountry.label}
+                  title={displayedCountry.label}
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Palette */}
