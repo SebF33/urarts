@@ -72,6 +72,9 @@ export default define.page((ctx) => {
           href={asset("/icons/favicon-192x192.png")}
         />
 
+        {/* Font */}
+        <link rel="preload" href="/fonts/CaveatBrush.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+
         {/* CSS & JS */}
         <script defer type="module" src={asset("/styles/app/state.js")}></script>
         <script defer type="module" src={asset("/styles/event/zoom-block.js")}></script>
