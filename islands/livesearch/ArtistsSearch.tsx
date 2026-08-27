@@ -133,6 +133,18 @@ const COUNTRY_TRANSLATIONS: Record<"fr" | "en", Record<string, string>> = {
 };
 
 
+// Alias courts des pays
+const SHORT_LABEL_OVERRIDES: Record<string, Record<"fr" | "en", string>> = {
+  china: { fr: "Chine", en: "China" },
+  russia: { fr: "Russie", en: "Russia" },
+  usa: { fr: "États-Unis", en: "United States" },
+};
+
+function getShortCountryLabel(slug: string, lng: "en" | "fr", fallback: string): string {
+  return SHORT_LABEL_OVERRIDES[slug]?.[lng] ?? fallback;
+}
+
+
 // Liste des pays pour celui sélectionné
 const ALL_COUNTRIES = [ ...FLAG_GROUPS[1], ...FLAG_GROUPS[2], ...FLAG_GROUPS[3] ];
 
@@ -153,19 +165,19 @@ function getCurrentCountry(slug: string, lng: "en" | "fr") {
 }
 
 
-// Nom du pays avec effet d'écriture progressive
+// Label du pays avec effet d'écriture progressive
 const ENTER_TOTAL_MS = 1200;
 const CHAR_ENTER_DURATION_MS = 200;
 const EXIT_DURATION_MS = 20; // doit correspondre à disappear-effect-very-fast-fadeout
 
 function AnimatedCountryLabel(
-  { text, isExiting }: { text: string; isExiting: boolean },
+  { text, fullLabel, isExiting }: { text: string; fullLabel: string; isExiting: boolean },
 ) {
   if (isExiting) {
     return (
       <p
         class="text-md md:text-xl font-extrabold text-center px-2 truncate w-full disappear-effect-very-fast-fadeout"
-        title={text}
+        title={fullLabel}
       >
         {text}
       </p>
@@ -178,7 +190,7 @@ function AnimatedCountryLabel(
     : 0;
 
   return (
-    <p class="text-md md:text-xl font-extrabold text-center px-2 w-full overflow-hidden" title={text}>
+    <p class="text-md md:text-xl font-extrabold text-center px-2 w-full overflow-hidden" title={fullLabel}>
       {chars.map((char, i) => (
         <span
           key={i}
@@ -409,17 +421,18 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
             />
 
             <div class="absolute -left-[30px] md:left-[60px] right-0 top-[50px] md:top-[90px] flex flex-col items-center">
-              {/* Nom du pays sélectionné */}
-              <div class="paper paper-shadow w-40 md:w-50 h-7 -mt-1 md:mt-6 ml-24 md:-ml-12 flex items-center justify-center -rotate-12 z-2">
+              {/* Label du pays sélectionné */}
+              <div class="paper paper-shadow w-30 md:w-38 h-6 md:h-7 mt-2 md:mt-6 ml-12 md:-ml-12 flex items-center justify-center -rotate-12 z-2">
                 <div class="top-tape h-2! max-w-[85%] -top-1!"></div>
                 <AnimatedCountryLabel
                   key={`label-${displayedCountry.slug}`}
-                  text={displayedCountry.label}
+                  text={getShortCountryLabel(displayedCountry.slug, languageSignal.value as "en" | "fr", displayedCountry.label)}
+                  fullLabel={displayedCountry.label}
                   isExiting={isExiting}
                 />
               </div>
               {/* Drapeau du pays sélectionné */}
-              <div class="paper paper-shadow relative w-24 h-18 mt-2 md:-mt-2 ml-16 md:ml-32 flex items-center justify-center rotate-6">
+              <div class="paper paper-shadow relative w-24 h-18 mt-2 md:-mt-2 ml-5 md:ml-32 flex items-center justify-center rotate-6">
                 <div class="top-tape h-3! max-w-[85%] -top-1!"></div>
                 <img
                   key={`flag-${displayedCountry.slug}`}
