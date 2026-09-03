@@ -174,7 +174,7 @@ export const handler = define.handlers({
 
     const artsTags = filteredTags.map((tag, index) => {
       const marginClasses = ["-ml-1", "ml-1", "-ml-1", "ml-1", "-ml-1", "ml-1"];
-      const rotationDegrees = [-3, 3, -1, 2, -2, 6];
+      const rotationDegrees = [-6, 5, -3, 4, -5, 7];
       const rotation = rotationDegrees[index % rotationDegrees.length];
 
       return {
