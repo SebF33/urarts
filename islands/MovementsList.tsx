@@ -131,14 +131,13 @@ export default function MovementsList(
                 <li class={`mx-2 my-4`} key={index}>
                   <a
                     href={"/movement/" + item.slug}
-                    class="cursor-pointer"
+                    class="paper paper-shadow group relative block w-fit mx-auto p-2 rounded-b-xl"
                     onClick={handleClick}
-                    onMouseEnter={() =>
-                      handleMouseEnter(item.slug)}
-                    onPointerEnter={() =>
-                      handleMouseEnter(item.slug)}
+                    onMouseEnter={() => handleMouseEnter(item.slug)}
+                    onPointerEnter={() => handleMouseEnter(item.slug)}
                   >
-                    <p class={`relative group text-xl leading-none`}>
+                    <div class="top-tape h-3! max-w-[90%] -top-1!"></div>
+                    <p class={`relative text-md md:text-xl text-center leading-none z-10`}>
                       <span>{item.name}</span>
                       <span class={`italic text-[1.05rem]`}>
                         {" "}({item.art_count}{" "}
@@ -146,7 +145,7 @@ export default function MovementsList(
                         {item.art_count === "1" ? "" : "s"})
                       </span>
                       <span
-                        class={`absolute -bottom-2 left-0 w-0 h-1 bg-cyan transition-all group-hover:w-full`}
+                        class="absolute -bottom-2 left-0 w-0 h-1 bg-lighterdark transition-all group-hover:w-full"
                       >
                       </span>
                     </p>
@@ -156,6 +155,7 @@ export default function MovementsList(
             </ul>
           )}
 
+        {/* Aperçu d'une œuvre */}
         <Preview image={hoveredImageUrl} />
       </div>
     </div>
