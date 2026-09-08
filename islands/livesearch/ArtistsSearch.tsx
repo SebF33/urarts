@@ -422,7 +422,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
 
             <div class="absolute -left-[30px] md:left-[60px] right-0 top-[50px] md:top-[90px] flex flex-col items-center">
               {/* Label du pays sélectionné */}
-              <div class="paper paper-shadow w-30 md:w-38 h-6 md:h-7 mt-2 md:mt-6 ml-12 md:-ml-12 flex items-center justify-center -rotate-12 z-2">
+              <div class="paper paper-shadow w-30 md:w-38 h-6 md:h-7 mt-2 md:mt-6 ml-12 md:-ml-12 flex items-center justify-center rounded-xl -rotate-12 z-2">
                 <div class="top-tape h-2! max-w-[85%] -top-1!"></div>
                 <AnimatedCountryLabel
                   key={`label-${displayedCountry.slug}`}
@@ -432,7 +432,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 />
               </div>
               {/* Drapeau du pays sélectionné */}
-              <div class="paper paper-shadow relative w-24 h-18 mt-2 md:-mt-2 ml-5 md:ml-32 flex items-center justify-center rotate-6">
+              <div class="paper paper-shadow relative w-24 h-18 mt-2 md:-mt-2 ml-5 md:ml-32 flex items-center justify-center rounded-xl rotate-6">
                 <div class="top-tape h-3! max-w-[85%] -top-1!"></div>
                 <img
                   key={`flag-${displayedCountry.slug}`}
