@@ -185,25 +185,32 @@ export default function IndicatorsPage(
         class="flex-grow"
       >
         <div class={`p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}>
+          {/* Titre de la page */}
           <Title
             name="indicators"
             dimension="min-h-[30px] max-w-[115px] md:min-h-[60px] md:max-w-[230px]"
             margin="mt-2 mb-6 md:mt-5"
           />
-
-          <div class={`charts flex justify-center max-w-xl mx-auto mt-12 mb-24`}>
-            <Doughnut
-              countResult={artistCountResult}
-              nationalityResult={artistNationalityResult}
-              totalArtistCountResult={totalArtistCountResult}
-              valueResult={artistNationalityValueResult}
-            />
-            <PolarArea
-              countResult={movementCountResult}
-              nameResult={movementNameResult}
-              totalArtCountResult={totalArtCountResult}
-              valueResult={movementValueResult}
-            />
+          {/* Indicateurs */}
+          <div class="relative mx-auto mt-12 mb-24">
+            <div class="paper paper-shadow absolute inset-0">
+              <div class="tape-section"></div>
+              <div class="tape-section"></div>
+            </div>
+            <div class={`charts relative max-w-xl flex mx-auto justify-center z-10`}>
+              <Doughnut
+                countResult={artistCountResult}
+                nationalityResult={artistNationalityResult}
+                totalArtistCountResult={totalArtistCountResult}
+                valueResult={artistNationalityValueResult}
+              />
+              <PolarArea
+                countResult={movementCountResult}
+                nameResult={movementNameResult}
+                totalArtCountResult={totalArtCountResult}
+                valueResult={movementValueResult}
+              />
+            </div>
           </div>
         </div>
       </main>
