@@ -182,7 +182,7 @@ export default function ArtsSearch() {
       </div>
 
       <div class={`flex flex-wrap`}>
-        {/* Liste des arts */}
+        {/* Liste des œuvres */}
         {searchResults &&
           (
             <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 mx-auto p-7 mask-50`}>
@@ -190,12 +190,13 @@ export default function ArtsSearch() {
                 <li class={`appear-effect-list-fadein mx-2 my-4`} key={index}>
                   <a
                     href={"/art/" + item.slug + "?alone&id=" + item.id}
-                    class="cursor-pointer"
+                    class="paper paper-shadow group relative block w-fit mx-auto p-2 rounded-b-xl"
                     onClick={handleClick}
                     onMouseEnter={() => handleMouseEnter(item.id, item.slug)}
                     onPointerEnter={() => handleMouseEnter(item.id, item.slug)}
                   >
-                    <p class={`relative group text-xl leading-none`}>
+                    <div class="top-tape h-3! max-w-[90%] -top-1!"></div>
+                    <p class={`relative text-md md:text-xl text-center leading-none z-10`}>
                       <span>{item.name}</span>
                       <span class={`italic text-[1.05rem]`}>
                         {" "}({item.last_name})
