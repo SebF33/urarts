@@ -25,6 +25,9 @@ type Arts = Array<ArtCollection>;
 
 
 export default function ArtsSearch() {
+  const PAGE_SIZE = 20;
+  const [offset, setOffset] = useState<number>(0);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [hoveredImageUrl, setHoveredImageUrl] = useState<object | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const [searchResults, setSearchResults] = useState<ArtRow[]>([]);
@@ -113,15 +116,28 @@ export default function ArtsSearch() {
   // Appel à l'API "Œuvres d'art"
   useEffect(() => {
     const timer = setTimeout(() => {
-      ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}`)
+      ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}&offset=0`)
         .json<ArtRow[]>()
         .then((response) => {
           setSearchResults(response);
+          setOffset(0);
+          setHasMore(response.length === PAGE_SIZE);
         });
     }, DELAY_API_CALL);
 
     return () => clearTimeout(timer);
   }, [debouncedValue]);
+
+  function loadMore() {
+    const nextOffset = offset + PAGE_SIZE;
+    ky.get(`${UrlBasePath}/api/arts?lng=${languageSignal.value}&name=${debouncedValue}&offset=${nextOffset}`)
+      .json<ArtRow[]>()
+      .then((response) => {
+        setSearchResults((prev) => [...prev, ...response]);
+        setOffset(nextOffset);
+        setHasMore(response.length === PAGE_SIZE);
+      });
+  }
 
 
   // Background pour la page des œuvres d'art
@@ -182,10 +198,10 @@ export default function ArtsSearch() {
       </div>
 
       <div class={`flex flex-wrap`}>
-        {/* Liste des œuvres */}
         {searchResults &&
           (
-            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 mx-auto p-7 mask-50`}>
+            <ul class={`text-lighterdark lg:w-1/3 sm:w-1/2 mx-auto p-7`}>
+              {/* Liste des œuvres */}
               {searchResults.map((item, index) => (
                 <li class={`appear-effect-list-fadein mx-2 my-4`} key={index}>
                   <a
@@ -210,6 +226,25 @@ export default function ArtsSearch() {
                   </a>
                 </li>
               ))}
+
+              {/* Charger plus d'œuvres */}
+              {hasMore && searchResults.length > 0 && (
+                <li class="appear-effect-list-fadein mx-2 my-4">
+                  <a
+                    href="#"
+                    class="paper paper-shadow group relative block w-fit mx-auto p-2 rounded-b-xl"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      loadMore();
+                    }}
+                  >
+                    <div class="top-tape h-3! max-w-[90%] -top-1!"></div>
+                    <p class="relative text-2xl text-center leading-none z-10 tracking-widest">
+                      •••
+                    </p>
+                  </a>
+                </li>
+              )}
 
               {/* Pas de résultats */}
               {searchResults.length === 0 && searchTerm !== "" &&

@@ -28,6 +28,10 @@ export const handler = define.handlers({
 
     let query;
 
+    // Décalage (pagination)
+    query = url.searchParams.get("offset") || "0";
+    const offset = Math.max(0, Number.parseInt(query, 10) || 0);
+
     // Langue
     query = url.searchParams.get("lng") || "";
     const lng = query.length ? encodeURIComponent(query) : DEFAULT_LNG;
@@ -173,6 +177,7 @@ export const handler = define.handlers({
         (qb) => qb.orderBy(({ fn }) => fn("lower", ["last_name_normalized"])),
       )
       .$if(random, (qb) => qb.orderBy(sql`random()`))
+      .offset(offset)
       .limit(20)
       .execute();
 
