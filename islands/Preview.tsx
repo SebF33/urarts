@@ -29,7 +29,7 @@ export default function Preview(
 
 
   return (
-    <div class="preview-frame relative my-16 mx-auto lg:mr-0">
+    <div class="preview-frame sticky top-[60px] self-start relative my-16 mx-auto lg:mr-0">
       <div class="paper paper-shadow absolute top-7 right-2 max-w-[110px] min-w-[110px] text-xl rotate-20 transform-gpu z-10">
         <div class="top-tape max-h-2"></div>
         {i18next.t("arts.preview", { ns: "translation" })}
