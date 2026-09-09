@@ -20,7 +20,7 @@ export default function AboutNotePaper() {
 
 
   return (
-    <div class="paper max-w-[500px] mx-6 mt-6 mb-2 scale-[0.9] md:scale-[0.85] xl:scale-[0.8]">
+    <div class="paper paper-shadow max-w-[500px] mx-6 mt-6 mb-2 scale-[0.9] md:scale-[0.85] xl:scale-[0.8]">
       <div class="tape-section"></div>
       <div class="flex flex-col w-full p-4 font-medium text-sm md:text-base">
         {/* En-tête langue */}
