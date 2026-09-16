@@ -38,6 +38,17 @@ export const PAGE_BACKGROUNDS = {
     },
   },
 
+  api: {
+    bodyBackgroundColor: colorScheme[currentColorScheme].gray,
+    mainSelector: '[data-name="api"]',
+    mainStyle: {
+      background: "url(/background/white)",
+      backgroundAttachment: "local",
+      backgroundPosition: "center",
+      backgroundSize: "420px",
+    },
+  },
+
   artists: {
     bodyBackgroundColor: colorScheme[currentColorScheme].gray,
     mainSelector: '[data-name="artists"]',

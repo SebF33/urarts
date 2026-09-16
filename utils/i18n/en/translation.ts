@@ -298,7 +298,7 @@ const translation = {
   },
   nav: {
     about: "About Urarts...",
-    api: "A sample of the API.",
+    api: "The API documentation.",
     artists: "Artists",
     arts: "Artworks",
     histocharacters: "Historical figures.",
@@ -324,6 +324,7 @@ const translation = {
   },
   title: {
     about: "About",
+    api: "API doc",
     artists: "Artists",
     arts: "Artworks",
     histocharacters: "Historical figures",

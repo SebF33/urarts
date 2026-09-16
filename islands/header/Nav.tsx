@@ -609,11 +609,8 @@ export default function Nav(props: Props) {
               </span>
             </a>
             <a
-              href="/api/arts"
-              f-client-nav={false}
+              href="/api"
               id="desktopApiAnchor"
-              target="_blank"
-              rel="noopener"
               class={desktopApiAnchor}
               draggable={draggable}
               aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
@@ -748,10 +745,7 @@ export default function Nav(props: Props) {
             </div>
             <div class={`hidden w-[50px]`}>
               <a
-                href="/api/arts"
-                f-client-nav={false}
-                target="_blank"
-                rel="noopener"
+                href="/api"
                 class={mobileSecondaryAnchor}
                 aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
               >

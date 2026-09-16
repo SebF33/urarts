@@ -6,6 +6,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 **Auteur : Sébastien Flouriot (SebF33)**
 
+## [2026-09-16]
+
+### Nouveautés
+- Ajout d'une page pour la documentation des API.
+
 ## [2026-05-16]
 
 ### Nouveautés
