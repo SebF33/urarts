@@ -743,9 +743,10 @@ export default function Nav(props: Props) {
                 <StatIcon aria-hidden="true" />
               </a>
             </div>
-            <div class={`hidden w-[50px]`}>
+            <div class={`w-[50px]`}>
               <a
                 href="/api"
+                id="mobile-anchor"
                 class={mobileSecondaryAnchor}
                 aria-label={`${i18next.t("nav.api", { ns: "translation" })}`}
               >
