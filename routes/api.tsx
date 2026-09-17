@@ -61,7 +61,7 @@ const endpoints: Endpoint[] = [
       { name: "nationality", key: "nationality" },
       { name: "years", key: "years", example: "1800,1900" },
     ],
-    example: `${UrlBasePath}/api/artists?lng=fr&gender=Femme`,
+    example: `${UrlBasePath}/api/artists?lng=fr&gender=women`,
   },
   {
     path: "/api/collection",

@@ -120,7 +120,7 @@ async function up(db: Kysely<DbSchema>): Promise<void> {
   await db.insertInto("artist").values({
     first_name: "",
     last_name: "",
-    gender: "Femme",
+    gender: "women",
     nationality: "",
     birthyear: "",
     deathyear: "",

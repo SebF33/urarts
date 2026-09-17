@@ -17,7 +17,7 @@ export default function WomenSearch() {
   const [searchResults, setSearchResults] = useState<ArtistRow[]>([]);
 
   // Contexte
-  const gender = "Femme";
+  const gender = "women";
 
 
   // CSS

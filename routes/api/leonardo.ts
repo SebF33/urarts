@@ -682,7 +682,7 @@ export const handler = define.handlers({
 
           const womenResults = await db.selectFrom("artist")
             .select(["last_name", "avatar_url", "color", "slug"])
-            .where("gender", "=", "Femme")
+            .where("gender", "=", "women")
             .where("artist.slug", "not in", TALENTS)
             .$if(
               !DisplayCopyrightedArtist,

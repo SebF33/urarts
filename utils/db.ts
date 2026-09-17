@@ -37,7 +37,7 @@ interface ArtistTable {
   first_name_normalized: string | null;
   last_name: string; // Nom ou surnom de l'artiste
   last_name_normalized: string | null;
-  gender: "Femme" | "Homme" | "Autre"; // Genre de l'artiste
+  gender: "women" | "man" | "other"; // Genre de l'artiste
   birthyear: string; // Année de naissance de l'artiste
   deathyear: string; // Année de décès de l'artiste ("": non renseignée)
   avatar_url: string; // Avatar de l'artiste

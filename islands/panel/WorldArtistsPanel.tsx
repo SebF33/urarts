@@ -77,9 +77,9 @@ export function WorldArtistsPanel(
                 key={a.id}
                 className="flex items-center gap-4 p-4 rounded-lg"
                 style={{
-                  backgroundColor: a.gender === "Homme"
+                  backgroundColor: a.gender === "man"
                     ? theme.blue
-                    : a.gender === "Femme"
+                    : a.gender === "women"
                     ? theme.magenta
                     : theme.white,
                   border: `1px solid ${theme.gray}`,
