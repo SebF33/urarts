@@ -176,7 +176,7 @@ function AnimatedCountryLabel(
   if (isExiting) {
     return (
       <p
-        class="text-md md:text-xl font-extrabold text-center px-2 truncate w-full disappear-effect-very-fast-fadeout"
+        class="text-md md:text-xl font-extrabold text-center px-2 truncate w-full z-10 disappear-effect-very-fast-fadeout"
         title={fullLabel}
       >
         {text}
@@ -436,7 +436,7 @@ export default function ArtistsSearch(props: { readonly nationality: string }) {
                 <div class="top-tape h-3! max-w-[85%] -top-1!"></div>
                 <img
                   key={`flag-${displayedCountry.slug}`}
-                  class={`w-18 h-18 object-contain ${isExiting ? "disappear-effect-very-fast-fadeout" : "paint-enter"}`}
+                  class={`w-18 h-18 object-contain z-10 ${isExiting ? "disappear-effect-very-fast-fadeout" : "paint-enter"}`}
                   src={`/icons/${displayedCountry.slug}.png`}
                   alt={displayedCountry.label}
                   title={displayedCountry.label}
