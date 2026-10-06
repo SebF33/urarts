@@ -888,6 +888,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
     background: `${colorScheme[currentColorScheme].gray} url(../textures/fauvism.png)`,
     backgroundSize: "clamp(300px, 25.0vw, 480px)",
   },
+  finland: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/finland.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
+  },
   fire: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/fire.png)`,
     backgroundSize: "clamp(300px, 39.6vw, 760px)",
@@ -1111,6 +1115,10 @@ export const BG_STYLE: Record<string, { background: string; backgroundSize: stri
   surrealism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/surrealism.png)`,
     backgroundSize: "clamp(300px, 21.9vw, 420px)",
+  },
+  sweden: {
+    background: `${colorScheme[currentColorScheme].gray} url(../textures/sweden.png)`,
+    backgroundSize: "clamp(300px, 39.6vw, 760px)",
   },
   symbolism: {
     background: `${colorScheme[currentColorScheme].gray} url(../textures/symbolism.png)`,
